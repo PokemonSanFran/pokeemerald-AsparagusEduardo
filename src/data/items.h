@@ -1142,7 +1142,7 @@ const struct Item gItems[] =
     {
         .name = _("X Defend"),
         .itemId = ITEM_X_DEFENSE,
-        .price = 2000,
+        .price = 1000,
         .description = sXDefendDesc,
         .pocket = POCKET_ITEMS,
         .type = 4,
@@ -3853,7 +3853,7 @@ const struct Item gItems[] =
 
     [ITEM_POKEBLOCK_CASE] =
     {
-        .name = _("{POKEBLOCK} CASE"),
+        .name = _("{POKEBLOCK} Case"),
         .itemId = ITEM_POKEBLOCK_CASE,
         .price = 0,
         .description = sPokeblockCaseDesc,
@@ -3958,7 +3958,7 @@ const struct Item gItems[] =
 
     [ITEM_ROOM_1_KEY] =
     {
-        .name = _("Rm. 1 Key"),
+        .name = _("RM. 1 Key"),
         .itemId = ITEM_ROOM_1_KEY,
         .price = 0,
         .description = sRoom1KeyDesc,
@@ -3971,7 +3971,7 @@ const struct Item gItems[] =
 
     [ITEM_ROOM_2_KEY] =
     {
-        .name = _("Rm. 2 Key"),
+        .name = _("RM. 2 Key"),
         .itemId = ITEM_ROOM_2_KEY,
         .price = 0,
         .description = sRoom2KeyDesc,
@@ -3984,7 +3984,7 @@ const struct Item gItems[] =
 
     [ITEM_ROOM_4_KEY] =
     {
-        .name = _("Rm. 4 Key"),
+        .name = _("RM. 4 Key"),
         .itemId = ITEM_ROOM_4_KEY,
         .price = 0,
         .description = sRoom4KeyDesc,
@@ -3997,7 +3997,7 @@ const struct Item gItems[] =
 
     [ITEM_ROOM_6_KEY] =
     {
-        .name = _("Rm. 6 Key"),
+        .name = _("RM. 6 Key"),
         .itemId = ITEM_ROOM_6_KEY,
         .price = 0,
         .description = sRoom6KeyDesc,
@@ -5019,7 +5019,7 @@ const struct Item gItems[] =
 
     [ITEM_VS_SEEKER] =
     {
-        .name = _("Vs Seeker"),
+        .name = _("VS Seeker"),
         .itemId = ITEM_VS_SEEKER,
         .price = 0,
         .description = sVSSeekerDesc,
