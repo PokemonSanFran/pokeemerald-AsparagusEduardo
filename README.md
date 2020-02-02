@@ -1,14 +1,13 @@
-# About this branch
-This is a decapitalized (all-caps text replaced with proper capitalization) version of the [**pokeemerald**](https://travis-ci.org/pret/pokeemerald) dissasembly, originally made by [**Wyrserth**](https://github.com/Wyrserth) and adapted to the current structure of the project.
+# Pokémon Infused Emerald
 
-As the disassembly continues to develop, I'll try to keep up this branch as updated as possible.
+Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly project and inspired by Pokémon Theta Emerald, this project's objective is to improve Pokémon Emerald's experience with features from later generations, including quality of life additions, mechanics and content.
 
-It builds the following ROM:
+# Code used:
+* [battle_engine_v2](https://github.com/dizzyeggg/pokeemerald/tree/battle_engine_v2) by [DizzyEgg](https://github.com/dizzyeggg).
+* [pokemon_expansion](https://github.com/DizzyEggg/pokeemerald/tree/pokemon_expansion) by [DizzyEgg](https://github.com/dizzyeggg).
+* [item_expansion](https://github.com/DizzyEggg/pokeemerald/tree/item_expansion) by [DizzyEgg](https://github.com/dizzyeggg).
 
-* pokeemerald.gba `sha1: 8C19F2555E10DFF32A9914CEAC360B018AF42E6C`
-
-To set up the repository, see [INSTALL.md](INSTALL.md).
-
+* [WhiteOutMoney](https://github.com/AsparagusEduardo/pokeemerald/tree/WhiteOutMoney) by myself.
 
 ## See also
 
