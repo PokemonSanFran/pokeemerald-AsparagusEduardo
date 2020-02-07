@@ -1,5 +1,5 @@
 #include "global.h"
-#include "alloc.h"
+#include "malloc.h"
 #include "task.h"
 #include "main.h"
 #include "overworld.h"
@@ -21,7 +21,7 @@ struct PokenavResources
     u32 (*currentMenuCb1)(void);
     u32 currentMenuIndex;
     u16 mode;
-    u16 fieldA;
+    u16 conditionSearchId;
     bool32 hasAnyRibbons;
     void *field10[SUBSTRUCT_COUNT];
 };
@@ -48,8 +48,8 @@ static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
 static void Task_RunLoopedTask_LinkMode(u8 a0);
 static void Task_RunLoopedTask(u8 taskId);
-static void sub_81C742C(u8 taskId);
-static void sub_81C72BC(void);
+static void Task_Pokenav(u8 taskId);
+static void CB2_InitPokenavForTutorial(void);
 
 const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
 {
@@ -57,7 +57,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk0 = PokenavCallback_Init_0,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9924,
-        .unkC = sub_81C9990,
+        .unkC = CreateMenuHandlerLoopedTask,
         .unk10 = sub_81C99C0,
         .unk14 = sub_81C9430,
         .unk18 = sub_81C99D4,
@@ -66,7 +66,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk0 = PokenavCallback_Init_0,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
-        .unkC = sub_81C9990,
+        .unkC = CreateMenuHandlerLoopedTask,
         .unk10 = sub_81C99C0,
         .unk14 = sub_81C9430,
         .unk18 = sub_81C99D4,
@@ -75,7 +75,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk0 = PokenavCallback_Init_2,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
-        .unkC = sub_81C9990,
+        .unkC = CreateMenuHandlerLoopedTask,
         .unk10 = sub_81C99C0,
         .unk14 = sub_81C9430,
         .unk18 = sub_81C99D4,
@@ -84,7 +84,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk0 = PokenavCallback_Init_3,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
-        .unkC = sub_81C9990,
+        .unkC = CreateMenuHandlerLoopedTask,
         .unk10 = sub_81C99C0,
         .unk14 = sub_81C9430,
         .unk18 = sub_81C99D4,
@@ -93,7 +93,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk0 = PokenavCallback_Init_4,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
-        .unkC = sub_81C9990,
+        .unkC = CreateMenuHandlerLoopedTask,
         .unk10 = sub_81C99C0,
         .unk14 = sub_81C9430,
         .unk18 = sub_81C99D4,
@@ -102,7 +102,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk0 = PokenavCallback_Init_5,
         .unk4 = sub_81C941C,
         .unk8 = sub_81C9940,
-        .unkC = sub_81C9990,
+        .unkC = CreateMenuHandlerLoopedTask,
         .unk10 = sub_81C99C0,
         .unk14 = sub_81C9430,
         .unk18 = sub_81C99D4,
@@ -156,7 +156,7 @@ const struct UnknownPokenavCallbackStruct PokenavMenuCallbacks[15] =
         .unk0 = PokenavCallback_Init_11,
         .unk4 = sub_81CAB24,
         .unk8 = sub_81CB260,
-        .unkC = sub_81CB29C,
+        .unkC = CreateMatchCallLoopedTask,
         .unk10 = sub_81CB2CC,
         .unk14 = sub_81CAB38,
         .unk18 = sub_81CB2E0,
@@ -311,19 +311,19 @@ void CB2_InitPokeNav(void)
         InitPokenavResources(gPokenavResources);
         ResetTasks();
         SetVBlankCallback(NULL);
-        CreateTask(sub_81C742C, 0);
+        CreateTask(Task_Pokenav, 0);
         SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VBlankCB_Pokenav);
     }
 }
 
-void sub_81C72A4(void)
+void OpenPokenavForTutorial(void)
 {
-    SetMainCallback2(sub_81C72BC);
-    FadeScreen(1, 0);
+    SetMainCallback2(CB2_InitPokenavForTutorial);
+    FadeScreen(FADE_TO_BLACK, 0);
 }
 
-static void sub_81C72BC(void)
+static void CB2_InitPokenavForTutorial(void)
 {
     UpdatePaletteFade();
     if (gPaletteFade.active)
@@ -337,12 +337,12 @@ static void sub_81C72BC(void)
     else
     {
         InitPokenavResources(gPokenavResources);
-        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_1;
+        gPokenavResources->mode = POKENAV_MODE_FORCE_CALL_READY;
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
         SetVBlankCallback(NULL);
-        CreateTask(sub_81C742C, 0);
+        CreateTask(Task_Pokenav, 0);
         SetMainCallback2(CB2_Pokenav);
         SetVBlankCallback(VBlankCB_Pokenav);
     }
@@ -416,7 +416,7 @@ static void VBlankCB_Pokenav(void)
     ProcessSpriteCopyRequests();
 }
 
-static void sub_81C742C(u8 taskId)
+static void Task_Pokenav(u8 taskId)
 {
     u32 v1;
     s16 *data = gTasks[taskId].data;
@@ -554,18 +554,18 @@ void SetPokenavMode(u16 mode)
     gPokenavResources->mode = mode;
 }
 
-void sub_81C7694(u32 a0)
+void SetSelectedConditionSearch(u32 cursorPos)
 {
-    u32 value = a0;
+    u32 searchId = cursorPos;
 
-    if (value > 4)
-        value = 0;
-    gPokenavResources->fieldA = value;
+    if (searchId > POKENAV_MENUITEM_CONDITION_SEARCH_TOUGH - POKENAV_MENUITEM_CONDITION_SEARCH_COOL)
+        searchId = 0;
+    gPokenavResources->conditionSearchId = searchId;
 }
 
-u32 sub_81C76AC(void)
+u32 GetSelectedConditionSearch(void)
 {
-    return gPokenavResources->fieldA;
+    return gPokenavResources->conditionSearchId;
 }
 
 bool32 CanViewRibbonsMenu(void)

@@ -41,6 +41,8 @@
 #define EGG_GROUP_DRAGON        14
 #define EGG_GROUP_UNDISCOVERED  15
 
+#define EGG_GROUPS_PER_MON      2
+
 // Pokemon natures
 #define NATURE_HARDY    0
 #define NATURE_LONELY   1
@@ -78,8 +80,8 @@
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 
-#define NUM_STATS 6
-#define NUM_BATTLE_STATS 8
+#define NUM_EV_STATS     NUM_STATS - 1 // excludes HP
+#define NUM_BATTLE_STATS NUM_STATS + 2 // includes Accuracy and Evasion
 
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
@@ -175,12 +177,12 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+#define MIN_LEVEL 1
 #define MAX_LEVEL 100
 
 #define OT_ID_PLAYER_ID       0
 #define OT_ID_PRESET          1
 #define OT_ID_RANDOM_NO_SHINY 2
-
 
 #define MON_GIVEN_TO_PARTY      0
 #define MON_GIVEN_TO_PC         1
@@ -190,19 +192,29 @@
 #define PLAYER_HAS_ONE_MON             1
 #define PLAYER_HAS_ONE_USABLE_MON      2
 
+#define MON_ALREADY_KNOWS_MOVE  0xFFFE
+#define MON_HAS_MAX_MOVES       0xFFFF
+
+#define LEVEL_UP_MOVE_ID   0x01FF
+#define LEVEL_UP_MOVE_LV   0xFE00
+#define LEVEL_UP_END       0xFFFF
+
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
-#define FRIENDSHIP_EVENT_GROW_LEVEL           0
-#define FRIENDSHIP_EVENT_VITAMIN              1 // unused
-#define FRIENDSHIP_EVENT_BATTLE_ITEM          2 // unused
-#define FRIENDSHIP_EVENT_LEAGUE_BATTLE        3
-#define FRIENDSHIP_EVENT_LEARN_TMHM           4
-#define FRIENDSHIP_EVENT_WALKING              5
-#define FRIENDSHIP_EVENT_FAINT_SMALL          6
-#define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 7
-#define FRIENDSHIP_EVENT_FAINT_LARGE          8
+// Constants for AdjustFriendship
+#define FRIENDSHIP_EVENT_GROW_LEVEL       0
+#define FRIENDSHIP_EVENT_VITAMIN          1 // unused, handled by PokemonUseItemEffects
+#define FRIENDSHIP_EVENT_BATTLE_ITEM      2 // unused, handled by PokemonUseItemEffects
+#define FRIENDSHIP_EVENT_LEAGUE_BATTLE    3
+#define FRIENDSHIP_EVENT_LEARN_TMHM       4
+#define FRIENDSHIP_EVENT_WALKING          5
+#define FRIENDSHIP_EVENT_FAINT_SMALL      6
+#define FRIENDSHIP_EVENT_FAINT_FIELD_PSN  7
+#define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
+
+#define MAX_FRIENDSHIP  0xFF
 
 #define STATUS_PRIMARY_NONE      0
 #define STATUS_PRIMARY_POISON    1
