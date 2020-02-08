@@ -2770,7 +2770,7 @@ const struct Item gItems[] =
     {
         .name = _("King's Rock"),
         .itemId = ITEM_KINGS_ROCK,
-        .price = 100,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_FLINCH,
         .holdEffectParam = 10,
         .description = sKingsRockDesc,
@@ -2838,7 +2838,7 @@ const struct Item gItems[] =
     {
         .name = _("DeepSeaTooth"),
         .itemId = ITEM_DEEP_SEA_TOOTH,
-        .price = 200,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_DEEP_SEA_TOOTH,
         .description = sDeepSeaToothDesc,
         .pocket = POCKET_POWER_UP,
@@ -2851,7 +2851,7 @@ const struct Item gItems[] =
     {
         .name = _("DeepSeaScale"),
         .itemId = ITEM_DEEP_SEA_SCALE,
-        .price = 200,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_DEEP_SEA_SCALE,
         .description = sDeepSeaScaleDesc,
         .pocket = POCKET_POWER_UP,
@@ -2930,7 +2930,7 @@ const struct Item gItems[] =
     {
         .name = _("Metal Coat"),
         .itemId = ITEM_METAL_COAT,
-        .price = 100,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_STEEL_POWER,
         .holdEffectParam = 10,
         .description = sMetalCoatDesc,
@@ -2996,7 +2996,7 @@ const struct Item gItems[] =
     {
         .name = _("Electirizer"),
         .itemId = ITEM_ELECTIRIZER,
-        .price = 2000,
+        .price = 2100,
         .description = sElectirizerDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -3008,7 +3008,7 @@ const struct Item gItems[] =
     {
         .name = _("Magmarizer"),
         .itemId = ITEM_MAGMARIZER,
-        .price = 2000,
+        .price = 2100,
         .description = sMagmarizerDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -3020,7 +3020,7 @@ const struct Item gItems[] =
     {
         .name = _("Dubious Disc"),
         .itemId = ITEM_DUBIOUS_DISC,
-        .price = 2000,
+        .price = 2100,
         .description = sDubiousDiscDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -3032,7 +3032,7 @@ const struct Item gItems[] =
     {
         .name = _("Reaper Cloth"),
         .itemId = ITEM_REAPER_CLOTH,
-        .price = 2000,
+        .price = 2100,
         .description = sReaperClothDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -3071,7 +3071,7 @@ const struct Item gItems[] =
     {
         .name = _("Prism Scale"),
         .itemId = ITEM_PRISM_SCALE,
-        .price = 2000,
+        .price = 2100,
         .description = sPrismScaleDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -3083,7 +3083,7 @@ const struct Item gItems[] =
     {
         .name = _("WhippedDream"),
         .itemId = ITEM_WHIPPED_DREAM,
-        .price = 2000,
+        .price = 2100,
         .description = sWhippedDreamDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -3095,7 +3095,7 @@ const struct Item gItems[] =
     {
         .name = _("Sachet"),
         .itemId = ITEM_SACHET,
-        .price = 2000,
+        .price = 2100,
         .description = sSachetDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
