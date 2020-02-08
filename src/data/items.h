@@ -7512,4 +7512,17 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
     },
+    
+    //Mod items
+    [ITEM_STRANGE_SOUVENIR] =
+    {
+        .name = _("Str. Souvenir"),
+        .itemId = ITEM_STRANGE_SOUVENIR,
+        .price = 0,
+        .description = sStrangeSouvenirDesc,
+        .pocket = POCKET_POWER_UP,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
 };

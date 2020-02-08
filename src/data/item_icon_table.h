@@ -592,4 +592,5 @@ const u32 *const gItemIconTable[][2] =
 
     //Mod items
     [ITEM_LINK_CABLE] = {gItemIcon_LinkCable, gItemIconPalette_LinkCable},
+    [ITEM_STRANGE_SOUVENIR] = {gItemIcon_StrangeSouvenir, gItemIconPalette_StrangeSouvenir},
 };

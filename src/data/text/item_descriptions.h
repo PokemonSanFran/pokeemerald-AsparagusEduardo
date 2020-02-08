@@ -2794,3 +2794,8 @@ static const u8 sLinkCableDesc[] = _(
 	"Rare machine part\n"
     "that is loved by\n"
     "certain Pokémon.");
+
+static const u8 sStrangeSouvenirDesc[] = _(
+	"An ornament that\n"
+    "brings the joy of\n"
+    "Alola to Pokémon");

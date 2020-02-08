@@ -6566,6 +6566,8 @@ extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 //Mod items
 extern const u32 gItemIcon_LinkCable[];
 extern const u32 gItemIconPalette_LinkCable[];
+extern const u32 gItemIcon_StrangeSouvenir[];
+extern const u32 gItemIconPalette_StrangeSouvenir[];
 
 //menu graphics
 extern const u16 gFireRedMenuElements1_Pal[16];
