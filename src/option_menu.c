@@ -16,6 +16,9 @@
 #include "gba/m4a_internal.h"
 #include "constants/rgb.h"
 
+#include "sound.h"
+#include "constants/songs.h"
+
 // Task data
 enum
 {
@@ -276,10 +279,14 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         if (gTasks[taskId].data[TD_MENUSELECTION] == MENUITEM_CANCEL)
+        {
+            PlaySE(SE_SAVE);
             gTasks[taskId].func = Task_OptionMenuSave;
+        }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
+        PlaySE(SE_SAVE);
         gTasks[taskId].func = Task_OptionMenuSave;
     }
     else if (gMain.newKeys & DPAD_UP)
