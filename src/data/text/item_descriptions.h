@@ -2798,4 +2798,4 @@ static const u8 sLinkCableDesc[] = _(
 static const u8 sStrangeSouvenirDesc[] = _(
 	"An ornament that\n"
     "brings the joy of\n"
-    "Alola to Pokémon");
+    "Alola to Pokémon.");
