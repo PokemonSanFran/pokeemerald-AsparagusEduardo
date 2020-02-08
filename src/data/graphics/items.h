@@ -1514,3 +1514,7 @@ const u32 gItemIconPalette_SwiftWing[] = INCBIN_U32("graphics/items/icon_palette
 
 const u32 gItemIcon_PrettyWing[] = INCBIN_U32("graphics/items/icons/pretty_wing.4bpp.lz");
 const u32 gItemIconPalette_PrettyWing[] = INCBIN_U32("graphics/items/icon_palettes/pretty_wing.gbapal.lz");
+
+//Mod Items
+const u32 gItemIcon_LinkCable[] = INCBIN_U32("graphics/items/icons/link_cable.4bpp.lz");
+const u32 gItemIconPalette_LinkCable[] = INCBIN_U32("graphics/items/icon_palettes/link_cable.gbapal.lz");

@@ -7498,5 +7498,18 @@ const struct Item gItems[] =
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
-    }
+    },
+    
+    //Mod items
+    [ITEM_LINK_CABLE] =
+    {
+        .name = _("Link Cable"),
+        .itemId = ITEM_LINK_CABLE,
+        .price = 0,
+        .description = sLinkCableDesc,
+        .pocket = POCKET_POWER_UP,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
 };

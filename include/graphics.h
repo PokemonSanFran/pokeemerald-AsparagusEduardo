@@ -6558,6 +6558,10 @@ extern const u32 gItemIconPalette_PrettyWing[];
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 
+//Mod items
+extern const u32 gItemIcon_LinkCable[];
+extern const u32 gItemIconPalette_LinkCable[];
+
 //menu graphics
 extern const u16 gFireRedMenuElements1_Pal[16];
 extern const u16 gFireRedMenuElements2_Pal[16];

@@ -589,4 +589,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_CLEVER_WING] = {gItemIcon_CleverWing, gItemIconPalette_CleverWing},
     [ITEM_SWIFT_WING] = {gItemIcon_SwiftWing, gItemIconPalette_SwiftWing},
     [ITEM_PRETTY_WING] = {gItemIcon_PrettyWing, gItemIconPalette_PrettyWing},
+
+    //Mod items
+    [ITEM_LINK_CABLE] = {gItemIcon_LinkCable, gItemIconPalette_LinkCable},
 };

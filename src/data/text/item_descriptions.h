@@ -2788,3 +2788,9 @@ static const u8 sPrettyWingDesc[] = _(
     "A beautiful yet\n"
     "plain feather that\n"
     "does nothing.");
+
+//Mod items
+static const u8 sLinkCableDesc[] = _(
+	"Rare machine part\n"
+    "that is loved by\n"
+    "certain Pokémon.");

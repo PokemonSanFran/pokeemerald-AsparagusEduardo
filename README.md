@@ -2,12 +2,14 @@
 
 Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly project and inspired by Pokémon Theta Emerald, this project's objective is to improve Pokémon Emerald's experience with features from later generations, including quality of life additions, mechanics and content.
 
-# Code used:
+## Code used:
 * [battle_engine_v2](https://github.com/dizzyeggg/pokeemerald/tree/battle_engine_v2) by [DizzyEgg](https://github.com/dizzyeggg).
 * [pokemon_expansion](https://github.com/DizzyEggg/pokeemerald/tree/pokemon_expansion) by [DizzyEgg](https://github.com/dizzyeggg).
 * [item_expansion](https://github.com/DizzyEggg/pokeemerald/tree/item_expansion) by [DizzyEgg](https://github.com/dizzyeggg).
-
 * [WhiteOutMoney](https://github.com/AsparagusEduardo/pokeemerald/tree/WhiteOutMoney) by myself.
+
+## Other resources:
+* Link Cable sprite by [KryptonLion](https://www.deviantart.com/kryptonlion).
 
 ## See also
 
