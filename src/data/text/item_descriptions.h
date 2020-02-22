@@ -2789,6 +2789,11 @@ static const u8 sPrettyWingDesc[] = _(
     "plain feather that\n"
     "does nothing.");
 
+static const u8 sShinyCharmDesc[] = _(
+	"A charm that will\n"
+    "raise the chance\n"
+    "of Shiny Pokémon.");
+    
 //Mod items
 static const u8 sLinkCableDesc[] = _(
 	"Rare machine part\n"
