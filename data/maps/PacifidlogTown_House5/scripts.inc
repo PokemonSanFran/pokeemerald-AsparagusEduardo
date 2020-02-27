@@ -29,9 +29,10 @@ PacifidlogTown_House5_Text_CanSeeMirageIslandToday: @ 8204161
 
 PacifidlogTown_House5_Text_MirageIslandAppearDependingOnWeather: @ 820418B
 	.string "Mirage Island…\p"
-	.string "It must become visible and invisible\n"
-	.string "depending on the weather conditions\l"
-	.string "that make mirages appear.\p"
-	.string "Or is it really appearing and\n"
-	.string "disappearing?$"
+	.string "It is said that a certain species of\n"
+	.string "Pokémon are native to the island and\l"
+	.string "can make it appear and disappear.\p"
+	.string "I would love to visit it one day...\p"
+	.string "Why you say?\p"
+	.string "Why not?$"
 

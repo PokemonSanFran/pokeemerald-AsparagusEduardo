@@ -8,6 +8,7 @@
 #include "rtc.h"
 #include "script.h"
 #include "task.h"
+#include "constants/species.h"
 
 static u32 GetMirageRnd(void)
 {
@@ -45,7 +46,7 @@ bool8 IsMirageIslandPresent(void)
     int i;
 
     for (i = 0; i < PARTY_SIZE; i++)
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && (GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY) & 0xFFFF) == rnd)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_WYNAUT)
             return TRUE;
 
     return FALSE;
