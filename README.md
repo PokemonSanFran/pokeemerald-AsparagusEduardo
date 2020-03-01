@@ -8,7 +8,8 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [item_expansion](https://github.com/DizzyEggg/pokeemerald/tree/item_expansion) by [DizzyEgg](https://github.com/dizzyeggg).
 * [BW2 Repels Menu](https://github.com/DizzyEggg/pokeemerald/tree/repel) by [DizzyEgg](https://github.com/dizzyeggg).
 * [item_desc_header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
-* Gen 6 Exp Share by [Lunos](https://github.com/LOuroboros).
+* [Lunos](https://github.com/LOuroboros)'s port of Blurose's Gen 6 Exp Share.
+* [paccy](https://www.pokecommunity.com/showthread.php?t=422107)'s port of camthesaxman's soaring.
 * [WhiteOutMoney](https://github.com/AsparagusEduardo/pokeemerald/tree/WhiteOutMoney) by myself.
 * [AlolaBranchedEvolution](https://github.com/AsparagusEduardo/pokeemerald/tree/AlolanEvolution) by myself.
 * [BetterBag](https://github.com/AsparagusEduardo/pokeemerald/tree/BetterBag) by myself.
