@@ -1973,7 +1973,7 @@ static const u8 sOldSeaMapDesc[] = _(
     "that shows the way\n"
     "to a certain island.");
 
-	// New items
+// New items
 static const u8 sWideLensDesc[] = _(
     "A magnifying lens\n"
     "that boosts the\n"
@@ -2804,3 +2804,8 @@ static const u8 sStrangeSouvenirDesc[] = _(
 	"An ornament that\n"
     "brings the joy of\n"
     "Alola to Pokémon.");
+    
+static const u8 sEonFluteDesc[] = _(
+	"A flute that can\n"
+	"summon Latias or\n"
+	"Latios.");
