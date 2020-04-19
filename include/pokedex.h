@@ -4,8 +4,6 @@
 extern u8 gUnusedPokedexU8;
 extern void (*gPokedexVBlankCB)(void);
 
-//#define KANTO_DEX_COUNT 151
-
 enum
 {
     DEX_MODE_HOENN,
