@@ -200,7 +200,7 @@ void CB2_InitSoar(void)
 			u16 cursorX, cursorY;
 			bool8 inCave;
 			ClearDialogWindowAndFrame(0, 1);
-			RegionMap_GetSectionCoordsFromCurrFieldPos(&sPrevMapSection, &cursorX, &cursorY, &inCave);
+			InitMapBasedOnPlayerLocation(&sPrevMapSection, &cursorX, &cursorY, &inCave);
 			sPrevMapSection = 0xD5;
 
 			sPlayerPosX = Q_8_7(cursorX * 8, 0);
@@ -478,7 +478,7 @@ static void StartBarrelRoll(void)
 
 static void UpdateMapSectionPopup(void)
 {
-	unsigned int mapSection = GetRegionMapSectionIdAt(IPART(sPlayerPosX) / 8, IPART(sPlayerPosY) / 8);
+	unsigned int mapSection = GetRegionMapSecIdAt(IPART(sPlayerPosX) / 8, IPART(sPlayerPosY) / 8);
 
 	if (mapSection != sPrevMapSection)
 	{
@@ -521,7 +521,7 @@ static void CB2_HandleInput(void)
 	int sinYaw;
 	int cosYaw;
 
-	if ((gMain.newKeys & A_BUTTON) && sPrevMapSection != MAPSEC_NONE && sPrevMapSection != MAPSEC_ROUTE_126 && sPrevMapSection != MAPSEC_ROUTE_128 && sPrevMapSection != MAPSEC_ROUTE_129 && sPrevMapSection != MAPSEC_ROUTE_130 && sPrevMapSection != MAPSEC_ROUTE_131 && (get_flagnr_blue_points(sPrevMapSection) == MAPSECTYPE_CITY_CANFLY || get_flagnr_blue_points(sPrevMapSection) == MAPSECTYPE_BATTLE_FRONTIER))
+	if ((gMain.newKeys & A_BUTTON) && sPrevMapSection != MAPSEC_NONE && sPrevMapSection != MAPSEC_ROUTE_126 && sPrevMapSection != MAPSEC_ROUTE_128 && sPrevMapSection != MAPSEC_ROUTE_129 && sPrevMapSection != MAPSEC_ROUTE_130 && sPrevMapSection != MAPSEC_ROUTE_131 && (GetMapsecType(sPrevMapSection) == MAPSECTYPE_CITY_CANFLY || GetMapsecType(sPrevMapSection) == MAPSECTYPE_BATTLE_FRONTIER))
 	{
 		PlaySE(SE_SELECT);
 

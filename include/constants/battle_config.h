@@ -6,6 +6,7 @@
 #define GEN_5 2
 #define GEN_6 3
 #define GEN_7 4
+#define GEN_8 5
 
 // Calculation settings
 #define B_CRIT_CHANCE               GEN_6 // Chances of a critical hit landing. See atk04_critcalc.
@@ -17,7 +18,9 @@
 
 // Move settings
 #define B_FELL_STINGER_STAT_RAISE   GEN_6 // Gen6 Atk+2, Gen7 Atk+3.
-#define B_SOUND_SUBSTITUTE          GEN_6 // Starting from gen6 sound moves bypass Substitute.
+#define B_SOUND_SUBSTITUTE          GEN_6 // Starting from Gen6 sound moves bypass Substitute.
+#define B_TOXIC_NEVER_MISS          GEN_6 // Starting from Gen6, if Toxic is used by a Poison type, it will never miss.
+#define B_PAYBACK_SWITCH_BOOST      GEN_6 // Starting from Gen5, if the opponent switches out, Payback's damage will no longer be doubled.
 
 // Ability settings
 #define B_ABILITY_POP_UP            GEN_6 // Starting from gen5, the pokemon abilities are displayed in a pop-up, when they activate in battle.
@@ -25,6 +28,7 @@
 #define B_GALE_WINGS                GEN_6 // Gen7 requires full hp.
 #define B_STANCE_CHANGE_FAIL        GEN_7 // In Gen7, Aegislash's form change does not happen, if the pokemon cannot use a move, because of confusion, paralysis, etc. In gen6, the form change occurs despite not being able to move.
 #define B_GHOSTS_ESCAPE             GEN_6 // From Gen6 onwards, ghosts can escape even when blocked by abilities such as Shadow Tag.
+#define B_MOODY_ACC_EVASION         GEN_6 // In Gen8, Moody CANNOT raise Accuray and Evasion any more
 
 // Other
 #define B_FAST_INTRO                TRUE // If set to TRUE, battle intro texts print at the same time as animation of a pokemon, as opposing to waiting for the animation to end.
