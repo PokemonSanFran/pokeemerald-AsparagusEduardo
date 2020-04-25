@@ -1713,6 +1713,37 @@
 	various \battler, VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED
 	.4byte \ptr
 	.endm
+
+	.macro trypoisontype attacker:req, target:req, ptr:req
+	various \attacker, VARIOUS_HANDLE_TYPE_IMMUNITY
+	.byte \target
+	.4byte \ptr
+	.endm
+	
+	.macro trysetfairylock ptr:req
+	various BS_ATTACKER, VARIOUS_TRY_FAIRY_LOCK
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifnoally battler:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NO_ALLY
+	.4byte \ptr
+	.endm
+	
+	.macro jumpifnoholdeffect battler:req, holdEffet:req, ptr:req
+	various \battler, VARIOUS_JUMP_IF_NO_HOLD_EFFECT
+	.byte \holdEffet
+	.4byte \ptr
+	.endm
+	
+	.macro infatuatewithbattler battler1:req, battler2:req
+	various \battler1, VARIOUS_INFATUATE_WITH_BATTLER
+	.byte \battler2
+	.endm
+	
+	.macro setlastuseditem battler:req
+	various \battler, VARIOUS_SET_LAST_USED_ITEM
+	.endm
 	
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
@@ -1830,6 +1861,12 @@
 	.macro jumpifleafguard jumpptr:req
 	jumpifhalfword CMP_NO_COMMON_BITS, gBattleWeather, WEATHER_SUN_ANY, 1f
 	jumpifability BS_TARGET, ABILITY_LEAF_GUARD, \jumpptr
+	1:
+	.endm
+	
+	.macro jumpifsafeguard jumpptr:req
+	jumpifability BS_ATTACKER, ABILITY_INFILTRATOR, 1f
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, \jumpptr
 	1:
 	.endm
 
