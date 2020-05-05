@@ -83,7 +83,7 @@ static u8 MoveRegionMapCursor_Zoomed(void);
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation);
 static u16 GetMapSecIdAt(u16 x, u16 y);
 static void RegionMap_SetBG2XAndBG2Y(s16 x, s16 y);
-void InitMapBasedOnPlayerLocation(u16 *mapSectionId, u16 *cursorPosX, u16 *cursorPosY, bool8 *playerIsInCave);
+static void InitMapBasedOnPlayerLocation(void);
 static void RegionMap_InitializeStateBasedOnSSTidalLocation(void);
 u8 GetMapsecType(u16 mapSecId);
 static u16 CorrectSpecialMapSecId_Internal(u16 mapSecId);
@@ -301,7 +301,7 @@ const u8 sMapHealLocations[][3] =
     {MAP_GROUP(LILYCOVE_CITY), MAP_NUM(LILYCOVE_CITY), HEAL_LOCATION_LILYCOVE_CITY},
     {MAP_GROUP(MOSSDEEP_CITY), MAP_NUM(MOSSDEEP_CITY), HEAL_LOCATION_MOSSDEEP_CITY},
     {MAP_GROUP(SOOTOPOLIS_CITY), MAP_NUM(SOOTOPOLIS_CITY), HEAL_LOCATION_SOOTOPOLIS_CITY},
-    {MAP_GROUP(EVER_GRANDE_CITY), MAP_NUM(EVER_GRANDE_CITY), HEAL_LOCATION_EVER_GRANDE_CITY_1},
+    {MAP_GROUP(EVER_GRANDE_CITY), MAP_NUM(EVER_GRANDE_CITY), HEAL_LOCATION_EVER_GRANDE_CITY},
 	{MAP_GROUP(ROUTE101), MAP_NUM(ROUTE101), HEAL_LOCATION_ROUTE101},
 	{MAP_GROUP(ROUTE102), MAP_NUM(ROUTE102), HEAL_LOCATION_ROUTE102},
 	{MAP_GROUP(ROUTE103), MAP_NUM(ROUTE103), HEAL_LOCATION_ROUTE103},
@@ -537,7 +537,7 @@ void InitRegionMapData(struct RegionMap *regionMap, const struct BgTemplate *tem
 void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap)
 {
     gRegionMap = regionMap;
-        InitMapBasedOnPlayerLocation(&gRegionMap->mapSecId, &gRegionMap->cursorPosX, &gRegionMap->cursorPosY, &gRegionMap->playerIsInCave);
+    InitMapBasedOnPlayerLocation();
     gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
     gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
 }
@@ -574,7 +574,7 @@ bool8 LoadRegionMapGfx(void)
         LZ77UnCompWram(sRegionMapCursorLargeGfxLZ, gRegionMap->cursorLargeImage);
         break;
     case 5:
-        InitMapBasedOnPlayerLocation(&gRegionMap->mapSecId, &gRegionMap->cursorPosX, &gRegionMap->cursorPosY, &gRegionMap->playerIsInCave);
+        InitMapBasedOnPlayerLocation();
         gRegionMap->playerIconSpritePosX = gRegionMap->cursorPosX;
         gRegionMap->playerIconSpritePosY = gRegionMap->cursorPosY;
         gRegionMap->mapSecId = CorrectSpecialMapSecId_Internal(gRegionMap->mapSecId);
@@ -966,7 +966,7 @@ static u16 GetMapSecIdAt(u16 x, u16 y)
     return sRegionMap_MapSectionLayout[x + y * MAP_WIDTH];
 }
 
-void InitMapBasedOnPlayerLocation(u16 *mapSectionId, u16 *cursorPosX, u16 *cursorPosY, bool8 *playerIsInCave)
+void RegionMap_GetSectionCoordsFromCurrFieldPos(u16 *mapSectionId, u16 *cursorPosX, u16 *cursorPosY, bool8 *playerIsInCave)
 {
 	const struct MapHeader *mapHeader;
 	u16 mapWidth;
@@ -1004,8 +1004,8 @@ void InitMapBasedOnPlayerLocation(u16 *mapSectionId, u16 *cursorPosX, u16 *curso
 			*playerIsInCave = TRUE;
 		break;
 	case MAP_TYPE_UNDERGROUND:
-	case MAP_TYPE_UNUSED_2:
-		if (gMapHeader.flags & MAP_ALLOW_ESCAPE_ROPE)
+	case MAP_TYPE_UNKNOWN:
+		if (gMapHeader.flags & MAP_ALLOW_ESCAPING)
 		{
 			mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
 			*mapSectionId = mapHeader->regionMapSectionId;
@@ -1097,11 +1097,10 @@ void InitMapBasedOnPlayerLocation(u16 *mapSectionId, u16 *cursorPosX, u16 *curso
 			x = 1;
 		if (gSaveBlock1Ptr->pos.x > 51)
 			x++;
-
 		y = 0;
-        if (gSaveBlock1Ptr->pos.y > 37)
+		if (gSaveBlock1Ptr->pos.y > 37)
 			y = 1;
-        if (gSaveBlock1Ptr->pos.y > 56)
+		if (gSaveBlock1Ptr->pos.y > 56)
 			y++;
 		break;
 	case MAPSEC_ROUTE_121:
@@ -1119,6 +1118,10 @@ void InitMapBasedOnPlayerLocation(u16 *mapSectionId, u16 *cursorPosX, u16 *curso
 	}
 	*cursorPosX = gRegionMapEntries[*mapSectionId].x + x + MAPCURSOR_X_MIN;
 	*cursorPosY = gRegionMapEntries[*mapSectionId].y + y + MAPCURSOR_Y_MIN;
+}
+
+static void InitMapBasedOnPlayerLocation(void) {
+	RegionMap_GetSectionCoordsFromCurrFieldPos(&gRegionMap->mapSecId, &gRegionMap->cursorPosX, &gRegionMap->cursorPosY, &gRegionMap->playerIsInCave);
 }
 
 static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
@@ -2062,27 +2065,27 @@ static void CB_ExitFlyMap(void)
             {
                 switch (sFlyMap->regionMap.mapSecId)
                 {
-                    case MAPSEC_SOUTHERN_ISLAND:
-                        SetWarpDestinationToHealLocation(HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR);
-                        break;
-                    case MAPSEC_BATTLE_FRONTIER:
-                        SetWarpDestinationToHealLocation(HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST);
-                        break;
-                    case MAPSEC_LITTLEROOT_TOWN:
-                        SetWarpDestinationToHealLocation(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_1 : HEAL_LOCATION_LITTLEROOT_TOWN_2);
-                        break;
-                    case MAPSEC_EVER_GRANDE_CITY:
-                        SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && sFlyMap->regionMap.posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
-                        break;
-                    case MAPSEC_MT_CHIMNEY:
-                        SetWarpDestinationToHealLocation(HEAL_LOCATION_MT_CHIMNEY);
-                        break;
-                    default:
-                        if (sMapHealLocations[sFlyMap->regionMap.mapSecId][2] != 0)
-                            SetWarpDestinationToHealLocation(sMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
-                        else
-                            SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], -1);
-                        break;
+                case MAPSEC_SOUTHERN_ISLAND:
+                    SetWarpDestinationToHealLocation(HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR);
+                    break;
+                case MAPSEC_BATTLE_FRONTIER:
+                    SetWarpDestinationToHealLocation(HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST);
+                    break;
+                case MAPSEC_LITTLEROOT_TOWN:
+                    SetWarpDestinationToHealLocation(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE);
+                    break;
+                case MAPSEC_EVER_GRANDE_CITY:
+                    SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && sFlyMap->regionMap.posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
+                    break;
+                case MAPSEC_MT_CHIMNEY:
+                    SetWarpDestinationToHealLocation(HEAL_LOCATION_MT_CHIMNEY);
+                    break;
+                default:
+                    if (sMapHealLocations[sFlyMap->regionMap.mapSecId][2] != 0)
+                        SetWarpDestinationToHealLocation(sMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+                    else
+                        SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], -1);
+                    break;
                 }
                 ReturnToFieldFromFlyMapSelect();
             }

@@ -67,9 +67,9 @@ static const struct WindowTemplate sPopupWindowTemplate =
 };
 
 // For now, just use the region map graphics
-static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/soar/region_map.gbapal");
-static const u32 sRegionMapBkgnd_ImageLZ[] = INCBIN_U32("graphics/soar/region_map.8bpp.lz");
-static const u32 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U32("graphics/soar/region_map_map.bin.lz");
+static const u16 sRegionMapBg_Pal[] = INCBIN_U16("graphics/soar/region_map.gbapal");
+static const u32 sRegionMapBg_GfxLZ[] = INCBIN_U32("graphics/soar/region_map.8bpp.lz");
+static const u32 sRegionMapBg_TilemapLZ[] = INCBIN_U32("graphics/soar/region_map_map.bin.lz");
 
 //
 // Eon sprite data
@@ -200,7 +200,7 @@ void CB2_InitSoar(void)
 			u16 cursorX, cursorY;
 			bool8 inCave;
 			ClearDialogWindowAndFrame(0, 1);
-			InitMapBasedOnPlayerLocation(&sPrevMapSection, &cursorX, &cursorY, &inCave);
+			RegionMap_GetSectionCoordsFromCurrFieldPos(&sPrevMapSection, &cursorX, &cursorY, &inCave);
 			sPrevMapSection = 0xD5;
 
 			sPlayerPosX = Q_8_7(cursorX * 8, 0);
@@ -280,10 +280,10 @@ static void CB2_LoadSoarGraphics(void)
 		SetHBlankCallback(SoarHBlankCallback);
 
 		// Load image data
-		LZ77UnCompVram(sRegionMapBkgnd_ImageLZ, (void *)(VRAM + BG2_IMAGE_OFFSET));
+		LZ77UnCompVram(sRegionMapBg_GfxLZ, (void *)(VRAM + BG2_IMAGE_OFFSET));
 
 		// Load tilemap
-		LZ77UnCompVram(sRegionMapBkgnd_TilemapLZ, gDecompressionBuffer);
+		LZ77UnCompVram(sRegionMapBg_TilemapLZ, gDecompressionBuffer);
 		src = gDecompressionBuffer;
 		dest = (void *)(VRAM + BG2_TILEMAP_OFFSET);
 		// Copy each row to VRAM
@@ -295,7 +295,7 @@ static void CB2_LoadSoarGraphics(void)
 		}
 
 		// load palette
-		LoadPalette(sRegionMapBkgnd_Pal, 0x70, 64);
+		LoadPalette(sRegionMapBg_Pal, 0x70, 64);
 
 		// Create sprites
 		LoadEonGraphics();
@@ -646,10 +646,10 @@ static void WarpCB2(void)
 		SetWarpDestinationToHealLocation(HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST);
 		break;
 	case MAPSEC_LITTLEROOT_TOWN:
-		SetWarpDestinationToHealLocation(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_1 : HEAL_LOCATION_LITTLEROOT_TOWN_2);
+		SetWarpDestinationToHealLocation(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE);
 		break;
 	case MAPSEC_EVER_GRANDE_CITY:
-		SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && (IPART(sPlayerPosY) / 8) == 10 ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
+		SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && (IPART(sPlayerPosY) / 8) == 10 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
 		break;
 	case MAPSEC_MT_CHIMNEY:
 		SetWarpDestinationToHealLocation(HEAL_LOCATION_MT_CHIMNEY);
