@@ -62,7 +62,6 @@
 #include "constants/species.h"
 #include "constants/trainers.h"
 #include "cable_club.h"
-#include "money.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
@@ -460,13 +459,6 @@ const u8 * const gStatusConditionStringsTable[7][2] =
 static const u8 sPkblToEscapeFactor[][3] = {{0, 0, 0}, {3, 5, 0}, {2, 3, 0}, {1, 2, 0}, {1, 1, 0}};
 static const u8 sGoNearCounterToCatchFactor[] = {4, 3, 2, 1};
 static const u8 sGoNearCounterToEscapeFactor[] = {4, 4, 4, 4};
-
-static const u16 sBadgeFlags[8] =
-{
-    FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
-    FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
-};
-static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 60, 80, 100, 120, };
 
 // code
 void CB2_InitBattle(void)
@@ -4754,16 +4746,6 @@ static void HandleEndTurn_BattleLost(void)
     }
     else
     {
-        s32 i, count;
-
-        for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
-        {
-            if (FlagGet(sBadgeFlags[i]) == TRUE)
-            {
-                ++count;
-            }
-        }
-        RemoveMoney(&gSaveBlock1Ptr->money, sWhiteOutBadgeMoney[count] * gMaxPartyLevel);
         gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
     }
 
