@@ -328,7 +328,7 @@ SECTIONS {
         src/unk_transition.o(.text);
         src/international_string_util.o(.text);
 		src/soar.o(.text);
-        src/day_night.o(.text);
+        src/dns.o(.text);
     } =0
 
     script_data :
@@ -689,7 +689,7 @@ SECTIONS {
 		src/soar.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-        src/day_night.o(.rodata);
+        src/dns.o(.rodata);
     } =0
 
     song_data :
