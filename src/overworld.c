@@ -6,7 +6,6 @@
 #include "bg.h"
 #include "cable_club.h"
 #include "clock.h"
-#include "day_night.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
@@ -115,6 +114,7 @@ static void c2_80567AC(void);
 static void CB2_LoadMap2(void);
 static void VBlankCB_Field(void);
 static void SpriteCB_LinkPlayer(struct Sprite *sprite);
+static void ChooseAmbientCrySpecies(void);
 static void do_load_map_stuff_loop(u8 *state);
 static bool32 map_loading_iteration_3(u8 *state);
 static bool32 sub_8086638(u8 *state);
@@ -1316,7 +1316,7 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
     }
 }
 
-void ChooseAmbientCrySpecies(void)
+static void ChooseAmbientCrySpecies(void)
 {
     if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE130)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE130))
@@ -1475,7 +1475,6 @@ static void OverworldBasic(void)
     CameraUpdate();
     UpdateCameraPanning();
     BuildOamBuffer();
-    ProcessImmediateTimeEvents();
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     do_scheduled_bg_tilemap_copies_to_vram();
@@ -1795,7 +1794,6 @@ static void VBlankCB_Field(void)
     FieldUpdateBgTilemapScroll();
     TransferPlttBuffer();
     TransferTilesetAnimsBuffer();
-    CheckClockForImmediateTimeEvents();
 }
 
 static void InitCurrentFlashLevelScanlineEffect(void)
