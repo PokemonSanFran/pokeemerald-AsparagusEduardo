@@ -331,6 +331,7 @@ const u16 gPaletteTagExceptions[] =
     0xD704, //TAG_HEALTHBAR_PAL
     0xD710, //TAG_STATUS_SUMMARY_BAR_PAL
     0xD712, //TAG_STATUS_SUMMARY_BALLS_PAL
+    0x2722, //ITEM_TAG & MONEY_LABEL_TAG
 };
 
 /***********************************************
