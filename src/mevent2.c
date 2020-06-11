@@ -25,34 +25,36 @@ static void sub_801BA8C(u32 a0, u32 a1, u32 *a2, int a3);
 
 void sub_801AFD8(void)
 {
+    /*
     CpuFill32(0, &gSaveBlock1Ptr->unk_322C, sizeof(gSaveBlock1Ptr->unk_322C));
     sub_801B180();
     sub_811F8BC();
+    */
 }
 
 struct WonderNews *GetSavedWonderNews(void)
 {
-    return &gSaveBlock1Ptr->unk_322C.wonderNews.data;
+    //return &gSaveBlock1Ptr->unk_322C.wonderNews.data;
 }
 
 struct WonderCard *GetSavedWonderCard(void)
 {
-    return &gSaveBlock1Ptr->unk_322C.wonderCard.data;
+    //return &gSaveBlock1Ptr->unk_322C.wonderCard.data;
 }
 
 struct MEventBuffer_3430_Sub *sav1_get_mevent_buffer_2(void)
 {
-    return &gSaveBlock1Ptr->unk_322C.buffer_310.data;
+    //return &gSaveBlock1Ptr->unk_322C.buffer_310.data;
 }
 
 struct MysteryEventStruct *sub_801B044(void)
 {
-    return &gSaveBlock1Ptr->unk_322C.unk_340;
+    //return &gSaveBlock1Ptr->unk_322C.unk_340;
 }
 
 u16 *sub_801B058(void)
 {
-    return gSaveBlock1Ptr->unk_322C.unk_338;
+    //return gSaveBlock1Ptr->unk_322C.unk_338;
 }
 
 void DestroyWonderNews(void)
@@ -62,6 +64,7 @@ void DestroyWonderNews(void)
 
 bool32 sub_801B078(const struct WonderNews *src)
 {
+    /*
     if (!sub_801B114(src))
         return FALSE;
 
@@ -69,15 +72,18 @@ bool32 sub_801B078(const struct WonderNews *src)
     gSaveBlock1Ptr->unk_322C.wonderNews.data = *src;
     gSaveBlock1Ptr->unk_322C.wonderNews.crc = CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.wonderNews.data, sizeof(struct WonderNews));
     return TRUE;
+    */
+    return FALSE;
 }
 
 bool32 ValidateReceivedWonderNews(void)
 {
+    /*
     if (CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.wonderNews.data, sizeof(struct WonderNews)) != gSaveBlock1Ptr->unk_322C.wonderNews.crc)
         return FALSE;
     if (!sub_801B114(&gSaveBlock1Ptr->unk_322C.wonderNews.data))
         return FALSE;
-
+    */
     return TRUE;
 }
 
@@ -91,17 +97,20 @@ static bool32 sub_801B114(const struct WonderNews *data)
 
 bool32 WonderNews_Test_Unk_02(void)
 {
+    /*
     const struct WonderNews *data = &gSaveBlock1Ptr->unk_322C.wonderNews.data;
     if (data->unk_02 == 0)
         return FALSE;
-
+    */
     return TRUE;
 }
 
 static void s_DestroyWonderNews(void)
 {
+    /*
     CpuFill32(0, GetSavedWonderNews(), sizeof(gSaveBlock1Ptr->unk_322C.wonderNews.data));
     gSaveBlock1Ptr->unk_322C.wonderNews.crc = 0;
+    */
 }
 
 static void sub_801B180(void)
@@ -112,6 +121,7 @@ static void sub_801B180(void)
 
 bool32 sub_801B1A4(const u8 *src)
 {
+    /*
     const u8 *r5 = (const u8 *)&gSaveBlock1Ptr->unk_322C.wonderNews.data;
     u32 i;
     if (!ValidateReceivedWonderNews())
@@ -122,12 +132,13 @@ bool32 sub_801B1A4(const u8 *src)
         if (r5[i] != src[i])
             return FALSE;
     }
-
+    */
     return TRUE;
 }
 
 void DestroyWonderCard(void)
 {
+    /*
     sub_801B330();
     sub_801B368();
     sub_801B9F8();
@@ -135,6 +146,7 @@ void DestroyWonderCard(void)
     ClearMysteryEventFlags();
     ClearMysteryEventVars();
     ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
+    */
 }
 
 bool32 sub_801B21C(const struct WonderCard *data)
@@ -143,25 +155,27 @@ bool32 sub_801B21C(const struct WonderCard *data)
     struct WonderCard *r1;
     if (!sub_801B2CC(data))
         return FALSE;
-
+    /*
     DestroyWonderCard();
     memcpy(&gSaveBlock1Ptr->unk_322C.wonderCard.data, data, sizeof(struct WonderCard));
     gSaveBlock1Ptr->unk_322C.wonderCard.crc = CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.wonderCard.data, sizeof(struct WonderCard));
     r2 = &gSaveBlock1Ptr->unk_322C.buffer_310.data;
     r1 = &gSaveBlock1Ptr->unk_322C.wonderCard.data;
     r2->unk_06 = r1->unk_02;
+    */
     return TRUE;
 }
 
 bool32 ValidateReceivedWonderCard(void)
 {
+    /*
     if (gSaveBlock1Ptr->unk_322C.wonderCard.crc != CalcCRC16WithTable((void *)&gSaveBlock1Ptr->unk_322C.wonderCard.data, sizeof(struct WonderCard)))
         return FALSE;
     if (!sub_801B2CC(&gSaveBlock1Ptr->unk_322C.wonderCard.data))
         return FALSE;
     if (!ValidateSavedRamScript())
         return FALSE;
-
+    */
     return TRUE;
 }
 
@@ -183,30 +197,36 @@ static bool32 sub_801B2CC(const struct WonderCard *data)
 
 bool32 WonderCard_Test_Unk_08_6(void)
 {
+    /*
     const struct WonderCard *data = &gSaveBlock1Ptr->unk_322C.wonderCard.data;
     if (data->unk_08_6 == 0)
         return FALSE;
-
+    */
     return TRUE;
 }
 
 static void sub_801B330(void)
 {
+    /*
     CpuFill32(0, &gSaveBlock1Ptr->unk_322C.wonderCard.data, sizeof(struct WonderCard));
     gSaveBlock1Ptr->unk_322C.wonderCard.crc = 0;
+    */
 }
 
 static void sub_801B368(void)
 {
+    /*
     CpuFill32(0, sav1_get_mevent_buffer_2(), 18 *sizeof(u16));
     gSaveBlock1Ptr->unk_322C.buffer_310.crc = 0;
+    */
 }
 
 u16 GetWonderCardFlagID(void)
 {
+    /*
     if (ValidateReceivedWonderCard())
         return gSaveBlock1Ptr->unk_322C.wonderCard.data.unk_00;
-
+    */
     return 0;
 }
 
@@ -303,16 +323,19 @@ static int sub_801B4CC(void)
     struct WonderCard *data;
     if (!ValidateReceivedWonderCard())
         return 0;
-
+    /*
     data = &gSaveBlock1Ptr->unk_322C.wonderCard.data;
     if (data->unk_08_0 != 1)
         return 0;
 
     return sub_801B438(&gSaveBlock1Ptr->unk_322C.buffer_310.data, data->unk_09);
+    */
+    return 0;
 }
 
 bool32 sub_801B508(const u16 *data)
 {
+    /*
     struct WonderCard *buffer = &gSaveBlock1Ptr->unk_322C.wonderCard.data;
     int size = buffer->unk_09;
     int i;
@@ -331,7 +354,7 @@ bool32 sub_801B508(const u16 *data)
             return TRUE;
         }
     }
-
+    */
     return FALSE;
 }
 
@@ -364,7 +387,7 @@ void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 a1)
     {
         data->unk_14 = 0;
     }
-
+    /*
     for (i = 0; i < 4; i++)
         data->unk_16[i] = gSaveBlock1Ptr->unk_322C.unk_338[i];
 
@@ -375,6 +398,7 @@ void sub_801B580(struct MEventStruct_Unk1442CC *data, bool32 a1)
 
     memcpy(data->unk_5C, RomHeaderGameCode, 4);
     data->unk_60 = RomHeaderSoftwareVersion;
+    */
 }
 
 bool32 sub_801B6A0(const struct MEventStruct_Unk1442CC *data, bool32 a1)
@@ -462,6 +486,7 @@ u16 MEventStruct_Unk1442CC_GetValueNFrom_unk_20(const struct MEventStruct_Unk144
 
 static void sub_801B7D8(u32 command)
 {
+    /*
     struct WonderCard *data = &gSaveBlock1Ptr->unk_322C.wonderCard.data;
     if (data->unk_08_0 == 2)
     {
@@ -492,10 +517,12 @@ static void sub_801B7D8(u32 command)
             *dest = 999;
         }
     }
+    */
 }
 
 u16 mevent_081445C0(u32 command)
 {
+    /*
     switch (command)
     {
         case GET_CARD_BATTLES_WON_INTERNAL:
@@ -545,6 +572,7 @@ u16 mevent_081445C0(u32 command)
     }
 
     AGB_ASSERT(0);
+    */
     return 0;
 }
 
@@ -555,6 +583,7 @@ void sub_801B940(void)
 
 bool32 sub_801B94C(u16 a0)
 {
+    /*
     gUnknown_02022C70 = FALSE;
     if (a0 == 0)
         return FALSE;
@@ -566,11 +595,13 @@ bool32 sub_801B94C(u16 a0)
         return FALSE;
 
     gUnknown_02022C70 = TRUE;
+    */
     return TRUE;
 }
 
 void sub_801B990(u32 a0, u32 a1)
 {
+    /*
     if (gUnknown_02022C70)
     {
         switch (a0)
@@ -588,11 +619,14 @@ void sub_801B990(u32 a0, u32 a1)
             AGB_ASSERT(0);
         }
     }
+    */
 }
 
 static void sub_801B9F8(void)
 {
+    /*
     CpuFill32(0, gSaveBlock1Ptr->unk_322C.unk_344, sizeof(gSaveBlock1Ptr->unk_322C.unk_344));
+    */
 }
 
 static bool32 sub_801BA24(u32 a0, u32 *a1, int size)
