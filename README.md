@@ -17,7 +17,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * Reusable TMs.
 * [BW2 Repels](https://github.com/DizzyEggg/pokeemerald/tree/repel) functionality.  Code by [DizzyEgg](https://github.com/dizzyeggg).
 * [More bag pockets](https://github.com/AsparagusEduardo/pokeemerald/tree/BetterBag) by me.
-* Trade Item Evolutions now also have the option to use the item like an evolution stone.
+* Trade Evolution Items can be hold while leveling up to trigger their evolutions.
 	* A new item, the Link Cable, can be used for trade evolutions without items. Sprite by [KryptonLion](https://www.deviantart.com/kryptonlion).
 *  When blacking out, you no longer lose half your money, instead using the [current formula](https://github.com/AsparagusEduardo/pokeemerald/tree/WhiteOutMoney). Code by me, with help from [lightgod87](https://github.com/lightgod87).
 * Shows [Type effectiveness in-battle](https://www.pokecommunity.com/showthread.php?p=10167016#post10167016). Code by PokemonCrazy.
