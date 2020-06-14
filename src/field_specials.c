@@ -4363,3 +4363,10 @@ u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
+
+//Debug
+void CheckSaveBlock1Size(void)
+{
+    u32 size = (sizeof(struct SaveBlock1));
+    ConvertIntToDecimalStringN(gStringVar1, size, STR_CONV_MODE_LEFT_ALIGN, 6);
+}
