@@ -103,7 +103,9 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs: @ 820446E
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces: @ 820461A
 	.string "If your Pokémon can Surf, you'll be\n"
-	.string "able to go to all sorts of places.$"
+	.string "able to go to all sorts of places.\p"
+	.string "You can even hold B to speed\n"
+	.string "through the waters!$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon: @ 8204661
 	.string "Wally's coming home soon.\n"
