@@ -20,12 +20,15 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
 void Debug_ShowMainMenu(void);
 static void Debug_DestroyMenu(u8);
 static void DebugAction_PlayBoo(u8);
+static void DebugAction_CheckSaveBlock1(u8);
 static void DebugAction_Cancel(u8);
 static void DebugAction_OpenSaveBlocksMenu(u8);
 static void DebugAction_OpenSub1(u8);
 static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_SaveBlocks(u8);
 static void DebugTask_HandleMenuInput_Sub1(u8);
+
+extern u8 Debug_CheckSaveBlock1[];
 
 enum DebugMenuOptions{
     DEBUG_MENU_ITEM_SAVEBLOCKS,
@@ -97,9 +100,9 @@ static void (*const sDebugMenuActions[])(u8) =
 
 static void (*const sDebugMenu_SaveBlocks_Actions[])(u8) =
 {
-    [SAVEBLOCKS_MENU_ITEM_SAVEBLOCK1] = DebugAction_PlayBoo,
-    [SAVEBLOCKS_MENU_ITEM_SAVEBLOCK2] = DebugAction_PlayBoo,
-    [SAVEBLOCKS_MENU_ITEM_PKMNSTORAGE] = DebugAction_PlayBoo,
+    [SAVEBLOCKS_MENU_ITEM_SAVEBLOCK1] = DebugAction_CheckSaveBlock1,
+    [SAVEBLOCKS_MENU_ITEM_SAVEBLOCK2] = NULL,
+    [SAVEBLOCKS_MENU_ITEM_PKMNSTORAGE] = NULL,
 };
 
 static void (*const sDebugMenu_Sub1_Actions[])(u8) =
@@ -270,6 +273,13 @@ static void DebugAction_OpenSub1(u8 taskId)
 static void DebugAction_PlayBoo(u8 taskId)
 {
     PlayBGM(MUS_BATTLE33);
+}
+
+static void DebugAction_CheckSaveBlock1(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_CheckSaveBlock1);
 }
 
 #endif
