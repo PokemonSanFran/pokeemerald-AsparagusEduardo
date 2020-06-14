@@ -1,3 +1,7 @@
+#include "debug.h"
+
+#ifdef DEBUG_MENU
+
 #include "global.h"
 #include "list_menu.h"
 #include "main.h"
@@ -267,3 +271,5 @@ static void DebugAction_PlayBoo(u8 taskId)
 {
     PlayBGM(MUS_BATTLE33);
 }
+
+#endif
