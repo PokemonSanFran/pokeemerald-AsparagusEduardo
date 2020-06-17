@@ -38,6 +38,8 @@ const u16 gTutorMoves[] =
 //#define TUTOR(move) ((u64)1 << (TUTOR_##move))
 #define TUTOR(move) ((u8) (TUTOR_##move))
 
+// DISCLAIMER: These are untested. Tutor bugs CAN and WILL be caught during development, and this system may change accordingly.
+
 static const u8 sNoneTutorLearnset[] =
 {
     TUTOR(MOVE_DOUBLE_EDGE),
@@ -11127,7 +11129,7 @@ static const u8 sPyroarTutorLearnset[] =
     0xFF,
 };
 
-static const u8 sFlabébéTutorLearnset[] =
+static const u8 sFlabebeTutorLearnset[] =
 {
     TUTOR(MOVE_SLEEP_TALK),
     TUTOR(MOVE_SNORE),
@@ -13480,7 +13482,7 @@ static const u8 *const sTutorLearnsets[] =
     [SPECIES_VIVILLON] = sVivillonTutorLearnset,
     [SPECIES_LITLEO] = sLitleoTutorLearnset,
     [SPECIES_PYROAR] = sPyroarTutorLearnset,
-    [SPECIES_FLABEBE] = sFlabébéTutorLearnset,
+    [SPECIES_FLABEBE] = sFlabebeTutorLearnset,
     [SPECIES_FLOETTE] = sFloetteTutorLearnset,
     [SPECIES_FLORGES] = sFlorgesTutorLearnset,
     [SPECIES_SKIDDO] = sSkiddoTutorLearnset,
