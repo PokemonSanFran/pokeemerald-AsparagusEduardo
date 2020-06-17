@@ -424,11 +424,11 @@ const struct WindowTemplate gUnknown_086141AC[] =
 // .text
 
 struct ListBuffer1 {
-    struct ListMenuItem subBuffers[65];
+    struct ListMenuItem subBuffers[129];
 };
 
 struct ListBuffer2 {
-    s8 name[65][24];
+    s8 name[129][24];
 };
 
 struct TempWallyStruct {
