@@ -19,12 +19,15 @@
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
 void Debug_ShowMainMenu(void);
 static void Debug_DestroyMenu(u8);
+
 static void DebugAction_PlayBoo(u8);
 static void DebugAction_CheckSaveBlock(u8);
 static void DebugAction_CheckWallClock(u8);
 static void DebugAction_SetWallClock(u8);
 static void DebugAction_Cancel(u8);
+
 static void DebugAction_OpenUtilitiesMenu(u8);
+static void DebugAction_OpenFlagsMenu(u8);
 static void DebugAction_OpenSub1(u8);
 static void DebugTask_HandleMenuInput_Main(u8);
 static void DebugTask_HandleMenuInput_Utilities(u8);
@@ -34,25 +37,9 @@ extern u8 Debug_CheckSaveBlock[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
 
-enum DebugMenuOptions{
-    DEBUG_MENU_ITEM_UTILITIES,
-    DEBUG_MENU_ITEM_OPTION_2,
-    DEBUG_MENU_ITEM_OPTION_3,
-    DEBUG_MENU_ITEM_OPTION_4,
-    DEBUG_MENU_ITEM_OPTION_5,
-    DEBUG_MENU_ITEM_OPTION_6,
-    DEBUG_MENU_ITEM_CANCEL,
-};
-
-enum DebugMenuOptions_SaveBlocks{
-    SAVEBLOCKS_MENU_ITEM_CHECKSAVEBLOCK,
-    SAVEBLOCKS_MENU_ITEM_CHECKWALLCLOCK,
-    SAVEBLOCKS_MENU_ITEM_SETWALLCLOCK,
-};
-
 // Main Menu
 static const u8 gDebugText_Utilities[] = _("Utilities");
-static const u8 gDebugText_Option2[] = _("Option 2");
+static const u8 gDebugText_Flags[] = _("Flags");
 static const u8 gDebugText_Option3[] = _("Option 3");
 static const u8 gDebugText_Option4[] = _("Option 4");
 static const u8 gDebugText_Option5[] = _("Option 5");
@@ -62,54 +49,72 @@ static const u8 gDebugText_Cancel[] = _("Cancel");
 static const u8 gDebugText_SaveBlockSpace[] = _("SaveBlock Space");
 static const u8 gDebugText_CheckWallClock[] = _("Check Wall Clock");
 static const u8 gDebugText_SetWallClock[] = _("Set Wall Clock");
+
+static const u8 gDebugText_StoryFlags[] = _("Story Flags");
+static const u8 gDebugText_PokedexFlags[] = _("Pokédex Flags");
+
 static const u8 gDebugText_None[] = _("None");
 
 // Sub Menu 1
 static const u8 gDebugText__Sub1_OptionA[] = _("Option A");
 
-static const struct ListMenuItem sDebugMenuItems[] =
+static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
-    [DEBUG_MENU_ITEM_UTILITIES] = {gDebugText_Utilities, DEBUG_MENU_ITEM_UTILITIES},
-    [DEBUG_MENU_ITEM_OPTION_2] = {gDebugText_Option2, DEBUG_MENU_ITEM_OPTION_2},
-    [DEBUG_MENU_ITEM_OPTION_3] = {gDebugText_Option3, DEBUG_MENU_ITEM_OPTION_3},
-    [DEBUG_MENU_ITEM_OPTION_4] = {gDebugText_Option4, DEBUG_MENU_ITEM_OPTION_4},
-    [DEBUG_MENU_ITEM_OPTION_5] = {gDebugText_Option5, DEBUG_MENU_ITEM_OPTION_5},
-    [DEBUG_MENU_ITEM_OPTION_6] = {gDebugText_Option6, DEBUG_MENU_ITEM_OPTION_6},
-    [DEBUG_MENU_ITEM_CANCEL] = {gDebugText_Cancel, DEBUG_MENU_ITEM_CANCEL}
+    [0] = {gDebugText_Utilities, 0},
+    [1] = {gDebugText_Flags, 1},
+    [2] = {gDebugText_Option3, 2},
+    [3] = {gDebugText_Option4, 3},
+    [4] = {gDebugText_Option5, 4},
+    [5] = {gDebugText_Option6, 5},
+    [6] = {gDebugText_Cancel, 6}
 };
 
-static const struct ListMenuItem sDebugMenu_SpaceManage_Items[] =
+static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [SAVEBLOCKS_MENU_ITEM_CHECKSAVEBLOCK] = {gDebugText_SaveBlockSpace, SAVEBLOCKS_MENU_ITEM_CHECKSAVEBLOCK},
-    [SAVEBLOCKS_MENU_ITEM_CHECKWALLCLOCK] = {gDebugText_CheckWallClock, SAVEBLOCKS_MENU_ITEM_CHECKWALLCLOCK},
-    [SAVEBLOCKS_MENU_ITEM_SETWALLCLOCK] = {gDebugText_SetWallClock, SAVEBLOCKS_MENU_ITEM_SETWALLCLOCK},
+    [0] = {gDebugText_SaveBlockSpace, 0},
+    [1] = {gDebugText_CheckWallClock, 1},
+    [2] = {gDebugText_SetWallClock, 2},
 };
 
-static const struct ListMenuItem sDebugMenu_Sub1_Items[] =
+static const struct ListMenuItem sDebugMenu_Items_Flags[] =
+{
+    [0] = {gDebugText_StoryFlags, 0},
+    [1] = {gDebugText_PokedexFlags, 1},
+    [2] = {gDebugText_None, 2},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_Sub1[] =
 {
     [0] = {gDebugText__Sub1_OptionA, 0},
     [1] = {gDebugText_Cancel, 1}
 };
 
-static void (*const sDebugMenuActions[])(u8) =
+static void (*const sDebugMenu_Actions_Main[])(u8) =
 {
-    [DEBUG_MENU_ITEM_UTILITIES] = DebugAction_OpenUtilitiesMenu,
-    [DEBUG_MENU_ITEM_OPTION_2] = NULL,
-    [DEBUG_MENU_ITEM_OPTION_3] = NULL,
-    [DEBUG_MENU_ITEM_OPTION_4] = NULL,
-    [DEBUG_MENU_ITEM_OPTION_5] = NULL,
-    [DEBUG_MENU_ITEM_OPTION_6] = DebugAction_OpenSub1,
-    [DEBUG_MENU_ITEM_CANCEL] = DebugAction_Cancel
+    [0] = DebugAction_OpenUtilitiesMenu,
+    [1] = DebugAction_OpenFlagsMenu,
+    [2] = NULL,
+    [3] = NULL,
+    [4] = NULL,
+    [5] = DebugAction_OpenSub1,
+    [6] = DebugAction_Cancel
 };
 
-static void (*const sDebugMenu_SaveBlocks_Actions[])(u8) =
+static void (*const sDebugMenu_Actions_SaveBlocks[])(u8) =
 {
-    [SAVEBLOCKS_MENU_ITEM_CHECKSAVEBLOCK] = DebugAction_CheckSaveBlock,
-    [SAVEBLOCKS_MENU_ITEM_CHECKWALLCLOCK] = DebugAction_CheckWallClock,
-    [SAVEBLOCKS_MENU_ITEM_SETWALLCLOCK] = DebugAction_SetWallClock,
+    [0] = DebugAction_CheckSaveBlock,
+    [1] = DebugAction_CheckWallClock,
+    [2] = DebugAction_SetWallClock,
 };
 
-static void (*const sDebugMenu_Sub1_Actions[])(u8) =
+static void (*const sDebugMenu_Actions_Flags[])(u8) =
+{
+    [0] = DebugAction_CheckSaveBlock,
+    [1] = DebugAction_CheckWallClock,
+    [2] = NULL,
+};
+
+static void (*const sDebugMenu_Actions_Sub1[])(u8) =
 {
     [0] = DebugAction_PlayBoo,
     [1] = DebugAction_Cancel
@@ -126,30 +131,37 @@ static const struct WindowTemplate sDebugMenuWindowTemplate =
     .baseBlock = 1,
 };
 
-static const struct ListMenuTemplate sDebugMenuListTemplate =
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Main =
 {
-    .items = sDebugMenuItems,
+    .items = sDebugMenu_Items_Main,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenuItems),
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Main),
 };
 
-static const struct ListMenuTemplate sDebugMenu_SpaceManage_ListTemplate =
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Utilities =
 {
-    .items = sDebugMenu_SpaceManage_Items,
+    .items = sDebugMenu_Items_Utilities,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_SpaceManage_Items),
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utilities),
 };
 
-static const struct ListMenuTemplate sDebugMenu_Sub1_ListTemplate =
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Flags =
 {
-    .items = sDebugMenu_Sub1_Items,
+    .items = sDebugMenu_Items_Flags,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
-    .totalItems = ARRAY_COUNT(sDebugMenu_Sub1_Items),
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Flags),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sub1 =
+{
+    .items = sDebugMenu_Items_Sub1,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sub1),
 };
 
 void Debug_ShowMainMenu(void)
 {
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenuListTemplate);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
 }
 
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate)
@@ -209,7 +221,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenuActions[input]) != NULL)
+        if ((func = sDebugMenu_Actions_Main[input]) != NULL)
             func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -227,7 +239,25 @@ static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_SaveBlocks_Actions[input]) != NULL)
+        if ((func = sDebugMenu_Actions_SaveBlocks[input]) != NULL)
+            func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMainMenu();
+    }
+}
+static void DebugTask_HandleMenuInput_Flags(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_Flags[input]) != NULL)
             func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -245,7 +275,7 @@ static void DebugTask_HandleMenuInput_Sub1(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Sub1_Actions[input]) != NULL)
+        if ((func = sDebugMenu_Actions_Sub1[input]) != NULL)
             func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -260,12 +290,17 @@ static void DebugTask_HandleMenuInput_Sub1(u8 taskId)
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_SpaceManage_ListTemplate);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
+}
+static void DebugAction_OpenFlagsMenu(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Flags, sDebugMenu_ListTemplate_Flags);
 }
 static void DebugAction_OpenSub1(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    Debug_ShowMenu(DebugTask_HandleMenuInput_Sub1, sDebugMenu_Sub1_ListTemplate);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Sub1, sDebugMenu_ListTemplate_Sub1);
 }
 
 // Actions
