@@ -7,11 +7,15 @@
 #include "main.h"
 #include "map_name_popup.h"
 #include "menu.h"
+#include "pokedex.h"
 #include "script.h"
 #include "sound.h"
 #include "strings.h"
 #include "task.h"
+#include "event_data.h"
+#include "constants/flags.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 
 #define DEBUG_MAIN_MENU_HEIGHT 9
 #define DEBUG_MAIN_MENU_WIDTH 13
@@ -24,6 +28,8 @@ static void DebugAction_PlayBoo(u8);
 static void DebugAction_CheckSaveBlock(u8);
 static void DebugAction_CheckWallClock(u8);
 static void DebugAction_SetWallClock(u8);
+static void DebugAction_SetPokedexFlags(u8);
+static void DebugAction_SwitchNatDex(u8);
 static void DebugAction_Cancel(u8);
 
 static void DebugAction_OpenUtilitiesMenu(u8);
@@ -36,6 +42,7 @@ static void DebugTask_HandleMenuInput_Sub1(u8);
 extern u8 Debug_CheckSaveBlock[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
+extern u8 Debug_SetPokedexFlags[];
 
 // Main Menu
 static const u8 gDebugText_Utilities[] = _("Utilities");
@@ -51,7 +58,8 @@ static const u8 gDebugText_CheckWallClock[] = _("Check Wall Clock");
 static const u8 gDebugText_SetWallClock[] = _("Set Wall Clock");
 
 static const u8 gDebugText_StoryFlags[] = _("Story Flags");
-static const u8 gDebugText_PokedexFlags[] = _("Pokédex Flags");
+static const u8 gDebugText_SetPokedexFlags[] = _("Set Pokédex Flags");
+static const u8 gDebugText_SwitchNationalDex[] = _("NatDex ON/OFF");
 
 static const u8 gDebugText_None[] = _("None");
 
@@ -79,8 +87,8 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
     [0] = {gDebugText_StoryFlags, 0},
-    [1] = {gDebugText_PokedexFlags, 1},
-    [2] = {gDebugText_None, 2},
+    [1] = {gDebugText_SetPokedexFlags, 1},
+    [2] = {gDebugText_SwitchNationalDex, 2},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Sub1[] =
@@ -110,8 +118,8 @@ static void (*const sDebugMenu_Actions_SaveBlocks[])(u8) =
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
     [0] = DebugAction_CheckSaveBlock,
-    [1] = DebugAction_CheckWallClock,
-    [2] = NULL,
+    [1] = DebugAction_SetPokedexFlags,
+    [2] = DebugAction_SwitchNatDex,
 };
 
 static void (*const sDebugMenu_Actions_Sub1[])(u8) =
@@ -330,6 +338,31 @@ static void DebugAction_CheckWallClock(u8 taskId)
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(PlayersHouse_2F_EventScript_CheckWallClock);
+}
+static void DebugAction_SetPokedexFlags(u8 taskId)
+{
+    u16 i;
+    for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+    {
+        GetSetPokedexFlag(i + 1, FLAG_SET_CAUGHT);
+        GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
+    }
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_SetPokedexFlags);
+}
+static void DebugAction_SwitchNatDex(u8 taskId)
+{
+    if(IsNationalPokedexEnabled())
+    {
+        DisableNationalPokedex();
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        EnableNationalPokedex();
+        PlaySE(SE_PC_LOGIN);
+    }
 }
 
 #endif
