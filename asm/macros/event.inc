@@ -900,13 +900,13 @@
 	.4byte \text
 	.endm
 
-	@ Gives the player one of the specified (species) Pokemon at level level holding item. The trailing 0s are unused parameters
-	.macro givemon species:req, level:req, item:req
+	@ Gives the player one of the specified (species) Pokemon at level level holding item. Option to set an ability (random by default). The trailing 0s are unused parameters
+	.macro givemon species:req, level:req, item:req, ability=3
 	.byte 0x79
 	.2byte \species
 	.byte \level
 	.2byte \item
-	.4byte 0x0
+	.4byte \ability
 	.4byte 0x0
 	.byte 0
 	.endm
