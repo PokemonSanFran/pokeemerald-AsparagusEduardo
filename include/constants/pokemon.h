@@ -329,7 +329,7 @@
 #define EVO_ITEM_ALOLA       0x0020 // specified item is used on Pokémon while holding a Strange Souvenir
 #define EVO_LEVEL_NIGHT_ALOLA 0x0021 // Pokémon reaches the specified level, is night, holding Strange Souvenir
 
-#define EVOS_PER_MON 8
+#define EVOS_PER_MON 10
 
 #define NUM_MALE_LINK_FACILITY_CLASSES   8
 #define NUM_FEMALE_LINK_FACILITY_CLASSES 8
