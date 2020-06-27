@@ -9,12 +9,6 @@ Debug_SetPokedexFlags::
 	releaseall
 	end
 
-Debug_GiveAllMon::
-	givemon SPECIES_DARMANITAN, 50, ITEM_NONE, 2
-    msgbox Debug_SetPokedexFlags_Text
-	releaseall
-	end
-
 Debug_CheckSaveBlock_Text:
 	.string "SaveBlock1 is {STR_VAR_1} bytes long.\n"
 	.string "Max size is 15872 bytes.\p"
