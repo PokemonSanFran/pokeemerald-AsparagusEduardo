@@ -37,6 +37,8 @@
 #include "mirage_tower.h"
 #include "field_screen_effect.h"
 #include "data.h"
+#include "rtc.h"
+#include "dns.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/game_stat.h"
@@ -627,9 +629,23 @@ u8 BattleSetup_GetTerrainId(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+    RtcCalcLocalTime();
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
-        return BATTLE_TERRAIN_GRASS;
+    {
+        u8 time = GetDnsTimeLapse(gLocalTime.hours);
+        switch(time)
+        {
+            case TIME_SUNSET:
+            case TIME_NIGHTFALL:
+                return BATTLE_TERRAIN_GRASS_DUSK;
+            case TIME_NIGHT:
+            case TIME_MIDNIGHT:
+                return BATTLE_TERRAIN_GRASS_NIGHT;
+            default:
+                return BATTLE_TERRAIN_GRASS;
+        }
+    }
     if (MetatileBehavior_IsLongGrass(tileBehavior))
         return BATTLE_TERRAIN_LONG_GRASS;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))

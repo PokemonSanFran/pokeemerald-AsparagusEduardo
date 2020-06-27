@@ -3,7 +3,16 @@
 
 #define DNS_PAL_EXCEPTION   FALSE
 #define DNS_PAL_ACTIVE      TRUE
-
+/* Timelapses */
+enum
+{
+    TIME_MIDNIGHT,
+    TIME_DAWN,
+    TIME_DAY,
+    TIME_SUNSET,
+    TIME_NIGHTFALL,
+    TIME_NIGHT
+};
 struct LightingColour {
     u8 paletteNum;
     u8 colourNum;

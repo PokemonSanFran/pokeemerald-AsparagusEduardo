@@ -23,16 +23,6 @@
  * options, to understand how the dns works.            *
  * ******************************************************/
  
-/* Timelapses */
-enum
-{
-    TIME_MIDNIGHT,
-    TIME_DAWN,
-    TIME_DAY,
-    TIME_SUNSET,
-    TIME_NIGHTFALL,
-    TIME_NIGHT
-};
 
 /* End hours for each of the timelapses */
 #define MIDNIGHT_END_HOUR   6       //00 - 06
@@ -128,20 +118,20 @@ const struct DnsPalExceptions gCombatPalExceptions =
     .pal = {
         DNS_PAL_EXCEPTION,  //0
         DNS_PAL_EXCEPTION,  //1
-        DNS_PAL_ACTIVE,     //2
-        DNS_PAL_ACTIVE,     //3
-        DNS_PAL_ACTIVE,     //4
+        DNS_PAL_EXCEPTION,  //2
+        DNS_PAL_EXCEPTION,  //3
+        DNS_PAL_EXCEPTION,  //4
         DNS_PAL_EXCEPTION,  //5
-        DNS_PAL_ACTIVE,     //6
-        DNS_PAL_ACTIVE,     //7
-        DNS_PAL_ACTIVE,     //8
-        DNS_PAL_ACTIVE,     //9
-        DNS_PAL_ACTIVE,     //10
-        DNS_PAL_ACTIVE,     //11
-        DNS_PAL_ACTIVE,     //12
-        DNS_PAL_ACTIVE,     //13
-        DNS_PAL_ACTIVE,     //14
-        DNS_PAL_ACTIVE,     //15
+        DNS_PAL_EXCEPTION,  //6
+        DNS_PAL_EXCEPTION,  //7
+        DNS_PAL_EXCEPTION,  //8
+        DNS_PAL_EXCEPTION,  //9
+        DNS_PAL_EXCEPTION,  //10
+        DNS_PAL_EXCEPTION,  //11
+        DNS_PAL_EXCEPTION,  //12
+        DNS_PAL_EXCEPTION,  //13
+        DNS_PAL_EXCEPTION,  //14
+        DNS_PAL_EXCEPTION,  //15
         DNS_PAL_EXCEPTION,  //16
         DNS_PAL_EXCEPTION,  //17
         DNS_PAL_EXCEPTION,  //18

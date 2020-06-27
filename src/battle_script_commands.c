@@ -11265,6 +11265,8 @@ static void Cmd_getsecretpowereffect(void)
     switch (gBattleTerrain)
     {
     case BATTLE_TERRAIN_GRASS:
+    case BATTLE_TERRAIN_GRASS_DUSK:
+    case BATTLE_TERRAIN_GRASS_NIGHT:
         gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
         break;
     case BATTLE_TERRAIN_LONG_GRASS:

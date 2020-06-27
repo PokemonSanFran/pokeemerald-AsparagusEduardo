@@ -5423,6 +5423,8 @@ extern const u32 gBattleTerrainTilemap_TallGrass[];
 extern const u32 gBattleTerrainAnimTiles_TallGrass[];
 extern const u32 gBattleTerrainAnimTilemap_TallGrass[];
 extern const u32 gBattleTerrainPalette_TallGrass[];
+extern const u32 gBattleTerrainPalette_TallGrass_Dusk[];
+extern const u32 gBattleTerrainPalette_TallGrass_Night[];
 extern const u32 gBattleTerrainTiles_LongGrass[];
 extern const u32 gBattleTerrainTilemap_LongGrass[];
 extern const u32 gBattleTerrainAnimTiles_LongGrass[];
