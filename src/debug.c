@@ -29,6 +29,7 @@ static void DebugAction_CheckSaveBlock(u8);
 static void DebugAction_CheckWallClock(u8);
 static void DebugAction_SetWallClock(u8);
 static void DebugAction_SetPokedexFlags(u8);
+static void DebugAction_SwitchDex(u8);
 static void DebugAction_SwitchNatDex(u8);
 static void DebugAction_Cancel(u8);
 
@@ -59,6 +60,7 @@ static const u8 gDebugText_SetWallClock[] = _("Set Wall Clock");
 
 static const u8 gDebugText_StoryFlags[] = _("Story Flags");
 static const u8 gDebugText_SetPokedexFlags[] = _("Set Pokédex Flags");
+static const u8 gDebugText_SwitchDex[] = _("Pokédex ON/OFF");
 static const u8 gDebugText_SwitchNationalDex[] = _("NatDex ON/OFF");
 
 static const u8 gDebugText_None[] = _("None");
@@ -88,7 +90,8 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
     [0] = {gDebugText_StoryFlags, 0},
     [1] = {gDebugText_SetPokedexFlags, 1},
-    [2] = {gDebugText_SwitchNationalDex, 2},
+    [2] = {gDebugText_SwitchDex, 2},
+    [3] = {gDebugText_SwitchNationalDex, 3},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Sub1[] =
@@ -119,7 +122,8 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
     [0] = DebugAction_CheckSaveBlock,
     [1] = DebugAction_SetPokedexFlags,
-    [2] = DebugAction_SwitchNatDex,
+    [2] = DebugAction_SwitchDex,
+    [3] = DebugAction_SwitchNatDex,
 };
 
 static void (*const sDebugMenu_Actions_Sub1[])(u8) =
@@ -350,6 +354,19 @@ static void DebugAction_SetPokedexFlags(u8 taskId)
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_SetPokedexFlags);
+}
+static void DebugAction_SwitchDex(u8 taskId)
+{
+    if(FlagGet(FLAG_SYS_POKEDEX_GET))
+    {
+        FlagClear(FLAG_SYS_POKEDEX_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_SYS_POKEDEX_GET);
+        PlaySE(SE_PC_LOGIN);
+    }
 }
 static void DebugAction_SwitchNatDex(u8 taskId)
 {
