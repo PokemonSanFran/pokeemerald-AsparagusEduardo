@@ -329,7 +329,7 @@ SECTIONS {
         src/unk_transition.o(.text);
         src/international_string_util.o(.text);
 		src/soar.o(.text);
-        src/dns.o(.text);
+        src/day_night.o(.text);
         src/debug.o(.text);
     } =0
 
@@ -692,7 +692,7 @@ SECTIONS {
 		src/soar.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-        src/dns.o(.rodata);
+        src/day_night.o(.rodata);
         src/debug.o(.rodata);
     } =0
 
