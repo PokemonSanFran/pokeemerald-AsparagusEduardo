@@ -44,6 +44,7 @@
 #include "tv.h"
 #include "wallclock.h"
 #include "window.h"
+#include "day_night.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_tower.h"
 #include "constants/decorations.h"
@@ -4370,4 +4371,8 @@ void CheckSaveBlock1Size(void)
     ConvertIntToDecimalStringN(gStringVar1, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock2), STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar3, sizeof(struct PokemonStorage), STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+void CheckWeekDay(void)
+{
+    StringCopy(gStringVar1, GetDayOfWeekString(gLocalTime.dayOfWeek));
 }

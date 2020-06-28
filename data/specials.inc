@@ -538,3 +538,4 @@ gSpecials:: @ 81DBA64
 	
 	@Debug
 	def_special CheckSaveBlock1Size
+	def_special CheckWeekDay

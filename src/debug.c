@@ -31,6 +31,7 @@ static void DebugAction_SetWallClock(u8);
 static void DebugAction_SetPokedexFlags(u8);
 static void DebugAction_SwitchDex(u8);
 static void DebugAction_SwitchNatDex(u8);
+static void DebugAction_CheckWeekDay(u8);
 static void DebugAction_Cancel(u8);
 
 static void DebugAction_OpenUtilitiesMenu(u8);
@@ -44,6 +45,7 @@ extern u8 Debug_CheckSaveBlock[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
 extern u8 Debug_SetPokedexFlags[];
+extern u8 Debug_CheckWeekDay[];
 
 // Main Menu
 static const u8 gDebugText_Utilities[] = _("Utilities");
@@ -57,6 +59,7 @@ static const u8 gDebugText_Cancel[] = _("Cancel");
 static const u8 gDebugText_SaveBlockSpace[] = _("SaveBlock Space");
 static const u8 gDebugText_CheckWallClock[] = _("Check Wall Clock");
 static const u8 gDebugText_SetWallClock[] = _("Set Wall Clock");
+static const u8 gDebugText_CheckWeekDay[] = _("Check Week Day");
 
 static const u8 gDebugText_StoryFlags[] = _("Story Flags");
 static const u8 gDebugText_SetPokedexFlags[] = _("Set Pokédex Flags");
@@ -84,6 +87,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [0] = {gDebugText_SaveBlockSpace, 0},
     [1] = {gDebugText_CheckWallClock, 1},
     [2] = {gDebugText_SetWallClock, 2},
+    [3] = {gDebugText_CheckWeekDay, 3},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
@@ -116,6 +120,7 @@ static void (*const sDebugMenu_Actions_SaveBlocks[])(u8) =
     [0] = DebugAction_CheckSaveBlock,
     [1] = DebugAction_CheckWallClock,
     [2] = DebugAction_SetWallClock,
+    [3] = DebugAction_CheckWeekDay,
 };
 
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
@@ -380,6 +385,12 @@ static void DebugAction_SwitchNatDex(u8 taskId)
         EnableNationalPokedex();
         PlaySE(SE_PC_LOGIN);
     }
+}
+static void DebugAction_CheckWeekDay(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Debug_CheckWeekDay);
 }
 
 #endif

@@ -9,6 +9,17 @@ Debug_SetPokedexFlags::
 	releaseall
 	end
 
+Debug_CheckWeekDay::
+	special CheckWeekDay
+    msgbox Debug_CheckWeekDay_Text
+	releaseall
+	end
+
+Debug_CheckWeekDay_Text:
+	.string "Aaaaah, yes!\l"
+	.string "{STR_VAR_1}s are made for dads!\l"
+	.string "And dad's car!$"
+
 Debug_CheckSaveBlock_Text:
 	.string "SaveBlock1 is {STR_VAR_1} bytes long.\n"
 	.string "Max size is 15872 bytes.\p"
