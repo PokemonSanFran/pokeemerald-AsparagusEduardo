@@ -145,7 +145,7 @@
       "id": "LAYOUT_VERDANTURF_TOWN",
       "name": "VerdanturfTown_Layout",
       "width": 20,
-      "height": 20,
+      "height": 38,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Mauville",
       "border_filepath": "data/layouts/VerdanturfTown/border.bin",
@@ -314,7 +314,7 @@
     {
       "id": "LAYOUT_ROUTE116",
       "name": "Route116_Layout",
-      "width": 100,
+      "width": 80,
       "height": 20,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",

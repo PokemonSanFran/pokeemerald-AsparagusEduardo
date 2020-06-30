@@ -14,14 +14,14 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "direction": "down",
-      "offset": 80,
-      "map": "MAP_VERDANTURF_TOWN"
-    },
-    {
       "direction": "left",
       "offset": 0,
       "map": "MAP_RUSTBORO_CITY"
+    },
+    {
+      "direction": "right",
+      "offset": 0,
+      "map": "MAP_VERDANTURF_TOWN"
     }
   ],
   "object_events": [
@@ -209,7 +209,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 80,
+      "x": 79,
       "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -472,7 +472,7 @@
     },
     {
       "type": "secret_base",
-      "x": 79,
+      "x": 78,
       "y": 11,
       "elevation": 0,
       "secret_base_id": "SECRET_BASE_BLUE_CAVE2_1"
