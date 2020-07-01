@@ -26,7 +26,6 @@
 #include "constants/maps.h"
 #include "constants/species.h"
 #include "constants/weather.h"
-#include "constants/day_night.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
@@ -600,13 +599,11 @@ static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 
 bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavior)
 {
-    u16 headerId, dayOrNight;
+    u16 headerId;
     struct Roamer *roamer;
 
     if (sWildEncountersDisabled == TRUE)
         return FALSE;
-
-    dayOrNight = IsDayOrNight();
 
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == 0xFFFF)
@@ -672,7 +669,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 }
 
                 // try a regular wild land encounter
-                if (dayOrNight == TIME_DAY)
+                if (IsCurrentlyDay())
                 {
                     if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                     {
@@ -690,7 +687,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                         return TRUE;
                     }
                 }
-                else if (dayOrNight == TIME_NIGHT)
+                else
                 {
                     if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                     {
@@ -781,9 +778,7 @@ void RockSmashWildEncounter(void)
 bool8 SweetScentWildEncounter(void)
 {
     s16 x, y;
-    u16 headerId, dayOrNight;
-
-    dayOrNight = IsDayOrNight();
+    u16 headerId;
 
     PlayerGetDestCoords(&x, &y);
     headerId = GetCurrentMapWildMonHeaderId();
@@ -814,7 +809,7 @@ bool8 SweetScentWildEncounter(void)
     {
         if (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
         {
-            if (dayOrNight == TIME_DAY && gWildMonHeaders[headerId].landMonsInfo == NULL)
+            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
 
             if (TryStartRoamerEncounter() == TRUE)
@@ -827,7 +822,7 @@ bool8 SweetScentWildEncounter(void)
                 SetUpMassOutbreakEncounter(0);
             else
             {
-                if(dayOrNight == TIME_DAY)
+                if(IsCurrentlyDay())
                     TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
                 else
                     TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, 0);

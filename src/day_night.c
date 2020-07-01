@@ -65,14 +65,11 @@ const u8 *const gDayOfWeekTable[] =
     gText_Saturday
 };
 
-u8 IsDayOrNight(void)
+bool8 IsCurrentlyDay(void)
 {
-    if (gLocalTime.hours >= 0 && gLocalTime.hours < 6)
-        return TIME_NIGHT;
-    else if (gLocalTime.hours >= 6 && gLocalTime.hours < 18)
-        return TIME_DAY;
-    else
-        return TIME_NIGHT;
+    if (gLocalTime.hours >= 6 && gLocalTime.hours < 18)
+        return TRUE;
+    return FALSE;
 }
 
 u8 GetCurrentTimeOfDay(void)
