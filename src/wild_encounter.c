@@ -17,6 +17,7 @@
 #include "battle_debug.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "day_night.h"
 #include "constants/abilities.h"
 #include "constants/battle_config.h"
 #include "constants/game_stat.h"
@@ -25,6 +26,7 @@
 #include "constants/maps.h"
 #include "constants/species.h"
 #include "constants/weather.h"
+#include "constants/day_night.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
@@ -167,6 +169,36 @@ static u8 ChooseWildMonIndex_Land(void)
     else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
         return 9;
     else if (rand == ENCOUNTER_CHANCE_LAND_MONS_SLOT_9)
+        return 10;
+    else
+        return 11;
+}
+
+static u8 ChooseWildMonIndex_LandNight(void)
+{
+    u8 rand = Random() % ENCOUNTER_CHANCE_LAND_MONS_NIGHT_TOTAL;
+
+    if (rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_0)
+        return 0;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_0 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_1)
+        return 1;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_1 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_2)
+        return 2;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_2 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_3)
+        return 3;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_3 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_4)
+        return 4;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_4 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_5)
+        return 5;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_5 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_6)
+        return 6;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_6 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_7)
+        return 7;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_7 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_8)
+        return 8;
+    else if (rand >= ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_8 && rand < ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_9)
+        return 9;
+    else if (rand == ENCOUNTER_CHANCE_LAND_MONS_NIGHT_SLOT_9)
         return 10;
     else
         return 11;
@@ -388,6 +420,7 @@ static void CreateWildMon(u16 species, u8 level)
 enum
 {
     WILD_AREA_LAND,
+    WILD_AREA_LAND_NIGHT,
     WILD_AREA_WATER,
     WILD_AREA_ROCKS,
     WILD_AREA_FISHING,
@@ -418,6 +451,22 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
             break;
 
         wildMonIndex = ChooseWildMonIndex_Land();
+        break;
+    case WILD_AREA_LAND_NIGHT:
+        if (TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex))
+            break;
+        if (TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex))
+            break;
+        if (TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_LIGHTNING_ROD, &wildMonIndex))
+            break;
+        if (TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, TYPE_FIRE, ABILITY_FLASH_FIRE, &wildMonIndex))
+            break;
+        if (TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, TYPE_GRASS, ABILITY_HARVEST, &wildMonIndex))
+            break;
+        if (TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, TYPE_WATER, ABILITY_STORM_DRAIN, &wildMonIndex))
+            break;
+
+        wildMonIndex = ChooseWildMonIndex_LandNight();
         break;
     case WILD_AREA_WATER:
         if (TryGetAbilityInfluencedWildMonIndex(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex))
@@ -551,11 +600,13 @@ static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 
 bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavior)
 {
-    u16 headerId;
+    u16 headerId, dayOrNight;
     struct Roamer *roamer;
 
     if (sWildEncountersDisabled == TRUE)
         return FALSE;
+
+    dayOrNight = IsDayOrNight();
 
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == 0xFFFF)
@@ -596,6 +647,8 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         {
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
+            else if (gWildMonHeaders[headerId].landMonsNightInfo == NULL)
+                return FALSE;
             else if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
             else if (DoWildEncounterRateTest(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
@@ -619,20 +672,41 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 }
 
                 // try a regular wild land encounter
-                if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                if (dayOrNight == TIME_DAY)
                 {
-                    if (USE_BATTLE_DEBUG && !GetSafariZoneFlag() && GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS)
+                    if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                     {
-                        struct Pokemon mon1 = gEnemyParty[0];
-                        TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE);
-                        gEnemyParty[1] = mon1;
-                        BattleSetup_StartDoubleWildBattle();
+                        if (USE_BATTLE_DEBUG && !GetSafariZoneFlag() && GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS)
+                        {
+                            struct Pokemon mon1 = gEnemyParty[0];
+                            TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE);
+                            gEnemyParty[1] = mon1;
+                            BattleSetup_StartDoubleWildBattle();
+                        }
+                        else
+                        {
+                            BattleSetup_StartWildBattle();
+                        }
+                        return TRUE;
                     }
-                    else
+                }
+                else if (dayOrNight == TIME_NIGHT)
+                {
+                    if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                     {
-                        BattleSetup_StartWildBattle();
+                        if (USE_BATTLE_DEBUG && !GetSafariZoneFlag() && GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS)
+                        {
+                            struct Pokemon mon1 = gEnemyParty[0];
+                            TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, WILD_CHECK_KEEN_EYE);
+                            gEnemyParty[1] = mon1;
+                            BattleSetup_StartDoubleWildBattle();
+                        }
+                        else
+                        {
+                            BattleSetup_StartWildBattle();
+                        }
+                        return TRUE;
                     }
-                    return TRUE;
                 }
 
                 return FALSE;
@@ -707,7 +781,9 @@ void RockSmashWildEncounter(void)
 bool8 SweetScentWildEncounter(void)
 {
     s16 x, y;
-    u16 headerId;
+    u16 headerId, dayOrNight;
+
+    dayOrNight = IsDayOrNight();
 
     PlayerGetDestCoords(&x, &y);
     headerId = GetCurrentMapWildMonHeaderId();
@@ -738,7 +814,7 @@ bool8 SweetScentWildEncounter(void)
     {
         if (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
         {
-            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
+            if (dayOrNight == TIME_DAY && gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
 
             if (TryStartRoamerEncounter() == TRUE)
@@ -750,7 +826,13 @@ bool8 SweetScentWildEncounter(void)
             if (DoMassOutbreakEncounterTest() == TRUE)
                 SetUpMassOutbreakEncounter(0);
             else
-                TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
+            {
+                if(dayOrNight == TIME_DAY)
+                    TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
+                else
+                    TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, 0);
+            }
+                
 
             BattleSetup_StartWildBattle();
             return TRUE;
