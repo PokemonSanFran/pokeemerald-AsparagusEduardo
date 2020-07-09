@@ -2,6 +2,7 @@
 #define GUARD_CONSTANTS_SPECIES_H
 
 #define SPECIES_NONE 0
+// Gen 1
 #define SPECIES_BULBASAUR 1
 #define SPECIES_IVYSAUR 2
 #define SPECIES_VENUSAUR 3
@@ -153,6 +154,7 @@
 #define SPECIES_DRAGONITE 149
 #define SPECIES_MEWTWO 150
 #define SPECIES_MEW 151
+// Gen 2
 #define SPECIES_CHIKORITA 152
 #define SPECIES_BAYLEEF 153
 #define SPECIES_MEGANIUM 154
@@ -253,6 +255,7 @@
 #define SPECIES_LUGIA 249
 #define SPECIES_HO_OH 250
 #define SPECIES_CELEBI 251
+// Gen 3
 #define SPECIES_TREECKO 252
 #define SPECIES_GROVYLE 253
 #define SPECIES_SCEPTILE 254
@@ -388,6 +391,7 @@
 #define SPECIES_RAYQUAZA 384
 #define SPECIES_JIRACHI 385
 #define SPECIES_DEOXYS 386
+// Gen 4
 #define SPECIES_TURTWIG 387
 #define SPECIES_GROTLE 388
 #define SPECIES_TORTERRA 389
@@ -413,7 +417,7 @@
 #define SPECIES_RAMPARDOS 409
 #define SPECIES_SHIELDON 410
 #define SPECIES_BASTIODON 411
-#define SPECIES_BURMY 412
+#define SPECIES_BURMY 412 // Plant cloak
 #define SPECIES_WORMADAM 413
 #define SPECIES_MOTHIM 414
 #define SPECIES_COMBEE 415
@@ -488,13 +492,14 @@
 #define SPECIES_PALKIA 484
 #define SPECIES_HEATRAN 485
 #define SPECIES_REGIGIGAS 486
-#define SPECIES_GIRATINA 487
+#define SPECIES_GIRATINA 487 // Altered
 #define SPECIES_CRESSELIA 488
 #define SPECIES_PHIONE 489
 #define SPECIES_MANAPHY 490
 #define SPECIES_DARKRAI 491
-#define SPECIES_SHAYMIN 492
+#define SPECIES_SHAYMIN 492 // Land
 #define SPECIES_ARCEUS 493
+// Gen 5
 #define SPECIES_VICTINI 494
 #define SPECIES_SNIVY 495
 #define SPECIES_SERVINE 496
@@ -651,6 +656,7 @@
 #define SPECIES_KELDEO 647
 #define SPECIES_MELOETTA 648
 #define SPECIES_GENESECT 649
+// Gen 6
 #define SPECIES_CHESPIN 650
 #define SPECIES_QUILLADIN 651
 #define SPECIES_CHESNAUGHT 652
@@ -667,22 +673,22 @@
 #define SPECIES_TALONFLAME 663
 #define SPECIES_SCATTERBUG 664
 #define SPECIES_SPEWPA 665
-#define SPECIES_VIVILLON 666
+#define SPECIES_VIVILLON 666 // Meadow
 #define SPECIES_LITLEO 667
 #define SPECIES_PYROAR 668
-#define SPECIES_FLABEBE 669
-#define SPECIES_FLOETTE 670
-#define SPECIES_FLORGES 671
+#define SPECIES_FLABEBE 669 // Red
+#define SPECIES_FLOETTE 670 // Red
+#define SPECIES_FLORGES 671 // Red
 #define SPECIES_SKIDDO 672
 #define SPECIES_GOGOAT 673
 #define SPECIES_PANCHAM 674
 #define SPECIES_PANGORO 675
-#define SPECIES_FURFROU 676
+#define SPECIES_FURFROU 676 // Natural
 #define SPECIES_ESPURR 677
-#define SPECIES_MEOWSTIC 678
+#define SPECIES_MEOWSTIC 678 // Male
 #define SPECIES_HONEDGE 679
 #define SPECIES_DOUBLADE 680
-#define SPECIES_AEGISLASH 681
+#define SPECIES_AEGISLASH 681 // Blade
 #define SPECIES_SPRITZEE 682
 #define SPECIES_AROMATISSE 683
 #define SPECIES_SWIRLIX 684
@@ -711,18 +717,19 @@
 #define SPECIES_KLEFKI 707
 #define SPECIES_PHANTUMP 708
 #define SPECIES_TREVENANT 709
-#define SPECIES_PUMPKABOO 710
-#define SPECIES_GOURGEIST 711
+#define SPECIES_PUMPKABOO 710 // Average
+#define SPECIES_GOURGEIST 711 // Average
 #define SPECIES_BERGMITE 712
 #define SPECIES_AVALUGG 713
 #define SPECIES_NOIBAT 714
 #define SPECIES_NOIVERN 715
 #define SPECIES_XERNEAS 716
 #define SPECIES_YVELTAL 717
-#define SPECIES_ZYGARDE 718
+#define SPECIES_ZYGARDE 718 // 50%
 #define SPECIES_DIANCIE 719
-#define SPECIES_HOOPA 720
+#define SPECIES_HOOPA 720 // Confined
 #define SPECIES_VOLCANION 721
+// Gen 7
 #define SPECIES_ROWLET 722
 #define SPECIES_DARTRIX 723
 #define SPECIES_DECIDUEYE 724
@@ -742,11 +749,11 @@
 #define SPECIES_VIKAVOLT 738
 #define SPECIES_CRABRAWLER 739
 #define SPECIES_CRABOMINABLE 740
-#define SPECIES_ORICORIO 741
+#define SPECIES_ORICORIO 741 // Baile
 #define SPECIES_CUTIEFLY 742
 #define SPECIES_RIBOMBEE 743
 #define SPECIES_ROCKRUFF 744
-#define SPECIES_LYCANROC 745
+#define SPECIES_LYCANROC 745 // Midday
 #define SPECIES_WISHIWASHI 746
 #define SPECIES_MAREANIE 747
 #define SPECIES_TOXAPEX 748
@@ -811,109 +818,426 @@
 #define SPECIES_ZERAORA 807
 #define SPECIES_MELTAN 808
 #define SPECIES_MELMETAL 809
+// Gen 8
+#define SPECIES_GROOKEY     810 // Not implemented.
+#define SPECIES_THWACKEY    811 // Not implemented.
+#define SPECIES_RILLABOOM   812 // Not implemented.
+#define SPECIES_SCORBUNNY   813 // Not implemented.
+#define SPECIES_RABOOT      814 // Not implemented.
+#define SPECIES_CINDERACE   815 // Not implemented.
+#define SPECIES_SOBBLE      816 // Not implemented.
+#define SPECIES_DRIZZILE    817 // Not implemented.
+#define SPECIES_INTELEON    818 // Not implemented.
+#define SPECIES_SKWOVET     819 // Not implemented.
+#define SPECIES_GREEDENT    820 // Not implemented.
+#define SPECIES_ROOKIDEE    821 // Not implemented.
+#define SPECIES_CORVISQUIRE 822 // Not implemented.
+#define SPECIES_CORVIKNIGHT 823 // Not implemented.
+#define SPECIES_BLIPBUG     824 // Not implemented.
+#define SPECIES_DOTTLER     825 // Not implemented.
+#define SPECIES_ORBEETLE    826 // Not implemented.
+#define SPECIES_NICKIT      827 // Not implemented.
+#define SPECIES_THIEVUL     828 // Not implemented.
+#define SPECIES_GOSSIFLEUR  829 // Not implemented.
+#define SPECIES_ELDEGOSS    830 // Not implemented.
+#define SPECIES_WOOLOO      831 // Not implemented.
+#define SPECIES_DUBWOOL     832 // Not implemented.
+#define SPECIES_CHEWTLE     833 // Not implemented.
+#define SPECIES_DREDNAW     834 // Not implemented.
+#define SPECIES_YAMPER      835 // Not implemented.
+#define SPECIES_BOLTUND     836 // Not implemented.
+#define SPECIES_ROLYCOLY    837 // Not implemented.
+#define SPECIES_CARKOL      838 // Not implemented.
+#define SPECIES_COALOSSAL   839 // Not implemented.
+#define SPECIES_APPLIN      840 // Not implemented.
+#define SPECIES_FLAPPLE     841 // Not implemented.
+#define SPECIES_APPLETUN    842 // Not implemented.
+#define SPECIES_SILICOBRA   843 // Not implemented.
+#define SPECIES_SANDACONDA  844 // Not implemented.
+#define SPECIES_CRAMORANT   845 // Not implemented.
+#define SPECIES_ARROKUDA    846 // Not implemented.
+#define SPECIES_BARRASKEWDA 847 // Not implemented.
+#define SPECIES_TOXEL       848 // Not implemented.
+#define SPECIES_TOXTRICITY  849 // Not implemented.
+#define SPECIES_SIZZLIPEDE  850 // Not implemented.
+#define SPECIES_CENTISKORCH 851 // Not implemented.
+#define SPECIES_CLOBBOPUS   852 // Not implemented.
+#define SPECIES_GRAPPLOCT   853 // Not implemented.
+#define SPECIES_SINISTEA    854 // Not implemented.
+#define SPECIES_POLTEAGEIST 855 // Not implemented.
+#define SPECIES_HATENNA     856 // Not implemented.
+#define SPECIES_HATTREM     857 // Not implemented.
+#define SPECIES_HATTERENE   858 // Not implemented.
+#define SPECIES_IMPIDIMP    859 // Not implemented.
+#define SPECIES_MORGREM     860 // Not implemented.
+#define SPECIES_GRIMMSNARL  861 // Not implemented.
+#define SPECIES_OBSTAGOON   862 // Not implemented.
+#define SPECIES_PERRSERKER  863 // Not implemented.
+#define SPECIES_CURSOLA     864 // Not implemented.
+#define SPECIES_SIRFETCHD   865 // Not implemented.
+#define SPECIES_MR_RIME     866 // Not implemented.
+#define SPECIES_RUNERIGUS   867 // Not implemented.
+#define SPECIES_MILCERY     868 // Not implemented.
+#define SPECIES_ALCREMIE    869 // Not implemented.
+#define SPECIES_FALINKS     870 // Not implemented.
+#define SPECIES_PINCURCHIN  871 // Not implemented.
+#define SPECIES_SNOM        872 // Not implemented.
+#define SPECIES_FROSMOTH    873 // Not implemented.
+#define SPECIES_STONJOURNER 874 // Not implemented.
+#define SPECIES_EISCUE      875 // Not implemented.
+#define SPECIES_INDEEDEE    876 // Not implemented.
+#define SPECIES_MORPEKO     877 // Not implemented.
+#define SPECIES_CUFANT      878 // Not implemented.
+#define SPECIES_COPPERAJAH  879 // Not implemented.
+#define SPECIES_DRACOZOLT   880 // Not implemented.
+#define SPECIES_ARCTOZOLT   881 // Not implemented.
+#define SPECIES_DRACOVISH   882 // Not implemented.
+#define SPECIES_ARCTOVISH   883 // Not implemented.
+#define SPECIES_DURALUDON   884 // Not implemented.
+#define SPECIES_DREEPY      885 // Not implemented.
+#define SPECIES_DRAKLOAK    886 // Not implemented.
+#define SPECIES_DRAGAPULT   887 // Not implemented.
+#define SPECIES_ZACIAN      888 // Not implemented.
+#define SPECIES_ZAMAZENTA   889 // Not implemented.
+#define SPECIES_ETERNATUS   890 // Not implemented.
+#define SPECIES_KUBFU       891 // Not implemented.
+#define SPECIES_URSHIFU     892 // Not implemented.
+#define SPECIES_ZARUDE      893 // Not implemented.
 
-// Megas
-#define SPECIES_MEGA_AMPHAROS 810
-#define SPECIES_MEGA_VENUSAUR 811
-#define SPECIES_MEGA_CHARIZARD_X 812
-#define SPECIES_MEGA_CHARIZARD_Y 813
-#define SPECIES_MEGA_MEWTWO_X 814
-#define SPECIES_MEGA_MEWTWO_Y 815
-#define SPECIES_MEGA_BLAZIKEN 816
-#define SPECIES_MEGA_MEDICHAM 817
-#define SPECIES_MEGA_HOUNDOOM 818
-#define SPECIES_MEGA_AGGRON 819
-#define SPECIES_MEGA_BANETTE 820
-#define SPECIES_MEGA_TYRANITAR 821
-#define SPECIES_MEGA_SCIZOR 822
-#define SPECIES_MEGA_PINSIR 823
-#define SPECIES_MEGA_AERODACTYL 824
-#define SPECIES_MEGA_LUCARIO 825
-#define SPECIES_MEGA_ABOMASNOW 826
-#define SPECIES_MEGA_BLASTOISE 827
-#define SPECIES_MEGA_KANGASKHAN 828
-#define SPECIES_MEGA_GYARADOS 829
-#define SPECIES_MEGA_ABSOL 830
-#define SPECIES_MEGA_ALAKAZAM 831
-#define SPECIES_MEGA_HERACROSS 832
-#define SPECIES_MEGA_MAWILE 833
-#define SPECIES_MEGA_MANECTRIC 834
-#define SPECIES_MEGA_GARCHOMP 835
-#define SPECIES_MEGA_LATIOS 836
-#define SPECIES_MEGA_LATIAS 837
-#define SPECIES_MEGA_SWAMPERT 838
-#define SPECIES_MEGA_SCEPTILE 839
-#define SPECIES_MEGA_SABLEYE 840
-#define SPECIES_MEGA_ALTARIA 841
-#define SPECIES_MEGA_GALLADE 842
-#define SPECIES_MEGA_AUDINO 843
-#define SPECIES_MEGA_SHARPEDO 844
-#define SPECIES_MEGA_SLOWBRO 845
-#define SPECIES_MEGA_STEELIX 846
-#define SPECIES_MEGA_PIDGEOT 847
-#define SPECIES_MEGA_GLALIE 848
-#define SPECIES_MEGA_DIANCIE 849
-#define SPECIES_MEGA_METAGROSS 850
-#define SPECIES_MEGA_RAYQUAZA 851
-#define SPECIES_MEGA_CAMERUPT 852
-#define SPECIES_MEGA_LOPUNNY 853
-#define SPECIES_MEGA_SALAMENCE 854
-#define SPECIES_MEGA_BEEDRILL 855
-#define SPECIES_MEGA_GENGAR 856
-#define SPECIES_MEGA_GARDEVOIR 857
+#define FORMS_START SPECIES_ZARUDE
 
-#define SPECIES_BURMY_SANDY 858
-#define SPECIES_BURMY_TRASH 859
-#define SPECIES_WORMADAM_SANDY 860
-#define SPECIES_WORMADAM_TRASH 861
-#define SPECIES_ROTOM_HEAT 862
-#define SPECIES_ROTOM_WASH 863
-#define SPECIES_ROTOM_FROST 864
-#define SPECIES_ROTOM_FAN 865
-#define SPECIES_ROTOM_MOW 866
-#define SPECIES_KYUREM_BLACK 867
-#define SPECIES_KYUREM_WHITE 868
-#define SPECIES_MEOWSTIC_F 869
+// Gen 3 Forms
+#define SPECIES_DEOXYS_ATTACK           FORMS_START + 1 // Not adapted.
+#define SPECIES_DEOXYS_DEFENSE          FORMS_START + 2 // Not adapted.
+#define SPECIES_DEOXYS_SPEED            FORMS_START + 3 // Not adapted.
+// Gen 4 Forms
+#define SPECIES_BURMY_SANDY             FORMS_START + 4
+#define SPECIES_BURMY_TRASH             FORMS_START + 5
+#define SPECIES_WORMADAM_SANDY          FORMS_START + 6
+#define SPECIES_WORMADAM_TRASH          FORMS_START + 7
+#define SPECIES_SHELLOS_EAST            FORMS_START + 8 // Not implemented.
+#define SPECIES_ROTOM_HEAT              FORMS_START + 9
+#define SPECIES_ROTOM_WASH              FORMS_START + 10
+#define SPECIES_ROTOM_FROST             FORMS_START + 11
+#define SPECIES_ROTOM_FAN               FORMS_START + 12
+#define SPECIES_ROTOM_MOW               FORMS_START + 13
+#define SPECIES_GIRATINA_ORIGIN         FORMS_START + 14
+#define SPECIES_SHAYMIN_SKY             FORMS_START + 15
+#define SPECIES_ARCEUS_FIST             FORMS_START + 16 // Not implemented.
+#define SPECIES_ARCEUS_SKY              FORMS_START + 17 // Not implemented.
+#define SPECIES_ARCEUS_TOXIC            FORMS_START + 18 // Not implemented.
+#define SPECIES_ARCEUS_EARTH            FORMS_START + 19 // Not implemented.
+#define SPECIES_ARCEUS_STONE            FORMS_START + 20 // Not implemented.
+#define SPECIES_ARCEUS_INSECT           FORMS_START + 21 // Not implemented.
+#define SPECIES_ARCEUS_SPOOKY           FORMS_START + 22 // Not implemented.
+#define SPECIES_ARCEUS_IRON             FORMS_START + 23 // Not implemented.
+#define SPECIES_ARCEUS_FLAME            FORMS_START + 24 // Not implemented.
+#define SPECIES_ARCEUS_SPLASH           FORMS_START + 25 // Not implemented.
+#define SPECIES_ARCEUS_MEADOW           FORMS_START + 26 // Not implemented.
+#define SPECIES_ARCEUS_ZAP              FORMS_START + 27 // Not implemented.
+#define SPECIES_ARCEUS_MIND             FORMS_START + 28 // Not implemented.
+#define SPECIES_ARCEUS_ICICLE           FORMS_START + 29 // Not implemented.
+#define SPECIES_ARCEUS_DRACO            FORMS_START + 30 // Not implemented.
+#define SPECIES_ARCEUS_DREAD            FORMS_START + 31 // Not implemented.
+#define SPECIES_ARCEUS_PIXIE            FORMS_START + 32 // Not implemented.
+// Gen 5 Forms
+#define SPECIES_BASCULIN_BLUE           FORMS_START + 33 // Not implemented.
+#define SPECIES_DARMANITAN_ZEN          FORMS_START + 34 // Not implemented.
+#define SPECIES_DEERLING_SUMMER         FORMS_START + 35 // Not implemented.
+#define SPECIES_DEERLING_AUTUMN         FORMS_START + 36 // Not implemented.
+#define SPECIES_DEERLING_WINTER         FORMS_START + 37 // Not implemented.
+#define SPECIES_SAWSBUCK_SUMMER         FORMS_START + 38 // Not implemented.
+#define SPECIES_SAWSBUCK_AUTUMN         FORMS_START + 39 // Not implemented.
+#define SPECIES_SAWSBUCK_WINTER         FORMS_START + 40 // Not implemented.
+#define SPECIES_TORNADUS_THERIAN        FORMS_START + 41 // Not implemented.
+#define SPECIES_THUNDURUS_THERIAN       FORMS_START + 42
+#define SPECIES_LANDORUS_THERIAN        FORMS_START + 43
+#define SPECIES_KYUREM_BLACK            FORMS_START + 44
+#define SPECIES_KYUREM_WHITE            FORMS_START + 45
+#define SPECIES_KELDEO_RESOLUTE         FORMS_START + 46 // Not implemented.
+#define SPECIES_GENESECT_SHOCK          FORMS_START + 47 // Not implemented.
+#define SPECIES_GENESECT_BURN           FORMS_START + 48 // Not implemented.
+#define SPECIES_GENESECT_CHILL          FORMS_START + 49 // Not implemented.
+#define SPECIES_GENESECT_DOUSE          FORMS_START + 50 // Not implemented.
+// Gen 6 Forms
+#define SPECIES_VIVILLON_ARCHIPELAGO    FORMS_START + 51 // Not implemented.
+#define SPECIES_VIVILLON_CONTINENTAL    FORMS_START + 52 // Not implemented.
+#define SPECIES_VIVILLON_ELEGANT        FORMS_START + 53 // Not implemented.
+#define SPECIES_VIVILLON_GARDEN         FORMS_START + 54 // Not implemented.
+#define SPECIES_VIVILLON_HIGH_PLAINS    FORMS_START + 55 // Not implemented.
+#define SPECIES_VIVILLON_ICY_SNOW       FORMS_START + 56 // Not implemented.
+#define SPECIES_VIVILLON_JUNGLE         FORMS_START + 57 // Not implemented.
+#define SPECIES_VIVILLON_MARINE         FORMS_START + 58 // Not implemented.
+#define SPECIES_VIVILLON_MODERN         FORMS_START + 59 // Not implemented.
+#define SPECIES_VIVILLON_MONSOON        FORMS_START + 60 // Not implemented.
+#define SPECIES_VIVILLON_OCEAN          FORMS_START + 61 // Not implemented.
+#define SPECIES_VIVILLON_POLAR          FORMS_START + 62 // Not implemented.
+#define SPECIES_VIVILLON_RIVER          FORMS_START + 63 // Not implemented.
+#define SPECIES_VIVILLON_SANDSTORM      FORMS_START + 64 // Not implemented.
+#define SPECIES_VIVILLON_SAVANNA        FORMS_START + 65 // Not implemented.
+#define SPECIES_VIVILLON_SUN            FORMS_START + 66 // Not implemented.
+#define SPECIES_VIVILLON_TUNDRA         FORMS_START + 67 // Not implemented.
+#define SPECIES_VIVILLON_POKE_BALL      FORMS_START + 68 // Not implemented.
+#define SPECIES_VIVILLON_FANCY          FORMS_START + 69 // Not implemented.
+#define SPECIES_FLABEBE_YELLOW          FORMS_START + 70 // Not implemented.
+#define SPECIES_FLABEBE_ORANGE          FORMS_START + 71 // Not implemented.
+#define SPECIES_FLABEBE_BLUE            FORMS_START + 72 // Not implemented.
+#define SPECIES_FLABEBE_WHITE           FORMS_START + 73 // Not implemented.
+#define SPECIES_FLOETTE_YELLOW          FORMS_START + 74 // Not implemented.
+#define SPECIES_FLOETTE_ORANGE          FORMS_START + 75 // Not implemented.
+#define SPECIES_FLOETTE_BLUE            FORMS_START + 76 // Not implemented.
+#define SPECIES_FLOETTE_WHITE           FORMS_START + 77 // Not implemented.
+#define SPECIES_FLORGES_YELLOW          FORMS_START + 78 // Not implemented.
+#define SPECIES_FLORGES_ORANGE          FORMS_START + 79 // Not implemented.
+#define SPECIES_FLORGES_BLUE            FORMS_START + 80 // Not implemented.
+#define SPECIES_FLORGES_WHITE           FORMS_START + 81 // Not implemented.
+#define SPECIES_FURFROU_HEART           FORMS_START + 82 // Not implemented.
+#define SPECIES_FURFROU_STAR            FORMS_START + 83 // Not implemented.
+#define SPECIES_FURFROU_DIAMOND         FORMS_START + 84 // Not implemented.
+#define SPECIES_FURFROU_DEBUTANTE       FORMS_START + 85 // Not implemented.
+#define SPECIES_FURFROU_MATRON          FORMS_START + 86 // Not implemented.
+#define SPECIES_FURFROU_DANDY           FORMS_START + 87 // Not implemented.
+#define SPECIES_FURFROU_LA_REINE        FORMS_START + 88 // Not implemented.
+#define SPECIES_FURFROU_KABUKI          FORMS_START + 89 // Not implemented.
+#define SPECIES_FURFROU_PHARAOH         FORMS_START + 90 // Not implemented.
+#define SPECIES_MEOWSTIC_F              FORMS_START + 91
+#define SPECIES_PUMPKABOO_SMALL         FORMS_START + 92 // Not implemented.
+#define SPECIES_PUMPKABOO_LARGE         FORMS_START + 93 // Not implemented.
+#define SPECIES_PUMPKABOO_SUPER         FORMS_START + 94 // Not implemented.
+#define SPECIES_GOURGEIST_SMALL         FORMS_START + 95 // Not implemented.
+#define SPECIES_GOURGEIST_LARGE         FORMS_START + 96 // Not implemented.
+#define SPECIES_GOURGEIST_SUPER         FORMS_START + 97 // Not implemented.
+#define SPECIES_XERNEAS_ACTIVE          FORMS_START + 98 // Not implemented, current Xerneas has Active's sprite.
+#define SPECIES_HOOPA_UNBOUND           FORMS_START + 99
+// Alolan Forms
+#define SPECIES_ALOLAN_RATTATA          FORMS_START + 100
+#define SPECIES_ALOLAN_RATICATE         FORMS_START + 101
+#define SPECIES_ALOLAN_RAICHU           FORMS_START + 102
+#define SPECIES_ALOLAN_SANDSHREW        FORMS_START + 103
+#define SPECIES_ALOLAN_SANDSLASH        FORMS_START + 104
+#define SPECIES_ALOLAN_VULPIX           FORMS_START + 105
+#define SPECIES_ALOLAN_NINETALES        FORMS_START + 106
+#define SPECIES_ALOLAN_DIGLETT          FORMS_START + 107
+#define SPECIES_ALOLAN_DUGTRIO          FORMS_START + 108
+#define SPECIES_ALOLAN_MEOWTH           FORMS_START + 109
+#define SPECIES_ALOLAN_PERSIAN          FORMS_START + 110
+#define SPECIES_ALOLAN_GEODUDE          FORMS_START + 111
+#define SPECIES_ALOLAN_GRAVELER         FORMS_START + 112
+#define SPECIES_ALOLAN_GOLEM            FORMS_START + 113
+#define SPECIES_ALOLAN_GRIMER           FORMS_START + 114
+#define SPECIES_ALOLAN_MUK              FORMS_START + 115
+#define SPECIES_ALOLAN_EXEGGUTOR        FORMS_START + 116
+#define SPECIES_ALOLAN_MAROWAK          FORMS_START + 117
+// Gen 7 Forms
+#define SPECIES_PIKACHU_CAP_ORIGINAL    FORMS_START + 118 // Not implemented.
+#define SPECIES_PIKACHU_CAP_HOENN       FORMS_START + 119 // Not implemented.
+#define SPECIES_PIKACHU_CAP_SINNOH      FORMS_START + 120 // Not implemented.
+#define SPECIES_PIKACHU_CAP_UNOVA       FORMS_START + 121 // Not implemented.
+#define SPECIES_PIKACHU_CAP_KALOS       FORMS_START + 122 // Not implemented.
+#define SPECIES_PIKACHU_CAP_ALOLA       FORMS_START + 123 // Not implemented.
+#define SPECIES_PIKACHU_CAP_PARTNER     FORMS_START + 124 // Not implemented.
+#define SPECIES_GRENINJA_ASH            FORMS_START + 125 // Not implemented.
+#define SPECIES_ZYGARDE_10              FORMS_START + 126 // Not implemented.
+#define SPECIES_ORICORIO_POM_POM        FORMS_START + 127 // Not implemented.
+#define SPECIES_ORICORIO_PA_U           FORMS_START + 128 // Not implemented.
+#define SPECIES_ORICORIO_SENSU          FORMS_START + 129 // Not implemented.
+#define SPECIES_LYCANROC_MIDNIGHT       FORMS_START + 130
+#define SPECIES_LYCANROC_DUSK           FORMS_START + 131
+#define SPECIES_SILVALLY_FIGHTING       FORMS_START + 132 // Not implemented.
+#define SPECIES_SILVALLY_FLYING         FORMS_START + 133 // Not implemented.
+#define SPECIES_SILVALLY_POISON         FORMS_START + 134 // Not implemented.
+#define SPECIES_SILVALLY_GROUND         FORMS_START + 135 // Not implemented.
+#define SPECIES_SILVALLY_ROCK           FORMS_START + 136 // Not implemented.
+#define SPECIES_SILVALLY_BUG            FORMS_START + 137 // Not implemented.
+#define SPECIES_SILVALLY_GHOST          FORMS_START + 138 // Not implemented.
+#define SPECIES_SILVALLY_STEEL          FORMS_START + 139 // Not implemented.
+#define SPECIES_SILVALLY_FIRE           FORMS_START + 140 // Not implemented.
+#define SPECIES_SILVALLY_WATER          FORMS_START + 141 // Not implemented.
+#define SPECIES_SILVALLY_GRASS          FORMS_START + 142 // Not implemented.
+#define SPECIES_SILVALLY_ELECTRIC       FORMS_START + 143 // Not implemented.
+#define SPECIES_SILVALLY_PSYCHIC        FORMS_START + 144 // Not implemented.
+#define SPECIES_SILVALLY_ICE            FORMS_START + 145 // Not implemented.
+#define SPECIES_SILVALLY_DRAGON         FORMS_START + 146 // Not implemented.
+#define SPECIES_SILVALLY_DARK           FORMS_START + 147 // Not implemented.
+#define SPECIES_SILVALLY_FAIRY          FORMS_START + 148 // Not implemented.
+#define SPECIES_MINIOR_CORE             FORMS_START + 149 // To be changed to CORE_RED
+#define SPECIES_MINIOR_CORE_ORANGE      FORMS_START + 150 // Not implemented.
+#define SPECIES_MINIOR_CORE_YELLOW      FORMS_START + 151 // Not implemented.
+#define SPECIES_MINIOR_CORE_GREEN       FORMS_START + 152 // Not implemented.
+#define SPECIES_MINIOR_CORE_BLUE        FORMS_START + 153 // Not implemented.
+#define SPECIES_MINIOR_CORE_INDIGO      FORMS_START + 154 // Not implemented.
+#define SPECIES_MINIOR_CORE_VIOLET      FORMS_START + 155 // Not implemented.
+#define SPECIES_NECROZMA_DUSK_MANE      FORMS_START + 156 // Not implemented.
+#define SPECIES_NECROZMA_DAWN_WINGS     FORMS_START + 157 // Not implemented.
+#define SPECIES_MAGEARNA_ORIGINAL_COLOR FORMS_START + 158 // Not implemented.
+// Galarian Forms
+#define SPECIES_GALARIAN_MEOWTH         FORMS_START + 159 // Not implemented.
+#define SPECIES_GALARIAN_PONYTA         FORMS_START + 160 // Not implemented.
+#define SPECIES_GALARIAN_SLOWPOKE       FORMS_START + 161 // Not implemented.
+#define SPECIES_GALARIAN_SLOWBRO        FORMS_START + 162 // Not implemented.
+#define SPECIES_GALARIAN_RAPIDASH       FORMS_START + 163 // Not implemented.
+#define SPECIES_GALARIAN_FARFETCHD      FORMS_START + 164 // Not implemented.
+#define SPECIES_GALARIAN_WEEZING        FORMS_START + 165 // Not implemented.
+#define SPECIES_GALARIAN_MR_MIME        FORMS_START + 166 // Not implemented.
+#define SPECIES_GALARIAN_ARTICUNO       FORMS_START + 167 // Not implemented.
+#define SPECIES_GALARIAN_ZAPDOS         FORMS_START + 168 // Not implemented.
+#define SPECIES_GALARIAN_MOLTRES        FORMS_START + 169 // Not implemented.
+#define SPECIES_GALARIAN_SLOWKING       FORMS_START + 170 // Not implemented.
+#define SPECIES_GALARIAN_CORSOLA        FORMS_START + 171 // Not implemented.
+#define SPECIES_GALARIAN_ZIGZAGOON      FORMS_START + 172 // Not implemented.
+#define SPECIES_GALARIAN_LINOONE        FORMS_START + 173 // Not implemented.
+#define SPECIES_GALARIAN_DARUMAKA       FORMS_START + 174 // Not implemented.
+#define SPECIES_GALARIAN_DARMANITAN     FORMS_START + 175 // Not implemented.
+#define SPECIES_GALARIAN_YAMASK         FORMS_START + 176 // Not implemented.
+#define SPECIES_GALARIAN_STUNFISK       FORMS_START + 177 // Not implemented.
+// Gen 8 Forms
+#define SPECIES_PIKACHU_CAP_WORLD       FORMS_START + 178 // Not implemented.
+#define SPECIES_TOXTRICITY_LOW_KEY      FORMS_START + 179 // Not implemented.
+#define SPECIES_SINISTEA_ANTIQUE        FORMS_START + 180 // Not implemented.
+#define SPECIES_POLTEAGEIST_ANTIQUE     FORMS_START + 181 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_VANILLA_CREAM  FORMS_START + 182 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_RUBY_CREAM     FORMS_START + 183 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_MATCHA_CREAM   FORMS_START + 184 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_MINT_CREAM     FORMS_START + 185 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_LEMON_CREAM    FORMS_START + 186 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_SALTED_CREAM   FORMS_START + 187 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_RUBY_SWIRL     FORMS_START + 188 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_CARAMEL_SWIRL  FORMS_START + 189 // Not implemented.
+#define SPECIES_ALCREAMIE_STRAWBERRY_RAINBOW_SWIRL  FORMS_START + 190 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_VANILLA_CREAM       FORMS_START + 191 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_RUBY_CREAM          FORMS_START + 192 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_MATCHA_CREAM        FORMS_START + 193 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_MINT_CREAM          FORMS_START + 194 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_LEMON_CREAM         FORMS_START + 195 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_SALTED_CREAM        FORMS_START + 196 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_RUBY_SWIRL          FORMS_START + 197 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_CARAMEL_SWIRL       FORMS_START + 198 // Not implemented.
+#define SPECIES_ALCREAMIE_BERRY_RAINBOW_SWIRL       FORMS_START + 199 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_VANILLA_CREAM        FORMS_START + 200 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_RUBY_CREAM           FORMS_START + 201 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_MATCHA_CREAM         FORMS_START + 202 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_MINT_CREAM           FORMS_START + 203 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_LEMON_CREAM          FORMS_START + 204 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_SALTED_CREAM         FORMS_START + 205 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_RUBY_SWIRL           FORMS_START + 206 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_CARAMEL_SWIRL        FORMS_START + 207 // Not implemented.
+#define SPECIES_ALCREAMIE_LOVE_RAINBOW_SWIRL        FORMS_START + 208 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_VANILLA_CREAM        FORMS_START + 209 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_RUBY_CREAM           FORMS_START + 210 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_MATCHA_CREAM         FORMS_START + 211 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_MINT_CREAM           FORMS_START + 212 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_LEMON_CREAM          FORMS_START + 213 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_SALTED_CREAM         FORMS_START + 214 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_RUBY_SWIRL           FORMS_START + 215 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_CARAMEL_SWIRL        FORMS_START + 216 // Not implemented.
+#define SPECIES_ALCREAMIE_STAR_RAINBOW_SWIRL        FORMS_START + 217 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_VANILLA_CREAM      FORMS_START + 218 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_RUBY_CREAM         FORMS_START + 219 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_MATCHA_CREAM       FORMS_START + 220 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_MINT_CREAM         FORMS_START + 221 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_LEMON_CREAM        FORMS_START + 222 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_SALTED_CREAM       FORMS_START + 223 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_RUBY_SWIRL         FORMS_START + 224 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_CARAMEL_SWIRL      FORMS_START + 225 // Not implemented.
+#define SPECIES_ALCREAMIE_CLOVER_RAINBOW_SWIRL      FORMS_START + 226 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_VANILLA_CREAM      FORMS_START + 227 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_RUBY_CREAM         FORMS_START + 228 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_MATCHA_CREAM       FORMS_START + 229 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_MINT_CREAM         FORMS_START + 230 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_LEMON_CREAM        FORMS_START + 231 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_SALTED_CREAM       FORMS_START + 232 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_RUBY_SWIRL         FORMS_START + 233 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_CARAMEL_SWIRL      FORMS_START + 234 // Not implemented.
+#define SPECIES_ALCREAMIE_FLOWER_RAINBOW_SWIRL      FORMS_START + 235 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_VANILLA_CREAM      FORMS_START + 236 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_RUBY_CREAM         FORMS_START + 237 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_MATCHA_CREAM       FORMS_START + 238 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_MINT_CREAM         FORMS_START + 239 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_LEMON_CREAM        FORMS_START + 240 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_SALTED_CREAM       FORMS_START + 241 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_RUBY_SWIRL         FORMS_START + 242 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_CARAMEL_SWIRL      FORMS_START + 243 // Not implemented.
+#define SPECIES_ALCREAMIE_RIBBON_RAINBOW_SWIRL      FORMS_START + 244 // Not implemented.
 
-#define SPECIES_ALOLAN_RATTATA 870
-#define SPECIES_ALOLAN_RATICATE 871
-#define SPECIES_ALOLAN_RAICHU 872
-#define SPECIES_ALOLAN_SANDSHREW 873
-#define SPECIES_ALOLAN_SANDSLASH 874
-#define SPECIES_ALOLAN_VULPIX 875
-#define SPECIES_ALOLAN_NINETALES 876
-#define SPECIES_ALOLAN_DIGLETT 877
-#define SPECIES_ALOLAN_DUGTRIO 878
-#define SPECIES_ALOLAN_MEOWTH 879
-#define SPECIES_ALOLAN_PERSIAN 880
-#define SPECIES_ALOLAN_GEODUDE 881
-#define SPECIES_ALOLAN_GRAVELER 882
-#define SPECIES_ALOLAN_GOLEM 883
-#define SPECIES_ALOLAN_GRIMER 884
-#define SPECIES_ALOLAN_MUK 885
-#define SPECIES_ALOLAN_EXEGGUTOR 886
-#define SPECIES_ALOLAN_MAROWAK 887
+#define SPECIES_URSHIFU_RAPID           FORMS_START + 245 // Not implemented.
+#define SPECIES_ZARUDE_DADA             FORMS_START + 246 // Not implemented.
 
-// TODO: forms
-#define SPECIES_PRIMAL_KYOGRE 888
-#define SPECIES_PRIMAL_GROUDON 889
-#define SPECIES_SHAYMIN_SKY 890
-#define SPECIES_GIRATINA_ORIGIN 891
-#define SPECIES_DARMANITAN_ZEN 892
-#define SPECIES_TORNADUS_THERIAN 893
-#define SPECIES_THUNDURUS_THERIAN 894
-#define SPECIES_LANDORUS_THERIAN 895
-#define SPECIES_MELOETTA_PIROUETTE 896
-#define SPECIES_AEGISLASH_BLADE 897
-#define SPECIES_HOOPA_UNBOUND 898
-#define SPECIES_MINIOR_CORE 899
-#define SPECIES_WISHIWASHI_SCHOOL 900
-#define SPECIES_MIMIKYU_BUSTED 901
-#define SPECIES_LYCANROC_MIDNIGHT 902
-#define SPECIES_LYCANROC_DUSK 903
+#define BATTLE_FORMS_START              SPECIES_ZARUDE_DADA
 
-#define SPECIES_EGG 904
-#define NUM_SPECIES SPECIES_EGG
+#define SPECIES_CASTFORM_SUNNY          BATTLE_FORMS_START + 1 // Not adapted.
+#define SPECIES_CASTFORM_RAINY          BATTLE_FORMS_START + 2 // Not adapted.
+#define SPECIES_CASTFORM_SNOWY          BATTLE_FORMS_START + 3 // Not adapted.
+#define SPECIES_MELOETTA_PIROUETTE      BATTLE_FORMS_START + 4
+#define SPECIES_AEGISLASH_BLADE         BATTLE_FORMS_START + 5
+#define SPECIES_ZYGARDE_COMPLETE        BATTLE_FORMS_START + 6 // Not implemented.
+#define SPECIES_WISHIWASHI_SCHOOL       BATTLE_FORMS_START + 7
+#define SPECIES_MIMIKYU_BUSTED          BATTLE_FORMS_START + 8
+#define SPECIES_NECROZMA_ULTRA          BATTLE_FORMS_START + 9 // Not implemented.
+#define SPECIES_GALARIAN_DARMANITAN_ZEN BATTLE_FORMS_START + 10 // Not implemented.
+#define SPECIES_CRAMORANT_GULPING       BATTLE_FORMS_START + 11 // Not implemented.
+#define SPECIES_CRAMORANT_GORGING       BATTLE_FORMS_START + 12 // Not implemented.
+#define SPECIES_EISCUE_NOICE            BATTLE_FORMS_START + 13 // Not implemented.
+#define SPECIES_MORPEKO_HANGRY          BATTLE_FORMS_START + 14 // Not implemented.
+#define SPECIES_ZACIAN_CROWNED          BATTLE_FORMS_START + 15 // Not implemented.
+#define SPECIES_ZAMAZENTA_CROWNED       BATTLE_FORMS_START + 16 // Not implemented.
+
+#define MEGAS_START                 SPECIES_ZAMAZENTA_CROWNED
+
+#define SPECIES_MEGA_VENUSAUR       MEGAS_START + 1
+#define SPECIES_MEGA_CHARIZARD_X    MEGAS_START + 2
+#define SPECIES_MEGA_CHARIZARD_Y    MEGAS_START + 3
+#define SPECIES_MEGA_BLASTOISE      MEGAS_START + 4
+#define SPECIES_MEGA_BEEDRILL       MEGAS_START + 5
+#define SPECIES_MEGA_PIDGEOT        MEGAS_START + 6
+#define SPECIES_MEGA_ALAKAZAM       MEGAS_START + 7
+#define SPECIES_MEGA_SLOWBRO        MEGAS_START + 8
+#define SPECIES_MEGA_GENGAR         MEGAS_START + 9
+#define SPECIES_MEGA_KANGASKHAN     MEGAS_START + 10
+#define SPECIES_MEGA_PINSIR         MEGAS_START + 11
+#define SPECIES_MEGA_GYARADOS       MEGAS_START + 12
+#define SPECIES_MEGA_AERODACTYL     MEGAS_START + 13
+#define SPECIES_MEGA_MEWTWO_X       MEGAS_START + 14
+#define SPECIES_MEGA_MEWTWO_Y       MEGAS_START + 15
+#define SPECIES_MEGA_AMPHAROS       MEGAS_START + 16
+#define SPECIES_MEGA_STEELIX        MEGAS_START + 17
+#define SPECIES_MEGA_SCIZOR         MEGAS_START + 18
+#define SPECIES_MEGA_HERACROSS      MEGAS_START + 19
+#define SPECIES_MEGA_HOUNDOOM       MEGAS_START + 20
+#define SPECIES_MEGA_TYRANITAR      MEGAS_START + 21
+#define SPECIES_MEGA_SCEPTILE       MEGAS_START + 22
+#define SPECIES_MEGA_BLAZIKEN       MEGAS_START + 23
+#define SPECIES_MEGA_SWAMPERT       MEGAS_START + 24
+#define SPECIES_MEGA_GARDEVOIR      MEGAS_START + 25
+#define SPECIES_MEGA_SABLEYE        MEGAS_START + 26
+#define SPECIES_MEGA_MAWILE         MEGAS_START + 27
+#define SPECIES_MEGA_AGGRON         MEGAS_START + 28
+#define SPECIES_MEGA_MEDICHAM       MEGAS_START + 29
+#define SPECIES_MEGA_MANECTRIC      MEGAS_START + 30
+#define SPECIES_MEGA_SHARPEDO       MEGAS_START + 31
+#define SPECIES_MEGA_CAMERUPT       MEGAS_START + 32
+#define SPECIES_MEGA_ALTARIA        MEGAS_START + 33
+#define SPECIES_MEGA_BANETTE        MEGAS_START + 34
+#define SPECIES_MEGA_ABSOL          MEGAS_START + 35
+#define SPECIES_MEGA_GLALIE         MEGAS_START + 36
+#define SPECIES_MEGA_SALAMENCE      MEGAS_START + 37
+#define SPECIES_MEGA_METAGROSS      MEGAS_START + 38
+#define SPECIES_MEGA_LATIAS         MEGAS_START + 39
+#define SPECIES_MEGA_LATIOS         MEGAS_START + 40
+#define SPECIES_MEGA_RAYQUAZA       MEGAS_START + 41
+#define SPECIES_MEGA_LOPUNNY        MEGAS_START + 42
+#define SPECIES_MEGA_GARCHOMP       MEGAS_START + 43
+#define SPECIES_MEGA_LUCARIO        MEGAS_START + 44
+#define SPECIES_MEGA_ABOMASNOW      MEGAS_START + 45
+#define SPECIES_MEGA_GALLADE        MEGAS_START + 46
+#define SPECIES_MEGA_AUDINO         MEGAS_START + 47
+#define SPECIES_MEGA_DIANCIE        MEGAS_START + 48
+
+// Primal Reversion
+#define SPECIES_PRIMAL_KYOGRE       MEGAS_START + 49
+#define SPECIES_PRIMAL_GROUDON      MEGAS_START + 50
+
+#define SPECIES_EGG                 SPECIES_PRIMAL_GROUDON + 1
+#define NUM_SPECIES                 SPECIES_EGG
 
 // Unown forms, not actual species
 #define SPECIES_UNOWN_A NUM_SPECIES + 1
