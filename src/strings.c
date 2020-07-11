@@ -1837,3 +1837,8 @@ const u8 gText_Wednesday[] = _("Wednesday");
 const u8 gText_Thursday[] = _("Thursday");
 const u8 gText_Friday[] = _("Friday");
 const u8 gText_Saturday[] = _("Saturday");
+
+const u8 gMenuText_Move[] = _("Move");
+const u8 gText_MoveItemWhere[] = _("Move item to where?");
+const u8 gText_XsYAnd[] = _("{STR_VAR_1}'s {STR_VAR_2} and\n");
+const u8 gText_XsYWereSwapped[] = _("{STR_VAR_1}'s {STR_VAR_2} were swapped!{PAUSE_UNTIL_PRESS}");
