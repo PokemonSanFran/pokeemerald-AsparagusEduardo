@@ -29,6 +29,7 @@ enum
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
     MENUITEM_TEST,
+    MENUITEM_HP_BAR,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -56,6 +57,7 @@ static void HighlightOptionMenuItem(int cursor);
 static void TextSpeed_DrawChoices(int selection, int y);
 static void BattleScene_DrawChoices(int selection, int y);
 static void BattleStyle_DrawChoices(int selection, int y);
+static void HpBar_DrawChoices(int selection, int y);
 static void Sound_DrawChoices(int selection, int y);
 static void FrameType_DrawChoices(int selection, int y);
 static void ButtonMode_DrawChoices(int selection, int y);
@@ -64,6 +66,7 @@ static int FrameType_ProcessInput(int selection);
 static int FourOptions_ProcessInput(int selection);
 static int ThreeOptions_ProcessInput(int selection);
 static int TwoOptions_ProcessInput(int selection);
+static int ElevenOptions_ProcessInput(int selection);
 static int Sound_ProcessInput(int selection);
 static void DrawTextOption(void);
 static void DrawOptionMenuTexts(void);
@@ -82,6 +85,7 @@ struct
     [MENUITEM_BUTTONMODE] = {ButtonMode_DrawChoices, ThreeOptions_ProcessInput},
     [MENUITEM_FRAMETYPE] = {FrameType_DrawChoices, FrameType_ProcessInput},
     [MENUITEM_TEST] = {Test_DrawChoices, FourOptions_ProcessInput},
+    [MENUITEM_HP_BAR] = {HpBar_DrawChoices, ElevenOptions_ProcessInput},
     [MENUITEM_CANCEL] = {NULL, NULL},
 };
 
@@ -92,6 +96,7 @@ EWRAM_DATA static struct OptionMenu *sOptions = NULL;
 static const u16 sUnknown_0855C604[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
+static const u8 sText_HpBar[] = _("HP BAR");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
@@ -102,6 +107,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_TEST]        = gText_Sound,
+    [MENUITEM_HP_BAR]      = sText_HpBar,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
 
@@ -469,6 +475,11 @@ static int FourOptions_ProcessInput(int selection)
     return XOptions_ProcessInput(4, selection);
 }
 
+static int ElevenOptions_ProcessInput(int selection)
+{
+    return XOptions_ProcessInput(11, selection);
+}
+
 static int TwoOptions_ProcessInput(int selection)
 {
     if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
@@ -526,6 +537,20 @@ static int GetMiddleX(const u8 *txt1, const u8 *txt2, const u8 *txt3)
 }
 
 // Draw Choices functions
+static void HpBar_DrawChoices(int selection, int y)
+{
+    if (selection < 10)
+    {
+        u8 textPlus[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}+1{0x77}{0x77}{0x77}{0x77}{0x77}"); // 0x77 is to clear INSTANT text
+        textPlus[7] = CHAR_0 + selection;
+        DrawOptionMenuChoice(textPlus, 104, y, 1);
+    }
+    else
+    {
+        DrawOptionMenuChoice(sText_Instant, 104, y, 1);
+    }
+}
+
 static void BattleScene_DrawChoices(int selection, int y)
 {
     u8 styles[2] = {0};
