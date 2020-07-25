@@ -238,7 +238,7 @@ const u8 gJigglypuffPokedexText[] = _(
 
 const u8 gWigglytuffPokedexText[] = _(
     "Su piel tiene una calidad de lujo. Dormir\n"
-    "junto a un WIGGLYTUFF es una maravilla.\n"
+    "junto a un Wigglytuff es una maravilla.\n"
     "Cuando aspira, su tamaño aumenta de\n"
     "forma desmesurada.");
 
