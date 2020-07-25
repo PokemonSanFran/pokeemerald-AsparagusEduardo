@@ -3,1549 +3,1525 @@ static const u8 sDummyDesc[] = _(
 
 // Pokeballs
 static const u8 sMasterBallDesc[] = _(
-    "The best Ball that\n"
-    "catches a Pokémon\n"
-    "without fail.");
+    "Es la mejor.\n"
+    "Atrapa siempre al\n"
+    "Pokémon. No falla.");
 
 static const u8 sUltraBallDesc[] = _(
-    "A better Ball with\n"
-    "a higher catch rate\n"
-    "than a Great Ball.");
+    "Es muy buena. Tiene\n"
+    "más índice de éxito\n"
+    "que la Superball.");
 
 static const u8 sGreatBallDesc[] = _(
-    "A good Ball with a\n"
-    "higher catch rate\n"
-    "than a Poké Ball.");
+    "Es buena. Tiene\n"
+    "más índice de éxito\n"
+    "que la Poké Ball.");
 
 static const u8 sPokeBallDesc[] = _(
-    "A tool used for\n"
-    "catching wild\n"
-    "Pokémon.");
+    "Sirve para atrapar\n"
+    "Pokémon salvajes.");
 
 static const u8 sSafariBallDesc[] = _(
-    "A special Ball that\n"
-    "is used only in the\n"
-    "Safari Zone.");
+    "Tiene una función\n"
+    "especial. Se usa\n"
+    "en la Zona Safari.");
 
 static const u8 sNetBallDesc[] = _(
-    "A Ball that works\n"
-    "well on Water- and\n"
-    "Bug-type Pokémon.");
+    "Funciona bien con\n"
+    "los Pokémon de\n"
+    "tipo Agua y Bicho.");
 
 static const u8 sDiveBallDesc[] = _(
-    "A Ball that works\n"
-    "better on Pokémon\n"
-    "on the ocean floor.");
+    "Funciona mejor con\n"
+    "los Pokémon del\n"
+    "fondo del mar.");
 
 static const u8 sNestBallDesc[] = _(
-    "A Ball that works\n"
-    "better on weaker\n"
-    "Pokémon.");
+    "Funciona mejor\n"
+    "con los Pokémon\n"
+    "de menor nivel.");
 
 static const u8 sRepeatBallDesc[] = _(
-    "A Ball that works\n"
-    "better on Pokémon\n"
-    "caught before.");
+    "Funciona mejor con\n"
+    "los que son iguales\n"
+    "a los que ya tienes.");
 
 static const u8 sTimerBallDesc[] = _(
-    "A Ball that gains\n"
-    "power in battles\n"
-    "taking many turns.");
+    "Funciona mejor al\n"
+    "avanzar el combate.");
 
 static const u8 sLuxuryBallDesc[] = _(
-    "A cozy Ball that\n"
-    "makes Pokémon\n"
-    "more friendly.");
+    "Es muy acogedora.\n"
+    "Hace a los Pokémon\n"
+    "más simpáticos.");
 
 static const u8 sPremierBallDesc[] = _(
-    "A rare Ball made\n"
-    "in commemoration\n"
-    "of some event.");
+    "Es muy particular.\n"
+    "Se hizo para\n"
+    "conmemorar algo.");
 
 // Medicine
 static const u8 sPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a Pokémon by\n"
-    "20 points.");
+    "Restaura 20 PS\n"
+    "de un Pokémon.");
 
 static const u8 sAntidoteDesc[] = _(
-    "Heals a poisoned\n"
-    "Pokémon.");
+    "Cura a un Pokémon\n"
+    "envenenado.");
 
 static const u8 sBurnHealDesc[] = _(
-    "Heals Pokémon\n"
-    "of a burn.");
+    "Cura a un Pokémon\n"
+    "quemado.");
 
 static const u8 sIceHealDesc[] = _(
-    "Defrosts a frozen\n"
+    "Descongela a los\n"
     "Pokémon.");
 
 static const u8 sAwakeningDesc[] = _(
-    "Awakens a sleeping\n"
-    "Pokémon.");
+    "Despierta a un\n"
+    "Pokémon dormido.");
 
 static const u8 sParalyzeHealDesc[] = _(
-    "Heals a paralyzed\n"
-    "Pokémon.");
+    "Cura a un Pokémon\n"
+    "paralizado.");
 
 static const u8 sFullRestoreDesc[] = _(
-    "Fully restores the\n"
-    "HP and status of a\n"
-    "Pokémon.");
+    "Restaura todos los\n"
+    "PS y el estado\n"
+    "de un Pokémon.");
 
 static const u8 sMaxPotionDesc[] = _(
-    "Fully restores the\n"
-    "HP of a Pokémon.");
+    "Restaura todos los\n"
+    "PS de un Pokémon.");
 
 static const u8 sHyperPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a Pokémon by\n"
-    "200 points.");
+    "Restaura 200 PS\n"
+    "de un Pokémon.");
 
 static const u8 sSuperPotionDesc[] = _(
-    "Restores the HP of\n"
-    "a Pokémon by\n"
-    "50 points.");
+    "Restaura 50 PS\n"
+    "de un Pokémon.");
 
 static const u8 sFullHealDesc[] = _(
-    "Heals all the\n"
-    "status problems of\n"
-    "one Pokémon.");
+    "Cura los problemas\n"
+    "de estado de un\n"
+    "Pokémon.");
 
 static const u8 sReviveDesc[] = _(
-    "Revives a fainted\n"
-    "Pokémon with half\n"
-    "its HP.");
+    "Hace revivir a un\n"
+    "Pokémon. Le da\n"
+    "la mitad de los PS.");
 
 static const u8 sMaxReviveDesc[] = _(
-    "Revives a fainted\n"
-    "Pokémon with all\n"
-    "its HP.");
+    "Hace revivir a un\n"
+    "Pokémon debilitado.\n"
+    "Le da todos los PS.");
 
 static const u8 sFreshWaterDesc[] = _(
-    "A mineral water\n"
-    "that restores HP\n"
-    "by 50 points.");
+    "Agua mineral que\n"
+    "restaura 50 PS.");
 
 static const u8 sSodaPopDesc[] = _(
-    "A fizzy soda drink\n"
-    "that restores HP\n"
-    "by 60 points.");
+    "Bebida gaseosa que\n"
+    "restaura 60 PS.");
 
 static const u8 sLemonadeDesc[] = _(
-    "A very sweet drink\n"
-    "that restores HP\n"
-    "by 80 points.");
+    "Bebida dulce que\n"
+    "restaura 80 PS.");
 
 static const u8 sMoomooMilkDesc[] = _(
-    "A nutritious milk\n"
-    "that restores HP\n"
-    "by 100 points.");
+    "Nutritiva leche que\n"
+    "restaura 100 PS.");
 
 static const u8 sEnergyPowderDesc[] = _(
-    "A bitter powder\n"
-    "that restores HP\n"
-    "by 50 points.");
+    "Polvo amargo que\n"
+    "restaura 50 PS.");
 
 static const u8 sEnergyRootDesc[] = _(
-    "A bitter root\n"
-    "that restores HP\n"
-    "by 200 points.");
+    "Raíz amarga que\n"
+    "restaura 200 PS.");
 
 static const u8 sHealPowderDesc[] = _(
-    "A bitter powder\n"
-    "that heals all\n"
-    "status problems.");
+    "Polvos amargos que\n"
+    "curan los problemas\n"
+    "de estado.");
 
 static const u8 sRevivalHerbDesc[] = _(
-    "A very bitter herb\n"
-    "that revives a\n"
-    "fainted Pokémon.");
+    "Hierba amarga que\n"
+    "hace revivir a un\n"
+    "Pokémon debilitado.");
 
 static const u8 sEtherDesc[] = _(
-    "Restores the PP\n"
-    "of a selected move\n"
-    "by 10.");
+    "Restaura 10 PP del\n"
+    "ataque que elijas.");
 
 static const u8 sMaxEtherDesc[] = _(
-    "Fully restores the\n"
-    "PP of a selected\n"
-    "move.");
+    "Restaura los PP del\n"
+    "ataque que elijas.");
 
 static const u8 sElixirDesc[] = _(
-    "Restores the PP\n"
-    "of all moves by 10.");
+    "Restaura 10 PP de\n"
+    "todos los ataques.");
 
 static const u8 sMaxElixirDesc[] = _(
-    "Fully restores the\n"
-    "PP of a Pokémon's\n"
-    "moves.");
+    "Restaura los PP de\n"
+    "todos los ataques\n"
+    "de un Pokémon.");
 
 static const u8 sLavaCookieDesc[] = _(
-    "A local specialty\n"
-    "that heals all\n"
-    "status problems.");
+    "Dulce típico que\n"
+    "cura los problemas\n"
+    "de estado.");
 
 static const u8 sBlueFluteDesc[] = _(
-    "A glass flute that\n"
-    "awakens sleeping\n"
-    "Pokémon.");
+    "Flauta de cristal\n"
+    "que despierta a los\n"
+    "Pokémon dormidos.");
 
 static const u8 sYellowFluteDesc[] = _(
-    "A glass flute that\n"
-    "snaps Pokémon\n"
-    "out of confusion.");
+    "Flauta de cristal\n"
+    "que espabila a los\n"
+    "Pokémon confusos.");
 
 static const u8 sRedFluteDesc[] = _(
-    "A glass flute that\n"
-    "snaps Pokémon\n"
-    "out of attraction.");
+    "Flauta de cristal\n"
+    "que pone fin\n"
+    "a la atracción.");
 
 static const u8 sBlackFluteDesc[] = _(
-    "A glass flute that\n"
-    "keeps away wild\n"
-    "Pokémon.");
+    "Flauta de cristal\n"
+    "que aleja a los\n"
+    "Pokémon salvajes.");
 
 static const u8 sWhiteFluteDesc[] = _(
-    "A glass flute that\n"
-    "lures wild Pokémon.");
+    "Flauta de cristal\n"
+    "que atrae a los\n"
+    "Pokémon salvajes.");
 
 static const u8 sBerryJuiceDesc[] = _(
-    "A 100% pure juice\n"
-    "that restores HP\n"
-    "by 20 points.");
+    "Zumo 100% natural\n"
+    "que restaura 20 PS.");
 
 static const u8 sSacredAshDesc[] = _(
-    "Fully revives and\n"
-    "restores all\n"
-    "fainted Pokémon.");
+    "Recupera del todo\n"
+    "a los Pokémon\n"
+    "debilitados.");
 
 // Collectibles
 static const u8 sShoalSaltDesc[] = _(
-    "Salt obtained from\n"
-    "deep inside the\n"
-    "Shoal Cave.");
+    "Sal procedente de\n"
+    "lo más profundo de\n"
+    "la Cueva Cardumen.");
 
 static const u8 sShoalShellDesc[] = _(
-    "A seashell found\n"
-    "deep inside the\n"
-    "Shoal Cave.");
+    "Concha marina de\n"
+    "lo más profundo de\n"
+    "la Cueva Cardumen.");
 
 static const u8 sRedShardDesc[] = _(
-    "A shard from an\n"
-    "ancient item. Can\n"
-    "be sold cheaply.");
+    "Parte de un objeto\n"
+    "antiguo. Se vende\n"
+    "a bajo precio.");
 
 static const u8 sBlueShardDesc[] = _(
-    "A shard from an\n"
-    "ancient item. Can\n"
-    "be sold cheaply.");
+    "Parte de un objeto\n"
+    "antiguo. Se vende\n"
+    "a bajo precio.");
 
 static const u8 sYellowShardDesc[] = _(
-    "A shard from an\n"
-    "ancient item. Can\n"
-    "be sold cheaply.");
+    "Parte de un objeto\n"
+    "antiguo. Se vende\n"
+    "a bajo precio.");
 
 static const u8 sGreenShardDesc[] = _(
-    "A shard from an\n"
-    "ancient item. Can\n"
-    "be sold cheaply.");
+    "Parte de un objeto\n"
+    "antiguo. Se vende\n"
+    "a bajo precio.");
 
 // Vitamins
 static const u8 sHPUpDesc[] = _(
-    "Raises the base HP\n"
-    "of one Pokémon.");
+    "Aumenta los PS\n"
+    "de un Pokémon.");
 
 static const u8 sProteinDesc[] = _(
-    "Raises the base\n"
-    "Attack stat of one\n"
-    "Pokémon.");
+    "Aumenta el Ataque\n"
+    "de un Pokémon.");
 
 static const u8 sIronDesc[] = _(
-    "Raises the base\n"
-    "Defense stat of\n"
-    "one Pokémon.");
+    "Aumenta la Defensa\n"
+    "de un Pokémon.");
 
 static const u8 sCarbosDesc[] = _(
-    "Raises the base\n"
-    "Speed stat of one\n"
-    "Pokémon.");
+    "Sube la Velocidad\n"
+    "de un Pokémon.");
 
 static const u8 sCalciumDesc[] = _(
-    "Raises the base\n"
-    "Sp. Atk stat of one\n"
-    "Pokémon.");
+    "Sube el At. Esp.\n"
+    "de un Pokémon.");
 
 static const u8 sRareCandyDesc[] = _(
-    "Raises the level\n"
-    "of a Pokémon by\n"
-    "one.");
+    "Aumenta 1 nivel\n"
+    "a un Pokémon.");
 
 static const u8 sPPUpDesc[] = _(
-    "Raises the maximum\n"
-    "PP of a selected\n"
-    "move.");
+    "Aumenta los PP\n"
+    "máximos del\n"
+    "ataque que elijas.");
 
 static const u8 sZincDesc[] = _(
-    "Raises the base\n"
-    "Sp. Def stat of one\n"
+    "Aumenta la Def.\n"
+    "Esp. de un\n"
     "Pokémon.");
 
 static const u8 sPPMaxDesc[] = _(
-    "Raises the PP of a\n"
-    "move to its maximum\n"
-    "points.");
+    "Aumenta los PP\n"
+    "del ataque que\n"
+    "elijas al máximo.");
 
 // Battle items
 static const u8 sGuardSpecDesc[] = _(
-    "Prevents stat\n"
-    "reduction when\n"
-    "used in battle.");
+    "Evita la reducción\n"
+    "de características\n"
+    "durante el combate.");
 
 static const u8 sDireHitDesc[] = _(
-    "Raises the\n"
-    "critical-hit ratio\n"
-    "during one battle.");
+    "Aumenta el índice\n"
+    "de golpe crítico\n"
+    "en un combate.");
 
 static const u8 sXAttackDesc[] = _(
-    "Raises the stat\n"
-    "Attack during one\n"
-    "battle.");
+    "Aumenta el\n"
+    "Ataque durante\n"
+    "un combate.");
 
 static const u8 sXDefendDesc[] = _(
-    "Raises the stat\n"
-    "Defense during one\n"
-    "battle.");
+    "Aumenta la\n"
+    "Defensa durante\n"
+    "un combate.");
 
 static const u8 sXSpeedDesc[] = _(
-    "Raises the stat\n"
-    "Speed during one\n"
-    "battle.");
+    "Aumenta la\n"
+    "Velocidad durante\n"
+    "un combate.");
 
 static const u8 sXAccuracyDesc[] = _(
-    "Raises accuracy\n"
-    "of attack moves\n"
-    "during one battle.");
+    "Sube la Precisión\n"
+    "de los ataques\n"
+    "en un combate.");
 
 static const u8 sXSpecialDesc[] = _(
-    "Raises the stat\n"
-    "Sp. Atk during one\n"
-    "battle.");
+    "Aumenta el At. Esp.\n"
+    "en un combate.");
 
 static const u8 sPokeDollDesc[] = _(
-    "Use to flee from\n"
-    "any battle with\n"
-    "a wild Pokémon.");
+    "Sirve para huir de\n"
+    "un combate con un\n"
+    "Pokémon salvaje.");
 
 static const u8 sFluffyTailDesc[] = _(
-    "Use to flee from\n"
-    "any battle with\n"
-    "a wild Pokémon.");
+    "Sirve para huir de\n"
+    "un combate con un\n"
+    "Pokémon salvaje.");
 
 // Field items
 static const u8 sSuperRepelDesc[] = _(
-    "Repels weak wild\n"
-    "Pokémon for 200\n"
-    "steps.");
+    "Repele Pokémon\n"
+    "salvajes débiles\n"
+    "200 pasos.");
 
 static const u8 sMaxRepelDesc[] = _(
-    "Repels weak wild\n"
-    "Pokémon for 250\n"
-    "steps.");
+    "Repele Pokémon\n"
+    "salvajes débiles\n"
+    "250 pasos.");
 
 static const u8 sEscapeRopeDesc[] = _(
-    "Use to escape\n"
-    "instantly from a\n"
-    "cave or a dungeon.");
+    "Sirve para huir de\n"
+    "una cueva u otros\n"
+    "sitios cerrados.");
 
 static const u8 sRepelDesc[] = _(
-    "Repels weak wild\n"
-    "Pokémon for 100\n"
-    "steps.");
+    "Repele Pokémon\n"
+    "salvajes débiles\n"
+    "100 pasos.");
 
 // Evolution stones
 static const u8 sSunStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
+    "Hace evolucionar\n"
+    "a varias especies\n"
+    "de Pokémon.");
 
 static const u8 sMoonStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
+    "Hace evolucionar\n"
+    "a varias especies\n"
+    "de Pokémon.");
 
 static const u8 sFireStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
+    "Hace evolucionar\n"
+    "a varias especies\n"
+    "de Pokémon.");
 
 static const u8 sThunderStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
+    "Hace evolucionar\n"
+    "a varias especies\n"
+    "de Pokémon.");
 
 static const u8 sWaterStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
+    "Hace evolucionar\n"
+    "a varias especies\n"
+    "de Pokémon.");
 
 static const u8 sLeafStoneDesc[] = _(
-    "Makes certain\n"
-    "species of Pokémon\n"
-    "evolve.");
+    "Hace evolucionar\n"
+    "a varias especies\n"
+    "de Pokémon.");
 
 // Valuable items
 static const u8 sTinyMushroomDesc[] = _(
-    "A plain mushroom\n"
-    "that would sell\n"
-    "at a cheap price.");
+    "Seta común.\n"
+    "Se vende\n"
+    "a bajo precio.");
 
 static const u8 sBigMushroomDesc[] = _(
-    "A rare mushroom\n"
-    "that would sell at a\n"
-    "high price.");
+    "Sera poco común.\n"
+    "Se vende\n"
+    "a alto precio.");
 
 static const u8 sPearlDesc[] = _(
-    "A pretty pearl\n"
-    "that would sell at a\n"
-    "cheap price.");
+    "Bonita perla\n"
+    "que se vende\n"
+    "a bajo precio.");
 
 static const u8 sBigPearlDesc[] = _(
-    "A lovely large pearl\n"
-    "that would sell at a\n"
-    "high price.");
+    "Perla grande y\n"
+    "bella que se vende\n"
+    "a alto precio.");
 
 static const u8 sStardustDesc[] = _(
-    "Beautiful red sand.\n"
-    "Can be sold at a\n"
-    "high price.");
+    "Bonita arena roja\n"
+    "que se vende a alto\n"
+    "precio.");
 
 static const u8 sStarPieceDesc[] = _(
-    "A red gem shard.\n"
-    "It would sell for a\n"
-    "very high price.");
+    "Trozo de gema roja\n"
+    "que se vende a alto\n"
+    "precio.");
 
 static const u8 sNuggetDesc[] = _(
-    "A nugget of pure\n"
-    "gold. Can be sold at\n"
-    "a high price.");
+    "Pepita de oro puro\n"
+    "que se vende a alto\n"
+    "precio.");
 
 static const u8 sHeartScaleDesc[] = _(
-    "A lovely scale.\n"
-    "It is coveted by\n"
-    "collectors.");
+    "Escama preciosa..\n"
+    "Pieza codiciada por\n"
+    "coleccionistas.");
 
 // Mail
 static const u8 sOrangeMailDesc[] = _(
-    "A Zigzagoon-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Zigzagoon.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sHarborMailDesc[] = _(
-    "A Wingull-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Wingull.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sGlitterMailDesc[] = _(
-    "A Pikachu-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Pikachu.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sMechMailDesc[] = _(
-    "A Magnemite-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Magnemite.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sWoodMailDesc[] = _(
-    "A Slakoth-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Slakoth.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sWaveMailDesc[] = _(
-    "A Wailmer-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Wailmer.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sBeadMailDesc[] = _(
-    "Mail featuring a\n"
-    "sketch of the\n"
-    "holding Pokémon.");
+    "Carta con la imagen\n"
+    "del Pokémon que la\n"
+    "lleva.");
 
 static const u8 sShadowMailDesc[] = _(
-    "A Duskull-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Duskull.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sTropicMailDesc[] = _(
-    "A Bellossom-print\n"
-    "Mail to be held by\n"
-    "a Pokémon.");
+    "Sale Bellossom.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sDreamMailDesc[] = _(
-    "Mail featuring a\n"
-    "sketch of the\n"
-    "holding Pokémon.");
+    "Carta con la imagen\n"
+    "del Pokémon que la\n"
+    "lleva.");
 
 static const u8 sFabMailDesc[] = _(
-    "A gorgeous-print\n"
-    "Mail to be held\n"
-    "by a Pokémon.");
+    "Fabuloso dibujo.\n"
+    "Debe llevarla\n"
+    "un Pokémon.");
 
 static const u8 sRetroMailDesc[] = _(
-    "Mail featuring the\n"
-    "drawings of three\n"
+    "Carta con las\n"
+    "imágenes de tres\n"
     "Pokémon.");
 
 // Berries
 static const u8 sCheriBerryDesc[] = _(
-    "A hold item that\n"
-    "heals paralysis\n"
-    "in battle.");
+    "Al llevarla, cura\n"
+    "la parálisis\n"
+    "en el combate.");
 
 static const u8 sChestoBerryDesc[] = _(
-    "A hold item that\n"
-    "awakens Pokémon\n"
-    "in battle.");
+    "Al llevarla,\n"
+    "te despierta\n"
+    "en el combate.");
 
 static const u8 sPechaBerryDesc[] = _(
-    "A hold item that\n"
-    "heals poisoning\n"
-    "in battle.");
+    "Al llevarla, cura\n"
+    "el envenenamiento\n"
+    "en el combate.");
 
 static const u8 sRawstBerryDesc[] = _(
-    "A hold item that\n"
-    "heals a burn in\n"
-    "battle.");
+    "Al llevarla, cura\n"
+    "las quemaduras\n"
+    "en el combate.");
 
 static const u8 sAspearBerryDesc[] = _(
-    "A hold item that\n"
-    "defrosts Pokémon\n"
-    "in battle.");
+    "Al llevarla,\n"
+    "te descongela\n"
+    "en el combate.");
 
 static const u8 sLeppaBerryDesc[] = _(
-    "A hold item that\n"
-    "restores 10 PP in\n"
-    "battle.");
+    "Al llevarla,\n"
+    "te restaura 10 PP\n"
+    "en el combate.");
 
 static const u8 sOranBerryDesc[] = _(
-    "A hold item that\n"
-    "restores 10 HP in\n"
-    "battle.");
+    "Al llevarla,\n"
+    "te restaura 10 PS\n"
+    "en el combate.");
 
 static const u8 sPersimBerryDesc[] = _(
-    "A hold item that\n"
-    "heals confusion\n"
-    "in battle.");
+    "Al llevarla, te\n"
+    "saca del estado\n"
+    "de confusión.");
 
 static const u8 sLumBerryDesc[] = _(
-    "A hold item that\n"
-    "heals any status\n"
-    "problem in battle.");
+    "Al llevarla, cura\n"
+    "los problemas\n"
+    "de estado.");
 
 static const u8 sSitrusBerryDesc[] = _(
-    "A hold item that\n"
-    "restores 30 HP in\n"
-    "battle.");
+    "Al llevarla,\n"
+    "te restaura 30 PS\n"
+    "en el combate.");
 
 static const u8 sFigyBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Al llevarla, te\n"
+    "restaura PS, pero\n"
+    "puede confundirte.");
 
 static const u8 sWikiBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Al llevarla, te\n"
+    "restaura PS, pero\n"
+    "puede confundirte.");
 
 static const u8 sMagoBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Al llevarla, te\n"
+    "restaura PS, pero\n"
+    "puede confundirte.");
 
 static const u8 sAguavBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Al llevarla, te\n"
+    "restaura PS, pero\n"
+    "puede confundirte.");
 
 static const u8 sIapapaBerryDesc[] = _(
-    "A hold item that\n"
-    "restores HP but\n"
-    "may confuse.");
+    "Al llevarla, te\n"
+    "restaura PS, pero\n"
+    "puede confundirte.");
 
 static const u8 sRazzBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Razz.");
+    "En suelo fértil da\n"
+    "Frambu. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sBlukBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Bluk.");
+    "En suelo fértil da\n"
+    "Oram. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sNanabBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Nanab.");
+    "En suelo fértil da\n"
+    "Latano. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sWepearBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Wepear.");
+    "En suelo fértil da\n"
+    "Peragu. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sPinapBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Pinap.");
+    "En suelo fértil da\n"
+    "Pinia. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sPomegBerryDesc[] = _(
-    "Makes a Pokémon\n"
-    "friendly but lowers\n"
-    "base HP.");
+    "Hace amable al\n"
+    "Pokémon, pero\n"
+    "baja los PS.");
 
 static const u8 sKelpsyBerryDesc[] = _(
-    "Makes a Pokémon\n"
-    "friendly but lowers\n"
-    "base Attack.");
+    "Hace amable al\n"
+    "Pokémon, pero\n"
+    "baja el Ataque.");
 
 static const u8 sQualotBerryDesc[] = _(
-    "Makes a Pokémon\n"
-    "friendly but lowers\n"
-    "base Defense.");
+    "Hace amable al\n"
+    "Pokémon, pero\n"
+    "baja la Defensa.");
 
 static const u8 sHondewBerryDesc[] = _(
-    "Makes a Pokémon\n"
-    "friendly but lowers\n"
-    "base Sp. Atk.");
+    "Hace amable al\n"
+    "Pokémon, pero\n"
+    "baja el At. Esp.");
 
 static const u8 sGrepaBerryDesc[] = _(
-    "Makes a Pokémon\n"
-    "friendly but lowers\n"
-    "base Sp. Def.");
+    "Hace amable al\n"
+    "Pokémon, pero\n"
+    "baja la Def. Esp.");
 
 static const u8 sTamatoBerryDesc[] = _(
-    "Makes a Pokémon\n"
-    "friendly but lowers\n"
-    "base Speed.");
+    "Hace amable al\n"
+    "Pokémon, pero\n"
+    "baja la Velocid.");
 
 static const u8 sCornnBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Cornn.");
+    "En suelo fértil da\n"
+    "Mais. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sMagostBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Magost.");
+    "En suelo fértil da\n"
+    "Aostan. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sRabutaBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Rabuta.");
+    "En suelo fértil da\n"
+    "Rautan. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sNomelBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Nomel.");
+    "En suelo fértil da\n"
+    "Monli. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sSpelonBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Spelon.");
+    "En suelo fértil da\n"
+    "Wikano. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sPamtreBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Pamtre.");
+    "En suelo fértil da\n"
+    "Plamna. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sWatmelBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Watmel.");
+    "En suelo fértil da\n"
+    "Sambia. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sDurinBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Durin.");
+    "En suelo fértil da\n"
+    "Rudion. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sBelueBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Belue.");
+    "En suelo fértil da\n"
+    "Andano. Sirve para\n"
+    "hacer {POKEBLOCK}S.");
 
 static const u8 sLiechiBerryDesc[] = _(
-    "A hold item that\n"
-    "raises Attack in\n"
-    "a pinch.");
+    "Al llevarla, subirá\n"
+    "el Ataque en un\n"
+    "momento de apuro.");
 
 static const u8 sGanlonBerryDesc[] = _(
-    "A hold item that\n"
-    "raises Defense in\n"
-    "a pinch.");
+    "Al llevarla, subirá\n"
+    "la Defensa en un\n"
+    "momento de apuro.");
 
 static const u8 sSalacBerryDesc[] = _(
-    "A hold item that\n"
-    "raises Speed in\n"
-    "a pinch.");
+    "Al llevarla, subirá\n"
+    "la Velocidad en un\n"
+    "momento de apuro.");
 
 static const u8 sPetayaBerryDesc[] = _(
-    "A hold item that\n"
-    "raises Sp. Atk in\n"
-    "a pinch.");
+    "Al llevarla, subirá\n"
+    "el At. Esp. en un\n"
+    "momento de apuro.");
 
 static const u8 sApicotBerryDesc[] = _(
-    "A hold item that\n"
-    "raises Sp. Def in\n"
-    "a pinch.");
+    "Al llevarla, subirá\n"
+    "la Def. Esp. en un\n"
+    "momento de apuro.");
 
 static const u8 sLansatBerryDesc[] = _(
-    "A hold item that\n"
-    "ups the critical-\n"
-    "hit rate in a pinch.");
+    "Al llevarla, sube la\n"
+    "posibilidad de dar\n"
+    "un golpe crítico.");
 
 static const u8 sStarfBerryDesc[] = _(
-    "A hold item that\n"
-    "sharply boosts a\n"
-    "stat in a pinch.");
+    "Al llevarla, subirá\n"
+    "una caract. en un\n"
+    "momento de apuro.");
 
 static const u8 sEnigmaBerryDesc[] = _(
-    "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow a mystery.");
+    "En suelo fértil da\n"
+    "algo raro. De ella\n"
+    "se hacen {POKEBLOCK}S.");
 
 // Hold items
 static const u8 sBrightPowderDesc[] = _(
-    "A hold item that\n"
-    "casts a glare to\n"
-    "reduce accuracy.");
+    "Al llevarlo, lanza\n"
+    "un destello que ba-\n"
+    "ja la Precisión.");
 
 static const u8 sWhiteHerbDesc[] = _(
-    "A hold item that\n"
-    "restores any\n"
-    "lowered stat.");
+    "Al llevarla, restau-\n"
+    "ra características\n"
+    "debilitadas.");
 
 static const u8 sMachoBraceDesc[] = _(
-    "A hold item that\n"
-    "promotes growth,\n"
-    "but reduces Speed.");
+    "Al llevarla, se\n"
+    "crece rápido, pero\n"
+    "baja la Velocidad.");
 
 static const u8 sExpShareDesc[] = _(
-    "A hold item that\n"
-    "gets Exp. points\n"
-    "from battles.");
+    "Al llevarlo, se\n"
+    "toman puntos de\n"
+    "Exp. del combate.");
 
 static const u8 sQuickClawDesc[] = _(
-    "A hold item that\n"
-    "occasionally allows\n"
-    "the first strike.");
+    "Al llevarla, se\n"
+    "puede golpear en\n"
+    "primer lugar.");
 
 static const u8 sSootheBellDesc[] = _(
-    "A hold item that\n"
-    "calms spirits and\n"
-    "fosters friendship.");
+    "Al llevarla, calma\n"
+    "los ánimos y\n"
+    "fomenta la amistad.");
 
 static const u8 sMentalHerbDesc[] = _(
-    "A hold item that\n"
-    "snaps Pokémon out\n"
-    "of infatuation.");
+    "Al llevarla, los\n"
+    "Pokémon se liberan\n"
+    "del enamoramiento.");
 
 static const u8 sChoiceBandDesc[] = _(
-    "Raises a move's\n"
-    "power, but permits\n"
-    "only that move.");
+    "Aumenta la fuerza\n"
+    "de un ataque, pero\n"
+    "sólo deja usar ése.");
 
 static const u8 sKingsRockDesc[] = _(
-    "A hold item that\n"
-    "may cause flinching\n"
-    "when the foe is hit.");
+    "Al llevarla, puede\n"
+    "hacer retroceder al\n"
+    "rival si lo hieres.");
 
 static const u8 sSilverPowderDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Bug-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Bicho.");
 
 static const u8 sAmuletCoinDesc[] = _(
-    "Doubles money in\n"
-    "battle if the\n"
-    "holder takes part.");
+    "Si el que lo lleva\n"
+    "lucha en combate,\n"
+    "duplica el dinero.");
 
 static const u8 sCleanseTagDesc[] = _(
-    "A hold item that\n"
-    "helps repel wild\n"
-    "Pokémon.");
+    "Al llevarlo, ayuda\n"
+    "a repeler a los\n"
+    "Pokémon salvajes.");
 
 static const u8 sSoulDewDesc[] = _(
-    "Hold item: raises\n"
-    "Sp. Atk & Sp. Def of\n"
-    "Latios & Latias.");
+    "Al llevarlo, suben\n"
+    "el At. y la Def. Esp.\n"
+    "de Latios y Latias.");
 
 static const u8 sDeepSeaToothDesc[] = _(
-    "A hold item that\n"
-    "raises the Sp. Atk\n"
-    "of Clamperl.");
+    "Al llevarlo, sube el\n"
+    "At. Esp. de\n"
+    "Clamperl.");
 
 static const u8 sDeepSeaScaleDesc[] = _(
-    "A hold item that\n"
-    "raises the Sp. Def\n"
-    "of Clamperl.");
+    "Al llevarlo, sube la\n"
+    "Def. Esp. de\n"
+    "Clamperl.");
 
 static const u8 sSmokeBallDesc[] = _(
-    "A hold item that\n"
-    "assures fleeing\n"
-    "from wild Pokémon.");
+    "Se usa para huir de\n"
+    "combates contra\n"
+    "Pokémon salvajes.");
 
 static const u8 sEverstoneDesc[] = _(
-    "A wondrous hold\n"
-    "item that prevents\n"
-    "evolution.");
+    "El que lleve esta\n"
+    "piedra mágica\n"
+    "no evolucionará.");
 
 static const u8 sFocusBandDesc[] = _(
-    "A hold item that\n"
-    "occasionally\n"
-    "prevents fainting.");
+    "Al llevarla, quizá\n"
+    "evites debilitarte.");
 
 static const u8 sLuckyEggDesc[] = _(
-    "A hold item that\n"
-    "boosts Exp. points\n"
-    "earned in battle.");
+    "Al llevarlo, ganarás\n"
+    "muchos más puntos\n"
+    "de Exp. en combate.");
 
 static const u8 sScopeLensDesc[] = _(
-    "A hold item that\n"
-    "improves the\n"
-    "critical-hit rate.");
+    "Al llevarlo, aumenta\n"
+    "la posibilidad\n"
+    "de golpe crítico.");
 
 static const u8 sMetalCoatDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Steel-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Acero.");
 
 static const u8 sLeftoversDesc[] = _(
-    "A hold item that\n"
-    "gradually restores\n"
-    "HP in battle.");
+    "Al llevarlos, van\n"
+    "restaurando los PS\n"
+    "durante el combate.");
 
 static const u8 sDragonScaleDesc[] = _(
-    "A strange scale\n"
-    "held by Dragon-\n"
-    "type Pokémon.");
+    "Rara escama que\n"
+    "llevan los Pokémon\n"
+    "de tipo Dragón.");
 
 static const u8 sLightBallDesc[] = _(
-    "A hold item that\n"
-    "raises the Sp. Atk\n"
-    "of Pikachu.");
+    "Al llevarla, el At.\n"
+    "Esp. de Pikachu\n"
+    "aumentará.");
 
 static const u8 sSoftSandDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Ground-type moves.");
+    "Al llevarla, forta-\n"
+    "lece los ataques\n"
+    "de tipo Tierra.");
 
 static const u8 sHardStoneDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Rock-type moves.");
+    "Al llevarla, forta-\n"
+    "lece los ataques\n"
+    "de tipo Roca.");
 
 static const u8 sMiracleSeedDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Grass-type moves.");
+    "Al llevarla, forta-\n"
+    "lece los ataques\n"
+    "de tipo Planta.");
 
 static const u8 sBlackGlassesDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Dark-type moves.");
+    "Al llevarlas, forta-\n"
+    "lecen los ataques\n"
+    "de tipo Siniestro.");
 
 static const u8 sBlackBeltDesc[] = _(
-    "A hold item that\n"
-    "boosts Fighting-\n"
-    "type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Lucha.");
 
 static const u8 sMagnetDesc[] = _(
-    "A hold item that\n"
-    "boosts Electric-\n"
-    "type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Eléctric.");
 
 static const u8 sMysticWaterDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Water-type moves.");
+    "Al llevarla, forta-\n"
+    "lece los ataques\n"
+    "de tipo Agua.");
 
 static const u8 sSharpBeakDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Flying-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Volador.");
 
 static const u8 sPoisonBarbDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Poison-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Veneno.");
 
 static const u8 sNeverMeltIceDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Ice-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Hielo.");
 
 static const u8 sSpellTagDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Ghost-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Fantasma.");
 
 static const u8 sTwistedSpoonDesc[] = _(
-    "A hold item that\n"
-    "boosts Psychic-\n"
-    "type moves.");
+    "Al llevarla, forta-\n"
+    "lece los ataques\n"
+    "de tipo Psíquico.");
 
 static const u8 sCharcoalDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Fire-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Fuego.");
 
 static const u8 sDragonFangDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Dragon-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Dragón.");
 
 static const u8 sSilkScarfDesc[] = _(
-    "A hold item that\n"
-    "raises the power of\n"
-    "Normal-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece los ataques\n"
+    "de tipo Normal.");
 
 static const u8 sUpGradeDesc[] = _(
-    "A peculiar box made\n"
-    "by Silph Co.");
+    "Peculiar caja\n"
+    "hecha en\n"
+    "Silph S.A.");
 
 static const u8 sShellBellDesc[] = _(
-    "A hold item that\n"
-    "restores HP upon\n"
-    "striking the foe.");
+    "Al llevarla y\n"
+    "golpear al rival,\n"
+    "recuperas PS.");
 
 static const u8 sSeaIncenseDesc[] = _(
-    "A hold item that\n"
-    "slightly boosts\n"
-    "Water-type moves.");
+    "Al llevarlo, forta-\n"
+    "lece algo los\n"
+    "ataques tipo Agua.");
 
 static const u8 sLaxIncenseDesc[] = _(
-    "A hold item that\n"
-    "slightly lowers the\n"
-    "foe's accuracy.");
+    "Al llevarlo, baja\n"
+    "algo la Precisión\n"
+    "del rival.");
 
 static const u8 sLuckyPunchDesc[] = _(
-    "A hold item that\n"
-    "raises Chansey's\n"
-    "critical-hit rate.");
+    "Al llevarlo, Chansey\n"
+    "dará posiblemente\n"
+    "un golpe crítico.");
 
 static const u8 sMetalPowderDesc[] = _(
-    "A hold item that\n"
-    "raises Ditto's\n"
-    "Defense.");
+    "Si lo lleva Ditto,\n"
+    "su Defensa\n"
+    "aumentará.");
 
 static const u8 sThickClubDesc[] = _(
-    "A hold item that \n"
-    "raises Cubone or\n"
-    "Marowak's Attack.");
+    "Al llevarlo, Cubone\n"
+    "o Marowak tendrán\n"
+    "mejor Ataque.");
 
 static const u8 sStickDesc[] = _(
-    "A hold item that\n"
-    "raises Farfetch'd's\n"
-    "critical-hit ratio.");
+    "Farfetch'd tiene\n"
+    "más índice de golpe\n"
+    "crítico al llevarlo.");
 
 static const u8 sRedScarfDesc[] = _(
-    "A hold item that\n"
-    "raises Cool in\n"
-    "Contests.");
+    "Al llevarlo en los\n"
+    "Concursos,\n"
+    "sube el Carisma.");
 
 static const u8 sBlueScarfDesc[] = _(
-    "A hold item that\n"
-    "raises Beauty in\n"
-    "Contests.");
+    "Al llevarlo en los\n"
+    "Concursos,\n"
+    "sube la Belleza.");
 
 static const u8 sPinkScarfDesc[] = _(
-    "A hold item that\n"
-    "raises Cute in\n"
-    "Contests.");
+    "Al llevarlo en los\n"
+    "Concursos,\n"
+    "sube la Dulzura.");
 
 static const u8 sGreenScarfDesc[] = _(
-    "A hold item that\n"
-    "raises Smart in\n"
-    "Contests.");
+    "Al llevarlo en los\n"
+    "Concursos,\n"
+    "sube el Ingenio.");
 
 static const u8 sYellowScarfDesc[] = _(
-    "A hold item that\n"
-    "raises Tough in\n"
-    "Contests.");
+    "Al llevarlo en los\n"
+    "Concursos,\n"
+    "sube la Dureza.");
 
 // Key items
 static const u8 sMachBikeDesc[] = _(
-    "A folding bicycle\n"
-    "that doubles your\n"
-    "speed or better.");
+    "Bici plegable con la\n"
+    "que se va el doble\n"
+    "de rápido que a pie.");
 
 static const u8 sCoinCaseDesc[] = _(
-    "A case that holds\n"
-    "up to 9,999 Coins.");
+    "Te servirá para\n"
+    "llevar hasta 9.999\n"
+    "Fichas.");
 
 static const u8 sItemfinderDesc[] = _(
-    "A device that\n"
-    "signals an invisible\n"
-    "item by sound.");
+    "Detector de\n"
+    "objetos invisibles\n"
+    "por ondas sonoras.");
 
 static const u8 sOldRodDesc[] = _(
-    "Use by any body of\n"
-    "water to fish for\n"
-    "wild Pokémon.");
+    "Pesca Pokémon\n"
+    "salvajes en todo\n"
+    "tipo de aguas.");
 
 static const u8 sGoodRodDesc[] = _(
-    "A decent fishing\n"
-    "rod for catching\n"
-    "wild Pokémon.");
+    "Una buena caña\n"
+    "para pescar\n"
+    "Pokémon salvajes.");
 
 static const u8 sSuperRodDesc[] = _(
-    "The best fishing\n"
-    "rod for catching\n"
-    "wild Pokémon.");
+    "Es la mejor caña\n"
+    "para pescar\n"
+    "Pokémon salvajes.");
 
 static const u8 sSSTicketDesc[] = _(
-    "The ticket required\n"
-    "for sailing on a\n"
-    "ferry.");
+    "Es el billete válido\n"
+    "para embarcar.");
 
 static const u8 sContestPassDesc[] = _(
-    "The pass required\n"
-    "for entering\n"
-    "Pokémon Contests.");
+    "Es necesario para\n"
+    "participar en un\n"
+    "Concurso Pokémon.");
 
 static const u8 sWailmerPailDesc[] = _(
-    "A tool used for\n"
-    "watering Berries\n"
-    "and plants.");
+    "Sirve para regar\n"
+    "las Bayas y las\n"
+    "plantas.");
 
 static const u8 sDevonGoodsDesc[] = _(
-    "A package that\n"
-    "contains Devon's\n"
-    "machine parts.");
+    "Paquete con todas\n"
+    "las piezas de la\n"
+    "máquina de Devon.");
 
 static const u8 sSootSackDesc[] = _(
-    "A sack used to\n"
-    "gather and hold\n"
-    "volcanic ash.");
+    "Saco usado para\n"
+    "recoger y guardar\n"
+    "cenizas volcánicas.");
 
 static const u8 sBasementKeyDesc[] = _(
-    "The key for New\n"
-    "Mauville beneath\n"
-    "Mauville City.");
+    "Llave de MALVALA-\n"
+    "NOVA (al sur de\n"
+    "Ciudad Malvalona).");
 
 static const u8 sAcroBikeDesc[] = _(
-    "A folding bicycle\n"
-    "capable of jumps\n"
-    "and wheelies.");
+    "Bici plegable ideal\n"
+    "para saltar y hacer\n"
+    "caballitos y giros.");
 
 static const u8 sPokeblockCaseDesc[] = _(
-    "A case for holding\n"
-    "{POKEBLOCK}s made with\n"
-    "a Berry Blender.");
+    "Tubo para los\n"
+    "{POKEBLOCK}S hechos\n"
+    "con la Licuabayas.");
 
 static const u8 sLetterDesc[] = _(
-    "A letter to Steven\n"
-    "from the President\n"
-    "of the Devon Corp.");
+    "Carta para Steven,\n"
+    "del Presidente\n"
+    "de Devon S.A.");
 
 static const u8 sEonTicketDesc[] = _(
-    "The ticket for a\n"
-    "ferry to a distant\n"
-    "southern island.");
+    "Billete necesario\n"
+    "para ir hasta una\n"
+    "lejana isla del sur.");
 
 static const u8 sRedOrbDesc[] = _(
-    "A red, glowing orb\n"
-    "said to contain an\n"
-    "ancient power.");
+    "Es roja y brillante.\n"
+    "Dicen que posee\n"
+    "un poder ancestral.");
 
 static const u8 sBlueOrbDesc[] = _(
-    "A blue, glowing orb\n"
-    "said to contain an\n"
-    "ancient power.");
+    "Es azul y brillante.\n"
+    "Dicen que posee\n"
+    "un poder ancestral.");
 
 static const u8 sScannerDesc[] = _(
-    "A device found\n"
-    "inside the\n"
-    "Abandoned Ship.");
+    "Dispositivo encon-\n"
+    "trado en la Nao\n"
+    "Abandonada.");
 
 static const u8 sGoGogglesDesc[] = _(
-    "Nifty goggles that\n"
-    "protect eyes from\n"
-    "desert sandstorms.");
+    "Ingeniosas gafas\n"
+    "que protegen de la\n"
+    "arena del desierto.");
 
 static const u8 sMeteoriteDesc[] = _(
-    "A meteorite found\n"
-    "at Meteor Falls.");
+    "Meteorito encon-\n"
+    "trado en la Cascada\n"
+    "Meteoro.");
 
 static const u8 sRoom1KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
+    "Llave de una de las\n"
+    "cabinas de la Nao\n"
+    "Abandonada.");
 
 static const u8 sRoom2KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
+    "Llave de una de las\n"
+    "cabinas de la Nao\n"
+    "Abandonada.");
 
 static const u8 sRoom4KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
+    "Llave de una de las\n"
+    "cabinas de la Nao\n"
+    "Abandonada.");
 
 static const u8 sRoom6KeyDesc[] = _(
-    "A key that opens a\n"
-    "door inside the\n"
-    "Abandoned Ship.");
+    "Llave de una de las\n"
+    "cabinas de la Nao\n"
+    "Abandonada.");
 
 static const u8 sStorageKeyDesc[] = _(
-    "The key to the\n"
-    "storage inside the\n"
-    "Abandoned Ship.");
+    "Llave del Almacén\n"
+    "de la Nao Aban-\n"
+    "donada.");
 
 static const u8 sRootFossilDesc[] = _(
-    "A fossil of an\n"
-    "ancient, seafloor-\n"
-    "dwelling Pokémon.");
+    "Fósil de un Pokémon\n"
+    "ancestral que moró\n"
+    "en el fondo del mar.");
 
 static const u8 sClawFossilDesc[] = _(
-    "A fossil of an\n"
-    "ancient, seafloor-\n"
-    "dwelling Pokémon.");
+    "Fósil de un Pokémon\n"
+    "ancestral que moró\n"
+    "en el fondo del mar.");
 
 static const u8 sDevonScopeDesc[] = _(
-    "A device by Devon\n"
-    "that signals any\n"
-    "unseeable Pokémon.");
+    "Dispositivo hecho\n"
+    "en Devon para ver\n"
+    "Pokémon invisibles.");
 
 // TMs/HMs
 static const u8 sTM01Desc[] = _(
-    "Powerful, but makes\n"
-    "the user flinch if\n"
-    "hit by the foe.");
+    "Es potente, pero\n"
+    "hiere al atacante\n"
+    "si el rival le atiza.");
 
 static const u8 sTM02Desc[] = _(
-    "Hooks and slashes\n"
-    "the foe with long,\n"
-    "sharp claws.");
+    "Engancha y araña\n"
+    "al rival con garras\n"
+    "afiladas.");
 
 static const u8 sTM03Desc[] = _(
-    "Generates an\n"
-    "ultrasonic wave\n"
-    "that may confuse.");
+    "Emite una onda\n"
+    "ultrasónica que\n"
+    "puede confundir.");
 
 static const u8 sTM04Desc[] = _(
-    "Raises Sp. Atk and\n"
-    "Sp. Def by focusing\n"
-    "the mind.");
+    "Se concentra para\n"
+    "subir el At. Esp.\n"
+    "y la Def. Esp.");
 
 static const u8 sTM05Desc[] = _(
-    "A savage roar that\n"
-    "makes the foe flee \n"
-    "to end the battle.");
+    "Tremendo rugido\n"
+    "que hace huir del\n"
+    "combate al rival.");
 
 static const u8 sTM06Desc[] = _(
-    "Poisons the foe\n"
-    "with a toxin that\n"
-    "gradually worsens.");
+    "Envenena con una\n"
+    "toxina que se va\n"
+    "intensificando.");
 
 static const u8 sTM07Desc[] = _(
-    "Creates a hailstorm\n"
-    "that damages all\n"
-    "types except Ice.");
+    "Tormenta de gra-\n"
+    "nizo dañina salvo\n"
+    "para el tipo Hielo.");
 
 static const u8 sTM08Desc[] = _(
-    "Bulks up the body\n"
-    "to boost both\n"
-    "Attack & Defense.");
+    "Robustece el\n"
+    "cuerpo para subir\n"
+    "Ataque y Defensa.");
 
 static const u8 sTM09Desc[] = _(
-    "Shoots 2 to 5 seeds\n"
-    "in a row to strike\n"
-    "the foe.");
+    "Dispara de 2 a 5\n"
+    "ráfagas de semillas\n"
+    "seguidas.");
 
 static const u8 sTM10Desc[] = _(
-    "The attack power\n"
-    "varies among\n"
-    "different Pokémon.");
+    "La fuerza del\n"
+    "ataque varía según\n"
+    "el Pokémon.");
 
 static const u8 sTM11Desc[] = _(
-    "Raises the power of\n"
-    "Fire-type moves\n"
-    "for 5 turns.");
+    "Sube los ataques\n"
+    "de tipo Fuego\n"
+    "durante 5 turnos.");
 
 static const u8 sTM12Desc[] = _(
-    "Enrages the foe so\n"
-    "it can only use\n"
-    "attack moves.");
+    "Enfada al rival\n"
+    "para que sólo\n"
+    "use Ataques.");
 
 static const u8 sTM13Desc[] = _(
-    "Fires an icy cold\n"
-    "beam that may\n"
-    "freeze the foe.");
+    "Rayo de hielo\n"
+    "que puede llegar\n"
+    "a congelar.");
 
 static const u8 sTM14Desc[] = _(
-    "A brutal snow-and-\n"
-    "wind attack that\n"
-    "may freeze the foe.");
+    "Tormenta de viento\n"
+    "y nieve que puede\n"
+    "llegar a congelar.");
 
 static const u8 sTM15Desc[] = _(
-    "Powerful, but needs\n"
-    "recharging the\n"
-    "next turn.");
+    "Es eficaz, pero\n"
+    "necesita 1 turno\n"
+    "para recargarse.");
 
 static const u8 sTM16Desc[] = _(
-    "Creates a wall of\n"
-    "light that lowers\n"
-    "Sp. Atk damage.");
+    "Pared de luz que\n"
+    "reduce el daño del\n"
+    "At. Esp.");
 
 static const u8 sTM17Desc[] = _(
-    "Negates all damage,\n"
-    "but may fail if used\n"
-    "in succession.");
+    "Anula los daños,\n"
+    "pero puede fallar\n"
+    "si se usa sin parar.");
 
 static const u8 sTM18Desc[] = _(
-    "Raises the power of\n"
-    "Water-type moves\n"
-    "for 5 turns.");
+    "Sube los ataques\n"
+    "de tipo Agua\n"
+    "durante 5 turnos.");
 
 static const u8 sTM19Desc[] = _(
-    "Recovers half the\n"
-    "HP of the damage \n"
-    "this move inflicts.");
+    "Recupera la mitad\n"
+    "de PS del daño\n"
+    "que produce.");
 
 static const u8 sTM20Desc[] = _(
-    "Prevents status\n"
-    "abnormality with a\n"
-    "mystical power.");
+    "Evita alteraciones\n"
+    "de estado usando\n"
+    "un poder secreto.");
 
 static const u8 sTM21Desc[] = _(
-    "The less the user\n"
-    "likes you, the more\n"
-    "powerful this move.");
+    "Cuanto menos le\n"
+    "gustes al Pokémon,\n"
+    "más fuerte ataca.");
 
 static const u8 sTM22Desc[] = _(
-    "Absorbs sunlight in\n"
-    "the 1st turn, then\n"
-    "attacks next turn.");
+    "1.{SUPER_ER}: toma\n"
+    "luz.\n"
+    "2.º turno: ataca.");
 
 static const u8 sTM23Desc[] = _(
-    "Slams the foe with\n"
-    "a hard tail. It may\n"
-    "lower Defense.");
+    "Golpea con un gran\n"
+    "coletazo y puede\n"
+    "bajar la Defensa.");
 
 static const u8 sTM24Desc[] = _(
-    "A powerful electric\n"
-    "attack that may\n"
-    "cause paralysis.");
+    "Duro ataque eléc-\n"
+    "trico que puede\n"
+    "paralizar al rival.");
 
 static const u8 sTM25Desc[] = _(
-    "Strikes the foe\n"
-    "with a thunderbolt.\n"
-    "It may paralyze.");
+    "Ataca con un\n"
+    "rayo que puede\n"
+    "paralizar al rival.");
 
 static const u8 sTM26Desc[] = _(
-    "Causes a quake\n"
-    "that has no effect\n"
-    "on flying foes.");
+    "Provoca un temblor\n"
+    "que no afecta a los\n"
+    "voladores.");
 
 static const u8 sTM27Desc[] = _(
-    "The more the user\n"
-    "likes you, the more\n"
-    "powerful this move.");
+    "Cuanto más le\n"
+    "gustes al Pokémon\n"
+    "más fuerte ataca.");
 
 static const u8 sTM28Desc[] = _(
-    "Digs underground\n"
-    "the 1st turn, then\n"
-    "strikes next turn.");
+    "1.{SUPER_ER} turno: cava.\n"
+    "2.º turno: ataca.");
 
 static const u8 sTM29Desc[] = _(
-    "A powerful psychic\n"
-    "attack that may\n"
-    "lower Sp. Def.");
+    "Fuerte ataque psí-\n"
+    "quico que puede\n"
+    "bajar la Def. Esp.");
 
 static const u8 sTM30Desc[] = _(
-    "Hurls a dark lump\n"
-    "at the foe. It may\n"
-    "lower Sp. Def.");
+    "Lanza una bola\n"
+    "negra que puede\n"
+    "bajar la Def. Esp.");
 
 static const u8 sTM31Desc[] = _(
-    "Destroys barriers\n"
-    "like Light Screen\n"
-    "and causes damage.");
+    "Destruye barreras\n"
+    "como Pantalla Luz\n"
+    "y causa daño.");
 
 static const u8 sTM32Desc[] = _(
-    "Creates illusory\n"
-    "copies to enhance\n"
-    "elusiveness.");
+    "Crea ilusiones\n"
+    "para mejorar la\n"
+    "Evasión.");
 
 static const u8 sTM33Desc[] = _(
-    "Creates a wall of\n"
-    "light that weakens\n"
-    "physical attacks.");
+    "Pared de luz que\n"
+    "baja los ataques\n"
+    "físicos.");
 
 static const u8 sTM34Desc[] = _(
-    "Zaps the foe with a\n"
-    "jolt of electricity\n"
-    "that never misses.");
+    "Propina un ataque\n"
+    "eléctrico rápido\n"
+    "e ineludible.");
 
 static const u8 sTM35Desc[] = _(
-    "Looses a stream of\n"
-    "fire that may burn\n"
-    "the foe.");
+    "Lanza un chorro de\n"
+    "fuego que puede\n"
+    "causar quemaduras.");
 
 static const u8 sTM36Desc[] = _(
-    "Hurls sludge at the\n"
-    "foe. It may poison\n"
-    "the foe.");
+    "Descarga de lodo\n"
+    "que puede llegar\n"
+    "a envenenar.");
 
 static const u8 sTM37Desc[] = _(
-    "Causes a sandstorm\n"
-    "that hits the foe\n"
-    "over several turns.");
+    "Tormenta de arena\n"
+    "que dura varios\n"
+    "turnos.");
 
 static const u8 sTM38Desc[] = _(
-    "A powerful fire\n"
-    "attack that may\n"
-    "burn the foe.");
+    "Potente ataque de\n"
+    "fuego que puede\n"
+    "quemar al rival.");
 
 static const u8 sTM39Desc[] = _(
-    "Stops the foe from\n"
-    "moving with rocks.\n"
-    "May lower Speed.");
+    "Inmoviliza al rival\n"
+    "con rocas. Puede\n"
+    "bajar la Velocidad.");
 
 static const u8 sTM40Desc[] = _(
-    "An extremely fast\n"
-    "attack that can't\n"
-    "be avoided.");
+    "Ataque tremen-\n"
+    "damente rápido\n"
+    "e ineludible.");
 
 static const u8 sTM41Desc[] = _(
-    "Prevents the foe\n"
-    "from using the same\n"
-    "move in a row.");
+    "Impide al rival que\n"
+    "use un ataque de\n"
+    "forma continuada.");
 
 static const u8 sTM42Desc[] = _(
-    "Raises Attack when\n"
-    "poisoned, burned,\n"
-    "or paralyzed.");
+    "Sube el Ataque al\n"
+    "estar quemado,\n"
+    "paraliz. o enven.");
 
 static const u8 sTM43Desc[] = _(
-    "Adds an effect to\n"
-    "attack depending\n"
-    "on the location.");
+    "Tiene efectos\n"
+    "distintos según\n"
+    "la zona.");
 
 static const u8 sTM44Desc[] = _(
-    "The user sleeps for\n"
-    "2 turns to restore\n"
-    "health and status.");
+    "El Pokémon duerme\n"
+    "2 turnos y restaura\n"
+    "su salud y estado.");
 
 static const u8 sTM45Desc[] = _(
-    "Makes it tough to\n"
-    "attack a foe of the\n"
-    "opposite gender.");
+    "Hace difícil atacar\n"
+    "a un rival del otro\n"
+    "género.");
 
 static const u8 sTM46Desc[] = _(
-    "While attacking,\n"
-    "it may steal the\n"
-    "foe's held item.");
+    "Al atacar, puede\n"
+    "quitar al rival\n"
+    "el objeto que lleve.");
 
 static const u8 sTM47Desc[] = _(
-    "Spreads hard-\n"
-    "edged wings and\n"
-    "slams into the foe.");
+    "Bate las rígidas\n"
+    "alas para golpear\n"
+    "al rival.");
 
 static const u8 sTM48Desc[] = _(
-    "Switches abilities\n"
-    "with the foe on the\n"
-    "turn this is used.");
+    "Intercambia la\n"
+    "habilidad especial\n"
+    "durante 1 turno.");
 
 static const u8 sTM49Desc[] = _(
-    "Steals the effects\n"
-    "of the move the foe\n"
-    "is trying to use.");
+    "Rova el efecto del\n"
+    "ataque que el rival\n"
+    "intenta usar.");
 
 static const u8 sTM50Desc[] = _(
-    "Enables full-power\n"
-    "attack, but sharply\n"
-    "lowers Sp. Atk.");
-
+    "Ataca con toda la\n"
+    "fuerza, pero baja\n"
+    "mucho el At. Esp.");
 
 static const u8 sHM01Desc[] = _(
-    "Attacks the foe\n"
-    "with sharp blades\n"
-    "or claws.");
+    "Corta con finas\n"
+    "cuchillas, afiladas\n"
+    "garras, etc.");
 
 static const u8 sHM02Desc[] = _(
-    "Flies up on the\n"
-    "first turn, then\n"
-    "attacks next turn.");
+    "1.{SUPER_ER} turno: vuela.\n"
+    "2.º turno: ataca.");
 
 static const u8 sHM03Desc[] = _(
-    "Creates a huge\n"
-    "wave, then crashes\n"
-    "it down on the foe.");
+    "Crea una ola\n"
+    "gigante y la lanza\n"
+    "contra el enemigo.");
 
 static const u8 sHM04Desc[] = _(
-    "Builds enormous\n"
-    "power, then slams\n"
-    "the foe.");
+    "Genera mucha\n"
+    "fuerza y ataca con\n"
+    "energía al rival.");
 
 static const u8 sHM05Desc[] = _(
-    "Looses a powerful\n"
-    "blast of light that\n"
-    "reduces accuracy.");
+    "Lanza una intensa\n"
+    "ráfaga de luz que\n"
+    "baja la Precisión.");
 
 static const u8 sHM06Desc[] = _(
-    "A rock-crushingly\n"
-    "tough attack that\n"
-    "may lower Defense.");
+    "Ataque demoledor\n"
+    "que puede bajar\n"
+    "la Defensa.");
 
 static const u8 sHM07Desc[] = _(
-    "Attacks the foe\n"
-    "with enough power\n"
-    "to climb waterfalls.");
+    "Embiste con impulso\n"
+    "como para remontar\n"
+    "una cascada.");
 
 static const u8 sHM08Desc[] = _(
-    "Dives underwater\n"
-    "the 1st turn, then\n"
-    "attacks next turn.");
+    "1.{SUPER_ER} turno: bucea.\n"
+    "2.º turno: golpea.");
 
 // FireRed/LeafGreen key items
 static const u8 sOaksParcelDesc[] = _(
-    "A parcel for Prof.\n"
-    "Oak from a Pokémon\n"
-    "Mart's clerk.");
+    "Se lo mandan al\n"
+    "Prof. Oak desde una\n"
+    "Tienda Pokémon.");
 
 static const u8 sPokeFluteDesc[] = _(
-    "A sweet-sounding\n"
-    "flute that awakens\n"
-    "Pokémon.");
+    "Despierta a los\n"
+    "Pokémon.\n"
+    "Suena de maravilla.");
 
 static const u8 sSecretKeyDesc[] = _(
-    "The key to the\n"
-    "Cinnabar Island\n"
-    "Gym's entrance.");
+    "Abre el Gimnasio\n"
+    "de Isla Canela.");
 
 static const u8 sBikeVoucherDesc[] = _(
-    "A voucher for\n"
-    "obtaining a bicycle\n"
-    "from the Bike Shop.");
+    "Puede canjearse\n"
+    "por una bici en la\n"
+    "Tienda de Bicis.");
 
 static const u8 sGoldTeethDesc[] = _(
-    "Gold dentures lost\n"
-    "by the Safari\n"
-    "Zone's Warden.");
+    "Son los dientes de\n"
+    "oro que perdió el\n"
+    "Guarda del Safari.");
 
 static const u8 sOldAmberDesc[] = _(
-    "A stone containing\n"
-    "the genes of an\n"
-    "ancient Pokémon.");
+    "Trozo de ámbar\n"
+    "con genes de un\n"
+    "Pokémon ancestral.");
 
 static const u8 sCardKeyDesc[] = _(
-    "A card-type door\n"
-    "key used in Silph\n"
-    "Co's office.");
+    "Abre las Oficinas\n"
+    "Centrales\n"
+    "de Silph S.A.");
 
 static const u8 sLiftKeyDesc[] = _(
-    "An elevator key\n"
-    "used in Team\n"
-    "Rocket's Hideout.");
+    "Abre el ascensor\n"
+    "de la Guarida\n"
+    "del Equipo Rocket.");
 
 static const u8 sHelixFossilDesc[] = _(
-    "A piece of an\n"
-    "ancient marine\n"
-    "Pokémon's seashell.");
+    "Concha marina de un\n"
+    "Pokémon ancestral\n"
+    "que habitó el mar.");
 
 static const u8 sDomeFossilDesc[] = _(
-    "A piece of an\n"
-    "ancient marine\n"
-    "Pokémon's shell.");
+    "Concha de un\n"
+    "Pokémon ancestral\n"
+    "que habitó el mar.");
 
 static const u8 sSilphScopeDesc[] = _(
-    "Silph Co's scope\n"
-    "makes unseeable\n"
-    "Pokémon visible.");
+    "Dispositivo de\n"
+    "Silph S.A. para ver\n"
+    "Pokémon invisibles.");
 
 static const u8 sBicycleDesc[] = _(
-    "A folding bicycle\n"
-    "that is faster than\n"
-    "the Running Shoes.");
+    "Bici plegable\n"
+    "más rápida que\n"
+    "las Deportivas.");
 
 static const u8 sTownMapDesc[] = _(
-    "Can be viewed\n"
-    "anytime. Shows your\n"
-    "present location.");
+    "Puede consultarse\n"
+    "cuando sea. Indica\n"
+    "dónde estás.");
 
 static const u8 sVSSeekerDesc[] = _(
-    "A rechargeable unit\n"
-    "that flags battle-\n"
-    "ready Trainers.");
+    "Indica qué Entre-\n"
+    "nadores quieren\n"
+    "luchar. Se recarga.");
 
 static const u8 sFameCheckerDesc[] = _(
-    "Stores information\n"
-    "on famous people\n"
-    "for instant recall.");
+    "Refresca la memoria\n"
+    "sobre cosas\n"
+    "y personas.");
 
 static const u8 sTMCaseDesc[] = _(
-    "A convenient case \n"
-    "that holds TMs and\n"
-    "HMs.");
+    "Tubo que contiene\n"
+    "las MT y MO.\n"
+    "Es muy útil.");
 
 static const u8 sBerryPouchDesc[] = _(
-    "A convenient\n"
-    "container that\n"
-    "holds Berries.");
+    "Útil saquito que\n"
+    "sirve para llevar\n"
+    "Bayas.");
 
 static const u8 sTeachyTVDesc[] = _(
-    "A TV set tuned to\n"
-    "an advice program\n"
-    "for Trainers.");
+    "Tele que emite\n"
+    "útiles consejos\n"
+    "para Entrenadores.");
 
 static const u8 sTriPassDesc[] = _(
-    "A pass for ferries\n"
-    "between One, Two,\n"
-    "and Three Island.");
+    "Ticket del ferry\n"
+    "de Isla Prima,\n"
+    "Secunda y Tera.");
 
 static const u8 sRainbowPassDesc[] = _(
-    "For ferries serving\n"
-    "Vermilion and the\n"
-    "Sevii Islands.");
+    "Ticket del ferry\n"
+    "de Carmín y Archi7.");
 
 static const u8 sTeaDesc[] = _(
-    "A thirst-quenching\n"
-    "tea prepared by an\n"
-    "old lady.");
+    "Té preparado por\n"
+    "una señora mayor.\n"
+    "Apaga la sed.");
 
 static const u8 sMysticTicketDesc[] = _(
-    "A ticket required\n"
-    "to board the ship\n"
-    "to Navel Rock.");
+    "Ticket necesario\n"
+    "para navegar hasta\n"
+    "Roca Ombligo.");
 
 static const u8 sAuroraTicketDesc[] = _(
-    "A ticket required\n"
-    "to board the ship\n"
-    "to Birth Island.");
+    "Ticket necesario\n"
+    "para navegar hasta\n"
+    "Isla Origen.");
 
 static const u8 sPowderJarDesc[] = _(
-    "Stores Berry\n"
-    "Powder made using\n"
-    "a Berry Crusher.");
+    "Es para el Polvo\n"
+    "de Baya que sale\n"
+    "del Machacabayas.");
 
 static const u8 sRubyDesc[] = _(
-    "An exquisite, red-\n"
-    "glowing gem that\n"
-    "symbolizes passion.");
+    "Bella gema de brillo\n"
+    "rojizo. Simboliza\n"
+    "el entusiasmo.");
 
 static const u8 sSapphireDesc[] = _(
-    "A brilliant blue gem\n"
-    "that symbolizes\n"
-    "honesty.");
+    "Bella gema de brillo\n"
+    "azulado. Simboliza\n"
+    "la sinceridad.");
 
 // Emerald-specific key items
 static const u8 sMagmaEmblemDesc[] = _(
-    "A medal-like item in\n"
-    "the same shape as\n"
-    "Team Magma's mark.");
+    "Especie de medalla\n"
+    "idéntica al símbolo\n"
+    "del Equipo Magma.");
 
 static const u8 sOldSeaMapDesc[] = _(
-    "A faded sea chart\n"
-    "that shows the way\n"
-    "to a certain island.");
+    "Descolorido mapa\n"
+    "marino, que indica\n"
+    "dónde hay una isla.");

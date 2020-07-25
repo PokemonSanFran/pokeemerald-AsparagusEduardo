@@ -1486,8 +1486,9 @@ static void sub_80E48E8(void)
 {
     u8 buffer[0x20];
 
-    StringCopy(buffer, gSpeciesNames[gNamingScreenData->monSpecies]);
-    StringAppendN(buffer, gNamingScreenData->template->title, 15);
+    StringCopy(buffer, gNamingScreenData->template->title);
+    StringAppendN(buffer, gSpeciesNames[gNamingScreenData->monSpecies], 15);
+    StringAppendN(buffer, gText_QuestionMark, 15);
     FillWindowPixelBuffer(gNamingScreenData->windows[3], PIXEL_FILL(1));
     AddTextPrinterParameterized(gNamingScreenData->windows[3], 1, buffer, 8, 1, 0, 0);
     PutWindowTilemap(gNamingScreenData->windows[3]);

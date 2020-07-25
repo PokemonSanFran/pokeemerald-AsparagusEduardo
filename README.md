@@ -1,7 +1,13 @@
 # About this branch
-This is a decapitalized (all-caps text replaced with proper capitalization) version of the [**pokeemerald**](https://travis-ci.org/pret/pokeemerald) dissasembly, originally made by [**Wyrserth**](https://github.com/Wyrserth) and adapted to the current structure of the project.
+This branch is a decapitalized (all-caps text replaced with proper capitalization) version of [**Lunos**](https://github.com/LOuroboros)'s `pokeesmeralda` branch.
 
-As the disassembly continues to develop, I'll try to keep up this branch as updated as possible.
+It's a combination of both his branch and my current decap branch (originally made by [**Wyrserth**](https://github.com/Wyrserth)).
+
+## Bugs
+
+- The big button in the middle of the PokéNav's sprite on the left side of the screen is not being animated, even though it should. 
+
+As the disassembly and translation continues to develop, I'll try to keep up this branch as updated as possible.
 
 It builds the following ROM:
 

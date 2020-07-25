@@ -430,7 +430,7 @@ Route117_PokemonDayCare_Text_WhatWillYouBattleWith: @ 8292617
 	.string "Come back another time.$"
 
 Text_EggHatchHuh: @ 8292668
-	.string "Huh?$"
+	.string "¿Y esto?$"
 
 Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne: @ 829266D
 	.string "Huh?\n"
