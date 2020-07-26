@@ -320,6 +320,27 @@ static const s8 gUnknown_0831ACE0[] ={-32, -16, -16, -32, -32, 0, 0, 0};
 
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+    _("Normal"),
+    _("Lucha"),
+    _("Volad."),
+    _("Veneno"),
+    _("Tierra"),
+    _("Roca"),
+    _("Bicho"),
+    _("Fant."),
+    _("Acero"),
+    _("(?)"),
+    _("Fuego"),
+    _("Agua"),
+    _("Planta"),
+    _("Elect."),
+    _("Psíq."),
+    _("Hielo"),
+    _("Dragón"),
+    _("Sinie."),
+    _("Hada"),
+#else
     _("Normal"),
     _("Fight"),
     _("Flying"),
@@ -339,6 +360,8 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     _("Dragon"),
     _("Dark"),
     _("Fairy"),
+#endif
+
 };
 
 // This is a factor in how much money you get for beating a trainer.

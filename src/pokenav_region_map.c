@@ -135,7 +135,11 @@ static const struct WindowTemplate sMapSecInfoWindowTemplate =
     .bg = 1,
     .tilemapLeft = 17,
     .tilemapTop = 4,
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+    .width = 14,
+#else
     .width = 12,
+#endif
     .height = 13,
     .paletteNum = 1,
     .baseBlock = 0x4C

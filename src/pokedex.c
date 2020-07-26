@@ -93,6 +93,7 @@ enum
     NAME_VWX,
     NAME_YZ,
 };
+#define METRIC_SYSTEM   TRUE
 
 // For scrolling search parameter
 #define MAX_SEARCH_PARAM_ON_SCREEN   6
@@ -4132,6 +4133,99 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(1, description, 0xF0), 0x5F);
 }
 
+#if METRIC_SYSTEM
+static void PrintMonHeight(u16 height, u8 left, u8 top) // Ported from the German Translation of Pokémon Ruby thanks to Pokeruby
+{
+    u8 buffer[16];
+    int offset;
+    u8 result;
+    u8 i = 0;
+    offset = 0;
+
+
+    buffer[i++] = 0xFC;
+    buffer[i++] = 0x13;
+    i++;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+
+    result = (height / 1000);
+    if (result == 0)
+    {
+        offset = 6;
+    }
+    else
+    {
+        buffer[i++] = result + CHAR_0;
+    }
+
+
+    result = (height % 1000) / 100;
+    if (result == 0 && offset != 0)
+    {
+        offset += 6;
+    }
+    else
+    {
+        buffer[i++] = result + CHAR_0;
+    }
+
+    buffer[i++] = (((height % 1000) % 100) / 10) + CHAR_0;
+    buffer[i++] = CHAR_COMMA;
+    buffer[i++] = (((height % 1000) % 100) % 10) + CHAR_0;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_m;
+
+    buffer[i++] = EOS;
+    buffer[2] = offset;
+    PrintInfoScreenText(buffer, left, top);
+}
+
+static void PrintMonWeight(u16 weight, u8 left, u8 top) // Ported from the German Translation of Pokémon Ruby thanks to Pokeruby
+{
+    u8 buffer[18];
+    int offset;
+    u8 result;
+    u8 i = 0;
+    offset = 0;
+
+
+    buffer[i++] = 0xFC;
+    buffer[i++] = 0x13;
+    i++;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_SPACE;
+
+    result = (weight / 1000);
+    if (result == 0)
+        offset = 6;
+    else
+        buffer[i++] = result + CHAR_0;
+
+    result = (weight % 1000) / 100;
+    if (result == 0 && offset != 0)
+        offset += 6;
+    else
+        buffer[i++] = result + CHAR_0;
+
+    buffer[i++] = (((weight % 1000) % 100) / 10) + CHAR_0;
+    buffer[i++] = CHAR_COMMA;
+    buffer[i++] = (((weight % 1000) % 100) % 10) + CHAR_0;
+    buffer[i++] = CHAR_SPACE;
+    buffer[i++] = CHAR_k;
+    buffer[i++] = CHAR_g;
+
+    buffer[i++] = EOS;
+    buffer[2] = offset;
+    PrintInfoScreenText(buffer, left, top);
+}
+#else
 static void PrintMonHeight(u16 height, u8 left, u8 top)
 {
     u8 buffer[16];
@@ -4230,6 +4324,7 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
 }
 #endif
 }
+#endif
 
 const u8 *GetPokedexCategoryName(u16 dexNum) // unused
 {

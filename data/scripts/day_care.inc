@@ -429,8 +429,13 @@ Route117_PokemonDayCare_Text_WhatWillYouBattleWith: @ 8292617
 	.string "what will you battle with?\p"
 	.string "Come back another time.$"
 
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+Text_EggHatchHuh: @ 8292668
+	.string "¿Y esto?$"
+#else
 Text_EggHatchHuh: @ 8292668
 	.string "Huh?$"
+#endif
 
 Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne: @ 829266D
 	.string "Huh?\n"

@@ -1,5 +1,149 @@
 @ Contest move effect descriptions
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+gText_HighlyAppealingMove:: @ 827CB82
+	.string "Resulta muy llamativo.$"
 
+gText_UserMoreEasilyStartled:: @ 827CB9B
+	.string "Tras usarlo, será facil\nque te asusten.$"
+
+gText_GreatAppealButNoMoreToEnd:: @ 827CBCE
+	.string "Gusta mucho, pero impide\nseguir participando.$"
+
+gText_UsedRepeatedlyWithoutBoringJudge:: @ 827CC03
+	.string "Por más que se use, el Juez\nno se aburrirá nunca.$"
+
+gText_AvoidStartledByOthersOnce:: @ 827CC34
+	.string "Puede evitar que\nte asusten una vez.$"
+
+gText_AvoidStartledByOthers:: @ 827CC5D
+	.string "Puede evitar\nque te asusten.$"
+
+gText_AvoidStartledByOthersLittle:: @ 827CC81 / Unused
+	.string "Can avoid being startled\nby others a little.$"
+
+gText_UserLessLikelyStartled:: @ 827CCAE / Unused
+	.string "After this move, the user is\nless likely to be startled.$"
+
+gText_SlightlyStartleFrontMon:: @ 827CCE7 / Unused
+	.string "Slightly startles the\nPokémon in front.$"
+
+gText_SlightlyStartleAppealed:: @ 827CD0F / Unused
+	.string "Slightly startles those\nthat have made appeals.$"
+
+gText_StartleAppealedBeforeUser:: @ 827CD3F
+	.string "Asusta al Pokémon que se\nha exhibido antes que tú.$"
+
+gText_StartleAllAppealed:: @ 827CD73
+	.string "Asusta a los Pokémon que\nya se han exhibido.$"
+
+gText_BadlyStartleFrontMon:: @ 827CDA6
+	.string "Aterra al último Pokémon\nque se exhibió.$"
+
+gText_BadlyStartleAppealed:: @ 827CDCB
+	.string "Aterra a los que\nya se han exhibido.$"
+
+gText_StartleAppealedBeforeUser2:: @ 827CDF8
+	.string "Asusta al Pokémon que se\nha exhibido antes que tú.$"
+
+gText_StartleAllAppealed2:: @ 827CE2C
+	.string "Asusta a los Pokémon que\nya se han exhibido.$"
+
+gText_ShiftJudgesAttentionFromOthers:: @ 827CE5F
+	.string "Hace que el Juez deje de\nprestar atención al resto.$"
+
+gText_StartleMonHasJudgesAttention:: @ 827CE89
+	.string "Asusta más al Pokémon que\ncapta la atención del Juez.$"
+
+gText_JamOthersMissesTurn:: @ 827CEBE
+	.string "Inhibe a los otros,\npero pierdes un turno.$"
+
+gText_StartleMonsMadeSameTypeAppeal:: @ 827CEEF
+	.string "Asusta más a los que usaron\nrecursos del mismo tipo.$"
+
+gText_BadlyStartleCoolAppeals:: @ 827CF1E / Unused
+	.string "Badly startles Pokémon\nthat made Cool appeals.$"
+
+gText_BadlyStartleBeautyAppeals:: @ 827CF4D / Unused
+	.string "Badly startles Pokémon\nthat made Beauty appeals.$"
+
+gText_BadlyStartleCuteAppeals:: @ 827CF7E / Unused
+	.string "Badly startles Pokémon\nthat made Cute appeals.$"
+
+gText_BadlyStartleSmartAppeals:: @ 827CFAD / Unused
+	.string "Badly startles Pokémon\nthat made Smart appeals.$"
+
+gText_BadlyStartleToughAppeals:: @ 827CFDD / Unused
+	.string "Badly startles Pokémon\nthat made Tough appeals.$"
+
+gText_MakeMonAfterUserNervous:: @ 827D00D / Unused
+	.string "Makes one Pokémon after\nthe user nervous.$"
+
+gText_MakeAllMonsAfterUserNervous:: @ 827D037
+	.string "Inquieta a los Pokémon\nque van detrás de ti.$"
+
+gText_WorsenConditionOfThoseMadeAppeals:: @ 827D061
+	.string "Baja la forma de los que\nse han exhibido.$"
+
+gText_BadlyStartleMonsGoodCondition:: @ 827D093 / Unused
+	.string "Badly startles Pokémon in\ngood condition.$"
+
+gText_AppealGreatIfPerformedFirst:: @ 827D0BD
+	.string "La exhibición es un éxito\nsi se es el primero.$"
+
+gText_AppealGreatIfPerformedLast:: @ 827D0E8
+	.string "La exhibición es un éxito\nsi se es el ultimo.$"
+
+gText_AppealAsGoodAsThoseBeforeIt:: @ 827D112
+	.string "La exhibición es tan buena\ncomo las anteriores.$"
+
+gText_AppealAsGoodAsOneBeforeIt:: @ 827D13F
+	.string "La exhibición es tan buena\ncomo la anterior.$"
+
+gText_AppealBetterLaterItsPerformed:: @ 827D16E
+	.string "Causa mayor impacto cuanto\nmás tarde se usa.$"
+
+gText_AppealVariesDependingOnTiming:: @ 827D1A1
+	.string "El impacto que tenga varía\nsegún cuándo se use.$"
+
+gText_WorksWellIfSameTypeAsBefore:: @ 827D1D6
+	.string "Funciona bien si es del\nmismo tipo que el anterior.$"
+
+gText_WorksWellIfDifferentTypeAsBefore:: @ 827D20A / Unused
+	.string "Works well if different in\ntype than the one before.$"
+
+gText_AffectedByAppealInFront:: @ 827D23F
+	.string "El éxito dependerá de la\nactuación precedente.$"
+
+gText_UpsConditionHelpsPreventNervousness:: @ 827D26E
+	.string "Mejora tu forma y te ayuda\na mantener la calma.$"
+
+gText_AppealWorksWellIfConditionGood:: @ 827D2A3
+	.string "Resulta muy lucido\nsi estás en buena forma.$"
+
+gText_NextAppealMadeEarlier:: @ 827D2DA
+	.string "En la siguiente ronda, deja\nque te exhibas antes.$"
+
+gText_NextAppealMadeLater:: @ 827D309
+	.string "En la siguiente ronda, deja\nque te exhibas más tarde.$"
+
+gText_TurnOrderMoreEasilyScrambled:: @ 827D336 / Unused
+	.string "Makes the next turn's order\nmore easily scrambled.$"
+
+gText_ScrambleOrderOfNextAppeals:: @ 827D369
+	.string "Altera los turnos en la\nsiguiente ronda.$"
+
+gText_AppealExcitesAudienceInAnyContest:: @ 827D39A
+	.string "Entusiasma al público\nen cualquier Concurso.$"
+
+gText_BadlyStartlesMonsGoodAppeals:: @ 827D3CE
+	.string "Aterra a todos los Pokémon\nque se han exhibido bien.$"
+
+gText_AppealBestMoreCrowdExcited:: @ 827D401
+	.string "El lucimiento es mayor si\nel público está entregado.$"
+
+gText_TemporarilyStopCrowdExcited:: @ 827D436
+	.string "Templa momentáneamente\nel fervor del público.$"
+#else
 gText_HighlyAppealingMove:: @ 827CB82
 	.string "A highly appealing move.$"
 
@@ -143,7 +287,7 @@ gText_AppealBestMoreCrowdExcited:: @ 827D401
 
 gText_TemporarilyStopCrowdExcited:: @ 827D436
 	.string "Temporarily stops the\ncrowd from growing excited.$"
-
+#endif
 @ Unused move names
 
 gText_RainDance:: @ 827D468

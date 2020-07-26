@@ -1,4 +1,39 @@
 	.align 2
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+gText_ConfirmSave:: @ 82C87B4
+	.string "¿Quieres guardar la partida?$"
+
+gText_AlreadySavedFile:: @ 82C87D5
+	.string "Ya hay una partida guardada.\n"
+	.string "¿Quieres sobrescribirla?$"
+
+gText_SavingDontTurnOff:: @ 82C8810
+	.string "Guardando…\n"
+	.string "No apagues la consola.$"
+
+gText_PlayerSavedGame:: @ 82C8832
+	.string "{PLAYER} guardó la partida.$"
+
+gText_DifferentSaveFile:: @ 82C8845
+	.string "¡ATENCIÓN!\p"
+	.string "Ya hay una partida guardada.\p"
+	.string "Si guardas, perderás los datos\n"
+	.string "de la partida incluyendo los\l"
+	.string "objetos y los Pokémon.\p"
+	.string "¿Seguro que quieres guardar ahora\n"
+	.string "y sobrescribir los otros datos?$"
+
+gText_SaveError:: @ 82C892A
+	.string "Save error.\p"
+	.string "Please exchange the\n"
+	.string "backup memory.$"
+
+gText_SavingDontTurnOffPower:: @ 82C8959
+	.string "Saving…\n"
+	.string "Don't turn off the power.$"
+	
+#else
+
 gText_ConfirmSave:: @ 82C87B4
 	.string "Would you like to save the game?$"
 
@@ -31,3 +66,5 @@ gText_SaveError:: @ 82C892A
 gText_SavingDontTurnOffPower:: @ 82C8959
 	.string "Saving…\n"
 	.string "Don't turn off the power.$"
+
+#endif

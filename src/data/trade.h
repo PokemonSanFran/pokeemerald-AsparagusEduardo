@@ -14,6 +14,35 @@ static const u16 sTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_
 static const u16 sTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
 static const u8 sTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
 static const u8 sTradeStripesBG3Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg3_map.bin");
+
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+static const u8 sText_EmptyString[] = _("");
+static const u8 sText_UnusedTextFormat[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}");
+const u8 gText_MaleSymbol4[] = _("♂");
+const u8 gText_FemaleSymbol4[] = _("♀");
+const u8 gText_GenderlessSymbol[] = _("");
+static const u8 sText_SpaceMove[] = _(" MOVE"); // unused
+static const u8 sText_NewLine[] = _("\n");
+static const u8 sText_Slash[] = _("/");
+static const u8 sText_Lv[] = _("Lv. ");
+static const u8 sText_ThreeDashes[] = _("---");
+static const u8 sText_FourQuestionMarks[] = _("????");
+static const u8 sText_832DAE4[] = _("");
+static const u8 sText_IsThisTradeOkay[] = _("Is this trade okay?");
+static const u8 sText_Cancel[] = _("Salir");
+static const u8 sText_ChooseAPkmn[] = _("Choose a Pokémon.");
+static const u8 sText_Summary[] = _("Summary");
+static const u8 sText_Trade[] = _("Trade");
+static const u8 sText_CancelTrade[] = _("Cancel trade?");
+static const u8 sJPText_PressBButtonToQuit[] = _("Bボタン　で　もどります");
+static const u8 sText_Summary2[] = _("Summary");
+static const u8 sText_Trade2[] = _("Trade");
+static const u8 sText_CommunicationStandby[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Communication standby…\nPlease wait.");
+static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.");
+static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPokémon for battle.");
+static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…");
+static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade Pokémon.");
+#else
 static const u8 sText_EmptyString[] = _("");
 static const u8 sText_UnusedTextFormat[] = _("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}");
 const u8 gText_MaleSymbol4[] = _("♂");
@@ -40,6 +69,7 @@ static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GREY}{HIGHLIGHT
 static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPokémon for battle.");
 static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GREY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GREY}Waiting for your friend\nto finish…");
 static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade Pokémon.");
+#endif
 
 static const struct OamData sTradeOamData_32x16 =
 {

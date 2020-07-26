@@ -710,5 +710,9 @@ static void sub_81CF8E4(struct PokenavMonList * item, u8 * dest)
     *s++ = CHAR_SPECIAL_F9;
     *s++ = CHAR_LV_2;
     ConvertIntToDecimalStringN(s, level, STR_CONV_MODE_LEFT_ALIGN, 3);
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+    sub_81DB494(dest, 1, gStringVar1, 45);
+#else
     sub_81DB494(dest, 1, gStringVar1, 40);
+#endif
 }

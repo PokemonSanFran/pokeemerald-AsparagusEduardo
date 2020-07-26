@@ -872,10 +872,13 @@ gText_PokemonTrainerSchoolEmail:: @ 8272CD5
 	.string "A Trainer's expertise is tested on the\n"
 	.string "move sets chosen for Pokémon.\p"
 	.string "… … … … … …$"
-
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+gText_PlayerHouseBootPC:: @ 8272D87
+	.string "{PLAYER} encendió el PC.$"
+#else
 gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
-
+#endif
 gText_PokeblockLinkCanceled:: @ 8272D9C
 	.string "The link was canceled.$"
 

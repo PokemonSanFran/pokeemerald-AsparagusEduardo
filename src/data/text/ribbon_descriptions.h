@@ -1,3 +1,24 @@
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+const u8 gRibbonDescriptionPart1_Champion[] = _("Cinta del Hall Fama");
+const u8 gRibbonDescriptionPart2_Champion[] = _("por ganar al Campeón");
+const u8 gRibbonDescriptionPart1_CoolContest[] = _("Concurso Carisma");
+const u8 gRibbonDescriptionPart1_BeautyContest[] = _("Concurso Belleza");
+const u8 gRibbonDescriptionPart1_CuteContest[] = _("Concurso Dulzura");
+const u8 gRibbonDescriptionPart1_SmartContest[] = _("Concurso Ingenio");
+const u8 gRibbonDescriptionPart1_ToughContest[] = _("Concurso Dureza");
+const u8 gRibbonDescriptionPart2_NormalRank[] = _("Ganador nivel normal.");
+const u8 gRibbonDescriptionPart2_SuperRank[] = _("Ganador nivel alto.");
+const u8 gRibbonDescriptionPart2_HyperRank[] = _("Ganador nivel avanzado.");
+const u8 gRibbonDescriptionPart2_MasterRank[] = _("Ganador nivel experto.");
+const u8 gRibbonDescriptionPart1_Winning[] = _("Cinta del Nivel 50");
+const u8 gRibbonDescriptionPart2_Winning[] = _("de Torre Batalla.");
+const u8 gRibbonDescriptionPart1_Victory[] = _("Cinta del Nivel Libre");
+const u8 gRibbonDescriptionPart2_Victory[] = _("de Torre Batalla.");
+const u8 gRibbonDescriptionPart1_Artist[] = _("Cinta ganada por ser");
+const u8 gRibbonDescriptionPart2_Artist[] = _("un modelo a seguir.");
+const u8 gRibbonDescriptionPart1_Effort[] = _("Cinta ganada por ser");
+const u8 gRibbonDescriptionPart2_Effort[] = _("un buen contrincante.");
+#else
 const u8 gRibbonDescriptionPart1_Champion[] = _("Champion-beating, Hall");
 const u8 gRibbonDescriptionPart2_Champion[] = _("of Fame Member Ribbon");
 const u8 gRibbonDescriptionPart1_CoolContest[] = _("Cool Contest");
@@ -17,6 +38,7 @@ const u8 gRibbonDescriptionPart1_Artist[] = _("Ribbon for being chosen");
 const u8 gRibbonDescriptionPart2_Artist[] = _("as a super sketch model.");
 const u8 gRibbonDescriptionPart1_Effort[] = _("Ribbon awarded for");
 const u8 gRibbonDescriptionPart2_Effort[] = _("being a hard worker.");
+#endif
 
 const u8 *const gRibbonDescriptionPointers[][2] = 
 {
