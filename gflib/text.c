@@ -129,6 +129,11 @@ extern const u16 gFont1JapaneseGlyphs[];
 extern const u16 gFont2JapaneseGlyphs[];
 extern const u8 gFont2JapaneseGlyphWidths[];
 
+// Esp
+extern const u16 gFont0EspLatinGlyphs[];
+extern const u16 gFont7EspLatinGlyphs[];
+extern const u16 gFont1EspLatinGlyphs[];
+
 void SetFontsPointer(const struct FontInfo *fonts)
 {
     gFonts = fonts;
@@ -2330,7 +2335,11 @@ void DecompressGlyphFont0(u16 glyphId, bool32 isJapanese)
     }
     else
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        glyphs = gFont0EspLatinGlyphs + (0x20 * glyphId);
+#else
         glyphs = gFont0LatinGlyphs + (0x20 * glyphId);
+#endif
         gUnknown_03002F90.unk80 = gFont0LatinGlyphWidths[glyphId];
 
         if (gUnknown_03002F90.unk80 <= 8)
@@ -2373,7 +2382,11 @@ void DecompressGlyphFont7(u16 glyphId, bool32 isJapanese)
     }
     else
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        glyphs = gFont7EspLatinGlyphs + (0x20 * glyphId);
+#else
         glyphs = gFont7LatinGlyphs + (0x20 * glyphId);
+#endif
         gUnknown_03002F90.unk80 = gFont7LatinGlyphWidths[glyphId];
 
         if (gUnknown_03002F90.unk80 <= 8)
@@ -2502,7 +2515,11 @@ void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese)
     }
     else
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        glyphs = gFont1EspLatinGlyphs + (0x20 * glyphId);
+#else
         glyphs = gFont1LatinGlyphs + (0x20 * glyphId);
+#endif
         gUnknown_03002F90.unk80 = gFont1LatinGlyphWidths[glyphId];
 
         if (gUnknown_03002F90.unk80 <= 8)

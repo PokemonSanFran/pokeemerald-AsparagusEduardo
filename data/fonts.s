@@ -74,3 +74,15 @@ gFont2JapaneseGlyphs:: @ 866C8E4
 	.align 2
 gFont2JapaneseGlyphWidths:: @ 86748E4
 	.include "graphics/fonts/font2_japanese_widths.inc"
+
+	.align 2
+gFont0EspLatinGlyphs:: @ 
+	.incbin "graphics/fonts/font0_es.latfont"
+
+	.align 2
+gFont7EspLatinGlyphs:: @ 863BEE4
+	.incbin "graphics/fonts/font7_es.latfont"
+
+	.align 2
+gFont1EspLatinGlyphs:: @ 864C2E4
+	.incbin "graphics/fonts/font1_es.latfont"

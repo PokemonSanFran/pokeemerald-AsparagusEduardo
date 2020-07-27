@@ -358,7 +358,14 @@ $(FONTGFXDIR)/unused_frlg_down_arrow.4bpp: %.4bpp: %.png
 $(FONTGFXDIR)/keypad_icons.4bpp: %.4bpp: %.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/font0_es.latfont: $(FONTGFXDIR)/font0_latin_es.png
+	$(GFX) $< $@
 
+$(FONTGFXDIR)/font1_es.latfont: $(FONTGFXDIR)/font1_latin_es.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/font7_es.latfont: $(FONTGFXDIR)/font7_latin_es.png
+	$(GFX) $< $@
 
 ### Miscellaneous ###
 graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
