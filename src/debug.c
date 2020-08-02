@@ -13,6 +13,7 @@
 #include "strings.h"
 #include "task.h"
 #include "event_data.h"
+#include "credits.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -33,6 +34,7 @@ static void DebugAction_SwitchDex(u8);
 static void DebugAction_SwitchNatDex(u8);
 static void DebugAction_SwitchPokeNav(u8);
 static void DebugAction_CheckWeekDay(u8);
+static void DebugAction_Credits(u8);
 static void DebugAction_Cancel(u8);
 
 static void DebugAction_OpenUtilitiesMenu(u8);
@@ -61,6 +63,7 @@ static const u8 gDebugText_SaveBlockSpace[] = _("SaveBlock Space");
 static const u8 gDebugText_CheckWallClock[] = _("Check Wall Clock");
 static const u8 gDebugText_SetWallClock[] = _("Set Wall Clock");
 static const u8 gDebugText_CheckWeekDay[] = _("Check Week Day");
+static const u8 gDebugText_WatchCredits[] = _("Watch Credits");
 
 static const u8 gDebugText_StoryFlags[] = _("Story Flags");
 static const u8 gDebugText_SetPokedexFlags[] = _("Set Pokédex Flags");
@@ -90,6 +93,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [1] = {gDebugText_CheckWallClock, 1},
     [2] = {gDebugText_SetWallClock, 2},
     [3] = {gDebugText_CheckWeekDay, 3},
+    [4] = {gDebugText_WatchCredits, 4},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
@@ -124,6 +128,7 @@ static void (*const sDebugMenu_Actions_SaveBlocks[])(u8) =
     [1] = DebugAction_CheckWallClock,
     [2] = DebugAction_SetWallClock,
     [3] = DebugAction_CheckWeekDay,
+    [4] = DebugAction_Credits,
 };
 
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
@@ -408,6 +413,12 @@ static void DebugAction_CheckWeekDay(u8 taskId)
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Debug_CheckWeekDay);
+}
+static void DebugAction_Credits(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    Debug_DestroyMenu(taskId);
+    SetMainCallback2(CB2_StartCreditsSequence);
 }
 
 #endif
