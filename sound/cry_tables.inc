@@ -1033,7 +1033,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Unown @ Pikachu_Cap_Alola, Not implemented
 	cry Cry_Unown @ Pikachu_Cap_Partner, Not implemented
 	cry Cry_Unown @ Greninja_Ash, Not implemented
-	cry Cry_Unown @ Zygarde_10, Not implemented
+	cry_not Cry_Zygarde_10
 	cry Cry_Unown @ Oricorio_Pom_Pom, Not implemented
 	cry Cry_Unown @ Oricorio_Pa_U, Not implemented
 	cry Cry_Unown @ Oricorio_Sensu, Not implemented
@@ -1162,7 +1162,7 @@ gCryTable:: @ 869DCF4
 	cry Cry_Castform
 	cry_not Cry_Meloetta_Pirouette
 	cry_not Cry_Aegislash_Blade
-	cry Cry_Unown @ Zygarde_Complete, Not implemented
+	cry_not Cry_Zygarde_Complete
 	cry_not Cry_Wishiwashi_School
 	cry_not Cry_Mimikyu_Busted
 	cry Cry_Unown @ Necrozma_Ultra, Not implemented
@@ -2257,7 +2257,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Unown @ Pikachu_Cap_Alola, Not implemented
 	cry2 Cry_Unown @ Pikachu_Cap_Partner, Not implemented
 	cry2 Cry_Unown @ Greninja_Ash, Not implemented
-	cry2 Cry_Unown @ Zygarde_10, Not implemented
+	cry2_not Cry_Zygarde_10
 	cry2 Cry_Unown @ Oricorio_Pom_Pom, Not implemented
 	cry2 Cry_Unown @ Oricorio_Pa_U, Not implemented
 	cry2 Cry_Unown @ Oricorio_Sensu, Not implemented
@@ -2386,7 +2386,7 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Castform
 	cry2_not Cry_Meloetta_Pirouette
 	cry2_not Cry_Aegislash_Blade
-	cry2 Cry_Unown @ Zygarde_Complete, Not implemented
+	cry2_not Cry_Zygarde_Complete
 	cry2_not Cry_Wishiwashi_School
 	cry2_not Cry_Mimikyu_Busted
 	cry2 Cry_Unown @ Necrozma_Ultra, Not implemented

@@ -1037,7 +1037,7 @@
 #define SPECIES_PIKACHU_CAP_ALOLA       FORMS_START + 123 // Not implemented.
 #define SPECIES_PIKACHU_CAP_PARTNER     FORMS_START + 124 // Not implemented.
 #define SPECIES_GRENINJA_ASH            FORMS_START + 125 // Not implemented.
-#define SPECIES_ZYGARDE_10              FORMS_START + 126 // Not implemented.
+#define SPECIES_ZYGARDE_10              FORMS_START + 126
 #define SPECIES_ORICORIO_POM_POM        FORMS_START + 127 // Not implemented.
 #define SPECIES_ORICORIO_PA_U           FORMS_START + 128 // Not implemented.
 #define SPECIES_ORICORIO_SENSU          FORMS_START + 129 // Not implemented.
@@ -1169,7 +1169,7 @@
 #define SPECIES_CASTFORM_SNOWY          BATTLE_FORMS_START + 3 // Not adapted.
 #define SPECIES_MELOETTA_PIROUETTE      BATTLE_FORMS_START + 4
 #define SPECIES_AEGISLASH_BLADE         BATTLE_FORMS_START + 5
-#define SPECIES_ZYGARDE_COMPLETE        BATTLE_FORMS_START + 6 // Not implemented.
+#define SPECIES_ZYGARDE_COMPLETE        BATTLE_FORMS_START + 6
 #define SPECIES_WISHIWASHI_SCHOOL       BATTLE_FORMS_START + 7
 #define SPECIES_MIMIKYU_BUSTED          BATTLE_FORMS_START + 8
 #define SPECIES_NECROZMA_ULTRA          BATTLE_FORMS_START + 9 // Not implemented.
