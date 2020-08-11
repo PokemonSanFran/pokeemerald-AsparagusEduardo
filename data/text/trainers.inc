@@ -4748,13 +4748,13 @@ Route134_Text_TylerIntro: @ 82A4937
 	.string "Would you care to join us?$"
 
 Route134_Text_TylerDefeat: @ 82A496B
-	.string "I wasn’t expecting this type of\n"
-	.string "strength. I’m impressed.$"
+	.string "I wasn't expecting this type of\n"
+	.string "strength. I'm impressed.$"
 
 Route134_Text_TylerPostBattle: @ 82A49B1
 	.string "It seems we got some catching up to"
 	.string "do in terms of our training.\p"
-	.string "Hopefully we’ll have a match like\n"
+	.string "Hopefully we'll have a match like\n"
 	.string "this next time.$"
 
 Route134_Text_ReynaIntro: @ 82A49E9
