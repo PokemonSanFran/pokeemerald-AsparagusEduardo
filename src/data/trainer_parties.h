@@ -5186,9 +5186,21 @@ static const struct TrainerMonNoItemCustomMoves sParty_Aaron[] = {
     {
     .iv = 255,
     .lvl = 34,
-    .species = SPECIES_BAGON,
-    .moves = {MOVE_DRAGON_BREATH, MOVE_HEADBUTT, MOVE_FOCUS_ENERGY, MOVE_EMBER}
-    }
+    .species = SPECIES_SYLVEON,
+    .moves = {MOVE_FAIRY_WIND, MOVE_TACKLE, MOVE_SWIFT, MOVE_IRON_TAIL}
+    },
+    {
+    .iv = 255,
+    .lvl = 34,
+    .species = SPECIES_PIKACHU,
+    .moves = {MOVE_THUNDERBOLT, MOVE_NUZZLE, MOVE_VOLT_TACKLE, MOVE_THUNDER_WAVE}
+    },
+    {
+    .iv = 64,
+    .lvl = 36,
+    .species = SPECIES_LUCARIO,
+    .moves = {MOVE_AURA_SPHERE, MOVE_BONE_RUSH, MOVE_HIDDEN_POWER, MOVE_CROSS_CHOP}
+    },
 };
 
 static const struct TrainerMonNoItemDefaultMoves sParty_Perry[] = {
