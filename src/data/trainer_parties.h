@@ -10197,8 +10197,18 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Rachel[] = {
     {
     .iv = 0,
     .lvl = 26,
-    .species = SPECIES_GOLDEEN,
-    }
+    .species = SPECIES_HAUNTER,
+    },
+    {
+    .iv = 0,
+    .lvl = 26,
+    .species = SPECIES_PUMPKABOO,
+    },
+    {
+    .iv = 0,
+    .lvl = 28,
+    .species = SPECIES_MIMIKYU,
+    },
 };
 
 static const struct TrainerMonNoItemCustomMoves sParty_Leonel[] = {
