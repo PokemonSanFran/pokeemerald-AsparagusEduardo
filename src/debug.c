@@ -33,6 +33,8 @@ static void DebugAction_SetPokedexFlags(u8);
 static void DebugAction_SwitchDex(u8);
 static void DebugAction_SwitchNatDex(u8);
 static void DebugAction_SwitchPokeNav(u8);
+static void DebugAction_SetFlyFlags(u8);
+static void DebugAction_SetBadgeFlags(u8);
 static void DebugAction_CheckWeekDay(u8);
 static void DebugAction_Credits(u8);
 static void DebugAction_Cancel(u8);
@@ -70,6 +72,8 @@ static const u8 gDebugText_SetPokedexFlags[] = _("Set Pokédex Flags");
 static const u8 gDebugText_SwitchDex[] = _("Pokédex ON/OFF");
 static const u8 gDebugText_SwitchNationalDex[] = _("NatDex ON/OFF");
 static const u8 gDebugText_SwitchPokeNav[] = _("PokéNav ON/OFF");
+static const u8 gDebugText_SetFlyFlags[] = _("Can Fly Anywhere");
+static const u8 gDebugText_GetAllBadges[] = _("Get all badges");
 
 static const u8 gDebugText_None[] = _("None");
 
@@ -103,6 +107,8 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
     [2] = {gDebugText_SwitchDex, 2},
     [3] = {gDebugText_SwitchNationalDex, 3},
     [4] = {gDebugText_SwitchPokeNav, 4},
+    [5] = {gDebugText_SetFlyFlags, 5},
+    [6] = {gDebugText_GetAllBadges, 6},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Sub1[] =
@@ -122,7 +128,7 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [6] = DebugAction_Cancel
 };
 
-static void (*const sDebugMenu_Actions_SaveBlocks[])(u8) =
+static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 {
     [0] = DebugAction_CheckSaveBlock,
     [1] = DebugAction_CheckWallClock,
@@ -138,6 +144,8 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
     [2] = DebugAction_SwitchDex,
     [3] = DebugAction_SwitchNatDex,
     [4] = DebugAction_SwitchPokeNav,
+    [5] = DebugAction_SetFlyFlags,
+    [6] = DebugAction_SetBadgeFlags,
 };
 
 static void (*const sDebugMenu_Actions_Sub1[])(u8) =
@@ -265,7 +273,7 @@ static void DebugTask_HandleMenuInput_Utilities(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if ((func = sDebugMenu_Actions_SaveBlocks[input]) != NULL)
+        if ((func = sDebugMenu_Actions_Utilities[input]) != NULL)
             func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -408,6 +416,73 @@ static void DebugAction_SwitchPokeNav(u8 taskId)
         PlaySE(SE_PC_LOGIN);
     }
 }
+static void DebugAction_SetFlyFlags(u8 taskId)
+{
+    FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+    FlagSet(FLAG_VISITED_OLDALE_TOWN);
+    FlagSet(FLAG_VISITED_DEWFORD_TOWN);
+    FlagSet(FLAG_VISITED_LAVARIDGE_TOWN);
+    FlagSet(FLAG_VISITED_FALLARBOR_TOWN);
+    FlagSet(FLAG_VISITED_VERDANTURF_TOWN);
+    FlagSet(FLAG_VISITED_PACIFIDLOG_TOWN);
+    FlagSet(FLAG_VISITED_PETALBURG_CITY);
+    FlagSet(FLAG_VISITED_SLATEPORT_CITY);
+    FlagSet(FLAG_VISITED_MAUVILLE_CITY);
+    FlagSet(FLAG_VISITED_RUSTBORO_CITY);
+    FlagSet(FLAG_VISITED_FORTREE_CITY);
+    FlagSet(FLAG_VISITED_LILYCOVE_CITY);
+    FlagSet(FLAG_VISITED_MOSSDEEP_CITY);
+    FlagSet(FLAG_VISITED_SOOTOPOLIS_CITY);
+    FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
+
+    FlagSet(FLAG_VISITED_ROUTE101);
+    FlagSet(FLAG_VISITED_ROUTE102);
+    FlagSet(FLAG_VISITED_ROUTE103);
+    FlagSet(FLAG_VISITED_ROUTE104);
+    FlagSet(FLAG_VISITED_ROUTE105);
+    FlagSet(FLAG_VISITED_ROUTE106);
+    FlagSet(FLAG_VISITED_ROUTE107);
+    FlagSet(FLAG_VISITED_ROUTE108);
+    FlagSet(FLAG_VISITED_ROUTE109);
+    FlagSet(FLAG_VISITED_ROUTE110);
+    FlagSet(FLAG_VISITED_ROUTE111);
+    FlagSet(FLAG_VISITED_ROUTE112);
+    FlagSet(FLAG_VISITED_ROUTE113);
+    FlagSet(FLAG_VISITED_ROUTE114);
+    FlagSet(FLAG_VISITED_ROUTE115);
+    FlagSet(FLAG_VISITED_ROUTE116);
+    FlagSet(FLAG_VISITED_ROUTE117);
+    FlagSet(FLAG_VISITED_ROUTE118);
+    FlagSet(FLAG_VISITED_ROUTE119);
+    FlagSet(FLAG_VISITED_ROUTE120);
+    FlagSet(FLAG_VISITED_ROUTE121);
+    FlagSet(FLAG_VISITED_ROUTE122);
+    FlagSet(FLAG_VISITED_ROUTE123);
+    FlagSet(FLAG_VISITED_ROUTE124);
+    FlagSet(FLAG_VISITED_ROUTE125);
+    FlagSet(FLAG_VISITED_ROUTE126);
+    FlagSet(FLAG_VISITED_ROUTE127);
+    FlagSet(FLAG_VISITED_ROUTE128);
+    FlagSet(FLAG_VISITED_ROUTE129);
+    FlagSet(FLAG_VISITED_ROUTE130);
+    FlagSet(FLAG_VISITED_ROUTE131);
+    FlagSet(FLAG_VISITED_ROUTE132);
+    FlagSet(FLAG_VISITED_ROUTE133);
+    FlagSet(FLAG_VISITED_ROUTE134);
+    FlagSet(FLAG_VISITED_MT_CHIMNEY);
+}
+static void DebugAction_SetBadgeFlags(u8 taskId)
+{
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_BADGE04_GET);
+    FlagSet(FLAG_BADGE05_GET);
+    FlagSet(FLAG_BADGE06_GET);
+    FlagSet(FLAG_BADGE07_GET);
+    FlagSet(FLAG_BADGE08_GET);
+}
+
 static void DebugAction_CheckWeekDay(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
