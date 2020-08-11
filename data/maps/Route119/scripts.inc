@@ -418,9 +418,9 @@ Route119_EventScript_Hugh:: @ 81F48D4
 	msgbox Route119_Text_HughPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route119_EventScript_Phil:: @ 81F48EB
-	trainerbattle_single TRAINER_PHIL, Route119_Text_PhilIntro, Route119_Text_PhilDefeat
-	msgbox Route119_Text_PhilPostBattle, MSGBOX_AUTOCLOSE
+Route119_EventScript_Danny:: @ 81F48EB
+	trainerbattle_single TRAINER_DANNY, Route119_Text_DannyIntro, Route119_Text_DannyDefeat
+	msgbox Route119_Text_DannyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Yasu:: @ 81F4902

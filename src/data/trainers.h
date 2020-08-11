@@ -5599,18 +5599,18 @@ const struct Trainer gTrainers[] = {
         .party = {.NoItemDefaultMoves = sParty_Hugh},
     },
 
-    [TRAINER_PHIL] =
+    [TRAINER_DANNY] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_BIRD_KEEPER,
+        .trainerClass = TRAINER_CLASS_PKMN_BREEDER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_COOL,
-        .trainerPic = TRAINER_PIC_BIRD_KEEPER,
-        .trainerName = _("Phil"),
+        .trainerPic = TRAINER_PIC_POKEMON_BREEDER_M,
+        .trainerName = _("Danny"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .partySize = ARRAY_COUNT(sParty_Phil),
-        .party = {.NoItemDefaultMoves = sParty_Phil},
+        .partySize = ARRAY_COUNT(sParty_Danny),
+        .party = {.NoItemDefaultMoves = sParty_Danny},
     },
 
     [TRAINER_JARED] =

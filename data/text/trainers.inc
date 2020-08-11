@@ -2838,16 +2838,16 @@ Route119_Text_HughPostBattle: @ 829E071
 	.string "My Bird Pokémon made my dreams of\n"
 	.string "flying come true!$"
 
-Route119_Text_PhilIntro: @ 829E0A5
+Route119_Text_DannyIntro: @ 829E0A5
 	.string "I'll show you the true potential of me\n"
-	.string "and my Bird Pokémon!$"
+	.string "and my Dragon Pokémon!$"
 
-Route119_Text_PhilDefeat: @ 829E0E1
+Route119_Text_DannyDefeat: @ 829E0E1
 	.string "We lacked potential…$"
 
-Route119_Text_PhilPostBattle: @ 829E0F6
+Route119_Text_DannyPostBattle: @ 829E0F6
 	.string "Ever since I was a little kid, I always\n"
-	.string "admired Bird Pokémon…$"
+	.string "admired Dragon Pokémon…$"
 
 Route119_Text_YasuIntro: @ 829E134
 	.string "To lurk in shadows, and live in\n"

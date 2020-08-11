@@ -401,7 +401,7 @@
 #define TRAINER_AARON                       397
 #define TRAINER_PERRY                       398
 #define TRAINER_HUGH                        399
-#define TRAINER_PHIL                        400
+#define TRAINER_DANNY                        400
 #define TRAINER_JARED                       401
 #define TRAINER_HUMBERTO                    402
 #define TRAINER_PRESLEY                     403
