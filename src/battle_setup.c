@@ -652,11 +652,9 @@ u8 BattleSetup_GetTerrainId(void)
         u8 time = GetTimeOfDay(gLocalTime.hours);
         switch(time)
         {
-            /*
             case TIME_SUNSET:
-            case TIME_NIGHTFALL:
+            //case TIME_NIGHTFALL:
                 return BATTLE_TERRAIN_GRASS_DUSK;
-            */
             case TIME_NIGHT:
             //case TIME_MIDNIGHT:
                 return BATTLE_TERRAIN_GRASS_NIGHT;

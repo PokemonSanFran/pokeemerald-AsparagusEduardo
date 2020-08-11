@@ -83,8 +83,10 @@ u8 GetTimeOfDay(s8 hours)
         return TIME_NIGHT;
     else if (hours < TIME_DAY_HOUR)
         return TIME_MORNING;
-    else if (hours < TIME_NIGHT_HOUR)
+    else if (hours < TIME_SUNSET_HOUR)
         return TIME_DAY;
+    else if (hours < TIME_NIGHT_HOUR)
+        return TIME_SUNSET;
     else
         return TIME_NIGHT;
 }
