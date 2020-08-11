@@ -5217,12 +5217,12 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Danny[] = {
     .iv = 0,
     .lvl = 26,
     .species = SPECIES_GABITE,
-    }
+    },
     {
     .iv = 0,
     .lvl = 27,
     .species = SPECIES_ALOLAN_EXEGGUTOR,
-    }
+    },
     {
     .iv = 0,
     .lvl = 28,
@@ -6618,13 +6618,28 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Kelvin[] = {
     }
 };
 
-static const struct TrainerMonItemCustomMoves sParty_Marley[] = {
+static const struct TrainerMonItemCustomMoves sParty_Tyler[] = {
     {
     .iv = 255,
     .lvl = 34,
-    .species = SPECIES_MANECTRIC,
+    .species = SPECIES_UMBREON,
     .heldItem = ITEM_NONE,
-    .moves = {MOVE_BITE, MOVE_ROAR, MOVE_THUNDER_WAVE, MOVE_THUNDERBOLT}
+    .moves = {MOVE_ASSURANCE, MOVE_MOONLIGHT, MOVE_PAYBACK, MOVE_DARK_PULSE}
+    },
+    {
+    .iv = 255,
+    .lvl = 34,
+    .species = SPECIES_GARDEVOIR,
+    .heldItem = ITEM_NONE,
+    .moves = {MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_CALM_MIND, MOVE_SHADOW_BALL}
+    },
+    
+    {
+    .iv = 255,
+    .lvl = 36,
+    .species = SPECIES_TORTERRA,
+    .heldItem = ITEM_NONE,
+    .moves = {MOVE_BULLDOZE, MOVE_RAZOR_LEAF, MOVE_WOOD_HAMMER, MOVE_LEECH_SEED}
     }
 };
 

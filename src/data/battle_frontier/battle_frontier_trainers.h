@@ -1824,13 +1824,13 @@ const struct BattleFrontierTrainer gBattleFrontierTrainers[FRONTIER_TRAINERS_COU
         .speechLose = {EC_WORD_THAT_WAS, EC_WORD_A_LITTLE, EC_WORD_TOO, EC_WORD_MUCH, EC_WORD_TO, EC_WORD_TAKE},
         .monSet = gBattleFrontierTrainerMons_Gillian2
     },
-    [FRONTIER_TRAINER_TYLER] = {
-        .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,
-        .trainerName = _("Tyler"),
+    [FRONTIER_TRAINER_MARLEY] = {
+        .facilityClass = FACILITY_CLASS_PKMN_RANGER_F,
+        .trainerName = _("Marley"),
         .speechBefore = {EC_WORD_YO, EC_WORD_EXCL, 0xFFFF, EC_WORD_LET_S, EC_WORD_GO, EC_WORD_EXCL_EXCL},
         .speechWin = {EC_WORD_YO, EC_WORD_EXCL, 0xFFFF, EC_WORD_I, EC_WORD_WON, EC_WORD_YO},
         .speechLose = {EC_WORD_YO, EC_WORD_EXCL, 0xFFFF, EC_WORD_I, EC_WORD_LOST, EC_WORD_YO},
-        .monSet = gBattleFrontierTrainerMons_Tyler
+        .monSet = gBattleFrontierTrainerMons_Marley
     },
     [FRONTIER_TRAINER_CHAZ] = {
         .facilityClass = FACILITY_CLASS_PKMN_RANGER_M,

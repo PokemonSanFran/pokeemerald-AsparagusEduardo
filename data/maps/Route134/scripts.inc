@@ -41,9 +41,9 @@ Route134_EventScript_Reyna:: @ 81F76DD
 	msgbox Route134_Text_ReynaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route134_EventScript_Marley:: @ 81F76F4
-	trainerbattle_single TRAINER_MARLEY, Route134_Text_MarleyIntro, Route134_Text_MarleyDefeat
-	msgbox Route134_Text_MarleyPostBattle, MSGBOX_AUTOCLOSE
+Route134_EventScript_Tyler:: @ 81F76F4
+	trainerbattle_single TRAINER_TYLER, Route134_Text_TylerIntro, Route134_Text_TylerDefeat
+	msgbox Route134_Text_TylerPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route134_EventScript_Kelvin:: @ 81F770B

@@ -509,7 +509,7 @@
 #define TRAINER_KAYLEY                      505
 #define TRAINER_AURON                       506
 #define TRAINER_KELVIN                      507
-#define TRAINER_MARLEY                      508
+#define TRAINER_TYLER                       508
 #define TRAINER_REYNA                       509
 #define TRAINER_HUDSON                      510
 #define TRAINER_CONOR                       511

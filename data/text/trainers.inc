@@ -4742,15 +4742,15 @@ Route134_Text_KelvinPostBattle: @ 82A48BD
 	.string "Actually, I know a fainted Pokémon\n"
 	.string "can still Surf, but it feels wrong.$"
 
-Route134_Text_MarleyIntro: @ 82A4937
+Route134_Text_TylerIntro: @ 82A4937
 	.string "Can your Pokémon dodge our\n"
 	.string "lightning-quick attacks?$"
 
-Route134_Text_MarleyDefeat: @ 82A496B
+Route134_Text_TylerDefeat: @ 82A496B
 	.string "I never knew such a technique existed!\n"
 	.string "You've defeated us thoroughly.$"
 
-Route134_Text_MarleyPostBattle: @ 82A49B1
+Route134_Text_TylerPostBattle: @ 82A49B1
 	.string "I haven't lost my passion for speed.\n"
 	.string "I will try harder.$"
 
