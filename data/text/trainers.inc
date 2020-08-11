@@ -4743,8 +4743,8 @@ Route134_Text_KelvinPostBattle: @ 82A48BD
 	.string "can still Surf, but it feels wrong.$"
 
 Route134_Text_TylerIntro: @ 82A4937
-	.string "Oh hello. Me and Aaron were\n"
-	.string "just about to have a Pokémon battle.\p"
+	.string "Oh hello. Me and Aaron were just\n"
+	.string "about to have a Pokémon battle.\p"
 	.string "Would you care to join us?$"
 
 Route134_Text_TylerDefeat: @ 82A496B
@@ -4752,7 +4752,7 @@ Route134_Text_TylerDefeat: @ 82A496B
 	.string "strength. I'm impressed.$"
 
 Route134_Text_TylerPostBattle: @ 82A49B1
-	.string "It seems we got some catching up to"
+	.string "It seems we got some catching up to\n"
 	.string "do in terms of our training.\p"
 	.string "Hopefully we'll have a match like\n"
 	.string "this next time.$"

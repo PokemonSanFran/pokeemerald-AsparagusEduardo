@@ -5560,7 +5560,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_AARON] =
     {
         .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_DRAGON_TAMER,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_INTENSE,
         .trainerPic = TRAINER_PIC_POKEMON_RANGER_M,
         .trainerName = _("Aaron"),
@@ -7114,7 +7114,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_TYLER] =
     {
         .partyFlags = F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_COOLTRAINER,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL,
         .trainerPic = TRAINER_PIC_POKEMON_RANGER_F,
         .trainerName = _("Tyler"),
