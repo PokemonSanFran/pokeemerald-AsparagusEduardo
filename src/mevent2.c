@@ -176,7 +176,7 @@ bool32 ValidateReceivedWonderCard(void)
     if (!ValidateSavedRamScript())
         return FALSE;
     */
-    return TRUE;
+    return FALSE;
 }
 
 static bool32 sub_801B2CC(const struct WonderCard *data)
