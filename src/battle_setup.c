@@ -37,7 +37,6 @@
 #include "mirage_tower.h"
 #include "field_screen_effect.h"
 #include "data.h"
-#include "rtc.h"
 #include "day_night.h"
 #include "constants/day_night.h"
 #include "constants/battle_frontier.h"
@@ -645,18 +644,15 @@ u8 BattleSetup_GetTerrainId(void)
 
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    RtcCalcLocalTime();
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
     {
-        u8 time = GetTimeOfDay(gLocalTime.hours);
+        u8 time = GetCurrentTimeOfDay();
         switch(time)
         {
             case TIME_SUNSET:
-            //case TIME_NIGHTFALL:
                 return BATTLE_TERRAIN_GRASS_DUSK;
             case TIME_NIGHT:
-            //case TIME_MIDNIGHT:
                 return BATTLE_TERRAIN_GRASS_NIGHT;
             default:
                 return BATTLE_TERRAIN_GRASS;
