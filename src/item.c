@@ -31,6 +31,7 @@ static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 static void ShowItemIconSprite(u16 item, bool8 firstTime);
 static void DestroyItemIconSprite(void);
+static void GetTMWithName(u8 *dst, u16 itemId, const u8 *moveName);
 
 // EWRAM variables
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
@@ -131,13 +132,18 @@ void CopyItemName(u16 itemId, u8 *dst)
 static const u8 sText_s[] = _("s");
 void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 {
-    StringCopy(dst, ItemId_GetName(itemId));
-    if (quantity > 1)
+    if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
+        GetTMWithName(dst, itemId, ItemId_GetName(itemId));
+    else
     {
-        if (ItemId_GetPocket(itemId) == POCKET_BERRIES)
-            GetBerryCountString(dst, gBerries[itemId - ITEM_CHERI_BERRY].name, quantity);
-        else
-            StringAppend(dst, sText_s);
+        StringCopy(dst, ItemId_GetName(itemId));
+        if (quantity > 1)
+        {
+            if (ItemId_GetPocket(itemId) == POCKET_BERRIES)
+                GetBerryCountString(dst, gBerries[itemId - ITEM_CHERI_BERRY].name, quantity);
+            else
+                StringAppend(dst, sText_s);
+        }
     }
 }
 
@@ -154,6 +160,31 @@ void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
     txtPtr = StringCopy(dst, berryName);
     *txtPtr = CHAR_SPACE;
     StringCopy(txtPtr + 1, berryString);
+}
+
+static const u8 sText_TM[] = _("TM");
+static const u8 sText_HM[] = _("HM");
+static const u8 sText_Space[] = _(" ");
+static void GetTMWithName(u8 *dst, u16 itemId, const u8 *moveName)
+{
+    const u8 zeroNums = 2;
+    const u8 *TMHMString;
+    u8 TMNumber;
+    if (ITEM_HM08 - itemId + 1 > NUM_HIDDEN_MACHINES)
+    {
+        TMHMString = sText_TM;
+        TMNumber = itemId - ITEM_TM01 + 1;
+    }
+    else
+    {
+        TMHMString = sText_HM;
+        TMNumber = itemId - ITEM_HM01 + 1;
+    }
+
+    StringCopy(dst, TMHMString);
+    ConvertIntToDecimalStringN(dst + zeroNums, TMNumber, STR_CONV_MODE_LEADING_ZEROS, zeroNums);
+    StringCopy(dst + zeroNums + 2, sText_Space);
+    StringCopy(dst + zeroNums + 3, moveName);
 }
 
 bool8 IsBagPocketNonEmpty(u8 pocket)
