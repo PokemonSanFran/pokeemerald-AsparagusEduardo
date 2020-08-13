@@ -253,7 +253,7 @@
 #define FLAG_RECEIVED_TM05                   0xE7
 #define FLAG_RECEIVED_TM19                   0xE8
 
-#define FLAG_UNUSED_0x0E9                    0xE9 // Unused Flag
+#define FLAG_RECEIVED_FANCLUB_TM_FRUSTRATION 0xE9
 
 #define FLAG_RECEIVED_TM44                   0xEA
 #define FLAG_RECEIVED_TM45                   0xEB
@@ -320,7 +320,7 @@
 #define FLAG_PETALBURG_MART_EXPANDED_ITEMS   0x128
 #define FLAG_RECEIVED_MIRACLE_SEED           0x129
 #define FLAG_RECEIVED_BELDUM                 0x12A
-#define FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK   0x12B
+#define FLAG_RECEIVED_FANCLUB_TM_RETURN      0x12B
 #define FLAG_MET_FANCLUB_YOUNGER_BROTHER     0x12C
 #define FLAG_RIVAL_LEFT_FOR_ROUTE103         0x12D
 #define FLAG_OMIT_DIVE_FROM_STEVEN_LETTER    0x12E
