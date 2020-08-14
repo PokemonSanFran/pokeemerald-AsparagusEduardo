@@ -161,9 +161,13 @@ void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
     *txtPtr = CHAR_SPACE;
     StringCopy(txtPtr + 1, berryString);
 }
-
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+static const u8 sText_TM[] = _("MT");
+static const u8 sText_HM[] = _("MO");
+#else
 static const u8 sText_TM[] = _("TM");
 static const u8 sText_HM[] = _("HM");
+#endif
 static const u8 sText_Space[] = _(" ");
 static void GetTMWithName(u8 *dst, u16 itemId, const u8 *moveName)
 {
