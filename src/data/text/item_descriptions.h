@@ -2308,49 +2308,49 @@ static const u8 sEjectButtonDesc[] = _(
     "by the foe.");
 
 static const u8 sAbsorbBulbDesc[] = _(
-    "Raises SP. ATK if\n"
+    "Raises Sp. Atk if\n"
     "the holder is hit by\n"
     "a Water-type move.");
 
 static const u8 sCellBatteryDesc[] = _(
-    "Raises ATK if the\n"
+    "Raises Atk if the\n"
     "holder is hit by an\n"
     "Electric-type move.");
 
 static const u8 sLuminousMossDesc[] = _(
-    "Raises SP. DEF if\n"
+    "Raises Sp. Def if\n"
     "the holder is hit by\n"
     "a Water-type move.");
 
 static const u8 sSnowballDesc[] = _(
-    "Raises ATK if its\n"
+    "Raises Atk if its\n"
     "holder is hit by an\n"
     "Ice-type move.");
 
 static const u8 sWeaknessPolicyDesc[] = _(
     "If hit by a Super\n"
     "Effective move, ups\n"
-    "ATK and SP. ATK.");
+    "Atk and Sp. Atk.");
 
 static const u8 sDouseDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Water type.");
+    "Techno Blast to\n"
+    "Water type.");
 
 static const u8 sShockDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Electric type.");
+    "Techno Blast to\n"
+    "Electric type.");
 
 static const u8 sBurnDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Fire type.");
+    "Techno Blast to\n"
+    "Fire type.");
 
 static const u8 sChillDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Ice type.");
+    "Techno Blast to\n"
+    "Ice type.");
 
 static const u8 sFireGemDesc[] = _(
     "Increases the\n"
@@ -2744,12 +2744,12 @@ static const u8 sResistWingDesc[] = _(
 
 static const u8 sGeniusWingDesc[] = _(
     "An item that raises\n"
-    "the base SP. ATK.\n"
+    "the base Sp. Atk.\n"
     "of a Pokémon.");
 
 static const u8 sCleverWingDesc[] = _(
     "An item that raises\n"
-    "the base SP. DEF.\n"
+    "the base Sp. Def.\n"
     "of a Pokémon.");
 
 static const u8 sSwiftWingDesc[] = _(
@@ -2763,26 +2763,26 @@ static const u8 sPrettyWingDesc[] = _(
     "does nothing.");
 
 static const u8 sShinyCharmDesc[] = _(
-	"A charm that will\n"
+    "A charm that will\n"
     "raise the chance\n"
     "of Shiny Pokémon.");
     
 //Mod items
 static const u8 sLinkCableDesc[] = _(
-	"Rare machine part\n"
+    "Rare machine part\n"
     "that is loved by\n"
     "certain Pokémon.");
 
 static const u8 sStrangeSouvenirDesc[] = _(
-	"An ornament that\n"
+    "An ornament that\n"
     "brings the joy of\n"
     "Alola to Pokémon.");
     
 static const u8 sEonFluteDesc[] = _(
-	"A flute that can\n"
-	"summon Latias or\n"
-	"Latios.");
-
+    "A flute that can\n"
+    "summon Latias or\n"
+    "Latios.");
+ 
 #else
 
 static const u8 sDummyDesc[] = _(
@@ -3209,7 +3209,7 @@ static const u8 sXSpecialAttackDesc[] = _(
 
 static const u8 sXSpecialDefenseDesc[] = _(
     "Raises the stat\n"
-    "SP. DEF during one\n"
+    "Sp. Def during one\n"
     "battle.");
 
 static const u8 sPokeDollDesc[] = _(
@@ -4034,22 +4034,22 @@ static const u8 sShellBellDesc[] = _(
 
 static const u8 sPowerBracerDesc[] = _(
     "A hold item that\n"
-    "promotes ATK gain,\n"
+    "promotes Atk gain,\n"
     "but reduces SPEED.");
 
 static const u8 sPowerBeltDesc[] = _(
     "A hold item that\n"
-    "promotes DEF gain,\n"
+    "promotes Def gain,\n"
     "but reduces SPEED.");
 
 static const u8 sPowerLensDesc[] = _(
     "Hold item that pro-\n"
-    "motes SP. ATK gain,\n"
+    "motes Sp. Atk gain,\n"
     "but reduces SPEED.");
 
 static const u8 sPowerBandDesc[] = _(
     "Hold item that pro-\n"
-    "motes SP. DEF gain,\n"
+    "motes Sp. Def gain,\n"
     "but reduces SPEED.");
 
 static const u8 sPowerAnkletDesc[] = _(
@@ -5122,49 +5122,49 @@ static const u8 sEjectButtonDesc[] = _(
     "by the foe.");
 
 static const u8 sAbsorbBulbDesc[] = _(
-    "Raises SP. ATK if\n"
+    "Raises Sp. Atk if\n"
     "the holder is hit by\n"
     "a Water-type move.");
 
 static const u8 sCellBatteryDesc[] = _(
-    "Raises ATK if the\n"
+    "Raises Atk if the\n"
     "holder is hit by an\n"
     "Electric-type move.");
 
 static const u8 sLuminousMossDesc[] = _(
-    "Raises SP. DEF if\n"
+    "Raises Sp. Def if\n"
     "the holder is hit by\n"
     "a Water-type move.");
 
 static const u8 sSnowballDesc[] = _(
-    "Raises ATK if its\n"
+    "Raises Atk if its\n"
     "holder is hit by an\n"
     "Ice-type move.");
 
 static const u8 sWeaknessPolicyDesc[] = _(
     "If hit by a Super\n"
     "Effective move, ups\n"
-    "ATK and SP. ATK.");
+    "Atk and Sp. Atk.");
 
 static const u8 sDouseDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Water type.");
+    "Techno Blast to\n"
+    "Water type.");
 
 static const u8 sShockDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Electric type.");
+    "Techno Blast to\n"
+    "Electric type.");
 
 static const u8 sBurnDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Fire type.");
+    "Techno Blast to\n"
+    "Fire type.");
 
 static const u8 sChillDriveDesc[] = _(
     "Changes Genesect's\n"
-    "Techno Blast so it\n"
-    "becomes Ice type.");
+    "Techno Blast to\n"
+    "Ice type.");
 
 static const u8 sFireGemDesc[] = _(
     "Increases the\n"
@@ -5558,12 +5558,12 @@ static const u8 sResistWingDesc[] = _(
 
 static const u8 sGeniusWingDesc[] = _(
     "An item that raises\n"
-    "the base SP. ATK.\n"
+    "the base Sp. Atk.\n"
     "of a Pokémon.");
 
 static const u8 sCleverWingDesc[] = _(
     "An item that raises\n"
-    "the base SP. DEF.\n"
+    "the base Sp. Def.\n"
     "of a Pokémon.");
 
 static const u8 sSwiftWingDesc[] = _(
@@ -5577,24 +5577,24 @@ static const u8 sPrettyWingDesc[] = _(
     "does nothing.");
 
 static const u8 sShinyCharmDesc[] = _(
-	"A charm that will\n"
+    "A charm that will\n"
     "raise the chance\n"
     "of Shiny Pokémon.");
     
 //Mod items
 static const u8 sLinkCableDesc[] = _(
-	"Rare machine part\n"
+    "Rare machine part\n"
     "that is loved by\n"
     "certain Pokémon.");
 
 static const u8 sStrangeSouvenirDesc[] = _(
-	"An ornament that\n"
+    "An ornament that\n"
     "brings the joy of\n"
     "Alola to Pokémon.");
     
 static const u8 sEonFluteDesc[] = _(
-	"A flute that can\n"
-	"summon Latias or\n"
-	"Latios.");
+    "A flute that can\n"
+    "summon Latias or\n"
+    "Latios.");
 
 #endif

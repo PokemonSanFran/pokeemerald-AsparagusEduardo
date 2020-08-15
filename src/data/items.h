@@ -6912,7 +6912,7 @@ const struct Item gItems[] =
     [ITEM_LIGHT_CLAY] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-        .name = _("Cinta Experto"),
+        .name = _("Refleluz"),
 #else
         .name = _("Light Clay"),
 #endif
