@@ -1333,7 +1333,7 @@ u16 GetBestBattleTowerStreak(void)
 
 void BufferEReaderTrainerName(void)
 {
-    GetEreaderTrainerName(gStringVar1);
+    //GetEreaderTrainerName(gStringVar1);
 }
 
 u16 GetSlotMachineId(void)
