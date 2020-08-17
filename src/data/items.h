@@ -7323,9 +7323,9 @@ const struct Item gItems[] =
     [ITEM_LUSTROUS_ORB] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-        .name = _("Diamansfera"),
-#else
         .name = _("Lustresfera"),
+#else
+        .name = _("Lustrous Orb"),
 #endif
         .itemId = ITEM_LUSTROUS_ORB,
         .price = 200,
@@ -7968,7 +7968,7 @@ const struct Item gItems[] =
     [ITEM_EVIOLITE] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-        .name = _("Mineral Evol"),
+        .name = _("Mineral Evolutivo"),
 #else
         .name = _("Eviolite"),
 #endif
