@@ -647,6 +647,8 @@ u8 BattleSetup_GetTerrainId(void)
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
     {
+        return BATTLE_TERRAIN_GRASS;
+        /*
         u8 time = GetCurrentTimeOfDay();
         switch(time)
         {
@@ -657,6 +659,7 @@ u8 BattleSetup_GetTerrainId(void)
             default:
                 return BATTLE_TERRAIN_GRASS;
         }
+        */
     }
     if (MetatileBehavior_IsLongGrass(tileBehavior))
         return BATTLE_TERRAIN_LONG_GRASS;
