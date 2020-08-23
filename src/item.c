@@ -917,6 +917,7 @@ void ClearBag(void)
     {
         ClearItemSlots(gBagPockets[i].itemSlots, gBagPockets[i].capacity);
     }
+    AddBagItem(ITEM_POTION, 1);
 }
 
 u16 CountTotalItemQuantityInBag(u16 itemId)
