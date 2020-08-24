@@ -3,7 +3,7 @@
 
 #define TIME_MORNING_HOUR 4
 #define TIME_DAY_HOUR 10
-#define TIME_SUNSET_HOUR 17
+#define TIME_SUNSET_HOUR 18
 #define TIME_NIGHT_HOUR 20
 
 #define TIME_MORNING 0
