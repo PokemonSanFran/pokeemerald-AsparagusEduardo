@@ -11693,26 +11693,22 @@ static void Cmd_handleballthrow(void)
             {
             case ITEM_NET_BALL:
                 if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_BUG))
-                    ballMultiplier = 30;
+                    ballMultiplier = 35;
                 break;
             case ITEM_DIVE_BALL:
                 if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
                     ballMultiplier = 35;
                 break;
             case ITEM_NEST_BALL:
-                if (gBattleMons[gBattlerTarget].level < 40)
-                {
-                    ballMultiplier = 40 - gBattleMons[gBattlerTarget].level;
-                    if (ballMultiplier <= 9)
-                        ballMultiplier = 10;
-                }
+                if (gBattleMons[gBattlerTarget].level < 30)
+                    ballMultiplier = 41 - gBattleMons[gBattlerTarget].level;
                 break;
             case ITEM_REPEAT_BALL:
                 if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
-                    ballMultiplier = 30;
+                    ballMultiplier = 35;
                 break;
             case ITEM_TIMER_BALL:
-                ballMultiplier = gBattleResults.battleTurnCounter + 10;
+                ballMultiplier = (gBattleResults.battleTurnCounter * 3) + 10;
                 if (ballMultiplier > 40)
                     ballMultiplier = 40;
                 break;
@@ -11736,7 +11732,7 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_LURE_BALL:
                 if (gIsFishingEncounter)
-                    ballMultiplier = 30;
+                    ballMultiplier = 50;
                 break;
             case ITEM_MOON_BALL:
                 for (i = 0; i < EVOS_PER_MON; i++)
@@ -11758,13 +11754,13 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_HEAVY_BALL:
                 i = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1);
-                if (i < 1024)
+                if (i < 1000)
                     ballMultiplier = 5;
-                else if (i < 2048)
+                else if (i < 2000)
                     ballMultiplier = 10;
-                else if (i < 3072)
+                else if (i < 3000)
                     ballMultiplier = 20;
-                else if (i < 4096)
+                else if (i < 4000)
                     ballMultiplier = 30;
                 else
                     ballMultiplier = 40;
@@ -11775,18 +11771,32 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_QUICK_BALL:
                 if (gBattleResults.battleTurnCounter == 0)
-                    ballMultiplier = 40;
+                    ballMultiplier = 50;
                 break;
             case ITEM_DUSK_BALL:
                 RtcCalcLocalTime();
                 if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
                     ballMultiplier = 30;
                 break;
+            case ITEM_BEAST_BALL:
+            #ifdef IS_ULTRA_BEAST
+                if (IS_ULTRA_BEAST(gBattleMons[gBattlerTarget].species))
+                    ballMultiplier = 50;
+            #endif
+                break;
+            case ITEM_DREAM_BALL:
+                if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP))
+                    ballMultiplier = 40;
+                break;
             }
         }
         else
             ballMultiplier = sBallCatchBonuses[gLastUsedItem - ITEM_ULTRA_BALL];
 
+        #ifdef IS_ULTRA_BEAST
+        if (IS_ULTRA_BEAST(gBattleMons[gBattlerTarget].species) && gLastUsedItem != ITEM_BEAST_BALL)
+            ballMultiplier = 1;
+        #endif
         odds = (catchRate * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
