@@ -646,7 +646,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_HYPER_POTION,
         .price = 1200,
-        .holdEffectParam = 200,
+        .holdEffectParam = 120,
         .description = sHyperPotionDesc,
         .pocket = POCKET_MEDICINE,
         .type = 1,
@@ -665,7 +665,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_SUPER_POTION,
         .price = 700,
-        .holdEffectParam = 50,
+        .holdEffectParam = 60,
         .description = sSuperPotionDesc,
         .pocket = POCKET_MEDICINE,
         .type = 1,
@@ -738,7 +738,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_FRESH_WATER,
         .price = 200,
-        .holdEffectParam = 50,
+        .holdEffectParam = 30,
         .description = sFreshWaterDesc,
         .pocket = POCKET_MEDICINE,
         .type = 1,
@@ -757,7 +757,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_SODA_POP,
         .price = 300,
-        .holdEffectParam = 60,
+        .holdEffectParam = 50,
         .description = sSodaPopDesc,
         .pocket = POCKET_MEDICINE,
         .type = 1,
@@ -776,7 +776,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_LEMONADE,
         .price = 350,
-        .holdEffectParam = 80,
+        .holdEffectParam = 70,
         .description = sLemonadeDesc,
         .pocket = POCKET_MEDICINE,
         .type = 1,

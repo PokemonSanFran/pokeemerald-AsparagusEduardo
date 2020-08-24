@@ -167,11 +167,11 @@ static const u8 sMaxPotionDesc[] = _(
     "PS de un Pokémon.");
 
 static const u8 sHyperPotionDesc[] = _(
-    "Restaura 200 PS\n"
+    "Restaura 120 PS\n"
     "de un Pokémon.");
 
 static const u8 sSuperPotionDesc[] = _(
-    "Restaura 50 PS\n"
+    "Restaura 60 PS\n"
     "de un Pokémon.");
 
 static const u8 sFullHealDesc[] = _(
@@ -191,15 +191,15 @@ static const u8 sMaxReviveDesc[] = _(
 
 static const u8 sFreshWaterDesc[] = _(
     "Agua mineral que\n"
-    "restaura 50 PS.");
+    "restaura 30 PS.");
 
 static const u8 sSodaPopDesc[] = _(
     "Bebida gaseosa que\n"
-    "restaura 60 PS.");
+    "restaura 50 PS.");
 
 static const u8 sLemonadeDesc[] = _(
     "Bebida dulce que\n"
-    "restaura 80 PS.");
+    "restaura 70 PS.");
 
 static const u8 sMoomooMilkDesc[] = _(
     "Nutritiva leche que\n"
@@ -2961,12 +2961,12 @@ static const u8 sMaxPotionDesc[] = _(
 static const u8 sHyperPotionDesc[] = _(
     "Restores the HP of\n"
     "a Pokémon by\n"
-    "200 points.");
+    "120 points.");
 
 static const u8 sSuperPotionDesc[] = _(
     "Restores the HP of\n"
     "a Pokémon by\n"
-    "50 points.");
+    "60 points.");
 
 static const u8 sFullHealDesc[] = _(
     "Heals all the\n"
@@ -2986,17 +2986,17 @@ static const u8 sMaxReviveDesc[] = _(
 static const u8 sFreshWaterDesc[] = _(
     "A mineral water\n"
     "that restores HP\n"
-    "by 50 points.");
+    "by 30 points.");
 
 static const u8 sSodaPopDesc[] = _(
     "A fizzy soda drink\n"
     "that restores HP\n"
-    "by 60 points.");
+    "by 50 points.");
 
 static const u8 sLemonadeDesc[] = _(
     "A very sweet drink\n"
     "that restores HP\n"
-    "by 80 points.");
+    "by 70 points.");
 
 static const u8 sMoomooMilkDesc[] = _(
     "A nutritious milk\n"
