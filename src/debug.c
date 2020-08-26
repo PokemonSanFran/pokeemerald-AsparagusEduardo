@@ -113,13 +113,12 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
-    [0] = DebugAction_CheckSaveBlock,
-    [1] = DebugAction_SetPokedexFlags,
-    [2] = DebugAction_SwitchDex,
-    [3] = DebugAction_SwitchNatDex,
-    [4] = DebugAction_SwitchPokeNav,
-    [5] = DebugAction_SetFlyFlags,
-    [6] = DebugAction_SetBadgeFlags,
+    [0] = DebugAction_SetPokedexFlags,
+    [1] = DebugAction_SwitchDex,
+    [2] = DebugAction_SwitchNatDex,
+    [3] = DebugAction_SwitchPokeNav,
+    [4] = DebugAction_SetFlyFlags,
+    [5] = DebugAction_SetBadgeFlags,
 };
 
 static const struct WindowTemplate sDebugMenuWindowTemplate =
