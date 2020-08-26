@@ -594,4 +594,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_LINK_CABLE] = {gItemIcon_LinkCable, gItemIconPalette_LinkCable},
     [ITEM_STRANGE_SOUVENIR] = {gItemIcon_StrangeSouvenir, gItemIconPalette_StrangeSouvenir},
     [ITEM_EON_FLUTE] = { gItemIcon_EonFlute, gItemIconPalette_EonFlute },
+    [ITEM_LURE] = {gItemIcon_Lure, gItemIconPalette_Lure},
+    [ITEM_SUPER_LURE] = {gItemIcon_SuperLure, gItemIconPalette_SuperLure},
+    [ITEM_MAX_LURE] = {gItemIcon_MaxLure, gItemIconPalette_MaxLure},
 };

@@ -6021,6 +6021,12 @@ extern const u32 gItemIcon_DevonScope[];
 extern const u32 gItemIconPalette_DevonScope[];
 extern const u32 gItemIcon_EonFlute[];
 extern const u32 gItemIconPalette_EonFlute[];
+extern const u32 gItemIcon_Lure[];
+extern const u32 gItemIconPalette_Lure[];
+extern const u32 gItemIcon_SuperLure[];
+extern const u32 gItemIconPalette_SuperLure[];
+extern const u32 gItemIcon_MaxLure[];
+extern const u32 gItemIconPalette_MaxLure[];
 // TMs/HMs
 extern const u32 gItemIcon_TM[];
 extern const u32 gItemIconPalette_FightingTMHM[];

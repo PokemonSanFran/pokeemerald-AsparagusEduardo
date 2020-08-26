@@ -145,6 +145,34 @@ void HandleRepelMenuChoice(void)
     VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));
 }
 
+void TryDrawLureMenu(void)
+{
+    static const u16 lureItems[] = {ITEM_LURE, ITEM_SUPER_LURE, ITEM_MAX_LURE};
+    struct MenuAction menuItems[4] = {NULL};
+    int i, count = 0;
+
+    for (i = 0; i < ARRAY_COUNT(lureItems); i++)
+    {
+        if (CheckBagHasItem(lureItems[i], 1))
+        {
+            VarSet(VAR_0x8004 + count, lureItems[i]);
+            menuItems[count].text = ItemId_GetName(lureItems[i]);
+            count++;
+        }
+    }
+
+    if (count > 1)
+        DrawMultichoiceMenuCustom(0, 0, 0, FALSE, 0, menuItems, count);
+
+    gSpecialVar_Result = (count > 1);
+}
+
+void HandleLureMenuChoice(void)
+{
+    gSpecialVar_0x8004 = VarGet(VAR_0x8004 + gSpecialVar_Result); // Get item Id;
+    VarSet(VAR_LURE_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));
+}
+
 #define tLeft           data[0]
 #define tTop            data[1]
 #define tRight          data[2]

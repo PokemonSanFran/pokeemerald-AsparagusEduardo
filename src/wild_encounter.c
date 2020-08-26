@@ -28,6 +28,7 @@
 #include "constants/weather.h"
 
 extern const u8 EventScript_RepelWoreOff[];
+extern const u8 EventScript_LureWoreOff[];
 
 #define NUM_FEEBAS_SPOTS    6
 
@@ -546,6 +547,8 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
         encounterRate = encounterRate * 80 / 100;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
+    if (VarGet(VAR_LURE_STEP_COUNT))
+        encounterRate *= 2;
     if (!ignoreAbility && !GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
         u32 ability = GetMonAbility(&gPlayerParty[0]);
@@ -671,7 +674,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 {
                     if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                     {
-                        if (USE_BATTLE_DEBUG && !GetSafariZoneFlag() && GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS)
+                        if (!GetSafariZoneFlag() && GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS && VarGet(VAR_LURE_STEP_COUNT))
                         {
                             struct Pokemon mon1 = gEnemyParty[0];
                             TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE);
@@ -689,7 +692,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 {
                     if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                     {
-                        if (USE_BATTLE_DEBUG && !GetSafariZoneFlag() && GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS)
+                        if (!GetSafariZoneFlag() && GetMonsStateToDoubles() == PLAYER_HAS_TWO_USABLE_MONS && VarGet(VAR_LURE_STEP_COUNT))
                         {
                             struct Pokemon mon1 = gEnemyParty[0];
                             TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, WILD_CHECK_KEEN_EYE);
@@ -951,6 +954,30 @@ bool8 UpdateRepelCounter(void)
         if (steps == 0)
         {
             ScriptContext1_SetupScript(EventScript_RepelWoreOff);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+bool8 UpdateLureCounter(void)
+{
+    u16 steps;
+
+    if (InBattlePike() || InBattlePyramid())
+        return FALSE;
+    if (InUnionRoom() == TRUE)
+        return FALSE;
+
+    steps = VarGet(VAR_LURE_STEP_COUNT);
+
+    if (steps != 0)
+    {
+        steps--;
+        VarSet(VAR_LURE_STEP_COUNT, steps);
+        if (steps == 0)
+        {
+            ScriptContext1_SetupScript(EventScript_LureWoreOff);
             return TRUE;
         }
     }

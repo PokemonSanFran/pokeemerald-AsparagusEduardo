@@ -9782,4 +9782,55 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_LURE] =
+    {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Colonia"),
+#else
+        .name = _("Lure"),
+#endif
+        .itemId = ITEM_LURE,
+        .price = 350,
+        .holdEffectParam = 100,
+        .description = sLureDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_Lure,
+        .secondaryId = 0,
+    },
+
+    [ITEM_SUPER_LURE] =
+    {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Supercolonia"),
+#else
+        .name = _("Super Lure"),
+#endif
+        .itemId = ITEM_SUPER_LURE,
+        .price = 500,
+        .holdEffectParam = 200,
+        .description = sSuperLureDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_Lure,
+        .secondaryId = 0,
+    },
+
+    [ITEM_MAX_LURE] =
+    {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Colonia Máxima"),
+#else
+        .name = _("Max Lure"),
+#endif
+        .itemId = ITEM_MAX_LURE,
+        .price = 700,
+        .holdEffectParam = 250,
+        .description = sMaxLureDesc,
+        .pocket = POCKET_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_Lure,
+        .secondaryId = 0,
+    },
+
 };

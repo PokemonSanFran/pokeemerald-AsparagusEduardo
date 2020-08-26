@@ -511,6 +511,8 @@ static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileB
         return TRUE;
     if (UpdateRepelCounter() == TRUE)
         return TRUE;
+    if (UpdateLureCounter() == TRUE)
+        return TRUE;
     return FALSE;
 }
 

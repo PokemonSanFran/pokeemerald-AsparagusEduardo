@@ -2504,6 +2504,10 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 rolls++;
             } while (shinyValue >= SHINY_ODDS && rolls < SHINY_CHARM_REROLLS);
         }
+        //Additional reroll if Lure in effect
+        if (VarGet(VAR_LURE_STEP_COUNT) && (HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality)) >= SHINY_ODDS)
+            personality = Random32();
+
     }
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);

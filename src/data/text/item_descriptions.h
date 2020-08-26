@@ -2784,6 +2784,21 @@ static const u8 sEonFluteDesc[] = _(
     "invocar a Latias\n"
     "o Latios.");
 
+static const u8 sLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 100 steps.");
+
+static const u8 sSuperLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 200 steps.");
+
+static const u8 sMaxLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 250 steps.");
+
 #else
 
 static const u8 sDummyDesc[] = _(
@@ -5597,5 +5612,20 @@ static const u8 sEonFluteDesc[] = _(
     "A flute that can\n"
     "summon Latias or\n"
     "Latios.");
+
+static const u8 sLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 100 steps.");
+
+static const u8 sSuperLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 200 steps.");
+
+static const u8 sMaxLureDesc[] = _(
+    "Makes Pokémon more\n"
+    "likely to appear\n"
+    "for 250 steps.");
 
 #endif

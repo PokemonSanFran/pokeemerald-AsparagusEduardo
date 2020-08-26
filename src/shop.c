@@ -110,6 +110,7 @@ static const u16 sShopInventory_OneBadge[] = {
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
     ITEM_REPEL,
+    ITEM_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
@@ -125,6 +126,7 @@ static const u16 sShopInventory_TwoBadges[] = {
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
     ITEM_REPEL,
+    ITEM_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
@@ -141,6 +143,8 @@ static const u16 sShopInventory_ThreeBadges[] = {
     ITEM_PARALYZE_HEAL,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
@@ -158,6 +162,8 @@ static const u16 sShopInventory_FourBadges[] = {
     ITEM_REVIVE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
@@ -177,6 +183,8 @@ static const u16 sShopInventory_FiveBadges[] = {
     ITEM_REVIVE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
@@ -188,6 +196,7 @@ static const u16 sShopInventory_SixBadges[] = {
     ITEM_POTION,
     ITEM_SUPER_POTION,
     ITEM_HYPER_POTION,
+    ITEM_MAX_POTION,
     ITEM_ANTIDOTE,
     ITEM_BURN_HEAL,
     ITEM_ICE_HEAL,
@@ -197,6 +206,8 @@ static const u16 sShopInventory_SixBadges[] = {
     ITEM_REVIVE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
@@ -219,6 +230,9 @@ static const u16 sShopInventory_SevenBadges[] = {
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_MAX_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
@@ -242,6 +256,9 @@ static const u16 sShopInventory_EightBadges[] = {
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
+    ITEM_LURE,
+    ITEM_SUPER_LURE,
+    ITEM_MAX_LURE,
     ITEM_ESCAPE_ROPE,
     ITEM_NONE
 };
