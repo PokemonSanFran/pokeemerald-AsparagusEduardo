@@ -1663,10 +1663,10 @@ const u8 gText_PeopleTrading[] = _("People trading:");
 const u8 gText_PeopleBattling[] = _("People battling:");
 const u8 gText_PeopleInUnionRoom[] = _("People in the Union Room:");
 const u8 gText_PeopleCommunicating[] = _("People communicating:");
-const u8 gText_F700Players[] = _("{SPECIAL_F7 0} players");
-const u8 gText_F701Players[] = _("{SPECIAL_F7 1} players");
-const u8 gText_F702Players[] = _("{SPECIAL_F7 2} players");
-const u8 gText_F703Players[] = _("{SPECIAL_F7 3} players");
+const u8 gText_F700Players[] = _("{DYNAMIC 0} players");
+const u8 gText_F701Players[] = _("{DYNAMIC 1} players");
+const u8 gText_F702Players[] = _("{DYNAMIC 2} players");
+const u8 gText_F703Players[] = _("{DYNAMIC 3} players");
 
 const u8 *const gTextTable_Players[] = {
     gText_F700Players,
