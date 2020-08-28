@@ -4911,7 +4911,7 @@ const struct Item gItems[] =
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Piezas Devon"),
 #else
-        .name = _("Devon Parts"),
+        .name = _("Devon Goods"),
 #endif
         .itemId = ITEM_DEVON_GOODS,
         .price = 0,
