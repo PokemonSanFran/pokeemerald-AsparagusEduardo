@@ -15,7 +15,7 @@
   "connections": [
     {
       "direction": "left",
-      "offset": -18,
+      "offset": 0,
       "map": "MAP_VERDANTURF_TOWN"
     },
     {
@@ -347,9 +347,7 @@
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [
-
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
