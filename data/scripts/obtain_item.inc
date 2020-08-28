@@ -21,6 +21,8 @@ EventScript_BufferPocketNameAndTryFanfare:: @ 8271B08
 	case POCKET_MEDICINE, EventScript_BufferMedicinePocket
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
 	case POCKET_BATTLE_ITEMS, EventScript_BufferBattleItemsPocket
+	case POCKET_TYPE_ITEMS, EventScript_BufferTypeItemsPocket
+	case POCKET_MEGA_STONES, EventScript_BufferMegaStonesPocket
 	case POCKET_BERRIES, EventScript_BufferBerriesPocket
 	case POCKET_POWER_UP, EventScript_BufferPowerUpPocket
 	case POCKET_TM_HM, EventScript_BufferTMHMsPocket
@@ -71,6 +73,18 @@ EventScript_BufferBattleItemsPocket::
 
 EventScript_BufferPowerUpPocket::
 	bufferstdstring 2, STDSTRING_POWERUP
+	compare VAR_0x8007, 1
+	call_if_eq EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferTypeItemsPocket::
+	bufferstdstring 2, STDSTRING_TYPEITEMS
+	compare VAR_0x8007, 1
+	call_if_eq EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferMegaStonesPocket::
+	bufferstdstring 2, STDSTRING_MEGASTONES
 	compare VAR_0x8007, 1
 	call_if_eq EventScript_PlayFanfareObtainedItem
 	return

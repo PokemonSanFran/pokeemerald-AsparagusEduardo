@@ -122,6 +122,12 @@ void SetBagItemsPointers(void)
 
     gBagPockets[POWERUP_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_PowerUp;
     gBagPockets[POWERUP_POCKET].capacity = BAG_POWERUP_COUNT;
+
+    gBagPockets[TYPEITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_TypeItems;
+    gBagPockets[TYPEITEMS_POCKET].capacity = BAG_TYPEITEMS_COUNT;
+
+    gBagPockets[MEGASTONES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_MegaStones;
+    gBagPockets[MEGASTONES_POCKET].capacity = BAG_MEGASTONES_COUNT;
 }
 
 void CopyItemName(u16 itemId, u8 *dst)

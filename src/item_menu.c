@@ -686,11 +686,12 @@ bool8 SetupBagMenu(void)
     case 13:
         BagMenu_PrintPocketNames(gPocketNamesStringsTable[gBagPositionStruct.pocket], 0);
         BagMenu_CopyPocketNameToWindow(0);
-        BagMenu_DrawPocketIndicatorSquare(0, 0);
-        BagMenu_DrawPocketIndicatorSquare(5, 0);
-        BagMenu_DrawPocketIndicatorSquare(6, 0);
-        BagMenu_DrawPocketIndicatorSquare(7, 0);
-        BagMenu_DrawPocketIndicatorSquare(gBagPositionStruct.pocket, 1);
+        BagMenu_DrawPocketIndicatorSquare(0, FALSE);
+        BagMenu_DrawPocketIndicatorSquare(1, FALSE);
+        BagMenu_DrawPocketIndicatorSquare(7, FALSE);
+        BagMenu_DrawPocketIndicatorSquare(8, FALSE);
+        BagMenu_DrawPocketIndicatorSquare(9, FALSE);
+        BagMenu_DrawPocketIndicatorSquare(gBagPositionStruct.pocket, TRUE);
         gMain.state++;
         break;
     case 14:
@@ -1277,8 +1278,8 @@ void SwitchBagPocket(u8 taskId, s16 deltaBagPocketId, u16 a3)
         BagMenu_PrintPocketNames(gPocketNamesStringsTable[pocketId], gPocketNamesStringsTable[gBagPositionStruct.pocket]);
         BagMenu_CopyPocketNameToWindow(8);
     }
-    BagMenu_DrawPocketIndicatorSquare(gBagPositionStruct.pocket, 0);
-    BagMenu_DrawPocketIndicatorSquare(pocketId, 1);
+    BagMenu_DrawPocketIndicatorSquare(gBagPositionStruct.pocket, FALSE);
+    BagMenu_DrawPocketIndicatorSquare(pocketId, TRUE);
     FillBgTilemapBufferRect_Palette0(2, 11, 14, 2, 15, 16);
     ScheduleBgCopyTilemapToVram(2);
     SetBagVisualPocketId(pocketId, 1);
@@ -1344,9 +1345,9 @@ void sub_81AC23C(u8 a)
 void BagMenu_DrawPocketIndicatorSquare(u8 x, u8 is_current_bag)
 {
     if (is_current_bag == 0)
-        FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 4, 3, 1, 1);
+        FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 3, 3, 1, 1);
     else
-        FillBgTilemapBufferRect_Palette0(2, 0x102B, x + 4, 3, 1, 1);
+        FillBgTilemapBufferRect_Palette0(2, 0x102B, x + 3, 3, 1, 1);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -1570,6 +1571,8 @@ void OpenContextMenu(u8 unused)
                     case MEDICINE_POCKET:
                     case BATTLEITEMS_POCKET:
                     case POWERUP_POCKET:
+                    case TYPEITEMS_POCKET:
+                    case MEGASTONES_POCKET:
                         gBagMenu->contextMenuItemsPtr = sContextMenuItems_ItemsPocket;
                         gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
                         break;
