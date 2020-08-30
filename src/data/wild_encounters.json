@@ -1584,17 +1584,17 @@
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_SPINDA"
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_SPINDA"
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_SLUGMA"
+                "species": "SPECIES_BOUFFALANT"
               },
               {
                 "min_level": 14,
@@ -1604,27 +1604,32 @@
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_SPINDA"
+                "species": "SPECIES_SCRAGGY"
               },
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_SLUGMA"
+                "species": "SPECIES_SCRAGGY"
               },
               {
                 "min_level": 16,
                 "max_level": 16,
-                "species": "SPECIES_SPINDA"
+                "species": "SPECIES_SCRAGGY"
               },
               {
                 "min_level": 16,
                 "max_level": 16,
-                "species": "SPECIES_SLUGMA"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 16,
                 "max_level": 16,
-                "species": "SPECIES_SPINDA"
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_KLEFKI"
               },
               {
                 "min_level": 16,
@@ -1634,12 +1639,72 @@
               {
                 "min_level": 16,
                 "max_level": 16,
+                "species": "SPECIES_SKARMORY"
+              }
+            ]
+          },
+          "land_mons_night": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 15,
+                "max_level": 15,
                 "species": "SPECIES_SPINDA"
+              },
+              {
+                "min_level": 15,
+                "max_level": 15,
+                "species": "SPECIES_SPINDA"
+              },
+              {
+                "min_level": 15,
+                "max_level": 15,
+                "species": "SPECIES_SPINDA"
+              },
+              {
+                "min_level": 14,
+                "max_level": 14,
+                "species": "SPECIES_BOUFFALANT"
+              },
+              {
+                "min_level": 14,
+                "max_level": 14,
+                "species": "SPECIES_SANDSHREW"
+              },
+              {
+                "min_level": 14,
+                "max_level": 14,
+                "species": "SPECIES_SANDSHREW"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_SANDSHREW"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_SCRAGGY"
               },
               {
                 "min_level": 16,
                 "max_level": 16,
                 "species": "SPECIES_SKARMORY"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_SKARMORY"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_KLEFKI"
+              },
+              {
+                "min_level": 16,
+                "max_level": 16,
+                "species": "SPECIES_KLEFKI"
               }
             ]
           }
