@@ -3008,4 +3008,9 @@ extern const u8 gText_MoveItemWhere[];
 extern const u8 gText_XsYAnd[];
 extern const u8 gText_XsYWereSwapped[];
 
+extern const u8 gText_JackRateNickname[];
+extern const u8 gText_JackRememberMove[];
+extern const u8 gText_JackForgetMove[];
+extern const u8 gText_JackTeachMove[];
+
 #endif // GUARD_STRINGS_H
