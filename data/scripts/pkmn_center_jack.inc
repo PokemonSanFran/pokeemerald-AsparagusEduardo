@@ -1,4 +1,5 @@
 Common_EventScript_PkmnCenterJack::
+	msgbox gText_PkmnCenterJack_GotPokemonQuestions, MSGBOX_DEFAULT
 	multichoice 16, 0, MULTI_POKECENTER_JACK, 0
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
@@ -6,12 +7,12 @@ Common_EventScript_PkmnCenterJack::
 	case 1, Common_EventScript_PkmnCenterJack_RememberMove
 	case 2, Common_EventScript_PkmnCenterJack_ForgetMove
 	case 3, Common_EventScript_PkmnCenterJack_TeachMove
-	@msgbox LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink, MSGBOX_DEFAULT
-	@goto LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine
+	case 4, Common_EventScript_PkmnCenterJack_ComeBackAnytime
+	case MULTI_B_PRESSED, Common_EventScript_PkmnCenterJack_ComeBackAnytime
 	end
 
 Common_EventScript_PkmnCenterJack_RateNickame::
-	msgbox gText_PkmnCenterJack_Nickname, MSGBOX_DEFAULT
+	goto SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate
     return
 
 Common_EventScript_PkmnCenterJack_RememberMove::
@@ -24,5 +25,9 @@ Common_EventScript_PkmnCenterJack_ForgetMove::
 
 Common_EventScript_PkmnCenterJack_TeachMove::
 	msgbox gText_PkmnCenterJack_Teach, MSGBOX_DEFAULT
+    return
+
+Common_EventScript_PkmnCenterJack_ComeBackAnytime::
+	msgbox gText_PkmnCenterJack_ComeBackAnytime, MSGBOX_DEFAULT
     return
 
