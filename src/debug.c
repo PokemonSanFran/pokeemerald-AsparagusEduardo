@@ -648,7 +648,7 @@ static void GiveItem_SelectItemId(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         gTasks[taskId].data[5] = gTasks[taskId].data[3];
-        gTasks[taskId].data[3] = 0;
+        gTasks[taskId].data[3] = 1;
         gTasks[taskId].data[4] = 0;
 
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
@@ -713,7 +713,7 @@ static void GiveItem_SelectItemQuantity(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(MUS_FANFA4);
+        PlayFanfare(MUS_FANFA4);
         AddBagItem(gTasks[taskId].data[5], gTasks[taskId].data[3]);
         GiveItem_DestroySelectItem(taskId);
     }
