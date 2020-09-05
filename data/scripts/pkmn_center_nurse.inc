@@ -68,7 +68,13 @@ EventScript_PkmnCenterNurse_ReturnPkmn:: @ 82719E2
     applymovement VAR_0x800B, EventScript_PkmnCenterNurse_Bow
     waitmovement 0
     message gText_WeHopeToSeeYouAgain
+    waitmessage
+	applymovement OBJ_EVENT_ID_PLAYER, PkmnCenterNurse_Movement_FaceDown
     return
+
+PkmnCenterNurse_Movement_FaceDown: @ 81EBDC2
+	face_down
+	step_end
 
 EventScript_PkmnCenterNurse_ReturnPkmn2:: @ 8271A03
     message gText_ThankYouForWaiting
