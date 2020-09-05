@@ -218,12 +218,10 @@ static u32 mainseq_4(struct mevent_client * svr)
     case 17:
         InitRamScript_NoObjectEvent(svr->recvBuffer, 1000);
         break;
-    /*
     case 18:
         memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, svr->recvBuffer, 0xbc);
         ValidateEReaderTrainer();
         break;
-    */
     case 21:
         memcpy(gDecompressionBuffer, svr->recvBuffer, ME_SEND_BUF_SIZE);
         svr->mainseqno = 7;
