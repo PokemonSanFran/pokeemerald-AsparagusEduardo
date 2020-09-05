@@ -4980,7 +4980,7 @@ const struct Item gItems[] =
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Tubo {POKEBLOCK}"),
 #else
-        .name = _("{POKEBLOCK} CASE"),
+        .name = _("{POKEBLOCK} case"),
 #endif
         .itemId = ITEM_POKEBLOCK_CASE,
         .price = 0,
@@ -5183,9 +5183,9 @@ const struct Item gItems[] =
     [ITEM_STORAGE_KEY] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-        .name = _("Ll. Habitación 6"),
-#else
         .name = _("Llave Almacén"),
+#else
+        .name = _("Storage Key"),
 #endif
         .itemId = ITEM_STORAGE_KEY,
         .price = 0,
