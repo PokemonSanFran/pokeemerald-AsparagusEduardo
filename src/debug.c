@@ -89,10 +89,28 @@ enum {
     //DEBUG_MENU_ITEM_VARIABLES,
     //DEBUG_MENU_ITEM_WARP_TO_MAP,
     DEBUG_MENU_ITEM_GIVE_ITEM,
-    //DEBUG_MENU_ITEM_HEAL_PARTY,
+    DEBUG_MENU_ITEM_HEAL_PARTY,
     //DEBUG_MENU_ITEM_ACCESS_PC,
     //DEBUG_MENU_ITEM_GIVE_POKEMON,
     DEBUG_MENU_ITEM_CANCEL
+};
+
+enum {
+    DEBUG_UTIL_MENU_ITEM_SAVEBLOCK,
+    DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK,
+    DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
+    DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY,
+    DEBUG_UTIL_MENU_ITEM_WATCHCREDITS,
+};
+
+enum {
+    DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS,
+    DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF,
+    DEBUG_FLAG_MENU_ITEM_NATDEXONOFF,
+    DEBUG_FLAG_MENU_ITEM_POKENAVONOFF,
+    DEBUG_FLAG_MENU_ITEM_FLYANYWHERE,
+    DEBUG_FLAG_MENU_ITEM_GETALLBADGES,
+    DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF,
 };
 
 static const u8 gText_ItemQuantity[] =  _("  Quantity:       \n  {STR_VAR_1}    \n{STR_VAR_2}");
@@ -153,12 +171,12 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
     [DEBUG_MENU_ITEM_UTILITIES] = {gDebugText_Utilities, DEBUG_MENU_ITEM_UTILITIES},
     [DEBUG_MENU_ITEM_FLAGS] = {gDebugText_Flags, DEBUG_MENU_ITEM_FLAGS},
     [DEBUG_MENU_ITEM_GIVE_ITEM] = {gDebugText_GiveItem, DEBUG_MENU_ITEM_GIVE_ITEM},
+    [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
     [DEBUG_MENU_ITEM_CANCEL] = {gDebugText_Cancel, DEBUG_MENU_ITEM_CANCEL}
 };
 /*
     [DEBUG_MENU_ITEM_VARIABLES] = {gDebugText_Variables, DEBUG_MENU_ITEM_VARIABLES},
     [DEBUG_MENU_ITEM_WARP_TO_MAP] = {gDebugText_WarpToMap, DEBUG_MENU_ITEM_WARP_TO_MAP},
-    [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
     [DEBUG_MENU_ITEM_ACCESS_PC] = {gDebugText_AccessPC, DEBUG_MENU_ITEM_ACCESS_PC},
     [DEBUG_MENU_ITEM_GIVE_POKEMON] = {gDebugText_GivePokemon, DEBUG_MENU_ITEM_GIVE_POKEMON},
     [DEBUG_MENU_ITEM_CANCEL] = {gDebugText_Cancel, DEBUG_MENU_ITEM_CANCEL}
@@ -166,22 +184,22 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [0] = {gDebugText_SaveBlockSpace, 0},
-    [1] = {gDebugText_CheckWallClock, 1},
-    [2] = {gDebugText_SetWallClock, 2},
-    [3] = {gDebugText_CheckWeekDay, 3},
-    [4] = {gDebugText_WatchCredits, 4},
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK] = {gDebugText_SaveBlockSpace, DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = {gDebugText_CheckWallClock, DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK] = {gDebugText_SetWallClock, DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY] = {gDebugText_CheckWeekDay, DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY},
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS] = {gDebugText_WatchCredits, DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
-    [0] = {gDebugText_SetPokedexFlags, 0},
-    [1] = {gDebugText_SwitchDex, 1},
-    [2] = {gDebugText_SwitchNationalDex, 2},
-    [3] = {gDebugText_SwitchPokeNav, 3},
-    [4] = {gDebugText_SetFlyFlags, 4},
-    [5] = {gDebugText_GetAllBadges, 5},
-    [6] = {gDebugText_SwitchCollision, 6},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS] = {gDebugText_SetPokedexFlags, DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF] = {gDebugText_SwitchDex, DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF] = {gDebugText_SwitchNationalDex, DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF] = {gDebugText_SwitchPokeNav, DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
+    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE] = {gDebugText_SetFlyFlags, DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
+    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES] = {gDebugText_GetAllBadges, DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
+    [DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF] = {gDebugText_SwitchCollision, DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF},
 };
 
 static void (*const sDebugMenu_Actions_Main[])(u8) =
@@ -189,13 +207,13 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [DEBUG_MENU_ITEM_UTILITIES] = DebugAction_OpenUtilitiesMenu,
     [DEBUG_MENU_ITEM_FLAGS] = DebugAction_OpenFlagsMenu,
     [DEBUG_MENU_ITEM_GIVE_ITEM] = DebugAction_GiveItem,
+    [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
     [DEBUG_MENU_ITEM_CANCEL] = DebugAction_Cancel
 };
 /*
     [DEBUG_MENU_ITEM_FLAGS] = DebugAction_Flags,
     [DEBUG_MENU_ITEM_VARIABLES] = DebugAction_Variables,
     [DEBUG_MENU_ITEM_WARP_TO_MAP] = DebugAction_WarpToMap,
-    [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
     [DEBUG_MENU_ITEM_ACCESS_PC] = DebugAction_AccessPC,
     [DEBUG_MENU_ITEM_GIVE_POKEMON] = DebugAction_GivePokemon,
     [DEBUG_MENU_ITEM_CANCEL] = DebugAction_Cancel
@@ -203,22 +221,22 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
 
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 {
-    [0] = DebugAction_CheckSaveBlock,
-    [1] = DebugAction_CheckWallClock,
-    [2] = DebugAction_SetWallClock,
-    [3] = DebugAction_CheckWeekDay,
-    [4] = DebugAction_Credits,
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK] = DebugAction_CheckSaveBlock,
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK] = DebugAction_CheckWallClock,
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK] = DebugAction_SetWallClock,
+    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY] = DebugAction_CheckWeekDay,
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS] = DebugAction_Credits,
 };
 
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
-    [0] = DebugAction_SetPokedexFlags,
-    [1] = DebugAction_SwitchDex,
-    [2] = DebugAction_SwitchNatDex,
-    [3] = DebugAction_SwitchPokeNav,
-    [4] = DebugAction_SetFlyFlags,
-    [5] = DebugAction_SetBadgeFlags,
-    [6] = DebugAction_CollisionOnOff,
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS] = DebugAction_SetPokedexFlags,
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF] = DebugAction_SwitchDex,
+    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF] = DebugAction_SwitchNatDex,
+    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF] = DebugAction_SwitchPokeNav,
+    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE] = DebugAction_SetFlyFlags,
+    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES] = DebugAction_SetBadgeFlags,
+    [DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF] = DebugAction_CollisionOnOff,
 };
 
 static const struct WindowTemplate sDebugMenuWindowTemplate =
@@ -590,14 +608,16 @@ static void GiveItem_SelectItemId(u8 taskId)
         if(gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] >= ITEMS_COUNT){
+            if(gTasks[taskId].data[3] >= ITEMS_COUNT)
+            {
                 gTasks[taskId].data[3] = ITEMS_COUNT - 1;
             }
         }
         if(gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0){
+            if(gTasks[taskId].data[3] < 0)
+            {
                 gTasks[taskId].data[3] = 0;
             }
         }
@@ -655,14 +675,16 @@ static void GiveItem_SelectItemQuantity(u8 taskId)
         if(gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] >= 100){
+            if(gTasks[taskId].data[3] >= 100)
+            {
                 gTasks[taskId].data[3] = 99;
             }
         }
         if(gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if(gTasks[taskId].data[3] < 0){
+            if(gTasks[taskId].data[3] < 0)
+            {
                 gTasks[taskId].data[3] = 0;
             }
         }
@@ -719,7 +741,6 @@ static void DebugAction_HealParty(u8 taskId)
 {
     PlaySE(SE_KAIFUKU);
     HealPlayerParty();
-    Debug_DestroyMenu(taskId);
 }
 
 #endif
