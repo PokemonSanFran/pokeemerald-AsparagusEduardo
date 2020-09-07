@@ -1856,10 +1856,10 @@ const u8 gText_MoveItemWhere[] = _("Move item to where?");
 const u8 gText_XsYAnd[] = _("{STR_VAR_1}'s {STR_VAR_2} and\n");
 const u8 gText_XsYWereSwapped[] = _("{STR_VAR_1}'s {STR_VAR_2} were swapped!{PAUSE_UNTIL_PRESS}");
 
-const u8 gText_JackRateNickname[] = _("Inspeccionar mote");
-const u8 gText_JackRememberMove[] = _("Recordar movimiento");
-const u8 gText_JackForgetMove[] = _("Olvidar movimiento");
-const u8 gText_JackTeachMove[] = _("Enseñar movimiento");
+const u8 gText_JackRateNickname[] = _("Evaluar un mote");
+const u8 gText_JackRememberMove[] = _("Recordar un movimiento");
+const u8 gText_JackForgetMove[] = _("Olvidar un movimiento");
+const u8 gText_JackTeachMove[] = _("Enseñar un movimiento");
 
 #else
 

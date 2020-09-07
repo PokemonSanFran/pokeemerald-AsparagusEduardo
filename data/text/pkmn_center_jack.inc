@@ -1,29 +1,117 @@
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
+
 gText_PkmnCenterJack_GotPokemonQuestions::
-    .string "Got some Pokémon questions?\n"
-    .string "Feel free to ask away.$"
-gText_PkmnCenterJack_Nickname::
-    .string "Nickname$"
+    .string "Soy todo un experto en Pokémon.\n"
+    .string "¿En qué te puedo ayudar hoy?$"
+
+@Rate Nickname
+Common_PkmnCenterJack_Text_CritiqueWhichMonNickname:
+	.string "¿Qué mote quieres que evalúe?$"
+
+Common_PkmnCenterJack_Text_FineNameSuggestBetterOne:
+	.string "Hmmm… ¿{STR_VAR_1}, has dicho?\n"
+	.string "No está mal, no está mal…\p"
+	.string "Pero ¿cómo decirlo? Creo que se le\n"
+	.string "podría poner un mote aún mejor.\l"
+	.string "¿Qué me dices?$"
+
+Common_PkmnCenterJack_Text_WhatShallNewNameBe:
+	.string "Así me gusta. A ver…\n"
+	.string "¿Qué mote crees que le pegaría?$"
+
+Common_PkmnCenterJack_Text_MonShallBeKnownAsName:
+	.string "¡Ya está! ¡A partir de ahora, el mote\n"
+	.string "de esté Pokémon será {STR_VAR_1}!\p"
+	.string "Es un mote mucho mejor que el\n"
+	.string "anterior. ¡Qué bien!$"
+
+Common_PkmnCenterJack_Text_DoVisitAgain:
+	.string "Entiendo…\n"
+	.string "Entonces vuelve cuando quieras.$"
+
+Common_PkmnCenterJack_Text_NameNoDifferentYetSuperior:
+	.string "¡Ya está! ¡A partir de ahora, el mote\n"
+	.string "de esté Pokémon será {STR_VAR_1}!\p"
+	.string "No parece muy diferente del anterior\n"
+	.string "y, sin embargo, es muchísimo mejor.\l"
+	.string "¡Qué suerte tienes!$"
+
+Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg:
+	.string "Pero vamos a ver…\n"
+	.string "¡Esto es sólo un Huevo!$"
+
+@Remember Move
 gText_PkmnCenterJack_Remember::
-    .string "Remember$"
+    .string "Recordar$"
+
+@Forget Move
 gText_PkmnCenterJack_Forget::
-    .string "Forget$"
+    .string "Olvidar$"
+
+@Move Tutor
 gText_PkmnCenterJack_Teach::
-    .string "Teach$"
+    .string "Tutor$"
+
+@Nevermind
 gText_PkmnCenterJack_ComeBackAnytime::
-    .string "Well, come back anytime.$"
+    .string "¡Vuelve cuando quieras!$"
+
 #else
+
 gText_PkmnCenterJack_GotPokemonQuestions::
     .string "Got some Pokémon questions?\n"
     .string "Feel free to ask away.$"
-gText_PkmnCenterJack_Nickname::
-    .string "Nickname$"
+
+@Rate Nickname
+Common_PkmnCenterJack_Text_CritiqueWhichMonNickname:
+	.string "Which Pokémon's nickname should\n"
+	.string "I rate for you?$"
+
+Common_PkmnCenterJack_Text_FineNameSuggestBetterOne:
+	.string "Hmmm… {STR_VAR_1}, is it? That is\n"
+	.string "quite a fine nickname.\p"
+	.string "But I think we could give it\n"
+	.string "one even better. What do you think?$"
+
+Common_PkmnCenterJack_Text_WhatShallNewNameBe:
+	.string "I see! What would you like the new\n"
+	.string "nickname to be?$"
+
+Common_PkmnCenterJack_Text_MonShallBeKnownAsName:
+	.string "Done! From now on, this Pokémon\n"
+	.string "shall be known as {STR_VAR_1}!\p"
+	.string "You're right, that does seem to\n"
+	.string "fit it better. Nicely done!$"
+
+Common_PkmnCenterJack_Text_DoVisitAgain:
+	.string "All right. Let me know if you\n"
+	.string "change your mind.$"
+
+Common_PkmnCenterJack_Text_NameNoDifferentYetSuperior:
+	.string "Done! From now on, this Pokémon\n"
+	.string "shall be known as {STR_VAR_1}!\p"
+	.string "It looks no different from before,\n"
+	.string "and yet, this is vastly superior!\p"
+	.string "How fortunate for you!$"
+
+Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg:
+	.string "Now, now…\n"
+	.string "That is merely an Egg.$"
+
+@Remember Move
 gText_PkmnCenterJack_Remember::
     .string "Remember$"
+
+@Forget Move
 gText_PkmnCenterJack_Forget::
     .string "Forget$"
+
+@Move Tutor
 gText_PkmnCenterJack_Teach::
     .string "Teach$"
+
+@Nevermind
 gText_PkmnCenterJack_ComeBackAnytime::
     .string "Well, come back anytime.$"
+
 #endif
