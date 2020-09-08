@@ -1355,11 +1355,11 @@ bool8 sub_81AC2C0(void)
 {
     if (gBagPositionStruct.location <= ITEMMENULOCATION_BATTLE)
     {
-        u8 temp = gBagPositionStruct.pocket - 2;
-        if (temp > 1)
-            return TRUE;
+        u8 temp = gBagPositionStruct.pocket + 1;
+        if (temp == POCKET_TM_HM || temp == POCKET_BERRIES)
+            return FALSE;
     }
-    return FALSE;
+    return TRUE;
 }
 
 void BagMenu_SwapItems(u8 taskId)
