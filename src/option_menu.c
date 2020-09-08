@@ -311,16 +311,16 @@ static void ScrollMenu(u32 direction, bool32 copyWin)
 static void Task_OptionMenuProcessInput(u8 taskId)
 {
     int i;
-    if (gMain.newKeys & A_BUTTON)
+    if (JOY_NEW(A_BUTTON))
     {
         if (sOptions->menuCursor == MENUITEM_CANCEL)
             gTasks[taskId].func = Task_OptionMenuSave;
     }
-    else if (gMain.newKeys & B_BUTTON)
+    else if (JOY_NEW(B_BUTTON))
     {
         gTasks[taskId].func = Task_OptionMenuSave;
     }
-    else if (gMain.newKeys & DPAD_UP)
+    else if (JOY_NEW(DPAD_UP))
     {
         if (sOptions->visibleCursor == 3) // don't advance visible cursor until scrolled to the bottom
         {
@@ -352,7 +352,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
         }
         HighlightOptionMenuItem(sOptions->visibleCursor);
     }
-    else if (gMain.newKeys & DPAD_DOWN)
+    else if (JOY_NEW(DPAD_DOWN))
     {
         if (sOptions->visibleCursor == 3) // don't advance visible cursor until scrolled to the bottom
         {
@@ -451,12 +451,12 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 // Process Input functions
 static int XOptions_ProcessInput(int x, int selection)
 {
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (++selection > (x - 1))
             selection = 0;
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (--selection < 0)
             selection = (x - 1);
@@ -481,7 +481,7 @@ static int ElevenOptions_ProcessInput(int selection)
 
 static int TwoOptions_ProcessInput(int selection)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
         selection ^= 1;
 
     return selection;
@@ -489,7 +489,7 @@ static int TwoOptions_ProcessInput(int selection)
 
 static int Sound_ProcessInput(int selection)
 {
-    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
         selection ^= 1;
         SetPokemonCryStereo(selection);
@@ -500,7 +500,7 @@ static int Sound_ProcessInput(int selection)
 
 static int FrameType_ProcessInput(int selection)
 {
-    if (gMain.newKeys & DPAD_RIGHT)
+    if (JOY_NEW(DPAD_RIGHT))
     {
         if (selection < WINDOW_FRAMES_COUNT - 1)
             selection++;
@@ -510,7 +510,7 @@ static int FrameType_ProcessInput(int selection)
         LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
         LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
     }
-    if (gMain.newKeys & DPAD_LEFT)
+    if (JOY_NEW(DPAD_LEFT))
     {
         if (selection != 0)
             selection--;

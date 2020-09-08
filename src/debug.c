@@ -715,7 +715,7 @@ static void GiveItem_SelectItemQuantity(u8 taskId)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        PlayFanfare(MUS_FANFA4);
+        PlayFanfare(MUS_OBTAIN_ITEM);
         AddBagItem(gTasks[taskId].data[5], gTasks[taskId].data[3]);
         GiveItem_DestroySelectItem(taskId);
     }
@@ -741,7 +741,7 @@ static void GiveItem_DestroySelectItem(u8 taskId)
 
 static void DebugAction_HealParty(u8 taskId)
 {
-    PlaySE(SE_KAIFUKU);
+    PlaySE(SE_USE_ITEM);
     HealPlayerParty();
 }
 
