@@ -3,24 +3,16 @@ Common_EventScript_PkmnCenterJack::
 	multichoice 16, 0, MULTI_POKECENTER_JACK, 0
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
-	case 0, Common_EventScript_PkmnCenterJack_RateNickame
+	case 0, Common_EventScript_PkmnCenterJack_NameRater_ChooseMonToRate
 	case 1, Common_EventScript_PkmnCenterJack_RememberMove
-	case 2, Common_EventScript_PkmnCenterJack_ForgetMove
+	case 2, Common_EventScript_PkmnCenterJack_MoveDeleter_ChooseMonAndMoveToForget
 	case 3, Common_EventScript_PkmnCenterJack_TeachMove
 	case 4, Common_EventScript_PkmnCenterJack_ComeBackAnytime
 	case MULTI_B_PRESSED, Common_EventScript_PkmnCenterJack_ComeBackAnytime
 	end
 
-Common_EventScript_PkmnCenterJack_RateNickame::
-	goto Common_EventScript_PkmnCenterJack_ChooseMonToRate
-    return
-
 Common_EventScript_PkmnCenterJack_RememberMove::
 	msgbox gText_PkmnCenterJack_Remember, MSGBOX_DEFAULT
-    return
-
-Common_EventScript_PkmnCenterJack_ForgetMove::
-	msgbox gText_PkmnCenterJack_Forget, MSGBOX_DEFAULT
     return
 
 Common_EventScript_PkmnCenterJack_TeachMove::
@@ -31,50 +23,111 @@ Common_EventScript_PkmnCenterJack_ComeBackAnytime::
 	msgbox gText_PkmnCenterJack_ComeBackAnytime, MSGBOX_DEFAULT
     return
 
-Common_EventScript_PkmnCenterJack_ChooseMonToRate:: @ 8209AC6
+@Rate Nickname
+Common_EventScript_PkmnCenterJack_NameRater_ChooseMonToRate::
 	msgbox Common_PkmnCenterJack_Text_CritiqueWhichMonNickname, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, 255
-	goto_if_ne Common_EventScript_PkmnCenterJack_RateMonNickname
+	goto_if_ne Common_EventScript_PkmnCenterJack_NameRater_RateMonNickname
 	compare VAR_0x8004, 255
-	goto_if_eq Common_EventScript_PkmnCenterJack_DeclineNameRate
+	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_DeclineNameRate
 	end
 
-Common_EventScript_PkmnCenterJack_DeclineNameRate:: @ 8209AE9
+Common_EventScript_PkmnCenterJack_NameRater_DeclineNameRate::
 	msgbox Common_PkmnCenterJack_Text_DoVisitAgain, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_PkmnCenterJack_RateMonNickname:: @ 8209AF3
+Common_EventScript_PkmnCenterJack_NameRater_RateMonNickname::
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq Common_EventScript_PkmnCenterJack_CantRateEgg
+	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_CantRateEgg
 	special BufferMonNickname
 	msgbox Common_PkmnCenterJack_Text_FineNameSuggestBetterOne, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq Common_EventScript_PkmnCenterJack_ChangeNickname
+	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_ChangeNickname
 	compare VAR_RESULT, NO
-	goto_if_eq Common_EventScript_PkmnCenterJack_DeclineNameRate
+	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_DeclineNameRate
 	end
 
-Common_EventScript_PkmnCenterJack_CantRateEgg:: @ 8209B46
+Common_EventScript_PkmnCenterJack_NameRater_CantRateEgg::
 	msgbox Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_PkmnCenterJack_ChangeNickname:: @ 8209B5A
+Common_EventScript_PkmnCenterJack_NameRater_ChangeNickname::
 	msgbox Common_PkmnCenterJack_Text_WhatShallNewNameBe, MSGBOX_DEFAULT
 	call Common_EventScript_NameReceivedPartyMon
 	specialvar VAR_RESULT, TryPutNameRaterShowOnTheAir
 	special BufferMonNickname
 	compare VAR_RESULT, TRUE
-	goto_if_eq Common_EventScript_PkmnCenterJack_NewNameDifferent
+	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_NewNameDifferent
 	msgbox Common_PkmnCenterJack_Text_NameNoDifferentYetSuperior, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_PkmnCenterJack_NewNameDifferent:: @ 8209B84
+Common_EventScript_PkmnCenterJack_NameRater_NewNameDifferent::
 	msgbox Common_PkmnCenterJack_Text_MonShallBeKnownAsName, MSGBOX_DEFAULT
 	release
+	end
+
+@Move Deleter
+Common_EventScript_PkmnCenterJack_MoveDeleter_ChooseMonAndMoveToForget::
+	msgbox Common_PkmnCenterJack_Text_WhichMonShouldForget, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	compare VAR_0x8004, 255
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_ComeAgain
+	special IsSelectedMonEgg
+	compare VAR_RESULT, TRUE
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_EggCantForgetMoves
+	special GetNumMovesSelectedMonHas
+	compare VAR_RESULT, 1
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_MonOnlyKnowsOneMove
+	msgbox Common_PkmnCenterJack_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+	special MoveDeleterChooseMoveToForget
+	fadescreen FADE_FROM_BLACK
+	compare VAR_0x8005, MAX_MON_MOVES
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_ChooseMonAndMoveToForget
+	special BufferMoveDeleterNicknameAndMove
+	msgbox Common_PkmnCenterJack_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
+	switch VAR_RESULT
+	case YES, Common_EventScript_PkmnCenterJack_MoveDeleter_TryForgetMove
+	case NO, Common_EventScript_PkmnCenterJack_MoveDeleter_ComeAgain
+	releaseall
+	end
+
+Common_EventScript_PkmnCenterJack_MoveDeleter_TryForgetMove::
+	special IsLastMonThatKnowsSurf
+	compare VAR_RESULT, TRUE
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_LastMonWithSurf
+	special MoveDeleterForgetMove
+	playfanfare MUS_ME_WASURE
+	waitfanfare
+	msgbox Common_PkmnCenterJack_Text_MonHasForgottenMove, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Common_EventScript_PkmnCenterJack_MoveDeleter_MonOnlyKnowsOneMove::
+	special BufferMoveDeleterNicknameAndMove
+	msgbox Common_PkmnCenterJack_Text_MonOnlyKnowsOneMove, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Common_EventScript_PkmnCenterJack_MoveDeleter_EggCantForgetMoves::
+	msgbox Common_PkmnCenterJack_Text_EggCantForgetMoves, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Common_EventScript_PkmnCenterJack_MoveDeleter_ComeAgain::
+	msgbox Common_PkmnCenterJack_Text_ComeAgain, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Common_EventScript_PkmnCenterJack_MoveDeleter_LastMonWithSurf::
+	special BufferMoveDeleterNicknameAndMove
+	msgbox Common_PkmnCenterJack_Text_CantForgetSurf, MSGBOX_DEFAULT
+	releaseall
 	end

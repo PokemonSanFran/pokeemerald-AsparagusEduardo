@@ -45,8 +45,37 @@ gText_PkmnCenterJack_Remember::
     .string "Recordar$"
 
 @Forget Move
-gText_PkmnCenterJack_Forget::
-    .string "Olvidar$"
+Common_PkmnCenterJack_Text_WhichMonShouldForget:
+	.string "Which Pokémon should forget a move?$"
+
+Common_PkmnCenterJack_Text_WhichMoveShouldBeForgotten:
+	.string "Which move should be forgotten?$"
+
+Common_PkmnCenterJack_Text_MonOnlyKnowsOneMove:
+	.string "{STR_VAR_1} knows only one move\n"
+	.string "so it can't be forgotten…$"
+
+Common_PkmnCenterJack_Text_MonsMoveShouldBeForgotten:
+	.string "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
+	.string "That move should be forgotten?$"
+
+Common_PkmnCenterJack_Text_MonHasForgottenMove:
+	.string "It worked to perfection!\p"
+	.string "{STR_VAR_1} has forgotten\n"
+	.string "{STR_VAR_2} completely.$"
+
+Common_PkmnCenterJack_Text_ComeAgain:
+	.string "Come again if there are moves that\n"
+	.string "need to be forgotten.$"
+
+Common_PkmnCenterJack_Text_EggCantForgetMoves:
+	.string "What?\n"
+	.string "No Egg should know any moves.$"
+
+Common_PkmnCenterJack_Text_CantForgetSurf:
+	.string "Hm!\p"
+	.string "Your {STR_VAR_1} doesn't seem willing\n"
+	.string "to forget Surf.$"
 
 @Move Tutor
 gText_PkmnCenterJack_Teach::
@@ -103,8 +132,37 @@ gText_PkmnCenterJack_Remember::
     .string "Remember$"
 
 @Forget Move
-gText_PkmnCenterJack_Forget::
-    .string "Forget$"
+Common_PkmnCenterJack_Text_WhichMonShouldForget:
+	.string "Which Pokémon should forget a move?$"
+
+Common_PkmnCenterJack_Text_WhichMoveShouldBeForgotten:
+	.string "Which move should be forgotten?$"
+
+Common_PkmnCenterJack_Text_MonOnlyKnowsOneMove:
+	.string "{STR_VAR_1} knows only one move\n"
+	.string "so it can't be forgotten…$"
+
+Common_PkmnCenterJack_Text_MonsMoveShouldBeForgotten:
+	.string "Hm! {STR_VAR_1}'s {STR_VAR_2}?\n"
+	.string "That move should be forgotten?$"
+
+Common_PkmnCenterJack_Text_MonHasForgottenMove:
+	.string "It worked to perfection!\p"
+	.string "{STR_VAR_1} has forgotten\n"
+	.string "{STR_VAR_2} completely.$"
+
+Common_PkmnCenterJack_Text_ComeAgain:
+	.string "Come again if there are moves that\n"
+	.string "need to be forgotten.$"
+
+Common_PkmnCenterJack_Text_EggCantForgetMoves:
+	.string "What?\n"
+	.string "No Egg should know any moves.$"
+
+Common_PkmnCenterJack_Text_CantForgetSurf:
+	.string "Hm!\p"
+	.string "Your {STR_VAR_1} doesn't seem willing\n"
+	.string "to forget Surf.$"
 
 @Move Tutor
 gText_PkmnCenterJack_Teach::
