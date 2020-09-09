@@ -262,25 +262,11 @@ MoveTutor_EventScript_DoubleEdgeTaught:: @ 82C82B4
 PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor:: @ 82C82BE
 	lock
 	faceplayer
-	goto_if_set FLAG_MOVE_TUTOR_TAUGHT_EXPLOSION, MoveTutor_EventScript_ExplosionTaught
-	msgbox MoveTutor_Text_ExplosionTeach, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq MoveTutor_EventScript_ExplosionDeclined
-	call MoveTutor_EventScript_CanOnlyBeLearnedOnce
-	compare VAR_RESULT, NO
-	goto_if_eq MoveTutor_EventScript_ExplosionDeclined
-	msgbox MoveTutor_Text_ExplosionWhichMon, MSGBOX_DEFAULT
-	setvar VAR_0x8005, TUTOR_MOVE_EXPLOSION
-	call MoveTutor_EventScript_OpenPartyMenu
-	compare VAR_RESULT, 0
-	goto_if_eq MoveTutor_EventScript_ExplosionDeclined
-	setflag FLAG_MOVE_TUTOR_TAUGHT_EXPLOSION
+	goto_if_set FLAG_RECEIVED_PACIFIDLOG_TM_EXPLOSION, MoveTutor_EventScript_ExplosionTaught
+	msgbox MoveTutor_Text_ExplosionTeach, MSGBOX_DEFAULT
+	giveitem ITEM_TM64
+	setflag FLAG_RECEIVED_PACIFIDLOG_TM_EXPLOSION
 	goto MoveTutor_EventScript_ExplosionTaught
-	end
-
-MoveTutor_EventScript_ExplosionDeclined:: @ 82C8312
-	msgbox MoveTutor_Text_ExplosionDeclined, MSGBOX_DEFAULT
-	release
 	end
 
 MoveTutor_EventScript_ExplosionTaught:: @ 82C831C

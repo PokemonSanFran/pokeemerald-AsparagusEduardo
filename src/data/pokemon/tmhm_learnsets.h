@@ -2074,6 +2074,7 @@ static const u8 sGeodudeTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -2100,6 +2101,7 @@ static const u8 sGravelerTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -2128,6 +2130,7 @@ static const u8 sGolemTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -2275,6 +2278,7 @@ static const u8 sMagnemiteTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -2298,6 +2302,7 @@ static const u8 sMagnetonTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -2452,6 +2457,7 @@ static const u8 sGrimerTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     0xFF,
 };
@@ -2486,6 +2492,7 @@ static const u8 sMukTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -2509,6 +2516,7 @@ static const u8 sShellderTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM03_SURF),
     TMHM(HM08_DIVE),
     0xFF,
@@ -2534,6 +2542,7 @@ static const u8 sCloysterTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM03_SURF),
     TMHM(HM08_DIVE),
     0xFF,
@@ -2564,6 +2573,7 @@ static const u8 sGastlyTMHMLearnset[] =
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -2592,6 +2602,7 @@ static const u8 sHaunterTMHMLearnset[] =
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -2623,6 +2634,7 @@ static const u8 sGengarTMHMLearnset[] =
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -2649,6 +2661,7 @@ static const u8 sOnixTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -2796,6 +2809,7 @@ static const u8 sVoltorbTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -2821,6 +2835,7 @@ static const u8 sElectrodeTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -2846,6 +2861,7 @@ static const u8 sExeggcuteTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
     0xFF,
@@ -2873,6 +2889,7 @@ static const u8 sExeggutorTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
     0xFF,
@@ -3054,6 +3071,7 @@ static const u8 sKoffingTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -3083,6 +3101,7 @@ static const u8 sWeezingTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -4349,6 +4368,7 @@ static const u8 sMewTMHMLearnset[] =
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM49_SNATCH),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM02_FLY),
     TMHM(HM03_SURF),
@@ -5305,6 +5325,7 @@ static const u8 sSudowoodoTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -5793,6 +5814,7 @@ static const u8 sPinecoTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -5819,6 +5841,7 @@ static const u8 sForretressTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -5912,6 +5935,7 @@ static const u8 sSteelixTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
@@ -6018,6 +6042,7 @@ static const u8 sQwilfishTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM03_SURF),
     TMHM(HM07_WATERFALL),
     TMHM(HM08_DIVE),
@@ -6251,6 +6276,7 @@ static const u8 sMagcargoTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -6341,6 +6367,7 @@ static const u8 sCorsolaTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM03_SURF),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
@@ -7746,6 +7773,7 @@ static const u8 sSeedotTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -7773,6 +7801,7 @@ static const u8 sNuzleafTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
@@ -7803,6 +7832,7 @@ static const u8 sShiftryTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
@@ -8474,6 +8504,7 @@ static const u8 sNosepassTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -8965,6 +8996,7 @@ static const u8 sGulpinTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -8994,6 +9026,7 @@ static const u8 sSwalotTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -9161,6 +9194,7 @@ static const u8 sCameruptTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -9187,6 +9221,7 @@ static const u8 sTorkoalTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -9562,6 +9597,7 @@ static const u8 sLunatoneTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -9592,6 +9628,7 @@ static const u8 sSolrockTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -9740,6 +9777,7 @@ static const u8 sBaltoyTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -9770,6 +9808,7 @@ static const u8 sClaydolTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
     TMHM(HM06_ROCK_SMASH),
@@ -10272,6 +10311,7 @@ static const u8 sGlalieTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -10608,6 +10648,7 @@ static const u8 sMetangTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
@@ -10639,6 +10680,7 @@ static const u8 sMetagrossTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
@@ -10669,6 +10711,7 @@ static const u8 sRegirockTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -10698,6 +10741,7 @@ static const u8 sRegiceTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -10727,6 +10771,7 @@ static const u8 sRegisteelTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -12017,6 +12062,7 @@ static const u8 sDrifloonTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM05_FLASH),
     0xFF,
@@ -12045,6 +12091,7 @@ static const u8 sDrifblimTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM02_FLY),
     TMHM(HM05_FLASH),
@@ -12286,6 +12333,7 @@ static const u8 sStunkyTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -12317,6 +12365,7 @@ static const u8 sSkuntankTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
@@ -12374,6 +12423,7 @@ static const u8 sBronzongTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
     TMHM(HM06_ROCK_SMASH),
@@ -12399,6 +12449,7 @@ static const u8 sBonslyTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -13099,6 +13150,7 @@ static const u8 sMagnezoneTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -13135,6 +13187,7 @@ static const u8 sLickilickyTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM03_SURF),
     TMHM(HM04_STRENGTH),
@@ -13545,6 +13598,7 @@ static const u8 sProbopassTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -13738,6 +13792,7 @@ static const u8 sAzelfTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -13845,6 +13900,7 @@ static const u8 sHeatranTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -14941,6 +14997,7 @@ static const u8 sRoggenrolaTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -14961,6 +15018,7 @@ static const u8 sBoldoreTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -14982,6 +15040,7 @@ static const u8 sGigalithTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -16084,6 +16143,7 @@ static const u8 sTrubbishTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -16107,6 +16167,7 @@ static const u8 sGarbodorTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -16338,6 +16399,7 @@ static const u8 sSolosisTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -16366,6 +16428,7 @@ static const u8 sDuosionTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -16396,6 +16459,7 @@ static const u8 sReuniclusTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM48_SKILL_SWAP),
     TMHM(TM49_SNATCH),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
     TMHM(HM06_ROCK_SMASH),
@@ -16470,6 +16534,7 @@ static const u8 sVanilliteTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -16492,6 +16557,7 @@ static const u8 sVanillishTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -16515,6 +16581,7 @@ static const u8 sVanilluxeTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -16825,6 +16892,7 @@ static const u8 sFerroseedTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -16848,6 +16916,7 @@ static const u8 sFerrothornTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM05_FLASH),
@@ -17287,6 +17356,7 @@ static const u8 sCryogonalTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -18103,6 +18173,7 @@ static const u8 sLandorusTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM02_FLY),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
@@ -18224,6 +18295,7 @@ static const u8 sGenesectTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM02_FLY),
     TMHM(HM05_FLASH),
     0xFF,
@@ -19705,6 +19777,7 @@ static const u8 sCarbinkTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -19895,6 +19968,7 @@ static const u8 sPumpkabooTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -19925,6 +19999,7 @@ static const u8 sGourgeistTMHMLearnset[] =
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     TMHM(HM06_ROCK_SMASH),
     0xFF,
@@ -20147,6 +20222,7 @@ static const u8 sDiancieTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM48_SKILL_SWAP),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM05_FLASH),
     0xFF,
 };
@@ -20206,6 +20282,7 @@ static const u8 sVolcanionTMHMLearnset[] =
     TMHM(TM43_SECRET_POWER),
     TMHM(TM44_REST),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM01_CUT),
     TMHM(HM04_STRENGTH),
     TMHM(HM06_ROCK_SMASH),
@@ -21287,6 +21364,7 @@ static const u8 sSilvallyTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM44_REST),
     TMHM(TM47_STEEL_WING),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM03_SURF),
     0xFF,
 };
@@ -21311,6 +21389,7 @@ static const u8 sMiniorTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -21354,6 +21433,7 @@ static const u8 sTurtonatorTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -21824,6 +21904,7 @@ static const u8 sCelesteelaTMHMLearnset[] =
     TMHM(TM38_FIRE_BLAST),
     TMHM(TM42_FACADE),
     TMHM(TM44_REST),
+    TMHM(TM64_EXPLOSION),
     TMHM(HM02_FLY),
     0xFF,
 };
@@ -21905,6 +21986,7 @@ static const u8 sMagearnaTMHMLearnset[] =
     TMHM(TM31_BRICK_BREAK),
     TMHM(TM32_DOUBLE_TEAM),
     TMHM(TM33_REFLECT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -22002,6 +22084,7 @@ static const u8 sBlacephalonTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM46_THIEF),
     TMHM(TM50_OVERHEAT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -22598,6 +22681,7 @@ static const u8 sAlolanGeodudeTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -22621,6 +22705,7 @@ static const u8 sAlolanGravelerTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -22646,6 +22731,7 @@ static const u8 sAlolanGolemTMHMLearnset[] =
     TMHM(TM42_FACADE),
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -22670,6 +22756,7 @@ static const u8 sAlolanGrimerTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -22696,6 +22783,7 @@ static const u8 sAlolanMukTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 
@@ -22720,6 +22808,7 @@ static const u8 sAlolanExeggutorTMHMLearnset[] =
     TMHM(TM44_REST),
     TMHM(TM45_ATTRACT),
     TMHM(TM46_THIEF),
+    TMHM(TM64_EXPLOSION),
     0xFF,
 };
 

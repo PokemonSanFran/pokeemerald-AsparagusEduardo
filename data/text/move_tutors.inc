@@ -219,15 +219,7 @@ MoveTutor_Text_ExplosionTeach: @ 82C7CFA
 	.string "Seriously, I'm going to cause\n"
 	.string "a huge Explosion of popularity!\p"
 	.string "If you overheard that, I'll happily\n"
-	.string "teach Explosion to your Pokémon!$"
-
-MoveTutor_Text_ExplosionDeclined: @ 82C7E04
-	.string "Gaah! You're turning me down because\n"
-	.string "I live in the country?$"
-
-MoveTutor_Text_ExplosionWhichMon: @ 82C7E40
-	.string "Fine! An Explosion it is!\n"
-	.string "Which Pokémon wants to blow up?$"
+	.string "give you this TM for your Pokémon!$"
 
 MoveTutor_Text_ExplosionTaught: @ 82C7E7A
 	.string "For a long time, I've taught Pokémon\n"

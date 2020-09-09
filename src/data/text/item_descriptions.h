@@ -1740,6 +1740,10 @@ static const u8 sTM50Desc[] = _(
     "fuerza, pero baja\n"
     "mucho el At. Esp.");
 
+static const u8 sTM64Desc[] = _(
+    "Causa mucho daño,\n"
+    "pero te debilita.");
+
 static const u8 sHM01Desc[] = _(
     "Corta con finas\n"
     "cuchillas, afiladas\n"
@@ -4562,6 +4566,11 @@ static const u8 sTM50Desc[] = _(
     "Enables full-power\n"
     "attack, but sharply\n"
     "lowers Sp. Atk.");
+
+static const u8 sTM64Desc[] = _(
+    "Inflicts severe\n"
+    "damage but makes\n"
+    "the user faint.");
 
 
 static const u8 sHM01Desc[] = _(

@@ -6066,6 +6066,23 @@ const struct Item gItems[] =
         .importance = 1,
     },
 
+    [ITEM_TM64_EXPLOSION] =
+    {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Explosión"),
+#else
+        .name = _("Explosion"),
+#endif
+        .itemId = ITEM_TM64_EXPLOSION,
+        .price = 3000,
+        .description = sTM64Desc,
+        .pocket = POCKET_TM_HM,
+        .type = 1,
+        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .secondaryId = 0,
+        .importance = 1,
+    },
+
     [ITEM_HM01_CUT] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH

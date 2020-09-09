@@ -766,6 +766,8 @@
 #define ITEM_TM49_SNATCH        ITEM_TM49
 #define ITEM_TM50_OVERHEAT      ITEM_TM50
 
+#define ITEM_TM64_EXPLOSION     ITEM_TM64
+
 #define ITEM_HM01_CUT           ITEM_HM01
 #define ITEM_HM02_FLY           ITEM_HM02
 #define ITEM_HM03_SURF          ITEM_HM03
