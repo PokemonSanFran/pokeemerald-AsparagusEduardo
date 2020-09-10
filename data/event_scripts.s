@@ -838,12 +838,12 @@ Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 
 @ The below and surf.inc could be split into some text/notices.inc
 gText_PokemartSign:: @ 8272B6A
-	.string "“Selected items for your convenience!”\n"
-	.string "Pokémon Mart$"
+	.string "Tienda Pokémon\n"
+	.string "“¡Gran gama de artículos selectos!”$"
 
 gText_PokemonCenterSign:: @ 8272B9E
-	.string "“Rejuvenate your tired partners!”\n"
-	.string "Pokémon Center$"
+	.string "Centro Pokémon\n"
+	.string "“¡Rejuvenece a tus cansados amigos!”$"
 
 gText_MomOrDadMightLikeThisProgram:: @ 8272BCF
 	.string "{STR_VAR_1} might like this program.\n"
@@ -863,13 +863,15 @@ gText_SelectWithoutRegisteredItem:: @ 8272C98
 	.string "registered to Select for easy use.$"
 
 gText_PokemonTrainerSchoolEmail:: @ 8272CD5
-	.string "There's an e-mail from Pokémon Trainer\n"
-	.string "School.\p"
-	.string "… … … … … …\p"
-	.string "A Pokémon may learn up to four moves.\p"
-	.string "A Trainer's expertise is tested on the\n"
-	.string "move sets chosen for Pokémon.\p"
-	.string "… … … … … …$"
+	.string "Tienes un correo electrónico de la\n"
+	.string "Escuela de Entrenadores Pokémon.\p"
+	.string "A ver…\p"
+	.string "“Un Pokémon puede aprender\n"
+	.string "hasta cuatro movimientos.\p"
+	.string "La habilidad de un Entrenador\n"
+	.string "se aprecia por la combinación\l"
+	.string "de movimientos de sus Pokémon.”\p"
+	.string "Qué interesante…$"
 
 gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} encendió el PC.$"
@@ -882,8 +884,10 @@ gText_UnusedNicknameReceivedPokemon:: @ 8272DB3
 	.string "the {STR_VAR_2} you received?$"
 
 gText_PlayerWhitedOut:: @ 8272DE3
-	.string "{PLAYER} is out of usable\n"
-	.string "Pokémon!\p{PLAYER} whited out!$"
+	.string "¡A {PLAYER} no le\n"
+	.string "quedan Pokémon!\p"
+	.string "¡{PLAYER} está fuera\n"
+	.string "de combate!$"
 
 gText_RegisteredTrainerinPokeNav:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"

@@ -12,11 +12,11 @@ static const u8 sDoubleSlapDescription[] = _(
 
 static const u8 sCometPunchDescription[] = _(
     "Pega de 2 a 5\n"
-	"veces seguidas.");
+    "veces seguidas.");
 
 static const u8 sMegaPunchDescription[] = _(
     "Un puñetazo de gran\n"
-	"potencia.");
+    "potencia.");
 
 static const u8 sPayDayDescription[] = _(
     "Arroja monedas\n"

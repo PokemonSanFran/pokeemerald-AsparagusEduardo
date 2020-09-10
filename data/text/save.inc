@@ -23,10 +23,10 @@ gText_DifferentSaveFile:: @ 82C8845
 	.string "y sobrescribir los otros datos?$"
 
 gText_SaveError:: @ 82C892A
-	.string "Save error.\p"
-	.string "Please exchange the\n"
-	.string "backup memory.$"
+	.string "Error al guardar.\p"
+	.string "Por favor cambie la\n"
+	.string "memoria de respaldo.$"
 
 gText_SavingDontTurnOffPower:: @ 82C8959
-	.string "Saving…\n"
-	.string "Don't turn off the power.$"
+	.string "Guardando…\n"
+	.string "No apagues la consola.$"
