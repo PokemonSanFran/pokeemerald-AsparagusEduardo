@@ -286,6 +286,7 @@ extern const u8 gText_Win[];
 extern const u8 gText_Loss[];
 extern const u8 gText_Draw[];
 extern const u8 gText_StatRose[];
+extern const u8 sText_StatSharply[];
 extern const u8 gText_PkmnsStatChanged2[];
 extern const u8 gText_PkmnGettingPumped[];
 extern const u8 gText_PkmnShroudedInMist[];

@@ -5380,7 +5380,8 @@ static void BufferStatRoseMessage(s32 arg0)
 {
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[arg0]]);
-    StringCopy(gBattleTextBuff2, gText_StatRose);
+    StringCopy(gBattleTextBuff2, sText_StatSharply);
+    StringAppend(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnsStatChanged2);
 }
 
