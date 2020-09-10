@@ -842,6 +842,60 @@ Common_EventScript_PlayerHandedOverTheItem:: @ 82723E4
 	.include "data/text/obtain_item.inc"
 
 @ The below and surf.inc could be split into some text/notices.inc
+
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+gText_PokemartSign:: @ 8272B6A
+	.string "Tienda Pokémon\n"
+	.string "“¡Gran gama de artículos selectos!”$"
+
+gText_PokemonCenterSign:: @ 8272B9E
+	.string "Centro Pokémon\n"
+	.string "“¡Rejuvenece a tus cansados amigos!”$"
+
+gText_MomOrDadMightLikeThisProgram:: @ 8272BCF
+	.string "{STR_VAR_1} might like this program.\n"
+	.string "… … … … … … … … … … … … … … … …\p"
+	.string "Better get going!$"
+
+gText_WhichFloorWouldYouLike:: @ 8272C1D
+	.string "Welcome to Lilycove Department Store.\p"
+	.string "Which floor would you like?$"
+
+gText_SandstormIsVicious:: @ 8272C5F
+	.string "The sandstorm is vicious.\n"
+	.string "It's impossible to keep going.$"
+
+gText_SelectWithoutRegisteredItem:: @ 8272C98
+	.string "An item in the Bag can be\n"
+	.string "registered to Select for easy use.$"
+
+gText_PokemonTrainerSchoolEmail:: @ 8272CD5
+	.string "Tienes un correo electrónico de la\n"
+	.string "Escuela de Entrenadores Pokémon.\p"
+	.string "A ver…\p"
+	.string "“Un Pokémon puede aprender\n"
+	.string "hasta cuatro movimientos.\p"
+	.string "La habilidad de un Entrenador\n"
+	.string "se aprecia por la combinación\l"
+	.string "de movimientos de sus Pokémon.”\p"
+	.string "Qué interesante…$"
+
+gText_PlayerHouseBootPC:: @ 8272D87
+	.string "{PLAYER} encendió el PC.$"
+
+gText_PokeblockLinkCanceled:: @ 8272D9C
+	.string "The link was canceled.$"
+
+gText_UnusedNicknameReceivedPokemon:: @ 8272DB3
+	.string "Want to give a nickname to\n"
+	.string "the {STR_VAR_2} you received?$"
+
+gText_PlayerWhitedOut:: @ 8272DE3
+	.string "¡A {PLAYER} no le\n"
+	.string "quedan Pokémon!\p"
+	.string "¡{PLAYER} está fuera\n"
+	.string "de combate!$"
+#else
 gText_PokemartSign:: @ 8272B6A
 	.string "“Selected items for your convenience!”\n"
 	.string "Pokémon Mart$"
@@ -875,13 +929,10 @@ gText_PokemonTrainerSchoolEmail:: @ 8272CD5
 	.string "A Trainer's expertise is tested on the\n"
 	.string "move sets chosen for Pokémon.\p"
 	.string "… … … … … …$"
-#if GAME_LANGUAGE == LANGUAGE_SPANISH
-gText_PlayerHouseBootPC:: @ 8272D87
-	.string "{PLAYER} encendió el PC.$"
-#else
+
 gText_PlayerHouseBootPC:: @ 8272D87
 	.string "{PLAYER} booted up the PC.$"
-#endif
+	
 gText_PokeblockLinkCanceled:: @ 8272D9C
 	.string "The link was canceled.$"
 
@@ -892,6 +943,7 @@ gText_UnusedNicknameReceivedPokemon:: @ 8272DB3
 gText_PlayerWhitedOut:: @ 8272DE3
 	.string "{PLAYER} is out of usable\n"
 	.string "Pokémon!\p{PLAYER} whited out!$"
+#endif
 
 gText_RegisteredTrainerinPokeNav:: @ 8272E0F
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"

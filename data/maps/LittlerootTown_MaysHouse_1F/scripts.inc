@@ -333,6 +333,93 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2: @ 81F8BBF
 	walk_up
 	step_end
 
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+RivalsHouse_1F_Text_OhYoureTheNewNeighbor: @ 81F8BC5
+	.string "Hola. ¿Quién eres tú?\p"
+	.string "Ah…\n"
+	.string "Ya…\p"
+	.string "¡Tú eres {PLAYER}{KUN} y te acabas\n"
+	.string "de mudar aquí al lado! ¿Qué tal?\p"
+	.string "Nuestro {RIVAL} tiene más\n"
+	.string "o menos tu edad.\p"
+	.string "Se ha emocionado tantísimo cuando\n"
+	.string "ha sabido que venías a vivir aquí…\p"
+	.string "Ahora está arriba, creo.$"
+
+RivalsHouse_1F_Text_LikeChildLikeFather: @ 81F8CA5
+	.string "De tal padre, tal retoño.\p"
+	.string "¡Mi marido está igual de entusiasmado\n"
+	.string "por los Pokémon que nuestro retoño!\p"
+	.string "Cuando no está en su Laboratorio,\n"
+	.string "anda perdido entre las hierbas altas.$"
+
+RivalsHouse_1F_Text_TooBusyToNoticeVisit: @ 81F8D37
+	.string "¡Ay! ¡{RIVAL}!\p"
+	.string "¡Estos niños están tan ocupados\n"
+	.string "con sus Pokémon que no se acuerdan\l"
+	.string "de venir a ver a sus padres, {PLAYER}{KUN}!$"
+
+RivalsHouse_1F_Text_WentOutToRoute103: @ 81F8D93
+	.string "Oh, {RIVAL} ha ido a la RUTA 103.\p"
+	.string "De tal palo, tal astilla.\n"
+	.string "{RIVAL} es incapaz de quedarse\l"
+	.string "en casa sin hacer nada.$"
+
+RivalsHouse_1F_Text_ShouldGoHomeEverySoOften: @ 81F8E01
+	.string "Creo que viajar con Pokémon\n"
+	.string "es de lo mejor que hay.\p"
+	.string "Pero deberías ir a casa alguna vez\n"
+	.string "a decir a tu madre que estás bien…\p"
+	.string "Puede que ella no te lo diga, pero\n"
+	.string "estará preocupada por ti, {PLAYER}{KUN}.$"
+
+RivalsHouse_1F_Text_MayWhoAreYou: @ 81F8EC6
+	.string "¿Eh?\n"
+	.string "¿Quién…? ¿Quién eres tú?\p"
+	.string "Ah…\n"
+	.string "Ya…\p"
+	.string "Eres {PLAYER}{KUN}.\n"
+	.string "Y te acabas de mudar.\p"
+	.string "Mmm… Yo me llamo Aura.\n"
+	.string "¡Encantada!\p"
+	.string "Yo…\n"
+	.string "sueño con hacerme amiga de miles\l"
+	.string "de Pokémon de todo el mundo.\p"
+	.string "He… oído algo sobre ti, {PLAYER}{KUN}.\n"
+	.string "Me lo ha dicho mi padre, el Prof. Abedul.\p"
+	.string "Tenía muchas ganas de que nos\n"
+	.string "cayéramos bien e hiciéramos amistad.\p"
+	.string "Qué tontería, ¿no?\n"
+	.string "Si acabo de conocerte, {PLAYER}{KUN}…\p"
+	.string "Ji, ji, ji…\p"
+	.string "¡Ahí va! ¡Se me había olvidado!\p"
+	.string "¡Tenía que ir a ayudar a mi padre\n"
+	.string "a atrapar Pokémon salvajes!\p"
+	.string "¡{PLAYER}{KUN}, nos vemos luego!$"
+
+RivalsHouse_1F_Text_BrendanWhoAreYou: @ 81F90B4
+	.string "¿Eh?\n"
+	.string "¿Tú…?\p"
+	.string "¿Quién eres tú?\p"
+	.string "Ya… Eres {PLAYER}, ¿no?\n"
+	.string "Y te acabas de mudar, ¿verdad?\p"
+	.string "Y mi padre, el Prof. Abedul,\n"
+	.string "me ha dicho que tu padre es un\l"
+	.string "Líder de Gimnasio, ¿cierto?\p"
+	.string "Yo me llamo Bruno.\n"
+	.string "¡Hola, vecina!\p"
+	.string "¿Y eso? {PLAYER}, ¿no tienes\n"
+	.string "ningún Pokémon?\p"
+	.string "¿Quieres que atrape uno para ti?\p"
+	.string "¡Ahí va! ¡Se me había olvidado!\p"
+	.string "Tengo que ir a ayudar a mi padre\n"
+	.string "a atrapar Pokémon salvajes…\p"
+	.string "Bueno, pues otro día, ¿vale?$"
+
+RivalsHouse_1F_Text_DoYouHavePokemon: @ 81F9262
+	.string "¡Anda, hola!\p"
+	.string "¿Ya tienes tu propio Pokémon?$"
+#else
 RivalsHouse_1F_Text_OhYoureTheNewNeighbor: @ 81F8BC5
 	.string "Oh, hello. And you are?\p"
 	.string "… … … … … … … … …\n"
@@ -420,3 +507,4 @@ RivalsHouse_1F_Text_DoYouHavePokemon: @ 81F9262
 	.string "Hi, neighbor!\p"
 	.string "Do you already have your\n"
 	.string "own Pokémon?$"
+#endif

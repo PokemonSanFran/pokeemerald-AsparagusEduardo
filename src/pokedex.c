@@ -4143,8 +4143,8 @@ static void PrintMonHeight(u16 height, u8 left, u8 top) // Ported from the Germa
     offset = 0;
 
 
-    buffer[i++] = 0xFC;
-    buffer[i++] = 0x13;
+    buffer[i++] = EXT_CTRL_CODE_BEGIN;
+    buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
     i++;
     buffer[i++] = CHAR_SPACE;
     buffer[i++] = CHAR_SPACE;
@@ -4193,8 +4193,8 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top) // Ported from the Germa
     offset = 0;
 
 
-    buffer[i++] = 0xFC;
-    buffer[i++] = 0x13;
+    buffer[i++] = EXT_CTRL_CODE_BEGIN;
+    buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
     i++;
     buffer[i++] = CHAR_SPACE;
     buffer[i++] = CHAR_SPACE;

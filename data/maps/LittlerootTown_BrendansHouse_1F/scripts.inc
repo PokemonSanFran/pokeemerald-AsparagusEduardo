@@ -299,6 +299,160 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2: @ 81F7A16
 	walk_up
 	step_end
 
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+PlayersHouse_1F_Text_IsntItNiceInHere: @ 81F7A1C
+	.string "Mamá: ¿Ves, {PLAYER}?\n"
+	.string "¿A que esto es muy bonito?$"
+
+PlayersHouse_1F_Text_MoversPokemonGoSetClock: @ 81F7A46
+	.string "Los Pokémon del servicio de mudanzas\n"
+	.string "hacen todo el trabajo duro y además\l"
+	.string "recogen lo que ensucian. ¡Es perfecto!\p"
+	.string "{PLAYER}, tu cuarto está arriba.\n"
+	.string "¡Ve a verlo, cariño!\p"
+	.string "Papá te ha comprado un nuevo\n"
+	.string "reloj para que recuerdes este día.\l"
+	.string "No olvides ponerlo en hora.$"
+
+PlayersHouse_1F_Text_ArentYouInterestedInRoom: @ 81F7B24
+	.string "Mamá: ¿Y bien, {PLAYER}?\n"
+	.string "¿No quieres ver tu cuarto?$"
+
+PlayersHouse_1F_Text_GoSetTheClock: @ 81F7B67
+	.string "Mamá: {PLAYER}, cielo…\p"
+	.string "Pon en hora el reloj de tu cuarto.$"
+
+PlayersHouse_1F_Text_OhComeQuickly: @ 81F7B96
+	.string "Mamá: ¡{PLAYER}, {PLAYER}\n"
+	.string "¡Ven! ¡Ven rápido!$"
+
+PlayersHouse_1F_Text_MaybeDadWillBeOn: @ 81F7BBC
+	.string "Mamá: ¡Mira! ¡El Gimnasio de Petalia!\n"
+	.string "¡A ver si sale tu padre!$"
+
+PlayersHouse_1F_Text_ItsOverWeMissedHim: @ 81F7BF1
+	.string "Mamá: Pues no… Qué lástima…\p"
+	.string "Creo que estaba hace nada y se\n"
+	.string "acaba de ir. Mala suerte.$"
+
+PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor: @ 81F7C35
+	.string "Ah, sí, una cosa.\n"
+	.string "Uno de los amigos de tu padre vive aquí.\p"
+	.string "Se llama Prof. Abedul.\p"
+	.string "Vive aquí al lado. Creo que deberías\n"
+	.string "ir a verlo y presentarte, cariño.$"
+
+PlayersHouse_1F_Text_SeeYouHoney: @ 81F7CC3
+	.string "Mamá: ¡Hasta luego, cielo!$"
+
+PlayersHouse_1F_Text_DidYouMeetProfBirch: @ 81F7CD8
+	.string "Mamá: ¿Has ido a presentarte\n"
+	.string "al Prof. Abedul?$"
+
+PlayersHouse_1F_Text_YouShouldRestABit: @ 81F7D08
+	.string "Mamá: ¿Cómo estás, {PLAYER}?\n"
+	.string "No pareces muy en forma.\p"
+	.string "Creo que deberías descansar un poco.$"
+
+PlayersHouse_1F_Text_TakeCareHoney: @ 81F7D5C
+	.string "Mamá: ¡Cuídate, cielo!$"
+
+PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom: @ 81F7D73
+	.string "Mamá: ¡Mira por dónde! ¿Tu padre\n"
+	.string "te ha dado esa Medalla?\p"
+	.string "¡Pues yo también quiero darte algo!$"
+
+PlayersHouse_1F_Text_DontPushYourselfTooHard: @ 81F7DBE
+	.string "No te esfuerces demasiado, cielo.\n"
+	.string "Tienes que saber cuándo hay que parar.\p"
+	.string "¡Buena suerte y ven a verme\n"
+	.string "de vez en cuando!$"
+
+PlayersHouse_1F_Text_IsThatAPokenav: @ 81F7E0E
+	.string "Mamá: ¿Qué es eso, cariño? ¿Un PokéNav?\n"
+	.string "¿Te lo dio alguien de Devon?\p"
+	.string "Entonces, cielo, tendrás que apuntarme\n"
+	.string "en él, ¿no?\p"
+	.string "Mmm…$"
+
+PlayersHouse_1F_Text_RegisteredMom: @ 81F7E89
+	.string "Acabas de registrar a Mamá\n"
+	.string "en el PokéNav.$"
+
+PlayersHouse_1F_Text_Vigoroth1: @ 81F7EA8
+	.string "¡Vigoró, vigoró!$"
+
+PlayersHouse_1F_Text_Vigoroth2: @ 81F7EB3
+	.string "Goro, goro-goro…$"
+
+PlayersHouse_1F_Text_ReportFromPetalburgGym: @ 81F7EC6
+	.string "Entrevistador: Y, desde el Gimnasio\n"
+	.string "de Petalia, nos despedimos de todos.$"
+
+PlayersHouse_1F_Text_TheresAMovieOnTV: @ 81F7F0F
+	.string "Hay una peli en la tele.\p"
+	.string "Dos hombres están bailando sobre\n"
+	.string "el teclado de un piano de cola.\p"
+	.string "Bueno, mejor dejo de ver la tele.$"
+
+PlayersHouse_1F_Text_RunningShoesManual: @ 81F7F66
+	.string "Son las instrucciones de las \n"
+	.string "Deportivas.\p"
+	.string "“Pulsa el Botón B cuando lleves las\n"
+	.string "Deportivas para salir pitando.\p"
+	.string "Ponte las Deportivas y empieza\n"
+	.string "a correr por todas partes.”$"
+
+PlayersHouse_1F_Text_TicketFromBrineyCameForYou: @ 81F800E
+	.string "Papá: ¿Eh?\p"
+	.string "¡Pero si es mi {PLAYER}!\p"
+	.string "Hace un siglo que no te veo…\n"
+	.string "¡Si pareces mucho más fuerte!\p"
+	.string "Ésa es la impresión que das, ¡pero\n"
+	.string "tu padre aún puede dar guerra!\p"
+	.string "Ah, sí, tengo algo para ti.\n"
+	.string "Te lo envía un tal Sr. Arenque.$"
+
+PlayersHouse_1F_Text_PortsInSlateportLilycove: @ 81F80FE
+	.string "Papá: ¿Un Ticket para el ferry?\p"
+	.string "Si recuerdo bien, los puertos donde\n"
+	.string "atraca son Ciudad Portual y Calagua.$"
+
+PlayersHouse_1F_Text_BetterGetBackToGym: @ 81F815B
+	.string "Mejor vuelvo al Gimnasio de Petalia.\p"
+	.string "Cariño, gracias por ocuparte\n"
+	.string "de la casa mientras yo estoy fuera.$"
+
+PlayersHouse_1F_Text_DadShouldStayLonger: @ 81F81B9
+	.string "Mamá: Este padre tuyo…\p"
+	.string "Cuando por fin viene un poco a casa,\n"
+	.string "sólo se le ocurre hablar de Pokémon.\p"
+	.string "Debería relajarse un poco y quedarse\n"
+	.string "más tiempo aquí tranquilito…$"
+
+PlayersHouse_1F_Text_IsThatABreakingStory: @ 81F824B
+	.string "Mamá: ¿Un especial informativo?$"
+
+PlayersHouse_1F_Text_LatiEmergencyNewsFlash: @ 81F826F
+	.string "¡Interrumpimos la programación para\n"
+	.string "traerles las últimas noticias!\p"
+	.string "Hay noticias confusas sobre supuestos\n"
+	.string "avistamientos de un Pokémon azzzrt…\l"
+	.string "volando en distintos puntos de Hoenn.\p"
+	.string "Actualmente se desconoce la identidad\n"
+	.string "del Pokémon.\p"
+	.string "Y ahora les dejamos con la programación\n"
+	.string "habitual.$"
+
+PlayersHouse_1F_Text_WhatColorDidTheySay: @ 81F8351
+	.string "Mamá: {PLAYER}, ¿has oído eso?\p"
+	.string "¿De qué color ha dicho el de\n"
+	.string "la tele que era ese Pokémon?$"
+
+PlayersHouse_1F_Text_StillUnknownPokemon: @ 81F83A1
+	.string "Mamá: ¡Ver para creer!\n"
+	.string "¡Aún hay Pokémon desconocidos!$"
+#else
 PlayersHouse_1F_Text_IsntItNiceInHere: @ 81F7A1C
 	.string "Mom: See, {PLAYER}?\n"
 	.string "Isn't it nice in here, too?$"
@@ -450,3 +604,4 @@ PlayersHouse_1F_Text_WhatColorDidTheySay: @ 81F8351
 PlayersHouse_1F_Text_StillUnknownPokemon: @ 81F83A1
 	.string "Mom: Well, isn't that something!\n"
 	.string "There are still unknown Pokémon.$"
+#endif

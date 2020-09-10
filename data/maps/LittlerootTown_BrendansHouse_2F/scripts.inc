@@ -286,6 +286,39 @@ PlayersHouse_2F_EventScript_GameCube:: @ 81F865F
 	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
 	end
 
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+PlayersHouse_2F_Text_ClockIsStopped: @ 81F8668
+	.string "El reloj está parado…\p"
+	.string "Será mejor ponerlo en hora.$"
+
+PlayersHouse_2F_Text_HowDoYouLikeYourRoom: @ 81F869A
+	.string "Mamá: {PLAYER}, ¿te gusta\n"
+	.string "tu nuevo cuarto?\p"
+	.string "Bien. Todo está colocado como debe ser.\p"
+	.string "También han acabado con la mudanza\n"
+	.string "de la planta baja.\p"
+	.string "¡Este servicio de mudanzas Pokémon\n"
+	.string "es de lo más eficaz!\p"
+	.string "Oh, deberías comprobar que tienes\n"
+	.string "todas tus cosas en la mesa.$"
+
+PlayersHouse_2F_Text_Notebook: @ 81F877F
+	.string "{PLAYER} abrió el cuaderno.\p"
+	.string "“Regla Aventurera N.º 1\n"
+	.string "Pulsa Start para abrir el Menú.\p"
+	.string "Regla Aventurera N.º 2\n"
+	.string "Elige Guardar para guardar la partida.”\p"
+	.string "Las demás páginas están en blanco…$"
+
+Common_Text_LookCloserAtMap: @ 81F8820
+	.string "{PLAYER} miró más de cerca el mapa\n"
+	.string "de la región de Hoenn.$"
+
+PlayersHouse_2F_Text_ItsAGameCube: @ 81F884F
+	.string "Es una consola Nintendo GameCube.\p"
+	.string "Hay una consola Game Boy Advance\n"
+	.string "conectada a ella que sirve de Mando.$"
+#else
 PlayersHouse_2F_Text_ClockIsStopped: @ 81F8668
 	.string "The clock is stopped…\p"
 	.string "Better set it and start it!$"
@@ -316,3 +349,4 @@ PlayersHouse_2F_Text_ItsAGameCube: @ 81F884F
 	.string "It's a Nintendo GameCube.\p"
 	.string "A Game Boy Advance is connected to\n"
 	.string "serve as the Controller.$"
+#endif

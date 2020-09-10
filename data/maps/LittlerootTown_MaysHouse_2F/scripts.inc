@@ -329,6 +329,94 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC:: @ 81F958F
 	releaseall
 	end
 
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+RivalsHouse_2F_Text_MayWhoAreYou: @ 81F959C
+	.string "¿Eh?\n"
+	.string "¿Quién…? ¿Quién eres tú?\p"
+	.string "Ah…\n"
+	.string "Ya…\p"
+	.string "Eres {PLAYER}{KUN}.\n"
+	.string "Y te acabas de mudar.\p"
+	.string "Mmm… Yo me llamo Aura.\n"
+	.string "¡Encantada!\p"
+	.string "Yo…\n"
+	.string "sueño con hacerme amiga de miles\l"
+	.string "de Pokémon de todo el mundo.\p"
+	.string "He… oído algo sobre ti, {PLAYER}{KUN}.\n"
+	.string "Me lo ha dicho mi padre, el Prof. Abedul.\p"
+	.string "Tenía muchas ganas de que nos\n"
+	.string "cayéramos bien e hiciéramos amistad.\p"
+	.string "Qué tontería, ¿no?\n"
+	.string "Si acabo de conocerte, {PLAYER}{KUN}…\p"
+	.string "Ji, ji, ji…\p"
+	.string "¡Ahí va! ¡Se me había olvidado!\p"
+	.string "¡Tenía que ir a ayudar a mi padre\n"
+	.string "a atrapar Pokémon salvajes!\p"
+	.string "¡{PLAYER}{KUN}, nos vemos luego!$"
+
+RivalsHouse_2F_Text_MayGettingReady: @ 81F978A
+	.string "Mis Pokémon están curados…\n"
+	.string "Tengo todos los objetos… y…$"
+
+RivalsHouse_2F_Text_BrendanWhoAreYou: @ 81F97B4
+	.string "¿Eh?\n"
+	.string "¿Tú…?\p"
+	.string "¿Quién eres tú?\p"
+	.string "Ya… Eres {PLAYER}, ¿no?\n"
+	.string "Y te acabas de mudar, ¿verdad?\p"
+	.string "Y mi padre, el Prof. Abedul,\n"
+	.string "me ha dicho que tu padre es un\l"
+	.string "Líder de Gimnasio, ¿cierto?\p"
+	.string "Yo me llamo Bruno.\n"
+	.string "¡Hola, vecina!\p"
+	.string "¿Y eso? {PLAYER}, ¿no tienes\n"
+	.string "ningún Pokémon?\p"
+	.string "¿Quieres que atrape uno para ti?\p"
+	.string "¡Ahí va! ¡Se me había olvidado!\p"
+	.string "Tengo que ir a ayudar a mi padre\n"
+	.string "a atrapar Pokémon salvajes…\p"
+	.string "Bueno, pues otro día, ¿vale?$"
+
+RivalsHouse_2F_Text_BrendanGettingReady: @ 81F9962
+	.string "Mis Pokémon están curados…\n"
+	.string "Tengo todos los objetos… y…$"
+
+RivalsHouse_2F_Text_ItsRivalsPokeBall: @ 81F9991
+	.string "¡Es la Poké Ball de {RIVAL}!\p"
+	.string "Será mejor que la deje donde está.$"
+
+RivalsHouse_2F_Text_MayJustCheckingMyPokedex: @ 81F99C9
+	.string "Aura: ¡{PLAYER}{KUN}!\p"
+	.string "Estaba mirando mi Pokédex.\p"
+	.string "Todavía hay un montón de Pokémon\n"
+	.string "que no he atrapado…\p"
+	.string "Y hay muchos otros que creo\n"
+	.string "que van a evolucionar…\p"
+	.string "¿Adónde debería ir a atrapar nuevos\n"
+	.string "Pokémon la próxima vez?$"
+
+RivalsHouse_2F_Text_MayWhereShouldIGoNext: @ 81F9A9E
+	.string "Aura: ¿Adónde debería ir a atrapar\n"
+	.string "nuevos Pokémon la próxima vez?\p"
+	.string "Sería divertido si nos encontráramos,\n"
+	.string "¿verdad, {PLAYER}{KUN}?$"
+
+RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex: @ 81F9B0D
+	.string "Bruno: Anda, hola, {PLAYER}.\p"
+	.string "Estaba mirando mi Pokédex.\p"
+	.string "Todavía hay un montón de Pokémon\n"
+	.string "que debo atrapar, ya lo sé,\l"
+	.string "pero ya está bastante completita.\p"
+	.string "Cuando miro mi Pokédex me entran\n"
+	.string "ganas de salir de viaje otra vez…$"
+
+RivalsHouse_2F_Text_BrendanWhereShouldIGoNext: @ 81F9BE7
+	.string "No logro decidir a qué lugar\n"
+	.string "debería ir para cazar Pokémon.\p"
+	.string "Oye, {PLAYER}, si nos vemos mientras\n"
+	.string "estoy atrapando Pokémon, igual\l"
+	.string "podríamos echarnos un combate…$"
+#else
 RivalsHouse_2F_Text_MayWhoAreYou: @ 81F959C
 	.string "Huh?\n"
 	.string "Who… Who are you?\p"
@@ -416,3 +504,4 @@ RivalsHouse_2F_Text_BrendanWhereShouldIGoNext: @ 81F9BE7
 	.string "Hey, {PLAYER}, if I see you while I'm out\n"
 	.string "catching Pokémon, I can pitch you a\l"
 	.string "battle if you'd like.$"
+#endif
