@@ -1,19 +1,16 @@
 Common_EventScript_PkmnCenterJack::
+	lockall
 	msgbox gText_PkmnCenterJack_GotPokemonQuestions, MSGBOX_DEFAULT
 	multichoice 16, 0, MULTI_POKECENTER_JACK, 0
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
 	case 0, Common_EventScript_PkmnCenterJack_NameRater_ChooseMonToRate
-	case 1, Common_EventScript_PkmnCenterJack_RememberMove
+	case 1, Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon
 	case 2, Common_EventScript_PkmnCenterJack_MoveDeleter_ChooseMonAndMoveToForget
 	case 3, Common_EventScript_PkmnCenterJack_TeachMove
 	case 4, Common_EventScript_PkmnCenterJack_ComeBackAnytime
 	case MULTI_B_PRESSED, Common_EventScript_PkmnCenterJack_ComeBackAnytime
 	end
-
-Common_EventScript_PkmnCenterJack_RememberMove::
-	msgbox gText_PkmnCenterJack_Remember, MSGBOX_DEFAULT
-    return
 
 Common_EventScript_PkmnCenterJack_TeachMove::
 	msgbox gText_PkmnCenterJack_Teach, MSGBOX_DEFAULT
@@ -21,7 +18,8 @@ Common_EventScript_PkmnCenterJack_TeachMove::
 
 Common_EventScript_PkmnCenterJack_ComeBackAnytime::
 	msgbox gText_PkmnCenterJack_ComeBackAnytime, MSGBOX_DEFAULT
-    return
+	releaseall
+    end
 
 @Rate Nickname
 Common_EventScript_PkmnCenterJack_NameRater_ChooseMonToRate::
@@ -129,5 +127,44 @@ Common_EventScript_PkmnCenterJack_MoveDeleter_ComeAgain::
 Common_EventScript_PkmnCenterJack_MoveDeleter_LastMonWithSurf::
 	special BufferMoveDeleterNicknameAndMove
 	msgbox Common_PkmnCenterJack_Text_CantForgetSurf, MSGBOX_DEFAULT
+	releaseall
+	end
+
+@Move Relearner
+Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon:: @ 82013D6
+	msgbox Common_PkmnCenterJack_Text_TutorWhichMon, MSGBOX_DEFAULT
+	special ChooseMonForMoveRelearner
+	waitstate
+	compare VAR_0x8004, 255
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_ComeBackAnytime
+	special IsSelectedMonEgg
+	compare VAR_RESULT, TRUE
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_CantTeachEgg
+	compare VAR_0x8005, 0
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_NoMoveToTeachMon
+	goto Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMove
+	end
+
+Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMove:: @ 820140C
+	msgbox Common_PkmnCenterJack_Text_TeachWhichMove, MSGBOX_DEFAULT
+	special TeachMoveRelearnerMove
+	waitstate
+	compare VAR_0x8004, 0
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon
+	goto Common_EventScript_PkmnCenterJack_MoveReminder_ComeBackAnytime
+	end
+
+Common_EventScript_PkmnCenterJack_MoveReminder_NoMoveToTeachMon:: @ 8201436
+	msgbox Common_PkmnCenterJack_Text_DontHaveMoveToTeachPokemon, MSGBOX_DEFAULT
+	goto Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon
+	end
+
+Common_EventScript_PkmnCenterJack_MoveReminder_CantTeachEgg:: @ 8201444
+	msgbox Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
+	goto Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon
+	end
+
+Common_EventScript_PkmnCenterJack_MoveReminder_ComeBackAnytime:: @ 8201452
+	msgbox gText_PkmnCenterJack_ComeBackAnytime, MSGBOX_DEFAULT
 	releaseall
 	end

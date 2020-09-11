@@ -41,8 +41,16 @@ Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg:
 	.string "¡Esto es sólo un Huevo!$"
 
 @Remember Move
-gText_PkmnCenterJack_Remember::
-    .string "Recordar$"
+Common_PkmnCenterJack_Text_TutorWhichMon: @ 82015A5
+	.string "Which Pokémon should I have\n"
+	.string "remember a move?$"
+
+Common_PkmnCenterJack_Text_TeachWhichMove: @ 82015C3
+	.string "Which move should it remember?$"
+
+Common_PkmnCenterJack_Text_DontHaveMoveToTeachPokemon: @ 82015DE
+	.string "It doesn't seem like that Pokémon has\n"
+	.string "any moves that it can remember.$"
 
 @Forget Move
 Common_PkmnCenterJack_Text_WhichMonShouldForget:
@@ -128,8 +136,16 @@ Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg:
 	.string "That is merely an Egg.$"
 
 @Remember Move
-gText_PkmnCenterJack_Remember::
-    .string "Remember$"
+Common_PkmnCenterJack_Text_TutorWhichMon: @ 82015A5
+	.string "Which Pokémon should I have\n"
+	.string "remember a move?$"
+
+Common_PkmnCenterJack_Text_TeachWhichMove: @ 82015C3
+	.string "Which move should it remember?$"
+
+Common_PkmnCenterJack_Text_DontHaveMoveToTeachPokemon: @ 82015DE
+	.string "It doesn't seem like that Pokémon has\n"
+	.string "any moves that it can remember.$"
 
 @Forget Move
 Common_PkmnCenterJack_Text_WhichMonShouldForget:
@@ -170,6 +186,6 @@ gText_PkmnCenterJack_Teach::
 
 @Nevermind
 gText_PkmnCenterJack_ComeBackAnytime::
-    .string "Well, come back anytime.$"
+    .string "Come back anytime!$"
 
 #endif
