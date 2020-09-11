@@ -32,6 +32,7 @@ struct BagPocket
 extern struct BagPocket gBagPockets[];
 extern struct ItemSlot gTmHmItemSlots[BAG_TMHM_COUNT];
 
+u16 GetBagItemQuantity(u16 *quantity);
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
 void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
 void SetBagItemsPointers(void);
