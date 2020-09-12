@@ -95,6 +95,7 @@ void DeserializeTmHmItemSlots(void)
         if (gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[i / 8] & (1<<bit))
             AddBagItem(i + ITEM_TM01, 1);
     }
+    SortItemsInBag(TMHM_POCKET, gSaveBlock2Ptr->tmItemSort);
 }
 
 void SetBagItemsPointers(void)

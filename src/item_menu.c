@@ -164,7 +164,6 @@ static void ItemMenu_SortByNumber(u8 taskId);
 static void ItemMenu_SortByMoveType(u8 taskId);
 static void SortBagItems(u8 taskId);
 static void Task_SortFinish(u8 taskId);
-static void SortItemsInBag(u8 pocket, u8 type);
 static void MergeSort(struct ItemSlot* array, u32 low, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*));
 static void Merge(struct ItemSlot* array, u32 low, u32 mid, u32 high, s8 (*comparator)(struct ItemSlot*, struct ItemSlot*));
 static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot* itemSlot2);
@@ -1079,10 +1078,12 @@ void UpdatePocketItemList(u8 pocketId)
     struct BagPocket *pocket = &gBagPockets[pocketId];
     switch (pocketId)
     {
+        /*
         case TMHM_POCKET:
         case BERRIES_POCKET:
             SortBerriesOrTMHMs(pocket);
             break;
+            */
         default:
             CompactItemsInBagPocket(pocket);
             break;
@@ -2575,11 +2576,11 @@ void PrintTMHMMoveData(u16 itemId)
 // bag sorting
 enum BagSortOptions
 {
-    SORT_ALPHABETICALLY,
-    SORT_BY_TYPE,
-    SORT_BY_AMOUNT, //greatest->least
     SORT_BY_NUMBER, //by itemID
+    SORT_ALPHABETICALLY,
     SORT_BY_MOVE_TYPE, //only for TMs
+    SORT_BY_AMOUNT, //greatest->least
+    SORT_BY_TYPE,
 };
 enum ItemSortType
 {
@@ -3210,7 +3211,7 @@ static void Task_SortFinish(u8 taskId)
     }
 }
 
-static void SortItemsInBag(u8 pocket, u8 type)
+void SortItemsInBag(u8 pocket, u8 type)
 {
     struct ItemSlot* itemMem;
     u16 itemAmount;
@@ -3253,6 +3254,7 @@ static void SortItemsInBag(u8 pocket, u8 type)
     case TMHM_POCKET:
         itemMem = gTmHmItemSlots;
         itemAmount = BAG_TMHM_COUNT;
+        gSaveBlock2Ptr->tmItemSort = type;
         break;
     case KEYITEMS_POCKET:
         itemMem = gSaveBlock1Ptr->bagPocket_KeyItems;

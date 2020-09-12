@@ -106,7 +106,7 @@ void BagMenu_InitListsMenu(u8 taskId);
 void UpdatePocketItemList(u8 pocketId);
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u8 taskId));
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
-
+void SortItemsInBag(u8 pocket, u8 type);
 
 
 #endif //GUARD_item_menu_H
