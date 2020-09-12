@@ -933,7 +933,7 @@ struct SaveBlock1
     /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x690*/ //struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
-              u8 bagPocket_TMHMOwnedFlags[24]; //allow for a total of 208 TMs/HMs
+              u8 bagPocket_TMHMOwnedFlags[26]; //allow for a total of 208 TMs/HMs
               //u8 bagPocket_TMHMPadding[242]; //do not touch the save layout, take 242 bytes of free space
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
               struct ItemSlot bagPocket_Medicine[BAG_MEDICINE_COUNT];
