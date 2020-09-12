@@ -48,6 +48,7 @@ static void DebugAction_CheckWeekDay(u8);
 static void DebugAction_Credits(u8);
 
 static void DebugAction_GiveItem(u8 taskId);
+static void DebugAction_GiveAllTMs(u8 taskId);
 static void DebugAction_Flags(u8 taskId);
 static void DebugAction_Variables(u8 taskId);
 static void DebugAction_WarpToMap(u8 taskId);
@@ -75,6 +76,7 @@ extern u8 Debug_CheckWeekDay[];
 static const u8 gDebugText_Utilities[] =        _("Utilities");
 static const u8 gDebugText_Flags[] =            _("Flags");
 static const u8 gDebugText_GiveItem[] =         _("Give Item");
+static const u8 gDebugText_GiveAllTMs[] =       _("Give All TMs");
 static const u8 gDebugText_Cancel[] =           _("Cancel");
 
 static const u8 gDebugText_Variables[] =        _("Variables");
@@ -89,6 +91,7 @@ enum {
     //DEBUG_MENU_ITEM_VARIABLES,
     //DEBUG_MENU_ITEM_WARP_TO_MAP,
     DEBUG_MENU_ITEM_GIVE_ITEM,
+    DEBUG_MENU_ITEM_GIVE_ALLTMS,
     DEBUG_MENU_ITEM_HEAL_PARTY,
     //DEBUG_MENU_ITEM_ACCESS_PC,
     //DEBUG_MENU_ITEM_GIVE_POKEMON,
@@ -171,6 +174,7 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
     [DEBUG_MENU_ITEM_UTILITIES] = {gDebugText_Utilities, DEBUG_MENU_ITEM_UTILITIES},
     [DEBUG_MENU_ITEM_FLAGS] = {gDebugText_Flags, DEBUG_MENU_ITEM_FLAGS},
     [DEBUG_MENU_ITEM_GIVE_ITEM] = {gDebugText_GiveItem, DEBUG_MENU_ITEM_GIVE_ITEM},
+    [DEBUG_MENU_ITEM_GIVE_ALLTMS] = {gDebugText_GiveAllTMs, DEBUG_MENU_ITEM_GIVE_ALLTMS},
     [DEBUG_MENU_ITEM_HEAL_PARTY] = {gDebugText_HealParty, DEBUG_MENU_ITEM_HEAL_PARTY},
     [DEBUG_MENU_ITEM_CANCEL] = {gDebugText_Cancel, DEBUG_MENU_ITEM_CANCEL}
 };
@@ -207,6 +211,7 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
     [DEBUG_MENU_ITEM_UTILITIES] = DebugAction_OpenUtilitiesMenu,
     [DEBUG_MENU_ITEM_FLAGS] = DebugAction_OpenFlagsMenu,
     [DEBUG_MENU_ITEM_GIVE_ITEM] = DebugAction_GiveItem,
+    [DEBUG_MENU_ITEM_GIVE_ALLTMS] = DebugAction_GiveAllTMs,
     [DEBUG_MENU_ITEM_HEAL_PARTY] = DebugAction_HealParty,
     [DEBUG_MENU_ITEM_CANCEL] = DebugAction_Cancel
 };
@@ -743,6 +748,221 @@ static void DebugAction_HealParty(u8 taskId)
 {
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
+}
+
+static void DebugAction_GiveAllTMs(u8 taskId)
+{
+    PlayFanfare(MUS_OBTAIN_TMHM);
+    AddBagItem(ITEM_TM01, 1);
+    AddBagItem(ITEM_TM02, 1);
+    AddBagItem(ITEM_TM03, 1);
+    AddBagItem(ITEM_TM04, 1);
+    AddBagItem(ITEM_TM05, 1);
+    AddBagItem(ITEM_TM06, 1);
+    AddBagItem(ITEM_TM07, 1);
+    AddBagItem(ITEM_TM08, 1);
+    AddBagItem(ITEM_TM09, 1);
+    AddBagItem(ITEM_TM10, 1);
+    AddBagItem(ITEM_TM11, 1);
+    AddBagItem(ITEM_TM12, 1);
+    AddBagItem(ITEM_TM13, 1);
+    AddBagItem(ITEM_TM14, 1);
+    AddBagItem(ITEM_TM15, 1);
+    AddBagItem(ITEM_TM16, 1);
+    AddBagItem(ITEM_TM17, 1);
+    AddBagItem(ITEM_TM18, 1);
+    AddBagItem(ITEM_TM19, 1);
+    AddBagItem(ITEM_TM20, 1);
+    AddBagItem(ITEM_TM21, 1);
+    AddBagItem(ITEM_TM22, 1);
+    AddBagItem(ITEM_TM23, 1);
+    AddBagItem(ITEM_TM24, 1);
+    AddBagItem(ITEM_TM25, 1);
+    AddBagItem(ITEM_TM26, 1);
+    AddBagItem(ITEM_TM27, 1);
+    AddBagItem(ITEM_TM28, 1);
+    AddBagItem(ITEM_TM29, 1);
+    AddBagItem(ITEM_TM30, 1);
+    AddBagItem(ITEM_TM31, 1);
+    AddBagItem(ITEM_TM32, 1);
+    AddBagItem(ITEM_TM33, 1);
+    AddBagItem(ITEM_TM34, 1);
+    AddBagItem(ITEM_TM35, 1);
+    AddBagItem(ITEM_TM36, 1);
+    AddBagItem(ITEM_TM37, 1);
+    AddBagItem(ITEM_TM38, 1);
+    AddBagItem(ITEM_TM39, 1);
+    AddBagItem(ITEM_TM40, 1);
+    AddBagItem(ITEM_TM41, 1);
+    AddBagItem(ITEM_TM42, 1);
+    AddBagItem(ITEM_TM43, 1);
+    AddBagItem(ITEM_TM44, 1);
+    AddBagItem(ITEM_TM45, 1);
+    AddBagItem(ITEM_TM46, 1);
+    AddBagItem(ITEM_TM47, 1);
+    AddBagItem(ITEM_TM48, 1);
+    AddBagItem(ITEM_TM49, 1);
+    AddBagItem(ITEM_TM50, 1);
+    //AddBagItem(ITEM_TM51, 1);
+    //AddBagItem(ITEM_TM52, 1);
+    //AddBagItem(ITEM_TM53, 1);
+    //AddBagItem(ITEM_TM54, 1);
+    //AddBagItem(ITEM_TM55, 1);
+    //AddBagItem(ITEM_TM56, 1);
+    //AddBagItem(ITEM_TM57, 1);
+    //AddBagItem(ITEM_TM58, 1);
+    //AddBagItem(ITEM_TM59, 1);
+    //AddBagItem(ITEM_TM60, 1);
+    //AddBagItem(ITEM_TM61, 1);
+    //AddBagItem(ITEM_TM62, 1);
+    //AddBagItem(ITEM_TM63, 1);
+    AddBagItem(ITEM_TM64, 1);
+    //AddBagItem(ITEM_TM65, 1);
+    //AddBagItem(ITEM_TM66, 1);
+    //AddBagItem(ITEM_TM67, 1);
+    //AddBagItem(ITEM_TM68, 1);
+    //AddBagItem(ITEM_TM69, 1);
+    //AddBagItem(ITEM_TM70, 1);
+    //AddBagItem(ITEM_TM71, 1);
+    //AddBagItem(ITEM_TM72, 1);
+    //AddBagItem(ITEM_TM73, 1);
+    //AddBagItem(ITEM_TM74, 1);
+    //AddBagItem(ITEM_TM75, 1);
+    //AddBagItem(ITEM_TM76, 1);
+    //AddBagItem(ITEM_TM77, 1);
+    //AddBagItem(ITEM_TM78, 1);
+    //AddBagItem(ITEM_TM79, 1);
+    //AddBagItem(ITEM_TM80, 1);
+    //AddBagItem(ITEM_TM81, 1);
+    //AddBagItem(ITEM_TM82, 1);
+    //AddBagItem(ITEM_TM83, 1);
+    //AddBagItem(ITEM_TM84, 1);
+    //AddBagItem(ITEM_TM85, 1);
+    //AddBagItem(ITEM_TM86, 1);
+    //AddBagItem(ITEM_TM87, 1);
+    //AddBagItem(ITEM_TM88, 1);
+    //AddBagItem(ITEM_TM89, 1);
+    //AddBagItem(ITEM_TM90, 1);
+    //AddBagItem(ITEM_TM91, 1);
+    //AddBagItem(ITEM_TM92, 1);
+    //AddBagItem(ITEM_TM93, 1);
+    //AddBagItem(ITEM_TM94, 1);
+    //AddBagItem(ITEM_TM95, 1);
+    //AddBagItem(ITEM_TM96, 1);
+    //AddBagItem(ITEM_TM97, 1);
+    //AddBagItem(ITEM_TM98, 1);
+    //AddBagItem(ITEM_TM99, 1);
+    //AddBagItem(ITEM_TM100, 1);
+    //AddBagItem(ITEM_TM101, 1);
+    //AddBagItem(ITEM_TM102, 1);
+    //AddBagItem(ITEM_TM103, 1);
+    //AddBagItem(ITEM_TM104, 1);
+    //AddBagItem(ITEM_TM105, 1);
+    //AddBagItem(ITEM_TM106, 1);
+    //AddBagItem(ITEM_TM107, 1);
+    //AddBagItem(ITEM_TM108, 1);
+    //AddBagItem(ITEM_TM109, 1);
+    //AddBagItem(ITEM_TM110, 1);
+    //AddBagItem(ITEM_TM111, 1);
+    //AddBagItem(ITEM_TM112, 1);
+    //AddBagItem(ITEM_TM113, 1);
+    //AddBagItem(ITEM_TM114, 1);
+    //AddBagItem(ITEM_TM115, 1);
+    //AddBagItem(ITEM_TM116, 1);
+    //AddBagItem(ITEM_TM117, 1);
+    //AddBagItem(ITEM_TM118, 1);
+    //AddBagItem(ITEM_TM119, 1);
+    //AddBagItem(ITEM_TM120, 1);
+    //AddBagItem(ITEM_TM121, 1);
+    //AddBagItem(ITEM_TM122, 1);
+    //AddBagItem(ITEM_TM123, 1);
+    //AddBagItem(ITEM_TM124, 1);
+    //AddBagItem(ITEM_TM125, 1);
+    //AddBagItem(ITEM_TM126, 1);
+    //AddBagItem(ITEM_TM127, 1);
+    //AddBagItem(ITEM_TM128, 1);
+    //AddBagItem(ITEM_TM129, 1);
+    //AddBagItem(ITEM_TM130, 1);
+    //AddBagItem(ITEM_TM131, 1);
+    //AddBagItem(ITEM_TM132, 1);
+    //AddBagItem(ITEM_TM133, 1);
+    //AddBagItem(ITEM_TM134, 1);
+    //AddBagItem(ITEM_TM135, 1);
+    //AddBagItem(ITEM_TM136, 1);
+    //AddBagItem(ITEM_TM137, 1);
+    //AddBagItem(ITEM_TM138, 1);
+    //AddBagItem(ITEM_TM139, 1);
+    //AddBagItem(ITEM_TM140, 1);
+    //AddBagItem(ITEM_TM141, 1);
+    //AddBagItem(ITEM_TM142, 1);
+    //AddBagItem(ITEM_TM143, 1);
+    //AddBagItem(ITEM_TM144, 1);
+    //AddBagItem(ITEM_TM145, 1);
+    //AddBagItem(ITEM_TM146, 1);
+    //AddBagItem(ITEM_TM147, 1);
+    //AddBagItem(ITEM_TM148, 1);
+    //AddBagItem(ITEM_TM149, 1);
+    //AddBagItem(ITEM_TM150, 1);
+    //AddBagItem(ITEM_TM151, 1);
+    //AddBagItem(ITEM_TM152, 1);
+    //AddBagItem(ITEM_TM153, 1);
+    //AddBagItem(ITEM_TM154, 1);
+    //AddBagItem(ITEM_TM155, 1);
+    //AddBagItem(ITEM_TM156, 1);
+    //AddBagItem(ITEM_TM157, 1);
+    //AddBagItem(ITEM_TM158, 1);
+    //AddBagItem(ITEM_TM159, 1);
+    //AddBagItem(ITEM_TM160, 1);
+    //AddBagItem(ITEM_TM161, 1);
+    //AddBagItem(ITEM_TM162, 1);
+    //AddBagItem(ITEM_TM163, 1);
+    //AddBagItem(ITEM_TM164, 1);
+    //AddBagItem(ITEM_TM165, 1);
+    //AddBagItem(ITEM_TM166, 1);
+    //AddBagItem(ITEM_TM167, 1);
+    //AddBagItem(ITEM_TM168, 1);
+    //AddBagItem(ITEM_TM169, 1);
+    //AddBagItem(ITEM_TM170, 1);
+    //AddBagItem(ITEM_TM171, 1);
+    //AddBagItem(ITEM_TM172, 1);
+    //AddBagItem(ITEM_TM173, 1);
+    //AddBagItem(ITEM_TM174, 1);
+    //AddBagItem(ITEM_TM175, 1);
+    //AddBagItem(ITEM_TM176, 1);
+    //AddBagItem(ITEM_TM177, 1);
+    //AddBagItem(ITEM_TM178, 1);
+    //AddBagItem(ITEM_TM179, 1);
+    //AddBagItem(ITEM_TM180, 1);
+    //AddBagItem(ITEM_TM181, 1);
+    //AddBagItem(ITEM_TM182, 1);
+    //AddBagItem(ITEM_TM183, 1);
+    //AddBagItem(ITEM_TM184, 1);
+    //AddBagItem(ITEM_TM185, 1);
+    //AddBagItem(ITEM_TM186, 1);
+    //AddBagItem(ITEM_TM187, 1);
+    //AddBagItem(ITEM_TM188, 1);
+    //AddBagItem(ITEM_TM189, 1);
+    //AddBagItem(ITEM_TM190, 1);
+    //AddBagItem(ITEM_TM191, 1);
+    //AddBagItem(ITEM_TM192, 1);
+    //AddBagItem(ITEM_TM193, 1);
+    //AddBagItem(ITEM_TM194, 1);
+    //AddBagItem(ITEM_TM195, 1);
+    //AddBagItem(ITEM_TM196, 1);
+    //AddBagItem(ITEM_TM197, 1);
+    //AddBagItem(ITEM_TM198, 1);
+    //AddBagItem(ITEM_TM199, 1);
+    //AddBagItem(ITEM_TM200, 1);
+
+    AddBagItem(ITEM_HM01, 1);
+    AddBagItem(ITEM_HM02, 1);
+    AddBagItem(ITEM_HM03, 1);
+    AddBagItem(ITEM_HM04, 1);
+    AddBagItem(ITEM_HM05, 1);
+    AddBagItem(ITEM_HM06, 1);
+    AddBagItem(ITEM_HM07, 1);
+    AddBagItem(ITEM_HM08, 1);
+
 }
 
 #endif
