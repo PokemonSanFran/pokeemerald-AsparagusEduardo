@@ -1004,8 +1004,7 @@ gText_ThankYouForAccessingMysteryGift:: @ 8273178
 	.string "Mystery Gift System.$"
 
 gText_PlayerFoundOneTMHM:: @ 82731A9
-	.string "{PLAYER} found one {STR_VAR_1}\n"
-	.string "{STR_VAR_2}!$"
+	.string "{PLAYER} found {STR_VAR_1}!$"
 
 gText_Sudowoodo_Attacked:: @ 82731BD
 	.string "The weird tree doesn't like the\n"
