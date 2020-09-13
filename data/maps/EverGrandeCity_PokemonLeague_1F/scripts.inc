@@ -36,19 +36,6 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Clerk:: @ 822960A
 	release
 	end
 
-	.align 2
-EverGrandeCity_PokemonLeague_1F_Pokemart: @ 8229624
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
-	release
-	end
-
 @ The door guards only check for FLAG_BADGE06_GET because Winonas badge is the only one that can be skipped
 @ Its assumed the player has the remaining badges
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard:: @ 8229636
