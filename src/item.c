@@ -17,6 +17,7 @@
 #include "pokemon_summary_screen.h"
 #include "menu.h"
 #include "party_menu.h"
+#include "overworld.h"
 #include "constants/items.h"
 #include "constants/hold_effects.h"
 #include "constants/tv.h"
@@ -29,7 +30,7 @@ extern u16 gUnknown_0203CF30[];
 #endif
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
-static void ShowItemIconSprite(u16 item, bool8 firstTime);
+static void ShowItemIconSprite(u16 item, bool8 firstTime, bool8 flash);
 static void DestroyItemIconSprite(void);
 static void GetTMWithName(u8 *dst, u16 itemId, const u8 *moveName);
 
@@ -37,6 +38,7 @@ static void GetTMWithName(u8 *dst, u16 itemId, const u8 *moveName);
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 EWRAM_DATA static u8 sHeaderBoxWindowId = 0;
 EWRAM_DATA u8 sItemIconSpriteId = 0;
+EWRAM_DATA u8 sItemIconSpriteId2 = 0;
 
 EWRAM_DATA struct ItemSlot gTmHmItemSlots[BAG_TMHM_COUNT] = {0};
 
@@ -1130,6 +1132,10 @@ void DrawHeaderBox(void)
     u8 headerType = gSpecialVar_0x8009;
     u8 textY;
     u8 *dst;
+    bool8 handleFlash = FALSE;
+    
+    if (Overworld_GetFlashLevel() > 1)
+        handleFlash = TRUE;
     
     if (headerType == 1)
         dst = gStringVar3;
@@ -1138,7 +1144,7 @@ void DrawHeaderBox(void)
     
     if (GetSetItemObtained(item, FLAG_GET_OBTAINED))
     {
-        ShowItemIconSprite(item, FALSE);
+        ShowItemIconSprite(item, FALSE, handleFlash);
         return; //no box if item obtained previously
     }
     
@@ -1154,7 +1160,7 @@ void DrawHeaderBox(void)
     else
         textY = 0;
     
-    ShowItemIconSprite(item, TRUE);
+    ShowItemIconSprite(item, TRUE, handleFlash);
     AddTextPrinterParameterized(sHeaderBoxWindowId, 0, dst, ITEM_ICON_X + 2, textY, 0, NULL);
 }
 
@@ -1172,13 +1178,25 @@ void HideHeaderBox(void)
     }
 }
 
+#include "gpu_regs.h"
+
 #define ITEM_TAG 0x2722 //same as money label
-static void ShowItemIconSprite(u16 item, bool8 firstTime)
+static void ShowItemIconSprite(u16 item, bool8 firstTime, bool8 flash)
 {
 	s16 x, y;
-	u8 iconSpriteId;
-
+	u8 iconSpriteId;   
+    u8 spriteId2 = MAX_SPRITES;
+    
+    if (flash)
+    {
+        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
+        SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WINOBJ_OBJ);
+    }
+    
     iconSpriteId = AddItemIconSprite(ITEM_TAG, ITEM_TAG, item);
+    if (flash)
+        spriteId2 = AddItemIconSprite(ITEM_TAG, ITEM_TAG, item);
+    
 	if (iconSpriteId != MAX_SPRITES)
 	{        
         if (!firstTime)
@@ -1198,6 +1216,15 @@ static void ShowItemIconSprite(u16 item, bool8 firstTime)
 		gSprites[iconSpriteId].pos2.y = y;
 		gSprites[iconSpriteId].oam.priority = 0;
 	}
+    
+    if (spriteId2 != MAX_SPRITES)
+    {
+        gSprites[spriteId2].pos2.x = x;
+        gSprites[spriteId2].pos2.y = y;
+        gSprites[spriteId2].oam.priority = 0;
+        gSprites[spriteId2].oam.objMode = ST_OAM_OBJ_WINDOW;
+        sItemIconSpriteId2 = spriteId2;
+    }
 
 	sItemIconSpriteId = iconSpriteId;
 }
@@ -1208,4 +1235,12 @@ static void DestroyItemIconSprite(void)
 	FreeSpritePaletteByTag(ITEM_TAG);
 	FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId]);
 	DestroySprite(&gSprites[sItemIconSpriteId]);
+    
+    if (Overworld_GetFlashLevel() > 1 && sItemIconSpriteId2 != MAX_SPRITES)
+    {
+        //FreeSpriteTilesByTag(ITEM_TAG);
+        //FreeSpritePaletteByTag(ITEM_TAG);
+        FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId2]);
+        DestroySprite(&gSprites[sItemIconSpriteId2]);
+    }
 }
