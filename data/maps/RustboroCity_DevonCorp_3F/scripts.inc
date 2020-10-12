@@ -253,13 +253,12 @@ RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter: @ 8212A29
 	.string "It should help you, a Trainer.$"
 
 RustboroCity_DevonCorp_3F_Text_ExplainExpShare: @ 8212A9E
-	.string "Mr. Stone: A Pokémon holding that\n"
-	.string "Exp. Share will be given some of the\l"
-	.string "Exp Points from battle.\p"
-	.string "It will get Exp Points even if it didn't\n"
-	.string "actually battle.\p"
-	.string "I would say Exp. Share is quite useful\n"
-	.string "for raising weak Pokémon.$"
+	.string "Mr. Stone: When you turn it on,\n"
+	.string "the Exp. Share will make everyone\l"
+	.string "gain experience in a battle, even\l"
+	.string "if they didn't participate in it!\p"
+	.string "Use it if you feel your team is\n"
+	.string "getting behind in training.$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends: @ 8212B78
 	.string "Mr. Stone: Since my youth, I've immersed\n"
