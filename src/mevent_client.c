@@ -219,7 +219,7 @@ static u32 mainseq_4(struct mevent_client * svr)
         InitRamScript_NoObjectEvent(svr->recvBuffer, 1000);
         break;
     case 18:
-        memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, svr->recvBuffer, 0xbc);
+        //memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, svr->recvBuffer, 0xbc);
         ValidateEReaderTrainer();
         break;
     case 21:
