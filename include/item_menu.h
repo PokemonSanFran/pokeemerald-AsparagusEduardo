@@ -70,7 +70,7 @@ struct BagMenuStruct
     u8 contextMenuItemsBuffer[4];
     u8 contextMenuNumItems;
     u8 numItemStacks[POCKETS_COUNT];
-    u8 numShownItems[6];
+    u8 numShownItems[POCKETS_COUNT + 1];
     s16 graphicsLoadState;
     u8 filler4[0xE];
     u8 pocketNameBuffer[32][32];
