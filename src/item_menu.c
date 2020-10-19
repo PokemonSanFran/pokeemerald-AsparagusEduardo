@@ -51,6 +51,7 @@
 #include "apprentice.h"
 #include "battle_pike.h"
 #include "constants/rgb.h"
+#include "dexnav.h"
 
 enum
 {
@@ -3480,6 +3481,8 @@ static void ItemMenu_RegisterR(u8 taskId)
     else
         gSaveBlock1Ptr->registeredItemR = gSpecialVar_ItemId;
     
+    VarSet(VAR_DEXNAV_SPECIES, SPECIES_NONE);
+    
     gTasks[taskId].func = ItemMenu_FinishRegister;
 }
 
@@ -3515,6 +3518,8 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
         registeredItem = gSaveBlock1Ptr->registeredItemL;
         break;
     case 2:
+        if ((VarGet(VAR_DEXNAV_SPECIES) & MASK_SPECIES) != SPECIES_NONE)
+            return FALSE;
         registeredItem = gSaveBlock1Ptr->registeredItemR;
         break;
     default:

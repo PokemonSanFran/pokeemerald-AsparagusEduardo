@@ -2468,6 +2468,9 @@ static void Task_DexNavMain(u8 taskId)
             
             // create value to store in a var
             VarSet(VAR_DEXNAV_SPECIES, ((sDexNavUiDataPtr->environment << 14) | species));
+            
+            //If item is registered to R
+            gSaveBlock1Ptr->registeredItemR = 0;
         }
         else
         {

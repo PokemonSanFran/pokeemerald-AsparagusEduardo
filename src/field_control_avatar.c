@@ -213,13 +213,12 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     else if (input->pressedLButton && UseRegisteredKeyItemOnField(1))
         return TRUE;
+    else if (input->pressedRButton && TryStartDexnavSearch())
+        return TRUE;
     else if (input->pressedRButton && UseRegisteredKeyItemOnField(2))
         return TRUE;
     
     if (input->tookStep && TryFindHiddenPokemon())
-        return TRUE;
-    
-    if (input->pressedRButton && TryStartDexnavSearch())
         return TRUE;
 
 #ifdef DEBUG_MENU
