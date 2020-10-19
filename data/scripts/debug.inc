@@ -21,10 +21,8 @@ Debug_CheckWeekDay_Text:
 	.string "And dad's car!$"
 
 Debug_CheckSaveBlock_Text:
-	.string "SaveBlock1 is {STR_VAR_1} bytes long.\n"
-	.string "Max size is 15872 bytes.\p"
-	.string "SaveBlock2 is {STR_VAR_2} bytes long.\n"
-	.string "Max size is 3968 bytes.\p"
+	.string "SaveBlock1 has {STR_VAR_1}/15872 bytes.\n"
+	.string "SaveBlock2 has {STR_VAR_2}/3968 bytes.\p"
 	.string "PokemonStorage is {STR_VAR_3} bytes long.\n"
 	.string "Max size is 35712 bytes.$"
 	
