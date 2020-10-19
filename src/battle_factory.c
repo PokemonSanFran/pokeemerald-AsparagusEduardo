@@ -421,7 +421,7 @@ static void SetPlayerAndOpponentParties(void)
                       monLevel,
                       ivs,
                       TRUE, gSaveBlock2Ptr->frontier.rentalMons[i].personality,
-                      OT_ID_PLAYER_ID, 0);
+                      OT_ID_PLAYER_ID, 0, 0); // handle forms
 
             count = 0;
             bits = gFacilityTrainerMons[monId].evSpread;
@@ -462,7 +462,7 @@ static void SetPlayerAndOpponentParties(void)
                       monLevel,
                       ivs,
                       TRUE, gSaveBlock2Ptr->frontier.rentalMons[i + 3].personality,
-                      OT_ID_PLAYER_ID, 0);
+                      OT_ID_PLAYER_ID, 0, 0); // handle forms
 
             count = 0;
             bits = gFacilityTrainerMons[monId].evSpread;
@@ -765,7 +765,7 @@ void FillFactoryBrainParty(void)
                                              gFacilityTrainerMons[monId].nature,
                                              fixedIV,
                                              gFacilityTrainerMons[monId].evSpread,
-                                             otId);
+                                             otId, 0); // handle forms
 
         friendship = 0;
         for (k = 0; k < MAX_MON_MOVES; k++)

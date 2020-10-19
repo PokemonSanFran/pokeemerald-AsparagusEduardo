@@ -2295,7 +2295,7 @@ static void sub_81772B8(struct Sprite *sprite)
 
 static void DeterminePokemonToShow(void)
 {
-    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON)));
+    u16 starter = SpeciesToNationalPokedexNum(GetStarterPokemon(VarGet(VAR_STARTER_MON))); // handle forms
     u16 page;
     u16 dexNum;
     u16 j;

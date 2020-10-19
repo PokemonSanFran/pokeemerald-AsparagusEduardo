@@ -556,6 +556,8 @@ bool8 mplay_80342A4(u8 battlerId)
 static void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battlerId, bool32 opponent)
 {
     u32 monsPersonality, currentPersonality, otId, species, paletteOffset, position;
+    u8 formId;
+    u16 formSpeciesId;
     const void *lzPaletteData;
     struct Pokemon *illusionMon = GetIllusionMonPtr(battlerId);
     if (illusionMon != NULL)
@@ -566,34 +568,38 @@ static void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battlerId, bool32 op
     {
         species = GetMonData(mon, MON_DATA_SPECIES);
         currentPersonality = monsPersonality;
+        formId = GetMonData(mon, MON_DATA_FORM_ID);
+        formSpeciesId = GetFormSpeciesId(species, formId);
     }
     else
     {
         species = gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies;
         currentPersonality = gTransformedPersonalities[battlerId];
+        formId = 0; // handle forms
+        formSpeciesId = GetFormSpeciesId(species, formId);
     }
 
     otId = GetMonData(mon, MON_DATA_OT_ID);
     position = GetBattlerPosition(battlerId);
     if (opponent)
     {
-        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
+        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId],
                                               gMonSpritesGfxPtr->sprites[position],
-                                              species, currentPersonality);
+                                              formSpeciesId, currentPersonality);
     }
     else
     {
         if (sub_80688F8(1, battlerId) == 1 || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
         {
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],
+            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[formSpeciesId],
                                                       gMonSpritesGfxPtr->sprites[position],
-                                                      species, currentPersonality);
+                                                      formSpeciesId, currentPersonality);
         }
         else
         {
-            HandleLoadSpecialPokePic(&gMonBackPicTable[species],
+            HandleLoadSpecialPokePic(&gMonBackPicTable[formSpeciesId],
                                     gMonSpritesGfxPtr->sprites[position],
-                                    species, currentPersonality);
+                                    formSpeciesId, currentPersonality);
         }
     }
 
@@ -602,7 +608,7 @@ static void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battlerId, bool32 op
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);
     else
-        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
+        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(formSpeciesId, otId, monsPersonality);
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, 0x20);
@@ -640,7 +646,7 @@ void nullsub_24(u16 species)
 void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
 {
     u8 position = GetBattlerPosition(battlerId);
-    DecompressPicFromTable_2(&gTrainerFrontPicTable[frontPicId],
+    DecompressPicFromTable_DontHandleDeoxys(&gTrainerFrontPicTable[frontPicId],
                              gMonSpritesGfxPtr->sprites[position],
                              SPECIES_NONE);
     LoadCompressedSpritePalette(&gTrainerFrontPicPaletteTable[frontPicId]);
@@ -649,7 +655,7 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
 void DecompressTrainerBackPic(u16 backPicId, u8 battlerId)
 {
     u8 position = GetBattlerPosition(battlerId);
-    DecompressPicFromTable_2(&gTrainerBackPicTable[backPicId],
+    DecompressPicFromTable_DontHandleDeoxys(&gTrainerBackPicTable[backPicId],
                              gMonSpritesGfxPtr->sprites[position],
                              SPECIES_NONE);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[backPicId].data,

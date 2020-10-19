@@ -865,6 +865,8 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
     u32 otId;
     u32 personality;
     const struct CompressedSpritePalette *pokePal;
+    u8 formId;
+    u16 formSpeciesId;
 
     switch (gTasks[taskId].tState)
     {
@@ -876,26 +878,17 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         species = gContestMons[i].species;
         personality = gContestMons[i].personality;
         otId = gContestMons[i].otId;
-        if (i == gContestPlayerMonIndex)
-        {
-            HandleLoadSpecialPokePic_2(
-                &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites[1],
-                species,
-                personality);
-        }
-        else
-        {
-            HandleLoadSpecialPokePic_DontHandleDeoxys(
-                &gMonFrontPicTable[species],
-                gMonSpritesGfxPtr->sprites[1],
-                species,
-                personality);
-        }
+        formId = gContestMons[i].formId;
+        formSpeciesId = GetFormSpeciesId(species, formId);
+        HandleLoadSpecialPokePic_DontHandleDeoxys(
+            &gMonFrontPicTable[formSpeciesId],
+            gMonSpritesGfxPtr->sprites[1],
+            formSpeciesId,
+            personality);
 
-        pokePal = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+        pokePal = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality); // handle form?
         LoadCompressedSpritePalette(pokePal);
-        SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
+        SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT, formId);
         gMultiuseSpriteTemplate.paletteTag = pokePal->tag;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, 272, 80, 10);
         gSprites[spriteId].data[1] = species;
@@ -1087,7 +1080,7 @@ static void Task_FlashStarsAndHearts(u8 taskId)
         sContestResults->data->pointsFlashing = TRUE;
 }
 
-static void LoadContestMonIcon(u16 species, u8 monIndex, u8 srcOffset, u8 useDmaNow, u32 personality)
+static void LoadContestMonIcon(u16 species, u8 monIndex, u8 srcOffset, u8 useDmaNow, u32 personality, u8 formId)
 {
     const u8 *iconPtr;
     u16 var0, var1, frameNum;
@@ -1097,7 +1090,7 @@ static void LoadContestMonIcon(u16 species, u8 monIndex, u8 srcOffset, u8 useDma
     else
         frameNum = 0;
 
-    iconPtr = GetMonIconPtr(species, personality, frameNum);
+    iconPtr = GetMonIconPtr(species, personality, frameNum, formId);
     iconPtr += srcOffset * 0x200 + 0x80;
     if (useDmaNow)
     {
@@ -1117,17 +1110,19 @@ static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
     int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        LoadContestMonIcon(gContestMons[i].species, i, srcOffset, useDmaNow, gContestMons[i].personality);
+        LoadContestMonIcon(gContestMons[i].species, i, srcOffset, useDmaNow, gContestMons[i].personality, gContestMons[i].formId);
 }
 
 static void LoadAllContestMonIconPalettes(void)
 {
     int i, species;
+    u8 formId;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         species = gContestMons[i].species;
-        LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[GetIconSpecies(species, 0)]], i * 0x10 + 0xA0, 0x20);
+        formId = gContestMons[i].formId;
+        LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[GetIconSpecies(species, 0, formId)]], i * 0x10 + 0xA0, 0x20);
     }
 }
 
@@ -1660,7 +1655,7 @@ static void Task_BounceMonIconInBox(u8 taskId)
     if (gTasks[taskId].tTimer++ == gTasks[taskId].tNumFrames)
     {
         gTasks[taskId].tTimer = 0;
-        LoadContestMonIcon(gTasks[taskId].tSpecies, monIndex, gTasks[taskId].tBounced, FALSE, gContestMons[monIndex].personality);
+        LoadContestMonIcon(gTasks[taskId].tSpecies, monIndex, gTasks[taskId].tBounced, FALSE, gContestMons[monIndex].personality, gContestMons[monIndex].formId);
         gTasks[taskId].tBounced ^= 1;
     }
 }
@@ -2539,6 +2534,8 @@ void ShowContestEntryMonPic(void)
     u8 spriteId;
     u8 taskId;
     u8 left, top;
+    u8 formId;
+    u16 formSpeciesId;
 
     if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == 0xFF)
     {
@@ -2546,30 +2543,29 @@ void ShowContestEntryMonPic(void)
         left = 10;
         top = 3;
         species = gContestMons[gSpecialVar_0x8006].species;
+        formId = gContestMons[gSpecialVar_0x8006].formId;
+        formSpeciesId = GetFormSpeciesId(species, formId);
         personality = gContestMons[gSpecialVar_0x8006].personality;
         otId = gContestMons[gSpecialVar_0x8006].otId;
         taskId = CreateTask(Task_ShowContestEntryMonPic, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
-        if (gSpecialVar_0x8006 == gContestPlayerMonIndex)
-            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
-        else
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[1], species, personality);
+        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites[1], formSpeciesId, personality);
 
-        palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+        palette = GetMonSpritePalStructFromOtIdPersonality(formSpeciesId, otId, personality);
         LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(species, 1);
+        SetMultiuseSpriteTemplateToPokemon(species, 1, formId);
         gMultiuseSpriteTemplate.paletteTag = palette->tag;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);
 
         if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
             if (!(gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER))
-                DoMonFrontSpriteAnimation(&gSprites[spriteId], species, FALSE, 0);
+                DoMonFrontSpriteAnimation(&gSprites[spriteId], formSpeciesId, FALSE, 0);
         }
         else
         {
-            DoMonFrontSpriteAnimation(&gSprites[spriteId], species, FALSE, 0);
+            DoMonFrontSpriteAnimation(&gSprites[spriteId], formSpeciesId, FALSE, 0);
         }
 
         gTasks[taskId].data[2] = spriteId;

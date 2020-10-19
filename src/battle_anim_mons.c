@@ -2057,54 +2057,41 @@ u8 GetBattlerSpriteBGPriorityRank(u8 battlerId)
     return 1;
 }
 
-u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10)
+u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10, u8 formId)
 {
     u8 spriteId;
     u16 sheet = LoadSpriteSheet(&sUnknown_08525FC0[a3]);
     u16 palette = AllocSpritePalette(sUnknown_08525F90[a3].paletteTag);
+    u16 formSpeciesId = GetFormSpeciesId(species, formId);
 
     if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->buffer == NULL)
         gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
     if (!isBackpic)
     {
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        if (a10 == 1 || sub_80688F8(5, battlerId) == 1 || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
-            LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
-                                                gMonSpritesGfxPtr->buffer,
-                                                species,
-                                                personality,
-                                                TRUE);
-        else
-            LoadSpecialPokePic_2(&gMonFrontPicTable[species],
-                                 gMonSpritesGfxPtr->buffer,
-                                 species,
-                                 personality,
-                                 TRUE);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(formSpeciesId, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
+        LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId],
+                                            gMonSpritesGfxPtr->buffer,
+                                            formSpeciesId,
+                                            personality,
+                                            TRUE);
     }
     else
     {
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        if (a10 == 1 || sub_80688F8(5, battlerId) == 1 || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
-            LoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],
-                                                gMonSpritesGfxPtr->buffer,
-                                                species,
-                                                personality,
-                                                FALSE);
-        else
-            LoadSpecialPokePic_2(&gMonBackPicTable[species],
-                                 gMonSpritesGfxPtr->buffer,
-                                 species,
-                                 personality,
-                                 FALSE);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(formSpeciesId, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
+        LoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[formSpeciesId],
+                                            gMonSpritesGfxPtr->buffer,
+                                            formSpeciesId,
+                                            personality,
+                                            FALSE);
     }
 
     RequestDma3Copy(gMonSpritesGfxPtr->buffer, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
 
     if (!isBackpic)
-        spriteId = CreateSprite(&sUnknown_08525F90[a3], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sUnknown_08525F90[a3], x, y + gMonFrontPicCoords[formSpeciesId].y_offset, subpriority);
     else
-        spriteId = CreateSprite(&sUnknown_08525F90[a3], x, y + gMonBackPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sUnknown_08525F90[a3], x, y + gMonBackPicCoords[formSpeciesId].y_offset, subpriority);
 
     if (IsContest())
     {

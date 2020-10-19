@@ -99,7 +99,7 @@ static void PrintContestantMonName(u8);
 static void PrintContestantMonNameWithColor(u8, u8);
 static u8 CreateJudgeSprite(void);
 static u8 CreateJudgeSpeechBubbleSprite(void);
-static u8 CreateContestantSprite(u16, u32, u32, u32);
+static u8 CreateContestantSprite(u16, u32, u32, u32, u8 formId);
 static void PrintContestMoveDescription(u16);
 static u16 SanitizeSpecies(u16);
 static void ContestClearGeneralTextWindow(void);
@@ -1779,7 +1779,8 @@ static void Task_DoAppeals(u8 taskId)
             gContestMons[eContest.currentContestant].species,
             gContestMons[eContest.currentContestant].otId,
             gContestMons[eContest.currentContestant].personality,
-            eContest.currentContestant);
+            eContest.currentContestant,
+            gContestMons[eContest.currentContestant].formId);
         gSprites[spriteId].pos2.x = 120;
         gSprites[spriteId].callback = SpriteCB_MonSlideIn;
         gTasks[taskId].tMonSpriteId = spriteId;
@@ -3112,18 +3113,17 @@ static u8 CreateJudgeSpeechBubbleSprite(void)
     return spriteId;
 }
 
-static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 index)
+static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 index, u8 formId)
 {
     u8 spriteId;
+    u16 formSpeciesId;
     species = SanitizeSpecies(species);
+    formSpeciesId = GetFormSpeciesId(species, formId);
 
-    if (index == gContestPlayerMonIndex)
-        HandleLoadSpecialPokePic_2(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites[0], species, personality);
-    else
-        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species], gMonSpritesGfxPtr->sprites[0], species, personality);
+    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites[0], formSpeciesId, personality);
 
-    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality), 0x120, 0x20);
-    SetMultiuseSpriteTemplateToPokemon(species, 0);
+    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(formSpeciesId, otId, personality), 0x120, 0x20);
+    SetMultiuseSpriteTemplateToPokemon(species, 0, formId);
 
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 0x70, GetBattlerSpriteFinal_Y(2, species, FALSE), 30);
     gSprites[spriteId].oam.paletteNum = 2;

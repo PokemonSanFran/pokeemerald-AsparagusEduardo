@@ -902,277 +902,6 @@ gCryTable:: @ 869DCF4
 	cry Cry_Unown @ Kubfu, Not implemented
 	cry Cry_Unown @ Urshifu, Not implemented
 	cry Cry_Unown @ Zarude, Not implemented
-	@ Gen 3 Forms
-	cry Cry_Unown @ Deoxys_Attack, Not implemented
-	cry Cry_Unown @ Deoxys_Defense, Not implemented
-	cry Cry_Unown @ Deoxys_Speed, Not implemented
-	@ Gen 4 Forms
-	cry_not Cry_Burmy_Sandy
-	cry_not Cry_Burmy_Trash
-	cry_not Cry_Wormadam_Sandy
-	cry_not Cry_Wormadam_Trash
-	cry Cry_Unown @ Shellos_East, Not implemented
-	cry_not Cry_Rotom_Heat
-	cry_not Cry_Rotom_Wash
-	cry_not Cry_Rotom_Frost
-	cry_not Cry_Rotom_Fan
-	cry_not Cry_Rotom_Mow
-	cry_not Cry_Giratina_Origin
-	cry_not Cry_Shaymin_Sky
-	cry Cry_Unown @ Arceus_Fist, Not implemented
-	cry Cry_Unown @ Arceus_Sky, Not implemented
-	cry Cry_Unown @ Arceus_Toxic, Not implemented
-	cry Cry_Unown @ Arceus_Earth, Not implemented
-	cry Cry_Unown @ Arceus_Stone, Not implemented
-	cry Cry_Unown @ Arceus_Insect, Not implemented
-	cry Cry_Unown @ Arceus_Spooky, Not implemented
-	cry Cry_Unown @ Arceus_Iron, Not implemented
-	cry Cry_Unown @ Arceus_Flame, Not implemented
-	cry Cry_Unown @ Arceus_Splash, Not implemented
-	cry Cry_Unown @ Arceus_Meadow, Not implemented
-	cry Cry_Unown @ Arceus_Zap, Not implemented
-	cry Cry_Unown @ Arceus_Mind, Not implemented
-	cry Cry_Unown @ Arceus_Icicle, Not implemented
-	cry Cry_Unown @ Arceus_Draco, Not implemented
-	cry Cry_Unown @ Arceus_Dread, Not implemented
-	cry Cry_Unown @ Arceus_Pixie, Not implemented
-	@ Gen 5 Forms
-	cry Cry_Unown @ Basculin_Blue, Not implemented
-	cry_not Cry_Darmanitan_Zen
-	cry Cry_Unown @ Deerling_Summer, Not implemented
-	cry Cry_Unown @ Deerling_Autumn, Not implemented
-	cry Cry_Unown @ Deerling_Winter, Not implemented
-	cry Cry_Unown @ Sawsbuck_Summer, Not implemented
-	cry Cry_Unown @ Sawsbuck_Autumn, Not implemented
-	cry Cry_Unown @ Sawsbuck_Winter, Not implemented
-	cry_not Cry_Tornadus_Therian
-	cry_not Cry_Thundurus_Therian
-	cry_not Cry_Landorus_Therian
-	cry_not Cry_Kyurem_Black
-	cry_not Cry_Kyurem_White
-	cry Cry_Unown @ Keldeo_Resolute, Not implemented
-	cry Cry_Unown @ Genesect_Shock, Not implemented
-	cry Cry_Unown @ Genesect_Burn, Not implemented
-	cry Cry_Unown @ Genesect_Chill, Not implemented
-	cry Cry_Unown @ Genesect_Douse, Not implemented
-	@ Gen 6 Forms
-	cry Cry_Unown @ Vivillon_Archipelago, Not implemented
-	cry Cry_Unown @ Vivillon_Continental, Not implemented
-	cry Cry_Unown @ Vivillon_Elegant, Not implemented
-	cry Cry_Unown @ Vivillon_Garden, Not implemented
-	cry Cry_Unown @ Vivillon_High_Plains, Not implemented
-	cry Cry_Unown @ Vivillon_Icy_Snow, Not implemented
-	cry Cry_Unown @ Vivillon_Jungle, Not implemented
-	cry Cry_Unown @ Vivillon_Marine, Not implemented
-	cry Cry_Unown @ Vivillon_Modern, Not implemented
-	cry Cry_Unown @ Vivillon_Monsoon, Not implemented
-	cry Cry_Unown @ Vivillon_Ocean, Not implemented
-	cry Cry_Unown @ Vivillon_Polar, Not implemented
-	cry Cry_Unown @ Vivillon_River, Not implemented
-	cry Cry_Unown @ Vivillon_Sandstorm, Not implemented
-	cry Cry_Unown @ Vivillon_Savanna, Not implemented
-	cry Cry_Unown @ Vivillon_Sun, Not implemented
-	cry Cry_Unown @ Vivillon_Tundra, Not implemented
-	cry Cry_Unown @ Vivillon_Poke_Ball, Not implemented
-	cry Cry_Unown @ Vivillon_Fancy, Not implemented
-	cry Cry_Unown @ Flabebe_Yellow, Not implemented
-	cry Cry_Unown @ Flabebe_Orange, Not implemented
-	cry Cry_Unown @ Flabebe_Blue, Not implemented
-	cry Cry_Unown @ Flabebe_White, Not implemented
-	cry Cry_Unown @ Floette_Yellow, Not implemented
-	cry Cry_Unown @ Floette_Orange, Not implemented
-	cry Cry_Unown @ Floette_Blue, Not implemented
-	cry Cry_Unown @ Floette_White, Not implemented
-	cry Cry_Unown @ Florges_Yellow, Not implemented
-	cry Cry_Unown @ Florges_Orange, Not implemented
-	cry Cry_Unown @ Florges_Blue, Not implemented
-	cry Cry_Unown @ Florges_White, Not implemented
-	cry Cry_Unown @ Furfrou_Heart, Not implemented
-	cry Cry_Unown @ Furfrou_Star, Not implemented
-	cry Cry_Unown @ Furfrou_Diamond, Not implemented
-	cry Cry_Unown @ Furfrou_Debutante, Not implemented
-	cry Cry_Unown @ Furfrou_Matron, Not implemented
-	cry Cry_Unown @ Furfrou_Dandy, Not implemented
-	cry Cry_Unown @ Furfrou_La_Reine, Not implemented
-	cry Cry_Unown @ Furfrou_Kabuki, Not implemented
-	cry Cry_Unown @ Furfrou_Pharaoh, Not implemented
-	cry_not Cry_Meowstic_F
-	cry Cry_Unown @ Pumpkaboo_Small, Not implemented
-	cry Cry_Unown @ Pumpkaboo_Large, Not implemented
-	cry Cry_Unown @ Pumpkaboo_Super, Not implemented
-	cry Cry_Unown @ Gourgeist_Small, Not implemented
-	cry Cry_Unown @ Gourgeist_Large, Not implemented
-	cry Cry_Unown @ Gourgeist_Super, Not implemented
-	cry Cry_Unown @ Xerneas_Active, Not implemented
-	cry_not Cry_Hoopa_Unbound
-	@ Alolan Forms
-	cry Cry_Alolan_Rattata
-	cry Cry_Alolan_Raticate
-	cry Cry_Alolan_Raichu
-	cry Cry_Alolan_Sandshrew
-	cry Cry_Alolan_Sandslash
-	cry Cry_Alolan_Vulpix
-	cry Cry_Alolan_Ninetales
-	cry Cry_Alolan_Diglett
-	cry Cry_Alolan_Dugtrio
-	cry Cry_Alolan_Meowth
-	cry Cry_Alolan_Persian
-	cry Cry_Alolan_Geodude
-	cry Cry_Alolan_Graveler
-	cry Cry_Alolan_Golem
-	cry Cry_Alolan_Grimer
-	cry Cry_Alolan_Muk
-	cry Cry_Alolan_Exeggutor
-	cry Cry_Alolan_Marowak
-	@ Gen 7 Forms
-	cry Cry_Unown @ Pikachu_Cap_Original, Not implemented
-	cry Cry_Unown @ Pikachu_Cap_Hoenn, Not implemented
-	cry Cry_Unown @ Pikachu_Cap_Sinnoh, Not implemented
-	cry Cry_Unown @ Pikachu_Cap_Unova, Not implemented
-	cry Cry_Unown @ Pikachu_Cap_Kalos, Not implemented
-	cry Cry_Unown @ Pikachu_Cap_Alola, Not implemented
-	cry Cry_Unown @ Pikachu_Cap_Partner, Not implemented
-	cry Cry_Unown @ Greninja_Ash, Not implemented
-	cry_not Cry_Zygarde_10
-	cry Cry_Unown @ Oricorio_Pom_Pom, Not implemented
-	cry Cry_Unown @ Oricorio_Pa_U, Not implemented
-	cry Cry_Unown @ Oricorio_Sensu, Not implemented
-	cry_not Cry_Lycanroc_Midnight
-	cry_not Cry_Lycanroc_Dusk
-	cry Cry_Unown @ Silvally_Fighting, Not implemented
-	cry Cry_Unown @ Silvally_Flying, Not implemented
-	cry Cry_Unown @ Silvally_Poison, Not implemented
-	cry Cry_Unown @ Silvally_Ground, Not implemented
-	cry Cry_Unown @ Silvally_Rock, Not implemented
-	cry Cry_Unown @ Silvally_Bug, Not implemented
-	cry Cry_Unown @ Silvally_Ghost, Not implemented
-	cry Cry_Unown @ Silvally_Steel, Not implemented
-	cry Cry_Unown @ Silvally_Fire, Not implemented
-	cry Cry_Unown @ Silvally_Water, Not implemented
-	cry Cry_Unown @ Silvally_Grass, Not implemented
-	cry Cry_Unown @ Silvally_Electric, Not implemented
-	cry Cry_Unown @ Silvally_Psychic, Not implemented
-	cry Cry_Unown @ Silvally_Ice, Not implemented
-	cry Cry_Unown @ Silvally_Dragon, Not implemented
-	cry Cry_Unown @ Silvally_Dark, Not implemented
-	cry Cry_Unown @ Silvally_Fairy, Not implemented
-	cry_not Cry_Minior_Core
-	cry Cry_Unown @ Minior_Core_Orange, Not implemented
-	cry Cry_Unown @ Minior_Core_Yellow, Not implemented
-	cry Cry_Unown @ Minior_Core_Green, Not implemented
-	cry Cry_Unown @ Minior_Core_Blue, Not implemented
-	cry Cry_Unown @ Minior_Core_Indigo, Not implemented
-	cry Cry_Unown @ Minior_Core_Violet, Not implemented
-	cry Cry_Unown @ Necrozma_Dusk_Mane, Not implemented
-	cry Cry_Unown @ Necrozma_Dawn_Wings, Not implemented
-	cry Cry_Unown @ Magearna_Original_Color, Not implemented
-	@ Galarian Forms
-	cry Cry_Unown @ Galarian_Meowth, Not implemented
-	cry Cry_Unown @ Galarian_Ponyta, Not implemented
-	cry Cry_Unown @ Galarian_Slowpoke, Not implemented
-	cry Cry_Unown @ Galarian_Slowbro, Not implemented
-	cry Cry_Unown @ Galarian_Rapidash, Not implemented
-	cry Cry_Unown @ Galarian_Farfetchd, Not implemented
-	cry Cry_Unown @ Galarian_Weezing, Not implemented
-	cry Cry_Unown @ Galarian_Mr_Mime, Not implemented
-	cry Cry_Unown @ Galarian_Articuno, Not implemented
-	cry Cry_Unown @ Galarian_Zapdos, Not implemented
-	cry Cry_Unown @ Galarian_Moltres, Not implemented
-	cry Cry_Unown @ Galarian_Slowking, Not implemented
-	cry Cry_Unown @ Galarian_Corsola, Not implemented
-	cry Cry_Unown @ Galarian_Zigzagoon, Not implemented
-	cry Cry_Unown @ Galarian_Linoone, Not implemented
-	cry Cry_Unown @ Galarian_Darumaka, Not implemented
-	cry Cry_Unown @ Galarian_Darmanitan, Not implemented
-	cry Cry_Unown @ Galarian_Yamask, Not implemented
-	cry Cry_Unown @ Galarian_Stunfisk, Not implemented
-	@ Gen 8 Forms
-	cry Cry_Unown @ Pikachu_Cap_World, Not implemented
-	cry Cry_Unown @ Toxtricity_Low_Key, Not implemented
-	cry Cry_Unown @ Sinistea_Antique, Not implemented
-	cry Cry_Unown @ Polteageist_Antique, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Vanilla_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Ruby_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Matcha_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Mint_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Lemon_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Salted_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Ruby_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Caramel_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Strawberry_Rainbow_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Vanilla_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Ruby_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Matcha_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Mint_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Lemon_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Salted_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Ruby_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Caramel_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Berry_Rainbow_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Vanilla_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Ruby_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Matcha_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Mint_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Lemon_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Salted_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Ruby_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Caramel_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Love_Rainbow_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Vanilla_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Ruby_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Matcha_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Mint_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Lemon_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Salted_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Ruby_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Caramel_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Star_Rainbow_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Vanilla_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Ruby_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Matcha_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Mint_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Lemon_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Salted_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Ruby_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Caramel_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Clover_Rainbow_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Vanilla_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Ruby_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Matcha_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Mint_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Lemon_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Salted_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Ruby_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Caramel_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Flower_Rainbow_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Vanilla_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Ruby_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Matcha_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Mint_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Lemon_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Salted_Cream, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Ruby_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Caramel_Swirl, Not implemented
-	cry Cry_Unown @ Alcreamie_Ribbon_Rainbow_Swirl, Not implemented
-	cry Cry_Unown @ Urshifu_Rapid, Not implemented
-	cry Cry_Unown @ Zarude_Dada, Not implemented
-	@ Battle Forms
-	cry Cry_Castform
-	cry Cry_Castform
-	cry Cry_Castform
-	cry_not Cry_Meloetta_Pirouette
-	cry_not Cry_Aegislash_Blade
-	cry_not Cry_Zygarde_Complete
-	cry_not Cry_Wishiwashi_School
-	cry_not Cry_Mimikyu_Busted
-	cry Cry_Unown @ Necrozma_Ultra, Not implemented
-	cry Cry_Unown @ Galarian_Darmanitan_Zen, Not implemented
-	cry Cry_Unown @ Cramorant_Gulping, Not implemented
-	cry Cry_Unown @ Cramorant_Gorging, Not implemented
-	cry Cry_Unown @ Eiscue_Noice, Not implemented
-	cry Cry_Unown @ Morpeko_Hangry, Not implemented
-	cry Cry_Unown @ Zacian_Crowned, Not implemented
-	cry Cry_Unown @ Zamazenta_Crowned, Not implemented
 	@ Megas
 	cry_not Cry_Mega_Venusaur
 	cry_not Cry_Mega_Charizard_X
@@ -1214,7 +943,6 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Mega_Metagross
 	cry_not Cry_Mega_Latias
 	cry_not Cry_Mega_Latios
-	cry_not Cry_Mega_Rayquaza
 	cry_not Cry_Mega_Lopunny
 	cry_not Cry_Mega_Garchomp
 	cry_not Cry_Mega_Lucario
@@ -1222,9 +950,272 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Mega_Gallade
 	cry_not Cry_Mega_Audino
 	cry_not Cry_Mega_Diancie
-	@ Primal Reversion
+    @ Special Mega + Primals
+	cry_not Cry_Mega_Rayquaza
 	cry_not Cry_Primal_Kyogre
 	cry_not Cry_Primal_Groudon
+	@ Alolan Forms
+	cry Cry_Rattata
+	cry Cry_Raticate
+	cry Cry_Raichu
+	cry Cry_Sandshrew
+	cry Cry_Sandslash
+	cry Cry_Vulpix
+	cry Cry_Ninetales
+	cry Cry_Diglett
+	cry Cry_Dugtrio
+	cry Cry_Meowth
+	cry Cry_Persian
+	cry Cry_Geodude
+	cry Cry_Graveler
+	cry Cry_Golem
+	cry Cry_Grimer
+	cry Cry_Muk
+	cry Cry_Exeggutor
+	cry Cry_Marowak
+    @ Misc Forms
+    @ Cosplay Pikachu
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	@ Cap Pikachu
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+	cry Cry_Pikachu  @ 869DE14
+    @ Pichu
+	cry Cry_Pichu  @ 869E4F8
+    @ Unown
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+	cry Cry_Unown  @ 869E654
+    @ Castform
+	cry Cry_Castform
+	cry Cry_Castform
+	cry Cry_Castform
+    @ Deoxys
+	cry Cry_Deoxys
+	cry Cry_Deoxys
+	cry Cry_Deoxys
+    @ Burmy
+	cry_not Cry_Burmy
+	cry_not Cry_Burmy
+    @ Wormadam
+	cry_not Cry_Wormadam
+	cry_not Cry_Wormadam
+    @ Cherrim
+	cry_not Cry_Cherrim
+    @ Shellos
+	cry_not Cry_Shellos
+    @ Gastrodon
+	cry_not Cry_Gastrodon
+    @ Rotom
+	cry_not Cry_Rotom
+	cry_not Cry_Rotom
+	cry_not Cry_Rotom
+	cry_not Cry_Rotom
+	cry_not Cry_Rotom
+    @ Giratina
+	cry_not Cry_Giratina
+    @ Shaymin
+	cry_not Cry_Shaymin_Sky
+    @ Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+	cry_not Cry_Arceus
+    @ Basculin
+	cry_not Cry_Basculin
+    @ Darmanitan
+	cry_not Cry_Darmanitan
+    @ Deerling
+	cry_not Cry_Deerling
+	cry_not Cry_Deerling
+	cry_not Cry_Deerling
+    @ Sawsbuck
+	cry_not Cry_Sawsbuck
+	cry_not Cry_Sawsbuck
+	cry_not Cry_Sawsbuck
+    @ Therian Forms
+	cry_not Cry_Tornadus_Therian
+	cry_not Cry_Thundurus_Therian
+	cry_not Cry_Landorus_Therian
+    @ Kyurem
+	cry_not Cry_Kyurem_White
+	cry_not Cry_Kyurem_Black
+    @ Keldeo
+	cry_not Cry_Keldeo
+    @ Meloetta
+	cry_not Cry_Meloetta
+    @ Genesect
+	cry_not Cry_Genesect
+	cry_not Cry_Genesect
+	cry_not Cry_Genesect
+	cry_not Cry_Genesect
+    @ Greninja
+	cry_not Cry_Greninja
+	cry_not Cry_Greninja
+    @ Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+	cry_not Cry_Vivillon
+    @ Flabébé
+	cry_not Cry_Flabebe
+	cry_not Cry_Flabebe
+	cry_not Cry_Flabebe
+	cry_not Cry_Flabebe
+    @ Floette
+	cry_not Cry_Floette
+	cry_not Cry_Floette
+	cry_not Cry_Floette
+	cry_not Cry_Floette
+	cry_not Cry_Floette_Eternal_Flower
+    @ Florges
+	cry_not Cry_Florges
+	cry_not Cry_Florges
+	cry_not Cry_Florges
+	cry_not Cry_Florges
+    @ Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+	cry_not Cry_Furfrou
+    @ Meowstic
+	cry_not Cry_Meowstic
+	@ Aegislash
+	cry_not Cry_Aegislash
+    @ Pumpkaboo
+	cry_not Cry_Pumpkaboo
+	cry_not Cry_Pumpkaboo
+	cry_not Cry_Pumpkaboo_Super
+    @ Gourgeist
+	cry_not Cry_Gourgeist
+	cry_not Cry_Gourgeist
+	cry_not Cry_Gourgeist_Super
+    @ Xerneas
+	cry_not Cry_Xerneas
+    @ Zygarde
+	cry_not Cry_Zygarde_10
+	cry_not Cry_Zygarde_10
+	cry_not Cry_Zygarde
+	cry_not Cry_Zygarde_Complete
+    @ Hoopa
+	cry_not Cry_Hoopa_Unbound
+    @ Oricorio
+	cry_not Cry_Oricorio_Pom_Pom
+	cry_not Cry_Oricorio_Pa_u
+	cry_not Cry_Oricorio_Sensu
+    @ Rockruff
+	cry_not Cry_Rockruff
+    @ Lycanroc
+	cry_not Cry_Lycanroc_Midnight
+	cry_not Cry_Lycanroc_Dusk
+    @ Wishiwashi
+	cry_not Cry_Wishiwashi_School
+    @ Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+	cry_not Cry_Silvally
+    @ Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+	cry_not Cry_Minior
+    @ Mimikyu
+	cry_not Cry_Mimikyu
+    @ Necrozma
+	cry_not Cry_Necrozma_Dusk_Mane
+	cry_not Cry_Necrozma_Dawn_Wings
+	cry_not Cry_Necrozma_Ultra
+    @ Magearna
+	cry_not Cry_Magearna
 
 	.align 2
 gCryTable2:: @ 869EF24
@@ -2126,277 +2117,6 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Unown @ Kubfu, Not implemented
 	cry2 Cry_Unown @ Urshifu, Not implemented
 	cry2 Cry_Unown @ Zarude, Not implemented
-	@ Gen 3 Forms
-	cry2 Cry_Unown @ Deoxys_Attack, Not implemented
-	cry2 Cry_Unown @ Deoxys_Defense, Not implemented
-	cry2 Cry_Unown @ Deoxys_Speed, Not implemented
-	@ Gen 4 Forms
-	cry2_not Cry_Burmy_Sandy
-	cry2_not Cry_Burmy_Trash
-	cry2_not Cry_Wormadam_Sandy
-	cry2_not Cry_Wormadam_Trash
-	cry2 Cry_Unown @ Shellos_East, Not implemented
-	cry2_not Cry_Rotom_Heat
-	cry2_not Cry_Rotom_Wash
-	cry2_not Cry_Rotom_Frost
-	cry2_not Cry_Rotom_Fan
-	cry2_not Cry_Rotom_Mow
-	cry2_not Cry_Giratina_Origin
-	cry2_not Cry_Shaymin_Sky
-	cry2 Cry_Unown @ Arceus_Fist, Not implemented
-	cry2 Cry_Unown @ Arceus_Sky, Not implemented
-	cry2 Cry_Unown @ Arceus_Toxic, Not implemented
-	cry2 Cry_Unown @ Arceus_Earth, Not implemented
-	cry2 Cry_Unown @ Arceus_Stone, Not implemented
-	cry2 Cry_Unown @ Arceus_Insect, Not implemented
-	cry2 Cry_Unown @ Arceus_Spooky, Not implemented
-	cry2 Cry_Unown @ Arceus_Iron, Not implemented
-	cry2 Cry_Unown @ Arceus_Flame, Not implemented
-	cry2 Cry_Unown @ Arceus_Splash, Not implemented
-	cry2 Cry_Unown @ Arceus_Meadow, Not implemented
-	cry2 Cry_Unown @ Arceus_Zap, Not implemented
-	cry2 Cry_Unown @ Arceus_Mind, Not implemented
-	cry2 Cry_Unown @ Arceus_Icicle, Not implemented
-	cry2 Cry_Unown @ Arceus_Draco, Not implemented
-	cry2 Cry_Unown @ Arceus_Dread, Not implemented
-	cry2 Cry_Unown @ Arceus_Pixie, Not implemented
-	@ Gen 5 Forms
-	cry2 Cry_Unown @ Basculin_Blue, Not implemented
-	cry2_not Cry_Darmanitan_Zen
-	cry2 Cry_Unown @ Deerling_Summer, Not implemented
-	cry2 Cry_Unown @ Deerling_Autumn, Not implemented
-	cry2 Cry_Unown @ Deerling_Winter, Not implemented
-	cry2 Cry_Unown @ Sawsbuck_Summer, Not implemented
-	cry2 Cry_Unown @ Sawsbuck_Autumn, Not implemented
-	cry2 Cry_Unown @ Sawsbuck_Winter, Not implemented
-	cry2_not Cry_Tornadus_Therian
-	cry2_not Cry_Thundurus_Therian
-	cry2_not Cry_Landorus_Therian
-	cry2_not Cry_Kyurem_Black
-	cry2_not Cry_Kyurem_White
-	cry2 Cry_Unown @ Keldeo_Resolute, Not implemented
-	cry2 Cry_Unown @ Genesect_Shock, Not implemented
-	cry2 Cry_Unown @ Genesect_Burn, Not implemented
-	cry2 Cry_Unown @ Genesect_Chill, Not implemented
-	cry2 Cry_Unown @ Genesect_Douse, Not implemented
-	@ Gen 6 Forms
-	cry2 Cry_Unown @ Vivillon_Archipelago, Not implemented
-	cry2 Cry_Unown @ Vivillon_Continental, Not implemented
-	cry2 Cry_Unown @ Vivillon_Elegant, Not implemented
-	cry2 Cry_Unown @ Vivillon_Garden, Not implemented
-	cry2 Cry_Unown @ Vivillon_High_Plains, Not implemented
-	cry2 Cry_Unown @ Vivillon_Icy_Snow, Not implemented
-	cry2 Cry_Unown @ Vivillon_Jungle, Not implemented
-	cry2 Cry_Unown @ Vivillon_Marine, Not implemented
-	cry2 Cry_Unown @ Vivillon_Modern, Not implemented
-	cry2 Cry_Unown @ Vivillon_Monsoon, Not implemented
-	cry2 Cry_Unown @ Vivillon_Ocean, Not implemented
-	cry2 Cry_Unown @ Vivillon_Polar, Not implemented
-	cry2 Cry_Unown @ Vivillon_River, Not implemented
-	cry2 Cry_Unown @ Vivillon_Sandstorm, Not implemented
-	cry2 Cry_Unown @ Vivillon_Savanna, Not implemented
-	cry2 Cry_Unown @ Vivillon_Sun, Not implemented
-	cry2 Cry_Unown @ Vivillon_Tundra, Not implemented
-	cry2 Cry_Unown @ Vivillon_Poke_Ball, Not implemented
-	cry2 Cry_Unown @ Vivillon_Fancy, Not implemented
-	cry2 Cry_Unown @ Flabebe_Yellow, Not implemented
-	cry2 Cry_Unown @ Flabebe_Orange, Not implemented
-	cry2 Cry_Unown @ Flabebe_Blue, Not implemented
-	cry2 Cry_Unown @ Flabebe_White, Not implemented
-	cry2 Cry_Unown @ Floette_Yellow, Not implemented
-	cry2 Cry_Unown @ Floette_Orange, Not implemented
-	cry2 Cry_Unown @ Floette_Blue, Not implemented
-	cry2 Cry_Unown @ Floette_White, Not implemented
-	cry2 Cry_Unown @ Florges_Yellow, Not implemented
-	cry2 Cry_Unown @ Florges_Orange, Not implemented
-	cry2 Cry_Unown @ Florges_Blue, Not implemented
-	cry2 Cry_Unown @ Florges_White, Not implemented
-	cry2 Cry_Unown @ Furfrou_Heart, Not implemented
-	cry2 Cry_Unown @ Furfrou_Star, Not implemented
-	cry2 Cry_Unown @ Furfrou_Diamond, Not implemented
-	cry2 Cry_Unown @ Furfrou_Debutante, Not implemented
-	cry2 Cry_Unown @ Furfrou_Matron, Not implemented
-	cry2 Cry_Unown @ Furfrou_Dandy, Not implemented
-	cry2 Cry_Unown @ Furfrou_La_Reine, Not implemented
-	cry2 Cry_Unown @ Furfrou_Kabuki, Not implemented
-	cry2 Cry_Unown @ Furfrou_Pharaoh, Not implemented
-	cry2_not Cry_Meowstic_F
-	cry2 Cry_Unown @ Pumpkaboo_Small, Not implemented
-	cry2 Cry_Unown @ Pumpkaboo_Large, Not implemented
-	cry2 Cry_Unown @ Pumpkaboo_Super, Not implemented
-	cry2 Cry_Unown @ Gourgeist_Small, Not implemented
-	cry2 Cry_Unown @ Gourgeist_Large, Not implemented
-	cry2 Cry_Unown @ Gourgeist_Super, Not implemented
-	cry2 Cry_Unown @ Xerneas_Active, Not implemented
-	cry2_not Cry_Hoopa_Unbound
-	@ Alolan Forms
-	cry2 Cry_Alolan_Rattata
-	cry2 Cry_Alolan_Raticate
-	cry2 Cry_Alolan_Raichu
-	cry2 Cry_Alolan_Sandshrew
-	cry2 Cry_Alolan_Sandslash
-	cry2 Cry_Alolan_Vulpix
-	cry2 Cry_Alolan_Ninetales
-	cry2 Cry_Alolan_Diglett
-	cry2 Cry_Alolan_Dugtrio
-	cry2 Cry_Alolan_Meowth
-	cry2 Cry_Alolan_Persian
-	cry2 Cry_Alolan_Geodude
-	cry2 Cry_Alolan_Graveler
-	cry2 Cry_Alolan_Golem
-	cry2 Cry_Alolan_Grimer
-	cry2 Cry_Alolan_Muk
-	cry2 Cry_Alolan_Exeggutor
-	cry2 Cry_Alolan_Marowak
-	@ Gen 7 Forms
-	cry2 Cry_Unown @ Pikachu_Cap_Original, Not implemented
-	cry2 Cry_Unown @ Pikachu_Cap_Hoenn, Not implemented
-	cry2 Cry_Unown @ Pikachu_Cap_Sinnoh, Not implemented
-	cry2 Cry_Unown @ Pikachu_Cap_Unova, Not implemented
-	cry2 Cry_Unown @ Pikachu_Cap_Kalos, Not implemented
-	cry2 Cry_Unown @ Pikachu_Cap_Alola, Not implemented
-	cry2 Cry_Unown @ Pikachu_Cap_Partner, Not implemented
-	cry2 Cry_Unown @ Greninja_Ash, Not implemented
-	cry2_not Cry_Zygarde_10
-	cry2 Cry_Unown @ Oricorio_Pom_Pom, Not implemented
-	cry2 Cry_Unown @ Oricorio_Pa_U, Not implemented
-	cry2 Cry_Unown @ Oricorio_Sensu, Not implemented
-	cry2_not Cry_Lycanroc_Midnight
-	cry2_not Cry_Lycanroc_Dusk
-	cry2 Cry_Unown @ Silvally_Fighting, Not implemented
-	cry2 Cry_Unown @ Silvally_Flying, Not implemented
-	cry2 Cry_Unown @ Silvally_Poison, Not implemented
-	cry2 Cry_Unown @ Silvally_Ground, Not implemented
-	cry2 Cry_Unown @ Silvally_Rock, Not implemented
-	cry2 Cry_Unown @ Silvally_Bug, Not implemented
-	cry2 Cry_Unown @ Silvally_Ghost, Not implemented
-	cry2 Cry_Unown @ Silvally_Steel, Not implemented
-	cry2 Cry_Unown @ Silvally_Fire, Not implemented
-	cry2 Cry_Unown @ Silvally_Water, Not implemented
-	cry2 Cry_Unown @ Silvally_Grass, Not implemented
-	cry2 Cry_Unown @ Silvally_Electric, Not implemented
-	cry2 Cry_Unown @ Silvally_Psychic, Not implemented
-	cry2 Cry_Unown @ Silvally_Ice, Not implemented
-	cry2 Cry_Unown @ Silvally_Dragon, Not implemented
-	cry2 Cry_Unown @ Silvally_Dark, Not implemented
-	cry2 Cry_Unown @ Silvally_Fairy, Not implemented
-	cry2_not Cry_Minior_Core
-	cry2 Cry_Unown @ Minior_Core_Orange, Not implemented
-	cry2 Cry_Unown @ Minior_Core_Yellow, Not implemented
-	cry2 Cry_Unown @ Minior_Core_Green, Not implemented
-	cry2 Cry_Unown @ Minior_Core_Blue, Not implemented
-	cry2 Cry_Unown @ Minior_Core_Indigo, Not implemented
-	cry2 Cry_Unown @ Minior_Core_Violet, Not implemented
-	cry2 Cry_Unown @ Necrozma_Dusk_Mane, Not implemented
-	cry2 Cry_Unown @ Necrozma_Dawn_Wings, Not implemented
-	cry2 Cry_Unown @ Magearna_Original_Color, Not implemented
-	@ Galarian Forms
-	cry2 Cry_Unown @ Galarian_Meowth, Not implemented
-	cry2 Cry_Unown @ Galarian_Ponyta, Not implemented
-	cry2 Cry_Unown @ Galarian_Slowpoke, Not implemented
-	cry2 Cry_Unown @ Galarian_Slowbro, Not implemented
-	cry2 Cry_Unown @ Galarian_Rapidash, Not implemented
-	cry2 Cry_Unown @ Galarian_Farfetchd, Not implemented
-	cry2 Cry_Unown @ Galarian_Weezing, Not implemented
-	cry2 Cry_Unown @ Galarian_Mr_Mime, Not implemented
-	cry2 Cry_Unown @ Galarian_Articuno, Not implemented
-	cry2 Cry_Unown @ Galarian_Zapdos, Not implemented
-	cry2 Cry_Unown @ Galarian_Moltres, Not implemented
-	cry2 Cry_Unown @ Galarian_Slowking, Not implemented
-	cry2 Cry_Unown @ Galarian_Corsola, Not implemented
-	cry2 Cry_Unown @ Galarian_Zigzagoon, Not implemented
-	cry2 Cry_Unown @ Galarian_Linoone, Not implemented
-	cry2 Cry_Unown @ Galarian_Darumaka, Not implemented
-	cry2 Cry_Unown @ Galarian_Darmanitan, Not implemented
-	cry2 Cry_Unown @ Galarian_Yamask, Not implemented
-	cry2 Cry_Unown @ Galarian_Stunfisk, Not implemented
-	@ Gen 8 Forms
-	cry2 Cry_Unown @ Pikachu_Cap_World, Not implemented
-	cry2 Cry_Unown @ Toxtricity_Low_Key, Not implemented
-	cry2 Cry_Unown @ Sinistea_Antique, Not implemented
-	cry2 Cry_Unown @ Polteageist_Antique, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Vanilla_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Ruby_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Matcha_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Mint_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Lemon_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Salted_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Ruby_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Caramel_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Strawberry_Rainbow_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Vanilla_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Ruby_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Matcha_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Mint_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Lemon_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Salted_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Ruby_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Caramel_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Berry_Rainbow_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Vanilla_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Ruby_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Matcha_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Mint_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Lemon_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Salted_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Ruby_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Caramel_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Love_Rainbow_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Vanilla_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Ruby_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Matcha_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Mint_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Lemon_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Salted_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Ruby_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Caramel_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Star_Rainbow_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Vanilla_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Ruby_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Matcha_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Mint_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Lemon_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Salted_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Ruby_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Caramel_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Clover_Rainbow_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Vanilla_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Ruby_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Matcha_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Mint_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Lemon_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Salted_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Ruby_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Caramel_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Flower_Rainbow_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Vanilla_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Ruby_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Matcha_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Mint_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Lemon_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Salted_Cream, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Ruby_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Caramel_Swirl, Not implemented
-	cry2 Cry_Unown @ Alcreamie_Ribbon_Rainbow_Swirl, Not implemented
-	cry2 Cry_Unown @ Urshifu_Rapid, Not implemented
-	cry2 Cry_Unown @ Zarude_Dada, Not implemented
-	@ Battle Forms
-	cry2 Cry_Castform
-	cry2 Cry_Castform
-	cry2 Cry_Castform
-	cry2_not Cry_Meloetta_Pirouette
-	cry2_not Cry_Aegislash_Blade
-	cry2_not Cry_Zygarde_Complete
-	cry2_not Cry_Wishiwashi_School
-	cry2_not Cry_Mimikyu_Busted
-	cry2 Cry_Unown @ Necrozma_Ultra, Not implemented
-	cry2 Cry_Unown @ Galarian_Darmanitan_Zen, Not implemented
-	cry2 Cry_Unown @ Cramorant_Gulping, Not implemented
-	cry2 Cry_Unown @ Cramorant_Gorging, Not implemented
-	cry2 Cry_Unown @ Eiscue_Noice, Not implemented
-	cry2 Cry_Unown @ Morpeko_Hangry, Not implemented
-	cry2 Cry_Unown @ Zacian_Crowned, Not implemented
-	cry2 Cry_Unown @ Zamazenta_Crowned, Not implemented
 	@ Megas
 	cry2_not Cry_Mega_Venusaur
 	cry2_not Cry_Mega_Charizard_X
@@ -2438,7 +2158,6 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Mega_Metagross
 	cry2_not Cry_Mega_Latias
 	cry2_not Cry_Mega_Latios
-	cry2_not Cry_Mega_Rayquaza
 	cry2_not Cry_Mega_Lopunny
 	cry2_not Cry_Mega_Garchomp
 	cry2_not Cry_Mega_Lucario
@@ -2446,6 +2165,269 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Mega_Gallade
 	cry2_not Cry_Mega_Audino
 	cry2_not Cry_Mega_Diancie
-	@ Primal Reversion
+    @ Special Mega + Primals
+	cry2_not Cry_Mega_Rayquaza
 	cry2_not Cry_Primal_Kyogre
 	cry2_not Cry_Primal_Groudon
+	@ Alolan Forms
+	cry2 Cry_Rattata
+	cry2 Cry_Raticate
+	cry2 Cry_Raichu
+	cry2 Cry_Sandshrew
+	cry2 Cry_Sandslash
+	cry2 Cry_Vulpix
+	cry2 Cry_Ninetales
+	cry2 Cry_Diglett
+	cry2 Cry_Dugtrio
+	cry2 Cry_Meowth
+	cry2 Cry_Persian
+	cry2 Cry_Geodude
+	cry2 Cry_Graveler
+	cry2 Cry_Golem
+	cry2 Cry_Grimer
+	cry2 Cry_Muk
+	cry2 Cry_Exeggutor
+	cry2 Cry_Marowak
+    @ Misc Forms
+    @ Cosplay Pikachu
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	@ Cap Pikachu
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+	cry2 Cry_Pikachu  @ 869DE14
+    @ Pichu
+	cry2 Cry_Pichu  @ 869E4F8
+    @ Unown
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+	cry2 Cry_Unown  @ 869E654
+    @ Castform
+	cry2 Cry_Castform
+	cry2 Cry_Castform
+	cry2 Cry_Castform
+    @ Deoxys
+	cry2 Cry_Deoxys
+	cry2 Cry_Deoxys
+	cry2 Cry_Deoxys
+    @ Burmy
+	cry2_not Cry_Burmy
+	cry2_not Cry_Burmy
+    @ Wormadam
+	cry2_not Cry_Wormadam
+	cry2_not Cry_Wormadam
+    @ Cherrim
+	cry2_not Cry_Cherrim
+    @ Shellos
+	cry2_not Cry_Shellos
+    @ Gastrodon
+	cry2_not Cry_Gastrodon
+    @ Rotom
+	cry2_not Cry_Rotom
+	cry2_not Cry_Rotom
+	cry2_not Cry_Rotom
+	cry2_not Cry_Rotom
+	cry2_not Cry_Rotom
+    @ Giratina
+	cry2_not Cry_Giratina
+    @ Shaymin
+	cry2_not Cry_Shaymin_Sky
+    @ Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+	cry2_not Cry_Arceus
+    @ Basculin
+	cry2_not Cry_Basculin
+    @ Darmanitan
+	cry2_not Cry_Darmanitan
+    @ Deerling
+	cry2_not Cry_Deerling
+	cry2_not Cry_Deerling
+	cry2_not Cry_Deerling
+    @ Sawsbuck
+	cry2_not Cry_Sawsbuck
+	cry2_not Cry_Sawsbuck
+	cry2_not Cry_Sawsbuck
+    @ Therian Forms
+	cry2_not Cry_Tornadus_Therian
+	cry2_not Cry_Thundurus_Therian
+	cry2_not Cry_Landorus_Therian
+    @ Kyurem
+	cry2_not Cry_Kyurem_White
+	cry2_not Cry_Kyurem_Black
+    @ Keldeo
+	cry2_not Cry_Keldeo
+    @ Meloetta
+	cry2_not Cry_Meloetta
+    @ Genesect
+	cry2_not Cry_Genesect
+	cry2_not Cry_Genesect
+	cry2_not Cry_Genesect
+	cry2_not Cry_Genesect
+    @ Greninja
+	cry2_not Cry_Greninja
+	cry2_not Cry_Greninja
+    @ Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+	cry2_not Cry_Vivillon
+    @ Flabébé
+	cry2_not Cry_Flabebe
+	cry2_not Cry_Flabebe
+	cry2_not Cry_Flabebe
+	cry2_not Cry_Flabebe
+    @ Floette
+	cry2_not Cry_Floette
+	cry2_not Cry_Floette
+	cry2_not Cry_Floette
+	cry2_not Cry_Floette
+	cry2_not Cry_Floette_Eternal_Flower
+    @ Florges
+	cry2_not Cry_Florges
+	cry2_not Cry_Florges
+	cry2_not Cry_Florges
+	cry2_not Cry_Florges
+    @ Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+	cry2_not Cry_Furfrou
+    @ Meowstic
+	cry2_not Cry_Meowstic
+	@ Aegislash
+	cry2_not Cry_Aegislash
+    @ Pumpkaboo
+	cry2_not Cry_Pumpkaboo
+	cry2_not Cry_Pumpkaboo
+	cry2_not Cry_Pumpkaboo_Super
+    @ Gourgeist
+	cry2_not Cry_Gourgeist
+	cry2_not Cry_Gourgeist
+	cry2_not Cry_Gourgeist_Super
+    @ Xerneas
+	cry2_not Cry_Xerneas
+    @ Zygarde
+	cry2_not Cry_Zygarde_10
+	cry2_not Cry_Zygarde_10
+	cry2_not Cry_Zygarde
+	cry2_not Cry_Zygarde_Complete
+    @ Hoopa
+	cry2_not Cry_Hoopa_Unbound
+    @ Oricorio
+	cry2_not Cry_Oricorio_Pom_Pom
+	cry2_not Cry_Oricorio_Pa_u
+	cry2_not Cry_Oricorio_Sensu
+    @ Rockruff
+	cry2_not Cry_Rockruff
+    @ Lycanroc
+	cry2_not Cry_Lycanroc_Midnight
+	cry2_not Cry_Lycanroc_Dusk
+    @ Wishiwashi
+	cry2_not Cry_Wishiwashi_School
+    @ Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+	cry2_not Cry_Silvally
+    @ Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+	cry2_not Cry_Minior
+    @ Mimikyu
+	cry2_not Cry_Mimikyu
+    @ Necrozma
+	cry2_not Cry_Necrozma_Dusk_Mane
+	cry2_not Cry_Necrozma_Dawn_Wings
+	cry2_not Cry_Necrozma_Ultra
+    @ Magearna
+	cry2_not Cry_Magearna

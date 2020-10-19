@@ -372,6 +372,8 @@ static u8 PickWildMonNature(void)
 static void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
+    u8 formId = GetFormIdFromFormSpeciesId(species);
+    u16 baseSpecies = GetFormSpeciesId(species, 0);
 
     ZeroEnemyPartyMons();
     checkCuteCharm = TRUE;
@@ -392,7 +394,9 @@ static void CreateWildMon(u16 species, u8 level)
     {
         u16 leadingMonSpecies = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
         u32 leadingMonPersonality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
-        u8 gender = GetGenderFromSpeciesAndPersonality(leadingMonSpecies, leadingMonPersonality);
+        u16 leadingMonFormId = GetMonData(&gPlayerParty[0], MON_DATA_FORM_ID);
+        u16 leadingMonFormSpeciesId = GetFormSpeciesId(leadingMonSpecies, leadingMonFormId);
+        u8 gender = GetGenderFromSpeciesAndPersonality(leadingMonFormSpeciesId, leadingMonPersonality);
 
         // misses mon is genderless check, although no genderless mon can have cute charm as ability
         if (gender == MON_FEMALE)
@@ -400,11 +404,11 @@ static void CreateWildMon(u16 species, u8 level)
         else
             gender = MON_FEMALE;
 
-        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, 32, gender, PickWildMonNature(), 0);
+        CreateMonWithGenderNatureLetter(&gEnemyParty[0], baseSpecies, level, 32, gender, PickWildMonNature(), 0, formId);
         return;
     }
 
-    CreateMonWithNature(&gEnemyParty[0], species, level, 32, PickWildMonNature());
+    CreateMonWithNature(&gEnemyParty[0], baseSpecies, level, 32, PickWildMonNature(), formId);
 }
 
 enum
@@ -860,6 +864,7 @@ bool8 DoesCurrentMapHaveFishingMons(void)
 void FishingWildEncounter(u8 rod)
 {
     u16 species;
+    u8 formId;
 
     if (CheckFeebas() == TRUE)
     {
@@ -873,7 +878,7 @@ void FishingWildEncounter(u8 rod)
         species = GenerateFishingWildMon(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
     }
     IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
-    SetPokemonAnglerSpecies(species);
+    SetPokemonAnglerSpecies(species); // handle forms?
     gIsFishingEncounter = TRUE;
     BattleSetup_StartWildBattle();
 }

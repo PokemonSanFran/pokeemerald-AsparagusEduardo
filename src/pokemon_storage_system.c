@@ -213,7 +213,8 @@ struct PokemonStorageSystemData
     u8 field_CD8[2];
     const u32 *cursorMonPalette;
     u32 cursorMonPersonality;
-    u16 cursorMonSpecies;
+    u16 cursorMonSpecies:11;
+    u16 cursorMonFormId:5;
     u16 cursorMonItem;
     u16 field_CE8;
     bool8 setMosaic;
@@ -639,7 +640,7 @@ static struct Sprite *sub_80CD2E8(u16 x, u16 y, u8 animId, u8 priority, u8 subpr
 static void SetWallpaperForCurrentBox(u8 wallpaperId);
 static void AddWallpapersMenu(u8 wallpaperSet);
 static u16 GetMovingItem(void);
-static void LoadCursorMonGfx(u16 species, u32 pid);
+static void LoadCursorMonGfx(u16 species, u32 pid, u8 formId);
 static void sub_80CA2D0(struct Sprite *sprite);
 static void sub_80CCF64(struct Sprite *sprite);
 static void sub_80CBA3C(struct Sprite *sprite);
@@ -651,7 +652,7 @@ static void SetMenuText(u8 textId);
 static void sub_80D0D8C(u8 cursorArea, u8 cursorPos);
 static void sub_80D0E50(u8 cursorArea, u8 cursorPos);
 static void sub_80D0F38(u16 item);
-static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority);
+static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority, u8 formId);
 static void DestroyBoxMonIcon(struct Sprite *sprite);
 static void SetBoxSpeciesAndPersonalities(u8 boxId);
 static void sub_80CB9D0(struct Sprite *sprite, u16 partyId);
@@ -3887,7 +3888,7 @@ static void Cb_ChangeScreen(u8 taskId)
         break;
     case SCREEN_CHANGE_NAME_BOX:
         FreePSSData();
-        DoNamingScreen(NAMING_SCREEN_BOX, GetBoxNamePtr(StorageGetCurrentBox()), 0, 0, 0, Cb2_ReturnToPSS);
+        DoNamingScreen(NAMING_SCREEN_BOX, GetBoxNamePtr(StorageGetCurrentBox()), 0, 0, 0, Cb2_ReturnToPSS, 0);
         break;
     case SCREEN_CHANGE_ITEM_FROM_BAG:
         FreePSSData();
@@ -4006,7 +4007,7 @@ static void sub_80CA1C4(void)
 
 static void RefreshCursorMonData(void)
 {
-    LoadCursorMonGfx(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality);
+    LoadCursorMonGfx(sPSSData->cursorMonSpecies, sPSSData->cursorMonPersonality, sPSSData->cursorMonFormId);
     PrintCursorMonInfo();
     sub_80CA65C();
     ScheduleBgCopyTilemapToVram(0);
@@ -4086,14 +4087,15 @@ static void LoadCursorMonSprite(void)
     }
 }
 
-static void LoadCursorMonGfx(u16 species, u32 pid)
+static void LoadCursorMonGfx(u16 species, u32 pid, u8 formId)
 {
+    u16 formSpeciesId = GetFormSpeciesId(species, formId);
     if (sPSSData->cursorMonSprite == NULL)
         return;
 
     if (species != SPECIES_NONE)
     {
-        LoadSpecialPokePic(&gMonFrontPicTable[species], sPSSData->field_22C4, species, pid, TRUE);
+        LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId], sPSSData->field_22C4, formSpeciesId, pid, TRUE);
         LZ77UnCompWram(sPSSData->cursorMonPalette, sPSSData->field_2244);
         CpuCopy32(sPSSData->field_22C4, sPSSData->field_223C, 0x800);
         LoadPalette(sPSSData->field_2244, sPSSData->field_223A, 0x20);
@@ -4530,9 +4532,10 @@ static void CreateMovingMonIcon(void)
 {
     u32 personality = GetMonData(&sPSSData->movingMon, MON_DATA_PERSONALITY);
     u16 species = GetMonData(&sPSSData->movingMon, MON_DATA_SPECIES2);
+    u8 formId = GetMonData(&sPSSData->movingMon, MON_DATA_FORM_ID);
     u8 priority = sub_80CAFAC();
 
-    sPSSData->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
+    sPSSData->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7, formId);
     sPSSData->movingMonSprite->callback = sub_80CC100;
 }
 
@@ -4542,6 +4545,7 @@ static void sub_80CB028(u8 boxId)
     u16 i, j, count;
     u16 species;
     u32 personality;
+    u8 formId;
 
     count = 0;
     boxPosition = 0;
@@ -4550,10 +4554,11 @@ static void sub_80CB028(u8 boxId)
         for (j = 0; j < IN_BOX_ROWS; j++)
         {
             species = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_SPECIES2);
+            formId = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_FORM_ID);
             if (species != SPECIES_NONE)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
-                sPSSData->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
+                sPSSData->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j, formId);
             }
             else
             {
@@ -4577,6 +4582,7 @@ static void sub_80CB028(u8 boxId)
 static void sub_80CB140(u8 boxPosition)
 {
     u16 species = GetCurrentBoxMonData(boxPosition, MON_DATA_SPECIES2);
+    u8 formId = GetCurrentBoxMonData(boxPosition, MON_DATA_FORM_ID);
 
     if (species != SPECIES_NONE)
     {
@@ -4584,7 +4590,7 @@ static void sub_80CB140(u8 boxPosition)
         s16 y = 8 * (3 * (boxPosition / IN_BOX_ROWS)) + 44;
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
-        sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS));
+        sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_ROWS), formId);
         if (sPSSData->boxOption == BOX_OPTION_MOVE_ITEMS)
             sPSSData->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
@@ -4669,7 +4675,7 @@ static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
             {
                 sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(sPSSData->boxSpecies[boxPosition],
                                                                                         sPSSData->boxPersonalities[boxPosition],
-                                                                                        x, y, 2, subpriority);
+                                                                                        x, y, 2, subpriority, 0); // handle forms
                 if (sPSSData->boxMonsSprites[boxPosition] != NULL)
                 {
                     sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
@@ -4691,7 +4697,7 @@ static u8 sub_80CB2F8(u8 row, u16 times, s16 xDelta)
             {
                 sPSSData->boxMonsSprites[boxPosition] = CreateMonIconSprite(sPSSData->boxSpecies[boxPosition],
                                                                                         sPSSData->boxPersonalities[boxPosition],
-                                                                                        x, y, 2, subpriority);
+                                                                                        x, y, 2, subpriority, 0); // handle forms
                 if (sPSSData->boxMonsSprites[boxPosition] != NULL)
                 {
                     sPSSData->boxMonsSprites[boxPosition]->data[1] = times;
@@ -4814,16 +4820,19 @@ static void CreatePartyMonsSprites(bool8 arg0)
     u16 i, count;
     u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2);
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
+    u8 formId = GetMonData(&gPlayerParty[0], MON_DATA_FORM_ID);
 
-    sPSSData->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+    sPSSData->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12, formId);
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        formId = GetMonData(&gPlayerParty[i], MON_DATA_FORM_ID);
+
         if (species != SPECIES_NONE)
         {
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            sPSSData->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
+            sPSSData->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12, formId);
             count++;
         }
         else
@@ -5189,13 +5198,13 @@ static void sub_80CC1E0(u16 species)
     }
 }
 
-static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority)
+static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 oamPriority, u8 subpriority, u8 formId)
 {
     u16 tileNum;
     u8 spriteId;
     struct SpriteTemplate tempalte = gUnknown_085728D4;
 
-    species = GetIconSpecies(species, personality);
+    species = GetIconSpecies(species, personality, formId);
     tempalte.paletteTag = 0xDAC0 + gMonIconPaletteIndices[species];
     tileNum = sub_80CC124(species);
     if (tileNum == 0xFFFF)
@@ -6795,6 +6804,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
             else
                 sPSSData->cursorMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
 
+            sPSSData->cursorMonFormId = GetMonData(mon, MON_DATA_FORM_ID);
             GetMonData(mon, MON_DATA_NICKNAME, sPSSData->cursorMonNick);
             StringGetEnd10(sPSSData->cursorMonNick);
             sPSSData->cursorMonLevel = GetMonData(mon, MON_DATA_LEVEL);
@@ -6819,7 +6829,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
             else
                 sPSSData->cursorMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
 
-
+            sPSSData->cursorMonFormId = GetMonData(boxMon, MON_DATA_FORM_ID);
             GetBoxMonData(boxMon, MON_DATA_NICKNAME, sPSSData->cursorMonNick);
             StringGetEnd10(sPSSData->cursorMonNick);
             sPSSData->cursorMonLevel = GetLevelFromBoxMonExp(boxMon);
@@ -8332,11 +8342,12 @@ static void sub_80D07B0(u8 arg0, u8 arg1)
     u8 position = arg0 + (6 * arg1);
     u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES2);
     u32 personality = GetCurrentBoxMonData(position, MON_DATA_PERSONALITY);
+    u8 formId = GetCurrentBoxMonData(position, MON_DATA_FORM_ID);
 
     if (species != SPECIES_NONE)
     {
-        const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
-        u8 index = GetValidMonIconPalIndex(species) + 8;
+        const u8 *iconGfx = GetMonIconPtr(species, personality, 1, formId);
+        u8 index = GetValidMonIconPalIndex(species, formId) + 8;
 
         BlitBitmapRectToWindow4BitTo8Bit(sPSSData->field_2200,
                                          iconGfx,
@@ -9364,7 +9375,7 @@ void CopyBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon *dst)
         *dst = gPokemonStoragePtr->boxes[boxId][boxPosition];
 }
 
-void CreateBoxMonAt(u8 boxId, u8 boxPosition, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 personality, u8 otIDType, u32 otID)
+void CreateBoxMonAt(u8 boxId, u8 boxPosition, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 personality, u8 otIDType, u32 otID, u8 formId)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
     {
@@ -9373,7 +9384,7 @@ void CreateBoxMonAt(u8 boxId, u8 boxPosition, u16 species, u8 level, u8 fixedIV,
                      level,
                      fixedIV,
                      hasFixedPersonality, personality,
-                     otIDType, otID);
+                     otIDType, otID, formId);
     }
 }
 

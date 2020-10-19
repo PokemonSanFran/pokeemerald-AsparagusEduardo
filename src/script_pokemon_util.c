@@ -65,15 +65,17 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 ability, u32 unused2, u8 u
     int sentToPc;
     u8 heldItem[2];
     struct Pokemon mon;
+    u8 formId = GetFormIdFromFormSpeciesId(species);
+    u16 baseSpecies = GetFormSpeciesId(species, 0);
 
-    CreateMon(&mon, species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&mon, baseSpecies, level, 32, 0, 0, OT_ID_PLAYER_ID, 0, formId);
     heldItem[0] = item;
     heldItem[1] = item >> 8;
     SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
     if (ability != 3)
         SetMonData(&mon, MON_DATA_ABILITY_NUM, &ability);
     sentToPc = GiveMonToPlayer(&mon);
-    nationalDexNum = SpeciesToNationalPokedexNum(species);
+    nationalDexNum = SpeciesToNationalPokedexNum(baseSpecies);
 
     switch(sentToPc)
     {
@@ -141,7 +143,7 @@ void CreateScriptedWildMon(u16 species, u8 level, u16 item)
     u8 heldItem[2];
 
     ZeroEnemyPartyMons();
-    CreateMon(&gEnemyParty[0], species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gEnemyParty[0], species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0, 0); // handle forms
     if (item)
     {
         heldItem[0] = item;

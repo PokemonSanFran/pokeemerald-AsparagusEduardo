@@ -916,6 +916,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
     if (gMain.inBattle)
     {
         struct Pokemon *mon, *illusionMon;
+        u16 formSpeciesId;
         s8 pan;
         u16 wantedCryCase;
         u8 taskId;
@@ -931,6 +932,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             pan = -25;
         }
 
+        formSpeciesId = GetFormSpeciesId(GetMonData(mon, MON_DATA_SPECIES), GetMonData(mon, MON_DATA_FORM_ID));
         if ((battlerId == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || battlerId == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->field_9_x1)
         {
@@ -957,9 +959,9 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
         illusionMon = GetIllusionMonPtr(battlerId);
         if (illusionMon != NULL)
-            gTasks[taskId].tCryTaskSpecies = GetMonData(illusionMon, MON_DATA_SPECIES);
+            gTasks[taskId].tCryTaskSpecies = GetFormSpeciesId(GetMonData(illusionMon, MON_DATA_SPECIES), GetMonData(illusionMon, MON_DATA_FORM_ID));
         else
-            gTasks[taskId].tCryTaskSpecies = GetMonData(mon, MON_DATA_SPECIES);
+            gTasks[taskId].tCryTaskSpecies = formSpeciesId;
 
         gTasks[taskId].tCryTaskPan = pan;
         gTasks[taskId].tCryTaskWantedCry = wantedCryCase;
