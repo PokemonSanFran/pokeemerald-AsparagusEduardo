@@ -1004,6 +1004,8 @@ struct SaveBlock1
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
     /*0x3D88*/ u16 registeredItemL;
     /*0x3D8A*/ u16 registeredItemR;
+               u8 dexNavSearchLevels[NUM_SPECIES];
+               u8 dexNavChain;
     // sizeof: 0x3???
 };
 

@@ -332,6 +332,7 @@ SECTIONS {
 		src/soar.o(.text);
         src/day_night.o(.text);
         src/debug.o(.text);
+        src/dexnav.o(.text);
     } =0
 
     script_data :
@@ -696,6 +697,7 @@ SECTIONS {
         data/sound_data.o(.rodata);
         src/day_night.o(.rodata);
         src/debug.o(.rodata);
+        src/dexnav.o(.rodata);
     } =0
 
     song_data :

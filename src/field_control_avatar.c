@@ -4,6 +4,7 @@
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "debug.h"
+#include "dexnav.h"
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -195,8 +196,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     if (input->pressedStartButton)
     {
-        PlaySE(SE_WIN_OPEN);
-        ShowStartMenu();
+        if (FlagGet(FLAG_SYS_DEXNAV_SEARCH))
+        {
+            ResetDexNavSearch();
+            return FALSE;
+        }
+        else
+        {
+            PlaySE(SE_WIN_OPEN);
+            ShowStartMenu();
+        }
         return TRUE;
     }
     
@@ -205,6 +214,12 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     else if (input->pressedLButton && UseRegisteredKeyItemOnField(1))
         return TRUE;
     else if (input->pressedRButton && UseRegisteredKeyItemOnField(2))
+        return TRUE;
+    
+    if (input->tookStep && TryFindHiddenPokemon())
+        return TRUE;
+    
+    if (input->pressedRButton && TryStartDexnavSearch())
         return TRUE;
 
 #ifdef DEBUG_MENU

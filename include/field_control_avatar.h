@@ -18,7 +18,6 @@ struct FieldInput
     bool8 input_field_1_4:1;
     bool8 input_field_1_5:1;
     bool8 input_field_1_6:1;
-    bool8 input_field_1_7:1;
     u8 dpadDirection;
 };
 
