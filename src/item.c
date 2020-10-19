@@ -553,7 +553,6 @@ void ClearItemSlots(struct ItemSlot *itemSlots, u8 itemCount)
 
 static s32 FindFreePCItemSlot(void)
 {
-    /*
     s8 i;
 
     for (i = 0; i < PC_ITEMS_COUNT; i++)
@@ -561,14 +560,12 @@ static s32 FindFreePCItemSlot(void)
         if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_NONE)
             return i;
     }
-    */
     return -1;
 }
 
 u8 CountUsedPCItemSlots(void)
 {
     u8 usedSlots = 0;
-    /*
     u8 i;
 
     for (i = 0; i < PC_ITEMS_COUNT; i++)
@@ -576,20 +573,18 @@ u8 CountUsedPCItemSlots(void)
         if (gSaveBlock1Ptr->pcItems[i].itemId != ITEM_NONE)
             usedSlots++;
     }
-    */
     return usedSlots;
 }
 
 bool8 CheckPCHasItem(u16 itemId, u16 count)
 {
     u8 i;
-    /*
+
     for (i = 0; i < PC_ITEMS_COUNT; i++)
     {
         if (gSaveBlock1Ptr->pcItems[i].itemId == itemId && GetPCItemQuantity(&gSaveBlock1Ptr->pcItems[i].quantity) >= count)
             return TRUE;
     }
-    */
     return FALSE;
 }
 
@@ -599,7 +594,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
     s8 freeSlot;
     u16 ownedCount;
     struct ItemSlot *newItems;
-    /*
+
     // Copy PC items
     newItems = AllocZeroed(sizeof(gSaveBlock1Ptr->pcItems));
     memcpy(newItems, gSaveBlock1Ptr->pcItems, sizeof(gSaveBlock1Ptr->pcItems));
@@ -647,13 +642,11 @@ bool8 AddPCItem(u16 itemId, u16 count)
     // Copy items back to the PC
     memcpy(gSaveBlock1Ptr->pcItems, newItems, sizeof(gSaveBlock1Ptr->pcItems));
     Free(newItems);
-    */
     return TRUE;
 }
 
 void RemovePCItem(u8 index, u16 count)
 {
-    /*
     // UB: should use GetPCItemQuantity and SetPCItemQuantity functions
     gSaveBlock1Ptr->pcItems[index].quantity -= count;
     if (gSaveBlock1Ptr->pcItems[index].quantity == 0)
@@ -661,12 +654,10 @@ void RemovePCItem(u8 index, u16 count)
         gSaveBlock1Ptr->pcItems[index].itemId = ITEM_NONE;
         CompactPCItems();
     }
-    */
 }
 
 void CompactPCItems(void)
 {
-    /*
     u16 i;
     u16 j;
 
@@ -682,7 +673,6 @@ void CompactPCItems(void)
             }
         }
     }
-    */
 }
 
 void SwapRegisteredBike(void)
