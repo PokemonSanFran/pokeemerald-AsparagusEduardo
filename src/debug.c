@@ -46,6 +46,7 @@ static void DebugAction_SetBadgeFlags(u8);
 static void DebugAction_CollisionOnOff(u8);
 static void DebugAction_CheckWeekDay(u8);
 static void DebugAction_Credits(u8);
+static void DebugAction_SwitchDexNav(u8);
 
 static void DebugAction_GiveItem(u8 taskId);
 static void DebugAction_GiveAllTMs(u8 taskId);
@@ -114,6 +115,7 @@ enum {
     DEBUG_FLAG_MENU_ITEM_FLYANYWHERE,
     DEBUG_FLAG_MENU_ITEM_GETALLBADGES,
     DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF,
+    DEBUG_FLAG_MENU_ITEM_DEXNAVONOFF,
 };
 
 static const u8 gText_ItemQuantity[] =  _("  Quantity:       \n  {STR_VAR_1}    \n{STR_VAR_2}");
@@ -166,6 +168,7 @@ static const u8 gDebugText_SwitchPokeNav[] = _("PokéNav ON/OFF");
 static const u8 gDebugText_SetFlyFlags[] = _("Can Fly Anywhere");
 static const u8 gDebugText_GetAllBadges[] = _("Get all badges");
 static const u8 gDebugText_SwitchCollision[] = _("Collision ON/OFF");
+static const u8 gDebugText_SwitchDexNav[] = _("DexNav ON/OFF");
 
 static const u8 gDebugText_None[] = _("None");
 
@@ -204,6 +207,7 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE] = {gDebugText_SetFlyFlags, DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
     [DEBUG_FLAG_MENU_ITEM_GETALLBADGES] = {gDebugText_GetAllBadges, DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
     [DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF] = {gDebugText_SwitchCollision, DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF},
+    [DEBUG_FLAG_MENU_ITEM_DEXNAVONOFF] = {gDebugText_SwitchDexNav, DEBUG_FLAG_MENU_ITEM_DEXNAVONOFF},
 };
 
 static void (*const sDebugMenu_Actions_Main[])(u8) =
@@ -242,6 +246,7 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE] = DebugAction_SetFlyFlags,
     [DEBUG_FLAG_MENU_ITEM_GETALLBADGES] = DebugAction_SetBadgeFlags,
     [DEBUG_FLAG_MENU_ITEM_COLISSIONONOFF] = DebugAction_CollisionOnOff,
+    [DEBUG_FLAG_MENU_ITEM_DEXNAVONOFF] = DebugAction_SwitchDexNav,
 };
 
 static const struct WindowTemplate sDebugMenuWindowTemplate =
@@ -963,6 +968,20 @@ static void DebugAction_GiveAllTMs(u8 taskId)
     AddBagItem(ITEM_HM07, 1);
     AddBagItem(ITEM_HM08, 1);
 
+}
+
+static void DebugAction_SwitchDexNav(u8 taskId)
+{
+    if(FlagGet(FLAG_SYS_DEXNAV_GET))
+    {
+        FlagClear(FLAG_SYS_DEXNAV_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_SYS_DEXNAV_GET);
+        PlaySE(SE_PC_LOGIN);
+    }
 }
 
 #endif
