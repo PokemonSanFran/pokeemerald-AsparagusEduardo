@@ -5839,6 +5839,9 @@ u16 SpeciesToNationalPokedexNum(u16 species)
     if (!species)
         return 0;
 
+    if (gFormSpeciesIdTables[species] != NULL)
+        return gFormSpeciesIdTables[species][0];
+
     return gSpeciesToNationalPokedexNum[species - 1];
 }
 
