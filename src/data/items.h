@@ -4338,7 +4338,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_POWER_BRACER,
         .price = 3000,
-        .holdEffect = HOLD_EFFECT_EV_BOOST,
+        .holdEffect = HOLD_EFFECT_POWER_ITEM,
         .holdEffectParam = 4,
         .description = sPowerBracerDesc,
         .pocket = POCKET_POWER_UP,
@@ -4356,7 +4356,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_POWER_BELT,
         .price = 3000,
-        .holdEffect = HOLD_EFFECT_EV_BOOST,
+        .holdEffect = HOLD_EFFECT_POWER_ITEM,
         .holdEffectParam = 4,
         .description = sPowerBeltDesc,
         .pocket = POCKET_POWER_UP,
@@ -4374,7 +4374,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_POWER_LENS,
         .price = 3000,
-        .holdEffect = HOLD_EFFECT_EV_BOOST,
+        .holdEffect = HOLD_EFFECT_POWER_ITEM,
         .holdEffectParam = 4,
         .description = sPowerLensDesc,
         .pocket = POCKET_POWER_UP,
@@ -4392,7 +4392,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_POWER_BAND,
         .price = 3000,
-        .holdEffect = HOLD_EFFECT_EV_BOOST,
+        .holdEffect = HOLD_EFFECT_POWER_ITEM,
         .holdEffectParam = 4,
         .description = sPowerBandDesc,
         .pocket = POCKET_POWER_UP,
@@ -4410,7 +4410,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_POWER_ANKLET,
         .price = 3000,
-        .holdEffect = HOLD_EFFECT_EV_BOOST,
+        .holdEffect = HOLD_EFFECT_POWER_ITEM,
         .holdEffectParam = 4,
         .description = sPowerAnkletDesc,
         .pocket = POCKET_POWER_UP,
@@ -4428,7 +4428,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_POWER_WEIGHT,
         .price = 3000,
-        .holdEffect = HOLD_EFFECT_EV_BOOST,
+        .holdEffect = HOLD_EFFECT_POWER_ITEM,
         .holdEffectParam = 4,
         .description = sPowerWeightDesc,
         .pocket = POCKET_POWER_UP,

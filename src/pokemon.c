@@ -6116,6 +6116,25 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies, u8 defeatedFormId)
     u8 holdEffect;
     int i, multiplier;
     u16 defeatedFormSpeciesId = GetFormSpeciesId(defeatedSpecies, defeatedFormId);
+    u8 stat;
+    u8 bonus;
+
+    heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+    if (heldItem == ITEM_ENIGMA_BERRY)
+    {
+        if (gMain.inBattle)
+            holdEffect = gEnigmaBerries[0].holdEffect;
+        else
+            //holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+            holdEffect = 0;
+    }
+    else
+    {
+        holdEffect = ItemId_GetHoldEffect(heldItem);
+    }
+
+    stat = ItemId_GetSecondaryId(heldItem);
+    bonus = ItemId_GetHoldEffectParam(heldItem);
 
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -6136,37 +6155,41 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies, u8 defeatedFormId)
         switch (i)
         {
         case STAT_HP:
-            evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_HP * multiplier;
+            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_HP)
+                evIncrease = (gBaseStats[defeatedFormSpeciesId].evYield_HP + bonus) * multiplier;
+            else
+                evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_HP * multiplier;
             break;
         case STAT_ATK:
-            evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_Attack * multiplier;
+            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_ATK)
+                evIncrease = (gBaseStats[defeatedFormSpeciesId].evYield_Attack + bonus) * multiplier;
+            else
+                evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_Attack * multiplier;
             break;
         case STAT_DEF:
-            evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_Defense * multiplier;
+            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_DEF)
+                evIncrease = (gBaseStats[defeatedFormSpeciesId].evYield_Defense + bonus) * multiplier;
+            else
+                evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_Defense * multiplier;
             break;
         case STAT_SPEED:
-            evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_Speed * multiplier;
+            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_SPEED)
+                evIncrease = (gBaseStats[defeatedFormSpeciesId].evYield_Speed + bonus) * multiplier;
+            else
+                evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_Speed * multiplier;
             break;
         case STAT_SPATK:
-            evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_SpAttack * multiplier;
+            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_SPATK)
+                evIncrease = (gBaseStats[defeatedFormSpeciesId].evYield_SpAttack + bonus) * multiplier;
+            else
+                evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_SpAttack * multiplier;
             break;
         case STAT_SPDEF:
-            evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_SpDefense * multiplier;
-            break;
-        }
-
-        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
-        if (heldItem == ITEM_ENIGMA_BERRY)
-        {
-            if (gMain.inBattle)
-                holdEffect = gEnigmaBerries[0].holdEffect;
+            if (holdEffect == HOLD_EFFECT_POWER_ITEM && stat == STAT_SPDEF)
+                evIncrease = (gBaseStats[defeatedFormSpeciesId].evYield_SpDefense + bonus) * multiplier;
             else
-                //holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-                holdEffect = 0;
-        }
-        else
-        {
-            holdEffect = ItemId_GetHoldEffect(heldItem);
+                evIncrease = gBaseStats[defeatedFormSpeciesId].evYield_SpDefense * multiplier;
+            break;
         }
 
         if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
