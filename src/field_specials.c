@@ -4397,7 +4397,7 @@ u8 CountRotomInParty (void)
     for (i = 0; i < partyCount; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (gSpeciesToNationalPokedexNum[species - 1] == SPECIES_ROTOM)
+        if (species == SPECIES_ROTOM)
         {
             gSpecialVar_0x8004 = i;
             rotomCount++;
@@ -4452,7 +4452,7 @@ void GetRotomNewSpecialMove (void)
 // Gets Rotom's current form and the matching move, stores them in gSpecialVar_0x8007 and gSpecialVar_0x8008
 void GetRotomState (void)
 {
-    gSpecialVar_0x8007 = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
+    gSpecialVar_0x8007 = GetFormSpeciesId(SPECIES_ROTOM, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_FORM_ID, NULL));
     gSpecialVar_0x8008 = RotomFormToMove(gSpecialVar_0x8007);
 }
 
@@ -4484,11 +4484,10 @@ void ChangeRotomForm (void)
 {
     u16 currentForm, newForm;
     
-    currentForm = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
-    newForm = gSpecialVar_0x8005;
-
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, &newForm);
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, &newForm);
+    currentForm = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_FORM_ID, NULL);
+    newForm = GetFormIdFromFormSpeciesId(gSpecialVar_0x8005);
+    
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_FORM_ID, &newForm);
     CalculateMonStats(&gPlayerParty[gSpecialVar_0x8004]);
 }
 
@@ -4506,7 +4505,7 @@ bool8 IsSelectedMonRotom (void)
     u32 species;
 
     species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
-    if (gSpeciesToNationalPokedexNum[species - 1] == SPECIES_ROTOM)
+    if (species == SPECIES_ROTOM)
     {
         return TRUE;
     }
