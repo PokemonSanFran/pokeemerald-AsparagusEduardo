@@ -59,6 +59,10 @@
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
 #include "day_night.h"
+#ifdef GBA_PRINTF
+#include "printf.h"
+#include "mgba.h"
+#endif
 
 // Defines
 enum WindowIds
@@ -1996,6 +2000,7 @@ static void DexNavLoadEncounterData(void)
             for (i = 0; i < LAND_WILD_COUNT; i++)
             {
                 species = landMonsInfo->wildPokemon[i].species;
+                mgba_printf(MGBA_LOG_DEBUG, "%d", species);
                 if (species != SPECIES_NONE && !SpeciesInArray(species, 0))
                     sDexNavUiDataPtr->landSpecies[grassIndex++] = landMonsInfo->wildPokemon[i].species;
             }
