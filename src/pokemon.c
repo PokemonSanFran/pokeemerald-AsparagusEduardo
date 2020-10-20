@@ -5098,7 +5098,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                     case 7:
                         {
                             u8 targetFormId;
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item, 0, &targetFormId);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, 2, item, SPECIES_NONE, &targetFormId);
 
                             if (targetSpecies != SPECIES_NONE)
                             {

@@ -917,7 +917,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
             DisplayPartyPokemonDataToTeachMove(slot, item, 0);
             break;
         case 2: // Evolution stone
-            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, 3, item, 0, &targetFormId) != SPECIES_NONE)
+            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, 3, item, SPECIES_NONE, &targetFormId) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
             break;
@@ -5144,7 +5144,7 @@ static void PartyMenuTryEvolution(u8 taskId)
 {
     u8 targetFormId;
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 targetSpecies = GetEvolutionTargetSpecies(mon, 0, 0, 0, &targetFormId);
+    u16 targetSpecies = GetEvolutionTargetSpecies(mon, 0, ITEM_NONE, SPECIES_NONE, &targetFormId);
 
     if (targetSpecies != SPECIES_NONE)
     {
