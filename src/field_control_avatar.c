@@ -4,6 +4,7 @@
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "debug.h"
+#include "dexnav.h"
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -81,8 +82,8 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->heldDirection2 = FALSE;
     input->tookStep = FALSE;
     input->pressedBButton = FALSE;
-    input->input_field_1_0 = FALSE;
-    input->input_field_1_1 = FALSE;
+    input->pressedLButton = FALSE;
+    input->pressedRButton = FALSE;
     input->input_field_1_2 = FALSE;
     input->input_field_1_3 = FALSE;
     input->dpadDirection = 0;
@@ -106,6 +107,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedAButton = TRUE;
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
+            if (newKeys & L_BUTTON)
+                input->pressedLButton = TRUE;
+            if (newKeys & R_BUTTON)
+                input->pressedRButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -133,7 +138,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_EAST;
 
 #ifdef DEBUG_MENU
-    if ((heldKeys & R_BUTTON) && input->pressedStartButton)
+    if ((heldKeys & B_BUTTON) && input->pressedStartButton)
     {
         input->input_field_1_2 = TRUE;
         input->pressedStartButton = FALSE;
@@ -191,11 +196,29 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     if (input->pressedStartButton)
     {
-        PlaySE(SE_WIN_OPEN);
-        ShowStartMenu();
+        if (FlagGet(FLAG_SYS_DEXNAV_SEARCH))
+        {
+            ResetDexNavSearch();
+            return FALSE;
+        }
+        else
+        {
+            PlaySE(SE_WIN_OPEN);
+            ShowStartMenu();
+        }
         return TRUE;
     }
-    if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
+    
+    if (input->pressedSelectButton && UseRegisteredKeyItemOnField(0))
+        return TRUE;
+    else if (input->pressedLButton && UseRegisteredKeyItemOnField(1))
+        return TRUE;
+    else if (input->pressedRButton && TryStartDexnavSearch())
+        return TRUE;
+    else if (input->pressedRButton && UseRegisteredKeyItemOnField(2))
+        return TRUE;
+    
+    if (input->tookStep && TryFindHiddenPokemon())
         return TRUE;
 
 #ifdef DEBUG_MENU

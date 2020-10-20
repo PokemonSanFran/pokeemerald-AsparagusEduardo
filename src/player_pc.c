@@ -304,13 +304,11 @@ static const u8 gUnknown_085DFF8C[] = {0x01, 0x03, 0x02, 0x00};
 // text
 void NewGameInitPCItems(void)
 {
-    /*
     u8 i;
 
     // because Game Freak don't know how to use a struct or a 2d array
     for(i = 0, ClearItemSlots(gSaveBlock1Ptr->pcItems, ARRAY_COUNT(gSaveBlock1Ptr->pcItems)); NEW_GAME_PC_ITEMS(i, PC_ITEM_ID) && NEW_GAME_PC_ITEMS(i, PC_QUANTITY) &&
         AddPCItem(NEW_GAME_PC_ITEMS(i, PC_ITEM_ID), NEW_GAME_PC_ITEMS(i, PC_QUANTITY)) == TRUE; i++);
-    */
 }
 
 void BedroomPC(void)
@@ -919,7 +917,6 @@ static void sub_816BCC4(u8 a)
 
 void ItemStorage_RefreshListMenu(void)
 {
-    /*
     u16 i;
 
     for(i = 0; i < playerPCItemPageInfo.count - 1; i++)
@@ -936,7 +933,6 @@ void ItemStorage_RefreshListMenu(void)
     gMultiuseListMenuTemplate.totalItems = playerPCItemPageInfo.count;
     gMultiuseListMenuTemplate.items = gUnknown_0203BCC4->unk0;
     gMultiuseListMenuTemplate.maxShowed = playerPCItemPageInfo.pageItems;
-    */
 }
 
 void CopyItemName_PlayerPC(u8 *string, u16 itemId)
@@ -946,7 +942,6 @@ void CopyItemName_PlayerPC(u8 *string, u16 itemId)
 
 static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu *thisMenu)
 {
-    /*
     if (b != TRUE)
         PlaySE(SE_SELECT);
     if (gUnknown_0203BCC4->unk666 == 0xFF)
@@ -958,12 +953,10 @@ static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu *thisMenu)
             sub_816C060(ITEMPC_GO_BACK_TO_PREV);
         sub_816BEF0(id);
     }
-    */
 }
 
 static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset)
 {
-    /*
     if (id != -2)
     {
         if (gUnknown_0203BCC4->unk666 != 0xFF)
@@ -977,12 +970,10 @@ static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset)
         StringExpandPlaceholders(gStringVar4, gText_xVar1);
         AddTextPrinterParameterized(windowId, 7, gStringVar4, GetStringRightAlignXOffset(7, gStringVar4, 104), yOffset, 0xFF, NULL);
     }
-    */
 }
 
 static void sub_816BEF0(s32 id)
 {
-    /*
     const u8* description;
     u8 windowId = gUnknown_0203BCC4->windowIds[1];
 
@@ -992,7 +983,6 @@ static void sub_816BEF0(s32 id)
         description = ItemStorage_GetItemPcResponse(ITEMPC_GO_BACK_TO_PREV);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, 1, description, 0, 1, 0, NULL);
-    */
 }
 
 static void ItemStorage_StartScrollIndicator(void)
@@ -1058,10 +1048,8 @@ static void sub_816C0C8(void)
 
 static void sub_816C110(void)
 {
-    /*
     CompactPCItems();
     sub_812220C(gSaveBlock1Ptr->pcItems, 50, &(playerPCItemPageInfo.pageItems), &(playerPCItemPageInfo.count), 0x8);
-    */
 }
 
 static void sub_816C140(void)
@@ -1210,7 +1198,6 @@ static void ItemStorage_GoBackToPlayerPCMenu(u8 taskId)
 
 static void ItemStorage_ItemSwapChoosePrompt(u8 taskId)
 {
-    /*
     s16 *data;
 
     data = gTasks[taskId].data;
@@ -1221,7 +1208,6 @@ static void ItemStorage_ItemSwapChoosePrompt(u8 taskId)
     CopyItemName(gSaveBlock1Ptr->pcItems[gUnknown_0203BCC4->unk666].itemId, gStringVar1);
     ItemStorage_PrintItemPcResponse(ItemStorage_GetItemPcResponse(ITEMPC_SWITCH_WHICH_ITEM));
     gTasks[taskId].func = sub_816C4FC;
-    */
 }
 
 static void sub_816C4FC(u8 taskId)
@@ -1262,7 +1248,6 @@ static void sub_816C4FC(u8 taskId)
 
 static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
 {
-    /*
     s16 *data;
     u16 b;
     u8 c;
@@ -1293,7 +1278,6 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
     data[5] = ListMenuInit(&gMultiuseListMenuTemplate, playerPCItemPageInfo.itemsAbove, playerPCItemPageInfo.cursorPos);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = ItemStorage_ProcessInput;
-    */
 }
 
 static void sub_816C690(u8 a)
@@ -1310,7 +1294,6 @@ static void sub_816C6BC(u8 windowId, u16 value, u32 mode, u8 x, u8 y, u8 n)
 
 static void ItemStorage_DoItemAction(u8 taskId)
 {
-    /*
     s16 *data;
     u16 b;
 
@@ -1340,12 +1323,10 @@ static void ItemStorage_DoItemAction(u8 taskId)
     }
     sub_816C6BC(sub_816BC7C(4), data[2], STR_CONV_MODE_LEADING_ZEROS, 8, 1, 3);
     gTasks[taskId].func = ItemStorage_HandleQuantityRolling;
-    */
 }
 
 static void ItemStorage_HandleQuantityRolling(u8 taskId)
 {
-    /*
     s16 *data;
     u16 b;
 
@@ -1372,12 +1353,10 @@ static void ItemStorage_HandleQuantityRolling(u8 taskId)
             ItemStorage_StartScrollIndicatorAndProcessInput(taskId);
         }
     }
-    */
 }
 
 static void ItemStorage_DoItemWithdraw(u8 taskId)
 {
-    /*
     s16 *data;
     u16 b;
 
@@ -1396,12 +1375,10 @@ static void ItemStorage_DoItemWithdraw(u8 taskId)
         ItemStorage_PrintItemPcResponse(ItemStorage_GetItemPcResponse(ITEMPC_NO_MORE_ROOM));
         gTasks[taskId].func = ItemStorage_WaitPressHandleResumeProcessInput;
     }
-    */
 }
 
 static void ItemStorage_DoItemToss(u8 taskId)
 {
-    /*
     s16 *data;
     u16 b;
 
@@ -1420,7 +1397,6 @@ static void ItemStorage_DoItemToss(u8 taskId)
         ItemStorage_PrintItemPcResponse(ItemStorage_GetItemPcResponse(ITEMPC_TOO_IMPORTANT));
         gTasks[taskId].func = ItemStorage_WaitPressHandleResumeProcessInput;
     }
-    */
 }
 
 static void ItemStorage_ResumeInputFromYesToss(u8 taskId)
@@ -1431,10 +1407,8 @@ static void ItemStorage_ResumeInputFromYesToss(u8 taskId)
 
 static void ItemStorage_ResumeInputFromNoToss(u8 taskId)
 {
-    /*
     ItemStorage_PrintItemPcResponse(ItemStorage_GetItemPcResponse(gSaveBlock1Ptr->pcItems[(playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos)].itemId));
     ItemStorage_StartScrollIndicatorAndProcessInput(taskId);
-    */
 }
 
 static void ItemStorage_HandleRemoveItem(u8 taskId)
@@ -1456,7 +1430,6 @@ static void ItemStorage_HandleRemoveItem(u8 taskId)
 
 static void ItemStorage_WaitPressHandleResumeProcessInput(u8 taskId)
 {
-    /*
     s16 *data;
 
     data = gTasks[taskId].data;
@@ -1465,7 +1438,6 @@ static void ItemStorage_WaitPressHandleResumeProcessInput(u8 taskId)
         ItemStorage_PrintItemPcResponse(ItemStorage_GetItemPcResponse(gSaveBlock1Ptr->pcItems[(playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos)].itemId));
         ItemStorage_StartScrollIndicatorAndProcessInput(taskId);
     }
-    */
 }
 
 static void ItemStorage_StartScrollIndicatorAndProcessInput(u8 taskId)

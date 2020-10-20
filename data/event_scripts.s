@@ -867,7 +867,7 @@ gText_SandstormIsVicious:: @ 8272C5F
 
 gText_SelectWithoutRegisteredItem:: @ 8272C98
 	.string "An item in the Bag can be\n"
-	.string "registered to Select for easy use.$"
+	.string "registered for easy use.$"
 
 gText_PokemonTrainerSchoolEmail:: @ 8272CD5
 	.string "Tienes un correo electrónico de la\n"
@@ -919,7 +919,7 @@ gText_SandstormIsVicious:: @ 8272C5F
 
 gText_SelectWithoutRegisteredItem:: @ 8272C98
 	.string "An item in the Bag can be\n"
-	.string "registered to Select for easy use.$"
+	.string "registered for easy use.$"
 
 gText_PokemonTrainerSchoolEmail:: @ 8272CD5
 	.string "There's an e-mail from Pokémon Trainer\n"
@@ -1119,3 +1119,5 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+    .include "data/scripts/dexnav.inc"
+    
