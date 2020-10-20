@@ -1861,6 +1861,14 @@ const u8 gText_JackRememberMove[] = _("Recordar un movimiento");
 const u8 gText_JackForgetMove[] = _("Olvidar un movimiento");
 const u8 gText_JackTeachMove[] = _("Enseñar un movimiento");
 
+// Rotom form options
+const u8 gText_MicrowaveOven[] = _("Horno Microondas");
+const u8 gText_WashingMachine[] = _("Lavadora");
+const u8 gText_Refrigerator[] = _("Refrigerador");
+const u8 gText_ElectricFan[] = _("Ventilador");
+const u8 gText_Lawnmower[] = _("Podadora");
+const u8 gText_Recall[] = _("Expulsar");
+
 #else
 
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
@@ -3719,5 +3727,13 @@ const u8 gText_JackRateNickname[] = _("Rate a nickname");
 const u8 gText_JackRememberMove[] = _("Remember a move");
 const u8 gText_JackForgetMove[] = _("Forget a move");
 const u8 gText_JackTeachMove[] = _("Teach a move");
+
+// Rotom form options
+const u8 gText_MicrowaveOven[] = _("Microwave Oven");
+const u8 gText_WashingMachine[] = _("Washing Machine");
+const u8 gText_Refrigerator[] = _("Refrigerator");
+const u8 gText_ElectricFan[] = _("Electric Fan");
+const u8 gText_Lawnmower[] = _("Lawnmower");
+const u8 gText_Recall[] = _("Recall");
 
 #endif

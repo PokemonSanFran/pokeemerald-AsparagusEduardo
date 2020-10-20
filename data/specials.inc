@@ -539,3 +539,12 @@ gSpecials:: @ 81DBA64
 	@Debug
 	def_special CheckSaveBlock1Size
 	def_special CheckWeekDay
+	@Rotom Form Change
+	def_special CountRotomInParty
+	def_special GetRotomState
+	def_special RotomForgetSpecialMove
+	def_special ChangeRotomForm
+	def_special TeachRotomMove
+	def_special IsSelectedMonRotom
+	def_special DoesRotomKnowSpecialMove
+	def_special GetRotomNewSpecialMove
