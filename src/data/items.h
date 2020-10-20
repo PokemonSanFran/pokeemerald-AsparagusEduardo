@@ -9749,6 +9749,19 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
     
+    [ITEM_OVAL_CHARM] =
+    {
+        .name = _("Oval Charm"),
+        .itemId = ITEM_OVAL_CHARM,
+        .price = 0,
+        .importance = 1,
+        .description = sOvalCharmDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+    
     //Mod items
     [ITEM_LINK_CABLE] =
     {

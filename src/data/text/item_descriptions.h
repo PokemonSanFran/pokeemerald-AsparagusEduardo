@@ -2772,6 +2772,11 @@ static const u8 sShinyCharmDesc[] = _(
     "la posibilidad de\n"
     "{PKMN} variocolores.");
     
+static const u8 sOvalCharmDesc[] = _(
+    "Raises the chance\n"
+    "of finding eggs\n"
+    "at the daycare.");
+    
 //Mod items
 static const u8 sLinkCableDesc[] = _(
     "Parte de máquina\n"
@@ -5605,6 +5610,11 @@ static const u8 sShinyCharmDesc[] = _(
     "A charm that will\n"
     "raise the chance\n"
     "of Shiny Pokémon.");
+    
+static const u8 sOvalCharmDesc[] = _(
+    "Raises the chance\n"
+    "of finding eggs\n"
+    "at the daycare.");
     
 //Mod items
 static const u8 sLinkCableDesc[] = _(
