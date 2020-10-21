@@ -385,11 +385,10 @@ void ReshowPlayerPC(u8 var)
 static void PlayerPC_ItemStorage(u8 taskId)
 {
     sub_816B4DC(taskId);
-    DisplayItemMessageOnField(taskId, gText_ItemStorageNotAvailable, ReshowPlayerPC);
-    /*
+    //DisplayItemMessageOnField(taskId, gText_ItemStorageNotAvailable, ReshowPlayerPC);
+    
     InitItemStorageMenu(taskId, ITEMPC_MENU_WITHDRAW);
     gTasks[taskId].func = ItemStorageMenuProcessInput;
-    */
 }
 
 static void PlayerPC_Mailbox(u8 taskId)
