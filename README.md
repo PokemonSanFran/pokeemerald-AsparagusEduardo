@@ -11,6 +11,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 	* [Strange Souvenir](https://github.com/AsparagusEduardo/pokeemerald/tree/AlolanEvolution), which allows Alola-only evolutions. Code and sprite size-adjusted by me.
 	* Gen 6 Exp Share. Original code by Blurose, ported by [Lunos](https://github.com/LOuroboros).
 	* Lures for attracting more double battles and raising shiny odds.
+* Spanish version in development by syncing with [pokeesmeralda](https://github.com/LOuroboros/pokeemerald/tree/pokeesmeralda) by [Lunos](https://github.com/LOuroboros).
 * [Soaring](https://www.pokecommunity.com/showthread.php?t=422107). Code by camthesaxman, ported by paccy.
 * [ghoulslash](https://github.com/ghoulslash)'s [DexNav](https://github.com/ghoulslash/pokeemerald/tree/dexnav).
 * [Day/Night lightning System](https://github.com/huderlem/pokeemerald/tree/daynight-diego) by [Sierraffinity](https://github.com/Sierraffinity)
@@ -40,8 +41,6 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 	* Name Rater can rename foreign Pokémon.
 * Expanded move names.
 * [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
-
-#### Aesthetic features
 
 ## See also
 
