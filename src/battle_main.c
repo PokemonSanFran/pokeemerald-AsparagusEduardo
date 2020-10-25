@@ -3175,9 +3175,9 @@ static void DoBattleIntro(void)
             }
             else
             {
-                u16 formSpeciesId = GetFormSpeciesId(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].formId);
-
+                u16 formSpeciesId;
                 memcpy(&gBattleMons[gActiveBattler], &gBattleResources->bufferB[gActiveBattler][4], sizeof(struct BattlePokemon));
+                formSpeciesId = GetFormSpeciesId(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].formId);
                 gBattleMons[gActiveBattler].type1 = gBaseStats[formSpeciesId].type1;
                 gBattleMons[gActiveBattler].type2 = gBaseStats[formSpeciesId].type2;
                 gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
