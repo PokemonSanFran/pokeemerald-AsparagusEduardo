@@ -5710,8 +5710,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
                 break;
             case EVO_LEVEL_NIGHT_ALOLA:
                 RtcCalcLocalTime();
-                if (!IsCurrentlyDay() && gEvolutionTable[formSpeciesId][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
-                    targetSpecies = gEvolutionTable[formSpeciesId][i].targetSpecies;
+                if (!IsCurrentlyDay() && gEvolutionTable[formSpeciesId][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)   
+                {
+                    *targetFormId = GetFormIdFromFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies);
+                    targetSpecies = GetFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies, 0); // Get base species
+                }
                 break;
             }
         }
@@ -5736,7 +5739,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
                 break;
             case EVO_TRADE_SPECIFIC_MON:
                 if (gEvolutionTable[formSpeciesId][i].param == tradePartnerSpecies)
-                    targetSpecies = gEvolutionTable[formSpeciesId][i].targetSpecies;
+                {
+                    *targetFormId = GetFormIdFromFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies);
+                    targetSpecies = GetFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies, 0); // Get base species
+                }
                 break;
             }
         }
@@ -5770,7 +5776,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
                 break;
             case EVO_ITEM_ALOLA:
                 if (gEvolutionTable[formSpeciesId][i].param == evolutionItem && heldItem == ITEM_STRANGE_SOUVENIR)
-                    targetSpecies = gEvolutionTable[formSpeciesId][i].targetSpecies;
+                {
+                    *targetFormId = GetFormIdFromFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies);
+                    targetSpecies = GetFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies, 0); // Get base species
+                }
                 break;
             }
         }
@@ -6484,7 +6493,7 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves, u8 formId)
     for (i = 0; i < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[formSpeciesId][i].move != LEVEL_UP_END; i++)
          moves[numMoves++] = gLevelUpLearnsets[formSpeciesId][i].move;
 
-     return numMoves;
+    return numMoves;
 }
 
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)

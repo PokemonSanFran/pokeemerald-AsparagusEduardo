@@ -926,15 +926,15 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(UNOWN_Z, gMonFrontPic_UnownZ),
     SPECIES_SPRITE(UNOWN_EMARK, gMonFrontPic_UnownExclamationMark),
     SPECIES_SPRITE(UNOWN_QMARK, gMonFrontPic_UnownQuestionMark),
-    
+
     SPECIES_SPRITE(CASTFORM_SUNNY, gMonFrontPic_CastformSunny),
     SPECIES_SPRITE(CASTFORM_RAINY, gMonFrontPic_CastformRainy),
     SPECIES_SPRITE(CASTFORM_SNOWY, gMonFrontPic_CastformSnowy),
-    
-    SPECIES_SPRITE(DEOXYS_ATTACK, gMonFrontPic_Deoxys),
-    SPECIES_SPRITE(DEOXYS_DEFENSE, gMonFrontPic_Deoxys),
-    SPECIES_SPRITE(DEOXYS_SPEED, gMonFrontPic_Deoxys),
-    
+
+    SPECIES_SPRITE(DEOXYS_ATTACK, gMonFrontPic_DeoxysAttack),
+    SPECIES_SPRITE(DEOXYS_DEFENSE, gMonFrontPic_DeoxysDefense),
+    SPECIES_SPRITE(DEOXYS_SPEED, gMonFrontPic_DeoxysSpeed),
+
     SPECIES_SPRITE(BURMY_SANDY_CLOAK, gMonFrontPic_BurmySandyCloak),
     SPECIES_SPRITE(BURMY_TRASH_CLOAK, gMonFrontPic_BurmyTrashCloak),
 
@@ -944,7 +944,6 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     SPECIES_SPRITE(CHERRIM_SUNSHINE, gMonFrontPic_CherrimSunshine),
 
     SPECIES_SPRITE(SHELLOS_EAST_SEA, gMonFrontPic_ShellosEastSea),
-    
     SPECIES_SPRITE(GASTRODON_EAST_SEA, gMonFrontPic_GastrodonEastSea),
 
     SPECIES_SPRITE(ROTOM_HEAT, gMonFrontPic_RotomHeat),

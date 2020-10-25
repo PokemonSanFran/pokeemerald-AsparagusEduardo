@@ -555,9 +555,12 @@ bool8 mplay_80342A4(u8 battlerId)
 
 static void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battlerId, bool32 opponent)
 {
-    u32 monsPersonality, currentPersonality, otId, species, paletteOffset, position;
+    u32 monsPersonality, currentPersonality, otId;
+    u16 species;
     u8 formId;
     u16 formSpeciesId;
+    u8 position;
+    u16 paletteOffset;
     const void *lzPaletteData;
     struct Pokemon *illusionMon = GetIllusionMonPtr(battlerId);
     if (illusionMon != NULL)

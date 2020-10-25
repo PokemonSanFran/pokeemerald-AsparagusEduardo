@@ -3907,6 +3907,18 @@ Cry_Necrozma_Ultra::
 	.incbin "sound/direct_sound_samples/cries/cry_not_necrozma_ultra.bin"
 
 	.align 2
+Cry_Deoxys_Attack::
+	.incbin "sound/direct_sound_samples/cries/cry_deoxys.bin"
+
+	.align 2
+Cry_Deoxys_Defense::
+	.incbin "sound/direct_sound_samples/cries/cry_deoxys.bin"
+
+	.align 2
+Cry_Deoxys_Speed::
+	.incbin "sound/direct_sound_samples/cries/cry_deoxys.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 
