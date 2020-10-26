@@ -536,9 +536,6 @@ gSpecials:: @ 81DBA64
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 	
-	@Debug
-	def_special CheckSaveBlock1Size
-	def_special CheckWeekDay
 	@Rotom Form Change
 	def_special CountRotomInParty
 	def_special GetRotomState

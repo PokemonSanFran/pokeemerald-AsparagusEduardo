@@ -4371,18 +4371,6 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
-//Debug
-void CheckSaveBlock1Size(void)
-{
-    ConvertIntToDecimalStringN(gStringVar1, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock2), STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar3, sizeof(struct PokemonStorage), STR_CONV_MODE_LEFT_ALIGN, 6);
-}
-void CheckWeekDay(void)
-{
-    StringCopy(gStringVar1, GetDayOfWeekString(gLocalTime.dayOfWeek));
-}
-
 // Checks how many Rotom player has with them
 // Stores the party position of the last Rotom found in gSpecialVar_0x8004
 // (Useful if there's only one Rotom in the party)
