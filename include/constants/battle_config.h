@@ -28,7 +28,7 @@
 #endif
 
 // Items with peculiar battle effects.
-#ifndef ITEM_EXPANSION_Fix
+#ifndef BATTLE_ENGINE
     #define ITEM_CHOPLE_BERRY   177
     #define ITEM_KEBIA_BERRY    178
     #define ITEM_SHUCA_BERRY    179

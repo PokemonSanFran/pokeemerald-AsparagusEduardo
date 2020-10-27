@@ -3426,6 +3426,76 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_CUSTAP_BERRY] =
+    {
+        .name = _("Custap Berry"),
+        .itemId = ITEM_CUSTAP_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_NONE, // To Do
+        .holdEffectParam = TYPE_FAIRY,
+        .description = sCustapBerryDesc,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_JABOCA_BERRY] =
+    {
+        .name = _("Jaboca Berry"),
+        .itemId = ITEM_JABOCA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_NONE, // To Do
+        .holdEffectParam = TYPE_FAIRY,
+        .description = sJabocaBerryDesc,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ROWAP_BERRY] =
+    {
+        .name = _("Rowap Berry"),
+        .itemId = ITEM_ROWAP_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_NONE, // To Do
+        .holdEffectParam = TYPE_FAIRY,
+        .description = sRowapBerryDesc,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_KEE_BERRY] =
+    {
+        .name = _("Kee Berry"),
+        .itemId = ITEM_KEE_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_NONE, // To Do
+        .holdEffectParam = TYPE_FAIRY,
+        .description = sKeeBerryDesc,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_MARANGA_BERRY] =
+    {
+        .name = _("Maranga Berry"),
+        .itemId = ITEM_MARANGA_BERRY,
+        .price = 20,
+        .holdEffect = HOLD_EFFECT_NONE, // To Do
+        .holdEffectParam = TYPE_FAIRY,
+        .description = sMarangaBerryDesc,
+        .pocket = POCKET_BERRIES,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
 // Hold items
 
     [ITEM_BRIGHT_POWDER] =
@@ -7315,6 +7385,18 @@ const struct Item gItems[] =
         .holdEffect = HOLD_EFFECT_CHOICE_SPECS,
         .description = sChoiceSpecsDesc,
         .pocket = POCKET_BATTLE_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
+    [ITEM_ODD_KEYSTONE] =
+    {
+        .name = _("Odd Keystone"),
+        .itemId = ITEM_ODD_KEYSTONE,
+        .price = 2100,
+        .description = sOddKeystoneDesc,
+        .pocket = POCKET_ITEMS,
         .type = 4,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 0,
