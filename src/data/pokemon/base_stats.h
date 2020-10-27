@@ -290,7 +290,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 45,
         .baseDefense   = 50,
         .baseSpeed     = 70,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpAttack  = 90,
+        #else
+        .baseSpAttack  = 80,
+        #endif
         .baseSpDefense = 80,
         .type1 = TYPE_BUG,
         .type2 = TYPE_FLYING,
@@ -363,7 +367,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_BEEDRILL] =
     {
         .baseHP        = 65,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 90,
+        #else
+        .baseAttack    = 80,
+        #endif
         .baseDefense   = 40,
         .baseSpeed     = 75,
         .baseSpAttack  = 45,
@@ -442,7 +450,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 83,
         .baseAttack    = 80,
         .baseDefense   = 75,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpeed     = 101,
+        #else
+        .baseSpeed     = 91,
+        #endif
         .baseSpAttack  = 70,
         .baseSpDefense = 70,
         .type1 = TYPE_NORMAL,
@@ -594,7 +606,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_ARBOK] =
     {
         .baseHP        = 60,
+        #if P_UPDATED_STATS >= GEN_7
         .baseAttack    = 95,
+        #else
+        .baseAttack    = 85,
+        #endif
         .baseDefense   = 69,
         .baseSpeed     = 80,
         .baseSpAttack  = 65,
@@ -621,10 +637,17 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 35,
         .baseAttack    = 55,
+        #if P_UPDATED_STATS >= GEN_6
         .baseDefense   = 40,
         .baseSpeed     = 90,
         .baseSpAttack  = 50,
         .baseSpDefense = 50,
+        #else
+        .baseDefense   = 30,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 40,
+        #endif
         .type1 = TYPE_ELECTRIC,
         .type2 = TYPE_ELECTRIC,
         .catchRate = 190,
@@ -649,7 +672,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 60,
         .baseAttack    = 90,
         .baseDefense   = 55,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpeed     = 110,
+        #else
+        .baseSpeed     = 100,
+        #endif
         .baseSpAttack  = 90,
         .baseSpDefense = 80,
         .type1 = TYPE_ELECTRIC,
@@ -774,7 +801,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_NIDOQUEEN] =
     {
         .baseHP        = 90,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 92,
+        #else
+        .baseAttack    = 82,
+        #endif
         .baseDefense   = 87,
         .baseSpeed     = 76,
         .baseSpAttack  = 75,
@@ -849,7 +880,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_NIDOKING] =
     {
         .baseHP        = 81,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 102,
+        #else
+        .baseAttack    = 92,
+        #endif
         .baseDefense   = 77,
         .baseSpeed     = 85,
         .baseSpAttack  = 85,
@@ -879,8 +914,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 35,
         .baseSpAttack  = 60,
         .baseSpDefense = 65,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 150,
         .expYield = 113,
         .evYield_HP        = 2,
@@ -904,10 +944,19 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 70,
         .baseDefense   = 73,
         .baseSpeed     = 60,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpAttack  = 95,
+        #else
+        .baseSpAttack  = 85,
+        #endif
         .baseSpDefense = 90,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 25,
         .expYield = 217,
         .evYield_HP        = 3,
@@ -988,8 +1037,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 20,
         .baseSpAttack  = 45,
         .baseSpDefense = 25,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 170,
         .expYield = 95,
         .evYield_HP        = 2,
@@ -1013,10 +1067,19 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 70,
         .baseDefense   = 45,
         .baseSpeed     = 45,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpAttack  = 85,
+        #else
+        .baseSpAttack  = 75,
+        #endif
         .baseSpDefense = 50,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 50,
         .expYield = 196,
         .evYield_HP        = 3,
@@ -1142,7 +1205,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 80,
         .baseDefense   = 85,
         .baseSpeed     = 50,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpAttack  = 110,
+        #else
+        .baseSpAttack  = 100,
+        #endif
         .baseSpDefense = 90,
         .type1 = TYPE_GRASS,
         .type2 = TYPE_POISON,
@@ -1298,7 +1365,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_DUGTRIO] =
     {
         .baseHP        = 35,
+        #if P_UPDATED_STATS >= GEN_7
         .baseAttack    = 100,
+        #else
+        .baseAttack    = 80,
+        #endif
         .baseDefense   = 50,
         .baseSpeed     = 120,
         .baseSpAttack  = 50,
@@ -1579,7 +1650,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_POLIWRATH] =
     {
         .baseHP        = 90,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 95,
+        #else
+        .baseAttack    = 85,
+        #endif
         .baseDefense   = 95,
         .baseSpeed     = 70,
         .baseSpAttack  = 70,
@@ -1661,7 +1736,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 45,
         .baseSpeed     = 120,
         .baseSpAttack  = 135,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpDefense = 95,
+        #else
+        .baseSpDefense = 85,
+        #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 50,
@@ -1815,7 +1894,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 65,
         .baseSpeed     = 70,
         .baseSpAttack  = 100,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpDefense = 70,
+        #else
+        .baseSpDefense = 60,
+        #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_POISON,
         .catchRate = 45,
@@ -1940,7 +2023,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_GOLEM] =
     {
         .baseHP        = 80,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 120,
+        #else
+        .baseAttack    = 110,
+        #endif
         .baseDefense   = 130,
         .baseSpeed     = 45,
         .baseSpAttack  = 55,
@@ -2122,7 +2209,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_FARFETCHD] =
     {
         .baseHP        = 52,
+        #if P_UPDATED_STATS >= GEN_7
         .baseAttack    = 90,
+        #else
+        .baseAttack    = 65,
+        #endif
         .baseDefense   = 55,
         .baseSpeed     = 60,
         .baseSpAttack  = 58,
@@ -2176,7 +2267,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 60,
         .baseAttack    = 110,
         .baseDefense   = 70,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpeed     = 110,
+        #else
+        .baseSpeed     = 100,
+        #endif
         .baseSpAttack  = 60,
         .baseSpDefense = 60,
         .type1 = TYPE_NORMAL,
@@ -2588,7 +2683,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 60,
         .baseAttack    = 50,
         .baseDefense   = 70,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpeed     = 150,
+        #else
+        .baseSpeed     = 140,
+        #endif
         .baseSpAttack  = 80,
         .baseSpDefense = 80,
         .type1 = TYPE_ELECTRIC,
@@ -2641,7 +2740,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 85,
         .baseSpeed     = 55,
         .baseSpAttack  = 125,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpDefense = 75,
+        #else
+        .baseSpDefense = 65,
+        #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 45,
@@ -3131,8 +3234,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 90,
         .baseSpAttack  = 100,
         .baseSpDefense = 120,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_PSYCHIC,
+        .type2 = TYPE_PSYCHIC,
+        #endif
         .catchRate = 45,
         .expYield = 161,
         .evYield_SpDefense = 2,
@@ -4203,7 +4311,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 50,
         .baseDefense   = 50,
         .baseSpeed     = 70,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpAttack  = 86,
+        #else
+        .baseSpAttack  = 76,
+        #endif
         .baseSpDefense = 96,
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
@@ -4304,7 +4416,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 70,
         .baseSpeed     = 40,
         .baseSpAttack  = 60,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpDefense = 70,
+        #else
+        .baseSpDefense = 60,
+        #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_POISON,
         .catchRate = 90,
@@ -4433,8 +4549,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 15,
         .baseSpAttack  = 45,
         .baseSpDefense = 55,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 150,
         .expYield = 44,
         .evYield_SpDefense = 1,
@@ -4460,8 +4581,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 15,
         .baseSpAttack  = 40,
         .baseSpDefense = 20,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 170,
         .expYield = 42,
         .evYield_HP        = 1,
@@ -4486,8 +4612,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 20,
         .baseSpAttack  = 40,
         .baseSpDefense = 65,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 190,
         .expYield = 49,
         .evYield_SpDefense = 1,
@@ -4511,8 +4642,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 80,
         .baseSpDefense = 105,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FLYING,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_FLYING,
+        #endif
         .catchRate = 75,
         .expYield = 142,
         .evYield_SpDefense = 2,
@@ -4633,7 +4769,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 90,
         .baseAttack    = 75,
+        #if P_UPDATED_STATS >= GEN_6
         .baseDefense   = 85,
+        #else
+        .baseDefense   = 75,
+        #endif
         .baseSpeed     = 55,
         .baseSpAttack  = 115,
         .baseSpDefense = 90,
@@ -4658,7 +4798,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 75,
         .baseAttack    = 80,
+        #if P_UPDATED_STATS >= GEN_6
         .baseDefense   = 95,
+        #else
+        .baseDefense   = 85,
+        #endif
         .baseSpeed     = 50,
         .baseSpAttack  = 90,
         .baseSpDefense = 100,
@@ -4688,8 +4832,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 20,
         .baseSpDefense = 50,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_WATER,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_WATER,
+        #endif
         .catchRate = 190,
         .expYield = 88,
         .evYield_HP        = 2,
@@ -4711,10 +4860,19 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 50,
         .baseDefense   = 80,
         .baseSpeed     = 50,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpAttack  = 60,
+        #else
+        .baseSpAttack  = 50,
+        #endif
         .baseSpDefense = 80,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_WATER,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_WATER,
+        .type2 = TYPE_WATER,
+        #endif
         .catchRate = 75,
         .expYield = 189,
         .evYield_HP        = 3,
@@ -4838,7 +4996,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 70,
         .baseSpeed     = 110,
         .baseSpAttack  = 55,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpDefense = 95,
+        #else
+        .baseSpDefense = 85,
+        #endif
         .type1 = TYPE_GRASS,
         .type2 = TYPE_FLYING,
         .catchRate = 45,
@@ -5344,8 +5506,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 30,
         .baseSpAttack  = 40,
         .baseSpDefense = 40,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 190,
         .expYield = 60,
         .evYield_Attack    = 1,
@@ -5369,8 +5536,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 45,
         .baseSpAttack  = 60,
         .baseSpDefense = 60,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 75,
         .expYield = 158,
         .evYield_Attack    = 2,
@@ -5390,7 +5562,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 65,
         .baseAttack    = 95,
+        #if P_UPDATED_STATS >= GEN_7
         .baseDefense   = 85,
+        #else
+        .baseDefense   = 75,
+        #endif
         .baseSpeed     = 85,
         .baseSpAttack  = 55,
         .baseSpDefense = 55,
@@ -5598,11 +5774,19 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MAGCARGO] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 60,
         .baseAttack    = 50,
         .baseDefense   = 120,
         .baseSpeed     = 30,
         .baseSpAttack  = 90,
+        #else
+        .baseHP        = 50,
+        .baseAttack    = 50,
+        .baseDefense   = 120,
+        .baseSpeed     = 30,
+        .baseSpAttack  = 80,
+        #endif
         .baseSpDefense = 80,
         .type1 = TYPE_FIRE,
         .type2 = TYPE_ROCK,
@@ -5677,12 +5861,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CORSOLA] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 65,
         .baseAttack    = 55,
         .baseDefense   = 95,
         .baseSpeed     = 35,
         .baseSpAttack  = 65,
         .baseSpDefense = 95,
+        #else
+        .baseHP        = 55,
+        .baseAttack    = 55,
+        .baseDefense   = 85,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 65,
+        .baseSpDefense = 85,
+        #endif
         .type1 = TYPE_WATER,
         .type2 = TYPE_ROCK,
         .catchRate = 60,
@@ -5780,7 +5973,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_MANTINE] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 85,
+        #else
+        .baseHP        = 65,
+        #endif
         .baseAttack    = 40,
         .baseDefense   = 70,
         .baseSpeed     = 70,
@@ -6839,7 +7036,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 70,
         .baseDefense   = 50,
         .baseSpeed     = 65,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpAttack  = 100,
+        #else
+        .baseSpAttack  = 90,
+        #endif
         .baseSpDefense = 50,
         .type1 = TYPE_BUG,
         .type2 = TYPE_FLYING,
@@ -7097,7 +7298,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 85,
         .baseDefense   = 60,
         .baseSpeed     = 125,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpAttack  = 75,
+        #else
+        .baseSpAttack  = 50,
+        #endif
         .baseSpDefense = 50,
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
@@ -7149,7 +7354,11 @@ const struct BaseStats gBaseStats[] =
         .baseAttack    = 50,
         .baseDefense   = 100,
         .baseSpeed     = 65,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpAttack  = 95,
+        #else
+        .baseSpAttack  = 85,
+        #endif
         .baseSpDefense = 70,
         .type1 = TYPE_WATER,
         .type2 = TYPE_FLYING,
@@ -7178,8 +7387,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 45,
         .baseSpDefense = 35,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_PSYCHIC,
+        .type2 = TYPE_PSYCHIC,
+        #endif
         .catchRate = 235,
         .expYield = 40,
         .evYield_SpAttack  = 1,
@@ -7203,8 +7417,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 50,
         .baseSpAttack  = 65,
         .baseSpDefense = 55,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_PSYCHIC,
+        .type2 = TYPE_PSYCHIC,
+        #endif
         .catchRate = 120,
         .expYield = 97,
         .evYield_SpAttack  = 2,
@@ -7228,8 +7447,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 125,
         .baseSpDefense = 115,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_PSYCHIC,
+        .type2 = TYPE_PSYCHIC,
+        #endif
         .catchRate = 45,
         .expYield = 233,
         .evYield_SpAttack  = 3,
@@ -7276,8 +7500,13 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 70,
         .baseAttack    = 60,
         .baseDefense   = 62,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpeed     = 80,
         .baseSpAttack  = 100,
+        #else
+        .baseSpeed     = 60,
+        .baseSpAttack  = 80,
+        #endif
         .baseSpDefense = 82,
         .type1 = TYPE_BUG,
         .type2 = TYPE_FLYING,
@@ -7558,7 +7787,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 63,
         .baseSpeed     = 68,
         .baseSpAttack  = 91,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpDefense = 73,
+        #else
+        .baseSpDefense = 63,
+        #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_NORMAL,
         .catchRate = 45,
@@ -7637,8 +7870,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 20,
         .baseSpAttack  = 20,
         .baseSpDefense = 40,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_NORMAL,
+        #endif
         .catchRate = 150,
         .expYield = 38,
         .evYield_HP        = 1,
@@ -7712,7 +7950,11 @@ const struct BaseStats gBaseStats[] =
         .baseHP        = 70,
         .baseAttack    = 65,
         .baseDefense   = 65,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpeed     = 90,
+        #else
+        .baseSpeed     = 70,
+        #endif
         .baseSpAttack  = 55,
         .baseSpDefense = 55,
         .type1 = TYPE_NORMAL,
@@ -7770,8 +8012,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 50,
         .baseSpAttack  = 55,
         .baseSpDefense = 55,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_STEEL,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_STEEL,
+        .type2 = TYPE_STEEL,
+        #endif
         .catchRate = 45,
         .expYield = 133,
         .evYield_Attack    = 1,
@@ -8024,10 +8271,17 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 65,
         .baseAttack    = 73,
+        #if P_UPDATED_STATS >= GEN_7
         .baseDefense   = 75,
         .baseSpeed     = 85,
         .baseSpAttack  = 47,
         .baseSpDefense = 85,
+        #else
+        .baseDefense   = 55,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 47,
+        .baseSpDefense = 75,
+        #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_BUG,
         .catchRate = 150,
@@ -8050,10 +8304,17 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 65,
         .baseAttack    = 47,
+        #if P_UPDATED_STATS >= GEN_7
         .baseDefense   = 75,
         .baseSpeed     = 85,
         .baseSpAttack  = 73,
         .baseSpDefense = 85,
+        #else
+        .baseDefense   = 55,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 73,
+        .baseSpDefense = 75,
+        #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_BUG,
         .catchRate = 150,
@@ -8650,7 +8911,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_LUNATONE] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 90,
+        #else
+        .baseHP        = 70,
+        #endif
         .baseAttack    = 55,
         .baseDefense   = 65,
         .baseSpeed     = 70,
@@ -8676,7 +8941,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_SOLROCK] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 90,
+        #else
+        .baseHP        = 70,
+        #endif
         .baseAttack    = 95,
         .baseDefense   = 85,
         .baseSpeed     = 70,
@@ -9186,12 +9455,21 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CHIMECHO] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 75,
         .baseAttack    = 50,
         .baseDefense   = 80,
         .baseSpeed     = 65,
         .baseSpAttack  = 95,
         .baseSpDefense = 90,
+        #else
+        .baseHP        = 65,
+        .baseAttack    = 50,
+        .baseDefense   = 70,
+        .baseSpeed     = 65,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 80,
+        #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 45,
@@ -10218,7 +10496,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 70,
         .baseSpeed     = 100,
         .baseSpAttack  = 50,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpDefense = 60,
+        #else
+        .baseSpDefense = 50,
+        #endif
         .type1 = TYPE_NORMAL,
         .type2 = TYPE_FLYING,
         .catchRate = 45,
@@ -10446,7 +10728,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 60,
         .baseAttack    = 70,
+        #if P_UPDATED_STATS >= GEN_6
         .baseDefense   = 65,
+        #else
+        .baseDefense   = 55,
+        #endif
         .baseSpeed     = 90,
         .baseSpAttack  = 125,
         .baseSpDefense = 105,
@@ -11274,8 +11560,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 70,
         .baseSpDefense = 90,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_PSYCHIC,
+        .type2 = TYPE_PSYCHIC,
+        #endif
         .catchRate = 145,
         .expYield = 62,
         .evYield_SpDefense = 1,
@@ -12027,8 +12318,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 80,
         .baseSpAttack  = 120,
         .baseSpDefense = 115,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_FAIRY,
         .type2 = TYPE_FLYING,
+        #else
+        .type1 = TYPE_NORMAL,
+        .type2 = TYPE_FLYING,
+        #endif
         .catchRate = 30,
         .expYield = 245,
         .evYield_SpAttack  = 2,
@@ -13024,7 +13320,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_STOUTLAND] =
     {
         .baseHP        = 85,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 110,
+        #else
+        .baseAttack    = 100,
+        #endif
         .baseDefense   = 90,
         .baseSpeed     = 80,
         .baseSpAttack  = 45,
@@ -13361,7 +13661,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_UNFEZANT] =
     {
         .baseHP        = 80,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 115,
+        #else
+        .baseAttack    = 105,
+        #endif
         .baseDefense   = 80,
         .baseSpeed     = 93,
         .baseSpAttack  = 65,
@@ -13497,7 +13801,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 130,
         .baseSpeed     = 25,
         .baseSpAttack  = 60,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpDefense = 80,
+        #else
+        .baseSpDefense = 70,
+        #endif
         .type1 = TYPE_ROCK,
         .type2 = TYPE_ROCK,
         .catchRate = 45,
@@ -13519,7 +13827,11 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_WOOBAT] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 65,
+        #else
+        .baseHP        = 55,
+        #endif
         .baseAttack    = 45,
         .baseDefense   = 43,
         .baseSpeed     = 72,
@@ -13774,7 +14086,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_SEISMITOAD] =
     {
         .baseHP        = 105,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 95,
+        #else
+        .baseAttack    = 85,
+        #endif
         .baseDefense   = 75,
         .baseSpeed     = 74,
         .baseSpAttack  = 85,
@@ -13908,7 +14224,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 80,
         .baseSpeed     = 92,
         .baseSpAttack  = 70,
+        #if P_UPDATED_STATS >= GEN_6
         .baseSpDefense = 80,
+        #else
+        .baseSpDefense = 70,
+        #endif
         .type1 = TYPE_BUG,
         .type2 = TYPE_GRASS,
         .catchRate = 45,
@@ -13984,7 +14304,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_SCOLIPEDE] =
     {
         .baseHP        = 60,
+        #if P_UPDATED_STATS >= GEN_6
         .baseAttack    = 100,
+        #else
+        .baseAttack    = 90,
+        #endif
         .baseDefense   = 89,
         .baseSpeed     = 112,
         .baseSpAttack  = 55,
@@ -14016,8 +14340,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 66,
         .baseSpAttack  = 37,
         .baseSpDefense = 50,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_GRASS,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_GRASS,
+        #endif
         .catchRate = 190,
         .expYield = 56,
         .evYield_Speed     = 1,
@@ -14042,8 +14371,13 @@ const struct BaseStats gBaseStats[] =
         .baseSpeed     = 116,
         .baseSpAttack  = 77,
         .baseSpDefense = 75,
+        #if P_UPDATED_TYPES >= GEN_6
         .type1 = TYPE_GRASS,
         .type2 = TYPE_FAIRY,
+        #else
+        .type1 = TYPE_GRASS,
+        .type2 = TYPE_GRASS,
+        #endif
         .catchRate = 75,
         .expYield = 168,
         .evYield_Speed     = 2,
@@ -14194,7 +14528,11 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 95,
         .baseAttack    = 117,
+        #if P_UPDATED_STATS >= GEN_6
         .baseDefense   = 80,
+        #else
+        .baseDefense   = 70,
+        #endif
         .baseSpeed     = 92,
         .baseSpAttack  = 65,
         .baseSpDefense = 70,
@@ -14323,7 +14661,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_CRUSTLE] =
     {
         .baseHP        = 70,
+        #if P_UPDATED_STATS >= GEN_7
         .baseAttack    = 105,
+        #else
+        .baseAttack    = 95,
+        #endif
         .baseDefense   = 125,
         .baseSpeed     = 45,
         .baseSpAttack  = 65,
@@ -15742,7 +16084,11 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_BEARTIC] =
     {
         .baseHP        = 95,
+        #if P_UPDATED_STATS >= GEN_7
         .baseAttack    = 130,
+        #else
+        .baseAttack    = 110,
+        #endif
         .baseDefense   = 80,
         .baseSpeed     = 50,
         .baseSpAttack  = 70,
@@ -15767,9 +16113,15 @@ const struct BaseStats gBaseStats[] =
 
     [SPECIES_CRYOGONAL] =
     {
+        #if P_UPDATED_STATS >= GEN_7
         .baseHP        = 80,
         .baseAttack    = 50,
         .baseDefense   = 50,
+        #else
+        .baseHP        = 70,
+        .baseAttack    = 50,
+        .baseDefense   = 30,
+        #endif
         .baseSpeed     = 105,
         .baseSpAttack  = 95,
         .baseSpDefense = 135,
@@ -17423,10 +17775,17 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 60,
         .baseAttack    = 50,
+        #if P_UPDATED_STATS >= GEN_8
+        .baseDefense   = 140,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 140,
+        #else
         .baseDefense   = 150,
         .baseSpeed     = 60,
         .baseSpAttack  = 50,
         .baseSpDefense = 150,
+        #endif
         .type1 = TYPE_STEEL,
         .type2 = TYPE_GHOST,
         .catchRate = 45,
@@ -20808,7 +21167,11 @@ const struct BaseStats gBaseStats[] =
         .baseDefense   = 65,
         .baseSpeed     = 150,
         .baseSpAttack  = 175,
+        #if P_UPDATED_STATS >= GEN_7
         .baseSpDefense = 105,
+        #else
+        .baseSpDefense = 95,
+        #endif
         .type1 = TYPE_PSYCHIC,
         .type2 = TYPE_PSYCHIC,
         .catchRate = 50,
@@ -25897,11 +26260,16 @@ const struct BaseStats gBaseStats[] =
     [SPECIES_AEGISLASH_BLADE] =
     {
         .baseHP        = 60,
-        .baseAttack    = 150,
         .baseDefense   = 50,
         .baseSpeed     = 60,
-        .baseSpAttack  = 150,
         .baseSpDefense = 50,
+        #if P_UPDATED_STATS >= GEN_8
+        .baseAttack    = 140,
+        .baseSpAttack  = 140,
+        #else
+        .baseAttack    = 150,
+        .baseSpAttack  = 150,
+        #endif
         .type1 = TYPE_STEEL,
         .type2 = TYPE_GHOST,
         .catchRate = 45,
