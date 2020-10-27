@@ -1600,7 +1600,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     gTasks[taskId].data[5] = 1;             //Species ID
     FreeMonIconPalettes(); //Free space for new palletes
     LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-    gTasks[taskId].data[6] = CreateMonIcon(1, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, 0); //Create pokemon sprite //FORM-TODO
+    gTasks[taskId].data[6] = CreateMonIcon(1, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, 0); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
     gTasks[taskId].data[7] = 0; //Simple 0 or complex 1
     gTasks[taskId].data[8] = 0; //Level
@@ -1639,7 +1639,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     gTasks[taskId].data[5] = 1;             //Species ID
     FreeMonIconPalettes(); //Free space for new palletes
     LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, 0); //Create pokemon sprite //FORM-TODO
+    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
     gTasks[taskId].data[7] = 1; //Simple 0 or complex 1
     gTasks[taskId].data[8] = 0; //Level
@@ -1692,7 +1692,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]);
         FreeMonIconPalettes(); //Free space for new pallete
         LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, 0); //Create new pokemon sprite //FORM-TODO
+        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create new pokemon sprite
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
     }
 
@@ -1994,7 +1994,8 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     int sentToPc;
     struct Pokemon mon;
     u8 i;
-    u16 species     = gTasks[taskId].data[5]; //species ID
+    u16 species     = GetBaseFormSpeciesId(gTasks[taskId].data[5]); //species ID
+    u8 formId       = GetFormIdFromFormSpeciesId(gTasks[taskId].data[5]); //species ID
     u8 level        = gTasks[taskId].data[8]; //Level
     u8 isShiny      = gTasks[taskId].data[9]; //Shiny: no 0, yes 1
     u8 nature       = gTasks[taskId].data[10]; //Nature ID
@@ -2005,23 +2006,23 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
         nature = Random() % NUM_NATURES;
 
     if (isShiny == 1)
+    {
+        u32 personality;
+        u32 otid = gSaveBlock2Ptr->playerTrainerId[0]
+            | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+            | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+            | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+        do
         {
-            u32 personality;
-            u32 otid = gSaveBlock2Ptr->playerTrainerId[0]
-              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+            personality = Random32();
+            personality = ((((Random() % 8) ^ (HIHALF(otid) ^ LOHALF(otid))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
+        } while (nature != GetNatureFromPersonality(personality));
 
-            do
-            {
-                personality = Random32();
-                personality = ((((Random() % 8) ^ (HIHALF(otid) ^ LOHALF(otid))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
-            } while (nature != GetNatureFromPersonality(personality));
-
-            CreateMon(&mon, species, level, 32, 1, personality, OT_ID_PRESET, otid, 0); //FORM-TODO
-        }
+        CreateMon(&mon, species, level, 32, 1, personality, OT_ID_PRESET, otid, formId);
+    }
     else
-        CreateMonWithNature(&mon, species, level, 32, nature, 0); //FORM-TODO
+        CreateMonWithNature(&mon, species, level, 32, nature, formId);
 
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -2051,11 +2052,11 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     // }
 
     //ability
-    if (abilityNum == 0xFF || GetAbilityBySpecies(species, abilityNum, 0) == 0) //FORM-TODO
+    if (abilityNum == 0xFF || GetAbilityBySpecies(species, abilityNum, formId) == 0)
     {
         do {
             abilityNum = Random() % 3;  // includes hidden abilities
-        } while (GetAbilityBySpecies(species, abilityNum, 0) == 0); //FORM-TODO
+        } while (GetAbilityBySpecies(species, abilityNum, formId) == 0);
     }
 
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);

@@ -7341,3 +7341,12 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
     }
     return targetFormId;
 }
+
+u16 GetBaseFormSpeciesId(u16 formSpeciesId)
+{
+    if (gFormSpeciesIdTables[formSpeciesId] != NULL)
+    {
+        return gFormSpeciesIdTables[formSpeciesId][0];
+    }
+    return formSpeciesId;
+}
