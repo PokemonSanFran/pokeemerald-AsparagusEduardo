@@ -73,7 +73,6 @@ const u8 ListListIDs[][NUM_SPECIES] =
 static const u16 InfusedTradeIDs[NUM_SPECIES] = { };
 static const u16 VanillaTradeIDs[NUM_SPECIES] =
 {
-    /*
     [SPECIES_TREECKO] =  277,
     [SPECIES_GROVYLE] =  278,
     [SPECIES_SCEPTILE] =  279,
@@ -209,7 +208,7 @@ static const u16 VanillaTradeIDs[NUM_SPECIES] =
     [SPECIES_JIRACHI] =  409,
     [SPECIES_DEOXYS] =  410,
     [SPECIES_CHIMECHO] =  411,
-    */
+   /*
     [277] =  SPECIES_TREECKO,
     [278] =  SPECIES_GROVYLE,
     [279] =  SPECIES_SCEPTILE,
@@ -345,6 +344,7 @@ static const u16 VanillaTradeIDs[NUM_SPECIES] =
     [409] =  SPECIES_JIRACHI,
     [410] =  SPECIES_DEOXYS,
     [411] =  SPECIES_CHIMECHO,
+    */
 };
 
 static const u16 *DimentionalIDs[] =
@@ -530,6 +530,7 @@ static void c3_0805465C(u8);
 static void sub_807F39C(u8);
 static void CB2_SaveAndEndWirelessTrade(void);
 static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension);
+static u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension);
 
 #include "data/trade.h"
 
@@ -797,16 +798,16 @@ static void CB2_CreateTradeMenu(void)
 
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PARTNER]; i++)
         {
-            u16 dimSpeciesId;
+            u16 localSpeciesId;
             struct Pokemon *mon = &gEnemyParty[i];
 
-            dimSpeciesId = GetLocalSpeciesFromDimentionSpecies(GetMonData(mon, MON_DATA_SPECIES2), gDimentionLink);
+            localSpeciesId = GetLocalSpeciesFromDimentionSpecies(GetMonData(mon, MON_DATA_SPECIES2), gDimentionLink);
                 
             #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_INFO, "dimSpeciesId %d", dimSpeciesId);
+            mgba_printf(MGBA_LOG_INFO, "localSpeciesId %d", localSpeciesId);
             #endif
 
-            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(dimSpeciesId,
+            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(localSpeciesId,
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
@@ -5327,12 +5328,25 @@ static void CB2_SaveAndEndWirelessTrade(void)
 
 static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
 {
-    u16 ultraSpecies;
+    u16 i;
 
-    if (dimension == 0)
-    {
+    if (dimension == 0 || species > NUM_SPECIES)
         return species;
+
+    for (i = 0; i < NUM_SPECIES; i++)
+    {
+        if (DimentionalIDs[dimension][i] == species)
+            return i;
     }
+    
+    return species;
+};
+
+static u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension)
+{
+    if (dimension == 0 || species > NUM_SPECIES)
+        return species;
+        
     if (DimentionalIDs[dimension] != NULL)
     {
         if (DimentionalIDs[dimension][species] != SPECIES_NONE)
