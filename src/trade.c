@@ -231,6 +231,8 @@ static EWRAM_DATA u8 *sMessageBoxTileBuffers[14] = {NULL};
 EWRAM_DATA struct MailStruct gTradeMail[PARTY_SIZE] = {0};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 EWRAM_DATA u16 localSpeciesIds[PARTY_SIZE] = {0};
+EWRAM_DATA bool8 adaptedSpecies1 = FALSE;
+EWRAM_DATA bool8 adaptedSpecies2 = FALSE;
 static EWRAM_DATA struct {
     /*0x0000*/ u8 bg2hofs;
     /*0x0001*/ u8 bg3hofs;
@@ -636,11 +638,22 @@ static void CB2_CreateTradeMenu(void)
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
-            u16 locSpeciesId = GetLocalSpeciesFromDimentionSpecies(localSpeciesIds[i], gDimentionLink);
-            #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
-            #endif
-            SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
+            if (!adaptedSpecies2)
+            {
+                u16 locSpeciesId = GetLocalSpeciesFromDimentionSpecies(localSpeciesIds[i], gDimentionLink);
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                #endif
+                SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
+            }
+            else
+            {
+                u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                #endif
+            }
+
             sTradeMenuData->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
@@ -650,6 +663,8 @@ static void CB2_CreateTradeMenu(void)
                                                          TRUE,
                                                          GetMonData(mon, MON_DATA_FORM_ID));
         }
+        if (!adaptedSpecies2)
+            adaptedSpecies2 = TRUE;
 
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PARTNER]; i++)
         {
@@ -1131,22 +1146,34 @@ static bool8 BufferTradeParties(void)
     int i;
     struct Pokemon *mon;
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    if (!adaptedSpecies1)
     {
-        struct Pokemon *mon = &gPlayerParty[i];
-        u16 dimSpeciesId;
-        localSpeciesIds[i] = GetMonData(mon, MON_DATA_SPECIES);
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            struct Pokemon *mon = &gPlayerParty[i];
+            u16 dimSpeciesId;
+            localSpeciesIds[i] = GetMonData(mon, MON_DATA_SPECIES);
+            #ifdef GBA_PRINTF
+            if (i == 0)
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId write %d", localSpeciesIds[i]);
+            #endif
+            dimSpeciesId = GetDimentionSpeciesFromLocalSpecies(localSpeciesIds[i], gDimentionLink);
+            #ifdef GBA_PRINTF
+            if (i == 0)
+                mgba_printf(MGBA_LOG_INFO, "Infused: dimSpeciesId write %d", dimSpeciesId);
+            #endif
+            
+            SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
+        }
+        if (!adaptedSpecies1)
+            adaptedSpecies1 = TRUE;
+    }
+    else
+    {
+        u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
         #ifdef GBA_PRINTF
-        if (i == 0)
-            mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId write %d", localSpeciesIds[i]);
+            mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId write %d", locSpeciesId);
         #endif
-        dimSpeciesId = GetDimentionSpeciesFromLocalSpecies(localSpeciesIds[i], gDimentionLink);
-        #ifdef GBA_PRINTF
-        if (i == 0)
-            mgba_printf(MGBA_LOG_INFO, "Infused: dimSpeciesId write %d", dimSpeciesId);
-        #endif
-        
-        SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
     }
     #ifdef GBA_PRINTF
     mgba_printf(MGBA_LOG_INFO, "--------------");
