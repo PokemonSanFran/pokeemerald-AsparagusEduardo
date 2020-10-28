@@ -233,6 +233,8 @@ EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 EWRAM_DATA u16 localSpeciesIds[PARTY_SIZE] = {0};
 EWRAM_DATA bool8 adaptedPlayerSpecies1 = FALSE;
 EWRAM_DATA bool8 adaptedPlayerSpecies2 = FALSE;
+EWRAM_DATA bool8 adaptedPartnerSpecies1 = FALSE;
+EWRAM_DATA bool8 adaptedPartnerSpecies2 = FALSE;
 static EWRAM_DATA struct {
     /*0x0000*/ u8 bg2hofs;
     /*0x0001*/ u8 bg3hofs;
@@ -520,6 +522,8 @@ static void CB2_CreateTradeMenu(void)
     case 0:
         adaptedPlayerSpecies1 = FALSE;
         adaptedPlayerSpecies2 = FALSE;
+        adaptedPartnerSpecies1 = FALSE;
+        adaptedPartnerSpecies2 = FALSE;
         sTradeMenuData = AllocZeroed(sizeof(*sTradeMenuData));
         InitTradeMenu();
         sMessageBoxAllocBuffer = AllocZeroed(ARRAY_COUNT(sMessageBoxTileBuffers) * 256);
@@ -673,13 +677,7 @@ static void CB2_CreateTradeMenu(void)
             u16 localSpeciesId;
             struct Pokemon *mon = &gEnemyParty[i];
 
-            localSpeciesId = GetLocalSpeciesFromDimentionSpecies(GetMonData(mon, MON_DATA_SPECIES2), gDimentionLink);
-                
-            #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_INFO, "Vanilla: localSpeciesId %d", localSpeciesId);
-            #endif
-
-            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(localSpeciesId,
+            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
@@ -855,6 +853,22 @@ static void CB2_ReturnToTradeMenu(void)
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
+            if (!adaptedPlayerSpecies2)
+            {
+                u16 locSpeciesId = GetLocalSpeciesFromDimentionSpecies(localSpeciesIds[i], gDimentionLink);
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                #endif
+                SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
+            }
+            else
+            {
+                u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                #endif
+            }
+            
             sTradeMenuData->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
@@ -1169,17 +1183,10 @@ static bool8 BufferTradeParties(void)
         }
         if (!adaptedPlayerSpecies1)
             adaptedPlayerSpecies1 = TRUE;
-    }
-    else
-    {
-        u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
         #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId write %d", locSpeciesId);
+        mgba_printf(MGBA_LOG_INFO, "--------------");
         #endif
     }
-    #ifdef GBA_PRINTF
-    mgba_printf(MGBA_LOG_INFO, "--------------");
-    #endif
     i = 0;
 
     switch (sTradeMenuData->bufferPartyState)
@@ -1298,7 +1305,17 @@ static bool8 BufferTradeParties(void)
         for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
         {
             u8 name[POKEMON_NAME_LENGTH + 1];
-            u16 species = GetMonData(mon, MON_DATA_SPECIES);
+            u16 species;
+
+            if (!adaptedPartnerSpecies1)
+            {
+                struct Pokemon *mon = &gEnemyParty[i];
+                u16 dimSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
+                dimSpeciesId = GetLocalSpeciesFromDimentionSpecies(dimSpeciesId, gDimentionLink);
+                
+                SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
+            }
+            species = GetMonData(mon, MON_DATA_SPECIES);
 
             if (species != SPECIES_NONE)
             {
@@ -1313,6 +1330,8 @@ static bool8 BufferTradeParties(void)
                 }
             }
         }
+        if (!adaptedPartnerSpecies1)
+            adaptedPartnerSpecies1 = TRUE;
         return TRUE;
     // Delay until next state
     case 2:
