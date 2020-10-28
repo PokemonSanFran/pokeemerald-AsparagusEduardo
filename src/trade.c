@@ -347,7 +347,7 @@ static const u16 VanillaTradeIDs[NUM_SPECIES] =
     */
 };
 
-static const u16 *DimentionalIDs[] =
+static const u16 *const DimentionalIDs[] =
 {
     InfusedTradeIDs,
     VanillaTradeIDs,
