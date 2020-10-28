@@ -646,9 +646,9 @@ static void CB2_CreateTradeMenu(void)
             struct Pokemon *mon = &gPlayerParty[i];
             if (!adaptedPlayerSpecies2)
             {
-                u16 locSpeciesId = GetLocalSpeciesFromDimentionSpecies(localSpeciesIds[i], gDimentionLink);
+                u16 locSpeciesId = localSpeciesIds[i];
                 #ifdef GBA_PRINTF
-                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2-%d", locSpeciesId, adaptedPlayerSpecies2);
                 #endif
                 SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
             }
@@ -656,7 +656,7 @@ static void CB2_CreateTradeMenu(void)
             {
                 u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
                 #ifdef GBA_PRINTF
-                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2-%d", locSpeciesId, adaptedPlayerSpecies2);
                 #endif
             }
 
@@ -855,9 +855,9 @@ static void CB2_ReturnToTradeMenu(void)
             struct Pokemon *mon = &gPlayerParty[i];
             if (!adaptedPlayerSpecies2)
             {
-                u16 locSpeciesId = GetLocalSpeciesFromDimentionSpecies(localSpeciesIds[i], gDimentionLink);
+                u16 locSpeciesId = localSpeciesIds[i];
                 #ifdef GBA_PRINTF
-                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2%d", locSpeciesId, adaptedPlayerSpecies2);
                 #endif
                 SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
             }
@@ -865,7 +865,7 @@ static void CB2_ReturnToTradeMenu(void)
             {
                 u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
                 #ifdef GBA_PRINTF
-                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId read %d", locSpeciesId);
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2%d", locSpeciesId, adaptedPlayerSpecies2);
                 #endif
             }
             
@@ -1169,14 +1169,9 @@ static bool8 BufferTradeParties(void)
             struct Pokemon *mon = &gPlayerParty[i];
             u16 dimSpeciesId;
             localSpeciesIds[i] = GetMonData(mon, MON_DATA_SPECIES);
-            #ifdef GBA_PRINTF
-            if (i == 0)
-                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId write %d", localSpeciesIds[i]);
-            #endif
             dimSpeciesId = GetDimentionSpeciesFromLocalSpecies(localSpeciesIds[i], gDimentionLink);
             #ifdef GBA_PRINTF
-            if (i == 0)
-                mgba_printf(MGBA_LOG_INFO, "Infused: dimSpeciesId write %d", dimSpeciesId);
+                mgba_printf(MGBA_LOG_INFO, "Player: locSpeciesId[%d] = %d, dimSpeciesId = %d", i, localSpeciesIds[i], dimSpeciesId);
             #endif
             
             SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
@@ -5270,15 +5265,25 @@ static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
 static u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension)
 {
     if (dimension == 0 || species > NUM_SPECIES)
+    {
+        #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_INFO, "test1 %d", species);
+        #endif
         return species;
+    }
         
     if (DimentionalIDs[dimension] != NULL)
     {
         if (DimentionalIDs[dimension][species] != SPECIES_NONE)
         {
+            #ifdef GBA_PRINTF
+            mgba_printf(MGBA_LOG_INFO, "test2 %d", DimentionalIDs[dimension][species]);
+            #endif
             return DimentionalIDs[dimension][species];
         }
     }
-            
+    #ifdef GBA_PRINTF
+    mgba_printf(MGBA_LOG_INFO, "test3 %d", species);
+    #endif
     return species;
 };
