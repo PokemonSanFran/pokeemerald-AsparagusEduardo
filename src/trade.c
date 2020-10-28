@@ -51,6 +51,307 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
+#ifdef GBA_PRINTF
+#include "printf.h"
+#include "mgba.h"
+#endif
+/*
+const u8 List1IDs[NUM_SPECIES] = { };
+const u8 List2IDs[NUM_SPECIES] =
+{
+    [SPECIES_TREECKO] =  1,
+    [SPECIES_GROVYLE] =  2,
+};
+
+const u8 ListListIDs[][NUM_SPECIES] =
+{
+    List1IDs,
+    List2IDs,
+};
+*/
+
+static const u16 InfusedTradeIDs[NUM_SPECIES] = { };
+static const u16 VanillaTradeIDs[NUM_SPECIES] =
+{
+    /*
+    [SPECIES_TREECKO] =  277,
+    [SPECIES_GROVYLE] =  278,
+    [SPECIES_SCEPTILE] =  279,
+    [SPECIES_TORCHIC] =  280,
+    [SPECIES_COMBUSKEN] =  281,
+    [SPECIES_BLAZIKEN] =  282,
+    [SPECIES_MUDKIP] =  283,
+    [SPECIES_MARSHTOMP] =  284,
+    [SPECIES_SWAMPERT] =  285,
+    [SPECIES_POOCHYENA] =  286,
+    [SPECIES_MIGHTYENA] =  287,
+    [SPECIES_ZIGZAGOON] =  288,
+    [SPECIES_LINOONE] =  289,
+    [SPECIES_WURMPLE] =  290,
+    [SPECIES_SILCOON] =  291,
+    [SPECIES_BEAUTIFLY] =  292,
+    [SPECIES_CASCOON] =  293,
+    [SPECIES_DUSTOX] =  294,
+    [SPECIES_LOTAD] =  295,
+    [SPECIES_LOMBRE] =  296,
+    [SPECIES_LUDICOLO] =  297,
+    [SPECIES_SEEDOT] =  298,
+    [SPECIES_NUZLEAF] =  299,
+    [SPECIES_SHIFTRY] =  300,
+    [SPECIES_NINCADA] =  301,
+    [SPECIES_NINJASK] =  302,
+    [SPECIES_SHEDINJA] =  303,
+    [SPECIES_TAILLOW] =  304,
+    [SPECIES_SWELLOW] =  305,
+    [SPECIES_SHROOMISH] =  306,
+    [SPECIES_BRELOOM] =  307,
+    [SPECIES_SPINDA] =  308,
+    [SPECIES_WINGULL] =  309,
+    [SPECIES_PELIPPER] =  310,
+    [SPECIES_SURSKIT] =  311,
+    [SPECIES_MASQUERAIN] =  312,
+    [SPECIES_WAILMER] =  313,
+    [SPECIES_WAILORD] =  314,
+    [SPECIES_SKITTY] =  315,
+    [SPECIES_DELCATTY] =  316,
+    [SPECIES_KECLEON] =  317,
+    [SPECIES_BALTOY] =  318,
+    [SPECIES_CLAYDOL] =  319,
+    [SPECIES_NOSEPASS] =  320,
+    [SPECIES_TORKOAL] =  321,
+    [SPECIES_SABLEYE] =  322,
+    [SPECIES_BARBOACH] =  323,
+    [SPECIES_WHISCASH] =  324,
+    [SPECIES_LUVDISC] =  325,
+    [SPECIES_CORPHISH] =  326,
+    [SPECIES_CRAWDAUNT] =  327,
+    [SPECIES_FEEBAS] =  328,
+    [SPECIES_MILOTIC] =  329,
+    [SPECIES_CARVANHA] =  330,
+    [SPECIES_SHARPEDO] =  331,
+    [SPECIES_TRAPINCH] =  332,
+    [SPECIES_VIBRAVA] =  333,
+    [SPECIES_FLYGON] =  334,
+    [SPECIES_MAKUHITA] =  335,
+    [SPECIES_HARIYAMA] =  336,
+    [SPECIES_ELECTRIKE] =  337,
+    [SPECIES_MANECTRIC] =  338,
+    [SPECIES_NUMEL] =  339,
+    [SPECIES_CAMERUPT] =  340,
+    [SPECIES_SPHEAL] =  341,
+    [SPECIES_SEALEO] =  342,
+    [SPECIES_WALREIN] =  343,
+    [SPECIES_CACNEA] =  344,
+    [SPECIES_CACTURNE] =  345,
+    [SPECIES_SNORUNT] =  346,
+    [SPECIES_GLALIE] =  347,
+    [SPECIES_LUNATONE] =  348,
+    [SPECIES_SOLROCK] =  349,
+    [SPECIES_AZURILL] =  350,
+    [SPECIES_SPOINK] =  351,
+    [SPECIES_GRUMPIG] =  352,
+    [SPECIES_PLUSLE] =  353,
+    [SPECIES_MINUN] =  354,
+    [SPECIES_MAWILE] =  355,
+    [SPECIES_MEDITITE] =  356,
+    [SPECIES_MEDICHAM] =  357,
+    [SPECIES_SWABLU] =  358,
+    [SPECIES_ALTARIA] =  359,
+    [SPECIES_WYNAUT] =  360,
+    [SPECIES_DUSKULL] =  361,
+    [SPECIES_DUSCLOPS] =  362,
+    [SPECIES_ROSELIA] =  363,
+    [SPECIES_SLAKOTH] =  364,
+    [SPECIES_VIGOROTH] =  365,
+    [SPECIES_SLAKING] =  366,
+    [SPECIES_GULPIN] =  367,
+    [SPECIES_SWALOT] =  368,
+    [SPECIES_TROPIUS] =  369,
+    [SPECIES_WHISMUR] =  370,
+    [SPECIES_LOUDRED] =  371,
+    [SPECIES_EXPLOUD] =  372,
+    [SPECIES_CLAMPERL] =  373,
+    [SPECIES_HUNTAIL] =  374,
+    [SPECIES_GOREBYSS] =  375,
+    [SPECIES_ABSOL] =  376,
+    [SPECIES_SHUPPET] =  377,
+    [SPECIES_BANETTE] =  378,
+    [SPECIES_SEVIPER] =  379,
+    [SPECIES_ZANGOOSE] =  380,
+    [SPECIES_RELICANTH] =  381,
+    [SPECIES_ARON] =  382,
+    [SPECIES_LAIRON] =  383,
+    [SPECIES_AGGRON] =  384,
+    [SPECIES_CASTFORM] =  385,
+    [SPECIES_VOLBEAT] =  386,
+    [SPECIES_ILLUMISE] =  387,
+    [SPECIES_LILEEP] =  388,
+    [SPECIES_CRADILY] =  389,
+    [SPECIES_ANORITH] =  390,
+    [SPECIES_ARMALDO] =  391,
+    [SPECIES_RALTS] =  392,
+    [SPECIES_KIRLIA] =  393,
+    [SPECIES_GARDEVOIR] =  394,
+    [SPECIES_BAGON] =  395,
+    [SPECIES_SHELGON] =  396,
+    [SPECIES_SALAMENCE] =  397,
+    [SPECIES_BELDUM] =  398,
+    [SPECIES_METANG] =  399,
+    [SPECIES_METAGROSS] =  400,
+    [SPECIES_REGIROCK] =  401,
+    [SPECIES_REGICE] =  402,
+    [SPECIES_REGISTEEL] =  403,
+    [SPECIES_KYOGRE] =  404,
+    [SPECIES_GROUDON] =  405,
+    [SPECIES_RAYQUAZA] =  406,
+    [SPECIES_LATIAS] =  407,
+    [SPECIES_LATIOS] =  408,
+    [SPECIES_JIRACHI] =  409,
+    [SPECIES_DEOXYS] =  410,
+    [SPECIES_CHIMECHO] =  411,
+    */
+    [277] =  SPECIES_TREECKO,
+    [278] =  SPECIES_GROVYLE,
+    [279] =  SPECIES_SCEPTILE,
+    [280] =  SPECIES_TORCHIC,
+    [281] =  SPECIES_COMBUSKEN,
+    [282] =  SPECIES_BLAZIKEN,
+    [283] =  SPECIES_MUDKIP,
+    [284] =  SPECIES_MARSHTOMP,
+    [285] =  SPECIES_SWAMPERT,
+    [286] =  SPECIES_POOCHYENA,
+    [287] =  SPECIES_MIGHTYENA,
+    [288] =  SPECIES_ZIGZAGOON,
+    [289] =  SPECIES_LINOONE,
+    [290] =  SPECIES_WURMPLE,
+    [291] =  SPECIES_SILCOON,
+    [292] =  SPECIES_BEAUTIFLY,
+    [293] =  SPECIES_CASCOON,
+    [294] =  SPECIES_DUSTOX,
+    [295] =  SPECIES_LOTAD,
+    [296] =  SPECIES_LOMBRE,
+    [297] =  SPECIES_LUDICOLO,
+    [298] =  SPECIES_SEEDOT,
+    [299] =  SPECIES_NUZLEAF,
+    [300] =  SPECIES_SHIFTRY,
+    [301] =  SPECIES_NINCADA,
+    [302] =  SPECIES_NINJASK,
+    [303] =  SPECIES_SHEDINJA,
+    [304] =  SPECIES_TAILLOW,
+    [305] =  SPECIES_SWELLOW,
+    [306] =  SPECIES_SHROOMISH,
+    [307] =  SPECIES_BRELOOM,
+    [308] =  SPECIES_SPINDA,
+    [309] =  SPECIES_WINGULL,
+    [310] =  SPECIES_PELIPPER,
+    [311] =  SPECIES_SURSKIT,
+    [312] =  SPECIES_MASQUERAIN,
+    [313] =  SPECIES_WAILMER,
+    [314] =  SPECIES_WAILORD,
+    [315] =  SPECIES_SKITTY,
+    [316] =  SPECIES_DELCATTY,
+    [317] =  SPECIES_KECLEON,
+    [318] =  SPECIES_BALTOY,
+    [319] =  SPECIES_CLAYDOL,
+    [320] =  SPECIES_NOSEPASS,
+    [321] =  SPECIES_TORKOAL,
+    [322] =  SPECIES_SABLEYE,
+    [323] =  SPECIES_BARBOACH,
+    [324] =  SPECIES_WHISCASH,
+    [325] =  SPECIES_LUVDISC,
+    [326] =  SPECIES_CORPHISH,
+    [327] =  SPECIES_CRAWDAUNT,
+    [328] =  SPECIES_FEEBAS,
+    [329] =  SPECIES_MILOTIC,
+    [330] =  SPECIES_CARVANHA,
+    [331] =  SPECIES_SHARPEDO,
+    [332] =  SPECIES_TRAPINCH,
+    [333] =  SPECIES_VIBRAVA,
+    [334] =  SPECIES_FLYGON,
+    [335] =  SPECIES_MAKUHITA,
+    [336] =  SPECIES_HARIYAMA,
+    [337] =  SPECIES_ELECTRIKE,
+    [338] =  SPECIES_MANECTRIC,
+    [339] =  SPECIES_NUMEL,
+    [340] =  SPECIES_CAMERUPT,
+    [341] =  SPECIES_SPHEAL,
+    [342] =  SPECIES_SEALEO,
+    [343] =  SPECIES_WALREIN,
+    [344] =  SPECIES_CACNEA,
+    [345] =  SPECIES_CACTURNE,
+    [346] =  SPECIES_SNORUNT,
+    [347] =  SPECIES_GLALIE,
+    [348] =  SPECIES_LUNATONE,
+    [349] =  SPECIES_SOLROCK,
+    [350] =  SPECIES_AZURILL,
+    [351] =  SPECIES_SPOINK,
+    [352] =  SPECIES_GRUMPIG,
+    [353] =  SPECIES_PLUSLE,
+    [354] =  SPECIES_MINUN,
+    [355] =  SPECIES_MAWILE,
+    [356] =  SPECIES_MEDITITE,
+    [357] =  SPECIES_MEDICHAM,
+    [358] =  SPECIES_SWABLU,
+    [359] =  SPECIES_ALTARIA,
+    [360] =  SPECIES_WYNAUT,
+    [361] =  SPECIES_DUSKULL,
+    [362] =  SPECIES_DUSCLOPS,
+    [363] =  SPECIES_ROSELIA,
+    [364] =  SPECIES_SLAKOTH,
+    [365] =  SPECIES_VIGOROTH,
+    [366] =  SPECIES_SLAKING,
+    [367] =  SPECIES_GULPIN,
+    [368] =  SPECIES_SWALOT,
+    [369] =  SPECIES_TROPIUS,
+    [370] =  SPECIES_WHISMUR,
+    [371] =  SPECIES_LOUDRED,
+    [372] =  SPECIES_EXPLOUD,
+    [373] =  SPECIES_CLAMPERL,
+    [374] =  SPECIES_HUNTAIL,
+    [375] =  SPECIES_GOREBYSS,
+    [376] =  SPECIES_ABSOL,
+    [377] =  SPECIES_SHUPPET,
+    [378] =  SPECIES_BANETTE,
+    [379] =  SPECIES_SEVIPER,
+    [380] =  SPECIES_ZANGOOSE,
+    [381] =  SPECIES_RELICANTH,
+    [382] =  SPECIES_ARON,
+    [383] =  SPECIES_LAIRON,
+    [384] =  SPECIES_AGGRON,
+    [385] =  SPECIES_CASTFORM,
+    [386] =  SPECIES_VOLBEAT,
+    [387] =  SPECIES_ILLUMISE,
+    [388] =  SPECIES_LILEEP,
+    [389] =  SPECIES_CRADILY,
+    [390] =  SPECIES_ANORITH,
+    [391] =  SPECIES_ARMALDO,
+    [392] =  SPECIES_RALTS,
+    [393] =  SPECIES_KIRLIA,
+    [394] =  SPECIES_GARDEVOIR,
+    [395] =  SPECIES_BAGON,
+    [396] =  SPECIES_SHELGON,
+    [397] =  SPECIES_SALAMENCE,
+    [398] =  SPECIES_BELDUM,
+    [399] =  SPECIES_METANG,
+    [400] =  SPECIES_METAGROSS,
+    [401] =  SPECIES_REGIROCK,
+    [402] =  SPECIES_REGICE,
+    [403] =  SPECIES_REGISTEEL,
+    [404] =  SPECIES_KYOGRE,
+    [405] =  SPECIES_GROUDON,
+    [406] =  SPECIES_RAYQUAZA,
+    [407] =  SPECIES_LATIAS,
+    [408] =  SPECIES_LATIOS,
+    [409] =  SPECIES_JIRACHI,
+    [410] =  SPECIES_DEOXYS,
+    [411] =  SPECIES_CHIMECHO,
+};
+
+static const u16 *DimentionalIDs[] =
+{
+    InfusedTradeIDs,
+    VanillaTradeIDs,
+};
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
@@ -228,6 +529,7 @@ static void Task_AnimateWirelessSignal(u8);
 static void c3_0805465C(u8);
 static void sub_807F39C(u8);
 static void CB2_SaveAndEndWirelessTrade(void);
+static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension);
 
 #include "data/trade.h"
 
@@ -476,6 +778,10 @@ static void CB2_CreateTradeMenu(void)
         sTradeMenuData->partyCounts[TRADE_PLAYER] = gPlayerPartyCount;
         sTradeMenuData->partyCounts[TRADE_PARTNER] = gEnemyPartyCount;
 
+        #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_INFO, "DimensionLink %d", gDimentionLink);
+        #endif
+
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
@@ -491,8 +797,16 @@ static void CB2_CreateTradeMenu(void)
 
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PARTNER]; i++)
         {
+            u16 dimSpeciesId;
             struct Pokemon *mon = &gEnemyParty[i];
-            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
+
+            dimSpeciesId = GetLocalSpeciesFromDimentionSpecies(GetMonData(mon, MON_DATA_SPECIES2), gDimentionLink);
+                
+            #ifdef GBA_PRINTF
+            mgba_printf(MGBA_LOG_INFO, "dimSpeciesId %d", dimSpeciesId);
+            #endif
+
+            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(dimSpeciesId,
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
@@ -5010,3 +5324,22 @@ static void CB2_SaveAndEndWirelessTrade(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
+
+static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
+{
+    u16 ultraSpecies;
+
+    if (dimension == 0)
+    {
+        return species;
+    }
+    if (DimentionalIDs[dimension] != NULL)
+    {
+        if (DimentionalIDs[dimension][species] != SPECIES_NONE)
+        {
+            return DimentionalIDs[dimension][species];
+        }
+    }
+            
+    return species;
+};
