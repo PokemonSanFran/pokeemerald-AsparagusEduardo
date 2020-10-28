@@ -231,8 +231,8 @@ static EWRAM_DATA u8 *sMessageBoxTileBuffers[14] = {NULL};
 EWRAM_DATA struct MailStruct gTradeMail[PARTY_SIZE] = {0};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 EWRAM_DATA u16 localSpeciesIds[PARTY_SIZE] = {0};
-EWRAM_DATA bool8 adaptedSpecies1 = FALSE;
-EWRAM_DATA bool8 adaptedSpecies2 = FALSE;
+EWRAM_DATA bool8 adaptedPlayerSpecies1 = FALSE;
+EWRAM_DATA bool8 adaptedPlayerSpecies2 = FALSE;
 static EWRAM_DATA struct {
     /*0x0000*/ u8 bg2hofs;
     /*0x0001*/ u8 bg3hofs;
@@ -518,6 +518,8 @@ static void CB2_CreateTradeMenu(void)
     switch (gMain.state)
     {
     case 0:
+        adaptedPlayerSpecies1 = FALSE;
+        adaptedPlayerSpecies2 = FALSE;
         sTradeMenuData = AllocZeroed(sizeof(*sTradeMenuData));
         InitTradeMenu();
         sMessageBoxAllocBuffer = AllocZeroed(ARRAY_COUNT(sMessageBoxTileBuffers) * 256);
@@ -638,7 +640,7 @@ static void CB2_CreateTradeMenu(void)
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
-            if (!adaptedSpecies2)
+            if (!adaptedPlayerSpecies2)
             {
                 u16 locSpeciesId = GetLocalSpeciesFromDimentionSpecies(localSpeciesIds[i], gDimentionLink);
                 #ifdef GBA_PRINTF
@@ -663,8 +665,8 @@ static void CB2_CreateTradeMenu(void)
                                                          TRUE,
                                                          GetMonData(mon, MON_DATA_FORM_ID));
         }
-        if (!adaptedSpecies2)
-            adaptedSpecies2 = TRUE;
+        if (!adaptedPlayerSpecies2)
+            adaptedPlayerSpecies2 = TRUE;
 
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PARTNER]; i++)
         {
@@ -1146,7 +1148,7 @@ static bool8 BufferTradeParties(void)
     int i;
     struct Pokemon *mon;
 
-    if (!adaptedSpecies1)
+    if (!adaptedPlayerSpecies1)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
@@ -1165,8 +1167,8 @@ static bool8 BufferTradeParties(void)
             
             SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
         }
-        if (!adaptedSpecies1)
-            adaptedSpecies1 = TRUE;
+        if (!adaptedPlayerSpecies1)
+            adaptedPlayerSpecies1 = TRUE;
     }
     else
     {
