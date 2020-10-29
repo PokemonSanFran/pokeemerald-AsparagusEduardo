@@ -889,7 +889,7 @@ static void CB2_CreateTradeMenu(void)
         sTradeMenuData->partyCounts[TRADE_PARTNER] = gEnemyPartyCount;
 
         #ifdef GBA_PRINTF
-        mgba_printf(MGBA_LOG_INFO, "DimensionLink %d", gDimentionLink);
+        mgba_printf(MGBA_LOG_INFO, "DimensionLink %d", VarGet(VAR_DIMENSION_LINK));
         #endif
 
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
@@ -1420,7 +1420,7 @@ static bool8 BufferTradeParties(void)
             struct Pokemon *mon = &gPlayerParty[i];
             u16 dimSpeciesId;
             localSpeciesIds[i] = GetMonData(mon, MON_DATA_SPECIES);
-            dimSpeciesId = GetDimentionSpeciesFromLocalSpecies(localSpeciesIds[i], gDimentionLink);
+            dimSpeciesId = GetDimentionSpeciesFromLocalSpecies(localSpeciesIds[i], VarGet(VAR_DIMENSION_LINK));
             #ifdef GBA_PRINTF
                 mgba_printf(MGBA_LOG_INFO, "Player: locSpeciesId[%d] = %d, dimSpeciesId = %d", i, localSpeciesIds[i], dimSpeciesId);
             #endif
@@ -1557,7 +1557,7 @@ static bool8 BufferTradeParties(void)
             {
                 struct Pokemon *mon = &gEnemyParty[i];
                 u16 dimSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
-                dimSpeciesId = GetLocalSpeciesFromDimentionSpecies(dimSpeciesId, gDimentionLink);
+                dimSpeciesId = GetLocalSpeciesFromDimentionSpecies(dimSpeciesId, VarGet(VAR_DIMENSION_LINK));
                 
                 SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
             }

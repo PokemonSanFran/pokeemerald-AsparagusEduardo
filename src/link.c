@@ -116,7 +116,6 @@ EWRAM_DATA struct {
 } sLinkErrorBuffer = {};
 static EWRAM_DATA u16 sReadyCloseLinkAttempts = 0; // never read
 static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
-EWRAM_DATA u8 gDimentionLink = 0;
 
 // Static ROM declarations
 
