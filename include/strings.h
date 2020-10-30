@@ -3020,6 +3020,7 @@ extern const u8 gText_JackRememberMove[];
 extern const u8 gText_JackForgetMove[];
 extern const u8 gText_JackTeachMove[];
 
+// Rotom form options
 extern const u8 gText_MicrowaveOven[];
 extern const u8 gText_WashingMachine[];
 extern const u8 gText_Refrigerator[];
