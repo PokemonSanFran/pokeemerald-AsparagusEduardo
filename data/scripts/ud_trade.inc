@@ -1,11 +1,18 @@
-UDTrade_EventScript_UDTradeCenter:: @USING
+Common_EventScript_UDTradeAttendant::
+	lockall
+	faceplayer
+	special OpenUDTradeMenu
+	waitstate
+	end
+
+UDTrade_EventScript_UDTradeCenter::
 	copyvar VAR_0x8007, VAR_LAST_TALKED
-	call CableClub_EventScript_CheckPartyTradeRequirements @ USING
+	call CableClub_EventScript_CheckPartyTradeRequirements
 	compare VAR_RESULT, 0
-	goto_if_eq CableClub_EventScript_AbortLink @ USING
+	goto_if_eq CableClub_EventScript_AbortLink
 	call Common_EventScript_SaveGame
 	compare VAR_RESULT, 0
-	goto_if_eq CableClub_EventScript_AbortLink @ USING
+	goto_if_eq CableClub_EventScript_AbortLink
 	message gText_PleaseWaitForLink
 	waitmessage
 	special TryTradeLinkup
@@ -19,7 +26,7 @@ UDTrade_EventScript_UDTradeCenter:: @USING
 	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
 	goto_if_eq CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
 	compare VAR_RESULT, LINKUP_FAILED
-	goto_if_eq CableClub_EventScript_AbortLink @ USING
+	goto_if_eq CableClub_EventScript_AbortLink
 	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
 	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
 	compare VAR_RESULT, LINKUP_PLAYER_NOT_READY
@@ -28,7 +35,7 @@ UDTrade_EventScript_UDTradeCenter:: @USING
 	goto_if_eq CableClub_EventScript_AbortLinkOtherTrainerNotReady
 	end
 
-UDTrade_EventScript_EnterUDTradeCenter:: @ 827713A
+UDTrade_EventScript_EnterUDTradeCenter::
 	setvar VAR_0x8004, USING_TRADE_CENTER
 	copyvar VAR_CABLE_CLUB_STATE, VAR_0x8004
 	messageautoscroll CableClub_Text_PleaseEnter
@@ -56,8 +63,3 @@ UDTrade_EventScript_EnterUDTradeCenter:: @ 827713A
 	waitstate
 	end
 
-Common_EventScript_UDTradeAttendant:: @ 827751B
-	lock
-	faceplayer
-	special OpenUDTradeMenu
-	end

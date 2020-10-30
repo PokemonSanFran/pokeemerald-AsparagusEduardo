@@ -1,9 +1,6 @@
-#include "debug.h"
-
 #include "global.h"
-#include "credits.h"
+#include "ud_trade.h"
 #include "data.h"
-#include "day_night.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -64,29 +61,18 @@ static void DebugAction_DestroyExtraWindow(u8 taskId);
 static void DebugTask_HandleMenuInput_Main(u8);
 
 static void UDTradeAction_VanillaDimension(u8 taskId);
-static void DebugAction_Give_CHEAT(u8 taskId);
 
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
-extern u8 Debug_ShowFieldMessageStringVar4[];
-extern u8 Debug_CheatStart[];
 extern u8 UDTrade_EventScript_UDTradeCenter[];
-extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
-extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
-#define ABILITY_NAME_LENGTH 12
-extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 
 // *******************************
 // Enums
 enum { // Main
     UDTRADE_VANILLA_DIMENSION,
-    DEBUG_MENU_ITEM_CANCEL
+    UDTRADE_MENU_CANCEL
 };
-
-// *******************************
-//Maps per map group COPY FROM /include/constants/map_groups.h
- static const u8 MAP_GROUP_COUNT[] = {57, 5, 5, 6, 7, 8, 9, 7, 7, 14, 8, 17, 10, 23, 13, 15, 15, 2, 2, 2, 3, 1, 1, 1, 108, 61, 89, 2, 1, 13, 1, 1, 3, 1, 0};
 
 // Text
 // Main Menu
@@ -98,7 +84,7 @@ static const u8 gDebugText_Cancel[] =               _("Cancel");
 static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
     [UDTRADE_VANILLA_DIMENSION]     = {gUDTradeText_VanillaDimension,   UDTRADE_VANILLA_DIMENSION},
-    [DEBUG_MENU_ITEM_CANCEL]        = {gDebugText_Cancel,               DEBUG_MENU_ITEM_CANCEL}
+    [UDTRADE_MENU_CANCEL]        = {gDebugText_Cancel,               UDTRADE_MENU_CANCEL}
 };
 
 // *******************************
@@ -106,7 +92,7 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
 static void (*const sDebugMenu_Actions_Main[])(u8) =
 {
     [UDTRADE_VANILLA_DIMENSION]     = UDTradeAction_VanillaDimension,
-    [DEBUG_MENU_ITEM_CANCEL]        = DebugAction_Cancel
+    [UDTRADE_MENU_CANCEL]        = DebugAction_Cancel
 };
 
 // *******************************
@@ -118,16 +104,6 @@ static const struct WindowTemplate sDebugMenuWindowTemplate =
     .tilemapTop = 1,
     .width = DEBUG_MAIN_MENU_WIDTH,
     .height = 2 * DEBUG_MAIN_MENU_HEIGHT,
-    .paletteNum = 15,
-    .baseBlock = 1,
-};
-static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
-{
-    .bg = 0,
-    .tilemapLeft = 6 + DEBUG_MAIN_MENU_WIDTH,
-    .tilemapTop = 1,
-    .width = DEBUG_NUMBER_DISPLAY_WIDTH,
-    .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -233,8 +209,6 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
     }
 }
 
-// *******************************
-// Actions Utilities
 static void UDTradeAction_VanillaDimension(u8 taskId)
 {
     PlaySE(SE_SELECT);
@@ -242,13 +216,6 @@ static void UDTradeAction_VanillaDimension(u8 taskId)
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(UDTrade_EventScript_UDTradeCenter);
-}
-
-static void DebugAction_Give_CHEAT(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Debug_CheatStart);
 }
 
 
