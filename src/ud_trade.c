@@ -57,8 +57,8 @@ static void UDTradeTask_HandleMenuInput_Main(u8);
 static void UDTradeAction_VanillaDimension(u8 taskId);
 
 // ID checking
-u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension);
-u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension);
+u16 GetDimensionSpeciesFromLocalSpecies(u16 species, u8 dimension);
+u16 GetLocalSpeciesFromDimensionSpecies(u16 species, u8 dimension);
 
 
 extern u8 UDTrade_EventScript_UDTradeCenter[];
@@ -209,17 +209,17 @@ static void UDTradeTask_HandleMenuInput_Main(u8 taskId)
     }
 }
 
-u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension)
+u16 GetDimensionSpeciesFromLocalSpecies(u16 species, u8 dimension)
 {
     if (dimension == 0 || species > NUM_SPECIES)
         return species;
         
-    if (DimentionalSpeciesIDs[dimension] != NULL)
-        return DimentionalSpeciesIDs[dimension][species];
+    if (DimensionalSpeciesIDs[dimension] != NULL)
+        return DimensionalSpeciesIDs[dimension][species];
     return species;
 };
 
-u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
+u16 GetLocalSpeciesFromDimensionSpecies(u16 species, u8 dimension)
 {
     u16 i;
 
@@ -228,7 +228,7 @@ u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
 
     for (i = 0; i < NUM_SPECIES; i++)
     {
-        if (DimentionalSpeciesIDs[dimension][i] == species)
+        if (DimensionalSpeciesIDs[dimension][i] == species)
             return i;
     }
     
@@ -247,7 +247,7 @@ static void ValidateDimension(u8 taskId)
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         speciesId = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        if (GetDimentionSpeciesFromLocalSpecies(speciesId, dimId) == SPECIES_NONE)
+        if (GetDimensionSpeciesFromLocalSpecies(speciesId, dimId) == SPECIES_NONE)
         {
             StringCopy(gStringVar1, gSpeciesNames[speciesId]);
             StringCopy(gStringVar2, sUDTradeMenu_Items_Main[dimId - 1].name);

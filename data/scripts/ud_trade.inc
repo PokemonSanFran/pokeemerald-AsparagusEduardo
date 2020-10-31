@@ -72,7 +72,7 @@ UDTrade_EventScript_SpeciesNotAllowed::
 	end
 
 UDTrade_Text_WhichDimension:
-	.string "With which Ultra Dimention do you\n"
+	.string "With which Ultra Dimension do you\n"
 	.string "wish to link with?$"
 
 UDTrade_Text_SpeciesNotAllowed:
