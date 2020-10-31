@@ -399,7 +399,7 @@ static const u16 VanillaSpeciesIDs[NUM_SPECIES] =
     [SPECIES_CHIMECHO] = 411,
 };
 
-static const u16 *const DimentionalSpeciesIDs[] =
+static const u16 *const DimensionalSpeciesIDs[] =
 {
     [DIMENSION_INFUSED] = InfusedSpeciesIDs,
     [DIMENSION_VANILLA] = VanillaSpeciesIDs,
