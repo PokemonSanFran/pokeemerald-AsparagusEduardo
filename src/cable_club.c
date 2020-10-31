@@ -1161,11 +1161,6 @@ static void Task_StartWirelessTrade(u8 taskId)
 
 void PlayerEnteredTradeSeat(void)
 {
-    if ((JOY_HELD(L_BUTTON)))
-        VarSet(VAR_DIMENSION_LINK, 1);
-    if ((JOY_HELD(R_BUTTON)))
-        VarSet(VAR_DIMENSION_LINK, 0);
-
     if (gWirelessCommType != 0)
         CreateTask_EnterCableClubSeat(Task_StartWirelessTrade);
     else
