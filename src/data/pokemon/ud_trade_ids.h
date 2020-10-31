@@ -2,6 +2,12 @@
 #include "global.h"
 #include "constants/species.h"
 
+enum
+{
+    DIMENSION_INFUSED,
+    DIMENSION_VANILLA,
+};
+
 static const u16 InfusedSpeciesIDs[NUM_SPECIES] = {};
 static const u16 VanillaSpeciesIDs[NUM_SPECIES] =
 {
@@ -395,6 +401,6 @@ static const u16 VanillaSpeciesIDs[NUM_SPECIES] =
 
 static const u16 *const DimentionalSpeciesIDs[] =
 {
-    InfusedSpeciesIDs,
-    VanillaSpeciesIDs,
+    [DIMENSION_INFUSED] = InfusedSpeciesIDs,
+    [DIMENSION_VANILLA] = VanillaSpeciesIDs,
 };

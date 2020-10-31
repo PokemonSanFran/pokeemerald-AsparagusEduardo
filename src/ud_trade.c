@@ -34,6 +34,11 @@
 #include "constants/map_groups.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "data/pokemon/ud_trade_ids.h"
+#ifdef GBA_PRINTF
+#include "printf.h"
+#include "mgba.h"
+#endif
 
 // Constants
 #define UDTRADE_MAIN_MENU_WIDTH 13
@@ -45,15 +50,19 @@ void UDTrade_ShowMainMenu(void);
 static void UDTrade_DestroyMenu(u8);
 static void UDTradeAction_Cancel(u8);
 static void UDTradeAction_DestroyExtraWindow(u8 taskId);
-
+static void UDTradeTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void UDTradeTask_HandleMenuInput_Main(u8);
 
+// Dimensions
 static void UDTradeAction_VanillaDimension(u8 taskId);
 
-static void UDTradeTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
-static void UDTradeAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
+// ID checking
+u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension);
+u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension);
+
 
 extern u8 UDTrade_EventScript_UDTradeCenter[];
+extern u8 UDTrade_EventScript_SpeciesNotAllowed[];
 extern u8 CableClub_EventScript_AbortLink[];
 
 // *******************************
@@ -160,7 +169,7 @@ static void UDTrade_DestroyMenu(u8 taskId)
 }
 static void UDTradeAction_Cancel(u8 taskId)
 {
-    VarSet(VAR_DIMENSION_LINK, 0);
+    VarSet(VAR_DIMENSION_LINK, DIMENSION_INFUSED);
     UDTrade_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(CableClub_EventScript_AbortLink);
@@ -200,13 +209,71 @@ static void UDTradeTask_HandleMenuInput_Main(u8 taskId)
     }
 }
 
-static void UDTradeAction_VanillaDimension(u8 taskId)
+u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension)
 {
-    PlaySE(SE_SELECT);
-    VarSet(VAR_DIMENSION_LINK, 1);
+    if (dimension == 0 || species > NUM_SPECIES)
+        return species;
+        
+    if (DimentionalSpeciesIDs[dimension] != NULL)
+        return DimentionalSpeciesIDs[dimension][species];
+    return species;
+};
+
+u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
+{
+    u16 i;
+
+    if (dimension == 0 || species > NUM_SPECIES)
+        return species;
+
+    for (i = 0; i < NUM_SPECIES; i++)
+    {
+        if (DimentionalSpeciesIDs[dimension][i] == species)
+            return i;
+    }
+    
+    return species;
+};
+
+static void ValidateDimension(u8 taskId)
+{
+    u8 i, dimId = VarGet(VAR_DIMENSION_LINK);
+    u16 speciesId = SPECIES_NONE;
+    u16 speciesIdnew = SPECIES_NONE;
+    u16 moveId = MOVE_NONE;
+    u16 itemId = ITEM_NONE;
+    u16 abilityId = ABILITY_NONE;
+    
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        speciesId = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        speciesIdnew = GetDimentionSpeciesFromLocalSpecies(speciesId, dimId);
+        mgba_printf(MGBA_LOG_INFO, "speciesId %d, speciesIdnew %d", speciesId, speciesIdnew);
+        if (GetDimentionSpeciesFromLocalSpecies(speciesId, dimId) == SPECIES_NONE)
+        {
+            UDTrade_DestroyMenu(taskId);
+            ScriptContext2_Enable();
+            ScriptContext1_SetupScript(UDTrade_EventScript_SpeciesNotAllowed);
+            return;
+        }
+    }
+
     UDTrade_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(UDTrade_EventScript_UDTradeCenter);
+}
+
+
+static void UDTradeAction_VanillaDimension(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    VarSet(VAR_DIMENSION_LINK, DIMENSION_VANILLA);
+    
+    ValidateDimension(taskId);
+
+    //UDTrade_DestroyMenu(taskId);
+    //ScriptContext2_Enable();
+    //ScriptContext1_SetupScript(UDTrade_EventScript_UDTradeCenter);
 }
 
 

@@ -26,7 +26,7 @@
 #define UNITS_METRIC
 #endif
 
-//#define GBA_PRINTF
+#define GBA_PRINTF
 
 // Various undefined behavior bugs may or may not prevent compilation with
 // newer compilers. So always fix them when using a modern compiler.

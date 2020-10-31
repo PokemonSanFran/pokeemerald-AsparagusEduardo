@@ -51,6 +51,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
+#include "ud_trade.h"
 #include "data/pokemon/ud_trade_ids.h"
 #ifdef GBA_PRINTF
 #include "printf.h"
@@ -238,8 +239,6 @@ static void Task_AnimateWirelessSignal(u8);
 static void c3_0805465C(u8);
 static void sub_807F39C(u8);
 static void CB2_SaveAndEndWirelessTrade(void);
-static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension);
-static u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension);
 
 #include "data/trade.h"
 
@@ -5100,48 +5099,3 @@ static void CB2_SaveAndEndWirelessTrade(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
-
-static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
-{
-    u16 i;
-
-    if (dimension == 0 || species > NUM_SPECIES)
-        return species;
-
-    for (i = 0; i < NUM_SPECIES; i++)
-    {
-        if (DimentionalSpeciesIDs[dimension][i] == species)
-            return i;
-    }
-    
-    return species;
-};
-
-static u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension)
-{
-    if (dimension == 0 || species > NUM_SPECIES)
-    {
-        #ifdef GBA_PRINTF
-        mgba_printf(MGBA_LOG_INFO, "test1 %d", species);
-        #endif
-        return species;
-    }
-        
-    if (DimentionalSpeciesIDs[dimension] != NULL)
-    {
-        return DimentionalSpeciesIDs[dimension][species];
-        /*
-        if (DimentionalSpeciesIDs[dimension][species] != SPECIES_NONE)
-        {
-            #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_INFO, "test2 %d", DimentionalSpeciesIDs[dimension][species]);
-            #endif
-            return DimentionalSpeciesIDs[dimension][species];
-        }
-        */
-    }
-    #ifdef GBA_PRINTF
-    mgba_printf(MGBA_LOG_INFO, "test3 %d", species);
-    #endif
-    return species;
-};

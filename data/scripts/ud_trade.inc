@@ -66,6 +66,39 @@ UDTrade_EventScript_EnterUDTradeCenter::
 	waitstate
 	end
 
-UDTrade_Text_WhichDimension: @ 8277EF1
-	.string "Which Ultra Dimension do you wish\n"
-	.string "to link with?$"
+UDTrade_EventScript_SpeciesNotAllowed::
+	lockall
+	faceplayer
+	message UDTrade_Text_SpeciesNotAllowed
+	message UDTrade_Text_WhichDimension
+	waitmessage
+	delay 28
+	special OpenUDTradeMenu
+	waitstate
+	end
+
+UDTrade_Text_WhichDimension:
+	.string "With which Ultra Dimention do you\n"
+	.string "wish to link with?$"
+
+UDTrade_Text_SpeciesNotAllowed:
+	.string "I'm sorry, but aaaaaaaaaa is\n"
+	.string "not allowed in the selected\l"
+	.string "Ultra Dimension.$"
+
+
+@UDTrade_Text_SpeciesNotAllowed:
+@	.string "I'm sorry, but {STR_VAR_1} is\n"
+@	.string "not allowed in the selected\l"
+@	.string "Ultra Dimension.$"
+
+
+UDTrade_Text_ItemNotAllowed:
+	.string "I'm sorry, but {STR_VAR_1} can't\n"
+	.string "carry {STR_VAR_2} into the\l"
+	.string "selected Ultra Dimension.$"
+
+UDTrade_Text_MoveNotAllowed:
+	.string "I'm sorry, but {STR_VAR_1} can't go\n"
+	.string "into the selected Ultra Dimension\l"
+	.string "while knowing the move {STR_VAR_2}.$"
