@@ -247,10 +247,11 @@ static void ValidateDimension(u8 taskId)
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         speciesId = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        speciesIdnew = GetDimentionSpeciesFromLocalSpecies(speciesId, dimId);
-        mgba_printf(MGBA_LOG_INFO, "speciesId %d, speciesIdnew %d", speciesId, speciesIdnew);
         if (GetDimentionSpeciesFromLocalSpecies(speciesId, dimId) == SPECIES_NONE)
         {
+            StringCopy(gStringVar1, gSpeciesNames[speciesId]);
+            StringCopy(gStringVar2, sUDTradeMenu_Items_Main[dimId - 1].name);
+            
             UDTrade_DestroyMenu(taskId);
             ScriptContext2_Enable();
             ScriptContext1_SetupScript(UDTrade_EventScript_SpeciesNotAllowed);
