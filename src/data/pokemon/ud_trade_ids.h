@@ -2,8 +2,8 @@
 #include "global.h"
 #include "constants/species.h"
 
-static const u16 InfusedTradeIDs[NUM_SPECIES] = {};
-static const u16 VanillaTradeIDs[NUM_SPECIES] =
+static const u16 InfusedSpeciesIDs[NUM_SPECIES] = {};
+static const u16 VanillaSpeciesIDs[NUM_SPECIES] =
 {
     [SPECIES_BULBASAUR] = 1,
     [SPECIES_IVYSAUR] = 2,
@@ -393,8 +393,8 @@ static const u16 VanillaTradeIDs[NUM_SPECIES] =
     [SPECIES_CHIMECHO] = 411,
 };
 
-static const u16 *const DimentionalIDs[] =
+static const u16 *const DimentionalSpeciesIDs[] =
 {
-    InfusedTradeIDs,
-    VanillaTradeIDs,
+    InfusedSpeciesIDs,
+    VanillaSpeciesIDs,
 };

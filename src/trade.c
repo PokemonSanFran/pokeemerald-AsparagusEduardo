@@ -5110,7 +5110,7 @@ static u16 GetLocalSpeciesFromDimentionSpecies(u16 species, u8 dimension)
 
     for (i = 0; i < NUM_SPECIES; i++)
     {
-        if (DimentionalIDs[dimension][i] == species)
+        if (DimentionalSpeciesIDs[dimension][i] == species)
             return i;
     }
     
@@ -5127,16 +5127,16 @@ static u16 GetDimentionSpeciesFromLocalSpecies(u16 species, u8 dimension)
         return species;
     }
         
-    if (DimentionalIDs[dimension] != NULL)
+    if (DimentionalSpeciesIDs[dimension] != NULL)
     {
-        return DimentionalIDs[dimension][species];
+        return DimentionalSpeciesIDs[dimension][species];
         /*
-        if (DimentionalIDs[dimension][species] != SPECIES_NONE)
+        if (DimentionalSpeciesIDs[dimension][species] != SPECIES_NONE)
         {
             #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_INFO, "test2 %d", DimentionalIDs[dimension][species]);
+            mgba_printf(MGBA_LOG_INFO, "test2 %d", DimentionalSpeciesIDs[dimension][species]);
             #endif
-            return DimentionalIDs[dimension][species];
+            return DimentionalSpeciesIDs[dimension][species];
         }
         */
     }
