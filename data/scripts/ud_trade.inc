@@ -1,6 +1,9 @@
 UDTrade_EventScript_OpenDimensionList::
 	lockall
 	faceplayer
+	message UDTrade_Text_WhichDimension
+	waitmessage
+	delay 28
 	special OpenUDTradeMenu
 	waitstate
 	end
@@ -63,3 +66,6 @@ UDTrade_EventScript_EnterUDTradeCenter::
 	waitstate
 	end
 
+UDTrade_Text_WhichDimension: @ 8277EF1
+	.string "Which Ultra Dimension do you wish\n"
+	.string "to link with?$"

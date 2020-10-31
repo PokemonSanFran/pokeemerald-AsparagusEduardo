@@ -53,7 +53,7 @@ static void UDTradeAction_VanillaDimension(u8 taskId);
 static void UDTradeTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void UDTradeAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
-extern u8 UDTrade_EventScript_OpenDimensionList[];
+extern u8 UDTrade_EventScript_UDTradeCenter[];
 extern u8 CableClub_EventScript_AbortLink[];
 
 // *******************************
@@ -206,7 +206,7 @@ static void UDTradeAction_VanillaDimension(u8 taskId)
     VarSet(VAR_DIMENSION_LINK, 1);
     UDTrade_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(UDTrade_EventScript_OpenDimensionList);
+    ScriptContext1_SetupScript(UDTrade_EventScript_UDTradeCenter);
 }
 
 
