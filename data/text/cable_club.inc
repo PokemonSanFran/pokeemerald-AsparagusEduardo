@@ -12,6 +12,10 @@ CableClub_Text_TradeUsingLinkCable:: @ 8277F1B
 	.string "Trade Pokémon with another player\n"
 	.string "using a GBA Game Link cable.$"
 
+CableClub_Text_UDTradeUsingLinkCable:: @ 8277F1B
+	.string "Trade Pokémon across Ultra Dimentions\n"
+	.string "using a GBA Game Link cable.$"
+
 CableClub_Text_BattleUsingLinkCable:: @ 8277F5A
 	.string "You may battle another Trainer\n"
 	.string "using a GBA Game Link cable.$"

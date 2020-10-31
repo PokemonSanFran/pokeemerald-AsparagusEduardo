@@ -1,4 +1,4 @@
-Common_EventScript_UDTradeAttendant::
+UDTrade_EventScript_OpenDimensionList::
 	lockall
 	faceplayer
 	special OpenUDTradeMenu
