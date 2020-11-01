@@ -75,22 +75,22 @@ enum { // Main
 // Text
 // Main Menu
 static const u8 gUDTradeText_VanillaDimension[] =   _("Vanilla Dimension");
-static const u8 gUDTradeText_Cancel[] =               _("Cancel");
+static const u8 gUDTradeText_Cancel[] =             _("Cancel");
 
 // *******************************
 // List Menu Items
 static const struct ListMenuItem sUDTradeMenu_Items_Main[] =
 {
-    [UDTRADE_VANILLA_DIMENSION]  = {gUDTradeText_VanillaDimension,   UDTRADE_VANILLA_DIMENSION},
-    [UDTRADE_MENU_CANCEL]        = {gUDTradeText_Cancel,             UDTRADE_MENU_CANCEL}
+    [UDTRADE_VANILLA_DIMENSION] = {gUDTradeText_VanillaDimension,   UDTRADE_VANILLA_DIMENSION},
+    [UDTRADE_MENU_CANCEL]       = {gUDTradeText_Cancel,             UDTRADE_MENU_CANCEL}
 };
 
 // *******************************
 // Menu Actions
 static void (*const sUDTradeMenu_Actions_Main[])(u8) =
 {
-    [UDTRADE_VANILLA_DIMENSION]  = UDTradeAction_VanillaDimension,
-    [UDTRADE_MENU_CANCEL]        = UDTradeAction_Cancel
+    [UDTRADE_VANILLA_DIMENSION] = UDTradeAction_VanillaDimension,
+    [UDTRADE_MENU_CANCEL]       = UDTradeAction_Cancel
 };
 
 // *******************************
@@ -223,8 +223,10 @@ u16 GetLocalSpeciesFromDimensionSpecies(u16 species, u8 dimension)
 {
     u16 i;
 
-    if (dimension == 0 || species > NUM_SPECIES)
+    if (dimension == 0)
         return species;
+    if (species >= NUM_SPECIES)
+        return SPECIES_NONE;
 
     for (i = 0; i < NUM_SPECIES; i++)
     {
@@ -232,7 +234,7 @@ u16 GetLocalSpeciesFromDimensionSpecies(u16 species, u8 dimension)
             return i;
     }
     
-    return species;
+    return SPECIES_NONE;
 };
 
 static void ValidateDimension(u8 taskId)
@@ -264,17 +266,11 @@ static void ValidateDimension(u8 taskId)
     ScriptContext1_SetupScript(UDTrade_EventScript_UDTradeCenter);
 }
 
-
 static void UDTradeAction_VanillaDimension(u8 taskId)
 {
     PlaySE(SE_SELECT);
     VarSet(VAR_DIMENSION_LINK, DIMENSION_VANILLA);
     
     ValidateDimension(taskId);
-
-    //UDTrade_DestroyMenu(taskId);
-    //ScriptContext2_Enable();
-    //ScriptContext1_SetupScript(UDTrade_EventScript_UDTradeCenter);
 }
-
 

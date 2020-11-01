@@ -1160,9 +1160,12 @@ static bool8 BufferTradeParties(void)
             {
                 struct Pokemon *mon = &gEnemyParty[i];
                 u16 dimSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
-                dimSpeciesId = GetLocalSpeciesFromDimensionSpecies(dimSpeciesId, VarGet(VAR_DIMENSION_LINK));
+                u16 locSpeciesId = GetLocalSpeciesFromDimensionSpecies(dimSpeciesId, VarGet(VAR_DIMENSION_LINK));
+                #ifdef GBA_PRINTF
+                    mgba_printf(MGBA_LOG_INFO, "partner: dimSpeciesId = %d, locSpeciesId = %d", dimSpeciesId, locSpeciesId);
+                #endif
                 
-                SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
+                SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
             }
             species = GetMonData(mon, MON_DATA_SPECIES);
 
@@ -1578,6 +1581,10 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     }
     partnerMonIdx %= PARTY_SIZE;
     partnerSpecies = GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_SPECIES);
+
+    //If trading invalid empty species
+    if (partnerSpecies == SPECIES_NONE)
+        return PARTNER_MON_INVALID;
 
     // Partner cant trade illegitimate Deoxys or Mew
     if (partnerSpecies == SPECIES_DEOXYS || partnerSpecies == SPECIES_MEW)
