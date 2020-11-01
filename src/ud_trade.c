@@ -42,7 +42,7 @@
 
 // Constants
 #define UDTRADE_MAIN_MENU_WIDTH 13
-#define UDTRADE_MAIN_MENU_HEIGHT 2
+#define UDTRADE_MAIN_MENU_HEIGHT 3
 
 // Define functions
 static void UDTrade_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
@@ -55,6 +55,7 @@ static void UDTradeTask_HandleMenuInput_Main(u8);
 
 // Dimensions
 static void UDTradeAction_VanillaDimension(u8 taskId);
+static void UDTradeAction_RyuDimension(u8 taskId);
 
 // ID checking
 u16 GetDimensionSpeciesFromLocalSpecies(u16 species, u8 dimension);
@@ -71,12 +72,14 @@ extern u8 CableClub_EventScript_AbortLink[];
 // Enums
 enum { // Main
     UDTRADE_VANILLA_DIMENSION,
+    UDTRADE_RYU_DIMENSION,
     UDTRADE_MENU_CANCEL
 };
 
 // Text
 // Main Menu
 static const u8 gUDTradeText_VanillaDimension[] =   _("Vanilla Dimension");
+static const u8 gUDTradeText_RyuDimension[] =       _("Ryu Dimension");
 static const u8 gUDTradeText_Cancel[] =             _("Cancel");
 
 // *******************************
@@ -84,6 +87,7 @@ static const u8 gUDTradeText_Cancel[] =             _("Cancel");
 static const struct ListMenuItem sUDTradeMenu_Items_Main[] =
 {
     [UDTRADE_VANILLA_DIMENSION] = {gUDTradeText_VanillaDimension,   UDTRADE_VANILLA_DIMENSION},
+    [UDTRADE_RYU_DIMENSION]     = {gUDTradeText_RyuDimension,       UDTRADE_RYU_DIMENSION},
     [UDTRADE_MENU_CANCEL]       = {gUDTradeText_Cancel,             UDTRADE_MENU_CANCEL}
 };
 
@@ -92,6 +96,7 @@ static const struct ListMenuItem sUDTradeMenu_Items_Main[] =
 static void (*const sUDTradeMenu_Actions_Main[])(u8) =
 {
     [UDTRADE_VANILLA_DIMENSION] = UDTradeAction_VanillaDimension,
+    [UDTRADE_RYU_DIMENSION]     = UDTradeAction_RyuDimension,
     [UDTRADE_MENU_CANCEL]       = UDTradeAction_Cancel
 };
 
@@ -289,3 +294,10 @@ static void UDTradeAction_VanillaDimension(u8 taskId)
     ValidateDimension(taskId);
 }
 
+static void UDTradeAction_RyuDimension(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    VarSet(VAR_DIMENSION_LINK, DIMENSION_RYU);
+    
+    ValidateDimension(taskId);
+}
