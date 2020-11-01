@@ -60,6 +60,8 @@ static void UDTradeAction_VanillaDimension(u8 taskId);
 u16 GetDimensionSpeciesFromLocalSpecies(u16 species, u8 dimension);
 u16 GetLocalSpeciesFromDimensionSpecies(u16 species, u8 dimension);
 
+// Util functions
+u8 CalculateTradeEnemyPartyCount(void);
 
 extern u8 UDTrade_EventScript_UDTradeCenter[];
 extern u8 UDTrade_EventScript_SpeciesNotAllowed[];
@@ -236,6 +238,19 @@ u16 GetLocalSpeciesFromDimensionSpecies(u16 species, u8 dimension)
     
     return SPECIES_NONE;
 };
+
+u8 CalculateTradeEnemyPartyCount(void)
+{
+    gEnemyPartyCount = 0;
+
+    while (gEnemyPartyCount < PARTY_SIZE
+        && GetMonData(&gEnemyParty[gEnemyPartyCount], MON_DATA_LEVEL, NULL) != 0)
+    {
+        gEnemyPartyCount++;
+    }
+
+    return gEnemyPartyCount;
+}
 
 static void ValidateDimension(u8 taskId)
 {

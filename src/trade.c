@@ -485,7 +485,7 @@ static void CB2_CreateTradeMenu(void)
         }
         break;
     case 7:
-        CalculateEnemyPartyCount();
+        CalculateTradeEnemyPartyCount();
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         sTradeMenuData->partyCounts[TRADE_PLAYER] = gPlayerPartyCount;
@@ -697,7 +697,7 @@ static void CB2_ReturnToTradeMenu(void)
         gMain.state++;
         break;
     case 7:
-        CalculateEnemyPartyCount();
+        CalculateTradeEnemyPartyCount();
         sTradeMenuData->partyCounts[TRADE_PLAYER] = gPlayerPartyCount;
         sTradeMenuData->partyCounts[TRADE_PARTNER] = gEnemyPartyCount;
         ClearWindowTilemap(0);
