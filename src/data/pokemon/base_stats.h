@@ -17775,15 +17775,13 @@ const struct BaseStats gBaseStats[] =
     {
         .baseHP        = 60,
         .baseAttack    = 50,
-        #if P_UPDATED_STATS >= GEN_8
-        .baseDefense   = 140,
         .baseSpeed     = 60,
         .baseSpAttack  = 50,
+        #if P_UPDATED_STATS >= GEN_8
+        .baseDefense   = 140,
         .baseSpDefense = 140,
         #else
         .baseDefense   = 150,
-        .baseSpeed     = 60,
-        .baseSpAttack  = 50,
         .baseSpDefense = 150,
         #endif
         .type1 = TYPE_STEEL,
