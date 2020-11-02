@@ -4276,7 +4276,7 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         if (pokeball <= ITEM_PREMIER_BALL)
             substruct3->unused3_3 = pokeball;
         else
-            substruct3->unused3_3 = 0;
+            substruct3->unused3_3 = ITEM_POKE_BALL;
         break;
     }
     case MON_DATA_OT_GENDER:
