@@ -8,36 +8,6 @@ UDTrade_EventScript_OpenDimensionList::
 	waitstate
 	end
 
-UDTrade_EventScript_UDTradeCenter::
-	copyvar VAR_0x8007, VAR_LAST_TALKED
-	call CableClub_EventScript_CheckPartyTradeRequirements
-	compare VAR_RESULT, 0
-	goto_if_eq CableClub_EventScript_AbortLink
-	call Common_EventScript_SaveGame
-	compare VAR_RESULT, 0
-	goto_if_eq CableClub_EventScript_AbortLink
-	message gText_PleaseWaitForLink
-	waitmessage
-	special TryTradeLinkup
-	waitstate
-	compare VAR_RESULT, LINKUP_SUCCESS
-	goto_if_eq CableClub_EventScript_EnterTradeCenter
-	compare VAR_RESULT, LINKUP_SOMEONE_NOT_READY
-	goto_if_eq CableClub_EventScript_AbortLinkSomeoneNotReady
-	compare VAR_RESULT, LINKUP_DIFF_SELECTIONS
-	goto_if_eq CableClub_EventScript_AbortLinkDifferentSelections
-	compare VAR_RESULT, LINKUP_WRONG_NUM_PLAYERS
-	goto_if_eq CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants
-	compare VAR_RESULT, LINKUP_FAILED
-	goto_if_eq CableClub_EventScript_AbortLink
-	compare VAR_RESULT, LINKUP_CONNECTION_ERROR
-	goto_if_eq CableClub_EventScript_AbortLinkConnectionError
-	compare VAR_RESULT, LINKUP_PLAYER_NOT_READY
-	goto_if_eq CableClub_EventScript_AbortLinkPlayerNotReady
-	compare VAR_RESULT, LINKUP_PARTNER_NOT_READY
-	goto_if_eq CableClub_EventScript_AbortLinkOtherTrainerNotReady
-	end
-
 UDTrade_EventScript_SpeciesNotAllowed::
 	msgbox UDTrade_Text_SpeciesNotAllowed
 	goto UDTrade_EventScript_OpenDimensionList

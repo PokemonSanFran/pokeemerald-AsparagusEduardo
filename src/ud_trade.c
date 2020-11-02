@@ -64,9 +64,9 @@ u16 GetLocalSpeciesFromDimensionSpecies(u16 species, u8 dimension);
 // Util functions
 u8 CalculateTradeEnemyPartyCount(void);
 
-extern u8 UDTrade_EventScript_UDTradeCenter[];
-extern u8 UDTrade_EventScript_SpeciesNotAllowed[];
 extern u8 CableClub_EventScript_AbortLink[];
+extern u8 CableClub_EventScript_TradeCenter[];
+extern u8 UDTrade_EventScript_SpeciesNotAllowed[];
 
 // *******************************
 // Enums
@@ -283,7 +283,7 @@ static void ValidateDimension(u8 taskId)
 
     UDTrade_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(UDTrade_EventScript_UDTradeCenter);
+    ScriptContext1_SetupScript(CableClub_EventScript_TradeCenter);
 }
 
 static void UDTradeAction_VanillaDimension(u8 taskId)
