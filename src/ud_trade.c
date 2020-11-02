@@ -42,7 +42,7 @@
 
 // Constants
 #define UDTRADE_MAIN_MENU_WIDTH 13
-#define UDTRADE_MAIN_MENU_HEIGHT 3
+#define UDTRADE_MAIN_MENU_HEIGHT 4
 
 // Define functions
 static void UDTrade_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
@@ -54,6 +54,7 @@ static void UDTradeTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void UDTradeTask_HandleMenuInput_Main(u8);
 
 // Dimensions
+static void UDTradeAction_InfusedDimension(u8 taskId);
 static void UDTradeAction_VanillaDimension(u8 taskId);
 static void UDTradeAction_RyuDimension(u8 taskId);
 
@@ -71,6 +72,7 @@ extern u8 UDTrade_EventScript_SpeciesNotAllowed[];
 // *******************************
 // Enums
 enum { // Main
+    UDTRADE_INFUSED_DIMENSION,
     UDTRADE_VANILLA_DIMENSION,
     UDTRADE_RYU_DIMENSION,
     UDTRADE_MENU_CANCEL
@@ -78,6 +80,7 @@ enum { // Main
 
 // Text
 // Main Menu
+static const u8 gUDTradeText_InfusedDimension[] =   _("Infused Dimension");
 static const u8 gUDTradeText_VanillaDimension[] =   _("Vanilla Dimension");
 static const u8 gUDTradeText_RyuDimension[] =       _("Ryu Dimension");
 static const u8 gUDTradeText_Cancel[] =             _("Cancel");
@@ -86,6 +89,7 @@ static const u8 gUDTradeText_Cancel[] =             _("Cancel");
 // List Menu Items
 static const struct ListMenuItem sUDTradeMenu_Items_Main[] =
 {
+    [UDTRADE_INFUSED_DIMENSION] = {gUDTradeText_InfusedDimension,   UDTRADE_INFUSED_DIMENSION},
     [UDTRADE_VANILLA_DIMENSION] = {gUDTradeText_VanillaDimension,   UDTRADE_VANILLA_DIMENSION},
     [UDTRADE_RYU_DIMENSION]     = {gUDTradeText_RyuDimension,       UDTRADE_RYU_DIMENSION},
     [UDTRADE_MENU_CANCEL]       = {gUDTradeText_Cancel,             UDTRADE_MENU_CANCEL}
@@ -95,6 +99,7 @@ static const struct ListMenuItem sUDTradeMenu_Items_Main[] =
 // Menu Actions
 static void (*const sUDTradeMenu_Actions_Main[])(u8) =
 {
+    [UDTRADE_INFUSED_DIMENSION] = UDTradeAction_InfusedDimension,
     [UDTRADE_VANILLA_DIMENSION] = UDTradeAction_VanillaDimension,
     [UDTRADE_RYU_DIMENSION]     = UDTradeAction_RyuDimension,
     [UDTRADE_MENU_CANCEL]       = UDTradeAction_Cancel
@@ -284,6 +289,14 @@ static void ValidateDimension(u8 taskId)
     UDTrade_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(CableClub_EventScript_TradeCenter);
+}
+
+static void UDTradeAction_InfusedDimension(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    VarSet(VAR_DIMENSION_LINK, DIMENSION_INFUSED);
+    
+    ValidateDimension(taskId);
 }
 
 static void UDTradeAction_VanillaDimension(u8 taskId)
