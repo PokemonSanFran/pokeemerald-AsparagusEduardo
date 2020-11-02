@@ -51,6 +51,12 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
+#include "ud_trade.h"
+#include "data/pokemon/ud_trade_ids.h"
+#ifdef GBA_PRINTF
+#include "printf.h"
+#include "mgba.h"
+#endif
 
 #define Trade_SendData(ptr) (SendBlock(bitmask_all_link_players_but_self(), ptr->linkData, 20))
 
@@ -80,6 +86,11 @@ static EWRAM_DATA u8 *sMessageBoxTileBuffers[14] = {NULL};
 
 EWRAM_DATA struct MailStruct gTradeMail[PARTY_SIZE] = {0};
 EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
+EWRAM_DATA u16 localSpeciesIds[PARTY_SIZE] = {0};
+EWRAM_DATA bool8 adaptedPlayerSpecies1 = FALSE;
+EWRAM_DATA bool8 adaptedPlayerSpecies2 = FALSE;
+EWRAM_DATA bool8 adaptedPartnerSpecies1 = FALSE;
+EWRAM_DATA bool8 adaptedPartnerSpecies2 = FALSE;
 static EWRAM_DATA struct {
     /*0x0000*/ u8 bg2hofs;
     /*0x0001*/ u8 bg3hofs;
@@ -363,6 +374,10 @@ static void CB2_CreateTradeMenu(void)
     switch (gMain.state)
     {
     case 0:
+        adaptedPlayerSpecies1 = FALSE;
+        adaptedPlayerSpecies2 = FALSE;
+        adaptedPartnerSpecies1 = FALSE;
+        adaptedPartnerSpecies2 = FALSE;
         sTradeMenuData = AllocZeroed(sizeof(*sTradeMenuData));
         InitTradeMenu();
         sMessageBoxAllocBuffer = AllocZeroed(ARRAY_COUNT(sMessageBoxTileBuffers) * 256);
@@ -470,15 +485,35 @@ static void CB2_CreateTradeMenu(void)
         }
         break;
     case 7:
-        CalculateEnemyPartyCount();
+        CalculateTradeEnemyPartyCount();
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         sTradeMenuData->partyCounts[TRADE_PLAYER] = gPlayerPartyCount;
         sTradeMenuData->partyCounts[TRADE_PARTNER] = gEnemyPartyCount;
 
+        #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_INFO, "DimensionLink %d", VarGet(VAR_DIMENSION_LINK));
+        #endif
+
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
+            if (!adaptedPlayerSpecies2)
+            {
+                u16 locSpeciesId = localSpeciesIds[i];
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2-%d", locSpeciesId, adaptedPlayerSpecies2);
+                #endif
+                SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
+            }
+            else
+            {
+                u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2-%d", locSpeciesId, adaptedPlayerSpecies2);
+                #endif
+            }
+
             sTradeMenuData->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
@@ -488,11 +523,15 @@ static void CB2_CreateTradeMenu(void)
                                                          TRUE,
                                                          GetMonData(mon, MON_DATA_FORM_ID));
         }
+        if (!adaptedPlayerSpecies2)
+            adaptedPlayerSpecies2 = TRUE;
 
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PARTNER]; i++)
         {
+            u16 localSpeciesId;
             struct Pokemon *mon = &gEnemyParty[i];
-            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
+
+            sTradeMenuData->partySpriteIds[TRADE_PARTNER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][0] * 8) + 14,
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
@@ -658,7 +697,7 @@ static void CB2_ReturnToTradeMenu(void)
         gMain.state++;
         break;
     case 7:
-        CalculateEnemyPartyCount();
+        CalculateTradeEnemyPartyCount();
         sTradeMenuData->partyCounts[TRADE_PLAYER] = gPlayerPartyCount;
         sTradeMenuData->partyCounts[TRADE_PARTNER] = gEnemyPartyCount;
         ClearWindowTilemap(0);
@@ -668,6 +707,22 @@ static void CB2_ReturnToTradeMenu(void)
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
         {
             struct Pokemon *mon = &gPlayerParty[i];
+            if (!adaptedPlayerSpecies2)
+            {
+                u16 locSpeciesId = localSpeciesIds[i];
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2%d", locSpeciesId, adaptedPlayerSpecies2);
+                #endif
+                SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
+            }
+            else
+            {
+                u16 locSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
+                #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Infused: locSpeciesId-%d adaptedPlayerSpecies2%d", locSpeciesId, adaptedPlayerSpecies2);
+                #endif
+            }
+            
             sTradeMenuData->partySpriteIds[TRADE_PLAYER][i] = CreateMonIcon(GetMonData(mon, MON_DATA_SPECIES2, NULL),
                                                          SpriteCB_MonIcon,
                                                          (sTradeMonSpriteCoords[i][0] * 8) + 14,
@@ -961,6 +1016,28 @@ static bool8 BufferTradeParties(void)
     int i;
     struct Pokemon *mon;
 
+    if (!adaptedPlayerSpecies1)
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            struct Pokemon *mon = &gPlayerParty[i];
+            u16 dimSpeciesId;
+            localSpeciesIds[i] = GetMonData(mon, MON_DATA_SPECIES);
+            dimSpeciesId = GetDimensionSpeciesFromLocalSpecies(localSpeciesIds[i], VarGet(VAR_DIMENSION_LINK));
+            #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_INFO, "Player: locSpeciesId[%d] = %d, dimSpeciesId = %d", i, localSpeciesIds[i], dimSpeciesId);
+            #endif
+            
+            SetMonData(mon, MON_DATA_SPECIES, &dimSpeciesId);
+        }
+        if (!adaptedPlayerSpecies1)
+            adaptedPlayerSpecies1 = TRUE;
+        #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_INFO, "--------------");
+        #endif
+    }
+    i = 0;
+
     switch (sTradeMenuData->bufferPartyState)
     {
     case 0:
@@ -1077,7 +1154,20 @@ static bool8 BufferTradeParties(void)
         for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
         {
             u8 name[POKEMON_NAME_LENGTH + 1];
-            u16 species = GetMonData(mon, MON_DATA_SPECIES);
+            u16 species;
+
+            if (!adaptedPartnerSpecies1)
+            {
+                struct Pokemon *mon = &gEnemyParty[i];
+                u16 dimSpeciesId = GetMonData(mon, MON_DATA_SPECIES);
+                u16 locSpeciesId = GetLocalSpeciesFromDimensionSpecies(dimSpeciesId, VarGet(VAR_DIMENSION_LINK));
+                #ifdef GBA_PRINTF
+                    mgba_printf(MGBA_LOG_INFO, "partner: dimSpeciesId = %d, locSpeciesId = %d", dimSpeciesId, locSpeciesId);
+                #endif
+                
+                SetMonData(mon, MON_DATA_SPECIES, &locSpeciesId);
+            }
+            species = GetMonData(mon, MON_DATA_SPECIES);
 
             if (species != SPECIES_NONE)
             {
@@ -1092,6 +1182,8 @@ static bool8 BufferTradeParties(void)
                 }
             }
         }
+        if (!adaptedPartnerSpecies1)
+            adaptedPartnerSpecies1 = TRUE;
         return TRUE;
     // Delay until next state
     case 2:
@@ -1489,6 +1581,10 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     }
     partnerMonIdx %= PARTY_SIZE;
     partnerSpecies = GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_SPECIES);
+
+    //If trading invalid empty species
+    if (partnerSpecies == SPECIES_NONE)
+        return PARTNER_MON_INVALID;
 
     // Partner cant trade illegitimate Deoxys or Mew
     if (partnerSpecies == SPECIES_DEOXYS || partnerSpecies == SPECIES_MEW)

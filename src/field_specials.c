@@ -67,6 +67,7 @@
 #include "constants/weather.h"
 #include "constants/metatile_labels.h"
 #include "palette.h"
+#include "ud_trade.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -4508,4 +4509,9 @@ bool8 DoesRotomKnowSpecialMove(void)
     initialSpecies = gSpecialVar_0x8007;
     initialMove = RotomFormToMove(initialSpecies);
     return MonKnowsMove(&gPlayerParty[gSpecialVar_0x8004], initialMove);
+}
+
+u8 OpenUDTradeMenu (void)
+{
+    UDTrade_ShowMainMenu();
 }

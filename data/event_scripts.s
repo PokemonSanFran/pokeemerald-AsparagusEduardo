@@ -1121,4 +1121,6 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/text/birch_speech.inc"
     .include "data/scripts/dexnav.inc"
 	.include "data/scripts/rotom.inc"
+	.include "data/scripts/ud_trade.inc"
+	@.include "data/text/cable_club.inc"
     

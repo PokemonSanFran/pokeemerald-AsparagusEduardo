@@ -545,3 +545,6 @@ gSpecials:: @ 81DBA64
 	def_special IsSelectedMonRotom
 	def_special DoesRotomKnowSpecialMove
 	def_special GetRotomNewSpecialMove
+
+	@UD Trade
+	def_special OpenUDTradeMenu

@@ -458,7 +458,7 @@ static const struct MenuAction MultichoiceList_Tent[] =
 
 static const struct MenuAction MultichoiceList_LinkServicesNoBerry[] =
 {
-    {gText_TradeCenter},
+    {gText_UDTradeCenter},
     {gText_Colosseum},
     {gText_RecordCorner},
     {gText_Exit},
@@ -499,7 +499,7 @@ static const struct MenuAction MultichoiceList_LinkServicesAll[] =
 
 static const struct MenuAction MultichoiceList_LinkServicesNoRecordBerry[] =
 {
-    {gText_TradeCenter},
+    {gText_UDTradeCenter},
     {gText_Colosseum},
     {gText_Exit},
 };
@@ -991,7 +991,7 @@ static const u8 *const sLilycoveSSTidalDestinations[SSTIDAL_SELECTION_COUNT] =
 
 static const u8 *const sCableClubOptions_WithRecordMix[] =
 {
-    CableClub_Text_TradeUsingLinkCable,
+    CableClub_Text_UDTradeUsingLinkCable,
     CableClub_Text_BattleUsingLinkCable,
     CableClub_Text_RecordCornerUsingLinkCable,
     CableClub_Text_CancelSelectedItem,
@@ -1020,7 +1020,7 @@ static const u8 *const sWirelessOptions_AllServices[] =
 };
 static const u8 *const sCableClubOptions_NoRecordMix[] =
 {
-    CableClub_Text_TradeUsingLinkCable,
+    CableClub_Text_UDTradeUsingLinkCable,
     CableClub_Text_BattleUsingLinkCable,
     CableClub_Text_CancelSelectedItem,
 };
