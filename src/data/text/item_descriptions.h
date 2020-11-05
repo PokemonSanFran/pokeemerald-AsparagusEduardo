@@ -966,6 +966,31 @@ static const u8 sRoseliBerryDesc[] = _(
     "tipo Hada si es\n"
     "débil contra él.");
 
+static const u8 sCustapBerryDesc[] = _(
+    "Quién la lleve podrá\n"
+    "moverse primero 1\n"
+    "vez en un apuro.");
+
+static const u8 sJabocaBerryDesc[] = _(
+    "Quien la lleve hará\n"
+    "daño a quién le de\n"
+    "un ataque físico.");
+
+static const u8 sRowapBerryDesc[] = _(
+    "Quien la lleve hará\n"
+    "daño a quién le de\n"
+    "un ataque especial.");
+
+static const u8 sKeeBerryDesc[] = _(
+    "Sube algo la Def.\n"
+    "si recibe un\n"
+    "ataque físico.");
+
+static const u8 sMarangaBerryDesc[] = _(
+    "Sube algo la Def.\n"
+    "Esp. si recibe un\n"
+    "ataque especial.");
+
 // Hold items
 static const u8 sBrightPowderDesc[] = _(
     "Al llevarlo, lanza\n"
@@ -2086,6 +2111,11 @@ static const u8 sChoiceSpecsDesc[] = _(
     "Sube el At. Esp.,\n"
     "pero sólo deja usar"
     "un movimiento.");
+
+static const u8 sOddKeystoneDesc[] = _(
+    "A veces se oyen\n"
+    "voces en su\n"
+    "interior.");
 
 static const u8 sAdamantOrbDesc[] = _(
     "Potencia los movim.\n"
