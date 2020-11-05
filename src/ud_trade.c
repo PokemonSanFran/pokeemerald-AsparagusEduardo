@@ -270,13 +270,16 @@ static void ValidateDimension(u8 taskId)
     u16 moveId = MOVE_NONE;
     u16 itemId = ITEM_NONE;
     u16 abilityId = ABILITY_NONE;
+    u8 nick[POKEMON_NAME_LENGTH + 2];
     
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         speciesId = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
         if (GetDimensionSpeciesFromLocalSpecies(speciesId, dimId) == SPECIES_NONE)
         {
-            StringCopy(gStringVar1, gSpeciesNames[speciesId]);
+            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
+            
+            StringCopy(gStringVar1, nick);
             StringCopy(gStringVar2, sUDTradeMenu_Items_Main[dimId - 1].name);
             
             UDTrade_DestroyMenu(taskId);
