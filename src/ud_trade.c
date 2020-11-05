@@ -280,7 +280,7 @@ static void ValidateDimension(u8 taskId)
             GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
             
             StringCopy(gStringVar1, nick);
-            StringCopy(gStringVar2, sUDTradeMenu_Items_Main[dimId - 1].name);
+            StringCopy(gStringVar2, sUDTradeMenu_Items_Main[dimId].name);
             
             UDTrade_DestroyMenu(taskId);
             ScriptContext2_Enable();
