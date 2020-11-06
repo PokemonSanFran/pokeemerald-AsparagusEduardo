@@ -1236,4 +1236,26 @@ void ItemUseOutOfBattle_EonFlute(u8 taskId)
 		DisplayDadsAdviceCannotUseItemMessage(taskId, data[3]);
 	}
 }
+
+void ItemUseOutOfBattle_SootSack(u8 taskId)
+{
+	ConvertIntToDecimalStringN(gStringVar1, GetAshCount(), STR_CONV_MODE_LEFT_ALIGN, 4);
+	StringExpandPlaceholders(gStringVar4, gText_AshQty);
+	if (!gTasks[taskId].tUsingRegisteredKeyItem)
+	{
+		DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
+	}
+	else
+	{
+		DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
+	}
+}		
+
+u16 GetAshCount(void)
+{
+	u16 *ashGatherCount;
+	ashGatherCount = GetVarPointer(VAR_ASH_GATHER_COUNT);
+	return *ashGatherCount;
+}
+
 #undef tUsingRegisteredKeyItem

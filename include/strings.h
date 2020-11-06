@@ -3030,4 +3030,6 @@ extern const u8 gText_ElectricFan[];
 extern const u8 gText_Lawnmower[];
 extern const u8 gText_Recall[];
 
+extern const u8 gText_AshQty[];
+
 #endif // GUARD_STRINGS_H

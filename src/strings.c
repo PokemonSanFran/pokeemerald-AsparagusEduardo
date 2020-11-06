@@ -1871,6 +1871,8 @@ const u8 gText_ElectricFan[] = _("Ventilador");
 const u8 gText_Lawnmower[] = _("Podadora");
 const u8 gText_Recall[] = _("Expulsar");
 
+const u8 gText_AshQty[] = _("Cantidad de Cenizas:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
+
 #else
 
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
@@ -3738,5 +3740,7 @@ const u8 gText_Refrigerator[] = _("Refrigerator");
 const u8 gText_ElectricFan[] = _("Electric Fan");
 const u8 gText_Lawnmower[] = _("Lawnmower");
 const u8 gText_Recall[] = _("Recall");
+
+const u8 gText_AshQty[] = _("Ash quantity:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}");
 
 #endif

@@ -30,6 +30,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [Repeated field medicine use](https://www.pokecommunity.com/showthread.php?p=10206290#post10206290) by [ghoulslash](https://github.com/ghoulslash).
 * When blacking out, you no longer lose half your money, instead using the [current formula](https://github.com/AsparagusEduardo/pokeemerald/tree/WhiteOutMoney). Code by me, with help from [lightgod87](https://github.com/lightgod87).
 * Shows [Type effectiveness in-battle](https://www.pokecommunity.com/showthread.php?p=10167016#post10167016). Code by PokemonCrazy.
+* [Soot Sack](https://www.pokecommunity.com/showthread.php?p=10222284#post10222284) can now be used to check how much ash it has. (by Sapphire Jester).
 
 #### New Features:
 * [RHH](https://github.com/rh-hideout)'s [Battle Engine](https://github.com/rh-hideout/pokeemerald-expansion/tree/battle_engine).
