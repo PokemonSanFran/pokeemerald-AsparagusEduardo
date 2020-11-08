@@ -4879,6 +4879,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         else
             gSaveBlock1Ptr->dexNavChain = 0;
         
+        gIsSurfingEncounter = FALSE;
         gDexnavBattle = FALSE;
         ResetSpriteData();
         if (gLeveledUpInBattle && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
