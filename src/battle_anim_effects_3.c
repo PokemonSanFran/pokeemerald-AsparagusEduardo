@@ -5066,8 +5066,8 @@ void AnimTask_GetReturnPowerLevel(u8 taskId)
 void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
     u8 spriteId, spriteId2;
-    u32 personality;
-    u32 otId;
+    int personality;
+    int otId;
     u16 species;
     u8 subpriority;
     bool8 isBackPic;
@@ -5102,37 +5102,40 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             isBackPic = FALSE;
             x = -32;
         }
-        else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-        {
-            personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-            otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-            if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
-            {
-                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-                formId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_FORM_ID);
-            }
-            else
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies; // handle forms
-
-            subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
-            isBackPic = FALSE;
-            x = 272;
-        }
         else
         {
-            personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-            otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
-            if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             {
-                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-                formId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_FORM_ID);
+                personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+                if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+                {
+                    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+                    formId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_FORM_ID);
+                }
+                else
+                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies; // handle forms
+
+                subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
+                isBackPic = FALSE;
+                x = 272;
             }
             else
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies; // handle forms
+            {
+                personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+                if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+                {
+                    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
+                    formId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_FORM_ID);
+                }
+                else
+                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies; // handle forms
 
-            subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
-            isBackPic = TRUE;
-            x = -32;
+                subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
+                isBackPic = TRUE;
+                x = -32;
+            }
         }
 
         spriteId2 = sub_80A8394(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, 0, formId);
@@ -5159,7 +5162,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 if (x < GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[7] = -1;
+                    gBattleAnimArgs[7] = 0xFFFF;
                 }
             }
             else
@@ -5167,7 +5170,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 if (x > GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X))
                 {
                     gTasks[taskId].data[14]++;
-                    gBattleAnimArgs[7] = -1;
+                    gBattleAnimArgs[7] = 0xFFFF;
                 }
             }
         }
