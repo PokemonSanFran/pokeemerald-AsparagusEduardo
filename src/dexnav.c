@@ -2748,7 +2748,7 @@ bool8 DexNavTryMakeShinyMon(void)
     u8 chain = gSaveBlock1Ptr->dexNavChain;
     
     #ifdef ITEM_SHINY_CHARM
-    charmBonus = (CheckBagHasItem(ITEM_SHINY_CHARM, 1) > 0) ? SHINY_CHARM_REROLLS : 0;
+    charmBonus = (CheckBagHasItem(ITEM_SHINY_CHARM, 1) > 0) ? I_SHINY_CHARM_REROLLS : 0;
     #endif
     
     lureBonus = (VarGet(VAR_LURE_STEP_COUNT) > 0) ? 1 : 0;

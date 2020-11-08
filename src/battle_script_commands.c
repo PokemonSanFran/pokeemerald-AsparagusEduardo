@@ -12107,16 +12107,6 @@ static void Cmd_handleballthrow(void)
             case ITEM_BEAST_BALL:
                 ballMultiplier = 1;
                 break;
-            case ITEM_BEAST_BALL:
-            #ifdef IS_ULTRA_BEAST
-                if (IS_ULTRA_BEAST(gBattleMons[gBattlerTarget].species))
-                    ballMultiplier = 50;
-            #endif
-                break;
-            case ITEM_DREAM_BALL:
-                if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP))
-                    ballMultiplier = 40;
-                break;
             }
         }
         else
