@@ -302,6 +302,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gTasks[ID].tCanStop = canStopEvo;
     gTasks[ID].tLearnsFirstMove = TRUE;
     gTasks[ID].tEvoWasStopped = FALSE;
+    gTasks[ID].tPartyID = partyID;
     gTasks[ID].tPreEvoFormId = currentFormId;
     gTasks[ID].tPostEvoFormId = formIdToEvolve;
 
