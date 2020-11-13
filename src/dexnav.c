@@ -1795,7 +1795,7 @@ static bool8 CapturedAllLandMons(u8 headerId)
     }
     else
     {
-        return TRUE;    //technically, no mon data means you caught them all
+        return FALSE;    //technically, no mon data means you caught them all
     }
 
     return FALSE;
@@ -1827,7 +1827,7 @@ static bool8 CapturedAllWaterMons(u8 headerId)
     }
     else
     {
-        return TRUE;    //technically, no mon data means you caught them all
+        return FALSE;    //technically, no mon data means you caught them all
     }
 
     return FALSE;
@@ -1858,7 +1858,7 @@ static bool8 CapturedAllHiddenMons(u8 headerId)
     }
     else
     {
-        return TRUE;    //technically, no mon data means you caught them all
+        return FALSE;    //technically, no mon data means you caught them all
     }
 
     return FALSE;
