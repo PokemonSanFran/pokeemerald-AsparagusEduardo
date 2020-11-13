@@ -490,6 +490,7 @@ struct SaveBlock2
              u16 optionsExpBarSpeed:4;
              u16 optionsDifficulty:2;
              u16 optionsTransitionSpeed:2;
+             u16 optionsUnitSystem:1;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x7];
     /*0x98*/ struct Time localTimeOffset;

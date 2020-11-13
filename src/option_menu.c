@@ -32,6 +32,7 @@ enum
     MENUITEM_HP_BAR,
     MENUITEM_EXP_BAR,
     MENUITEM_TRANSITION,
+    MENUITEM_UNIT_SYSTEM,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -61,6 +62,7 @@ static void BattleScene_DrawChoices(int selection, int y, u8 textSpeed);
 static void BattleStyle_DrawChoices(int selection, int y, u8 textSpeed);
 static void HpBar_DrawChoices(int selection, int y, u8 textSpeed);
 static void Transition_DrawChoices(int selection, int y, u8 textSpeed);
+static void UnitSystem_DrawChoices(int selection, int y, u8 textSpeed);
 static void Sound_DrawChoices(int selection, int y, u8 textSpeed);
 static void FrameType_DrawChoices(int selection, int y, u8 textSpeed);
 static void ButtonMode_DrawChoices(int selection, int y, u8 textSpeed);
@@ -90,6 +92,7 @@ struct
     [MENUITEM_HP_BAR] = {HpBar_DrawChoices, ElevenOptions_ProcessInput},
     [MENUITEM_EXP_BAR] = {HpBar_DrawChoices, ElevenOptions_ProcessInput},
     [MENUITEM_TRANSITION] = {Transition_DrawChoices, TwoOptions_ProcessInput},
+    [MENUITEM_UNIT_SYSTEM] = {UnitSystem_DrawChoices, TwoOptions_ProcessInput},
     [MENUITEM_CANCEL] = {NULL, NULL},
 };
 
@@ -103,6 +106,7 @@ static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/misc/option_menu_equals_si
 static const u8 sText_HpBar[] = _("Hp Bar Speed");
 static const u8 sText_ExpBar[] = _("Exp Bar Speed");
 static const u8 sText_Transition[] = _("Transition");
+static const u8 sText_UnitSystem[] = _("Unit System");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
@@ -115,6 +119,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_HP_BAR]      = sText_HpBar,
     [MENUITEM_EXP_BAR]     = sText_ExpBar,
     [MENUITEM_TRANSITION]  = sText_Transition,
+    [MENUITEM_UNIT_SYSTEM] = sText_UnitSystem,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
 
@@ -272,6 +277,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_HP_BAR] = gSaveBlock2Ptr->optionsHpBarSpeed;
         sOptions->sel[MENUITEM_EXP_BAR] = gSaveBlock2Ptr->optionsExpBarSpeed;
         sOptions->sel[MENUITEM_TRANSITION] = gSaveBlock2Ptr->optionsTransitionSpeed;
+        sOptions->sel[MENUITEM_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
 
         for (i = 0; i < 7; i++)
             DrawChoices(i, i * Y_DIFF, 0xFF);
@@ -432,6 +438,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsHpBarSpeed = sOptions->sel[MENUITEM_HP_BAR];
     gSaveBlock2Ptr->optionsExpBarSpeed = sOptions->sel[MENUITEM_EXP_BAR];
     gSaveBlock2Ptr->optionsTransitionSpeed = sOptions->sel[MENUITEM_TRANSITION];
+    gSaveBlock2Ptr->optionsUnitSystem = sOptions->sel[MENUITEM_UNIT_SYSTEM];
 
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -617,6 +624,15 @@ static void Transition_DrawChoices(int selection, int y, u8 textSpeed)
     styles[selection] = 1;
     DrawOptionMenuChoice(gText_TransitionStyleNormal, 104, y, styles[0], textSpeed);
     DrawOptionMenuChoice(gText_TransitionStyleInstant, GetStringRightAlignXOffset(1, gText_TransitionStyleInstant, 198), y, styles[1], textSpeed);
+}
+
+static void UnitSystem_DrawChoices(int selection, int y, u8 textSpeed)
+{
+    u8 styles[2] = {0, 0};
+
+    styles[selection] = 1;
+    DrawOptionMenuChoice(gText_UnitSystemMetric, 104, y, styles[0], textSpeed);
+    DrawOptionMenuChoice(gText_UnitSystemImperial, GetStringRightAlignXOffset(1, gText_TransitionStyleInstant, 198), y, styles[1], textSpeed);
 }
 
 

@@ -109,7 +109,6 @@ enum
     NAME_VWX,
     NAME_YZ,
 };
-#define METRIC_SYSTEM   TRUE
 
 // For scrolling search parameter
 #define MAX_SEARCH_PARAM_ON_SCREEN   6
@@ -4449,190 +4448,191 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     }
 }
 
-#if METRIC_SYSTEM
 static void PrintMonHeight(u16 height, u8 left, u8 top) // Ported from the German Translation of Pokémon Ruby thanks to Pokeruby
 {
-    u8 buffer[16];
-    int offset;
-    u8 result;
-    u8 i = 0;
-    offset = 0;
-
-
-    buffer[i++] = EXT_CTRL_CODE_BEGIN;
-    buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
-    i++;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-
-    result = (height / 1000);
-    if (result == 0)
+    if (gSaveBlock2Ptr->optionsUnitSystem == 0) //Metric
     {
-        offset = 6;
+        u8 buffer[16];
+        int offset;
+        u8 result;
+        u8 i = 0;
+        offset = 0;
+
+
+        buffer[i++] = EXT_CTRL_CODE_BEGIN;
+        buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
+        i++;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+
+        result = (height / 1000);
+        if (result == 0)
+        {
+            offset = 6;
+        }
+        else
+        {
+            buffer[i++] = result + CHAR_0;
+        }
+
+        result = (height % 1000) / 100;
+        if (result == 0 && offset != 0)
+        {
+            offset += 6;
+        }
+        else
+        {
+            buffer[i++] = result + CHAR_0;
+        }
+
+        buffer[i++] = (((height % 1000) % 100) / 10) + CHAR_0;
+        buffer[i++] = CHAR_COMMA;
+        buffer[i++] = (((height % 1000) % 100) % 10) + CHAR_0;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_m;
+
+        buffer[i++] = EOS;
+        buffer[2] = offset;
+        PrintInfoScreenText(buffer, left, top);
     }
     else
     {
-        buffer[i++] = result + CHAR_0;
+        u8 buffer[16];
+        u32 inches, feet;
+        u8 i = 0;
+
+        inches = (height * 10000) / 254;
+        if (inches % 10 >= 5)
+            inches += 10;
+        feet = inches / 120;
+        inches = (inches - (feet * 120)) / 10;
+
+        buffer[i++] = EXT_CTRL_CODE_BEGIN;
+        buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
+        if (feet / 10 == 0)
+        {
+            buffer[i++] = 18;
+            buffer[i++] = feet + CHAR_0;
+        }
+        else
+        {
+            buffer[i++] = 12;
+            buffer[i++] = feet / 10 + CHAR_0;
+            buffer[i++] = (feet % 10) + CHAR_0;
+        }
+        buffer[i++] = CHAR_SGL_QUOT_RIGHT;
+        buffer[i++] = (inches / 10) + CHAR_0;
+        buffer[i++] = (inches % 10) + CHAR_0;
+        buffer[i++] = CHAR_DBL_QUOT_RIGHT;
+        buffer[i++] = EOS;
+        PrintInfoScreenText(buffer, left, top);
     }
-
-
-    result = (height % 1000) / 100;
-    if (result == 0 && offset != 0)
-    {
-        offset += 6;
-    }
-    else
-    {
-        buffer[i++] = result + CHAR_0;
-    }
-
-    buffer[i++] = (((height % 1000) % 100) / 10) + CHAR_0;
-    buffer[i++] = CHAR_COMMA;
-    buffer[i++] = (((height % 1000) % 100) % 10) + CHAR_0;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_m;
-
-    buffer[i++] = EOS;
-    buffer[2] = offset;
-    PrintInfoScreenText(buffer, left, top);
 }
 
 static void PrintMonWeight(u16 weight, u8 left, u8 top) // Ported from the German Translation of Pokémon Ruby thanks to Pokeruby
 {
-    u8 buffer[18];
-    int offset;
-    u8 result;
-    u8 i = 0;
-    offset = 0;
-
-
-    buffer[i++] = EXT_CTRL_CODE_BEGIN;
-    buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
-    i++;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_SPACE;
-
-    result = (weight / 1000);
-    if (result == 0)
-        offset = 6;
-    else
-        buffer[i++] = result + CHAR_0;
-
-    result = (weight % 1000) / 100;
-    if (result == 0 && offset != 0)
-        offset += 6;
-    else
-        buffer[i++] = result + CHAR_0;
-
-    buffer[i++] = (((weight % 1000) % 100) / 10) + CHAR_0;
-    buffer[i++] = CHAR_COMMA;
-    buffer[i++] = (((weight % 1000) % 100) % 10) + CHAR_0;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_k;
-    buffer[i++] = CHAR_g;
-
-    buffer[i++] = EOS;
-    buffer[2] = offset;
-    PrintInfoScreenText(buffer, left, top);
-}
-#else
-static void PrintMonHeight(u16 height, u8 left, u8 top)
-{
-    u8 buffer[16];
-    u32 inches, feet;
-    u8 i = 0;
-
-    inches = (height * 10000) / 254;
-    if (inches % 10 >= 5)
-        inches += 10;
-    feet = inches / 120;
-    inches = (inches - (feet * 120)) / 10;
-
-    buffer[i++] = EXT_CTRL_CODE_BEGIN;
-    buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
-    if (feet / 10 == 0)
+    if (gSaveBlock2Ptr->optionsUnitSystem == 0) //Metric
     {
-        buffer[i++] = 18;
-        buffer[i++] = feet + CHAR_0;
-    }
-    else
-    {
-        buffer[i++] = 12;
-        buffer[i++] = feet / 10 + CHAR_0;
-        buffer[i++] = (feet % 10) + CHAR_0;
-    }
-    buffer[i++] = CHAR_SGL_QUOT_RIGHT;
-    buffer[i++] = (inches / 10) + CHAR_0;
-    buffer[i++] = (inches % 10) + CHAR_0;
-    buffer[i++] = CHAR_DBL_QUOT_RIGHT;
-    buffer[i++] = EOS;
-    PrintInfoScreenText(buffer, left, top);
-}
+        u8 buffer[18];
+        int offset;
+        u8 result;
+        u8 i = 0;
+        offset = 0;
 
-static void PrintMonWeight(u16 weight, u8 left, u8 top)
-{
-    u8 buffer[16];
-    bool8 output;
-    u8 i;
-    u32 lbs = (weight * 100000) / 4536;
 
-    if (lbs % 10u >= 5)
-        lbs += 10;
-    i = 0;
-    output = FALSE;
-
-    if ((buffer[i] = (lbs / 100000) + CHAR_0) == CHAR_0 && !output)
-    {
-        buffer[i++] = 0x77;
-    }
-    else
-    {
-        output = TRUE;
+        buffer[i++] = EXT_CTRL_CODE_BEGIN;
+        buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
         i++;
-    }
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
 
-    lbs %= 100000;
-    if ((buffer[i] = (lbs / 10000) + CHAR_0) == CHAR_0 && !output)
-    {
-        buffer[i++] = 0x77;
+        result = (weight / 1000);
+        if (result == 0)
+            offset = 6;
+        else
+            buffer[i++] = result + CHAR_0;
+
+        result = (weight % 1000) / 100;
+        if (result == 0 && offset != 0)
+            offset += 6;
+        else
+            buffer[i++] = result + CHAR_0;
+
+        buffer[i++] = (((weight % 1000) % 100) / 10) + CHAR_0;
+        buffer[i++] = CHAR_COMMA;
+        buffer[i++] = (((weight % 1000) % 100) % 10) + CHAR_0;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_k;
+        buffer[i++] = CHAR_g;
+
+        buffer[i++] = EOS;
+        buffer[2] = offset;
+        PrintInfoScreenText(buffer, left, top);
     }
     else
     {
-        output = TRUE;
-        i++;
-    }
+        u8 buffer[16];
+        bool8 output;
+        u8 i;
+        u32 lbs = (weight * 100000) / 4536;
 
-    lbs %= 10000;
-    if ((buffer[i] = (lbs / 1000) + CHAR_0) == CHAR_0 && !output)
-    {
-        buffer[i++] = 0x77;
-    }
-    else
-    {
-        output = TRUE;
-        i++;
-    }
+        if (lbs % 10u >= 5)
+            lbs += 10;
+        i = 0;
+        output = FALSE;
 
-    lbs %= 1000;
-    buffer[i++] = (lbs / 100) + CHAR_0;
-    lbs %= 100;
-    buffer[i++] = CHAR_PERIOD;
-    buffer[i++] = (lbs / 10) + CHAR_0;
-    buffer[i++] = CHAR_SPACE;
-    buffer[i++] = CHAR_l;
-    buffer[i++] = CHAR_b;
-    buffer[i++] = CHAR_s;
-    buffer[i++] = CHAR_PERIOD;
-    buffer[i++] = EOS;
-    PrintInfoScreenText(buffer, left, top);
+        if ((buffer[i] = (lbs / 100000) + CHAR_0) == CHAR_0 && !output)
+        {
+            buffer[i++] = 0x77;
+        }
+        else
+        {
+            output = TRUE;
+            i++;
+        }
+
+        lbs %= 100000;
+        if ((buffer[i] = (lbs / 10000) + CHAR_0) == CHAR_0 && !output)
+        {
+            buffer[i++] = 0x77;
+        }
+        else
+        {
+            output = TRUE;
+            i++;
+        }
+
+        lbs %= 10000;
+        if ((buffer[i] = (lbs / 1000) + CHAR_0) == CHAR_0 && !output)
+        {
+            buffer[i++] = 0x77;
+        }
+        else
+        {
+            output = TRUE;
+            i++;
+        }
+
+        lbs %= 1000;
+        buffer[i++] = (lbs / 100) + CHAR_0;
+        lbs %= 100;
+        buffer[i++] = CHAR_PERIOD;
+        buffer[i++] = (lbs / 10) + CHAR_0;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_l;
+        buffer[i++] = CHAR_b;
+        buffer[i++] = CHAR_s;
+        buffer[i++] = CHAR_PERIOD;
+        buffer[i++] = EOS;
+        PrintInfoScreenText(buffer, left, top);
+    }
 }
-#endif
 
 const u8 *GetPokedexCategoryName(u16 dexNum) // unused
 {
