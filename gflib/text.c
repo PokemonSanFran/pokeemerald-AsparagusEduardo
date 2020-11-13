@@ -50,7 +50,7 @@ const u8 gDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_RS.4bpp");
 const u8 gUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
 const u8 gUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 const u8 gDownArrowYCoords[] = { 0x0, 0x1, 0x2, 0x1 };
-const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x0 };
+const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x4 };
 
 const struct GlyphWidthFunc gGlyphWidthFuncs[] =
 {
@@ -166,17 +166,39 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
     return AddTextPrinter(&printerTemplate, speed, callback);
 }
 
+static bool32 HasScrollChars(const u8 *text)
+{
+    u32 i;
+    for (i = 0; text[i] != EOS; i++)
+    {
+        switch (text[i])
+        {
+        case CHAR_NEWLINE:
+        case EXT_CTRL_CODE_BEGIN:
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    int i;
-    u16 j;
-    u8 *ptr;
+    int i, j;
 
     if (!gFonts)
         return FALSE;
 
     gTempTextPrinter.active = 1;
     gTempTextPrinter.state = 0;
+    if (speed & 0x40 && speed != 0xFF)
+    {
+        gTempTextPrinter.instant = 1;
+        speed &= (~0x40);
+    }
+    else
+    {
+        gTempTextPrinter.instant = 0;
+    }
     gTempTextPrinter.textSpeed = speed;
     gTempTextPrinter.delayCounter = 0;
     gTempTextPrinter.scrollDistance = 0;
@@ -192,7 +214,11 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     gTempTextPrinter.japanese = 0;
 
     GenerateFontHalfRowLookupTable(printerTemplate->fgColor, printerTemplate->bgColor, printerTemplate->shadowColor);
-    if (speed != TEXT_SPEED_FF && speed != 0)
+    if (gTempTextPrinter.instant)
+    {
+        gTextPrinters[printerTemplate->windowId] = gTempTextPrinter;
+    }
+    else if (speed != TEXT_SPEED_FF && speed != 0)
     {
         --gTempTextPrinter.textSpeed;
         gTextPrinters[printerTemplate->windowId] = gTempTextPrinter;
@@ -216,8 +242,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 
 void RunTextPrinters(void)
 {
-    int i;
-    int j;
+    int i, j, temp;
 
     if (gUnknown_03002F84 == 0)
     {
@@ -225,23 +250,45 @@ void RunTextPrinters(void)
         {
             if (gTextPrinters[i].active)
             {
-                for (j = 0; j < 2; j++)
+                if (gTextPrinters[i].instant)
                 {
-                    u16 temp = RenderFont(&gTextPrinters[i]);
-                    switch (temp)
+                    do
                     {
-                    case 0:
-                        CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
-                    case 3:
-                        if (gTextPrinters[i].callback != 0)
-                            gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
-                        break;
-                    case 1:
-                        gTextPrinters[i].active = 0;
-                        break;
+                        temp = RenderFont(&gTextPrinters[i]);
+                        switch (temp)
+                        {
+                        case 3:
+                            CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
+                            if (gTextPrinters[i].callback != 0)
+                                gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
+                            break;
+                        case 1:
+                            CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
+                            gTextPrinters[i].active = 0;
+                            break;
+                        }
+                    } while (temp != 1 && temp != 3);
+                }
+                else
+                {
+                    for (j = 0; j < 2; j++)
+                    {
+                        temp = RenderFont(&gTextPrinters[i]);
+                        switch (temp)
+                        {
+                        case 0:
+                            CopyWindowToVram(gTextPrinters[i].printerTemplate.windowId, 2);
+                        case 3:
+                            if (gTextPrinters[i].callback != 0)
+                                gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
+                            break;
+                        case 1:
+                            gTextPrinters[i].active = 0;
+                            break;
+                        }
+                        if (temp != 0)
+                            break;
                     }
-                    if (temp != 0)
-                        break;
                 }
             }
         }

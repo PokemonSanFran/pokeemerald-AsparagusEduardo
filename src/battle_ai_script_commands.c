@@ -575,8 +575,19 @@ static u8 ChooseMoveOrAction_Singles(void)
 
 static u8 ChooseMoveOrAction_Doubles(void)
 {
-    s32 i, j;
+    s32 i;
+    s32 j;
     u32 flags;
+#ifndef BUGFIX
+    s32 scriptsToRun;
+#else
+    // the value assigned to this is a u32 (aiFlags)
+    // this becomes relevant because aiFlags can have bit 31 set
+    // and scriptsToRun is shifted
+    // this never happens in the vanilla game because bit 31 is
+    // only set when it's the first battle
+    u32 scriptsToRun;
+#endif
     s16 bestMovePointsForTarget[MAX_BATTLERS_COUNT];
     s8 mostViableTargetsArray[MAX_BATTLERS_COUNT];
     u8 actionOrMoveIndex[MAX_BATTLERS_COUNT];
