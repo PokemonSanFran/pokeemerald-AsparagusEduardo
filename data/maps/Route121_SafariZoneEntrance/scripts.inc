@@ -53,6 +53,7 @@ Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger:: @ 822BC18
 	end
 
 Route121_SafariZoneEntrance_EventScript_TalkToEntranceAttendant:: @ 822BC18
+	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
 	waitmovement 0
 	showmoneybox 0, 0, 0
@@ -118,7 +119,15 @@ Route121_SafariZoneEntrance_EventScript_NotEnoughMoney:: @ 822BCF8
 Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter:: @ 822BD06
 	closemessage
 	hidemoneybox
+	checkitem ITEM_SAFARI_PASS, 1
+	compare VAR_RESULT, 1
+	goto_if_eq Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter2
 	applymovement OBJ_EVENT_ID_PLAYER, Route121_SafariZoneEntrance_Movement_BackAwayFromCounter
+	waitmovement 0
+	releaseall
+	end
+	
+Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter2:: @ 822BD06
 	waitmovement 0
 	releaseall
 	end
