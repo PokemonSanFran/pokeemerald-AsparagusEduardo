@@ -6964,9 +6964,19 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 formSpeciesId, u32 otId,
 
     shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
     if (shinyValue < SHINY_ODDS)
-        return gMonShinyPaletteTable[formSpeciesId].data;
+    {
+        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
+            return gMonShinyPaletteTableFemale[formSpeciesId].data;
+        else
+            return gMonShinyPaletteTable[formSpeciesId].data;
+    }
     else
-        return gMonPaletteTable[formSpeciesId].data;
+    {
+        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
+            return gMonPaletteTableFemale[formSpeciesId].data;
+        else
+            return gMonPaletteTable[formSpeciesId].data;
+    }
 }
 
 const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon)
@@ -6985,9 +6995,19 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 
     shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
     if (shinyValue < SHINY_ODDS)
-        return &gMonShinyPaletteTable[formSpeciesId];
+    {
+        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
+            return &gMonShinyPaletteTableFemale[formSpeciesId];
+        else
+            return &gMonShinyPaletteTable[formSpeciesId];
+    }
     else
-        return &gMonPaletteTable[formSpeciesId];
+    {
+        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
+            return &gMonPaletteTableFemale[formSpeciesId];
+        else
+            return &gMonPaletteTable[formSpeciesId];
+    }
 }
 
 bool32 IsHMMove2(u16 move)
