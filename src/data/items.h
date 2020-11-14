@@ -9977,4 +9977,21 @@ const struct Item gItems[] =
         .secondaryId = 0,
     },
 
+    [ITEM_SAFARI_PASS] =
+    {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Pase Safari"),
+#else
+        .name = _("Safari Pass"),
+#endif
+        .itemId = ITEM_SAFARI_PASS,
+        .price = 0,
+        .description = sSafariPassDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = 4,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 0,
+    },
+
 };

@@ -2838,6 +2838,11 @@ static const u8 sMaxLureDesc[] = _(
     "likely to appear\n"
     "for 250 steps.");
 
+static const u8 sSafariPassDesc[] = _(
+    "Permite ingresar\n"
+    "de form libre a la\n"
+    "Zona Safari.");
+
 #else
 
 static const u8 sDummyDesc[] = _(
@@ -5706,5 +5711,10 @@ static const u8 sMaxLureDesc[] = _(
     "Makes Pokémon more\n"
     "likely to appear\n"
     "for 250 steps.");
+
+static const u8 sSafariPassDesc[] = _(
+    "Allows unrestricted\n"
+    "entrance to Hoenn's\n"
+    "Safari Zone.");
 
 #endif

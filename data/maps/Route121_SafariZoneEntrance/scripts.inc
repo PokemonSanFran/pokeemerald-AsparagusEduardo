@@ -46,7 +46,7 @@ Route121_SafariZoneEntrance_EventScript_FirstTimeInfo:: @ 822BC0E
 
 Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger:: @ 822BC18
 	lockall
-	checkitem ITEM_POTION, 1 @ITEM_SAFARI_PASS
+	checkitem ITEM_SAFARI_PASS, 1
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_TalkToEntranceAttendant
 	setflag FLAG_HIDE_SAFARI_ZONE_WORKER_WITHOUT_PASS

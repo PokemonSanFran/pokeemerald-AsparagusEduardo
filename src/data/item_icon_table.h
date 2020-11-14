@@ -601,4 +601,5 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_LURE] = {gItemIcon_Lure, gItemIconPalette_Lure},
     [ITEM_SUPER_LURE] = {gItemIcon_SuperLure, gItemIconPalette_SuperLure},
     [ITEM_MAX_LURE] = {gItemIcon_MaxLure, gItemIconPalette_MaxLure},
+    [ITEM_SAFARI_PASS] = {gItemIcon_SafariPass, gItemIconPalette_SafariPass},
 };

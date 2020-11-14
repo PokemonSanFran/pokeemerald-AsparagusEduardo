@@ -7341,6 +7341,8 @@ extern const u32 gItemIcon_LinkCable[];
 extern const u32 gItemIconPalette_LinkCable[];
 extern const u32 gItemIcon_StrangeSouvenir[];
 extern const u32 gItemIconPalette_StrangeSouvenir[];
+extern const u32 gItemIcon_SafariPass[];
+extern const u32 gItemIconPalette_SafariPass[];
 
 //menu graphics
 extern const u16 gFireRedMenuElements1_Pal[16];
