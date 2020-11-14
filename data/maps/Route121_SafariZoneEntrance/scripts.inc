@@ -50,6 +50,19 @@ Route121_SafariZoneEntrance_EventScript_EntranceCounterTrigger:: @ 822BC18
 	compare VAR_RESULT, 0
 	goto_if_eq Route121_SafariZoneEntrance_EventScript_TalkToEntranceAttendant
 	setflag FLAG_HIDE_SAFARI_ZONE_WORKER_WITHOUT_PASS
+	goto Route121_SafariZoneEntrance_EventScript_HasSafariPass
+	end
+
+Route121_SafariZoneEntrance_EventScript_HasSafariPass:: @ 822BC18
+	goto_if_set FLAG_SHOWN_SAFARI_PASS Route121_SafariZoneEntrance_EventScript_End
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	waitmovement 0
+	msgbox Route121_SafariZoneEntrance_Text_HasSafariPass, MSGBOX_DEFAULT
+	closemessage
+	setflag FLAG_SHOWN_SAFARI_PASS
+	end
+
+Route121_SafariZoneEntrance_EventScript_End:: @ 822BC18
 	end
 
 Route121_SafariZoneEntrance_EventScript_TalkToEntranceAttendant:: @ 822BC18

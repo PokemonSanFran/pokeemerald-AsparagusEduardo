@@ -130,6 +130,16 @@ Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay: @ 82A4F74
 	.string "All you can catch for just ¥500!\n"
 	.string "Would you like to play a Safari Game?$"
 
+Route121_SafariZoneEntrance_Text_HasSafariPass: @ 82A4F74
+	.string "Welcome to the Safari Zone!\p"
+	.string "All you can catch for just...\n"
+	.string "Huh?\p"
+	.string "That's a Safari Pass...\p"
+	.string "That means that you're allowed to\n"
+	.string "enter without restriction.\p"
+	.string "If you still want to play the\n"
+	.string "Safari game, please talk to me.$"
+
 Route121_SafariZoneEntrance_Text_PlayAnotherTime: @ 82A4FD7
 	.string "Okay.\n"
 	.string "Please play another time!$"
