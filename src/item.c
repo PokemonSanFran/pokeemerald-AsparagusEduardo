@@ -180,7 +180,7 @@ static const u8 sText_HM[] = _("HM");
 static const u8 sText_Space[] = _(" ");
 static void GetTMWithName(u8 *dst, u16 itemId, const u8 *moveName)
 {
-    const u8 zeroNums = 2;
+    const u8 zeroNums = 3;
     const u8 *TMHMString;
     u8 TMNumber;
     if (ITEM_HM08 - itemId + 1 > NUM_HIDDEN_MACHINES)
@@ -195,7 +195,7 @@ static void GetTMWithName(u8 *dst, u16 itemId, const u8 *moveName)
     }
 
     StringCopy(dst, TMHMString);
-    ConvertIntToDecimalStringN(dst + zeroNums, TMNumber, STR_CONV_MODE_LEADING_ZEROS, zeroNums);
+    ConvertIntToDecimalStringN(dst + 2, TMNumber, STR_CONV_MODE_LEADING_ZEROS, zeroNums);
     StringCopy(dst + zeroNums + 2, sText_Space);
     StringCopy(dst + zeroNums + 3, moveName);
 }
