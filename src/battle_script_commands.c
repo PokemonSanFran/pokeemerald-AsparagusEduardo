@@ -7901,6 +7901,8 @@ static void Cmd_various(void)
         if (gBattlescriptCurrInstr[3] == 0)
         {
             u16 megaSpecies;
+            u16 baseSpecies;
+            u16 formId;
             gBattleStruct->mega.evolvedSpecies[gActiveBattler] = gBattleMons[gActiveBattler].species;
             if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
                 || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
@@ -7915,8 +7917,15 @@ static void Cmd_various(void)
                 megaSpecies = GetWishMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[gActiveBattler], gBattleMons[gActiveBattler].moves[0], gBattleMons[gActiveBattler].moves[1], gBattleMons[gActiveBattler].moves[2], gBattleMons[gActiveBattler].moves[3]);
             }
 
-            gBattleMons[gActiveBattler].species = megaSpecies;
-            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
+            baseSpecies = GetBaseFormSpeciesId(megaSpecies);
+            formId = GetFormIdFromFormSpeciesId(megaSpecies);
+            
+            gBattleMons[gActiveBattler].species = baseSpecies;
+            gBattleMons[gActiveBattler].formId = formId;
+            SetMonData(mon, MON_DATA_SPECIES, &baseSpecies);
+            SetMonData(mon, MON_DATA_FORM_ID, &formId);
+
+            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetFormSpeciesId(baseSpecies, formId));
 
             BtlController_EmitSetMonData(0, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], 2, &megaSpecies);
             MarkBattlerForControllerExec(gActiveBattler);
