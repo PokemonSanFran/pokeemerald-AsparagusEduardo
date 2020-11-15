@@ -5233,7 +5233,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Danny[] = {
     {
     .iv = 0,
     .lvl = 27,
-    .species = SPECIES_ALOLAN_EXEGGUTOR,
+    .species = SPECIES_EXEGGUTOR_ALOLAN,
     },
     {
     .iv = 0,
