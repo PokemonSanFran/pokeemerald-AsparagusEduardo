@@ -6359,6 +6359,13 @@ static bool8 CalculateMoves(void)
 
     return TRUE;
 }
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+static const u8 sText_TM[] = _("MT");
+static const u8 sText_HM[] = _("MO");
+#else
+static const u8 sText_TM[] = _("TM");
+static const u8 sText_HM[] = _("HM");
+#endif
 static void PrintMoveNameAndInfo(u8 taskId, bool8 toggle)
 {
     u8 numEggMoves      = sPokedexView->numEggMoves;
@@ -6421,11 +6428,29 @@ static void PrintMoveNameAndInfo(u8 taskId, bool8 toggle)
     }
     else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves))
     {
+        const u8 zeroNums = 3;
+        const u8 *TMHMString;
+        u8 TMNumber;
+        u16 itemId = sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)];
+
         move = sStatsMovesTMHM[sPokedexView->moveSelected - numEggMoves - numLevelUpMoves];
         StringCopy(gStringVar3, gMoveNames[move]);
         StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
-        CopyItemName(sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)], gStringVar1); //TM name
-        PrintInfoScreenTextSmall(gStringVar1, moves_x + 113, moves_y + 9);
+
+        if (ITEM_HM08 - itemId + 1 > NUM_HIDDEN_MACHINES)
+        {
+            TMHMString = sText_TM;
+            TMNumber = itemId - ITEM_TM01 + 1;
+        }
+        else
+        {
+            TMHMString = sText_HM;
+            TMNumber = itemId - ITEM_HM01 + 1;
+        }
+
+        StringCopy(gStringVar1, TMHMString);
+        ConvertIntToDecimalStringN(gStringVar1 + 2, TMNumber, STR_CONV_MODE_LEADING_ZEROS, zeroNums);
+        PrintInfoScreenTextSmall(gStringVar1, moves_x + 110, moves_y + 9);
         item = sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)];
     }
     else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves))
