@@ -578,7 +578,7 @@ static void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battlerId, bool32 op
     {
         species = gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies;
         currentPersonality = gTransformedPersonalities[battlerId];
-        formId = 0; // handle forms
+        formId = GetFormIdFromFormSpeciesId(species); // handle forms
         formSpeciesId = GetFormSpeciesId(species, formId);
     }
 
@@ -887,9 +887,11 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 notTransform
         position = GetBattlerPosition(battlerAtk);
 
         if (GetBattlerSide(battlerDef) == B_SIDE_OPPONENT)
-            targetSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_SPECIES);
+            targetSpecies = GetFormSpeciesId(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_SPECIES),
+                                            GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_FORM_ID));
         else
-            targetSpecies = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_SPECIES);
+            targetSpecies = GetFormSpeciesId(GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_SPECIES),
+                                            GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_FORM_ID));
 
         if (GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
         {
