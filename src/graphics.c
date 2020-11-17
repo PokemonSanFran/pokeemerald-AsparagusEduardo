@@ -1804,11 +1804,7 @@ const u32 gPokedexInfoScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/info_scree
 const u32 gPokedexStatsScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/stats_screen.bin.lz");
 const u32 gPokedexCryScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/cry_screen.bin.lz");
 const u16 gPokedexSearchMenu_Pal[] = INCBIN_U16("graphics/pokedex/search_menu.gbapal");
-#if GAME_LANGUAGE == LANGUAGE_SPANISH
-const u32 gPokedexSearchMenu_Gfx[] = INCBIN_U32("graphics/pokedex/search_menu_es.4bpp.lz");
-#else
 const u32 gPokedexSearchMenu_Gfx[] = INCBIN_U32("graphics/pokedex/search_menu.4bpp.lz");
-#endif
 const u32 gPokedexSearchMenuNational_Tilemap[] = INCBIN_U32("graphics/pokedex/search_menu_national.bin.lz");
 const u32 gPokedexSearchMenuHoenn_Tilemap[] = INCBIN_U32("graphics/pokedex/search_menu_hoenn.bin.lz");
 

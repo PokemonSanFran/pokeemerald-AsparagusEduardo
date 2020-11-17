@@ -578,7 +578,7 @@ static void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battlerId, bool32 op
     {
         species = gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies;
         currentPersonality = gTransformedPersonalities[battlerId];
-        formId = GetFormIdFromFormSpeciesId(species); // handle forms
+        formId = GetFormIdFromFormSpeciesId(species);
         formSpeciesId = GetFormSpeciesId(species, formId);
     }
 

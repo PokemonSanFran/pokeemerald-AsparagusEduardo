@@ -3265,7 +3265,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
             }
             else
             {
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies; // handle forms
+                species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
                 formId = GetFormIdFromFormSpeciesId(species);
             }
 
@@ -3292,7 +3292,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
             }
             else
             {
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies; // handle forms
+                species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
                 formId = GetFormIdFromFormSpeciesId(species);
             }
 
@@ -5117,7 +5117,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 }
                 else
                 {
-                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies; // handle forms
+                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
                     formId = GetFormIdFromFormSpeciesId(species);
                 }
 
@@ -5136,7 +5136,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 }
                 else
                 {
-                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies; // handle forms
+                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
                     formId = GetFormIdFromFormSpeciesId(species);
                 }
 
