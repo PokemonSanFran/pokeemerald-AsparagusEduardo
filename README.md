@@ -32,6 +32,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * Shows [Type effectiveness in-battle](https://www.pokecommunity.com/showthread.php?p=10167016#post10167016). Code by PokemonCrazy.
 * [Soot Sack](https://www.pokecommunity.com/showthread.php?p=10222284#post10222284) can now be used to check how much ash it has. (by Sapphire Jester).
 * [Removed extra save confirmation](https://www.pokecommunity.com/showthread.php?p=10211835#post10211835), leaving it in line with newer games (by Hiroshi Sotomura)
+* Yellow TM Item Balls. (by Artrios)
 
 #### New Features:
 * [RHH](https://github.com/rh-hideout)'s [Battle Engine](https://github.com/rh-hideout/pokeemerald-expansion/tree/battle_engine).
