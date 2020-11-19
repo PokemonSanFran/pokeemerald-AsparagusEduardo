@@ -7633,10 +7633,11 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
     
     if (gFormSpeciesIdTables[formSpeciesId] != NULL)
     {
-        for (targetFormId = 0; targetFormId < ARRAY_COUNT(gFormSpeciesIdTables[formSpeciesId]); targetFormId++)
+        while (gFormSpeciesIdTables[formSpeciesId][targetFormId] != 0xFFFF)
         {
             if (formSpeciesId == gFormSpeciesIdTables[formSpeciesId][targetFormId])
                 break;
+            targetFormId++;
         }
     }
     return targetFormId;
