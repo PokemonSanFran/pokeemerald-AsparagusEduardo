@@ -1687,7 +1687,7 @@ const struct Item gItems[] =
         .name = _("Moon Stone"),
 #endif
         .itemId = ITEM_MOON_STONE,
-        .price = 0,
+        .price = 2100,
         .description = sMoonStoneDesc,
         .pocket = POCKET_POWER_UP,
         .type = 1,
@@ -3913,7 +3913,7 @@ const struct Item gItems[] =
         .name = _("Oval Stone"),
 #endif
         .itemId = ITEM_OVAL_STONE,
-        .price = 2000,
+        .price = 2100,
         .description = sOvalStoneDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -3929,7 +3929,7 @@ const struct Item gItems[] =
         .name = _("Protector"),
 #endif
         .itemId = ITEM_PROTECTOR,
-        .price = 2000,
+        .price = 2100,
         .description = sProtectorDesc,
         .pocket = POCKET_POWER_UP,
         .type = 4,
@@ -4009,7 +4009,7 @@ const struct Item gItems[] =
         .name = _("Razor Claw"),
 #endif
         .itemId = ITEM_RAZOR_CLAW,
-        .price = 2000,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_NONE, // Placeholder.
         .description = sRazorClawDesc,
         .pocket = POCKET_POWER_UP,
@@ -4026,7 +4026,7 @@ const struct Item gItems[] =
         .name = _("Razor Fang"),
 #endif
         .itemId = ITEM_RAZOR_FANG,
-        .price = 2000,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_FLINCH,
         .holdEffectParam = 10,
         .description = sRazorFangDesc,
