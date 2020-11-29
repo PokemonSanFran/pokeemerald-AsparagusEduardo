@@ -149,7 +149,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, STDSTRING_ITEMS
+	bufferstdstring 2, STDSTRING_MEDICINE
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64  @ 1/64 chance of an additional drink dropping
 	compare VAR_RESULT, 0
@@ -161,7 +161,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, STDSTRING_ITEMS
+	bufferstdstring 2, STDSTRING_MEDICINE
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	random 64  @ 1/64 * the prev 1/64 chance of a third additional drink dropping, ~ 0.02% chance
 	compare VAR_RESULT, 0
@@ -173,7 +173,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown, MSGBOX_DEFAULT
 	additem VAR_TEMP_0
 	bufferitemname 1, VAR_TEMP_0
-	bufferstdstring 2, STDSTRING_ITEMS
+	bufferstdstring 2, STDSTRING_MEDICINE
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink
 	end
