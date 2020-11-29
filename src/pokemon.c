@@ -5765,6 +5765,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
     u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, 0);
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
+    u16 currentMap;
     *targetFormId = 0;
 
     if (heldItem == ITEM_ENIGMA_BERRY)
@@ -5981,8 +5982,16 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, u
                     targetSpecies = GetFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies, 0); // Get base species
                 }
                 break;
-            case EVO_MAP:
+            case EVO_MAPSEC:
                 if (gMapHeader.regionMapSectionId == gEvolutionTable[formSpeciesId][i].param)
+                {
+                    *targetFormId = GetFormIdFromFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies);
+                    targetSpecies = GetFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies, 0); // Get base species
+                }
+                break;
+            case EVO_SPECIFIC_MAP:
+                currentMap = ((gSaveBlock1Ptr->location.mapGroup) << 8 | gSaveBlock1Ptr->location.mapNum);
+                if (currentMap == gEvolutionTable[species][i].param)
                 {
                     *targetFormId = GetFormIdFromFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies);
                     targetSpecies = GetFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies, 0); // Get base species

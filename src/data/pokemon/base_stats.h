@@ -737,7 +737,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 255,
         .expYield = 60,
         .evYield_Defense   = 1,
-        .item2 = ITEM_GRIP_CLAW,
+        #ifdef ITEM_EXPANSION
+            .item2 = ITEM_GRIP_CLAW,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -765,7 +767,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 90,
         .expYield = 158,
         .evYield_Defense   = 2,
-        .item2 = ITEM_GRIP_CLAW,
+        #ifdef ITEM_EXPANSION
+            .item2 = ITEM_GRIP_CLAW,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
