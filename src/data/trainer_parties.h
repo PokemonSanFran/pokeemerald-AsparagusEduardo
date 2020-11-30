@@ -3974,7 +3974,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel2[] = {
     {
     .iv = 0,
     .lvl = 34,
-    .species = SPECIES_PIKACHU
+    .species = SPECIES_PIKACHU,
     .heldItem = ITEM_LIGHT_BALL,
     },
     {
@@ -4004,7 +4004,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel3[] = {
     {
     .iv = 0,
     .lvl = 44,
-    .species = SPECIES_PIKACHU
+    .species = SPECIES_PIKACHU,
     .heldItem = ITEM_LIGHT_BALL,
     },
     {
@@ -4034,7 +4034,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel4[] = {
     {
     .iv = 0,
     .lvl = 60,
-    .species = SPECIES_PIKACHU
+    .species = SPECIES_PIKACHU,
     .heldItem = ITEM_LIGHT_BALL,
     },
     {
@@ -4064,7 +4064,7 @@ static const struct TrainerMonItemDefaultMoves sParty_Miguel5[] = {
     {
     .iv = 0,
     .lvl = 75,
-    .species = SPECIES_PIKACHU
+    .species = SPECIES_PIKACHU,
     .heldItem = ITEM_LIGHT_BALL,
     },
     {
