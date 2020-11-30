@@ -90,6 +90,14 @@
             1,
             1
           ]
+        },
+        {
+          "type": "hidden_mons",
+          "encounter_rates": [
+            40,
+            40,
+            20
+          ]
         }
       ],
       "encounters": [
