@@ -1,14 +1,33 @@
+@ gSpecialvar_0x8008: HM move being used
+@ gSpecialvar_0x8009: if 0, use player's mon. Otherwise, use Gym Leader's mon
+
 @ Interact with cuttable tree
 EventScript_CutTree:: @ 82906BB
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
 	checkpartymove MOVE_CUT
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CheckTreeCantCut
+	goto_if_eq EventScript_AnorithCut
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_CUT
 	msgbox Text_WantToCut, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_CancelCut
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	closemessage
+	dofieldeffect FLDEFF_USE_CUT_ON_TREE
+	waitstate
+	goto EventScript_CutTreeDown
+	end
+
+EventScript_AnorithCut::
+	setvar VAR_0x8004, SPECIES_ANORITH
+	setvar VAR_0x8008, MOVE_CUT
+	setvar VAR_0x8009, 1
+	bufferspeciesname 0, VAR_0x8004	
+	buffermovename 1, VAR_0x8008
+	msgbox Text_AnorithToCut, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelCut
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
@@ -52,6 +71,10 @@ Text_WantToCut: @ 829072E
 	.string "Cut down!\p"
 	.string "Would you like to Cut it?$"
 
+Text_AnorithToCut:
+	.string "This tree looks like it can be Cut down!\n"
+	.string "Call Roxanne's Anorith to Cut it?$"
+
 Text_MonUsedFieldMove: @ 8290771
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
 
@@ -65,11 +88,27 @@ EventScript_RockSmash:: @ 82907A6
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	checkpartymove MOVE_ROCK_SMASH
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantSmashRock
+	goto_if_eq EventScript_RaichuSmash
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox Text_WantToSmash, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_CancelSmash
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	closemessage
+	dofieldeffect FLDEFF_USE_ROCK_SMASH
+	waitstate
+	goto EventScript_SmashRock
+	end
+
+EventScript_RaichuSmash::
+	setvar VAR_0x8004, SPECIES_RAICHU_ALOLAN
+	setvar VAR_0x8008, MOVE_ROCK_SMASH
+	setvar VAR_0x8009, 1
+	bufferspeciesname 0, VAR_0x8004	
+	buffermovename 1, VAR_0x8008
+	msgbox Text_RaichuSmash, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_CancelSmash
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
@@ -123,6 +162,10 @@ Text_WantToSmash: @ 829083A
 	.string "This rock appears to be breakable.\n"
 	.string "Would you like to use Rock Smash?$"
 
+Text_RaichuSmash:
+	.string "This rock appears to be breakable.\n"
+	.string "Call Wattson's Raichu to smash it?$"
+
 Text_CantSmash: @ 829087F
 	.string "It's a rugged rock, but a Pokémon\n"
 	.string "may be able to smash it.$"
@@ -133,7 +176,7 @@ EventScript_StrengthBoulder:: @ 82908BA
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkpartymove MOVE_STRENGTH
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantStrength
+	goto_if_eq EventScript_ArcanineStrength
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -142,6 +185,19 @@ EventScript_StrengthBoulder:: @ 82908BA
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto EventScript_ActivateStrength
+	end
+
+EventScript_ArcanineStrength::
+	setvar VAR_0x8004, SPECIES_ARCANINE
+	setvar VAR_0x8008, MOVE_STRENGTH
+	setvar VAR_0x8009, 1
+	msgbox Text_ArcanineStrength, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_CancelStrength
+	closemessage
+	dofieldeffect FLDEFF_USE_STRENGTH
+	waitstate
+	goto EventScript_ActivateArcanineStrength
 	end
 
 EventScript_UseStrength:: @ 82908FD
@@ -154,6 +210,12 @@ EventScript_UseStrength:: @ 82908FD
 EventScript_ActivateStrength:: @ 8290908
 	setflag FLAG_SYS_USE_STRENGTH
 	msgbox Text_MonUsedStrength, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EventScript_ActivateArcanineStrength::
+	setflag FLAG_SYS_USE_STRENGTH
+	msgbox Text_ArcanineUsedStrength, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -177,9 +239,19 @@ Text_WantToStrength: @ 829092C
 	.string "may be able to push it aside.\p"
 	.string "Would you like to use Strength?$"
 
+Text_ArcanineStrength: @ 829092C
+	.string "It's a big boulder, but a Pokémon\n"
+	.string "may be able to push it aside.\p"
+	.string "Call Flannery's Arcanine to push it?$"
+
 Text_MonUsedStrength: @ 829098C
 	.string "{STR_VAR_1} used Strength!\p"
 	.string "{STR_VAR_1}'s Strength made it\n"
+	.string "possible to move boulders around!$"
+
+Text_ArcanineUsedStrength:
+	.string "Arcanine used Strength!\p"
+	.string "Arcanine 's Strength made it\n"
 	.string "possible to move boulders around!$"
 
 Text_CantStrength: @ 82909D6
@@ -194,7 +266,7 @@ EventScript_UseWaterfall:: @ 8290A49
 	lockall
 	checkpartymove MOVE_WATERFALL
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantWaterfall
+	goto_if_eq EventScript_TentacruelWaterfall
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
@@ -207,8 +279,19 @@ EventScript_UseWaterfall:: @ 8290A49
 EventScript_CannotUseWaterfall:: @ 8290A83
 	lockall
 
-EventScript_CantWaterfall:: @ 8290A84
-	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
+EventScript_TentacruelWaterfall::
+	setvar VAR_0x8004, SPECIES_TENTACRUEL
+	setvar VAR_0x8008, MOVE_WATERFALL
+	setvar VAR_0x8009, 1
+	bufferspeciesname 0, VAR_0x8004	
+	buffermovename 1, VAR_0x8008
+	setfieldeffectargument 0, VAR_RESULT
+	msgbox Text_TentacruelWaterfall, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_EndWaterfall
+	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
+	dofieldeffect FLDEFF_USE_WATERFALL
+	goto EventScript_EndWaterfall
 
 EventScript_EndWaterfall:: @ 8290A8C
 	releaseall
@@ -222,18 +305,37 @@ Text_WantToWaterfall: @ 8290AC3
 	.string "It's a large waterfall.\n"
 	.string "Would you like to use Waterfall?$"
 
+Text_TentacruelWaterfall:
+	.string "It's a large waterfall.\n"
+	.string "Call Juan's Tentacruel to climb it?$"
+
 Text_MonUsedWaterfall: @ 8290AFC
 	.string "{STR_VAR_1} used Waterfall.$"
 
 EventScript_UseDive:: @ 8290B0F
 	lockall
+	goto_if_unset FLAG_BADGE07_GET, EventScript_CantDive
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantDive
+	goto_if_eq EventScript_SlowbroDive
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToDive, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_EndDive
+	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+	dofieldeffect FLDEFF_USE_DIVE
+	goto EventScript_EndDive
+	end
+
+EventScript_SlowbroDive::
+	setvar VAR_0x8004, SPECIES_SLOWBRO
+	setvar VAR_0x8008, MOVE_DIVE
+	setvar VAR_0x8009, 1
+	bufferspeciesname 0, VAR_0x8004	
+	buffermovename 1, VAR_0x8008
+	msgbox Text_SlowbroDive, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq EventScript_EndDive
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
@@ -254,7 +356,7 @@ EventScript_UseDiveUnderwater:: @ 8290B5A
 	lockall
 	checkpartymove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantSurface
+	goto_if_eq EventScript_SlowbroSurface
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
@@ -266,9 +368,17 @@ EventScript_UseDiveUnderwater:: @ 8290B5A
 	goto EventScript_EndSurface
 	end
 
-EventScript_CantSurface:: @ 8290B99
-	lockall
-	msgbox Text_CantSurface, MSGBOX_DEFAULT
+EventScript_SlowbroSurface::
+	setvar VAR_0x8004, SPECIES_SLOWBRO
+	setvar VAR_0x8008, MOVE_DIVE
+	setvar VAR_0x8009, 1
+	bufferspeciesname 0, VAR_0x8004
+	buffermovename 1, VAR_0x8008
+	msgbox Text_WantToSurface, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_EndSurface
+	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
 	end
 
@@ -283,6 +393,10 @@ Text_CantDive: @ 8290BAA
 Text_WantToDive: @ 8290BE8
 	.string "The sea is deep here.\n"
 	.string "Would you like to use Dive?$"
+
+Text_SlowbroDive:
+	.string "The sea is deep here.\n"
+	.string "Call Tate & Liza's Slowbro to Dive?$"
 
 Text_MonUsedDive: @ 8290C1A
 	.string "{STR_VAR_1} used Dive.$"
