@@ -1315,6 +1315,8 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
 
 bool8 PartyHasMonWithSurf(void)
 {
+    return TRUE;
+    /*
     u8 i;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
@@ -1328,6 +1330,7 @@ bool8 PartyHasMonWithSurf(void)
         }
     }
     return FALSE;
+    */
 }
 
 bool8 IsPlayerSurfingNorth(void)
