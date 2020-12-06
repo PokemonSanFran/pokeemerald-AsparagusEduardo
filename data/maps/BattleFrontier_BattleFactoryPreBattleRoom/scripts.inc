@@ -61,6 +61,12 @@ BattleFrontier_BattleFactoryPreBattleRoom_EventScript_EnterBattleRoom:: @ 8259B7
 BattleFrontier_BattleFactoryPreBattleRoom_EventScript_ReturnToRoomFromBattle:: @ 8259BA5
 	factory_setopponentmons
 	factory_resethelditems
+	
+	buffernumberstring 0, 1
+	setvar VAR_0x8004, 1
+	special GiveFrontierBattlePointsMidChallenge
+	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_ObtainedBattlePoint, MSGBOX_GETPOINTS
+
 	msgbox BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons, MSGBOX_DEFAULT
 	playfanfare MUS_HEAL
 	waitfanfare
@@ -497,6 +503,10 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection: @ 82
 	.string "safekeeping.\p"
 	.string "You may then choose from our\n"
 	.string "selection of Pokémon.$"
+
+BattleFrontier_BattleFactoryPreBattleRoom_Text_ObtainedBattlePoint:
+	.string "{PLAYER} obtained\n"
+	.string "1 Battle Point(s).$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons: @ 825A22D
 	.string "Thank you for competing!\n"

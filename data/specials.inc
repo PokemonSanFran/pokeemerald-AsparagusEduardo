@@ -467,6 +467,7 @@ gSpecials:: @ 81DBA64
 	def_special UpdateBattlePointsWindow
 	def_special CloseBattlePointsWindow
 	def_special GiveFrontierBattlePoints
+	def_special GiveFrontierBattlePointsMidChallenge
 	def_special TakeFrontierBattlePoints
 	def_special GetFrontierBattlePoints
 	def_special ShowFrontierExchangeCornerItemIconWindow

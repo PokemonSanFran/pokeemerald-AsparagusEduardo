@@ -3040,6 +3040,21 @@ void GiveFrontierBattlePoints(void)
     }
 }
 
+void GiveFrontierBattlePointsMidChallenge(void)
+{
+    s32 points;
+
+    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
+        gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
+    else
+        gSaveBlock2Ptr->frontier.battlePoints = gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004;
+
+    points = gSaveBlock2Ptr->frontier.cardBattlePoints + gSpecialVar_0x8004;
+    if (points > 0xFFFF)
+        points = 0xFFFF;
+    gSaveBlock2Ptr->frontier.cardBattlePoints = points;
+}
+
 u16 GetFrontierBattlePoints(void)
 {
     return gSaveBlock2Ptr->frontier.battlePoints;
