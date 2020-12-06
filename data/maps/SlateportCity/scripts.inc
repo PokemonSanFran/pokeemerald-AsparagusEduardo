@@ -1319,8 +1319,8 @@ SlateportCity_Text_HarborSign: @ 81DEB5A
 	.string "the ferry S.S. Tidal.”$"
 
 SlateportCity_Text_NameRatersHouseSign: @ 81DEBA0
-	.string "Name Rater's House\n"
-	.string "“Pokémon nicknames rated.”$"
+	.string "Tradeback Guy's House\n"
+	.string "“Evolution made easier.”$"
 
 SlateportCity_Text_ExplainBerries: @ 81DEBCE
 	.string "If a wild Pokémon gets hurt, it heals\n"

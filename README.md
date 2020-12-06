@@ -14,9 +14,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * Running Shoes everywhere and from the beginning.
 * Reusable TMs.
 * Deletable HM moves.
-* Normal evolution methods work, but trading evolutions also can be triggered by holding the corresponding item while leveling up.
-	* A new item, the Link Cable, can be used for trade evolutions without items. Sprite by [KryptonLion](https://www.deviantart.com/kryptonlion).
-	* Shelmet and Karrablast can evolve while the other one is in the party.
+* Shelmet and Karrablast can evolve while the other one is in the party.
 * Eggs hatch at level 1.
 * Berry trees don't wither if their berries aren't picked up.
 * Easier way of getting to Mirage Island.
@@ -33,6 +31,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [Soot Sack](https://www.pokecommunity.com/showthread.php?p=10222284#post10222284) can now be used to check how much ash it has. (by Sapphire Jester).
 * [Removed extra save confirmation](https://www.pokecommunity.com/showthread.php?p=10211835#post10211835), leaving it in line with newer games (by Hiroshi Sotomura)
 * Yellow TM Item Balls. (by Artrios)
+* With the exception of Flash and Fly, you can use HM moves by calling the Gym Leaders' Pokémon. (by Buffelsaft)
 
 #### New Features:
 * [RHH](https://github.com/rh-hideout)'s [Battle Engine](https://github.com/rh-hideout/pokeemerald-expansion/tree/battle_engine).

@@ -4,11 +4,8 @@ SlateportCity_NameRatersHouse_MapScripts:: @ 8209AA4
 SlateportCity_NameRatersHouse_EventScript_NameRater:: @ 8209AA5
 	lock
 	faceplayer
-	msgbox SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate
-	compare VAR_RESULT, NO
-	goto_if_eq SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
+	msgbox SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname, MSGBOX_DEFAULT
+	release
 	end
 
 SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate:: @ 8209AC6
@@ -71,11 +68,75 @@ SlateportCity_NameRatersHouse_EventScript_NewNameDifferent:: @ 8209B84
 	release
 	end
 
+SlateportCity_NameRatersHouse_TradebackGuy_V1::
+	lock
+	faceplayer
+	msgbox SlateportCity_NameRatersHouse_TradebackGuy_Text_IllTradeIfYouWant, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq SlateportCity_NameRatersHouse_TradebackGuy_DeclineTrade
+	special ChoosePartyMon
+	waitstate
+	compare VAR_0x8004, 255
+	goto_if_eq SlateportCity_NameRatersHouse_TradebackGuy_DeclineTrade
+	copyvar VAR_0x8005, VAR_0x8004
+	setvar VAR_0x8004, 6
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
+	waitstate
+	msgbox SlateportCity_NameRatersHouse_TradebackGuy_Text_ComeBack, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_NameRatersHouse_TradebackGuy_V2::
+	lock
+	faceplayer
+	msgbox SlateportCity_NameRatersHouse_TradebackGuy_Text_IllTradeIfYouWant, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq SlateportCity_NameRatersHouse_TradebackGuy_DeclineTrade
+	special ChoosePartyMon
+	waitstate
+	compare VAR_0x8004, 255
+	goto_if_eq SlateportCity_NameRatersHouse_TradebackGuy_DeclineTrade
+	copyvar VAR_0x8005, VAR_0x8004
+	setvar VAR_0x8004, 7
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
+	waitstate
+	setvar VAR_0x8004, 8
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
+	waitstate
+	msgbox SlateportCity_NameRatersHouse_TradebackGuy_Text_ComeBack, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_NameRatersHouse_TradebackGuy_DeclineTrade::
+	msgbox SlateportCity_NameRatersHouse_TradebackGuy_Text_YouDontWantToThatsOkay, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_NameRatersHouse_TradebackGuy_Text_IllTradeIfYouWant:
+	.string "Hi! I'm the Tradeback Guy!\p"
+	.string "If you have a Pokémon that only\n"
+	.string "evolves through trading, then I\l"
+	.string "can help you out!\p"
+	.string "Do you have any Pokémon that you'd\n"
+	.string "like to evolve?$"
+
+SlateportCity_NameRatersHouse_TradebackGuy_Text_ComeBack:
+	.string "Come back anytime!$"
+
+SlateportCity_NameRatersHouse_TradebackGuy_Text_YouDontWantToThatsOkay:
+	.string "Alrighty. Well, if you change\n"
+	.string "mind I'll still be right here.$"
+
 SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname: @ 8209B8E
-	.string "Hi, hi! I'm the Name Rater!\n"
-	.string "I'm the fortune-teller of names!\p"
-	.string "I shall be pleased to rate your\n"
-	.string "Pokémon's nickname.$"
+	.string "Hi, hi! I'm the Name Rater!\p"
+	.string "…Or rather, I used to be.\p"
+	.string "Now you can rate nicknames in\n"
+	.string "every Pokémon Center…\p"
+	.string "My grandson however, has been\n"
+	.string "doing good with his business.$"
 
 SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname: @ 8209BFF
 	.string "Which Pokémon's nickname should\n"
