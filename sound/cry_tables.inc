@@ -817,91 +817,95 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Zeraora
 	cry_not Cry_Meltan
 	cry_not Cry_Melmetal
-	@ Gen 8
-	cry Cry_Unown @ Grookey, Not implemented
-	cry Cry_Unown @ Thwackey, Not implemented
-	cry Cry_Unown @ Rillaboom, Not implemented
-	cry Cry_Unown @ Scorbunny, Not implemented
-	cry Cry_Unown @ Raboot, Not implemented
-	cry Cry_Unown @ Cinderace, Not implemented
-	cry Cry_Unown @ Sobble, Not implemented
-	cry Cry_Unown @ Drizzile, Not implemented
-	cry Cry_Unown @ Inteleon, Not implemented
-	cry Cry_Unown @ Skwovet, Not implemented
-	cry Cry_Unown @ Greedent, Not implemented
-	cry Cry_Unown @ Rookidee, Not implemented
-	cry Cry_Unown @ Corvisquire, Not implemented
-	cry Cry_Unown @ Corviknight, Not implemented
-	cry Cry_Unown @ Blipbug, Not implemented
-	cry Cry_Unown @ Dottler, Not implemented
-	cry Cry_Unown @ Orbeetle, Not implemented
-	cry Cry_Unown @ Nickit, Not implemented
-	cry Cry_Unown @ Thievul, Not implemented
-	cry Cry_Unown @ Gossifleur, Not implemented
-	cry Cry_Unown @ Eldegoss, Not implemented
-	cry Cry_Unown @ Wooloo, Not implemented
-	cry Cry_Unown @ Dubwool, Not implemented
-	cry Cry_Unown @ Chewtle, Not implemented
-	cry Cry_Unown @ Drednaw, Not implemented
-	cry Cry_Unown @ Yamper, Not implemented
-	cry Cry_Unown @ Boltund, Not implemented
-	cry Cry_Unown @ Rolycoly, Not implemented
-	cry Cry_Unown @ Carkol, Not implemented
-	cry Cry_Unown @ Coalossal, Not implemented
-	cry Cry_Unown @ Applin, Not implemented
-	cry Cry_Unown @ Flapple, Not implemented
-	cry Cry_Unown @ Appletun, Not implemented
-	cry Cry_Unown @ Silicobra, Not implemented
-	cry Cry_Unown @ Sandaconda, Not implemented
-	cry Cry_Unown @ Cramorant, Not implemented
-	cry Cry_Unown @ Arrokuda, Not implemented
-	cry Cry_Unown @ Barraskewda, Not implemented
-	cry Cry_Unown @ Toxel, Not implemented
-	cry Cry_Unown @ Toxtricity, Not implemented
-	cry Cry_Unown @ Sizzlipede, Not implemented
-	cry Cry_Unown @ Centiskorch, Not implemented
-	cry Cry_Unown @ Clobbopus, Not implemented
-	cry Cry_Unown @ Grapploct, Not implemented
-	cry Cry_Unown @ Sinistea, Not implemented
-	cry Cry_Unown @ Polteageist, Not implemented
-	cry Cry_Unown @ Hatenna, Not implemented
-	cry Cry_Unown @ Hattrem, Not implemented
-	cry Cry_Unown @ Hatterene, Not implemented
-	cry Cry_Unown @ Impidimp, Not implemented
-	cry Cry_Unown @ Morgrem, Not implemented
-	cry Cry_Unown @ Grimmsnarl, Not implemented
-	cry Cry_Unown @ Obstagoon, Not implemented
-	cry Cry_Unown @ Perrserker, Not implemented
-	cry Cry_Unown @ Cursola, Not implemented
-	cry Cry_Unown @ Sirfetchd, Not implemented
-	cry Cry_Unown @ Mr_Rime, Not implemented
-	cry Cry_Unown @ Runerigus, Not implemented
-	cry Cry_Unown @ Milcery, Not implemented
-	cry Cry_Unown @ Alcremie, Not implemented
-	cry Cry_Unown @ Falinks, Not implemented
-	cry Cry_Unown @ Pincurchin, Not implemented
-	cry Cry_Unown @ Snom, Not implemented
-	cry Cry_Unown @ Frosmoth, Not implemented
-	cry Cry_Unown @ Stonjourner, Not implemented
-	cry Cry_Unown @ Eiscue, Not implemented
-	cry Cry_Unown @ Indeedee, Not implemented
-	cry Cry_Unown @ Morpeko, Not implemented
-	cry Cry_Unown @ Cufant, Not implemented
-	cry Cry_Unown @ Copperajah, Not implemented
-	cry Cry_Unown @ Dracozolt, Not implemented
-	cry Cry_Unown @ Arctozolt, Not implemented
-	cry Cry_Unown @ Dracovish, Not implemented
-	cry Cry_Unown @ Arctovish, Not implemented
-	cry Cry_Unown @ Duraludon, Not implemented
-	cry Cry_Unown @ Dreepy, Not implemented
-	cry Cry_Unown @ Drakloak, Not implemented
-	cry Cry_Unown @ Dragapult, Not implemented
-	cry Cry_Unown @ Zacian, Not implemented
-	cry Cry_Unown @ Zamazenta, Not implemented
-	cry Cry_Unown @ Eternatus, Not implemented
-	cry Cry_Unown @ Kubfu, Not implemented
-	cry Cry_Unown @ Urshifu, Not implemented
-	cry Cry_Unown @ Zarude, Not implemented
+	cry_not Cry_Grookey
+	cry_not Cry_Thwackey
+	cry_not Cry_Rillaboom
+	cry_not Cry_Scorbunny
+	cry_not Cry_Raboot
+	cry_not Cry_Cinderace
+	cry_not Cry_Sobble
+	cry_not Cry_Drizzile
+	cry_not Cry_Inteleon
+	cry_not Cry_Skwovet
+	cry_not Cry_Greedent
+	cry_not Cry_Rookidee
+	cry_not Cry_Corvisquire
+	cry_not Cry_Corviknight
+	cry_not Cry_Blipbug
+	cry_not Cry_Dottler
+	cry_not Cry_Orbeetle
+	cry_not Cry_Nickit
+	cry_not Cry_Thievul
+	cry_not Cry_Gossifleur
+	cry_not Cry_Eldegoss
+	cry_not Cry_Wooloo
+	cry_not Cry_Dubwool
+	cry_not Cry_Chewtle
+	cry_not Cry_Drednaw
+	cry_not Cry_Yamper
+	cry_not Cry_Boltund
+	cry_not Cry_Rolycoly
+	cry_not Cry_Carkol
+	cry_not Cry_Coalossal
+	cry_not Cry_Applin
+	cry_not Cry_Flapple
+	cry_not Cry_Appletun
+	cry_not Cry_Silicobra
+	cry_not Cry_Sandaconda
+	cry_not Cry_Cramorant
+	cry_not Cry_Arrokuda
+	cry_not Cry_Barraskewda
+	cry_not Cry_Toxel
+	cry_not Cry_Toxtricity
+	cry_not Cry_Sizzlipede
+	cry_not Cry_Centiskorch
+	cry_not Cry_Clobbopus
+	cry_not Cry_Grapploct
+	cry_not Cry_Sinistea
+	cry_not Cry_Polteageist
+	cry_not Cry_Hatenna
+	cry_not Cry_Hattrem
+	cry_not Cry_Hatterene
+	cry_not Cry_Impidimp
+	cry_not Cry_Morgrem
+	cry_not Cry_Grimmsnarl
+	cry_not Cry_Obstagoon
+	cry_not Cry_Perrserker
+	cry_not Cry_Cursola
+	cry_not Cry_Sirfetchd
+	cry_not Cry_MrRime
+	cry_not Cry_Runerigus
+	cry_not Cry_Milcery
+	cry_not Cry_Alcremie
+	cry_not Cry_Falinks
+	cry_not Cry_Pincurchin
+	cry_not Cry_Snom
+	cry_not Cry_Frosmoth
+	cry_not Cry_Stonjourner
+	cry_not Cry_Eiscue
+	cry_not Cry_Indeedee
+	cry_not Cry_Morpeko
+	cry_not Cry_Cufant
+	cry_not Cry_Copperajah
+	cry_not Cry_Dracozolt
+	cry_not Cry_Arctozolt
+	cry_not Cry_Dracovish
+	cry_not Cry_Arctovish
+	cry_not Cry_Duraludon
+	cry_not Cry_Dreepy
+	cry_not Cry_Drakloak
+	cry_not Cry_Dragapult
+	cry_not Cry_Zacian
+	cry_not Cry_Zamazenta
+	cry_not Cry_Eternatus
+	cry_not Cry_Kubfu
+	cry_not Cry_Urshifu
+	cry_not Cry_Zarude
+	cry_not Cry_Regieleki
+	cry_not Cry_Regidrago
+	cry_not Cry_Glastrier
+	cry_not Cry_Spectrier
+	cry_not Cry_Calyrex
 	@ Megas
 	cry_not Cry_Venusaur_Mega
 	cry_not Cry_Charizard_Mega_X
@@ -950,7 +954,7 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Gallade_Mega
 	cry_not Cry_Audino_Mega
 	cry_not Cry_Diancie_Mega
-    @ Special Mega + Primals
+	@ Special Mega + Primals
 	cry_not Cry_Rayquaza_Mega
 	cry_not Cry_Kyogre_Primal
 	cry_not Cry_Groudon_Primal
@@ -973,8 +977,28 @@ gCryTable:: @ 869DCF4
 	cry Cry_Muk
 	cry Cry_Exeggutor
 	cry Cry_Marowak
-    @ Misc Forms
-    @ Cosplay Pikachu
+	@ Galarian Forms
+	cry Cry_Meowth
+	cry Cry_Ponyta
+	cry Cry_Rapidash
+	cry_not Cry_Slowpoke_Galarian
+	cry Cry_Slowbro
+	cry Cry_Farfetchd
+	cry Cry_Weezing
+	cry Cry_MrMime
+	cry Cry_Articuno
+	cry Cry_Zapdos
+	cry Cry_Moltres
+	cry Cry_Slowking
+	cry Cry_Corsola
+	cry Cry_Zigzagoon
+	cry Cry_Linoone
+	cry_not Cry_Darumaka
+	cry_not Cry_Darmanitan
+	cry_not Cry_Yamask
+	cry_not Cry_Stunfisk
+	@ Misc Forms
+	@ Cosplay Pikachu
 	cry Cry_Pikachu  @ 869DE14
 	cry Cry_Pikachu  @ 869DE14
 	cry Cry_Pikachu  @ 869DE14
@@ -989,9 +1013,10 @@ gCryTable:: @ 869DCF4
 	cry Cry_Pikachu  @ 869DE14
 	cry Cry_Pikachu  @ 869DE14
 	cry Cry_Pikachu  @ 869DE14
-    @ Pichu
+	cry Cry_Pikachu  @ 869DE14
+	@ Pichu
 	cry Cry_Pichu  @ 869E4F8
-    @ Unown
+	@ Unown
 	cry Cry_Unown  @ 869E654
 	cry Cry_Unown  @ 869E654
 	cry Cry_Unown  @ 869E654
@@ -1019,37 +1044,37 @@ gCryTable:: @ 869DCF4
 	cry Cry_Unown  @ 869E654
 	cry Cry_Unown  @ 869E654
 	cry Cry_Unown  @ 869E654
-    @ Castform
+	@ Castform
 	cry Cry_Castform
 	cry Cry_Castform
 	cry Cry_Castform
-    @ Deoxys
+	@ Deoxys
 	cry Cry_Deoxys
 	cry Cry_Deoxys
 	cry Cry_Deoxys
-    @ Burmy
+	@ Burmy
 	cry_not Cry_Burmy
 	cry_not Cry_Burmy
-    @ Wormadam
+	@ Wormadam
 	cry_not Cry_Wormadam
 	cry_not Cry_Wormadam
-    @ Cherrim
+	@ Cherrim
 	cry_not Cry_Cherrim
-    @ Shellos
+	@ Shellos
 	cry_not Cry_Shellos
-    @ Gastrodon
+	@ Gastrodon
 	cry_not Cry_Gastrodon
-    @ Rotom
+	@ Rotom
 	cry_not Cry_Rotom
 	cry_not Cry_Rotom
 	cry_not Cry_Rotom
 	cry_not Cry_Rotom
 	cry_not Cry_Rotom
-    @ Giratina
+	@ Giratina
 	cry_not Cry_Giratina
-    @ Shaymin
+	@ Shaymin
 	cry_not Cry_Shaymin_Sky
-    @ Arceus
+	@ Arceus
 	cry_not Cry_Arceus
 	cry_not Cry_Arceus
 	cry_not Cry_Arceus
@@ -1067,38 +1092,39 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Arceus
 	cry_not Cry_Arceus
 	cry_not Cry_Arceus
-    @ Basculin
+	@ Basculin
 	cry_not Cry_Basculin
-    @ Darmanitan
+	@ Darmanitan
 	cry_not Cry_Darmanitan
-    @ Deerling
+	cry_not Cry_Darmanitan
+	@ Deerling
 	cry_not Cry_Deerling
 	cry_not Cry_Deerling
 	cry_not Cry_Deerling
-    @ Sawsbuck
+	@ Sawsbuck
 	cry_not Cry_Sawsbuck
 	cry_not Cry_Sawsbuck
 	cry_not Cry_Sawsbuck
-    @ Therian Forms
+	@ Therian Forms
 	cry_not Cry_Tornadus_Therian
 	cry_not Cry_Thundurus_Therian
 	cry_not Cry_Landorus_Therian
-    @ Kyurem
+	@ Kyurem
 	cry_not Cry_Kyurem_White
 	cry_not Cry_Kyurem_Black
-    @ Keldeo
+	@ Keldeo
 	cry_not Cry_Keldeo
-    @ Meloetta
+	@ Meloetta
 	cry_not Cry_Meloetta
-    @ Genesect
+	@ Genesect
 	cry_not Cry_Genesect
 	cry_not Cry_Genesect
 	cry_not Cry_Genesect
 	cry_not Cry_Genesect
-    @ Greninja
+	@ Greninja
 	cry_not Cry_Greninja
 	cry_not Cry_Greninja
-    @ Vivillon
+	@ Vivillon
 	cry_not Cry_Vivillon
 	cry_not Cry_Vivillon
 	cry_not Cry_Vivillon
@@ -1118,23 +1144,23 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Vivillon
 	cry_not Cry_Vivillon
 	cry_not Cry_Vivillon
-    @ Flabébé
+	@ Flabébé
 	cry_not Cry_Flabebe
 	cry_not Cry_Flabebe
 	cry_not Cry_Flabebe
 	cry_not Cry_Flabebe
-    @ Floette
+	@ Floette
 	cry_not Cry_Floette
 	cry_not Cry_Floette
 	cry_not Cry_Floette
 	cry_not Cry_Floette
 	cry_not Cry_Floette_Eternal_Flower
-    @ Florges
+	@ Florges
 	cry_not Cry_Florges
 	cry_not Cry_Florges
 	cry_not Cry_Florges
 	cry_not Cry_Florges
-    @ Furfrou
+	@ Furfrou
 	cry_not Cry_Furfrou
 	cry_not Cry_Furfrou
 	cry_not Cry_Furfrou
@@ -1144,39 +1170,39 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Furfrou
 	cry_not Cry_Furfrou
 	cry_not Cry_Furfrou
-    @ Meowstic
+	@ Meowstic
 	cry_not Cry_Meowstic
 	@ Aegislash
 	cry_not Cry_Aegislash
-    @ Pumpkaboo
+	@ Pumpkaboo
 	cry_not Cry_Pumpkaboo
 	cry_not Cry_Pumpkaboo
 	cry_not Cry_Pumpkaboo_Super
-    @ Gourgeist
+	@ Gourgeist
 	cry_not Cry_Gourgeist
 	cry_not Cry_Gourgeist
 	cry_not Cry_Gourgeist_Super
-    @ Xerneas
+	@ Xerneas
 	cry_not Cry_Xerneas
-    @ Zygarde
+	@ Zygarde
 	cry_not Cry_Zygarde_10
 	cry_not Cry_Zygarde_10
 	cry_not Cry_Zygarde
 	cry_not Cry_Zygarde_Complete
-    @ Hoopa
+	@ Hoopa
 	cry_not Cry_Hoopa_Unbound
-    @ Oricorio
+	@ Oricorio
 	cry_not Cry_Oricorio_Pom_Pom
 	cry_not Cry_Oricorio_Pa_u
 	cry_not Cry_Oricorio_Sensu
-    @ Rockruff
+	@ Rockruff
 	cry_not Cry_Rockruff
-    @ Lycanroc
+	@ Lycanroc
 	cry_not Cry_Lycanroc_Midnight
 	cry_not Cry_Lycanroc_Dusk
-    @ Wishiwashi
+	@ Wishiwashi
 	cry_not Cry_Wishiwashi_School
-    @ Silvally
+	@ Silvally
 	cry_not Cry_Silvally
 	cry_not Cry_Silvally
 	cry_not Cry_Silvally
@@ -1194,7 +1220,7 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Silvally
 	cry_not Cry_Silvally
 	cry_not Cry_Silvally
-    @ Minior
+	@ Minior
 	cry_not Cry_Minior
 	cry_not Cry_Minior
 	cry_not Cry_Minior
@@ -1208,14 +1234,51 @@ gCryTable:: @ 869DCF4
 	cry_not Cry_Minior
 	cry_not Cry_Minior
 	cry_not Cry_Minior
-    @ Mimikyu
+	@ Mimikyu
 	cry_not Cry_Mimikyu
-    @ Necrozma
+	@ Necrozma
 	cry_not Cry_Necrozma_Dusk_Mane
 	cry_not Cry_Necrozma_Dawn_Wings
 	cry_not Cry_Necrozma_Ultra
-    @ Magearna
+	@ Magearna
 	cry_not Cry_Magearna
+	@ Cramorant
+	cry_not Cry_Cramorant
+	cry_not Cry_Cramorant
+	@ Toxtricity
+	cry_not Cry_Toxtricity_Low_Key
+	@ Sinistea
+	cry_not Cry_Sinistea
+	@ Polteageist
+	cry_not Cry_Polteageist
+	@ Alcremie
+	cry_not Cry_Alcremie
+	cry_not Cry_Alcremie
+	cry_not Cry_Alcremie
+	cry_not Cry_Alcremie
+	cry_not Cry_Alcremie
+	cry_not Cry_Alcremie
+	cry_not Cry_Alcremie
+	cry_not Cry_Alcremie
+	@ Eiscue
+	cry_not Cry_Eiscue_Noice_Face
+	@ Indeedee
+	cry_not Cry_Indeedee_Female
+	@ Morpeko
+	cry_not Cry_Morpeko_Hangry
+	@ Zacian
+	cry_not Cry_Zacian_Crowned_Sword
+	@ Zamazenta
+	cry_not Cry_Zamazenta_Crowned_Shield
+	@ Eternatus
+	cry_not Cry_Eternatus_Eternamax
+	@ Urshifu
+	cry_not Cry_Urshifu_Rapid_Strike_Style
+	@ Zarude
+	cry_not Cry_Zarude
+	@ Calyrex
+	cry_not Cry_Calyrex_Ice_Rider
+	cry_not Cry_Calyrex_Shadow_Rider
 
 	.align 2
 gCryTable2:: @ 869EF24
@@ -2032,91 +2095,95 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Zeraora
 	cry2_not Cry_Meltan
 	cry2_not Cry_Melmetal
-	@ Gen 8
-	cry2 Cry_Unown @ Grookey, Not implemented
-	cry2 Cry_Unown @ Thwackey, Not implemented
-	cry2 Cry_Unown @ Rillaboom, Not implemented
-	cry2 Cry_Unown @ Scorbunny, Not implemented
-	cry2 Cry_Unown @ Raboot, Not implemented
-	cry2 Cry_Unown @ Cinderace, Not implemented
-	cry2 Cry_Unown @ Sobble, Not implemented
-	cry2 Cry_Unown @ Drizzile, Not implemented
-	cry2 Cry_Unown @ Inteleon, Not implemented
-	cry2 Cry_Unown @ Skwovet, Not implemented
-	cry2 Cry_Unown @ Greedent, Not implemented
-	cry2 Cry_Unown @ Rookidee, Not implemented
-	cry2 Cry_Unown @ Corvisquire, Not implemented
-	cry2 Cry_Unown @ Corviknight, Not implemented
-	cry2 Cry_Unown @ Blipbug, Not implemented
-	cry2 Cry_Unown @ Dottler, Not implemented
-	cry2 Cry_Unown @ Orbeetle, Not implemented
-	cry2 Cry_Unown @ Nickit, Not implemented
-	cry2 Cry_Unown @ Thievul, Not implemented
-	cry2 Cry_Unown @ Gossifleur, Not implemented
-	cry2 Cry_Unown @ Eldegoss, Not implemented
-	cry2 Cry_Unown @ Wooloo, Not implemented
-	cry2 Cry_Unown @ Dubwool, Not implemented
-	cry2 Cry_Unown @ Chewtle, Not implemented
-	cry2 Cry_Unown @ Drednaw, Not implemented
-	cry2 Cry_Unown @ Yamper, Not implemented
-	cry2 Cry_Unown @ Boltund, Not implemented
-	cry2 Cry_Unown @ Rolycoly, Not implemented
-	cry2 Cry_Unown @ Carkol, Not implemented
-	cry2 Cry_Unown @ Coalossal, Not implemented
-	cry2 Cry_Unown @ Applin, Not implemented
-	cry2 Cry_Unown @ Flapple, Not implemented
-	cry2 Cry_Unown @ Appletun, Not implemented
-	cry2 Cry_Unown @ Silicobra, Not implemented
-	cry2 Cry_Unown @ Sandaconda, Not implemented
-	cry2 Cry_Unown @ Cramorant, Not implemented
-	cry2 Cry_Unown @ Arrokuda, Not implemented
-	cry2 Cry_Unown @ Barraskewda, Not implemented
-	cry2 Cry_Unown @ Toxel, Not implemented
-	cry2 Cry_Unown @ Toxtricity, Not implemented
-	cry2 Cry_Unown @ Sizzlipede, Not implemented
-	cry2 Cry_Unown @ Centiskorch, Not implemented
-	cry2 Cry_Unown @ Clobbopus, Not implemented
-	cry2 Cry_Unown @ Grapploct, Not implemented
-	cry2 Cry_Unown @ Sinistea, Not implemented
-	cry2 Cry_Unown @ Polteageist, Not implemented
-	cry2 Cry_Unown @ Hatenna, Not implemented
-	cry2 Cry_Unown @ Hattrem, Not implemented
-	cry2 Cry_Unown @ Hatterene, Not implemented
-	cry2 Cry_Unown @ Impidimp, Not implemented
-	cry2 Cry_Unown @ Morgrem, Not implemented
-	cry2 Cry_Unown @ Grimmsnarl, Not implemented
-	cry2 Cry_Unown @ Obstagoon, Not implemented
-	cry2 Cry_Unown @ Perrserker, Not implemented
-	cry2 Cry_Unown @ Cursola, Not implemented
-	cry2 Cry_Unown @ Sirfetchd, Not implemented
-	cry2 Cry_Unown @ Mr_Rime, Not implemented
-	cry2 Cry_Unown @ Runerigus, Not implemented
-	cry2 Cry_Unown @ Milcery, Not implemented
-	cry2 Cry_Unown @ Alcremie, Not implemented
-	cry2 Cry_Unown @ Falinks, Not implemented
-	cry2 Cry_Unown @ Pincurchin, Not implemented
-	cry2 Cry_Unown @ Snom, Not implemented
-	cry2 Cry_Unown @ Frosmoth, Not implemented
-	cry2 Cry_Unown @ Stonjourner, Not implemented
-	cry2 Cry_Unown @ Eiscue, Not implemented
-	cry2 Cry_Unown @ Indeedee, Not implemented
-	cry2 Cry_Unown @ Morpeko, Not implemented
-	cry2 Cry_Unown @ Cufant, Not implemented
-	cry2 Cry_Unown @ Copperajah, Not implemented
-	cry2 Cry_Unown @ Dracozolt, Not implemented
-	cry2 Cry_Unown @ Arctozolt, Not implemented
-	cry2 Cry_Unown @ Dracovish, Not implemented
-	cry2 Cry_Unown @ Arctovish, Not implemented
-	cry2 Cry_Unown @ Duraludon, Not implemented
-	cry2 Cry_Unown @ Dreepy, Not implemented
-	cry2 Cry_Unown @ Drakloak, Not implemented
-	cry2 Cry_Unown @ Dragapult, Not implemented
-	cry2 Cry_Unown @ Zacian, Not implemented
-	cry2 Cry_Unown @ Zamazenta, Not implemented
-	cry2 Cry_Unown @ Eternatus, Not implemented
-	cry2 Cry_Unown @ Kubfu, Not implemented
-	cry2 Cry_Unown @ Urshifu, Not implemented
-	cry2 Cry_Unown @ Zarude, Not implemented
+	cry2_not Cry_Grookey
+	cry2_not Cry_Thwackey
+	cry2_not Cry_Rillaboom
+	cry2_not Cry_Scorbunny
+	cry2_not Cry_Raboot
+	cry2_not Cry_Cinderace
+	cry2_not Cry_Sobble
+	cry2_not Cry_Drizzile
+	cry2_not Cry_Inteleon
+	cry2_not Cry_Skwovet
+	cry2_not Cry_Greedent
+	cry2_not Cry_Rookidee
+	cry2_not Cry_Corvisquire
+	cry2_not Cry_Corviknight
+	cry2_not Cry_Blipbug
+	cry2_not Cry_Dottler
+	cry2_not Cry_Orbeetle
+	cry2_not Cry_Nickit
+	cry2_not Cry_Thievul
+	cry2_not Cry_Gossifleur
+	cry2_not Cry_Eldegoss
+	cry2_not Cry_Wooloo
+	cry2_not Cry_Dubwool
+	cry2_not Cry_Chewtle
+	cry2_not Cry_Drednaw
+	cry2_not Cry_Yamper
+	cry2_not Cry_Boltund
+	cry2_not Cry_Rolycoly
+	cry2_not Cry_Carkol
+	cry2_not Cry_Coalossal
+	cry2_not Cry_Applin
+	cry2_not Cry_Flapple
+	cry2_not Cry_Appletun
+	cry2_not Cry_Silicobra
+	cry2_not Cry_Sandaconda
+	cry2_not Cry_Cramorant
+	cry2_not Cry_Arrokuda
+	cry2_not Cry_Barraskewda
+	cry2_not Cry_Toxel
+	cry2_not Cry_Toxtricity
+	cry2_not Cry_Sizzlipede
+	cry2_not Cry_Centiskorch
+	cry2_not Cry_Clobbopus
+	cry2_not Cry_Grapploct
+	cry2_not Cry_Sinistea
+	cry2_not Cry_Polteageist
+	cry2_not Cry_Hatenna
+	cry2_not Cry_Hattrem
+	cry2_not Cry_Hatterene
+	cry2_not Cry_Impidimp
+	cry2_not Cry_Morgrem
+	cry2_not Cry_Grimmsnarl
+	cry2_not Cry_Obstagoon
+	cry2_not Cry_Perrserker
+	cry2_not Cry_Cursola
+	cry2_not Cry_Sirfetchd
+	cry2_not Cry_MrRime
+	cry2_not Cry_Runerigus
+	cry2_not Cry_Milcery
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Falinks
+	cry2_not Cry_Pincurchin
+	cry2_not Cry_Snom
+	cry2_not Cry_Frosmoth
+	cry2_not Cry_Stonjourner
+	cry2_not Cry_Eiscue
+	cry2_not Cry_Indeedee
+	cry2_not Cry_Morpeko
+	cry2_not Cry_Cufant
+	cry2_not Cry_Copperajah
+	cry2_not Cry_Dracozolt
+	cry2_not Cry_Arctozolt
+	cry2_not Cry_Dracovish
+	cry2_not Cry_Arctovish
+	cry2_not Cry_Duraludon
+	cry2_not Cry_Dreepy
+	cry2_not Cry_Drakloak
+	cry2_not Cry_Dragapult
+	cry2_not Cry_Zacian
+	cry2_not Cry_Zamazenta
+	cry2_not Cry_Eternatus
+	cry2_not Cry_Kubfu
+	cry2_not Cry_Urshifu
+	cry2_not Cry_Zarude
+	cry2_not Cry_Regieleki
+	cry2_not Cry_Regidrago
+	cry2_not Cry_Glastrier
+	cry2_not Cry_Spectrier
+	cry2_not Cry_Calyrex
 	@ Megas
 	cry2_not Cry_Venusaur_Mega
 	cry2_not Cry_Charizard_Mega_X
@@ -2165,7 +2232,7 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Gallade_Mega
 	cry2_not Cry_Audino_Mega
 	cry2_not Cry_Diancie_Mega
-    @ Special Mega + Primals
+	@ Special Mega + Primals
 	cry2_not Cry_Rayquaza_Mega
 	cry2_not Cry_Kyogre_Primal
 	cry2_not Cry_Groudon_Primal
@@ -2188,8 +2255,28 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Muk
 	cry2 Cry_Exeggutor
 	cry2 Cry_Marowak
-    @ Misc Forms
-    @ Cosplay Pikachu
+	@ Galarian Forms
+	cry2 Cry_Meowth
+	cry2 Cry_Ponyta
+	cry2 Cry_Rapidash
+	cry2_not Cry_Slowpoke_Galarian
+	cry2 Cry_Slowbro
+	cry2 Cry_Farfetchd
+	cry2 Cry_Weezing
+	cry2 Cry_MrMime
+	cry2 Cry_Articuno
+	cry2 Cry_Zapdos
+	cry2 Cry_Moltres
+	cry2 Cry_Slowking
+	cry2 Cry_Corsola
+	cry2 Cry_Zigzagoon
+	cry2 Cry_Linoone
+	cry2_not Cry_Darumaka
+	cry2_not Cry_Darmanitan
+	cry2_not Cry_Yamask
+	cry2_not Cry_Stunfisk
+	@ Misc Forms
+	@ Cosplay Pikachu
 	cry2 Cry_Pikachu  @ 869DE14
 	cry2 Cry_Pikachu  @ 869DE14
 	cry2 Cry_Pikachu  @ 869DE14
@@ -2204,9 +2291,10 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Pikachu  @ 869DE14
 	cry2 Cry_Pikachu  @ 869DE14
 	cry2 Cry_Pikachu  @ 869DE14
-    @ Pichu
+	cry2 Cry_Pikachu  @ 869DE14
+	@ Pichu
 	cry2 Cry_Pichu  @ 869E4F8
-    @ Unown
+	@ Unown
 	cry2 Cry_Unown  @ 869E654
 	cry2 Cry_Unown  @ 869E654
 	cry2 Cry_Unown  @ 869E654
@@ -2234,37 +2322,37 @@ gCryTable2:: @ 869EF24
 	cry2 Cry_Unown  @ 869E654
 	cry2 Cry_Unown  @ 869E654
 	cry2 Cry_Unown  @ 869E654
-    @ Castform
+	@ Castform
 	cry2 Cry_Castform
 	cry2 Cry_Castform
 	cry2 Cry_Castform
-    @ Deoxys
+	@ Deoxys
 	cry2 Cry_Deoxys
 	cry2 Cry_Deoxys
 	cry2 Cry_Deoxys
-    @ Burmy
+	@ Burmy
 	cry2_not Cry_Burmy
 	cry2_not Cry_Burmy
-    @ Wormadam
+	@ Wormadam
 	cry2_not Cry_Wormadam
 	cry2_not Cry_Wormadam
-    @ Cherrim
+	@ Cherrim
 	cry2_not Cry_Cherrim
-    @ Shellos
+	@ Shellos
 	cry2_not Cry_Shellos
-    @ Gastrodon
+	@ Gastrodon
 	cry2_not Cry_Gastrodon
-    @ Rotom
+	@ Rotom
 	cry2_not Cry_Rotom
 	cry2_not Cry_Rotom
 	cry2_not Cry_Rotom
 	cry2_not Cry_Rotom
 	cry2_not Cry_Rotom
-    @ Giratina
+	@ Giratina
 	cry2_not Cry_Giratina
-    @ Shaymin
+	@ Shaymin
 	cry2_not Cry_Shaymin_Sky
-    @ Arceus
+	@ Arceus
 	cry2_not Cry_Arceus
 	cry2_not Cry_Arceus
 	cry2_not Cry_Arceus
@@ -2282,38 +2370,39 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Arceus
 	cry2_not Cry_Arceus
 	cry2_not Cry_Arceus
-    @ Basculin
+	@ Basculin
 	cry2_not Cry_Basculin
-    @ Darmanitan
+	@ Darmanitan
 	cry2_not Cry_Darmanitan
-    @ Deerling
+	cry2_not Cry_Darmanitan
+	@ Deerling
 	cry2_not Cry_Deerling
 	cry2_not Cry_Deerling
 	cry2_not Cry_Deerling
-    @ Sawsbuck
+	@ Sawsbuck
 	cry2_not Cry_Sawsbuck
 	cry2_not Cry_Sawsbuck
 	cry2_not Cry_Sawsbuck
-    @ Therian Forms
+	@ Therian Forms
 	cry2_not Cry_Tornadus_Therian
 	cry2_not Cry_Thundurus_Therian
 	cry2_not Cry_Landorus_Therian
-    @ Kyurem
+	@ Kyurem
 	cry2_not Cry_Kyurem_White
 	cry2_not Cry_Kyurem_Black
-    @ Keldeo
+	@ Keldeo
 	cry2_not Cry_Keldeo
-    @ Meloetta
+	@ Meloetta
 	cry2_not Cry_Meloetta
-    @ Genesect
+	@ Genesect
 	cry2_not Cry_Genesect
 	cry2_not Cry_Genesect
 	cry2_not Cry_Genesect
 	cry2_not Cry_Genesect
-    @ Greninja
+	@ Greninja
 	cry2_not Cry_Greninja
 	cry2_not Cry_Greninja
-    @ Vivillon
+	@ Vivillon
 	cry2_not Cry_Vivillon
 	cry2_not Cry_Vivillon
 	cry2_not Cry_Vivillon
@@ -2333,23 +2422,23 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Vivillon
 	cry2_not Cry_Vivillon
 	cry2_not Cry_Vivillon
-    @ Flabébé
+	@ Flabébé
 	cry2_not Cry_Flabebe
 	cry2_not Cry_Flabebe
 	cry2_not Cry_Flabebe
 	cry2_not Cry_Flabebe
-    @ Floette
+	@ Floette
 	cry2_not Cry_Floette
 	cry2_not Cry_Floette
 	cry2_not Cry_Floette
 	cry2_not Cry_Floette
 	cry2_not Cry_Floette_Eternal_Flower
-    @ Florges
+	@ Florges
 	cry2_not Cry_Florges
 	cry2_not Cry_Florges
 	cry2_not Cry_Florges
 	cry2_not Cry_Florges
-    @ Furfrou
+	@ Furfrou
 	cry2_not Cry_Furfrou
 	cry2_not Cry_Furfrou
 	cry2_not Cry_Furfrou
@@ -2359,39 +2448,39 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Furfrou
 	cry2_not Cry_Furfrou
 	cry2_not Cry_Furfrou
-    @ Meowstic
+	@ Meowstic
 	cry2_not Cry_Meowstic
 	@ Aegislash
 	cry2_not Cry_Aegislash
-    @ Pumpkaboo
+	@ Pumpkaboo
 	cry2_not Cry_Pumpkaboo
 	cry2_not Cry_Pumpkaboo
 	cry2_not Cry_Pumpkaboo_Super
-    @ Gourgeist
+	@ Gourgeist
 	cry2_not Cry_Gourgeist
 	cry2_not Cry_Gourgeist
 	cry2_not Cry_Gourgeist_Super
-    @ Xerneas
+	@ Xerneas
 	cry2_not Cry_Xerneas
-    @ Zygarde
+	@ Zygarde
 	cry2_not Cry_Zygarde_10
 	cry2_not Cry_Zygarde_10
 	cry2_not Cry_Zygarde
 	cry2_not Cry_Zygarde_Complete
-    @ Hoopa
+	@ Hoopa
 	cry2_not Cry_Hoopa_Unbound
-    @ Oricorio
+	@ Oricorio
 	cry2_not Cry_Oricorio_Pom_Pom
 	cry2_not Cry_Oricorio_Pa_u
 	cry2_not Cry_Oricorio_Sensu
-    @ Rockruff
+	@ Rockruff
 	cry2_not Cry_Rockruff
-    @ Lycanroc
+	@ Lycanroc
 	cry2_not Cry_Lycanroc_Midnight
 	cry2_not Cry_Lycanroc_Dusk
-    @ Wishiwashi
+	@ Wishiwashi
 	cry2_not Cry_Wishiwashi_School
-    @ Silvally
+	@ Silvally
 	cry2_not Cry_Silvally
 	cry2_not Cry_Silvally
 	cry2_not Cry_Silvally
@@ -2409,7 +2498,7 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Silvally
 	cry2_not Cry_Silvally
 	cry2_not Cry_Silvally
-    @ Minior
+	@ Minior
 	cry2_not Cry_Minior
 	cry2_not Cry_Minior
 	cry2_not Cry_Minior
@@ -2423,11 +2512,48 @@ gCryTable2:: @ 869EF24
 	cry2_not Cry_Minior
 	cry2_not Cry_Minior
 	cry2_not Cry_Minior
-    @ Mimikyu
+	@ Mimikyu
 	cry2_not Cry_Mimikyu
-    @ Necrozma
+	@ Necrozma
 	cry2_not Cry_Necrozma_Dusk_Mane
 	cry2_not Cry_Necrozma_Dawn_Wings
 	cry2_not Cry_Necrozma_Ultra
-    @ Magearna
+	@ Magearna
 	cry2_not Cry_Magearna
+		@ Cramorant
+	cry2_not Cry_Cramorant
+	cry2_not Cry_Cramorant
+	@ Toxtricity
+	cry2_not Cry_Toxtricity_Low_Key
+	@ Sinistea
+	cry2_not Cry_Sinistea
+	@ Polteageist
+	cry2_not Cry_Polteageist
+	@ Alcremie
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Alcremie
+	cry2_not Cry_Alcremie
+	@ Eiscue
+	cry2_not Cry_Eiscue_Noice_Face
+	@ Indeedee
+	cry2_not Cry_Indeedee_Female
+	@ Morpeko
+	cry2_not Cry_Morpeko_Hangry
+	@ Zacian
+	cry2_not Cry_Zacian_Crowned_Sword
+	@ Zamazenta
+	cry2_not Cry_Zamazenta_Crowned_Shield
+	@ Eternatus
+	cry2_not Cry_Eternatus_Eternamax
+	@ Urshifu
+	cry2_not Cry_Urshifu_Rapid_Strike_Style
+	@ Zarude
+	cry2_not Cry_Zarude
+	@ Calyrex
+	cry2_not Cry_Calyrex_Ice_Rider
+	cry2_not Cry_Calyrex_Shadow_Rider
