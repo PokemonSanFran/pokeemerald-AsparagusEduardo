@@ -657,3 +657,7 @@ MagmaHideout_4F_EventScript_MaxRevive:: @ 829151F
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope:: @ 829152C
 	finditem ITEM_ESCAPE_ROPE
 	end
+
+ScorchedSlab_EventScript_ItemTyranitarite::
+	finditem ITEM_TYRANITARITE
+	end

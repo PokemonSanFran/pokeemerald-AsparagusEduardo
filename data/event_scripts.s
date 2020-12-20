@@ -1123,4 +1123,8 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	.include "data/scripts/rotom.inc"
 	.include "data/scripts/ud_trade.inc"
 	@.include "data/text/cable_club.inc"
+
+	.include "data/maps/ScorchedSlab_B1F/scripts.inc"
+	.include "data/maps/ScorchedSlab_B2F/scripts.inc"
+	.include "data/maps/ScorchedSlab_HeatransRoom/scripts.inc"
     
