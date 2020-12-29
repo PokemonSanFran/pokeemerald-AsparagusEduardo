@@ -27552,6 +27552,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_PONYTA_GALARIAN] =
@@ -27581,6 +27582,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_RAPIDASH_GALARIAN] =
@@ -27610,6 +27612,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_SLOWPOKE_GALARIAN] =
@@ -27639,6 +27642,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
 
@@ -27669,6 +27673,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_FARFETCHD_GALARIAN] =
@@ -27699,6 +27704,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_WEEZING_GALARIAN] =
@@ -27731,6 +27737,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_MR_MIME_GALARIAN] =
@@ -27760,6 +27767,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_ARTICUNO_GALARIAN] =
@@ -27788,6 +27796,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_ZAPDOS_GALARIAN] =
@@ -27816,6 +27825,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_MOLTRES_GALARIAN] =
@@ -27844,6 +27854,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_SLOWKING_GALARIAN] =
@@ -27873,6 +27884,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_CORSOLA_GALARIAN] =
@@ -27902,6 +27914,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_ZIGZAGOON_GALARIAN] =
@@ -27931,6 +27944,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_LINOONE_GALARIAN] =
@@ -27960,6 +27974,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_DARUMAKA_GALARIAN] =
@@ -27985,6 +28000,7 @@ const struct BaseStats gBaseStats[] =
         .abilityHidden = ABILITY_INNER_FOCUS,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_DARMANITAN_GALARIAN] =
@@ -28014,6 +28030,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_YAMASK_GALARIAN] =
@@ -28042,6 +28059,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_STUNFISK_GALARIAN] =
@@ -28070,6 +28088,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_PIKACHU_COSPLAY] =
@@ -30221,6 +30240,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = F_GALARIAN_FORM,
     },
 
     [SPECIES_DEERLING_SUMMER] =
