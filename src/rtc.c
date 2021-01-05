@@ -3,48 +3,6 @@
 #include "string_util.h"
 #include "text.h"
 
-/*-----------KEPT FROM SIERRA'S DNS------------------------*/
-#include "strings.h"
-bool8 IsCurrentlyDay(void) //My own custom function
-{
-    return GetCurrentTimeOfDay() != TIME_NIGHT;
-}
-u8 GetTimeOfDay(s8 hours)
-{
-    if (hours < TIME_MORNING_HOUR)
-        return TIME_NIGHT;
-    else if (hours < TIME_DAY_HOUR)
-        return TIME_MORNING;
-    else if (hours < TIME_SUNSET_HOUR)
-        return TIME_DAY;
-    else if (hours < TIME_NIGHT_HOUR)
-        return TIME_SUNSET;
-    else
-        return TIME_NIGHT;
-}
-u8 GetCurrentTimeOfDay(void)
-{
-    RtcCalcLocalTime(); //With Sierra's DNS this is already calculated automatically, but it's needed here without it
-    return GetTimeOfDay(gLocalTime.hours);
-}
-
-const u8 *const gDayOfWeekTable[] = 
-{
-    gText_Sunday,
-    gText_Monday,
-    gText_Tuesday,
-    gText_Wednesday,
-    gText_Thursday,
-    gText_Friday,
-    gText_Saturday
-};
-
-const u8 *GetDayOfWeekString(u8 dayOfWeek)
-{
-    return gDayOfWeekTable[dayOfWeek];
-}
-/*---------------------------------------------------------*/
-
 // iwram bss
 static u16 sErrorStatus;
 static struct SiiRtcInfo sRtc;
@@ -173,6 +131,21 @@ void RtcGetInfo(struct SiiRtcInfo *rtc)
         RtcGetRawInfo(rtc);
 }
 
+void RtcGetInfoFast(struct SiiRtcInfo *rtc)
+{
+    if (sErrorStatus & RTC_ERR_FLAG_MASK)
+        *rtc = sRtcDummy;
+    else
+        RtcGetRawInfoFast(rtc);
+}
+
+void RtcGetTime(struct SiiRtcInfo *rtc)
+{
+    RtcDisableInterrupts();
+    SiiRtcGetTime(rtc);
+    RtcRestoreInterrupts();
+}
+
 void RtcGetDateTime(struct SiiRtcInfo *rtc)
 {
     RtcDisableInterrupts();
@@ -191,6 +164,12 @@ void RtcGetRawInfo(struct SiiRtcInfo *rtc)
 {
     RtcGetStatus(rtc);
     RtcGetDateTime(rtc);
+}
+
+void RtcGetRawInfoFast(struct SiiRtcInfo *rtc)
+{
+    RtcGetStatus(rtc);
+    RtcGetTime(rtc);
 }
 
 u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
@@ -339,6 +318,12 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 void RtcCalcLocalTime(void)
 {
     RtcGetInfo(&sRtc);
+    RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2Ptr->localTimeOffset);
+}
+
+void RtcCalcLocalTimeFast(void)
+{
+    RtcGetInfoFast(&sRtc);
     RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2Ptr->localTimeOffset);
 }
 

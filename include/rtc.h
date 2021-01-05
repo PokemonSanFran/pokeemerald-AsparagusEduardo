@@ -19,23 +19,6 @@
 
 extern struct Time gLocalTime;
 
-/*-----------KEPT FROM SIERRA'S DNS------------------------*/
-#define TIME_MORNING_HOUR 4
-#define TIME_DAY_HOUR 10
-#define TIME_SUNSET_HOUR 18
-#define TIME_NIGHT_HOUR 20
-
-#define TIME_MORNING 0
-#define TIME_DAY 1
-#define TIME_SUNSET 2
-#define TIME_NIGHT 3
-#define TIME_OF_DAY_COUNT 4
-
-bool8 IsCurrentlyDay(void);
-u8 GetCurrentTimeOfDay(void);
-const u8 *GetDayOfWeekString(u8 dayOfWeek);
-/*---------------------------------------------------------*/
-
 void RtcDisableInterrupts(void);
 void RtcRestoreInterrupts(void);
 u32 ConvertBcdToBinary(u8 bcd);
@@ -48,6 +31,7 @@ void RtcGetInfo(struct SiiRtcInfo *rtc);
 void RtcGetDateTime(struct SiiRtcInfo *rtc);
 void RtcGetStatus(struct SiiRtcInfo *rtc);
 void RtcGetRawInfo(struct SiiRtcInfo *rtc);
+void RtcGetRawInfoFast(struct SiiRtcInfo *rtc);
 u16 RtcCheckInfo(struct SiiRtcInfo *rtc);
 void RtcReset(void);
 void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second);
@@ -57,6 +41,7 @@ void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day);
 void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day);
 void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t);
 void RtcCalcLocalTime(void);
+void RtcCalcLocalTimeFast(void);
 void RtcInitLocalTimeOffset(s32 hour, s32 minute);
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);

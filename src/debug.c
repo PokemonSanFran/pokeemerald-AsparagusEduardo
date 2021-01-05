@@ -12,6 +12,7 @@
 #include "coins.h"
 #include "credits.h"
 #include "data.h"
+#include "day_night.h"
 #include "daycare.h"
 #include "debug.h"
 #include "event_data.h"
