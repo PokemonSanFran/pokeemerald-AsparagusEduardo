@@ -61,7 +61,6 @@ static void HandleInitWindows(void);
 static void LaunchPokeblockFeedTask(void);
 static void SetPokeblockSpritePal(u8 pokeblockCaseId);
 static void sub_817A5CC(void);
-static void sub_8148108(u8 spriteId, bool8 a1);
 static void DoPokeblockCaseThrowEffect(u8 spriteId, bool8 arg1);
 static void PrepareMonToMoveToPokeblock(u8 spriteId);
 static void Task_HandleMonAtePokeblock(u8 taskId);
@@ -650,7 +649,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
         formId = GetMonData(mon, MON_DATA_FORM_ID);
         formSpeciesId = GetFormSpeciesId(species, formId);
-        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites[1], formSpeciesId, personality);
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites.ptr[1], formSpeciesId, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:

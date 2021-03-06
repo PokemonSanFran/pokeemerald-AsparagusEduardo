@@ -3120,7 +3120,7 @@ static u8 CreateContestantSprite(u16 species, u32 otId, u32 personality, u32 ind
     species = SanitizeSpecies(species);
     formSpeciesId = GetFormSpeciesId(species, formId);
 
-    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites[0], formSpeciesId, personality);
+    HandleLoadSpecialPokePic(&gMonBackPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites.ptr[0], formSpeciesId, personality);
 
     LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(formSpeciesId, otId, personality), 0x120, 0x20);
     SetMultiuseSpriteTemplateToPokemon(species, 0, formId);
@@ -4422,7 +4422,6 @@ static void CalculateAppealMoveImpact(u8 contestant)
     u16 move;
     u8 effect;
     u8 rnd;
-    bool8 canUseTurn;
     s32 i;
 
     eContestantStatus[contestant].appeal = 0;

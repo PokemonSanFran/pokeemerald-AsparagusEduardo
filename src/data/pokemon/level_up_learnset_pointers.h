@@ -439,7 +439,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_BRONZOR] = sBronzorLevelUpLearnset,
     [SPECIES_BRONZONG] = sBronzongLevelUpLearnset,
     [SPECIES_BONSLY] = sBonslyLevelUpLearnset,
-    [SPECIES_MIMEJR] = sMimeJrLevelUpLearnset,
+    [SPECIES_MIME_JR] = sMimeJrLevelUpLearnset,
     [SPECIES_HAPPINY] = sHappinyLevelUpLearnset,
     [SPECIES_CHATOT] = sChatotLevelUpLearnset,
     [SPECIES_SPIRITOMB] = sSpiritombLevelUpLearnset,
@@ -782,7 +782,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_BRUXISH] = sBruxishLevelUpLearnset,
     [SPECIES_DRAMPA] = sDrampaLevelUpLearnset,
     [SPECIES_DHELMISE] = sDhelmiseLevelUpLearnset,
-    [SPECIES_JANGMO_O] = sJangmoOLevelUpLearnset,
+    [SPECIES_JANGMO_O] = sJangmooLevelUpLearnset,
     [SPECIES_HAKAMO_O] = sHakamoOLevelUpLearnset,
     [SPECIES_KOMMO_O] = sKommoOLevelUpLearnset,
     [SPECIES_TAPU_KOKO] = sTapuKokoLevelUpLearnset,
@@ -1186,7 +1186,7 @@ const struct LevelUpMove *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_HOOPA_UNBOUND] = sHoopaUnboundLevelUpLearnset,
     // Oricorio
     [SPECIES_ORICORIO_POM_POM] = sOricorioLevelUpLearnset,
-    [SPECIES_ORICORIO_PA_U] = sOricorioLevelUpLearnset,
+    [SPECIES_ORICORIO_PAU] = sOricorioLevelUpLearnset,
     [SPECIES_ORICORIO_SENSU] = sOricorioLevelUpLearnset,
     // Rockruff
     [SPECIES_ROCKRUFF_OWN_TEMPO] = sRockruffLevelUpLearnset,

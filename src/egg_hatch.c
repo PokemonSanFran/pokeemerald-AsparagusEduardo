@@ -324,7 +324,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     pokerus = GetMonData(egg, MON_DATA_POKERUS);
     obedience = GetMonData(egg, MON_DATA_OBEDIENCE);
 
-    CreateMon(temp, species, EGG_HATCH_LEVEL, 32, TRUE, personality, OT_ID_PLAYER_ID, 0, formId);
+    CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0, formId);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -439,8 +439,8 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
             formId = GetMonData(mon, MON_DATA_FORM_ID);
             formSpeciesId = GetFormSpeciesId(species, formId);
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId],
-                                                      gMonSpritesGfxPtr->sprites[(a0 * 2) + 1],
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[formSpeciesId],
+                                                      gMonSpritesGfxPtr->sprites.ptr[(a0 * 2) + 1],
                                                       formSpeciesId, pid);
             LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
             *speciesLoc = species; // handle forms?

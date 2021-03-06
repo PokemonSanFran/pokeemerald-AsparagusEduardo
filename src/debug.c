@@ -1718,7 +1718,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     gTasks[taskId].data[5] = 0;            //Complex?
     FreeMonIconPalettes();                 //Free space for new pallete
     LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, 0); //Create pokemon sprite
+    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, 0); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
 }
 static void DebugAction_Give_PokemonComplex(u8 taskId)
@@ -1756,7 +1756,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     gTasks[taskId].data[5] = 1;            //Complex?
     FreeMonIconPalettes();                 //Free space for new palletes
     LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create pokemon sprite
+    gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create pokemon sprite
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
     gTasks[taskId].data[7] = 0;             //iterator
 }
@@ -1804,7 +1804,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]);
         FreeMonIconPalettes(); //Free space for new pallete
         LoadMonIconPalette(gTasks[taskId].data[3]); //Loads pallete for current mon
-        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create new pokemon sprite
+        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create new pokemon sprite
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
     }
 

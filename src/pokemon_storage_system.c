@@ -4095,7 +4095,7 @@ static void LoadCursorMonGfx(u16 species, u32 pid, u8 formId)
 
     if (species != SPECIES_NONE)
     {
-        LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId], sPSSData->field_22C4, formSpeciesId, pid, TRUE);
+        LoadSpecialPokePic(&gMonFrontPicTable[formSpeciesId], sPSSData->field_22C4, formSpeciesId, pid, TRUE);
         LZ77UnCompWram(sPSSData->cursorMonPalette, sPSSData->field_2244);
         CpuCopy32(sPSSData->field_22C4, sPSSData->field_223C, 0x800);
         LoadPalette(sPSSData->field_2244, sPSSData->field_223A, 0x20);
@@ -5178,7 +5178,7 @@ static u16 sub_80CC124(u16 species, u32 personality)
     sPSSData->field_B58[i] = species;
     sPSSData->field_B08[i]++;
     var = 16 * i;
-    CpuCopy32(GetMonIconTiles(species, TRUE, personality), (void*)(OBJ_VRAM0) + var * 32, 0x200);
+    CpuCopy32(GetMonIconTiles(species, personality), (void*)(OBJ_VRAM0) + var * 32, 0x200);
 
     return var;
 }
@@ -6786,11 +6786,11 @@ static void SetCursorMonData(void *pokemon, u8 mode)
 {
     u8 *txtPtr;
     u16 gender;
-    bool8 sanityIsBagEgg;
+    bool8 sanityIsBadEgg;
 
     sPSSData->cursorMonItem = 0;
     gender = MON_MALE;
-    sanityIsBagEgg = FALSE;
+    sanityIsBadEgg = FALSE;
     if (mode == MODE_PARTY)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
@@ -6798,8 +6798,8 @@ static void SetCursorMonData(void *pokemon, u8 mode)
         sPSSData->cursorMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
         if (sPSSData->cursorMonSpecies != SPECIES_NONE)
         {
-            sanityIsBagEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
-            if (sanityIsBagEgg)
+            sanityIsBadEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
+            if (sanityIsBadEgg)
                 sPSSData->cursorMonIsEgg = TRUE;
             else
                 sPSSData->cursorMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
@@ -6823,8 +6823,8 @@ static void SetCursorMonData(void *pokemon, u8 mode)
         if (sPSSData->cursorMonSpecies != SPECIES_NONE)
         {
             u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
-            sanityIsBagEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
-            if (sanityIsBagEgg)
+            sanityIsBadEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
+            if (sanityIsBadEgg)
                 sPSSData->cursorMonIsEgg = TRUE;
             else
                 sPSSData->cursorMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
@@ -6856,7 +6856,7 @@ static void SetCursorMonData(void *pokemon, u8 mode)
     }
     else if (sPSSData->cursorMonIsEgg)
     {
-        if (sanityIsBagEgg)
+        if (sanityIsBadEgg)
             StringCopyPadded(sPSSData->cursorMonNickText, sPSSData->cursorMonNick, CHAR_SPACE, 5);
         else
             StringCopyPadded(sPSSData->cursorMonNickText, gText_EggNickname, CHAR_SPACE, 8);
@@ -8346,7 +8346,7 @@ static void sub_80D07B0(u8 arg0, u8 arg1)
 
     if (species != SPECIES_NONE)
     {
-        const u8 *iconGfx = GetMonIconPtr(species, personality, 1, formId);
+        const u8 *iconGfx = GetMonIconPtr(species, personality, formId);
         u8 index = GetValidMonIconPalIndex(species, formId) + 8;
 
         BlitBitmapRectToWindow4BitTo8Bit(sPSSData->field_2200,
@@ -8400,7 +8400,7 @@ static u8 sub_80D0894(void)
 
 static void sub_80D08CC(void)
 {
-    s32 i, j, r8, r9;
+    s32 i, j;
     s32 rowCount, columnCount;
     u8 boxId;
     u8 monArrayId;
@@ -8419,8 +8419,13 @@ static void sub_80D08CC(void)
         for (j = sMoveMonsPtr->minRow; j < rowCount; j++)
         {
             struct BoxPokemon *boxMon = GetBoxedMonPtr(boxId, boxPosition);
-
+            // UB: possible null dereference
+#ifdef UBFIX
+            if (boxMon != NULL)
+                sMoveMonsPtr->boxMons[monArrayId] = *boxMon;
+#else
             sMoveMonsPtr->boxMons[monArrayId] = *boxMon;
+#endif
             monArrayId++;
             boxPosition++;
         }
@@ -9340,10 +9345,11 @@ u32 GetBoxMonLevelAt(u8 boxId, u8 boxPosition)
 {
     u32 lvl;
 
-    // BUG: Missed 'else' statement.
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT && GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES))
         lvl = GetLevelFromBoxMonExp(&gPokemonStoragePtr->boxes[boxId][boxPosition]);
-    // else
+    #ifdef BUGFIX
+    else
+    #endif
         lvl = 0;
 
     return lvl;

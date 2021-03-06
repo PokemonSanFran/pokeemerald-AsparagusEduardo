@@ -291,7 +291,7 @@ static const u16 RyuSpeciesIDs[NUM_SPECIES] =
     [SPECIES_HONCHKROW] = 430,      [SPECIES_GLAMEOW] = 431,        [SPECIES_PURUGLY] = 432,        
     [SPECIES_CHINGLING] = 433,      [SPECIES_STUNKY] = 434,         [SPECIES_SKUNTANK] = 435,       
     [SPECIES_BRONZOR] = 436,        [SPECIES_BRONZONG] = 437,       [SPECIES_BONSLY] = 438,         
-    [SPECIES_MIMEJR] = 439,         [SPECIES_HAPPINY] = 440,        [SPECIES_CHATOT] = 441,         
+    [SPECIES_MIME_JR] = 439,         [SPECIES_HAPPINY] = 440,        [SPECIES_CHATOT] = 441,         
     [SPECIES_SPIRITOMB] = 442,      [SPECIES_GIBLE] = 443,          [SPECIES_GABITE] = 444,         
     [SPECIES_GARCHOMP] = 445,       [SPECIES_MUNCHLAX] = 446,       [SPECIES_RIOLU] = 447,          
     [SPECIES_LUCARIO] = 448,        [SPECIES_HIPPOPOTAS] = 449,     [SPECIES_HIPPOWDON] = 450,      

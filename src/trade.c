@@ -394,7 +394,7 @@ static void CB2_CreateTradeMenu(void)
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            CreateMon(&gEnemyParty[i], SPECIES_NONE, 0, 32, FALSE, 0, OT_ID_PLAYER_ID, 0, 0);
+            CreateMon(&gEnemyParty[i], SPECIES_NONE, 0, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0, 0);
         }
 
         PrintTradeMessage(TRADE_MSG_STANDBY);
@@ -520,7 +520,6 @@ static void CB2_CreateTradeMenu(void)
                                                          (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY),
-                                                         TRUE,
                                                          GetMonData(mon, MON_DATA_FORM_ID));
         }
         if (!adaptedPlayerSpecies2)
@@ -537,7 +536,6 @@ static void CB2_CreateTradeMenu(void)
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY),
-                                                         FALSE,
                                                          GetMonData(mon, MON_DATA_FORM_ID));
         }
         gMain.state++;
@@ -729,9 +727,8 @@ static void CB2_ReturnToTradeMenu(void)
                                                          (sTradeMonSpriteCoords[i][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY),
-                                                         TRUE,
                                                          GetMonData(mon, MON_DATA_FORM_ID));
-        }
+
 
         for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PARTNER]; i++)
         {
@@ -742,7 +739,6 @@ static void CB2_ReturnToTradeMenu(void)
                                                          (sTradeMonSpriteCoords[i + PARTY_SIZE][1] * 8) - 12,
                                                          1,
                                                          GetMonData(mon, MON_DATA_PERSONALITY),
-                                                         FALSE,
                                                          GetMonData(mon, MON_DATA_FORM_ID));
         }
         gMain.state++;
@@ -851,6 +847,7 @@ static void CB2_ReturnToTradeMenu(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
+    }
 }
 
 static void VBlankCB_TradeMenu(void)
@@ -2827,7 +2824,7 @@ static void LoadTradeMonPic(u8 whichParty, u8 state)
         formId = GetMonData(mon, MON_DATA_FORM_ID);
         formSpeciesId = GetFormSpeciesId(species, formId);
 
-        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites[whichParty * 2 + 1], formSpeciesId, personality);
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites.ptr[whichParty * 2 + 1], formSpeciesId, personality);
 
         LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
         sTradeData->monSpecies[whichParty] = species;
@@ -3763,7 +3760,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case 65:
         if (gSprites[sTradeData->unk_D3].callback == SpriteCallbackDummy)
         {
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER])], gMonSpritesGfxPtr->sprites[3], GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER]), sTradeData->monPersonalities[TRADE_PARTNER]);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER])], gMonSpritesGfxPtr->sprites.ptr[3], GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER]), sTradeData->monPersonalities[TRADE_PARTNER]);
             sTradeData->state++;
         }
         break;
@@ -4279,7 +4276,7 @@ static bool8 AnimateTradeSequenceWireless(void)
     case 65:
         if (gSprites[sTradeData->unk_D3].callback == SpriteCallbackDummy)
         {
-            HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER])], gMonSpritesGfxPtr->sprites[3], GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER]), sTradeData->monPersonalities[TRADE_PARTNER]);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER])], gMonSpritesGfxPtr->sprites.ptr[3], GetFormSpeciesId(sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monFormIds[TRADE_PARTNER]), sTradeData->monPersonalities[TRADE_PARTNER]);
             sTradeData->state++;
         }
         break;
@@ -4542,7 +4539,7 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
     u8 isMail;
     struct Pokemon *pokemon = &gEnemyParty[0];
 
-    CreateMon(pokemon, inGameTrade->species, level, 32, TRUE, inGameTrade->personality, OT_ID_PRESET, inGameTrade->otId, GetFormIdFromFormSpeciesId(inGameTrade->species));
+    CreateMon(pokemon, inGameTrade->species, level, USE_RANDOM_IVS, TRUE, inGameTrade->personality, OT_ID_PRESET, inGameTrade->otId, GetFormIdFromFormSpeciesId(inGameTrade->species));
 
     SetMonData(pokemon, MON_DATA_HP_IV, &inGameTrade->ivs[0]);
     SetMonData(pokemon, MON_DATA_ATK_IV, &inGameTrade->ivs[1]);

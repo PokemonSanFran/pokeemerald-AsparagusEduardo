@@ -2057,7 +2057,7 @@ u8 GetBattlerSpriteBGPriorityRank(u8 battlerId)
     return 1;
 }
 
-u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u32 a10, u8 formId)
+u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, u8 formId)
 {
     u8 spriteId;
     u16 sheet = LoadSpriteSheet(&sUnknown_08525FC0[a3]);
@@ -2069,7 +2069,7 @@ u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(formSpeciesId, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[formSpeciesId],
+        LoadSpecialPokePic(&gMonFrontPicTable[formSpeciesId],
                                             gMonSpritesGfxPtr->buffer,
                                             formSpeciesId,
                                             personality,
@@ -2078,7 +2078,7 @@ u8 sub_80A8394(u16 species, bool8 isBackpic, u8 a3, s16 x, s16 y, u8 subpriority
     else
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(formSpeciesId, trainerId, personality), (palette * 0x10) + 0x100, 0x20);
-        LoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[formSpeciesId],
+        LoadSpecialPokePic(&gMonBackPicTable[formSpeciesId],
                                             gMonSpritesGfxPtr->buffer,
                                             formSpeciesId,
                                             personality,
