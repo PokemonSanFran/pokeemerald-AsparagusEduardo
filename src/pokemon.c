@@ -5277,7 +5277,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
         battlerId = MAX_BATTLERS_COUNT;
     }
     
-    if (gItemEffectTable[item - ITEM_POTION] == NULL && item != ITEM_ENIGMA_BERRY)
+    if (gItemEffectTable[item] == NULL && item != ITEM_ENIGMA_BERRY)
         return TRUE;
 
     // Get item effect
