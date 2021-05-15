@@ -7325,6 +7325,7 @@ static void Task_HandleEvolutionScreenInput(u8 taskId)
 }
 static void handleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u8 base_x, u8 base_y, u8 base_offset, u8 base_i)
 {
+    u8 formId = GetFormIdFromFormSpeciesId(targetSpecies);
     StringCopy(gStringVar3, gSpeciesNames[targetSpecies]); //evolution mon name
     StringExpandPlaceholders(gStringVar3, gText_EVO_Name); //evolution mon name
     PrintInfoScreenTextSmall(gStringVar3, base_x, base_y + base_offset*base_i); //evolution mon name
@@ -7336,7 +7337,7 @@ static void handleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u8 base_x, u8
             gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0, TRUE); //Create pokemon sprite
         #endif
         #ifdef POKEMON_EXPANSION
-            gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0, 0); //Create pokemon sprite
+            gTasks[taskId].data[4+base_i] = CreateMonIcon(targetSpecies, SpriteCB_MonIcon, 50 + 32*base_i, 31, 4, 0, formId); //Create pokemon sprite
         #endif
         gSprites[gTasks[taskId].data[4+base_i]].oam.priority = 0;
     }
