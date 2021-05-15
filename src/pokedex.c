@@ -7621,6 +7621,21 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species)
                 PrintInfoScreenTextSmall(gStringVar4, base_x+base_x_offset, base_y + base_offset*base_i);
                 break;
         #endif
+        case EVO_ITEM_ALOLA:
+            item = gEvolutionTable[species][i].param;
+            CopyItemName(item, gStringVar2);
+            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            handleTargetSpeciesPrint(taskId, targetSpecies, base_x, base_y, base_offset, base_i); //evolution mon name
+            StringExpandPlaceholders(gStringVar4, gText_EVO_ITEM_ALOLA );
+            PrintInfoScreenTextSmall(gStringVar4, base_x+base_x_offset, base_y + base_offset*base_i);
+            break;
+        case EVO_LEVEL_NIGHT_ALOLA:
+            ConvertIntToDecimalStringN(gStringVar2, gEvolutionTable[species][i].param, STR_CONV_MODE_LEADING_ZEROS, EVO_SCREEN_LVL_DIGITS); //level
+            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            handleTargetSpeciesPrint(taskId, targetSpecies, base_x, base_y, base_offset, base_i); //evolution mon name
+            StringExpandPlaceholders(gStringVar4, gText_EVO_LEVEL_NIGHT_ALOLA );
+            PrintInfoScreenTextSmall(gStringVar4, base_x+base_x_offset, base_y + base_offset*base_i);
+            break;
         }//Switch end
     }//For loop end
 }
