@@ -990,6 +990,28 @@ void GetOnOffBike(u8 transitionFlags)
     }
 }
 
+void SwitchBikeGears(void)
+{
+    if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE))
+    {
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
+        Overworld_ClearSavedMusic();
+        Overworld_PlaySpecialMapMusic();
+    }
+    else if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    {
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
+        PlaySE(SE_BIKE_BELL);
+    }
+    else
+    {
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
+        PlaySE(SE_BIKE_BELL);
+        Overworld_SetSavedMusic(MUS_CYCLING);
+        Overworld_ChangeMusicTo(MUS_CYCLING);
+    }
+}
+
 void BikeClearState(int newDirHistory, int newAbStartHistory)
 {
     u8 i;

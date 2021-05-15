@@ -57,6 +57,7 @@ static void PlayerFaceHiddenItem(u8 a);
 static void CheckForHiddenItemsInMapConnection(u8 taskId);
 static void Task_OpenRegisteredPokeblockCase(u8 taskId);
 static void ItemUseOnFieldCB_Bike(u8 taskId);
+static void ItemUseOnFieldCB_GearBike(u8 taskId);
 static void ItemUseOnFieldCB_Rod(u8);
 static void ItemUseOnFieldCB_Itemfinder(u8);
 static void ItemUseOnFieldCB_Berry(u8 taskId);
@@ -219,12 +220,42 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
     }
 }
 
+void ItemUseOutOfBattle_GearBike(u8 taskId)
+{
+    s16* data = gTasks[taskId].data;
+    s16 coordsY;
+    s16 coordsX;
+    u8 behavior;
+    PlayerGetDestCoords(&coordsX, &coordsY);
+    behavior = MapGridGetMetatileBehaviorAt(coordsX, coordsY);
+    if (FlagGet(FLAG_SYS_CYCLING_ROAD) == TRUE || MetatileBehavior_IsVerticalRail(behavior) == TRUE || MetatileBehavior_IsHorizontalRail(behavior) == TRUE || MetatileBehavior_IsIsolatedVerticalRail(behavior) == TRUE || MetatileBehavior_IsIsolatedHorizontalRail(behavior) == TRUE)
+        DisplayCannotDismountBikeMessage(taskId, tUsingRegisteredKeyItem);
+    else
+    {
+        if (Overworld_IsBikingAllowed() == TRUE && IsBikingDisallowedByPlayer() == 0)
+        {
+            sItemUseOnFieldCB = ItemUseOnFieldCB_GearBike;
+            SetUpItemUseOnFieldCallback(taskId);
+        }
+        else
+            DisplayDadsAdviceCannotUseItemMessage(taskId, tUsingRegisteredKeyItem);
+    }
+}
+
 static void ItemUseOnFieldCB_Bike(u8 taskId)
 {
     if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == MACH_BIKE)
         GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE);
     else // ACRO_BIKE
         GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
+    ScriptUnfreezeObjectEvents();
+    ScriptContext2_Disable();
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_GearBike(u8 taskId)
+{
+    SwitchBikeGears();
     ScriptUnfreezeObjectEvents();
     ScriptContext2_Disable();
     DestroyTask(taskId);
