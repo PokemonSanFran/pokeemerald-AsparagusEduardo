@@ -3632,7 +3632,7 @@ const struct Item gItems[] =
         .name = _("Scope Lens"),
 #endif
         .itemId = ITEM_SCOPE_LENS,
-        .price = 4000,
+        .price = 5000,
         .holdEffect = HOLD_EFFECT_SCOPE_LENS,
         .description = sScopeLensDesc,
         .pocket = POCKET_BATTLE_ITEMS,
