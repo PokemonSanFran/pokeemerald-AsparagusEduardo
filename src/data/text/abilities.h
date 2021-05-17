@@ -257,7 +257,7 @@ static const u8 sAsOneIceRiderDescription[] = _("Unnerve and Chilling Neigh.");
 static const u8 sAsOneShadowRiderDescription[] = _("Unnerve and Grim Neigh.");
 #else
 static const u8 sNoneDescription[] = _("No special ability.");
-static const u8 sStenchDescription[] = _("Helps repel wild Pokémon.");
+static const u8 sStenchDescription[] = _("May cause a foe to flinch.");
 static const u8 sDrizzleDescription[] = _("Summons rain in battle.");
 static const u8 sSpeedBoostDescription[] = _("Gradually boosts Speed.");
 static const u8 sBattleArmorDescription[] = _("Blocks critical hits.");

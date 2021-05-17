@@ -362,6 +362,10 @@
 #define BATTLE_TERRAIN_GRASS_DUSK   10
 #define BATTLE_TERRAIN_GRASS_NIGHT  11
 
+#define B_WAIT_TIME_LONG  64
+#define B_WAIT_TIME_MED   48
+#define B_WAIT_TIME_SHORT 32
+
 // Move targets
 #define MOVE_TARGET_SELECTED            0x0
 #define MOVE_TARGET_DEPENDS             0x1
