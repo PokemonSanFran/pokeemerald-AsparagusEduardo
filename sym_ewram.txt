@@ -151,3 +151,5 @@
 	.include "src/day_night.o"
     .include "src/dexnav.o"
 	.include "src/debug.o"
+gSoundInfo:
+    .space 0x1050
