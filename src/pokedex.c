@@ -7104,9 +7104,11 @@ static void PrintMonStatsToggle(u8 taskId)
     #ifdef POKEMON_EXPANSION
     else //Hidden abilities
     {
-        ability0 = gBaseStats[species].abilityHidden;
-        PrintInfoScreenTextSmallWhite(gAbilityNames[ability0], abilities_x, abilities_y);
-        PrintInfoScreenTextSmall(gAbilityDescriptionPointers[ability0], abilities_x, abilities_y + 14);
+        if (gBaseStats[species].abilities[2] != ABILITY_NONE)
+        {
+            PrintInfoScreenTextSmallWhite(gAbilityNames[gBaseStats[species].abilities[2]], abilities_x, abilities_y + 30);
+            PrintInfoScreenTextSmall(gAbilityDescriptionPointers[gBaseStats[species].abilities[2]], abilities_x, abilities_y + 44);
+        }
     }
     #endif
 
