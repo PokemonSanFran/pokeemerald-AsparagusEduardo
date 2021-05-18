@@ -5165,7 +5165,7 @@ u8 GetMonsStateToDoubles_2(void)
 
 u16 GetAbilityBySpecies(u16 species, u8 abilityNum, u8 formId)
 {
-    u16 formSpeciesId = GetFormSpeciesId(formSpeciesId, formId);
+    u16 formSpeciesId = GetFormSpeciesId(species, formId);
     if (abilityNum < NUM_ABILITY_SLOTS)
         gLastUsedAbility = gBaseStats[formSpeciesId].abilities[abilityNum];
     else
