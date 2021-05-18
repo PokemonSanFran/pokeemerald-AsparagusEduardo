@@ -7369,13 +7369,7 @@ void ClearBattleMonForms(void)
 
 u16 GetBattleBGM(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
-        return MUS_VS_KYOGRE_GROUDON;
-    else if (gBattleTypeFlags & BATTLE_TYPE_REGI)
-        return MUS_VS_REGI;
-    else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
-        return MUS_VS_TRAINER;
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         u8 trainerClass;
 
@@ -7420,8 +7414,43 @@ u16 GetBattleBGM(void)
             return MUS_VS_TRAINER;
         }
     }
+    else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        return MUS_VS_TRAINER;
     else
-        return MUS_VS_WILD;
+    {
+        switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
+        {
+        case SPECIES_ARTICUNO:
+        case SPECIES_ZAPDOS:
+        case SPECIES_MOLTRES:
+            return MUS_RG_VS_LEGEND;
+        case SPECIES_RAIKOU:
+            return HG_SEQ_GS_VS_RAIKOU;
+        case SPECIES_ENTEI:
+            return HG_SEQ_GS_VS_ENTEI;
+        case SPECIES_SUICUNE:
+            return HG_SEQ_GS_VS_SUICUNE;
+        case SPECIES_LUGIA:
+            return HG_SEQ_GS_VS_LUGIA;
+        case SPECIES_HO_OH:
+            return HG_SEQ_GS_VS_HOUOU;
+        case SPECIES_MEWTWO:
+            return MUS_RG_VS_MEWTWO;
+        case SPECIES_MEW:
+            return MUS_VS_MEW;
+        case SPECIES_REGIROCK:
+        case SPECIES_REGICE:
+        case SPECIES_REGISTEEL:
+            return MUS_VS_REGI;
+        case SPECIES_GROUDON:
+        case SPECIES_KYOGRE:
+            return MUS_VS_KYOGRE_GROUDON;
+        case SPECIES_DEOXYS:
+            return MUS_RG_VS_DEOXYS;
+	    default:
+            return MUS_VS_WILD;
+        }
+    }
 }
 
 void PlayBattleBGM(void)
