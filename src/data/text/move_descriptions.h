@@ -40,7 +40,7 @@ static const u8 sScratchDescription[] = _(
     "Araña con afiladas\n"
     "garras.");
 
-static const u8 sViceGripDescription[] = _(
+static const u8 sViseGripDescription[] = _(
     "Atrapa con potentes\n"
     "pinzas.");
 
@@ -539,7 +539,7 @@ static const u8 sSoftBoiledDescription[] = _(
     "Restaura hasta la mitad\n"
     "de tus PS máximos.");
 
-static const u8 sHiJumpKickDescription[] = _(
+static const u8 sHighJumpKickDescription[] = _(
     "Si fallas esta patada,\n"
     "puedes autolesionarte.");
 
@@ -735,7 +735,7 @@ static const u8 sScaryFaceDescription[] = _(
     "Asusta al enemigo para\n"
     "bajarle Velocidad.");
 
-static const u8 sFaintAttackDescription[] = _(
+static const u8 sFeintAttackDescription[] = _(
     "Acerca al enemigo para que\n"
     "el golpe no falle.");
 
@@ -1055,7 +1055,7 @@ static const u8 sFocusPunchDescription[] = _(
     "Es tardío, pero si el rival\n"
     "te golpea no te moverás.");
 
-static const u8 sSmellingSaltDescription[] = _(
+static const u8 sSmellingSaltsDescription[] = _(
     "Afecta a rivales paraliza-\n"
     "dos, pero también los cura.");
 

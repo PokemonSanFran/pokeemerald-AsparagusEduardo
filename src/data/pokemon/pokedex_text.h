@@ -728,7 +728,7 @@ const u8 gStarmiePokedexText[] = _(
     "estrellas que centelleaban con suavidad\n"
     "en el cielo nocturno.");
 
-const u8 gMrmimePokedexText[] = _(
+const u8 gMrMimePokedexText[] = _(
     "Domina la pantomima. Con sus gestos puede\n"
     "convencer a sus espectadores de la\n"
     "existencia de algo invisible y, cuando se lo\n"

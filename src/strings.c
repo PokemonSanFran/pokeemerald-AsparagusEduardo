@@ -257,7 +257,7 @@ const u8 gText_ThePokemonList[] = _("a la LISTA Pokémon");
 const u8 gText_TheShop[] = _("a la tienda");
 const u8 gText_ThePC[] = _("al PC");
 
-const u8 *const gReturnToXStringsTable[] =
+const u8 *const gBagMenu_ReturnToStrings[] =
 {
     gText_TheField,
     gText_TheBattle,
@@ -273,7 +273,7 @@ const u8 *const gReturnToXStringsTable[] =
     gText_ThePC
 };
 
-const u8 *const gReturnToXStringsTable2[] =
+const u8 *const gPyramidBagMenu_ReturnToStrings[] =
 {
     gText_TheField,
     gText_TheBattle,
@@ -1319,7 +1319,7 @@ const u8 gText_MatchCallMay_Intro1[] = _("Mis Pokémon y yo ayudamos");
 const u8 gText_MatchCallMay_Intro2[] = _("a mi padre a investigar.");
 const u8 gText_HatchedFromEgg[] = _("¡{STR_VAR_1} ha salido del Huevo!");
 const u8 gText_NicknameHatchPrompt[] = _("¿Quieres darle un mote a {STR_VAR_1}?");
-ALIGNED(4) const u8 gText_ReadyToBerryCrush[] = _("Are you ready to Berry-Crush?\nPlease pick a Berry for use.\p");
+ALIGNED(4) const u8 gText_ReadyPickBerry[] = _("Are you ready to Berry-Crush?\nPlease pick a Berry for use.\p");
 ALIGNED(4) const u8 gText_WaitForAllChooseBerry[] = _("Please wait while each member\nchooses a Berry.");
 ALIGNED(4) const u8 gText_EndedWithXUnitsPowder[] = _("{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}You ended up with {STR_VAR_1} units of\nsilky-smooth Berry Powder.{RESUME_MUSIC}\pYour total amount of Berry Powder\nis {STR_VAR_2}.\p");
 ALIGNED(4) const u8 gText_RecordingGameResults[] = _("Recording your game results in the\nsave file.\lPlease wait.");
