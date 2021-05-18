@@ -52,3 +52,4 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * An NPC in every Pokémon Center that serves as Name Rater and Move Reminder/Deleter/Tutor.
 * Expanded move names by Mandll27
 * [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
+* [Music Expansion by](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion) by [CyanSMP64](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion).
