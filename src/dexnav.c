@@ -524,7 +524,7 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
         if (searchLevel > 2)
         {
             // ability name
-            StringCopy(gStringVar1, gAbilityNames[GetAbilityBySpecies(species, sDexNavSearchDataPtr->abilityNum, 0)]);
+            StringCopy(gStringVar1, gAbilityNames[GetAbilityBySpecies(species, sDexNavSearchDataPtr->abilityNum, 0)]); //handle forms
             AddTextPrinterParameterized3(windowId, 0, WINDOW_COL_1 + 16, 12, sSearchFontColor, TEXT_SPEED_FF, gStringVar1);
         
             // item name
@@ -1223,10 +1223,10 @@ static void CreateDexNavWildMon(u16 species, u8 potential, u8 level, u8 abilityN
     
     CreateWildMon(species, level);  // shiny rate bonus handled in CreateBoxMon
     
-    //Pick potential ivs to set to 31
+    //Pick potential unique ivs to set to 31
     iv[0] = Random() % 6;
-    iv[1] = Random() % 6;
-    iv[2] = Random() % 6;
+    do {iv[1] = Random() % 6;} while (iv[1] == iv[0]);
+    do {iv[2] = Random() % 6;} while (iv[2] == iv[0] || iv[2] == iv[1]);
     if ((iv[0] != iv[1]) && (iv[0] != iv[2]) && (iv[1] != iv[2]))
     {
         if (potential > 2)
@@ -1942,27 +1942,28 @@ static void DexNavFadeAndExit(void)
 static bool8 SpeciesInArray(u16 species, u8 section)
 {
     u32 i;
+    u16 dexNum = SpeciesToNationalPokedexNum(species);
     
     switch (section)
     {
     case 0: //land
         for (i = 0; i < LAND_WILD_COUNT; i++)
         {
-            if (sDexNavUiDataPtr->landSpecies[i] == species)
+            if (SpeciesToNationalPokedexNum(sDexNavUiDataPtr->landSpecies[i]) == dexNum)
                 return TRUE;
         }
         break;
     case 1: //water
         for (i = 0; i < WATER_WILD_COUNT; i++)
         {
-            if (sDexNavUiDataPtr->waterSpecies[i] == species)
+            if (SpeciesToNationalPokedexNum(sDexNavUiDataPtr->waterSpecies[i]) == dexNum)
                 return TRUE;
         }
         break;
     case 2: //hidden
         for (i = 0; i < HIDDEN_WILD_COUNT; i++)
         {
-            if (sDexNavUiDataPtr->hiddenSpecies[i] == species)
+            if (SpeciesToNationalPokedexNum(sDexNavUiDataPtr->hiddenSpecies[i]) == dexNum)
                 return TRUE;
         }
         break;
@@ -2796,3 +2797,8 @@ void ResetDexNavSearch(void)
         EndDexNavSearch(FindTaskIdByFunc(Task_DexNavSearch));   //moving to new map ends dexnav search
 }
 
+void IncrementDexNavChain(void)
+{
+    if (gSaveBlock1Ptr->dexNavChain < DEXNAV_CHAIN_MAX)
+        gSaveBlock1Ptr->dexNavChain++;
+}

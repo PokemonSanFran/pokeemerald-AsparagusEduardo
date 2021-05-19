@@ -3970,4 +3970,3 @@ u8 FldEff_CaveDust(void)
     
     return spriteId;
 }
-
