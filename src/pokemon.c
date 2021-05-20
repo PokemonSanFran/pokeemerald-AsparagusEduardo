@@ -6501,11 +6501,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 {
                     for (j = 0; j < PARTY_SIZE; j++)
                     {
-                        u16 species = GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL);
+                        u16 currSpecies = GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL);
                         u16 formId = GetMonData(&gPlayerParty[j], MON_DATA_FORM_ID, NULL);
-                        u16 formSpeciesId = GetFormSpeciesId(species, formId);
-                        if (gBaseStats[formSpeciesId].type1 == TYPE_DARK
-                            || gBaseStats[formSpeciesId].type2 == TYPE_DARK)
+                        u16 currFormSpeciesId = GetFormSpeciesId(currSpecies, formId);
+                        if (gBaseStats[currFormSpeciesId].type1 == TYPE_DARK
+                            || gBaseStats[currFormSpeciesId].type2 == TYPE_DARK)
                         {
                             *targetFormId = GetFormIdFromFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies);
                             targetSpecies = GetFormSpeciesId(gEvolutionTable[formSpeciesId][i].targetSpecies, 0); // Get base species
