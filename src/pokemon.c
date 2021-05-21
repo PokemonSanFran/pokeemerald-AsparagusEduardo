@@ -5477,7 +5477,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM0_X_ATTACK)
              && gBattleMons[gActiveBattler].statStages[STAT_ATK] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_ATK] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_ATK] += itemEffect[i] & ITEM0_X_ATTACK;
@@ -5495,7 +5495,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_DEFEND)
              && gBattleMons[gActiveBattler].statStages[STAT_DEF] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_DEF] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_DEF] += (itemEffect[i] & ITEM1_X_DEFEND) >> 4;
@@ -5508,7 +5508,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_SPEED)
              && gBattleMons[gActiveBattler].statStages[STAT_SPEED] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_SPEED] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_SPEED] += itemEffect[i] & ITEM1_X_SPEED;
@@ -5523,7 +5523,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM2_X_ACCURACY)
              && gBattleMons[gActiveBattler].statStages[STAT_ACC] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_ACC] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_ACC] += (itemEffect[i] & ITEM2_X_ACCURACY) >> 4;
@@ -5536,7 +5536,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM2_X_SPATK)
              && gBattleMons[gActiveBattler].statStages[STAT_SPATK] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_SPATK] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_SPATK] += itemEffect[i] & ITEM2_X_SPATK;
@@ -5552,7 +5552,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_ATTACK)
              && gBattleMons[gActiveBattler].statStages[STAT_ATK] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_ATK] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_ATK] += 1;
@@ -5565,7 +5565,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_DEFENSE)
              && gBattleMons[gActiveBattler].statStages[STAT_DEF] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_DEF] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_DEF] += 1;
@@ -5578,7 +5578,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_SPEED)
              && gBattleMons[gActiveBattler].statStages[STAT_SPEED] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_SPEED] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_SPEED] += 1;
@@ -5591,7 +5591,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_SPATK)
              && gBattleMons[gActiveBattler].statStages[STAT_SPATK] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_SPATK] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_SPATK] += 1;
@@ -5604,7 +5604,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_SPDEF)
              && gBattleMons[gActiveBattler].statStages[STAT_SPDEF] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_SPDEF] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_SPDEF] += 1;
@@ -5617,7 +5617,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             if ((itemEffect[i] & ITEM1_X_ACCURACY)
              && gBattleMons[gActiveBattler].statStages[STAT_ACC] < MAX_STAT_STAGE)
             {
-                if (B_X_ITEMS_BUFF == GEN_7)
+                if (B_X_ITEMS_BUFF >= GEN_7)
                     gBattleMons[gActiveBattler].statStages[STAT_ACC] += 2;
                 else
                     gBattleMons[gActiveBattler].statStages[STAT_ACC] += 1;
@@ -6184,7 +6184,7 @@ static void BufferStatRoseMessage(s32 arg0)
 {
     gBattlerTarget = gBattlerInMenuId;
     StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[arg0]]);
-    if (B_X_ITEMS_BUFF == GEN_7)
+    if (B_X_ITEMS_BUFF >= GEN_7)
     {
         StringCopy(gBattleTextBuff2, gText_StatSharply);
         StringAppend(gBattleTextBuff2, gText_StatRose);
