@@ -7447,6 +7447,15 @@ u16 GetBattleBGM(void)
             return MUS_VS_KYOGRE_GROUDON;
         case SPECIES_DEOXYS:
             return MUS_RG_VS_DEOXYS;
+        case SPECIES_HEATRAN:
+            return DP_SEQ_BA_SECRET2;
+        case SPECIES_DIALGA:
+        case SPECIES_PALKIA:
+            return DP_SEQ_BA_DPOKE2;
+        case SPECIES_GIRATINA:
+            return PL_SEQ_PL_BA_GIRA;
+        case SPECIES_ARCEUS:
+            return DP_SEQ_BA_SECRET1;
 	    default:
             return MUS_VS_WILD;
         }
