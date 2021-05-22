@@ -2363,3 +2363,60 @@ $(MID_SUBDIR)/bw_seq_bgm_title01.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_pokemon_theme.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V106
+
+$(MID_SUBDIR)/bw_seq_bgm_starting.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V045
+
+$(MID_SUBDIR)/bw_seq_bgm_starting2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V090
+
+$(MID_SUBDIR)/bw_seq_bgm_e_opening.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V103
+
+$(MID_SUBDIR)/bw_seq_bgm_t_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V071
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_rival.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V079
+
+$(MID_SUBDIR)/bw_seq_bgm_e_tsureteke1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V066
+
+$(MID_SUBDIR)/bw_seq_bgm_e_doctor.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V100
+
+$(MID_SUBDIR)/bw_seq_bgm_labo.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V066
+
+$(MID_SUBDIR)/bw_seq_me_keyitem.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V085 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_e_friend.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V081
+
+$(MID_SUBDIR)/bw_seq_bgm_r_a_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G201 -V063
+
+$(MID_SUBDIR)/bw_seq_bgm_r_a.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G201 -V063
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_norapoke.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G202 -V094
+
+$(MID_SUBDIR)/bw_seq_bgm_win1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V116
+
+$(MID_SUBDIR)/bw_seq_me_lvup.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V090 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02_var3.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_t_02.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060

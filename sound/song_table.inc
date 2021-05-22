@@ -899,6 +899,25 @@ gSongTable:: @ 86B49F0
 	song bw_seq_bgm_title, 0, 0
 	song bw_seq_bgm_title01, 0, 0
 	song bw_seq_bgm_pokemon_theme, 0, 0
+	song bw_seq_bgm_starting, 0, 0
+	song bw_seq_bgm_starting2, 0, 0
+	song bw_seq_bgm_e_opening, 0, 0
+	song bw_seq_bgm_t_01, 0, 0
+	song bw_seq_bgm_vs_rival, 0, 0
+	song bw_seq_bgm_e_tsureteke1, 0, 0
+	song bw_seq_bgm_e_doctor, 0, 0
+	song bw_seq_bgm_labo, 0, 0
+	song bw_seq_me_keyitem, 2, 2
+	song bw_seq_bgm_e_friend, 0, 0
+	song bw_seq_bgm_r_a_var, 0, 0
+	song bw_seq_bgm_r_a, 0, 0
+	song bw_seq_bgm_vs_norapoke, 0, 0
+	song bw_seq_bgm_win1, 0, 0
+	song bw_seq_me_lvup, 2, 2
+	song bw_seq_bgm_t_02_var1, 0, 0
+	song bw_seq_bgm_t_02_var2, 0, 0
+	song bw_seq_bgm_t_02_var3, 0, 0
+	song bw_seq_bgm_t_02, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00
