@@ -5171,6 +5171,9 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum, u8 formId)
     else
         gLastUsedAbility = gBaseStats[formSpeciesId].abilities[0];
 
+    if (gLastUsedAbility == ABILITY_NONE)
+        gLastUsedAbility = gBaseStats[species].abilities[0];
+
     return gLastUsedAbility;
 }
 
