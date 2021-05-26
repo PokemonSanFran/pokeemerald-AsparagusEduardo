@@ -35,7 +35,7 @@ voicegroup202:: @ BW Ichinose (battles)
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound 60, 0, DirectSoundWaveData_bw_025cellog2, 254, 242, 255, 205
 	voice_directsound 60, 0, DirectSoundWaveData_bw_147pizza4, 255, 248, 0, 205
-	voice_keysplit voicegroup008, KeySplitTable140   @ flute 2
+	voice_keysplit voicegroup204, KeySplitTable140   @ flute 2
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_keysplit voicegroup007, KeySplitTable111   @ pizzicato
 	voice_directsound 60, 0, DirectSoundWaveData_bw_203timpg3, 255, 251, 0, 205

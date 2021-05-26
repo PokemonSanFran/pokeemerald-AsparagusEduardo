@@ -42,6 +42,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 	* Gen 6 Exp Share. Original code by Blurose, ported by [Lunos](https://github.com/LOuroboros).
 	* Lures for attracting more double battles and raising shiny odds.
 * [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/Decapitalization) every text in the game. Originally by [Wyrserth](https://github.com/Wyrserth) and mantained by me.
+* [Music Expansion](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion) by [CyanSMP64](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion).
 * Spanish version in development by syncing with [pokeesmeralda](https://github.com/LOuroboros/pokeemerald/tree/pokeesmeralda) by [Lunos](https://github.com/LOuroboros).
 	* [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/pokeesmeralda_decap) version mantained by me.
 * [Soaring](https://www.pokecommunity.com/showthread.php?t=422107). Code by camthesaxman, ported by paccy.
@@ -52,4 +53,3 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * An NPC in every Pokémon Center that serves as Name Rater and Move Reminder/Deleter/Tutor.
 * Expanded move names by Mandll27
 * [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
-* [Music Expansion](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion) by [CyanSMP64](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion).

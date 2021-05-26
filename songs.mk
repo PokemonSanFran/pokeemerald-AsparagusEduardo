@@ -2420,3 +2420,42 @@ $(MID_SUBDIR)/bw_seq_bgm_t_02_var3.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_t_02.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V060
+
+$(MID_SUBDIR)/bw_seq_bgm_e_tsureteke2.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V066
+
+$(MID_SUBDIR)/bw_seq_bgm_pokecen.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V066
+
+$(MID_SUBDIR)/bw_seq_me_asa.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V070 -p5
+
+$(MID_SUBDIR)/bw_seq_me_hyouka1.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G194 -V079 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_e_sage.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G199 -V099
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_sp_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_sp.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_su_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_su.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_au_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_au.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_wi_var.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
+
+$(MID_SUBDIR)/bw_seq_bgm_r_b_wi.s: %.s: %.mid
+	$(MID) $< $@ -E -R$(STD_REVERB) -G200 -V082
