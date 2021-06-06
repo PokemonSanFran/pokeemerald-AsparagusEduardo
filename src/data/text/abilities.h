@@ -514,7 +514,7 @@ static const u8 sAsOneIceRiderDescription[] = _("Unnerve and Chilling Neigh.");
 static const u8 sAsOneShadowRiderDescription[] = _("Unnerve and Grim Neigh.");
 #endif
 
-const u8 gAbilityNames[ABILITIES_COUNT_GEN8][ABILITY_NAME_LENGTH + 1] =
+const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
     [ABILITY_NONE]          = _("-------"),
@@ -1023,7 +1023,7 @@ const u8 gAbilityNames[ABILITIES_COUNT_GEN8][ABILITY_NAME_LENGTH + 1] =
 #endif
 };
 
-const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT_GEN8] =
+const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
     [ABILITY_NONE] = sNoneDescription,
     [ABILITY_STENCH] = sStenchDescription,

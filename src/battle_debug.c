@@ -764,11 +764,19 @@ static void Task_ShowAiPoints(u8 taskId)
                 data->aiIconSpriteIds[i] = 0xFF;
             }
         }
+        #ifndef POKEMON_EXPANSION
+        data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
+                                                 gBattleMons[data->aiBattlerId].otId,
+                                                 gBattleMons[data->aiBattlerId].personality,
+                                                 TRUE,
+                                                 39, 130, 15, 0xFFFF);
+        #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, 0xFFFF);
+        #endif
         data->aiViewState++;
         break;
     // Put text
@@ -862,9 +870,15 @@ static void Task_ShowAiKnowledge(u8 taskId)
         {
             if (GET_BATTLER_SIDE(i) == B_SIDE_PLAYER && IsBattlerAlive(i))
             {
+            #ifndef POKEMON_EXPANSION
                 data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
                                                          SpriteCallbackDummy,
                                                          95 + (count * 80), 17, 0, 0, FALSE);
+            #else
+                data->aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
+                                                         SpriteCallbackDummy,
+                                                         95 + (count * 80), 17, 0, 0, 0);
+            #endif
                 gSprites[data->aiIconSpriteIds[i]].data[0] = i; // battler id
                 count++;
             }
@@ -873,19 +887,19 @@ static void Task_ShowAiKnowledge(u8 taskId)
                 data->aiIconSpriteIds[i] = 0xFF;
             }
         }
-    #ifndef POKEMON_EXPANSION
+        #ifndef POKEMON_EXPANSION
         data->aiMonSpriteId = CreateMonPicSprite_HandleDeoxys(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, 0xFFFF);
-    #else
+        #else
         data->aiMonSpriteId = CreateMonPicSprite(gBattleMons[data->aiBattlerId].species,
                                                  gBattleMons[data->aiBattlerId].otId,
                                                  gBattleMons[data->aiBattlerId].personality,
                                                  TRUE,
                                                  39, 130, 15, 0xFFFF);
-    #endif
+        #endif
         data->aiViewState++;
         break;
     // Put text

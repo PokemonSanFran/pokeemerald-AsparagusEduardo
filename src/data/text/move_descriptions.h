@@ -4373,8 +4373,8 @@ static const u8 sGRAVITYDescription[] = _(
     "negating levitation.");
 
 static const u8 sMIRACLE_EYEDescription[] = _(
-    "Makes GHOSTS and evasive\n"
-    "foes easier to hit.");
+    "Negate evasiveness and\n"
+    "Dark-type's immunities.");
 
 static const u8 sWAKE_UP_SLAPDescription[] = _(
     "Powerful against sleeping\n"
@@ -5378,7 +5378,7 @@ static const u8 sSPARKLING_ARIADescription[] = _(
 
 static const u8 sICE_HAMMERDescription[] = _(
     "Swings the fist to strike.\n"
-    "Lowers the user's SPEED.");
+    "Lowers the user's Speed.");
 
 static const u8 sFLORAL_HEALINGDescription[] = _(
     "Restores an ally's HP.\n"
