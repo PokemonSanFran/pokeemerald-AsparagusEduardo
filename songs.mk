@@ -2474,3 +2474,27 @@ $(MID_SUBDIR)/bw_seq_bgm_win2.s: %.s: %.mid
 
 $(MID_SUBDIR)/bw_seq_bgm_eye_02.s: %.s: %.mid
 	$(MID) $< $@ -E -R20 -G200 -V065
+
+$(MID_SUBDIR)/bw_seq_me_item.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G194 -V070 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_c_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G194 -V064
+
+$(MID_SUBDIR)/bw_seq_me_hyouka2.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G194 -V081 -p5
+
+$(MID_SUBDIR)/bw_seq_bgm_d_01.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G201 -V093
+
+$(MID_SUBDIR)/bw_seq_bgm_d_01_b1f.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G201 -V093
+
+$(MID_SUBDIR)/bw_seq_bgm_d_01_b2f.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G201 -V093
+
+$(MID_SUBDIR)/bw_seq_bgm_e_plasma.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G201 -V073
+
+$(MID_SUBDIR)/bw_seq_bgm_vs_plasma.s: %.s: %.mid
+	$(MID) $< $@ -E -R20 -G202 -V120
