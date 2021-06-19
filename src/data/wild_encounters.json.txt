@@ -75,7 +75,6 @@ const struct WildPokemon {{ encounter.base_label }}_FishingMons[] =
 const struct WildPokemonInfo {{ encounter.base_label }}_FishingMonsInfo = { {{encounter.fishing_mons.encounter_rate}}, {{ encounter.base_label }}_FishingMons };
 {% endif %}
 
-
 {% if existsIn(encounter, "hidden_mons") %}
 const struct WildPokemon {{ encounter.base_label }}_HiddenMons[] =
 {
@@ -88,7 +87,6 @@ const struct WildPokemonInfo {{ encounter.base_label }}_HiddenMonsInfo = { {{enc
 {% endif %}
 
 ## endfor
-
 const struct WildPokemonHeader {{ wild_encounter_group.label }}[] =
 {
 ## for encounter in wild_encounter_group.encounters

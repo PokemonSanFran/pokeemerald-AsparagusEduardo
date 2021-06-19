@@ -1381,8 +1381,8 @@
 #define FLAG_IS_CHAMPION                            (SYSTEM_FLAGS + 0x1F) // Seems to be related to linking.
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
-#define FLAG_EON_LATI								(SYSTEM_FLAGS + 0x21)
-#define FLAG_SYS_DEXNAV_SEARCH                      (SYSTEM_FLAGS + 0x22)
+#define FLAG_SYS_DEXNAV_SEARCH                      (SYSTEM_FLAGS + 0x21)
+#define FLAG_SHINY_CREATION                         (SYSTEM_FLAGS + 0x22)   // force creation of a shiny mon
 #define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
 #define FLAG_SYS_DAYLIGHT_SAVING                    (SYSTEM_FLAGS + 0x24)
 #define FLAG_SYS_NO_COLLISION                       (SYSTEM_FLAGS + 0x25)
@@ -1496,7 +1496,7 @@
 #define FLAG_ARRIVED_AT_NAVEL_ROCK                  (SYSTEM_FLAGS + 0x81)
 #define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
 
-#define FLAG_UNUSED_0x8E3                           (SYSTEM_FLAGS + 0x83) // Unused Flag
+#define FLAG_EON_LATI                               (SYSTEM_FLAGS + 0x83) // Previously Unused Flag
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 

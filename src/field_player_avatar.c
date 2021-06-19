@@ -630,7 +630,8 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
             return;
         }
     }
-
+    
+    gPlayerAvatar.creeping = FALSE;
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
     {
         if (heldKeys & B_BUTTON)
@@ -644,8 +645,8 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         }
         else
         {
-            gPlayerAvatar.creeping = FALSE;
-            PlayerGoSpeed2(direction); // speed 2 is fast, same speed as running
+            // speed 2 is fast, same speed as running
+            PlayerGoSpeed2(direction);
         }
         return;
     }
@@ -657,18 +658,10 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         return;
     }
-    else if (FlagGet(FLAG_SYS_DEXNAV_SEARCH))
+    else if (FlagGet(FLAG_SYS_DEXNAV_SEARCH) && (heldKeys & A_BUTTON))
     {
-        if (heldKeys & A_BUTTON)
-        {
-            gPlayerAvatar.creeping = TRUE;
-            PlayerGoSlow(direction);
-        }
-        else
-        {
-            gPlayerAvatar.creeping = FALSE;
-            PlayerGoSpeed1(direction);
-        }
+        gPlayerAvatar.creeping = TRUE;
+        PlayerGoSlow(direction);
     }
     else
     {
@@ -980,7 +973,7 @@ void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
     }
 }
 
-// slow speed
+// slow
 static void PlayerGoSlow(u8 direction)
 {
     PlayerSetAnimId(GetWalkSlowMovementAction(direction), 2);
