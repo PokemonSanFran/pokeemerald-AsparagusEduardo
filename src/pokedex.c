@@ -47,6 +47,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
+
 enum
 {
     PAGE_MAIN,

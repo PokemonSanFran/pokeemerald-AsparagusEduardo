@@ -7852,7 +7852,9 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 190,
         .expYield = 54,
         .evYield_Speed     = 1,
-        .item1 = ITEM_PRETTY_WING,
+        #ifdef ITEM_EXPANSION
+            .item1 = ITEM_PRETTY_FEATHER,
+        #endif
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 70,
@@ -7885,7 +7887,7 @@ const struct BaseStats gBaseStats[] =
         .catchRate = 45,
         .expYield = 154,
         .evYield_Defense   = 2,
-        .item1 = ITEM_PRETTY_WING,
+        .item1 = ITEM_PRETTY_FEATHER,
         .item2 = ITEM_LUCKY_EGG,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,

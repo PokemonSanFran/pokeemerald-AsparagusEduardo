@@ -2762,37 +2762,37 @@ static const u8 sHoneyDesc[] = _(
     "atrae a Pokémon\n"
     "salvajes.");
 
-static const u8 sHealthWingDesc[] = _(
+static const u8 sHealthFeatherDesc[] = _(
     "Pluma que aumenta\n"
     "un poco los PS\n"
     "base de un Pokémon.");
 
-static const u8 sMuscleWingDesc[] = _(
+static const u8 sMuscleFeatherDesc[] = _(
     "Pluma que aumenta\n"
     "un poco el Ataque\n"
     "base de un Pokémon.");
 
-static const u8 sResistWingDesc[] = _(
+static const u8 sResistFeatherDesc[] = _(
     "Pluma que aumenta\n"
     "un poco la Defensa\n"
     "base de un Pokémon.");
 
-static const u8 sGeniusWingDesc[] = _(
+static const u8 sGeniusFeatherDesc[] = _(
     "Pluma que aumenta\n"
     "un poco el At. Esp.\n"
     "base de un Pokémon.");
 
-static const u8 sCleverWingDesc[] = _(
+static const u8 sCleverFeatherDesc[] = _(
     "Pluma que aumenta\n"
     "un poco la Def. Esp.\n"
     "base de un Pokémon.");
 
-static const u8 sSwiftWingDesc[] = _(
+static const u8 sSwiftFeatherDesc[] = _(
     "Pluma que aumenta\n"
     "un poco la Velocid.\n"
     "base de un Pokémon.");
 
-static const u8 sPrettyWingDesc[] = _(
+static const u8 sPrettyFeatherDesc[] = _(
     "Pluma corriente.\n"
     "Muy bonita, pero\n"
     "no sirve para nada.");
@@ -5816,37 +5816,37 @@ static const u8 sHoneyDesc[] = _(
     "attracts wild\n"
     "Pokémon when used.");
 
-static const u8 sHealthWingDesc[] = _(
+static const u8 sHealthFeatherDesc[] = _(
     "An item that raises\n"
     "the base HP of\n"
     "a Pokémon.");
 
-static const u8 sMuscleWingDesc[] = _(
+static const u8 sMuscleFeatherDesc[] = _(
     "An item that raises\n"
     "the base Attack of\n"
     "a Pokémon.");
 
-static const u8 sResistWingDesc[] = _(
+static const u8 sResistFeatherDesc[] = _(
     "An item that raises\n"
     "the base Defense\n"
     "of a Pokémon.");
 
-static const u8 sGeniusWingDesc[] = _(
+static const u8 sGeniusFeatherDesc[] = _(
     "An item that raises\n"
     "the base Sp. Atk.\n"
     "of a Pokémon.");
 
-static const u8 sCleverWingDesc[] = _(
+static const u8 sCleverFeatherDesc[] = _(
     "An item that raises\n"
     "the base Sp. Def.\n"
     "of a Pokémon.");
 
-static const u8 sSwiftWingDesc[] = _(
+static const u8 sSwiftFeatherDesc[] = _(
     "An item that raises\n"
     "the base Speed of\n"
     "a Pokémon.");
 
-static const u8 sPrettyWingDesc[] = _(
+static const u8 sPrettyFeatherDesc[] = _(
     "A beautiful yet\n"
     "plain feather that\n"
     "does nothing.");

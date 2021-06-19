@@ -9286,124 +9286,106 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_HEALTH_WING] =
+    [ITEM_HEALTH_FEATHER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Pluma Vigor"),
 #else
         .name = _("Health Feather"),
 #endif
-        .itemId = ITEM_HEALTH_WING,
+        .itemId = ITEM_HEALTH_FEATHER,
         .price = 300,
-        .holdEffect = 0,
-        .holdEffectParam = 4,
-        .description = sHealthWingDesc,
+        .description = sHealthFeatherDesc,
         .pocket = POCKET_POWER_UP,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = STAT_HP,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
     },
 
-    [ITEM_MUSCLE_WING] =
+    [ITEM_MUSCLE_FEATHER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Pluma Músculo"),
 #else
         .name = _("Muscle Feather"),
 #endif
-        .itemId = ITEM_MUSCLE_WING,
+        .itemId = ITEM_MUSCLE_FEATHER,
         .price = 300,
-        .holdEffect = 0,
-        .holdEffectParam = 4,
-        .description = sMuscleWingDesc,
+        .description = sMuscleFeatherDesc,
         .pocket = POCKET_POWER_UP,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = STAT_ATK,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
     },
 
-    [ITEM_RESIST_WING] =
+    [ITEM_RESIST_FEATHER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Pluma Músculo"),
 #else
         .name = _("Resist Feather"),
 #endif
-        .itemId = ITEM_RESIST_WING,
+        .itemId = ITEM_RESIST_FEATHER,
         .price = 300,
-        .holdEffect = 0,
-        .holdEffectParam = 4,
-        .description = sResistWingDesc,
+        .description = sResistFeatherDesc,
         .pocket = POCKET_POWER_UP,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = STAT_DEF,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
     },
 
-    [ITEM_GENIUS_WING] =
+    [ITEM_GENIUS_FEATHER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Pluma Intelecto"),
 #else
         .name = _("Genius Feather"),
 #endif
-        .itemId = ITEM_GENIUS_WING,
+        .itemId = ITEM_GENIUS_FEATHER,
         .price = 300,
-        .holdEffect = 0,
-        .holdEffectParam = 4,
-        .description = sGeniusWingDesc,
+        .description = sGeniusFeatherDesc,
         .pocket = POCKET_POWER_UP,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = STAT_SPATK,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
     },
 
-    [ITEM_CLEVER_WING] =
+    [ITEM_CLEVER_FEATHER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Pluma Mente"),
 #else
         .name = _("Clever Feather"),
 #endif
-        .itemId = ITEM_CLEVER_WING,
+        .itemId = ITEM_CLEVER_FEATHER,
         .price = 300,
-        .holdEffect = 0,
-        .holdEffectParam = 4,
-        .description = sCleverWingDesc,
+        .description = sCleverFeatherDesc,
         .pocket = POCKET_POWER_UP,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = STAT_SPDEF,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
     },
 
-    [ITEM_SWIFT_WING] =
+    [ITEM_SWIFT_FEATHER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Pluma Ímpetu"),
 #else
         .name = _("Swift Feather"),
 #endif
-        .itemId = ITEM_SWIFT_WING,
+        .itemId = ITEM_SWIFT_FEATHER,
         .price = 300,
-        .holdEffect = 0,
-        .holdEffectParam = 4,
-        .description = sSwiftWingDesc,
+        .description = sSwiftFeatherDesc,
         .pocket = POCKET_POWER_UP,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = STAT_SPEED,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Medicine,
     },
 
-    [ITEM_PRETTY_WING] =
+    [ITEM_PRETTY_FEATHER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Pluma Bella"),
 #else
         .name = _("Pretty Feather"),
 #endif
-        .itemId = ITEM_PRETTY_WING,
+        .itemId = ITEM_PRETTY_FEATHER,
         .price = 1000,
-        .description = sPrettyWingDesc,
+        .description = sPrettyFeatherDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
