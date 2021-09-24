@@ -3417,7 +3417,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_MENTAL_HERB,
         .price = 4000,
-        .holdEffect = HOLD_EFFECT_CURE_ATTRACT,
+        .holdEffect = HOLD_EFFECT_MENTAL_HERB,
         .description = sMentalHerbDesc,
         .pocket = POCKET_BATTLE_ITEMS,
         .type = ITEM_USE_BAG_MENU,
