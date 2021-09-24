@@ -908,7 +908,7 @@ void ItemUseOutOfBattle_Lure(u8 taskId)
     if (VarGet(VAR_LURE_STEP_COUNT) == 0)
         gTasks[taskId].func = Task_StartUseLure;
     else if (!InBattlePyramid())
-        DisplayItemMessage(taskId, 1, gText_LureEffectsLingered, BagMenu_InitListsMenu);
+        DisplayItemMessage(taskId, 1, gText_LureEffectsLingered, CloseItemMessage);
     else
         DisplayItemMessageInBattlePyramid(taskId, gText_LureEffectsLingered, Task_CloseBattlePyramidBagMessage);
 }
@@ -932,7 +932,7 @@ static void Task_UseLure(u8 taskId)
         VarSet(VAR_LURE_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
         RemoveUsedItem();
         if (!InBattlePyramid())
-            DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
+            DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, gStringVar4, Task_CloseBattlePyramidBagMessage);
     }
@@ -1017,7 +1017,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
         static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
-        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, BagMenu_InitListsMenu);        
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);        
     }
     else if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
         && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) // There are two present pokemon.
@@ -1237,7 +1237,7 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
 		}
 		else
 		{
-			DisplayItemMessage(taskId, 1, gOtherText_ExpShareOn, BagMenu_InitListsMenu);
+			DisplayItemMessage(taskId, 1, gOtherText_ExpShareOn, CloseItemMessage);
 		}
 	}
 	else
@@ -1249,7 +1249,7 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
 		}
 		else
 		{
-			DisplayItemMessage(taskId, 1, gOtherText_ExpShareOff, BagMenu_InitListsMenu);
+			DisplayItemMessage(taskId, 1, gOtherText_ExpShareOff, CloseItemMessage);
 		}
 	}
 	gSaveBlock2Ptr->expShare = !gSaveBlock2Ptr->expShare;
@@ -1275,7 +1275,7 @@ void ItemUseOutOfBattle_SootSack(u8 taskId)
 	StringExpandPlaceholders(gStringVar4, gText_AshQty);
 	if (!gTasks[taskId].tUsingRegisteredKeyItem)
 	{
-		DisplayItemMessage(taskId, 1, gStringVar4, BagMenu_InitListsMenu);
+		DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
 	}
 	else
 	{
