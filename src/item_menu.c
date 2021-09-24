@@ -61,10 +61,15 @@
 // This constant picks the max of the existing pocket sizes.
 // By default, the largest pocket is BAG_TMHM_COUNT at 64.
 #define MAX_POCKET_ITEMS  ((max(BAG_TMHM_COUNT,              \
+                            max(BAG_BATTLEITEMS_COUNT,       \
+                            max(BAG_MEDICINE_COUNT,          \
+                            max(BAG_POWERUP_COUNT,           \
+                            max(BAG_MEGASTONES_COUNT,        \
                             max(BAG_BERRIES_COUNT,           \
+                            max(BAG_TYPEITEMS_COUNT,         \
                             max(BAG_ITEMS_COUNT,             \
                             max(BAG_KEYITEMS_COUNT,          \
-                                BAG_POKEBALLS_COUNT))))) + 1)
+                                BAG_POKEBALLS_COUNT)))))))))) + 1)
 
 // Up to 8 item slots can be visible at a time
 #define MAX_ITEMS_SHOWN 8
@@ -1308,57 +1313,57 @@ static void Task_BagMenu_HandleInput(u8 taskId)
                         StartItemSwap(taskId);
                     }
                 }
-                else if (JOY_NEW(START_BUTTON))
+            }
+            else if (JOY_NEW(START_BUTTON))
+            {
+                if ((gBagMenu->numItemStacks[gBagPosition.pocket] - 1) <= 1) //can't sort with 0 or 1 item in bag
                 {
-                    if ((gBagMenu->numItemStacks[gBagPosition.pocket] - 1) <= 1) //can't sort with 0 or 1 item in bag
+                    static const u8 sText_NothingToSort[] = _("There's nothing to sort!");
+                    PlaySE(SE_SELECT);
+                    DisplayItemMessage(taskId, 1, sText_NothingToSort, HandleErrorMessage);
+                    break;
+                }
+            
+                tListPosition = GetItemListPosition(gBagPosition.pocket);
+                data[2] = BagGetQuantityByPocketPosition(gBagPosition.pocket + 1, tListPosition);
+                if (gBagPosition.cursorPosition[gBagPosition.pocket] == gBagMenu->numItemStacks[gBagPosition.pocket] - 1)
+                    break;
+                else
+                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, tListPosition);
+                
+                PlaySE(SE_SELECT);
+                BagDestroyPocketScrollArrowPair();
+                BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
+                ListMenuGetScrollAndRow(tListTaskId, scrollPos, cursorPos);
+                gTasks[taskId].func = Task_LoadBagSortOptions;
+            }
+            else
+            {
+                listPosition = ListMenu_ProcessInput(tListTaskId);
+                ListMenuGetScrollAndRow(tListTaskId, scrollPos, cursorPos);
+                switch (listPosition)
+                {
+                case LIST_NOTHING_CHOSEN:
+                    break;
+                case LIST_CANCEL:
+                    if (gBagPosition.location == ITEMMENULOCATION_BERRY_BLENDER_CRUSH)
                     {
-                        static const u8 sText_NothingToSort[] = _("There's nothing to sort!");
-                        PlaySE(SE_SELECT);
-                        DisplayItemMessage(taskId, 1, sText_NothingToSort, HandleErrorMessage);
+                        PlaySE(SE_FAILURE);
                         break;
                     }
-                
-                    tListPosition = GetItemListPosition(gBagPosition.pocket);
-                    data[2] = BagGetQuantityByPocketPosition(gBagPosition.pocket + 1, tListPosition);
-                    if (gBagPosition.cursorPosition[gBagPosition.pocket] == gBagMenu->numItemStacks[gBagPosition.pocket] - 1)
-                        break;
-                    else
-                        gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, tListPosition);
-                    
+                    PlaySE(SE_SELECT);
+                    gSpecialVar_ItemId = ITEM_NONE;
+                    gTasks[taskId].func = Task_FadeAndCloseBagMenu;
+                    break;
+                default: // A_BUTTON
                     PlaySE(SE_SELECT);
                     BagDestroyPocketScrollArrowPair();
                     BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
-                    ListMenuGetScrollAndRow(tListTaskId, scrollPos, cursorPos);
-                    gTasks[taskId].func = Task_LoadBagSortOptions;
-                }
-                else
-                {
-                    listPosition = ListMenu_ProcessInput(tListTaskId);
-                    ListMenuGetScrollAndRow(tListTaskId, scrollPos, cursorPos);
-                    switch (listPosition)
-                    {
-                    case LIST_NOTHING_CHOSEN:
-                        break;
-                    case LIST_CANCEL:
-                        if (gBagPosition.location == ITEMMENULOCATION_BERRY_BLENDER_CRUSH)
-                        {
-                            PlaySE(SE_FAILURE);
-                            break;
-                        }
-                        PlaySE(SE_SELECT);
-                        gSpecialVar_ItemId = ITEM_NONE;
-                        gTasks[taskId].func = Task_FadeAndCloseBagMenu;
-                        break;
-                    default: // A_BUTTON
-                        PlaySE(SE_SELECT);
-                        BagDestroyPocketScrollArrowPair();
-                        BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
-                        tListPosition = listPosition;
-                        tQuantity = BagGetQuantityByPocketPosition(gBagPosition.pocket + 1, listPosition);
-                        gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, listPosition);
-                        sContextMenuFuncs[gBagPosition.location](taskId);
-                        break;
-                    }
+                    tListPosition = listPosition;
+                    tQuantity = BagGetQuantityByPocketPosition(gBagPosition.pocket + 1, listPosition);
+                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, listPosition);
+                    sContextMenuFuncs[gBagPosition.location](taskId);
+                    break;
                 }
             }
         }
