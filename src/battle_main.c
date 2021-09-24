@@ -2503,7 +2503,7 @@ void SpriteCb_WildMon(struct Sprite *sprite)
 {
     if (gSaveBlock2Ptr->optionsTransitionSpeed == OPTIONS_TRANSITION_INSTANT)
     {
-        sprite->pos2.x = 0;
+        sprite->x2 = 0;
         StartHealthboxSlideIn(sprite->sBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->sBattler]);
         sprite->callback = SpriteCb_WildMonAnimate;

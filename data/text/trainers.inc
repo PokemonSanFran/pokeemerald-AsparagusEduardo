@@ -2838,7 +2838,7 @@ Route119_Text_HughPostBattle:
 	.string "My Bird Pokémon made my dreams of\n"
 	.string "flying come true!$"
 
-Route119_Text_PhilIntro:
+Route119_Text_DannyIntro:
 	.string "I'll show you the true potential of me\n"
 	.string "and my Dragon Pokémon!$"
 
