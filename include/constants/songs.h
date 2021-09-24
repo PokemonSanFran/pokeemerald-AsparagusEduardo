@@ -121,8 +121,7 @@
 #define SE_BALL_TRAY_BALL            115 // SE_TB_KON
 #define SE_BALL_TRAY_EXIT            116 // SE_TB_KARA
 #define SE_GLASS_FLUTE               117 // SE_BIDORO
-// Move SFX 
-#define SE_M_THUNDERBOLT             118 // SE_W085
+// Move SFX#define SE_M_THUNDERBOLT             118 // SE_W085
 #define SE_M_THUNDERBOLT2            119 // SE_W085B
 #define SE_M_HARDEN                  120 // SE_W231
 #define SE_M_NIGHTMARE               121 // SE_W171
@@ -252,8 +251,7 @@
 #define SE_M_STAT_DECREASE           245 // SE_W287B
 #define SE_M_HAZE                    246 // SE_W114
 #define SE_M_HYPER_BEAM2             247 // SE_W063B
-// FRLG SFX 
-#define SE_RG_DOOR                   248 // SE_RG_W_DOOR
+// FRLG SFX#define SE_RG_DOOR                   248 // SE_RG_W_DOOR
 #define SE_RG_CARD_FLIP              249 // SE_RG_CARD1
 #define SE_RG_CARD_FLIPPING          250 // SE_RG_CARD2
 #define SE_RG_CARD_OPEN              251 // SE_RG_CARD3
@@ -267,18 +265,14 @@
 #define SE_RG_HELP_ERROR             259 // SE_RG_HELP_NG
 #define SE_RG_DEOXYS_MOVE            260 // SE_RG_DEOMOV
 #define SE_RG_POKE_JUMP_SUCCESS      261 // SE_RG_EXCELLENT
-#define SE_RG_POKE_JUMP_FAILURE      262 // SE_RG_NAWAMISS 
-// New Emerald SFX 
-#define SE_POKENAV_CALL              263 // SE_TOREEYE
+#define SE_RG_POKE_JUMP_FAILURE      262 // SE_RG_NAWAMISS// New Emerald SFX#define SE_POKENAV_CALL              263 // SE_TOREEYE
 #define SE_POKENAV_HANG_UP           264 // SE_TOREOFF
 #define SE_ARENA_TIMEUP1             265 // SE_HANTEI1
 #define SE_ARENA_TIMEUP2             266 // SE_HANTEI2
 #define SE_PIKE_CURTAIN_CLOSE        267 // SE_CURTAIN
 #define SE_PIKE_CURTAIN_OPEN         268 // SE_CURTAIN1
 #define SE_SUDOWOODO_SHAKE           269 // SE_USSOKI
- 
-// Ruby & Sapphire Music 
-#define MUS_LITTLEROOT_TEST          350 // MUS_TETSUJI
+// Ruby & Sapphire Music#define MUS_LITTLEROOT_TEST          350 // MUS_TETSUJI
 #define MUS_GSC_ROUTE38              351 // MUS_FIELD13
 #define MUS_CAUGHT                   352 // MUS_KACHI22
 #define MUS_VICTORY_WILD             353 // MUS_KACHI2
@@ -396,8 +390,7 @@
 #define MUS_VS_ELITE_FOUR            482 // MUS_BATTLE38
 #define MUS_VS_AQUA_MAGMA_LEADER     483 // MUS_BATTLE30
 
-// FireRed & LeafGreen Music 
-#define MUS_RG_FOLLOW_ME             484 // MUS_RG_ANNAI
+// FireRed & LeafGreen Music#define MUS_RG_FOLLOW_ME             484 // MUS_RG_ANNAI
 #define MUS_RG_GAME_CORNER           485 // MUS_RG_SLOT
 #define MUS_RG_ROCKET_HIDEOUT        486 // MUS_RG_AJITO
 #define MUS_RG_GYM                   487 // MUS_RG_GYM
@@ -493,9 +486,7 @@
 #define MUS_VS_MEW                   472 // MUS_VS_MEW
 #define MUS_B_DOME_LOBBY             473 // MUS_B_DOME1
 
- 
-// Diamond & Pearl Music 
-#define DP_SEQ_TITLE00               270 // Opening Movie (Part 1)
+// Diamond & Pearl Music#define DP_SEQ_TITLE00               270 // Opening Movie (Part 1)
 #define DP_SEQ_TITLE01               271 // Opening Movie (Part 2)
 #define DP_SEQ_OPENING               272 // Introduction
 #define DP_SEQ_TV_HOUSOU             273 // Special Report "Search for the Red Gyarados!" (Part 1)
@@ -650,8 +641,7 @@
 #define DP_SEQ_AUS                   892 // Hall of Origin
 #define DP_SEQ_BA_SECRET1            681 // Battle! Arceus
 
-// Platinum Music 
-#define PL_SEQ_TITLE00               682 // Title Screen
+// Platinum Music#define PL_SEQ_TITLE00               682 // Title Screen
 #define PL_SEQ_TITLE01               683 // Press Start
 #define PL_SEQ_TV_HOUSOU             684 // Special Program: "Let's Ask Prof. Rowan!" (Part 1)
 #define PL_SEQ_TV_END                685 // Special Program: "Let's Ask Prof. Rowan!" (Part 2)
@@ -685,9 +675,7 @@
 #define PL_SEQ_PL_BA_BRAIN           713 // Battle! (Frontier Brain)
 #define PL_SEQ_PL_WINBRAIN           714 // Victory! (Frontier Brain)
 #define PL_SEQ_PL_VS_REGI            893 // Battle! (Regirock / Regice / Registeel)
- 
-// HeartGold & SoulSilver Music 
-#define HG_SEQ_GS_TITLE              715 // Opening Movie
+// HeartGold & SoulSilver Music#define HG_SEQ_GS_TITLE              715 // Opening Movie
 #define HG_SEQ_GS_POKEMON_THEME      716 // Title Screen
 #define HG_SEQ_GS_STARTING           717 // An Adventure Begins!
 #define HG_SEQ_GS_T_WAKABA           718 // New Bark Town
@@ -917,11 +905,9 @@
 // Black 2 & White 2 Music
 
 
-// Omega Ruby & Alpha Sapphire Music 
-// (Only additions to the OST not already present in RSE)
+// Omega Ruby & Alpha Sapphire Music// (Only additions to the OST not already present in RSE)
 
 
- 
 #define PH_TRAP_BLEND                559
 #define PH_TRAP_HELD                 560
 #define PH_TRAP_SOLO                 561

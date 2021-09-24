@@ -1,14 +1,14 @@
-SlateportCity_NameRatersHouse_MapScripts:: @ 8209AA4
+SlateportCity_NameRatersHouse_MapScripts::
 	.byte 0
 
-SlateportCity_NameRatersHouse_EventScript_NameRater:: @ 8209AA5
+SlateportCity_NameRatersHouse_EventScript_NameRater::
 	lock
 	faceplayer
 	msgbox SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate:: @ 8209AC6
+SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate::
 	msgbox SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
@@ -18,12 +18,12 @@ SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate:: @ 8209AC6
 	goto_if_eq SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
 	end
 
-SlateportCity_NameRatersHouse_EventScript_DeclineNameRate:: @ 8209AE9
+SlateportCity_NameRatersHouse_EventScript_DeclineNameRate::
 	msgbox SlateportCity_NameRatersHouse_Text_DoVisitAgain, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_NameRatersHouse_EventScript_RateMonNickname:: @ 8209AF3
+SlateportCity_NameRatersHouse_EventScript_RateMonNickname::
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
 	goto_if_eq SlateportCity_NameRatersHouse_EventScript_CantRateEgg
@@ -42,17 +42,17 @@ SlateportCity_NameRatersHouse_EventScript_RateMonNickname:: @ 8209AF3
 	goto_if_eq SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
 	end
 
-SlateportCity_NameRatersHouse_EventScript_CantRateEgg:: @ 8209B46
+SlateportCity_NameRatersHouse_EventScript_CantRateEgg::
 	msgbox SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT:: @ 8209B50
+SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT::
 	msgbox SlateportCity_NameRatersHouse_Text_MagnificentName, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_NameRatersHouse_EventScript_ChangeNickname:: @ 8209B5A
+SlateportCity_NameRatersHouse_EventScript_ChangeNickname::
 	msgbox SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe, MSGBOX_DEFAULT
 	call Common_EventScript_NameReceivedPartyMon
 	specialvar VAR_RESULT, TryPutNameRaterShowOnTheAir
@@ -63,7 +63,7 @@ SlateportCity_NameRatersHouse_EventScript_ChangeNickname:: @ 8209B5A
 	release
 	end
 
-SlateportCity_NameRatersHouse_EventScript_NewNameDifferent:: @ 8209B84
+SlateportCity_NameRatersHouse_EventScript_NewNameDifferent::
 	msgbox SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName, MSGBOX_DEFAULT
 	release
 	end
@@ -130,7 +130,7 @@ SlateportCity_NameRatersHouse_TradebackGuy_Text_YouDontWantToThatsOkay:
 	.string "Alrighty. Well, if you change\n"
 	.string "mind I'll still be right here.$"
 
-SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname: @ 8209B8E
+SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname:
 	.string "Hi, hi! I'm the Name Rater!\p"
 	.string "…Or rather, I used to be.\p"
 	.string "Now you can rate nicknames in\n"
@@ -138,45 +138,45 @@ SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname: @ 8209B8E
 	.string "My grandson however, has been\n"
 	.string "doing good with his business.$"
 
-SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname: @ 8209BFF
+SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname:
 	.string "Which Pokémon's nickname should\n"
 	.string "I critique?$"
 
-SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne: @ 8209C2B
+SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne:
 	.string "Hmmm… {STR_VAR_1}, is it? That is\n"
 	.string "quite a fine name you bestowed.\p"
 	.string "But! What say you, if I were to\n"
 	.string "suggest a slightly better name?$"
 
-SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe: @ 8209CA4
+SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe:
 	.string "Ah, good. Then, what shall the new\n"
 	.string "nickname be?$"
 
-SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName: @ 8209CD4
+SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName:
 	.string "Done! From now on, this Pokémon\n"
 	.string "shall be known as {STR_VAR_1}!\p"
 	.string "It is a better name than before!\n"
 	.string "How fortunate for you!$"
 
-SlateportCity_NameRatersHouse_Text_DoVisitAgain: @ 8209D42
+SlateportCity_NameRatersHouse_Text_DoVisitAgain:
 	.string "I see.\n"
 	.string "Do come visit again.$"
 
-SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior: @ 8209D5E
+SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior:
 	.string "Done! From now on, this Pokémon\n"
 	.string "shall be known as {STR_VAR_1}!\p"
 	.string "It looks no different from before,\n"
 	.string "and yet, this is vastly superior!\p"
 	.string "How fortunate for you!$"
 
-SlateportCity_NameRatersHouse_Text_MagnificentName: @ 8209DF0
+SlateportCity_NameRatersHouse_Text_MagnificentName:
 	.string "Hmmm… {STR_VAR_1} it is!\p"
 	.string "This is a magnificent nickname!\n"
 	.string "It is impeccably beyond reproach!\p"
 	.string "You'll do well to cherish your\n"
 	.string "{STR_VAR_1} now and beyond.$"
 
-SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg: @ 8209E74
+SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg:
 	.string "Now, now.\n"
 	.string "That is merely an Egg!$"
 

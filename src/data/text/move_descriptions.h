@@ -3642,7 +3642,7 @@ static const u8 sSnoreDescription[] = _(
 
 static const u8 sCurseDescription[] = _(
     "A move that functions\n"
-    "differently for Ghosts.");
+    "differently for GHOSTS.");
 
 static const u8 sFlailDescription[] = _(
     "Inflicts more damage when\n"

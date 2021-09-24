@@ -19,7 +19,7 @@
 //      .        .
 //    96   .  .  -96
 //         127
-//   
+//
 #define MIN_NEEDLE_POS  32
 #define MAX_NEEDLE_POS -32
 
@@ -257,7 +257,7 @@ bool8 LoadCryWaveformWindow(struct CryScreenWindow *window, u8 windowId)
     case 1:
         for (i = 0; i < sDexCryScreen->playStartPos * 8; i++)
             DrawWaveformSegment(i, 0);
-        
+
         gDexCryScreenState++;
         break;
     case 2:
@@ -299,7 +299,7 @@ void UpdateCryWaveformWindow(u8 windowId)
         DrawWaveformFlatline();
         return;
     }
-    
+
     // Cry playing, buffer waveform
     if (sDexCryScreen->cryState == 1)
     {
@@ -564,8 +564,8 @@ static void SpriteCB_CryMeterNeedle(struct Sprite *sprite)
     SetOamMatrix(0, matrix.a, matrix.b, matrix.c, matrix.d);
     x = gSineTable[((sCryMeterNeedle->rotation + 0x7F) & 0xFF)];
     y = gSineTable[((sCryMeterNeedle->rotation + 0x7F) & 0xFF) + 64];
-    sprite->pos2.x = x * 24 / 256;
-    sprite->pos2.y = y * 24 / 256;
+    sprite->x2 = x * 24 / 256;
+    sprite->y2 = y * 24 / 256;
 }
 
 static void SetCryMeterNeedleTarget(s8 offset)

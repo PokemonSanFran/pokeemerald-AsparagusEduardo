@@ -227,7 +227,7 @@
 // 1 bit each in the Pokémon struct. Gen 4 hard-codes
 // each of these to the given name. In Gen 3 they're
 // used to get an index into giftRibbons in the save block,
-// which can have a value 0-64 (0 is 'no ribbon') that 
+// which can have a value 0-64 (0 is 'no ribbon') that
 // corresponds to one of the special ribbons listed
 // in gGiftRibbonDescriptionPointers. Most of these were
 // never distributed
@@ -274,15 +274,6 @@
 
 #define MAX_FRIENDSHIP  0xFF
 
-#define STATUS_PRIMARY_NONE      0
-#define STATUS_PRIMARY_POISON    1
-#define STATUS_PRIMARY_PARALYSIS 2
-#define STATUS_PRIMARY_SLEEP     3
-#define STATUS_PRIMARY_FREEZE    4
-#define STATUS_PRIMARY_BURN      5
-#define STATUS_PRIMARY_POKERUS   6
-#define STATUS_PRIMARY_FAINTED   7
-
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
@@ -316,6 +307,7 @@
 #define FLAG_DMG_2X_IN_AIR          (1 << 22) // If target is in the air, can hit and deal double damage.
 #define FLAG_DMG_IN_AIR             (1 << 23) // If target is in the air, can hit.
 #define FLAG_DMG_UNGROUNDED_IGNORE_TYPE_IF_FLYING (1 << 24) // Makes a Ground type move do 1x damage to flying and levitating targets
+#define FLAG_THAW_USER              (1 << 25)
 
 // Split defines.
 #define SPLIT_PHYSICAL  0x0

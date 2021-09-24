@@ -1339,7 +1339,7 @@ void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm)
                 if (gSaveBlock2Ptr->frontier.towerRecords[i].name[j] != newRecord->name[j])
                     break;
                 if (newRecord->name[j] == EOS)
-                #endif  
+                #endif
                 {
                     k = PLAYER_NAME_LENGTH;
                     break;
@@ -3012,7 +3012,7 @@ static void FillPartnerParty(u16 trainerId)
                       sStevenMons[i].species,
                       sStevenMons[i].level,
                       sStevenMons[i].fixedIV,
-                      TRUE, 
+                      TRUE,
                       #ifdef BUGFIX
                       j,
                       #else

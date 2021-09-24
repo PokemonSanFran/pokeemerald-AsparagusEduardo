@@ -36,8 +36,8 @@
 #define MAX_MENU_ITEMS 9
 #define MENU_MIDPOINT (MAX_MENU_ITEMS / 2)
 
-#define TILE_HIGHLIGHT_NONE 0x0005 // Tile number for the bg of an unselected menu item 
-#define TILE_HIGHLIGHT_BLUE 0x1005 // Tile number for the bg of a selected menu item 
+#define TILE_HIGHLIGHT_NONE 0x0005 // Tile number for the bg of an unselected menu item
+#define TILE_HIGHLIGHT_BLUE 0x1005 // Tile number for the bg of a selected menu item
 #define TILE_HIGHLIGHT_RED  0x2005 // Tile number for the bg of a menu item to swap
 
 #define TAG_POKEBLOCK_CASE  14800
@@ -264,7 +264,7 @@ static const union AnimCmd *const sSpriteAnimTable_PokeblockCase[] =
     sSpriteAnim_PokeblockCase
 };
 
-static const union AffineAnimCmd sSpriteAffineAnim_85B26C8[] =
+static const union AffineAnimCmd sAffineAnim_PokeblockCaseShake[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -2,  2),
     AFFINEANIMCMD_FRAME(0, 0,  2,  4),
@@ -273,9 +273,9 @@ static const union AffineAnimCmd sSpriteAffineAnim_85B26C8[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sSpriteAffineAnimTable_85B26F0[] =
+static const union AffineAnimCmd *const sAffineAnims_PokeblockCaseShake[] =
 {
-    sSpriteAffineAnim_85B26C8
+    sAffineAnim_PokeblockCaseShake
 };
 
 const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet =
@@ -792,7 +792,7 @@ static void DrawPokeblockInfo(s32 pkblId)
             }
             CopyToBgTilemapBufferRect(2, rectTilemapSrc, (i / 3 * 6) + 1, (i % 3 * 2) + 13, 1, 2);
         }
-        
+
         // Print the Pokéblock's feel
         ConvertIntToDecimalStringN(gStringVar1, GetPokeblocksFeel(pokeblock), STR_CONV_MODE_RIGHT_ALIGN, 2);
         PrintOnPokeblockWindow(WIN_FEEL, gStringVar1, 4);
@@ -955,7 +955,7 @@ static void SpriteCB_ShakePokeblockCase(struct Sprite *sprite)
     {
     case 0:
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        sprite->affineAnims = sSpriteAffineAnimTable_85B26F0;
+        sprite->affineAnims = sAffineAnims_PokeblockCaseShake;
         InitSpriteAffineAnim(sprite);
         sprite->sState = 1;
         sprite->sTimer = 0;

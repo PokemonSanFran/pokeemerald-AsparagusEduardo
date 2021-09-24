@@ -2559,7 +2559,8 @@ static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
 
 // For displaying names of invalid moves
-static const u8 sATypeMove_Table[][NUMBER_OF_MON_TYPES - 1] =
+//static const u8 sATypeMove_Table[][NUMBER_OF_MON_TYPES - 1] =
+static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][17] =
 {
     [TYPE_NORMAL]   = _("a Normal move"),
     [TYPE_FIGHTING] = _("a Fighting move"),

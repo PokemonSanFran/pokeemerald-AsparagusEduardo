@@ -287,11 +287,11 @@ static void CompleteOnChosenItem(void)
 
 static void Intro_TryShinyAnimShowHealthbox(void)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim 
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive)
         TryShinyAnimation(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
 
-    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim 
+    if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
         TryShinyAnimation(gActiveBattler ^ BIT_FLANK, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ BIT_FLANK]]);
 
@@ -1046,7 +1046,7 @@ static void WallyHandleDrawTrainerPic(void)
                                                80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].size),
                                                30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = DISPLAY_WIDTH;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
@@ -1061,7 +1061,7 @@ static void WallyHandleTrainerSlide(void)
                                                80 + 4 * (8 - gTrainerBackPicCoords[TRAINER_BACK_PIC_WALLY].size),
                                                30);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].pos2.x = -96;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = -96;
     gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = 2;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBankSpriteCallbackDummy2;
@@ -1441,7 +1441,7 @@ static void WallyHandleIntroTrainerBallThrow(void)
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBattlerSpriteIds[gActiveBattler]].data[4] = gSprites[gBattlerSpriteIds[gActiveBattler]].y;
     gSprites[gBattlerSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
 

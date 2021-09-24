@@ -258,6 +258,11 @@ enum {
 #define TAG_BLINK_EFFECT_CONTESTANT2 0x80EA
 #define TAG_BLINK_EFFECT_CONTESTANT3 0x80EB
 
+#define TILE_FILLED_APPEAL_HEART 0x5012
+#define TILE_FILLED_JAM_HEART    0x5014
+#define TILE_EMPTY_APPEAL_HEART  0x5035
+#define TILE_EMPTY_JAM_HEART     0x5036
+
 enum {
     SLIDER_HEART_ANIM_NORMAL,
     SLIDER_HEART_ANIM_DISAPPEAR,
@@ -1098,10 +1103,10 @@ static void InitContestResources(void)
     eContestAI = (struct ContestAIInfo){};
     *gContestResources->excitement = (struct ContestExcitement){};
     memset(eContestGfxState, 0, CONTESTANT_COUNT * sizeof(struct ContestGraphicsState));
-    
+
     if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         SortContestants(FALSE);
-    
+
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         eContestantStatus[i].nextTurnOrder = 0xFF;
@@ -1780,7 +1785,7 @@ static void Task_DoAppeals(u8 taskId)
             gContestMons[eContest.currentContestant].personality,
             eContest.currentContestant,
             gContestMons[eContest.currentContestant].formId);
-        gSprites[spriteId].pos2.x = 120;
+        gSprites[spriteId].x2 = 120;
         gSprites[spriteId].callback = SpriteCB_MonSlideIn;
         gTasks[taskId].tMonSpriteId = spriteId;
         gBattlerSpriteIds[gBattlerAttacker] = spriteId;
@@ -2445,9 +2450,9 @@ static void Task_EndWaitForLink(u8 taskId)
 
 static void SpriteCB_MonSlideIn(struct Sprite *sprite)
 {
-    if (sprite->pos2.x != 0)
+    if (sprite->x2 != 0)
     {
-        sprite->pos2.x -= 2;
+        sprite->x2 -= 2;
     }
     else
     {
@@ -2461,8 +2466,8 @@ static void SpriteCB_MonSlideIn(struct Sprite *sprite)
 
 static void SpriteCB_MonSlideOut(struct Sprite *sprite)
 {
-    sprite->pos2.x -= 6;
-    if (sprite->pos1.x + sprite->pos2.x < -32)
+    sprite->x2 -= 6;
+    if (sprite->x + sprite->x2 < -32)
     {
         sprite->callback = SpriteCallbackDummy;
         sprite->invisible = TRUE;
@@ -3203,27 +3208,25 @@ static void PrintContestMoveDescription(u16 a)
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile,        0x0b, 0x1f, 0x05, 0x01, 0x11, 0x01);
     ContestBG_FillBoxWithIncrementingTile(0, categoryTile + 0x10, 0x0b, 0x20, 0x05, 0x01, 0x11, 0x01);
 
+    // Appeal hearts
     if (gContestEffects[gContestMoves[a].effect].appeal == 0xFF)
         numHearts = 0;
     else
         numHearts = gContestEffects[gContestMoves[a].effect].appeal / 10;
-    if (numHearts > 8)
-        numHearts = 8;
-    // Filled-in hearts
-    ContestBG_FillBoxWithTile(0, 0x5035, 0x15, 0x1f, 0x08,      0x01, 0x11);
-    // Empty hearts
-    ContestBG_FillBoxWithTile(0, 0x5012, 0x15, 0x1f, numHearts, 0x01, 0x11);
+    if (numHearts > MAX_CONTEST_MOVE_HEARTS)
+        numHearts = MAX_CONTEST_MOVE_HEARTS;
+    ContestBG_FillBoxWithTile(0, TILE_EMPTY_APPEAL_HEART, 0x15, 0x1f, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, TILE_FILLED_APPEAL_HEART, 0x15, 0x1f, numHearts, 0x01, 0x11);
 
+    // Jam hearts
     if (gContestEffects[gContestMoves[a].effect].jam == 0xFF)
         numHearts = 0;
     else
         numHearts = gContestEffects[gContestMoves[a].effect].jam / 10;
-    if (numHearts > 8)
-        numHearts = 8;
-    // Filled-in hearts
-    ContestBG_FillBoxWithTile(0, 0x5036, 0x15, 0x20, 0x08,      0x01, 0x11);
-    // Empty hearts
-    ContestBG_FillBoxWithTile(0, 0x5014, 0x15, 0x20, numHearts, 0x01, 0x11);
+    if (numHearts > MAX_CONTEST_MOVE_HEARTS)
+        numHearts = MAX_CONTEST_MOVE_HEARTS;
+    ContestBG_FillBoxWithTile(0, TILE_EMPTY_JAM_HEART, 0x15, 0x20, MAX_CONTEST_MOVE_HEARTS, 0x01, 0x11);
+    ContestBG_FillBoxWithTile(0, TILE_FILLED_JAM_HEART, 0x15, 0x20, numHearts, 0x01, 0x11);
 
     FillWindowPixelBuffer(WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
     Contest_PrintTextToBg0WindowStd(WIN_MOVE_DESCRIPTION, gContestEffectDescriptionPointers[gContestMoves[a].effect]);
@@ -3339,9 +3342,9 @@ static bool8 DrawStatusSymbol(u8 contestant)
     u16 symbolOffset = 0;
     u8 contestantOffset = gContestantTurnOrder[contestant] * 5 + 2;
 
-    if (eContestantStatus[contestant].resistant 
-     || eContestantStatus[contestant].immune 
-     || eContestantStatus[contestant].jamSafetyCount != 0 
+    if (eContestantStatus[contestant].resistant
+     || eContestantStatus[contestant].immune
+     || eContestantStatus[contestant].jamSafetyCount != 0
      || eContestantStatus[contestant].jamReduction != 0)
         symbolOffset = GetStatusSymbolTileOffset(STAT_SYMBOL_CIRCLE);
     else if (eContestantStatus[contestant].nervous)
@@ -3861,7 +3864,7 @@ static void UpdateHeartSlider(u8 contestant)
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].sContestant = contestant;
     gSprites[spriteId].sTargetX = slideTarget;
-    if (gSprites[spriteId].sTargetX > gSprites[spriteId].pos2.x)
+    if (gSprites[spriteId].sTargetX > gSprites[spriteId].x2)
         gSprites[spriteId].sMoveX = 1;
     else
         gSprites[spriteId].sMoveX = -1;
@@ -3893,14 +3896,14 @@ static bool8 SlidersDoneUpdating(void)
 
 static void SpriteCB_UpdateHeartSlider(struct Sprite *sprite)
 {
-    if (sprite->pos2.x == sprite->sTargetX)
+    if (sprite->x2 == sprite->sTargetX)
     {
         eContestGfxState[sprite->sContestant].sliderUpdating = FALSE;
         sprite->callback = SpriteCallbackDummy;
     }
     else
     {
-        sprite->pos2.x += sprite->sMoveX;
+        sprite->x2 += sprite->sMoveX;
     }
 }
 
@@ -3914,7 +3917,7 @@ static void UpdateSliderHeartSpriteYPositions(void)
     s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
-        gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.y = sSliderHeartYPositions[gContestantTurnOrder[i]];
+        gSprites[eContestGfxState[i].sliderHeartSpriteId].y = sSliderHeartYPositions[gContestantTurnOrder[i]];
 }
 
 // Used to hide (or subsequently reshow) the bottom two slider hearts that get hidden by text windows by moving them offscreen
@@ -3928,9 +3931,9 @@ static void SetBottomSliderHeartsInvisibility(bool8 invisible)
         if (gContestantTurnOrder[i] > 1)
         {
             if (!invisible)
-                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 180;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].x = 180;
             else
-                gSprites[eContestGfxState[i].sliderHeartSpriteId].pos1.x = 256;
+                gSprites[eContestGfxState[i].sliderHeartSpriteId].x = 256;
         }
     }
 }
@@ -4333,7 +4336,7 @@ void SortContestants(bool8 useRanking)
                     s32 j;
                     for (j = i; j > v3; j--)
                         gContestantTurnOrder[j] = gContestantTurnOrder[j - 1];
-                        
+
                     // Insert into the new spot.
                     gContestantTurnOrder[v3] = i;
                     break;
@@ -4348,7 +4351,7 @@ void SortContestants(bool8 useRanking)
         }
 
         // Invert gContestantTurnOrder; above, it was a list of contestant IDs. Now it's a list of turn orderings.
-        // 
+        //
         // For example, if contestant 3 had the first turn, then `gContestantTurnOrder[1] = 3`. The turn is the index,
         // the contestant is the data. After inverting the list, `gContestantTurnOrder[3] = 1`. The contestant is the index,
         // and the turn is the data.
@@ -4383,7 +4386,7 @@ void SortContestants(bool8 useRanking)
         }
 
         // Randomize the order of contestants with tied rankings using Selection Sort.
-        // 
+        //
         // Look through the array for tied ranks, and use randomOrdering to break the tie.
         // This ensures that contestants with the same rank will be randomly ordered. This
         // uses an in-place slection sort, which involves a lot of extra swapping.
@@ -4759,13 +4762,13 @@ static void Task_ApplauseOverflowAnimation(u8 taskId)
     if (++gTasks[taskId].data[0] == 1)
     {
         gTasks[taskId].data[0] = 0;
-        
+
         // Alternate between normal colors and white.
         if (gTasks[taskId].data[3] == 0)
             gTasks[taskId].data[4]++;
         else
             gTasks[taskId].data[4]--;
-        
+
         BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], RGB_WHITE);
 
         // At the maximum or minimum blending, switch directions.
@@ -4786,7 +4789,7 @@ static void Task_ApplauseOverflowAnimation(u8 taskId)
 static void SlideApplauseMeterIn(void)
 {
     CreateTask(Task_SlideApplauseMeterIn, 10);
-    gSprites[eContest.applauseMeterSpriteId].pos2.x = -70;
+    gSprites[eContest.applauseMeterSpriteId].x2 = -70;
     gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
     eContest.applauseMeterIsMoving = TRUE;
 }
@@ -4796,11 +4799,11 @@ static void Task_SlideApplauseMeterIn(u8 taskId)
     struct Sprite *sprite = &gSprites[eContest.applauseMeterSpriteId];
 
     gTasks[taskId].data[10] += 1664;
-    sprite->pos2.x += gTasks[taskId].data[10] >> 8;
+    sprite->x2 += gTasks[taskId].data[10] >> 8;
     gTasks[taskId].data[10] = gTasks[taskId].data[10] & 0xFF;
-    if (sprite->pos2.x > 0)
-        sprite->pos2.x = 0;
-    if (sprite->pos2.x == 0)
+    if (sprite->x2 > 0)
+        sprite->x2 = 0;
+    if (sprite->x2 == 0)
     {
         eContest.applauseMeterIsMoving = FALSE;
         DestroyTask(taskId);
@@ -4816,7 +4819,7 @@ static void SlideApplauseMeterOut(void)
     else
     {
         CreateTask(Task_SlideApplauseMeterOut, 10);
-        gSprites[eContest.applauseMeterSpriteId].pos2.x = 0;
+        gSprites[eContest.applauseMeterSpriteId].x2 = 0;
         eContest.applauseMeterIsMoving = TRUE;
     }
 }
@@ -4826,11 +4829,11 @@ static void Task_SlideApplauseMeterOut(u8 taskId)
     struct Sprite *sprite = &gSprites[eContest.applauseMeterSpriteId];
 
     gTasks[taskId].data[10] += 1664;
-    sprite->pos2.x -= gTasks[taskId].data[10] >> 8;
+    sprite->x2 -= gTasks[taskId].data[10] >> 8;
     gTasks[taskId].data[10] = gTasks[taskId].data[10] & 0xFF;
-    if (sprite->pos2.x < -70)
-        sprite->pos2.x = -70;
-    if (sprite->pos2.x == -70)
+    if (sprite->x2 < -70)
+        sprite->x2 = -70;
+    if (sprite->x2 == -70)
     {
         sprite->invisible = TRUE;
         eContest.applauseMeterIsMoving = FALSE;
@@ -4875,7 +4878,7 @@ static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
 // Unused.
 static void HideApplauseMeterNoAnim(void)
 {
-    gSprites[eContest.applauseMeterSpriteId].pos2.x = 0;
+    gSprites[eContest.applauseMeterSpriteId].x2 = 0;
     gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
 }
 
@@ -5014,7 +5017,7 @@ static void ShowHideNextTurnGfx(bool8 show)
         if (eContestantStatus[i].turnOrderMod != 0 && show)
         {
             CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(OBJ_VRAM0 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 6) * 32), 32);
-            gSprites[eContestGfxState[i].nextTurnSpriteId].pos1.y = sNextTurnSpriteYPositions[gContestantTurnOrder[i]];
+            gSprites[eContestGfxState[i].nextTurnSpriteId].y = sNextTurnSpriteYPositions[gContestantTurnOrder[i]];
             gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = FALSE;
         }
         else
@@ -5376,10 +5379,10 @@ static void SetBattleTargetSpritePosition(void)
 {
     struct Sprite *sprite = &gSprites[gBattlerSpriteIds[B_POSITION_OPPONENT_RIGHT]];
 
-    sprite->pos2.x = 0;
-    sprite->pos2.y = 0;
-    sprite->pos1.x = GetBattlerSpriteCoord(B_POSITION_OPPONENT_RIGHT, BATTLER_COORD_X);
-    sprite->pos1.y = GetBattlerSpriteCoord(B_POSITION_OPPONENT_RIGHT, BATTLER_COORD_Y);
+    sprite->x2 = 0;
+    sprite->y2 = 0;
+    sprite->x = GetBattlerSpriteCoord(B_POSITION_OPPONENT_RIGHT, BATTLER_COORD_X);
+    sprite->y = GetBattlerSpriteCoord(B_POSITION_OPPONENT_RIGHT, BATTLER_COORD_Y);
     sprite->invisible = TRUE;
 }
 
@@ -5953,7 +5956,7 @@ static void ContestDebugPrintBitStrings(void)
 
     if (!gEnableContestDebugging)
         return;
-    
+
     if (eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_WINNER_FLAGS && eContestDebugMode != CONTEST_DEBUG_MODE_PRINT_LOSER_FLAGS)
         return;
 
