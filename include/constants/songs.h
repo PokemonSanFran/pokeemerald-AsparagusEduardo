@@ -5,8 +5,8 @@
 
 #define END_SE                       SE_SUDOWOODO_SHAKE
 // Music
-#define START_MUS                     350
-#define END_MUS                       MUS_RG_TEACHY_TV_MENU
+#define START_MUS                     MUS_LITTLEROOT_TEST
+#define END_MUS                       DP_SEQ_BA_SECRET1
 
 #define MUS_DUMMY                     0 // MUS_DUMMY
 #define SE_USE_ITEM                   1 // SE_KAIFUKU
@@ -552,160 +552,26 @@
 
  
 // Diamond & Pearl Music 
-#define DP_SEQ_TITLE00                531 // Opening Movie (Part 1)
-#define DP_SEQ_TITLE01                532 // Opening Movie (Part 2)
-#define DP_SEQ_OPENING                533 // Introduction
-#define DP_SEQ_TV_HOUSOU              534 // Special Report "Search for the Red Gyarados!" (Part 1)
-#define DP_SEQ_TV_END                 535 // Special Report "Search for the Red Gyarados!" (Part 2)
-#define DP_SEQ_TOWN01_D               536 // Twinleaf Town (Day)
-#define DP_SEQ_TOWN01_N               537 // Twinleaf Town (Night)
-#define DP_SEQ_THE_RIV                538 // Rival
-#define DP_SEQ_ROAD_A_D               539 // Route 201 (Day)
-#define DP_SEQ_ROAD_A_N               540 // Route 201 (Night)
-#define DP_SEQ_D_LAKE                 541 // Lake
-#define DP_SEQ_THE_EVENT01            542 // A Surprise at the Lake!
-#define DP_SEQ_BA_POKE                543 // Battle! (Wild Pokémon)
-#define DP_SEQ_WINPOKE                544 // Victory! (Wild Pokémon)
-#define DP_SEQ_THE_GIRL               545 // Dawn
-#define DP_SEQ_THE_BOY                546 // Lucas
-#define DP_SEQ_FANFA4                 547 // Obtained an Item!
-#define DP_SEQ_TOWN02_D               548 // Sandgem Town (Day)
-#define DP_SEQ_TOWN02_N               549 // Sandgem Town (Night)
-#define DP_SEQ_KENKYUJO               550 // The Pokémon Lab
-#define DP_SEQ_TSURETEKE              551 // Hurry Along
-#define DP_SEQ_PC_01                  552 // Pokémon Center (Day)
-#define DP_SEQ_PC_02                  553 // Pokémon Center (Night)
-#define DP_SEQ_ASA                    554 // Pokémon Healed                  (TODO: SWEEP PITCH!!)
-#define DP_SEQ_EYE_BOY                555 // Trainers' Eyes Meet (Youngster)
-#define DP_SEQ_EYE_GIRL               556 // Trainers' Eyes Meet (Lass)
-#define DP_SEQ_BA_TRAIN               557 // Battle! (Trainer Battle)
-#define DP_SEQ_WINTRAIN               558 // Victory! (Trainer Battle)
-#define DP_SEQ_CITY01_D               559 // Jubilife City (Day)
-#define DP_SEQ_CITY01_N               560 // Jubilife City (Night)
-#define DP_SEQ_FANFA3                 561 // Obtained a Key Item!
-#define DP_SEQ_FS                     562 // Poké Mart
-#define DP_SEQ_ROAD_B_D               563 // Route 203 (Day)
-#define DP_SEQ_ROAD_B_N               564 // Route 203 (Night)
-#define DP_SEQ_BA_RIVAL               565 // Battle! (Rival)
-#define DP_SEQ_D_05                   566 // Oreburgh Gate
-#define DP_SEQ_WAZA                   567 // Obtained a TM!
-#define DP_SEQ_CITY03_D               568 // Oreburgh City (Day)
-#define DP_SEQ_CITY03_N               569 // Oreburgh City (Night)
-#define DP_SEQ_D_04                   570 // Oreburgh Mine
-#define DP_SEQ_GYM                    571 // Pokémon Gym
-#define DP_SEQ_BA_GYM                 572 // Battle! (Gym Leader)
-#define DP_SEQ_WINTGYM                573 // Victory! (Gym Leader)
-#define DP_SEQ_BADGE                  574 // Obtained a Badge!
-#define DP_SEQ_EYE_KID                575 // Trainers' Eyes Meet (Twins)
-#define DP_SEQ_FANFA1                 576 // Level Up!
-#define DP_SEQ_TOWN03_D               577 // Floaroma Town (Day)
-#define DP_SEQ_TOWN03_N               578 // Floaroma Town (Night)
-#define DP_SEQ_KINOMI                 579 // Obtained a Berry!
-#define DP_SEQ_ROAD_C_D               580 // Route 205 (Day)
-#define DP_SEQ_ROAD_C_N               581 // Route 205 (Night)
-#define DP_SEQ_EYE_GINGA              582 // Team Galactic Appears!
-#define DP_SEQ_BA_GINGA               583 // Battle! (Team Galactic)
-#define DP_SEQ_D_02                   584 // Eterna Forest
-#define DP_SEQ_GONIN                  585 // Let's Go Together
-#define DP_SEQ_CITY04_D               586 // Eterna City (Day)
-#define DP_SEQ_CITY04_N               587 // Eterna City (Night)
-#define DP_SEQ_D_GINLOBBY             588 // Galactic Eterna Building
-#define DP_SEQ_BA_GINGA3              589 // Battle! (Team Galactic Commander)
-#define DP_SEQ_WINGINGA               590 // Victory! (Team Galactic)
-#define DP_SEQ_SHINKA                 591 // Evolution
-#define DP_SEQ_FANFA5                 592 // Congratulations! Your Pokémon Evolved!
-#define DP_SEQ_BICYCLE                593 // Bicycle
-#define DP_SEQ_EYE_SPORT              594 // Trainers' Eyes Meet (Cyclist)
-#define DP_SEQ_ROAD_D_D               595 // Route 206 (Day)
-#define DP_SEQ_ROAD_D_N               596 // Route 206 (Night)
-#define DP_SEQ_CITY05_D               597 // Hearthome City (Day)
-#define DP_SEQ_CITY05_N               598 // Hearthome City (Night)
-#define DP_SEQ_ROAD_E_D               599 // Route 209 (Day)
-#define DP_SEQ_ROAD_E_N               600 // Route 209 (Night)
-#define DP_SEQ_EYE_MOUNT              601 // Trainers' Eyes Meet (Hiker)
-#define DP_SEQ_TOWN04_D               602 // Solaceon Town (Day)
-#define DP_SEQ_TOWN04_N               603 // Solaceon Town (Night)
-#define DP_SEQ_POCKETCH               604 // Obtained a Pokétch App!
-#define DP_SEQ_ROAD_F_D               605 // Route 210 (Day)
-#define DP_SEQ_ROAD_F_N               606 // Route 210 (Night)
-#define DP_SEQ_CITY07_D               607 // Veilstone City (Day)
-#define DP_SEQ_CITY07_N               608 // Veilstone City (Night)
-#define DP_SEQ_TOWN07_D               609 // Valor Lakefront (Day)
-#define DP_SEQ_TOWN07_N               610 // Valor Lakefront (Night)
-#define DP_SEQ_CITY02_D               611 // Canalave City (Day)
-#define DP_SEQ_CITY02_N               612 // Canalave City (Night)
-#define DP_SEQ_ROAD_SNOW_D            613 // Route 216 (Day)
-#define DP_SEQ_ROAD_SNOW_N            614 // Route 216 (Night)
-#define DP_SEQ_CITY09_D               615 // Snowpoint City (Day)
-#define DP_SEQ_CITY09_N               616 // Snowpoint City (Night)
-#define DP_SEQ_D_AGITO                617 // Team Galactic HQ
-#define DP_SEQ_BA_AGAKI               618 // Battle! (Team Galactic Boss)
-#define DP_SEQ_THE_EVENT04            619 // Deep Within Team Galactic HQ
-#define DP_SEQ_D_MOUNT1               620 // Mt. Coronet
-#define DP_SEQ_D_MOUNT2               621 // Spear Pillar
-#define DP_SEQ_THE_EVENT02            622 // The Legendary Pokémon Appears!
-#define DP_SEQ_THE_EVENT03            623 // Catastrophe!
-#define DP_SEQ_BA_DPOKE2              624 // Battle! (Dialga / Palkia)
-#define DP_SEQ_CITY08_D               625 // Sunyshore City (Day)
-#define DP_SEQ_CITY08_N               626 // Sunyshore City (Night)
-#define DP_SEQ_D_01                   627 // Victory Road
-#define DP_SEQ_EYE_ELITE              628 // Trainers' Eyes Meet (Ace Trainer)
-#define DP_SEQ_CITY10_D               629 // Pokémon League (Day)
-#define DP_SEQ_CITY10_N               630 // Pokémon League (Night)
-#define DP_SEQ_CITY11_D               631 // Fight Area (Day)
-#define DP_SEQ_CITY11_N               632 // Fight Area (Night)
-#define DP_SEQ_TOWN06_D               633 // Route 225 (Day)
-#define DP_SEQ_TOWN06_N               634 // Route 225 (Night)
-#define DP_SEQ_ROAD_BZA_D             635 // Route 228 (Day)
-#define DP_SEQ_ROAD_BZA_N             636 // Route 228 (Night)
-#define DP_SEQ_WIFILOBBY              637 // Nintendo Wi-Fi Connection
-#define DP_SEQ_BLD_TV                 638 // TV Station
-#define DP_SEQ_BLD_BLD_GTC            639 // GTS
-#define DP_SEQ_NAMINORI               640 // Surf
-#define DP_SEQ_WASURE                 641 // Move Deleted
-#define DP_SEQ_EYE_FIGHT              642 // Trainers' Eyes Meet (Black Belt)
-#define DP_SEQ_EYE_ENKA               643 // Trainers' Eyes Meet (Sailor)
-#define DP_SEQ_TANKOU                 644 // The Underground
-#define DP_SEQ_HATANIGE               645 // Captured a Flag Underground!
-#define DP_SEQ_EYE_LADY               646 // Trainers' Eyes Meet (Aroma Lady)
-#define DP_SEQ_D_03                   647 // Old Chateau
-#define DP_SEQ_D_SAFARI               648 // Great Marsh
-#define DP_SEQ_EYE_MYS                649 // Trainers' Eyes Meet (Collector)
-#define DP_SEQ_BLD_GAME               650 // Game Corner
-#define DP_SEQ_SLOT_ATARI             651 // You're a Winner!
-#define DP_SEQ_SLOT_OOATARI           652 // You're a Jackpot Winner!
-#define DP_SEQ_EYE_RICH               653 // Trainers' Eyes Meet (PI)
-#define DP_SEQ_D_RYAYHY               654 // Lake Caverns
-#define DP_SEQ_BA_DPOKE1              655 // Battle! (Uxie / Mesprit / Azelf)
-#define DP_SEQ_KUSAGASA               656 // A Poké Radar Hit!
-#define DP_SEQ_EYE_FUN                657 // Trainers' Eyes Meet (Artist)
-#define DP_SEQ_D_KOUEN                658 // Amity Square
-#define DP_SEQ_ACCE                   659 // Got an Accessory
-#define DP_SEQ_BLD_CON                660 // Contest Hall
-#define DP_SEQ_KINOMI1                661 // Poffins
-#define DP_SEQ_CON_TEST               662 // Super Contest!
-#define DP_SEQ_CO_DRESS               663 // Contest: Dress Up
-#define DP_SEQ_CO_KASHI               664 // Dance: Easy
-#define DP_SEQ_CO_TAKUMA              665 // Dance: Difficult
-#define DP_SEQ_CO_KEKKA               666 // Contest: Results Announcement
-#define DP_SEQ_CO_FANFA               667 // Contest: Winner
-#define DP_SEQ_BF_TOWWER              668 // Battle Tower
-#define DP_SEQ_D_06                   669 // Stark Mountain
-#define DP_SEQ_BA_SECRET2             670 // Battle! (Legendary Pokémon)
-#define DP_SEQ_PRESENT                671 // Mystery Gift
-#define DP_SEQ_D_LEAGUE               672 // Decisive Battle! (Pokémon League)
-#define DP_SEQ_EYE_TENNO              673 // The Elite Four Appears!
-#define DP_SEQ_BA_TENNO               674 // Battle! (Elite Four)
-#define DP_SEQ_WINTENNO               675 // Victory (Elite Four)
-#define DP_SEQ_EYE_CHAMP              676 // Champion Cynthia
-#define DP_SEQ_BA_CHANP               677 // Battle! (Champion)
-#define DP_SEQ_WINCHAMP               678 // Victory! (Champion)
-#define DP_SEQ_BLD_DENDO              679 // Hall of Fame
-#define DP_SEQ_BLD_EV_DENDO2          680 // Congratulations on Entering the Hall of Fame!
-#define DP_SEQ_BLD_ENDING             681 // Ending Theme
-#define DP_SEQ_FUE                    682 // Azure Flute
-#define DP_SEQ_AUS                    683 // Hall of Origin
-#define DP_SEQ_BA_SECRET1             684 // Battle! Arceus
+#define DP_SEQ_BA_POKE                531 // Battle! (Wild Pokémon)
+#define DP_SEQ_WINPOKE                532 // Victory! (Wild Pokémon)
+#define DP_SEQ_BA_TRAIN               533 // Battle! (Trainer Battle)
+#define DP_SEQ_WINTRAIN               534 // Victory! (Trainer Battle)
+#define DP_SEQ_BA_RIVAL               535 // Battle! (Rival)
+#define DP_SEQ_BA_GYM                 536 // Battle! (Gym Leader)
+#define DP_SEQ_WINTGYM                537 // Victory! (Gym Leader)
+#define DP_SEQ_BA_GINGA               538 // Battle! (Team Galactic)
+#define DP_SEQ_BA_GINGA3              539 // Battle! (Team Galactic Commander)
+#define DP_SEQ_WINGINGA               540 // Victory! (Team Galactic)
+#define DP_SEQ_BA_AGAKI               541 // Battle! (Team Galactic Boss)
+#define DP_SEQ_BA_DPOKE2              542 // Battle! (Dialga / Palkia)
+#define DP_SEQ_BA_DPOKE1              543 // Battle! (Uxie / Mesprit / Azelf)
+#define DP_SEQ_BA_SECRET2             544 // Battle! (Legendary Pokémon)
+#define DP_SEQ_BA_TENNO               545 // Battle! (Elite Four)
+#define DP_SEQ_WINTENNO               546 // Victory (Elite Four)
+#define DP_SEQ_EYE_CHAMP              547 // Champion Cynthia
+#define DP_SEQ_BA_CHANP               548 // Battle! (Champion)
+#define DP_SEQ_WINCHAMP               549 // Victory! (Champion)
+#define DP_SEQ_BA_SECRET1             550 // Battle! Arceus
 
 // Platinum Music 
 #define PL_SEQ_TITLE00                685 // Title Screen

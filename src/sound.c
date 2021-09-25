@@ -63,6 +63,7 @@ static const struct Fanfare sFanfares[] = {
     [FANFARE_OBTAIN_B_POINTS]         = { MUS_OBTAIN_B_POINTS,       313 },
     [FANFARE_REGISTER_MATCH_CALL]     = { MUS_REGISTER_MATCH_CALL,   135 },
     [FANFARE_OBTAIN_SYMBOL]           = { MUS_OBTAIN_SYMBOL,         318 },
+    /*
     [FANFARE_DP_TV_END]               = { DP_SEQ_TV_END,             244 },
     [FANFARE_DP_OBTAIN_ITEM]          = { DP_SEQ_FANFA4,             160 },
     [FANFARE_DP_HEAL]                 = { DP_SEQ_ASA,                160 },
@@ -139,6 +140,7 @@ static const struct Fanfare sFanfares[] = {
     [FANFARE_BW_MISSION_CLEAR]        = { BW_SEQ_ME_MISSION_CLEAR,   270 },
     [FANFARE_BW_MISSION_FAILED]       = { BW_SEQ_ME_MISSION_FAILED,  180 },
     [FANFARE_BW_OBTAIN_BERRY]         = { BW_SEQ_ME_KINOMI,          120 },
+    */
 };
 
 #define CRY_VOLUME  120 // was 125 in R/S
