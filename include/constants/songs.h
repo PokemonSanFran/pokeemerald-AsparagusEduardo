@@ -276,6 +276,10 @@
 #define SE_PIKE_CURTAIN_CLOSE        267 // SE_CURTAIN
 #define SE_PIKE_CURTAIN_OPEN         268 // SE_CURTAIN1
 #define SE_SUDOWOODO_SHAKE           269 // SE_USSOKI
+#define END_SE                       SE_SUDOWOODO_SHAKE
+
+// Music
+#define START_MUS                    350
 // Ruby & Sapphire Music
 #define MUS_LITTLEROOT_TEST          350 // MUS_TETSUJI
 #define MUS_GSC_ROUTE38              351 // MUS_FIELD13
@@ -471,6 +475,7 @@
 #define MUS_RG_TRAINER_TOWER         556 // MUS_RG_T_TOWER
 #define MUS_RG_SLOW_PALLET           557 // MUS_RG_SLOWMASARA
 #define MUS_RG_TEACHY_TV_MENU        558 // MUS_RG_TVNOIZE
+#define END_MUS                      MUS_RG_TEACHY_TV_MENU
 
 // Emerald Music
 #define MUS_ABNORMAL_WEATHER         443 // MUS_OOAME
