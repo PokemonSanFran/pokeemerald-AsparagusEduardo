@@ -9,8 +9,7 @@ struct TrainerMoney
 
 struct UnknownPokemonStruct4
 {
-    /*0x00*/ u16 species:11;
-    /*0x01*/ u16 formId:5;  
+    /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;
     /*0x04*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
     /*0x0F*/ u8 level;

@@ -724,8 +724,6 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
     u16 species;
     u32 personality, trainerId;
     const struct CompressedSpritePalette *palette;
-    u8 formId;
-    u16 formSpeciesId;
 
     switch (sPokeblockFeed->loadGfxState)
     {
@@ -733,9 +731,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         // Load mon gfx
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        formId = GetMonData(mon, MON_DATA_FORM_ID);
-        formSpeciesId = GetFormSpeciesId(species, formId);
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[formSpeciesId], gMonSpritesGfxPtr->sprites.ptr[1], formSpeciesId, personality);
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites.ptr[1], species, personality);
         sPokeblockFeed->loadGfxState++;
         break;
     case 1:
@@ -743,12 +739,10 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
         trainerId = GetMonData(mon, MON_DATA_OT_ID);
-        formId = GetMonData(mon, MON_DATA_FORM_ID);
-        formSpeciesId = GetFormSpeciesId(species, formId);
-        palette = GetMonSpritePalStructFromOtIdPersonality(formSpeciesId, trainerId, personality);
+        palette = GetMonSpritePalStructFromOtIdPersonality(species, trainerId, personality);
 
         LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(palette->tag, 1, formId);
+        SetMultiuseSpriteTemplateToPokemon(palette->tag, 1);
         sPokeblockFeed->loadGfxState++;
         break;
     case 2:

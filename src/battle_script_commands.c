@@ -3879,7 +3879,7 @@ static void Cmd_getexp(void)
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 6, gBattleMoveDamage);
 
                     PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
-                    MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species, gBattleMons[gBattlerFainted].formId);
+                    MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
                 }
                 gBattleStruct->sentInPokes >>= 1;
                 gBattleScripting.getexpState++;
@@ -5399,7 +5399,6 @@ static void Cmd_switchindataupdate(void)
     struct BattlePokemon oldData;
     s32 i;
     u8 *monData;
-    u16 formSpeciesId;
 
     if (gBattleControllerExecFlags)
         return;
@@ -5413,11 +5412,10 @@ static void Cmd_switchindataupdate(void)
         monData[i] = gBattleResources->bufferB[gActiveBattler][4 + i];
     }
 
-    formSpeciesId = GetFormSpeciesId(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].formId);
-    gBattleMons[gActiveBattler].type1 = gBaseStats[formSpeciesId].type1;
-    gBattleMons[gActiveBattler].type2 = gBaseStats[formSpeciesId].type2;
+    gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
+    gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
     gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
-    gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum, gBattleMons[gActiveBattler].formId);
+    gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
 
     // check knocked off item
     i = GetBattlerSide(gActiveBattler);
@@ -7029,14 +7027,13 @@ static void PutMonIconOnLvlUpBox(void)
 
     u16 species = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_PERSONALITY);
-    u8 formId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_FORM_ID);
 
-    const u8* iconPtr = GetMonIconPtr(species, personality, formId);
+    const u8* iconPtr = GetMonIconPtr(species, personality);
     iconSheet.data = iconPtr;
     iconSheet.size = 0x200;
     iconSheet.tag = MON_ICON_LVLUP_BOX_TAG;
 
-    iconPal = GetValidMonIconPalettePtr(species, formId);
+    iconPal = GetValidMonIconPalettePtr(species);
     iconPalSheet.data = iconPal;
     iconPalSheet.tag = MON_ICON_LVLUP_BOX_TAG;
 
@@ -8140,8 +8137,6 @@ static void Cmd_various(void)
         if (gBattlescriptCurrInstr[3] == 0)
         {
             u16 megaSpecies;
-            u16 baseSpecies;
-            u16 formId;
             gBattleStruct->mega.evolvedSpecies[gActiveBattler] = gBattleMons[gActiveBattler].species;
             if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
                 || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
@@ -8156,17 +8151,10 @@ static void Cmd_various(void)
                 megaSpecies = GetWishMegaEvolutionSpecies(gBattleStruct->mega.evolvedSpecies[gActiveBattler], gBattleMons[gActiveBattler].moves[0], gBattleMons[gActiveBattler].moves[1], gBattleMons[gActiveBattler].moves[2], gBattleMons[gActiveBattler].moves[3]);
             }
 
-            baseSpecies = GetBaseFormSpeciesId(megaSpecies);
-            formId = GetFormIdFromFormSpeciesId(megaSpecies);
-            
-            gBattleMons[gActiveBattler].species = baseSpecies;
-            gBattleMons[gActiveBattler].formId = formId;
-            SetMonData(mon, MON_DATA_SPECIES, &baseSpecies);
-            SetMonData(mon, MON_DATA_FORM_ID, &formId);
+            gBattleMons[gActiveBattler].species = megaSpecies;
+            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
 
-            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetFormSpeciesId(baseSpecies, formId));
-
-            BtlController_EmitSetMonData(0, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], 2, &megaSpecies);
+            BtlController_EmitSetMonData(0, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], 2, &gBattleMons[gActiveBattler].species);
             MarkBattlerForControllerExec(gActiveBattler);
         }
         // Change stats.
@@ -10861,7 +10849,6 @@ static void Cmd_healpartystatus(void)
         {
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
             u8 abilityNum = GetMonData(&party[i], MON_DATA_ABILITY_NUM);
-            u8 formId = GetMonData(&party[i], MON_DATA_FORM_ID);
 
             if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
@@ -10874,7 +10861,7 @@ static void Cmd_healpartystatus(void)
                          && !(gAbsentBattlerFlags & gBitTable[gActiveBattler]))
                     ability = gBattleMons[gActiveBattler].ability;
                 else
-                    ability = GetAbilityBySpecies(species, abilityNum, formId);
+                    ability = GetAbilityBySpecies(species, abilityNum);
 
                 if (ability != ABILITY_SOUNDPROOF)
                     toHeal |= (1 << i);
@@ -13036,8 +13023,7 @@ static void Cmd_trygivecaughtmonnick(void)
                            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_SPECIES),
                            GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]),
                            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_PERSONALITY, NULL),
-                           BattleMainCB2,
-                           GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_FORM_ID));
+                           BattleMainCB2);
 
             gBattleCommunication[MULTIUSE_STATE]++;
         }

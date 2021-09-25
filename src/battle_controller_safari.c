@@ -618,9 +618,8 @@ static void SafariHandlePlayFanfareOrBGM(void)
 static void SafariHandleFaintingCry(void)
 {
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
-    u8 formId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_FORM_ID);
 
-    PlayCry1(GetFormSpeciesId(species, formId), 25);
+    PlayCry1(species, 25);
     SafariBufferExecCompleted();
 }
 

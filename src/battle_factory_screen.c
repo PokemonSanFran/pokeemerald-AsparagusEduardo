@@ -1757,7 +1757,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
                                              gFacilityTrainerMons[monId].nature,
                                              ivs,
                                              gFacilityTrainerMons[monId].evSpread,
-                                             otId, 0); // handle forms
+                                             otId);
         friendship = 0;
         for (j = 0; j < MAX_MON_MOVES; j++)
             SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monId].moves[j], j);
@@ -1787,7 +1787,7 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
                                              gFacilityTrainerMons[monId].nature,
                                              ivs,
                                              gFacilityTrainerMons[monId].evSpread,
-                                             otId, 0); // handle forms
+                                             otId);
         friendship = 0;
         for (j = 0; j < MAX_MON_MOVES; j++)
             SetMonMoveAvoidReturn(&sFactorySelectScreen->mons[i + firstMonId].monData, gFacilityTrainerMons[monId].moves[j], j);

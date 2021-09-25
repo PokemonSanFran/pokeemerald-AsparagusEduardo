@@ -1742,7 +1742,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
                                              gFacilityTrainerMons[monId].nature,
                                              fixedIV,
                                              gFacilityTrainerMons[monId].evSpread,
-                                             otID, 0); // handle forms
+                                             otID);
 
         friendship = MAX_FRIENDSHIP;
         // Give the chosen pokemon its specified moves.
@@ -1783,7 +1783,7 @@ static void Unused_CreateApprenticeMons(u16 trainerId, u8 firstMonId)
 
     for (i = 0; i != 3; i++)
     {
-        CreateMonWithEVSpread(&gEnemyParty[firstMonId + i], apprentice->party[i].species, level, fixedIV, 8, 0); // handle forms
+        CreateMonWithEVSpread(&gEnemyParty[firstMonId + i], apprentice->party[i].species, level, fixedIV, 8);
         friendship = MAX_FRIENDSHIP;
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
@@ -1872,7 +1872,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
                                              gFacilityTrainerMons[monId].nature,
                                              fixedIV,
                                              gFacilityTrainerMons[monId].evSpread,
-                                             otID, 0); // handle forms
+                                             otID);
 
         friendship = 0;
         for (j = 0; j < MAX_MON_MOVES; j++)
@@ -1900,7 +1900,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
                                              gFacilityTrainerMons[monId].nature,
                                              fixedIV,
                                              gFacilityTrainerMons[monId].evSpread,
-                                             otID, 0); // handle forms
+                                             otID);
 
         friendship = 0;
         for (j = 0; j < MAX_MON_MOVES; j++)
@@ -3018,7 +3018,7 @@ static void FillPartnerParty(u16 trainerId)
                       #else
                       i, // BUG: personality was stored in the 'j' variable. As a result, Steven's pokemon do not have the intended natures.
                       #endif
-                      OT_ID_PRESET, STEVEN_OTID, 0); // handle forms
+                      OT_ID_PRESET, STEVEN_OTID);
             for (j = 0; j < PARTY_SIZE; j++)
                 SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_HP_EV + j, &sStevenMons[i].evs[j]);
             for (j = 0; j < MAX_MON_MOVES; j++)
@@ -3049,14 +3049,14 @@ static void FillPartnerParty(u16 trainerId)
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.NoItemDefaultMoves;
 
-                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID, partyData[i].formId);
+                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID);
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.NoItemCustomMoves;
 
-                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID, partyData[i].formId);
+                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID);
 
                 for (j = 0; j < 4; j++)
                 {
@@ -3069,7 +3069,7 @@ static void FillPartnerParty(u16 trainerId)
             {
                 const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.ItemDefaultMoves;
 
-                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID, partyData[i].formId);
+                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID);
 
                 SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -3078,7 +3078,7 @@ static void FillPartnerParty(u16 trainerId)
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party.ItemCustomMoves;
 
-                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID, partyData[i].formId);
+                CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, partyData[i].iv * 31 / 255, TRUE, j, TRUE, otID);
 
                 SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
@@ -3114,7 +3114,7 @@ static void FillPartnerParty(u16 trainerId)
                                                  gFacilityTrainerMons[monId].nature,
                                                  ivs,
                                                  gFacilityTrainerMons[monId].evSpread,
-                                                 otID, 0); // handle forms
+                                                 otID);
             friendship = MAX_FRIENDSHIP;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
@@ -3547,7 +3547,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
                                              gFacilityTrainerMons[monId].nature,
                                              fixedIV,
                                              gFacilityTrainerMons[monId].evSpread,
-                                             otID, 0); // handle forms
+                                             otID);
 
         friendship = MAX_FRIENDSHIP;
         // Give the chosen pokemon its specified moves.

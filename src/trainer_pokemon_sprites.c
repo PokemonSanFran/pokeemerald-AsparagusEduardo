@@ -191,7 +191,7 @@ static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFront
     return spriteId;
 }
 
-u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, u8 formId)
+u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
 {
     u8 *framePics;
     struct SpriteFrameImage *images;
@@ -199,7 +199,6 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
     u8 i;
     u8 spriteId;
     u8 flags2;
-    u16 formSpeciesId = GetFormSpeciesId(species, formId);
 
     for (i = 0; i < PICS_COUNT; i ++)
     {
@@ -232,7 +231,7 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
         Free(framePics);
         return 0xFFFF;
     }
-    if (DecompressPic(formSpeciesId, personality, flags, framePics, FALSE))
+    if (DecompressPic(species, personality, flags, framePics, FALSE))
     {
         // debug trap?
         return 0xFFFF;
@@ -243,7 +242,7 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
         images[j].size = 0x800;
     }
     sCreatingSpriteTemplate.tileTag = 0xFFFF;
-    sCreatingSpriteTemplate.anims = gMonFrontAnimsPtrTable[formSpeciesId];
+    sCreatingSpriteTemplate.anims = gMonFrontAnimsPtrTable[species];
     sCreatingSpriteTemplate.images = images;
     if (flags2 == 0x01)
     {
@@ -261,7 +260,7 @@ u16 CreatePicSprite2(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s1
         sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     }
     sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
-    LoadPicPaletteByTagOrSlot(formSpeciesId, otId, personality, paletteSlot, paletteTag, FALSE);
+    LoadPicPaletteByTagOrSlot(species, otId, personality, paletteSlot, paletteTag, FALSE);
     spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
     if (paletteTag == 0xFFFF)
     {

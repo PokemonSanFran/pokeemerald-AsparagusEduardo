@@ -300,11 +300,9 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     u8 i, friendship, language, gameMet, markings, isEventLegal;
     u16 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
-    u8 formId;
 
 
     species = GetMonData(egg, MON_DATA_SPECIES);
-    formId = GetMonData(egg, MON_DATA_FORM_ID);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -324,7 +322,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     pokerus = GetMonData(egg, MON_DATA_POKERUS);
     isEventLegal = GetMonData(egg, MON_DATA_EVENT_LEGAL);
 
-    CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0, formId);
+    CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -418,8 +416,6 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
     u8 r5 = 0;
     u8 spriteID = 0;
     struct Pokemon* mon = NULL;
-    u8 formId;
-    u16 formSpeciesId;
 
     if (a0 == 0)
     {
@@ -437,18 +433,15 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16* speciesLoc
         {
             u16 species = GetMonData(mon, MON_DATA_SPECIES);
             u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
-            formId = GetMonData(mon, MON_DATA_FORM_ID);
-            formSpeciesId = GetFormSpeciesId(species, formId);
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[formSpeciesId],
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[species],
                                                       gMonSpritesGfxPtr->sprites.ptr[(a0 * 2) + 1],
-                                                      formSpeciesId, pid);
+                                                      species, pid);
             LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
             *speciesLoc = species; // handle forms?
         }
         break;
     case 1:
-        formId = GetMonData(mon, MON_DATA_FORM_ID);
-        SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, r5, formId);
+        SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, r5);
         spriteID = CreateSprite(&gMultiuseSpriteTemplate, 120, 75, 6);
         gSprites[spriteID].invisible = TRUE;
         gSprites[spriteID].callback = SpriteCallbackDummy;
@@ -603,7 +596,6 @@ static void CB2_EggHatch_1(void)
     u16 species;
     u8 gender;
     u32 personality;
-    u8 formId;
 
     switch (sEggHatchData->CB2_state)
     {
@@ -683,8 +675,7 @@ static void CB2_EggHatch_1(void)
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gender = GetMonGender(&gPlayerParty[sEggHatchData->eggPartyID]);
             personality = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_PERSONALITY, 0);
-            formId = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_FORM_ID);
-            DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, EggHatchSetMonNickname, formId);
+            DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
             break;
         case 1:
         case -1:

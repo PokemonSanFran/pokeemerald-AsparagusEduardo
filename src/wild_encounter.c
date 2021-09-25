@@ -311,8 +311,6 @@ static u8 PickWildMonNature(void)
 void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
-    u8 formId = GetFormIdFromFormSpeciesId(species);
-    u16 baseSpecies = GetFormSpeciesId(species, 0);
 
     ZeroEnemyPartyMons();
     checkCuteCharm = TRUE;
@@ -333,9 +331,7 @@ void CreateWildMon(u16 species, u8 level)
     {
         u16 leadingMonSpecies = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES);
         u32 leadingMonPersonality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
-        u16 leadingMonFormId = GetMonData(&gPlayerParty[0], MON_DATA_FORM_ID);
-        u16 leadingMonFormSpeciesId = GetFormSpeciesId(leadingMonSpecies, leadingMonFormId);
-        u8 gender = GetGenderFromSpeciesAndPersonality(leadingMonFormSpeciesId, leadingMonPersonality);
+        u8 gender = GetGenderFromSpeciesAndPersonality(leadingMonSpecies, leadingMonPersonality);
 
         // misses mon is genderless check, although no genderless mon can have cute charm as ability
         if (gender == MON_FEMALE)
@@ -343,11 +339,11 @@ void CreateWildMon(u16 species, u8 level)
         else
             gender = MON_FEMALE;
 
-        CreateMonWithGenderNatureLetter(&gEnemyParty[0], baseSpecies, level, 32, gender, PickWildMonNature(), 0, formId);
+        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, 32, gender, PickWildMonNature(), 0);
         return;
     }
 
-    CreateMonWithNature(&gEnemyParty[0], baseSpecies, level, 32, PickWildMonNature(), formId);
+    CreateMonWithNature(&gEnemyParty[0], species, level, 32, PickWildMonNature());
 }
 
 enum
@@ -814,7 +810,6 @@ bool8 DoesCurrentMapHaveFishingMons(void)
 void FishingWildEncounter(u8 rod)
 {
     u16 species;
-    u8 formId;
 
     if (CheckFeebas() == TRUE)
     {

@@ -1015,7 +1015,7 @@ static void DebugAction_Util_WatchCredits(u8 taskId)
 static void DebugAction_Util_Trainer_Name(u8 taskId)
 {
     NewGameBirchSpeech_SetDefaultPlayerName(Random() % 20);
-    DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript, 0);
+    DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
 }
 static void DebugAction_Util_Trainer_Gender(u8 taskId)
 {
@@ -1789,7 +1789,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
         gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
     #endif
     #ifdef POKEMON_EXPANSION
-        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, 0); //Create pokemon sprite
+        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0); //Create pokemon sprite
     #endif
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
 }
@@ -1832,7 +1832,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
         gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
     #endif
     #ifdef POKEMON_EXPANSION
-        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create pokemon sprite
+        gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0); //Create pokemon sprite
     #endif
     gSprites[gTasks[taskId].data[6]].oam.priority = 0; //Mon Icon ID
     gTasks[taskId].data[7] = 0;             //iterator
@@ -1885,7 +1885,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
             gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, TRUE); //Create pokemon sprite
         #endif
         #ifdef POKEMON_EXPANSION
-            gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0, GetFormIdFromFormSpeciesId(gTasks[taskId].data[3])); //Create new pokemon sprite
+            gTasks[taskId].data[6] = CreateMonIcon(gTasks[taskId].data[3], SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4, 0); //Create new pokemon sprite
         #endif
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
     }
@@ -2073,7 +2073,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        abilityId = GetAbilityBySpecies(sDebugMonData->mon_speciesId, 0, GetFormIdFromFormSpeciesId(sDebugMonData->mon_speciesId));
+        abilityId = GetAbilityBySpecies(sDebugMonData->mon_speciesId, 0);
         StringCopy(gStringVar1, gAbilityNames[abilityId]);
         StringExpandPlaceholders(gStringVar4, gDebugText_PokemonAbility);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
@@ -2114,7 +2114,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
                 gTasks[taskId].data[3] = 0;
         }
 
-        abilityId = GetAbilityBySpecies(sDebugMonData->mon_speciesId, gTasks[taskId].data[3], GetFormIdFromFormSpeciesId(sDebugMonData->mon_speciesId));
+        abilityId = GetAbilityBySpecies(sDebugMonData->mon_speciesId, gTasks[taskId].data[3]);
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
@@ -2413,7 +2413,6 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     u8 IVs[6];
     u8 iv_val;
     u16 species     = GetBaseFormSpeciesId(sDebugMonData->mon_speciesId); //species ID;
-    u8 formId       = GetFormIdFromFormSpeciesId(sDebugMonData->mon_speciesId); //species ID
     u8 level        = sDebugMonData->mon_level;
     u8 isShiny      = sDebugMonData->isShiny; //Shiny: no 0, yes 1
     u8 nature       = sDebugMonData->mon_natureId;
@@ -2449,10 +2448,10 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
             personality = ((((Random() % 8) ^ (HIHALF(otid) ^ LOHALF(otid))) ^ LOHALF(personality)) << 16) | LOHALF(personality);
         } while (nature != GetNatureFromPersonality(personality));
 
-        CreateMon(&mon, species, level, 32, 1, personality, OT_ID_PRESET, otid, formId);
+        CreateMon(&mon, species, level, 32, 1, personality, OT_ID_PRESET, otid);
     }
     else
-        CreateMonWithNature(&mon, species, level, 32, nature, formId);
+        CreateMonWithNature(&mon, species, level, 32, nature);
 
     //EVs/IVs
     for (i = 0; i < NUM_STATS; i++)
@@ -2485,11 +2484,11 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     }
 
     //Ability
-    if (abilityNum == 0xFF || GetAbilityBySpecies(species, abilityNum, formId) == 0)
+    if (abilityNum == 0xFF || GetAbilityBySpecies(species, abilityNum) == 0)
     {
         do {
             abilityNum = Random() % 3;  // includes hidden abilities
-        } while (GetAbilityBySpecies(species, abilityNum, formId) == 0);
+        } while (GetAbilityBySpecies(species, abilityNum) == 0);
     }
 
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
@@ -2569,7 +2568,6 @@ static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
                  personality,
                  0,
                  OT_ID_PLAYER_ID,
-                 0,
                  0);
 
     for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
