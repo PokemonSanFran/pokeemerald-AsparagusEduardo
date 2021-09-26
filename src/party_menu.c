@@ -5348,7 +5348,9 @@ bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
-    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_USE, gSpecialVar_ItemId);
+    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_USE_DAY, gSpecialVar_ItemId);
+    if (targetSpecies == SPECIES_NONE)
+        targetSpecies = GetFormChangeTargetSpecies(mon, FORM_ITEM_USE, gSpecialVar_ItemId);
     if (targetSpecies != SPECIES_NONE)
     {
         gPartyMenuUseExitCallback = TRUE;
@@ -5356,7 +5358,7 @@ bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
         PlayCry2(targetSpecies, 0, 0x7D, 0xA);
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
         FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId]);
-        CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 0);
+        CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 1);
         CalculateMonStats(mon);
         GetMonNickname(mon, gStringVar1);
         StringExpandPlaceholders(gStringVar4, ChangedForm);
