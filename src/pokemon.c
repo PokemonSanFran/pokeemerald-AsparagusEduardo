@@ -52,6 +52,7 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "constants/battle_config.h"
+#include "day_night.h"
 
 struct SpeciesItem
 {
@@ -8214,7 +8215,7 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
             case FORM_ITEM_USE_DAY:
                 RtcCalcLocalTime();
                 if (arg == formChanges[i].param1 && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE)
-                 && (gLocalTime.hours >= 12 && gLocalTime.hours < 24))
+                 && IsCurrentlyDay())
                     targetSpecies = formChanges[i].targetSpecies;
                 break;
             default:
