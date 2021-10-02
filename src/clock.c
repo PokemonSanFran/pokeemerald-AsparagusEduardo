@@ -14,7 +14,6 @@
 
 static void UpdatePerDay(struct Time *localTime);
 static void UpdatePerMinute(struct Time *localTime);
-static void FormChangeTimeUpdate();
 
 static void InitTimeBasedEvents(void)
 {
@@ -70,27 +69,8 @@ static void UpdatePerMinute(struct Time *localTime)
         {
             BerryTreeTimeUpdate(minutes);
             gSaveBlock2Ptr->lastBerryTreeUpdate = *localTime;
-            FormChangeTimeUpdate();
         }
     }
-}
-
-static void FormChangeTimeUpdate()
-{
-    s32 i;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gPlayerParty[i];
-        u16 species = GetMonData(mon, MON_DATA_SPECIES);
-        u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_TIME_NIGHT, 0);
-        
-        if (targetSpecies != SPECIES_NONE)
-        {
-            SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
-            CalculateMonStats(mon);
-        }
-    }
-
 }
 
 static void ReturnFromStartWallClock(void)
