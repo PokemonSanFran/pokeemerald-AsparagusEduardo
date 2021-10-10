@@ -1539,12 +1539,12 @@ const struct Item gItems[] =
         .itemId = ITEM_ESCAPE_ROPE,
         .description = sEscapeRopeDesc,
         #if I_KEY_ESCAPE_ROPE >= GEN_8
-        .price = 0,
-        .importance = 1,
-        .pocket = POCKET_KEY_ITEMS,
+            .price = 0,
+            .importance = 1,
+            .pocket = POCKET_KEY_ITEMS,
         #else
-        .price = 1000,
-        .pocket = POCKET_ITEMS,
+            .price = 1000,
+            .pocket = POCKET_ITEMS,
         #endif
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_EscapeRope,
@@ -1960,6 +1960,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -1981,6 +1982,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2002,6 +2004,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2023,6 +2026,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
+            .secondaryId = FORM_ITEM_USE,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -2412,8 +2416,13 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_SITRUS_BERRY,
         .price = 20,
-        .holdEffect = HOLD_EFFECT_RESTORE_HP,
-        .holdEffectParam = 30,
+        #if defined(BATTLE_ENGINE) && I_SITRUS_BERRY_HEAL >= GEN_4
+            .holdEffect = HOLD_EFFECT_RESTORE_PCT_HP,
+            .holdEffectParam = 25,
+        #else
+            .holdEffect = HOLD_EFFECT_RESTORE_HP,
+            .holdEffectParam = 30,
+        #endif
         .description = sSitrusBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
@@ -3106,7 +3115,7 @@ const struct Item gItems[] =
         .itemId = ITEM_COBA_BERRY,
         .price = 20,
         .holdEffect = HOLD_EFFECT_RESIST_BERRY,
-        .holdEffectParam = TYPE_FIGHTING,
+        .holdEffectParam = TYPE_FLYING,
         .description = sCobaBerryDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
@@ -7154,6 +7163,7 @@ const struct Item gItems[] =
         #ifdef POKEMON_EXPANSION
             .type = ITEM_USE_PARTY_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_FormChange,
+            .secondaryId = FORM_ITEM_USE_TIME,
         #else
             .type = ITEM_USE_BAG_MENU,
             .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
