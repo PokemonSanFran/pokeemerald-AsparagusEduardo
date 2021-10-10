@@ -43,6 +43,8 @@
     #define SPECIES_CRAMORANT               0
     #define SPECIES_CRAMORANT_GORGING       10015
     #define SPECIES_CRAMORANT_GULPING       10016
+    #define SPECIES_GRENINJA_BATTLE_BOND    0
+    #define SPECIES_GRENINJA_ASH            10017
 #endif
 
 // Items with peculiar battle effects.
@@ -127,6 +129,7 @@
 #define B_GALE_WINGS                GEN_8 // In Gen7+ requires full HP to trigger.
 #define B_STANCE_CHANGE_FAIL        GEN_8 // In Gen7+, Stance Change fails if the Pokémon is unable to use a move because of confusion, paralysis, etc. In Gen6, it doesn't.
 #define B_GHOSTS_ESCAPE             GEN_8 // In Gen6+, Ghost-type Pokémon can escape even when blocked by abilities such as Shadow Tag.
+#define B_SHADOW_TAG_ESCAPE         GEN_7 // In Gen4+, if both sides have a Pokémon with Shadow Tag, all battlers can escape. Before, neither side could escape this situation.
 #define B_MOODY_ACC_EVASION         GEN_8 // In Gen8, Moody CANNOT raise Accuracy and Evasion anymore.
 #define B_FLASH_FIRE_FROZEN         GEN_8 // In Gen5+, Flash Fire can trigger even when frozen, when it couldn't before.
 #define B_SYNCHRONIZE_NATURE        GEN_8 // In Gen8, if the Pokémon with Synchronize is leading the party, it's 100% guaranteed that wild Pokémon will have the same ability, as opposed to 50% previously.
@@ -162,6 +165,10 @@
 
 // Item Theft Settings
 #define B_TRAINERS_KNOCK_OFF_ITEMS  TRUE  // If TRUE, trainers can steal/swap your items (non-berries are restored after battle). In vanilla games trainers cannot steal items.
+
+// Last Used Ball
+#define B_LAST_USED_BALL            TRUE        // If TRUE, the "last used ball" feature from Gen 7 will be implemented
+#define B_LAST_USED_BALL_BUTTON     R_BUTTON    // If last used ball is implemented, this button (or button combo) will trigger throwing the last used ball.
 
 // Other
 #define B_DOUBLE_WILD_CHANCE        0     // % chance of encountering two Pokémon in a Wild Encounter.
