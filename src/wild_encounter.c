@@ -26,6 +26,8 @@
 #include "constants/maps.h"
 #include "constants/weather.h"
 
+#include "tx_difficulty_challenges.h"
+
 extern const u8 EventScript_RepelWoreOff[];
 extern const u8 EventScript_LureWoreOff[];
 
@@ -314,6 +316,9 @@ void CreateWildMon(u16 species, u8 level)
 
     ZeroEnemyPartyMons();
     checkCuteCharm = TRUE;
+
+    if (gSaveBlock1Ptr->txRandEncounter) //tx_difficulty_challenges
+        species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_ENCOUNTER, TRUE, !gSaveBlock1Ptr->txRandChaos);
 
     switch (gBaseStats[species].genderRatio)
     {

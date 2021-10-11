@@ -3179,4 +3179,11 @@ extern const u8 gText_Recall[];
 
 extern const u8 gText_AshQty[];
 
+//tx_difficulty_challenges
+extern const u8 gText_NuzlockeCantThrowPokeBallRoute[];
+extern const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[];
+extern const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[];
+extern const u8 gText_TypeChallengeCantThrowPokeBall[];
+extern const u8 gText_BattleRules_NoItems_Player[];
+
 #endif // GUARD_STRINGS_H
