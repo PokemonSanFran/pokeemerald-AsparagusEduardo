@@ -1020,34 +1020,20 @@ u32 CanThrowBall(void)
 {
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
         && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) // There are two present pokemon.
-    {
         return 1;   // There are two present pokemon.
-    }
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
-    {
         return 2;   // No room for mon
-    }
     else if (FlagGet(FLAG_SYS_NO_CATCHING)) //DEBUG
-    {
         return 3;   // No catching flag.
-    }
     //tx_difficulty_challenges
-    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsCaptureBlocked) // Already caught on Area
-    {
-        return 4;
-    }
-    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive == 2) //already have THIS_mon
-    {
-        return 5;
-    }
-    else if (gSaveBlock1Ptr->txRandTypeChallenge && TypeChallengeCaptureBlocked) //pkmn not of the TYPE CHALLANGE type
-    {
-        return 6;
-    }
-    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive) // Already caught mon in Evo line
-    {
-        return 7;
-    }
+    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsCaptureBlocked)
+        return 4; // Already caught on Area
+    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive == 2)
+        return 5; //already have THIS_mon
+    else if (gSaveBlock1Ptr->txRandTypeChallenge && TypeChallengeCaptureBlocked)
+        return 6; //pkmn not of the TYPE CHALLANGE type
+    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive)
+        return 7; // Already caught mon in Evo line
     
     return 0;   // usable 
 }
