@@ -47,7 +47,6 @@
 #include "union_room_chat.h"
 #include "constants/items.h"
 #include "constants/map_groups.h"
-
 #include "tx_difficulty_challenges.h"
 
 // #include "printf.h"

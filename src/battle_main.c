@@ -65,7 +65,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "cable_club.h"
-
 #include "tx_difficulty_challenges.h"
 #include "overworld.h"
 

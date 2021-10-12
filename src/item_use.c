@@ -45,7 +45,7 @@
 #include "soar.h"
 
 #include "tx_difficulty_challenges.h"
-#include "battle_setup.h"
+#include "battle_setup.h" //tx_difficulty_challenges
 
 static void SetUpItemUseCallback(u8 taskId);
 static void FieldCB_UseItemOnField(void);

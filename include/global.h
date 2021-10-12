@@ -1096,8 +1096,6 @@ struct SaveBlock1
     // sizeof: 0x3???
 };
 
-//gSaveBlock1Ptr->txRandTypeChallenge
-#define TX_DIFFICULTY_CHALLENGES_USED
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
 
@@ -1107,5 +1105,7 @@ struct MapPosition
     s16 y;
     s8 height;
 };
+
+#define TX_DIFFICULTY_CHALLENGES_USED
 
 #endif // GUARD_GLOBAL_H

@@ -47,6 +47,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/battle_config.h"
+#include "constants/species.h"
+#include "tx_difficulty_challenges.h"
 
 enum {
     PSS_PAGE_INFO,
@@ -55,8 +57,6 @@ enum {
     PSS_PAGE_CONTEST_MOVES,
     PSS_PAGE_COUNT,
 };
-
-#include "tx_difficulty_challenges.h"
 
 // Screen titles (upper left)
 #define PSS_LABEL_WINDOW_POKEMON_INFO_TITLE 0

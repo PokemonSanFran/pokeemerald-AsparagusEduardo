@@ -53,14 +53,15 @@
 #include "constants/weather.h"
 #include "constants/battle_config.h"
 #include "day_night.h"
-
 #include "tx_difficulty_challenges.h"
-#include "constants/party_menu.h"
+#include "constants/party_menu.h" //tx_difficulty_challenges
 
-// #include "printf.h"
-// #include "mgba.h"
-// #include "data.h"                 // for gSpeciesNames, which maps species number to species name.
-// #include "../gflib/string_util.h" // for ConvertToAscii()
+#ifdef GBA_PRINTF //tx_difficulty_challenges
+    #include "printf.h"
+    #include "mgba.h"
+    #include "data.h"                 // for gSpeciesNames, which maps species number to species name.
+    #include "../gflib/string_util.h" // for ConvertToAscii()
+#endif
 
 struct SpeciesItem
 {
@@ -88,7 +89,6 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA struct Unknown_806F160_Struct *gUnknown_020249B4[2] = {NULL};
 
 //tx_difficulty_challenges
-EWRAM_DATA static u16 stemp[365] = {0};
 EWRAM_DATA static u16 sSpeciesList[NUM_SPECIES] = {0};
 EWRAM_DATA static u8 sTypeEffectivenessList[NUMBER_OF_MON_TYPES] = {0};
 
@@ -3106,7 +3106,6 @@ static const struct SpriteTemplate gUnknown_08329F28 =
 #define EVO_TYPE_2 2
 #define EVO_TYPE_SELF 3
 #define EVO_TYPE_LEGENDARY 4
-#define RANDOM_SPECIES_COUNT ARRAY_COUNT(sRandomSpecies)
 static const u8 gSpeciesMapping[NUM_SPECIES+1] =
 {
     [SPECIES_NONE]              = EVO_TYPE_SELF,
@@ -3550,7 +3549,9 @@ static const u8 gSpeciesMapping[NUM_SPECIES+1] =
     [SPECIES_LATIOS]            = EVO_TYPE_LEGENDARY,
     [SPECIES_JIRACHI]           = EVO_TYPE_LEGENDARY,
     [SPECIES_DEOXYS]            = EVO_TYPE_LEGENDARY,
-    #ifdef POKEMON_EXPANSION
+    #ifndef POKEMON_EXPANSION
+    [SPECIES_CHIMECHO]          = EVO_TYPE_0,
+    #else POKEMON_EXPANSION
     [SPECIES_CHIMECHO]          = EVO_TYPE_1,
     [SPECIES_TURTWIG]           = EVO_TYPE_0,
     [SPECIES_GROTLE]            = EVO_TYPE_1,
@@ -4372,11 +4373,10 @@ static const u8 gSpeciesMapping[NUM_SPECIES+1] =
     [SPECIES_ZARUDE_DADA]       = EVO_TYPE_LEGENDARY,
     [SPECIES_CALYREX_ICE_RIDER] = EVO_TYPE_LEGENDARY,
     [SPECIES_CALYREX_SHADOW_RIDER] = EVO_TYPE_LEGENDARY,
-    #else
-    [SPECIES_CHIMECHO]        = EVO_TYPE_0,
     #endif
     [SPECIES_EGG]             = EVO_TYPE_SELF,
 };
+#define RANDOM_SPECIES_COUNT ARRAY_COUNT(sRandomSpecies)
 static const u16 sRandomSpecies[] =
 {
     //SPECIES_NONE                    ,
@@ -9408,26 +9408,7 @@ const u16 gEvolutionLines[NUM_SPECIES][EVOS_PER_LINE] =
     #endif
 };
 
-static const u8 sTypeEffectivenessBaseList[NUMBER_OF_MON_TYPES] =
-{
-    TYPE_NORMAL,
-    TYPE_FIGHTING,
-    TYPE_FLYING,
-    TYPE_POISON,
-    TYPE_GROUND,
-    TYPE_ROCK,
-    TYPE_BUG,
-    TYPE_GHOST,
-    TYPE_STEEL,
-    TYPE_FIRE,
-    TYPE_WATER,
-    TYPE_GRASS,
-    TYPE_ELECTRIC,
-    TYPE_PSYCHIC,
-    TYPE_ICE,
-    TYPE_DRAGON,
-    TYPE_DARK,
-};
+#define RANDOM_TYPE_COUNT ARRAY_COUNT(sTypeChallengeValidTypes)
 static const u8  sTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
 {
     TYPE_NORMAL   ,
@@ -9447,6 +9428,11 @@ static const u8  sTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
     TYPE_ICE      ,
     TYPE_DRAGON   ,
     TYPE_DARK     ,
+    #ifdef POKEMON_EXPANSION
+        #if P_UPDATED_TYPES >= GEN_6
+            TYPE_FAIRY,
+        #endif
+    #endif
 };
 //**********************
 
@@ -14674,25 +14660,37 @@ void RandomizeSpeciesListEWRAM(u16 seed)
 
     if (!gSaveBlock1Ptr->txRandEncounterLegendary)
     {
+        u16 stemp[RANDOM_SPECIES_COUNT];
         memcpy(stemp, sRandomSpecies, sizeof(sRandomSpecies));
         ShuffleListU16(stemp, NELEMS(sRandomSpecies), seed);
-        // mgba_printf(MGBA_LOG_DEBUG, "NELEMS = %d", NELEMS(sRandomSpecies) );
+
         for (i=0; i<RANDOM_SPECIES_COUNT; i++)
         {
             sSpeciesList[sRandomSpecies[i]] = stemp[i];
-            // mgba_printf(MGBA_LOG_DEBUG, "sSpeciesList[%d] = %d", sRandomSpecies[i], stemp[i] );
+            #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_DEBUG, "i = %d: sSpeciesList[%d] = %d", i, sRandomSpecies[i], stemp[i] );
+            #endif
         }
+        #ifdef GBA_PRINTF
+            mgba_printf(MGBA_LOG_DEBUG, "**** sSpeciesList[%d] generated ****", NELEMS(sRandomSpecies) );
+        #endif
     }
     else //include legendary mons
     {
+        u16 stemp[RANDOM_SPECIES_COUNT_LEGENDARY];
         memcpy(stemp, sRandomSpeciesLegendary, sizeof(sRandomSpeciesLegendary));
         ShuffleListU16(stemp, NELEMS(sRandomSpeciesLegendary), seed);
-        // mgba_printf(MGBA_LOG_DEBUG, "NELEMS = %d", NELEMS(sRandomSpeciesLegendary) );
-        for (i=0; i<RANDOM_SPECIES_COUNT; i++)
+
+        for (i=0; i<RANDOM_SPECIES_COUNT_LEGENDARY; i++)
         {
             sSpeciesList[sRandomSpeciesLegendary[i]] = stemp[i];
-            // mgba_printf(MGBA_LOG_DEBUG, "sSpeciesList[%d] = %d", sRandomSpeciesLegendary[i], stemp[i] );
+            #ifdef GBA_PRINTF
+                mgba_printf(MGBA_LOG_DEBUG, "i = %d: sRandomSpeciesLegendary[%d] = %d", i, sRandomSpeciesLegendary[i], stemp[i] );
+            #endif
         }
+        #ifdef GBA_PRINTF
+            mgba_printf(MGBA_LOG_DEBUG, "**** sRandomSpeciesLegendary[%d] generated ****", NELEMS(sRandomSpeciesLegendary) );
+        #endif
     }
 }
 
@@ -14700,35 +14698,42 @@ u16 PickRandomizedSpeciesFromEWRAM(u16 species, u16 depth)
 {
     u8 i;
 
-    // switch (depth)
-    // {
-    // case TX_RANDOM_OFFSET_TRAINER  :
-    //     mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_TRAINER: species = %d", species );
-    //     break;
-    // case TX_RANDOM_OFFSET_TYPE     :
-    //     mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_TYPE: species = %d", species );
-    //     break;
-    // case TX_RANDOM_OFFSET_ABILITY  :
-    //     mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_ABILITY: species = %d", species );
-    //     break;
-    // case TX_RANDOM_OFFSET_MOVES    :
-    //     mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_MOVES: species = %d", species );
-    //     break;
-    // case TX_RANDOM_OFFSET_ENCOUNTER:
-    //     mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_ENCOUNTER: species = %d", species );
-    //     break;
-    // case TX_RANDOM_OFFSET_EVOLUTION:
-    //     mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_EVOLUTION: species = %d", species );
-    //     break;
-    // }
+    #ifdef GBA_PRINTF
+        switch (depth)
+        {
+        case TX_RANDOM_OFFSET_TRAINER  :
+            mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_TRAINER: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
+            break;
+        case TX_RANDOM_OFFSET_TYPE     :
+            mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_TYPE: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
+            break;
+        case TX_RANDOM_OFFSET_ABILITY  :
+            mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_ABILITY: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
+            break;
+        case TX_RANDOM_OFFSET_MOVES    :
+            mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_MOVES: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
+            break;
+        case TX_RANDOM_OFFSET_ENCOUNTER:
+            mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_ENCOUNTER: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
+            break;
+        case TX_RANDOM_OFFSET_EVOLUTION:
+            mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_EVOLUTION: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
+            break;
+        }
+    #endif
 
     for (i = 0; i < depth; i++)
     {
         species = sSpeciesList[species];
-        // mgba_printf(MGBA_LOG_DEBUG, "depth[%d], species = %d", i, species );
+        #ifdef GBA_PRINTF
+            mgba_printf(MGBA_LOG_DEBUG, "depth[%d], species = %d", i, species );
+        #endif
     }
-    // mgba_printf(MGBA_LOG_DEBUG, "depth[%d], species = %d", i, sSpeciesList[species] );
-    // mgba_printf(MGBA_LOG_DEBUG, "");
+    #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "depth[%d], species = %d = %s", i, sSpeciesList[species], ConvertToAscii(gSpeciesNames[sSpeciesList[species]]));
+        mgba_printf(MGBA_LOG_DEBUG, "");
+    #endif
+
     return sSpeciesList[species];
 }
 
@@ -14861,19 +14866,28 @@ u8 GetPokemonCenterChallenge()
     return !gSaveBlock1Ptr->txRandPkmnCenter;
 }
 
-void RandomizeTypeEffectivenessListEWRAM()
+void RandomizeTypeEffectivenessListEWRAM(u16 seed)
 {
-    u16 i;
+    u8 i;
+    u8 stemp[RANDOM_TYPE_COUNT];
 
-    memcpy(sTypeEffectivenessList, sTypeEffectivenessBaseList, sizeof(sTypeEffectivenessBaseList));
-    ShuffleListU8(sTypeEffectivenessList, NELEMS(sTypeEffectivenessBaseList), 1);
+    memcpy(stemp, sTypeChallengeValidTypes, sizeof(sTypeChallengeValidTypes));
+    ShuffleListU8(stemp, NELEMS(sTypeChallengeValidTypes), seed);
 
-    // mgba_printf(MGBA_LOG_DEBUG, "NELEMS = %d", NELEMS(sTypeEffectivenessBaseList) );
-
-    // for (i=0; i<NUMBER_OF_MON_TYPES; i++)
-    // {
-    //     mgba_printf(MGBA_LOG_DEBUG, "sTypeEffectivenessList[%d] = %d", sTypeEffectivenessList[i], stemp[i] );
-    // }
+    sTypeEffectivenessList[TYPE_MYSTERY] = TYPE_MYSTERY;
+    for (i=0; i<NUMBER_OF_MON_TYPES; i++)
+    {
+        if (i != TYPE_MYSTERY)
+            sTypeEffectivenessList[i] = stemp[i];
+        
+        #ifdef GBA_PRINTF
+            mgba_printf(MGBA_LOG_DEBUG, "sTypeEffectivenessList[%d]: %s => %s", i, ConvertToAscii(gTypeNames[i]), ConvertToAscii(gTypeNames[sTypeEffectivenessList[i]]) );
+        #endif
+    }
+    #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "**** sTypeEffectivenessList[%d] generated ****", NELEMS(sTypeEffectivenessList));
+        mgba_printf(MGBA_LOG_DEBUG, "");
+    #endif
 }
 u8 GetTypeEffectivenessRandom(u8 type)
 {
@@ -14883,6 +14897,6 @@ u8 GetTypeEffectivenessRandom(u8 type)
     if (!gSaveBlock1Ptr->txRandTypeEffectiveness)
         return type;
 
-    return sTypeEffectivenessList[type - 1];
+    return sTypeEffectivenessList[type];
 }
 

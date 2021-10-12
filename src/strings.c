@@ -2293,13 +2293,6 @@ const u8 *const gPocketNamesStringsTable[] =
     [KEYITEMS_POCKET] = gText_KeyItemsPocket
 };
 
-//tx_difficulty_challenges
-const u8 gText_NuzlockeCantThrowPokeBallRoute[]             = _("You have already used your encounter\nfor this area!{PAUSE_UNTIL_PRESS}");
-const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[]     = _("You have already caught a POKéMON\nin this evolution line!{PAUSE_UNTIL_PRESS}");
-const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[]     = _("You have already caught this POKéMON!{PAUSE_UNTIL_PRESS}");
-const u8 gText_TypeChallengeCantThrowPokeBall[]             = _("Type Challenge active, capture blocked!{PAUSE_UNTIL_PRESS}");
-const u8 gText_BattleRules_NoItems_Player[]                 = _("Competitive rules!\nNo items in battle!{PAUSE_UNTIL_PRESS}");
-
 const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
 const u8 gText_NumberItem_HM[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
 const u8 gText_SizeSlash[] = _("Size /");
@@ -3983,4 +3976,11 @@ const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} has no evol
 const u8 gText_FORMS_Buttons_PE[]                   = _("{A_BUTTON}EVOLUTIONS");
 const u8 gText_FORMS_Buttons_Decapped_PE[]          = _("{A_BUTTON}Evolutions");
 const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} has no alternate forms.");
+
+//tx_difficulty_challenges
+const u8 gText_NuzlockeCantThrowPokeBallRoute[]             = _("You have already used your encounter\nfor this area!{PAUSE_UNTIL_PRESS}");
+const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[]     = _("You have already caught a POKéMON\nin this evolution line!{PAUSE_UNTIL_PRESS}");
+const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[]     = _("You have already caught this POKéMON!{PAUSE_UNTIL_PRESS}");
+const u8 gText_TypeChallengeCantThrowPokeBall[]             = _("Type Challenge active, capture blocked!{PAUSE_UNTIL_PRESS}");
+const u8 gText_BattleRules_NoItems_Player[]                 = _("Competitive rules!\nNo items in battle!{PAUSE_UNTIL_PRESS}");
 #endif
