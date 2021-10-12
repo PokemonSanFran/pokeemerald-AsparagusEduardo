@@ -3551,7 +3551,7 @@ static const u8 gSpeciesMapping[NUM_SPECIES+1] =
     [SPECIES_DEOXYS]            = EVO_TYPE_LEGENDARY,
     #ifndef POKEMON_EXPANSION
     [SPECIES_CHIMECHO]          = EVO_TYPE_0,
-    #else POKEMON_EXPANSION
+    #else
     [SPECIES_CHIMECHO]          = EVO_TYPE_1,
     [SPECIES_TURTWIG]           = EVO_TYPE_0,
     [SPECIES_GROTLE]            = EVO_TYPE_1,
