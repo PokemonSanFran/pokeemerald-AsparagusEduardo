@@ -44,4 +44,6 @@ u32 CanThrowBall(void);
 void ItemUseOutOfBattle_SootSack(u8);
 u16 GetAshCount(void);
 
+void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField, const u8 *str); //tx_difficultiy_challenges
+
 #endif // GUARD_ITEM_USE_H

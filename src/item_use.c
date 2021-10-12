@@ -44,6 +44,9 @@
 #include "constants/songs.h"
 #include "soar.h"
 
+#include "tx_difficulty_challenges.h"
+#include "battle_setup.h"
+
 static void SetUpItemUseCallback(u8 taskId);
 static void FieldCB_UseItemOnField(void);
 static void Task_CallItemUseOnFieldCallback(u8 taskId);
@@ -142,7 +145,7 @@ static void Task_CallItemUseOnFieldCallback(u8 taskId)
         sItemUseOnFieldCB(taskId);
 }
 
-static void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField, const u8 *str)
+void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField, const u8 *str) //static //tx_difficulty_challenges
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (!isUsingRegisteredKeyItemOnField)
@@ -1015,18 +1018,22 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 u32 CanThrowBall(void)
 {
-    if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
-        return 3;   // No catching flag.
-    }
-    else if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+    if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
         && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) // There are two present pokemon.
-    {
         return 1;   // There are two present pokemon.
-    }
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
-    {
         return 2;   // No room for mon
-    }
+    else if (FlagGet(FLAG_SYS_NO_CATCHING)) //DEBUG
+        return 3;   // No catching flag.
+    //tx_difficulty_challenges
+    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsCaptureBlocked)
+        return 4; // Already caught on Area
+    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive == 2)
+        return 5; //already have THIS_mon
+    else if (gSaveBlock1Ptr->txRandTypeChallenge && TypeChallengeCaptureBlocked)
+        return 6; //pkmn not of the TYPE CHALLANGE type
+    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive)
+        return 7; // Already caught mon in Evo line
     
     return 0;   // usable 
 }
@@ -1059,6 +1066,18 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         break;
     case 3: // No catching flag.
         DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);    
+        break;
+    case 4: // Already caught on Area
+        DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallRoute);
+        break;
+    case 5: //already have THIS_mon
+        DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallAlreadyCaught);
+        break;
+    case 6: //pkmn not of the TYPE CHALLANGE type
+        DisplayCannotUseItemMessage(taskId, FALSE, gText_TypeChallengeCantThrowPokeBall);
+        break;
+    case 7: // Already caught mon in Evo line
+        DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallSpeciesClause);
         break;
     }
 }

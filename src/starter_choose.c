@@ -24,6 +24,13 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
+#include "tx_difficulty_challenges.h"
+
+// #include "printf.h"
+// #include "mgba.h"
+// #include "data.h"                 // for gSpeciesNames, which maps species number to species name.
+// #include "../gflib/string_util.h" // for ConvertToAscii()
+
 #define STARTER_MON_COUNT   3
 
 // Position of the sprite of the selected starter Pokemon
@@ -355,9 +362,40 @@ static const struct SpriteTemplate sSpriteTemplate_StarterCircle =
 // .text
 u16 GetStarterPokemon(u16 chosenStarterId)
 {
+    //tx_difficulty_challenges
+    u16 mon = sStarterMon[chosenStarterId];
+    u8 typeChallenge = gSaveBlock1Ptr->txRandTypeChallenge;
+    u16 i;
+
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
-    return sStarterMon[chosenStarterId];
+
+    //tx_difficulty_challenges
+    if (typeChallenge != TX_CHALLENGE_TYPE_OFF)
+    {
+        // mgba_printf(MGBA_LOG_DEBUG, "TX_CHALLENGE_TYPE_OFF = %d", TX_CHALLENGE_TYPE_OFF);
+        // mgba_printf(MGBA_LOG_DEBUG, "typeChallenge = %d", typeChallenge);
+        for (i=1; i<400; i++)
+        {
+            mon = PickRandomizedSpeciesFromEWRAM(mon, chosenStarterId+1);
+            if (GetTypeBySpecies(mon, 1) == typeChallenge || GetTypeBySpecies(mon, 2) == typeChallenge)
+                break;
+        }
+        // mgba_printf(MGBA_LOG_DEBUG, "i = %d", i + i*chosenStarterId);
+    }
+    else if (gSaveBlock1Ptr->txRandChaos && gSaveBlock1Ptr->txRandEncounter)
+    {
+        // mgba_printf(MGBA_LOG_DEBUG, "txRandChaos");
+        mon = PickRandomizedSpeciesFromEWRAM(sStarterMon[chosenStarterId], 3);
+    }
+    else if (gSaveBlock1Ptr->txRandEncounter)
+    {
+        // mgba_printf(MGBA_LOG_DEBUG, "gSaveBlock1Ptr->txRandEncounter");
+        mon = PickRandomEvo0Species(sStarterMon[chosenStarterId]);
+    }
+        
+    // mgba_printf(MGBA_LOG_DEBUG, "species[%d] = %s", mon, ConvertToAscii(gSpeciesNames[mon]));
+    return mon;
 }
 
 static void VblankCB_StarterChoose(void)
@@ -501,7 +539,7 @@ static void Task_HandleStarterChooseInput(u8 taskId)
         gTasks[taskId].tCircleSpriteId = spriteId;
 
         // Create Pokemon sprite
-        spriteId = CreatePokemonFrontSprite(gTasks[taskId].tStarterSelection, sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
+        spriteId = CreatePokemonFrontSprite(GetStarterPokemon(gTasks[taskId].tStarterSelection), sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
         gSprites[spriteId].affineAnims = &sAffineAnims_StarterPokemon;
         gSprites[spriteId].callback = SpriteCB_StarterPokemon;
 

@@ -13,6 +13,8 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
+#include "tx_difficulty_challenges.h"
+
 // this file's functions
 static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent);
@@ -792,6 +794,9 @@ static bool8 ShouldUseItem(void)
     s32 i;
     u8 validMons = 0;
     bool8 shouldUse = FALSE;
+
+    if (gSaveBlock1Ptr->txRandNoItemTrainer) //tx_difficulty_challenges
+        return FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT)
         return FALSE;

@@ -374,6 +374,11 @@
 #define EVO_LEVEL_NIGHT_ALOLA             34     // Pokémon reaches the specified level, is night, holding Strange Souvenir
 
 #define EVOS_PER_MON 10
+#ifdef POKEMON_EXPANSION //tx_difficulty_challenges
+    #define EVOS_PER_LINE 22
+#else
+    #define EVOS_PER_LINE 6
+#endif
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL     0

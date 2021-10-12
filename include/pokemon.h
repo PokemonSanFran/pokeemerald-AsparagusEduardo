@@ -7,6 +7,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/pokemon_config.h"
 #include "constants/map_groups.h"
+#include "constants/species.h" //tx_difficulty_challenges
 
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
 
@@ -285,6 +286,7 @@ extern const u16 gLinkPlayerFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const s8 gNatureStatTable[][5];
 extern const u16 gSpeciesToNationalPokedexNum[NUM_SPECIES];
+extern const u16 gEvolutionLines[NUM_SPECIES][EVOS_PER_LINE]; //tx_difficulty_challenges
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -446,4 +448,18 @@ u16 GetFormSpeciesId(u16 speciesId, u8 formId);
 u16 GetBaseFormSpeciesId(u16 formSpeciesId);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
+
+//tx_difficulty_challenges
+void RandomizeSpeciesListEWRAM(u16 seed);
+void RandomizeTypeEffectivenessListEWRAM();
+u16 PickRandomizedSpeciesFromEWRAM(u16 species, u16 depth);
+u16 PickRandomEvo0Species(u16 species);
+u8 GetTypeBySpecies(u16 species, u8 type);
+u16 GetSpeciesRandomSeeded(u16 species, u8 offset, u8 random, u8 seeded);
+u16 GetEvolutionTargetSpeciesRandom(u16 species, u8 random, u8 seeded);
+u8 GetPartySize();
+void NuzlockeDeletePartyMon(u8 position);
+void NuzlockeDeleteFaintedPartyPokemon(void) ;
+u8 GetPokemonCenterChallenge();
+
 #endif // GUARD_POKEMON_H
