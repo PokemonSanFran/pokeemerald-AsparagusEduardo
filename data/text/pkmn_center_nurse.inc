@@ -49,6 +49,12 @@ gText_ThankYouForWaiting:: @ 82729F0
 
 gText_WeHopeToSeeYouAgain2:: @ 8272A07
     .string "¡Vuelve cuando quieras!$"
+
+gText_PkmnCenterChallenge_NoVisitsLeft:: @ tx_difficulty_challenge
+    .string "Lo siento, ¡pero ya no te\n"
+    .string "quedan visitas!\p"
+    .string "¡Vuelve cuando quieras y\n"
+    .string "buena suerte en tu desafío!{PAUSE_UNTIL_PRESS}$"
 #else
 gText_WouldYouLikeToRestYourPkmn::
     .string "Hello, and welcome to\n"

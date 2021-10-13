@@ -308,8 +308,8 @@ const u8 *const gPocketNamesStringsTable[] =
     gText_KeyItemsPocket
 };
 
-const u8 gText_NumberVar1Clear7Var2[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
-const u8 gText_ClearTo11Var1Clear5Var2[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
+const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
+const u8 gText_NumberItem_HM[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
 const u8 gText_SizeSlash[] = _("Size /");
 const u8 gText_FirmSlash[] = _("Firm /");
 const u8 gText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}”");
@@ -440,6 +440,7 @@ const u8 gText_PkmnAdoresBaseVar2Fell[] = _("{STR_VAR_1} adores you!\nThe base {
 const u8 gText_PkmnFriendlyBaseVar2CantFall[] = _("{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} can't fall!{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnSnappedOutOfConfusion[] = _("{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnGotOverInfatuation[] = _("{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}");
+const u8 gText_PkmnTransformed[] = _("{STR_VAR_1} transformed!{PAUSE_UNTIL_PRESS}");
 const u8 gText_ThrowAwayItem[] = _("Throw away this\n{STR_VAR_1}?");
 const u8 gText_ItemThrownAway[] = _("The {STR_VAR_1}\nwas thrown away.{PAUSE_UNTIL_PRESS}");
 const u8 gText_TeachWhichPokemon2[] = _("Teach which Pokémon?"); // Unused
@@ -1254,7 +1255,7 @@ ALIGNED(4) const u8 gText_Facility[] = _("{STR_VAR_1}");
 
 const u8 gText_Give[] = _("Give");
 const u8 gText_NoNeed[] = _("No need");
-const u8 gText_ColorLightShadowDarkGrey[] = _("{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}");
+const u8 gText_ColorLightShadowDarkGray[] = _("{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}");
 const u8 gText_ColorBlue[] = _("{COLOR BLUE}");
 const u8 gText_ColorTransparent[] = _("{HIGHLIGHT TRANSPARENT}{COLOR TRANSPARENT}");
 const u8 gText_CDot[] = _("C.");
@@ -1264,9 +1265,9 @@ const u8 gText_PreliminaryResults[] = _("The preliminary results!");
 const u8 gText_Round2Results[] = _("Round 2 results!");
 const u8 gText_ContestantsMonWon[] = _("{STR_VAR_1}'s {STR_VAR_2} won!");
 const u8 gText_CommunicationStandby[] = _("Communication standby…");
-const u8 gText_ColorDarkGrey[] = _("{COLOR DARK_GRAY}");
+const u8 gText_ColorDarkGray[] = _("{COLOR DARK_GRAY}");
 const u8 gText_ColorDynamic6WhiteDynamic5[] = _("{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR6 WHITE DYNAMIC_COLOR5}"); // Unused
-const u8 gText_HighlightDarkGrey[] = _("{HIGHLIGHT DARK_GRAY}");
+const u8 gText_HighlightDarkGray[] = _("{HIGHLIGHT DARK_GRAY}");
 const u8 gText_EmptySpace2[] = _(" "); // Unused
 const u8 gText_DynColor2Male[] = _("{COLOR DYNAMIC_COLOR2}♂");
 const u8 gText_DynColor1Female[] = _("{COLOR DYNAMIC_COLOR1}♀");
@@ -1990,6 +1991,13 @@ const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} has no evol
 const u8 gText_FORMS_Buttons_PE[]                   = _("{A_BUTTON}EVOLUTIONS");
 const u8 gText_FORMS_Buttons_Decapped_PE[]          = _("{A_BUTTON}Evolutions");
 const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} has no alternate forms.");
+
+//tx_difficulty_challenges
+const u8 gText_NuzlockeCantThrowPokeBallRoute[]             = _("You have already used your encounter\nfor this area!{PAUSE_UNTIL_PRESS}");
+const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[]     = _("You have already caught a POKéMON\nin this evolution line!{PAUSE_UNTIL_PRESS}");
+const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[]     = _("You have already caught this POKéMON!{PAUSE_UNTIL_PRESS}");
+const u8 gText_TypeChallengeCantThrowPokeBall[]             = _("Type Challenge active, capture blocked!{PAUSE_UNTIL_PRESS}");
+const u8 gText_BattleRules_NoItems_Player[]                 = _("Competitive rules!\nNo items in battle!{PAUSE_UNTIL_PRESS}");
 #else
 
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
