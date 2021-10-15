@@ -110,19 +110,20 @@
 #define B_SPEED_BUFFING_RAPID_SPIN  GEN_8 // In Gen8, Rapid Spin raises the user's Speed by 1 stage.
 
 // Other move settings
-#define B_SOUND_SUBSTITUTE          GEN_8 // In Gen6+, sound moves bypass Substitute.
-#define B_TOXIC_NEVER_MISS          GEN_8 // In Gen6+, if Toxic is used by a Poison-type Pokémon, it will never miss.
-#define B_PAYBACK_SWITCH_BOOST      GEN_8 // In Gen5+, if the opponent switches out, Payback's damage will no longer be doubled.
-#define B_BINDING_TURNS             GEN_8 // In Gen5+, binding moves last for 4-5 turns instead of 2-5 turns. (With Grip Claw, 7 and 5 turns respectively.)
-#define B_UPROAR_TURNS              GEN_8 // In Gen5+, Uproar lasts for 3 turns instead of 2-5 turns.
-#define B_DISABLE_TURNS             GEN_8 // Disable's turns. See Cmd_disablelastusedattack.
-#define B_INCINERATE_GEMS           GEN_8 // In Gen6+, Incinerate can destroy Gems.
-#define B_MINIMIZE_DMG_ACC          GEN_8 // In Gen6+, moves that causes double damage to minimized Pokémon will also skip accuracy checks.
-#define B_PP_REDUCED_BY_SPITE       GEN_8 // In Gen4+, Spite reduces the foe's last move's PP by 4, instead of 2 to 5.
-#define B_CAN_SPITE_FAIL            GEN_8 // In Gen4+, Spite can no longer fail if the foe's last move only has 1 remaining PP.
-#define B_CRASH_IF_TARGET_IMMUNE    GEN_8 // In Gen4+, The user of Jump Kick or High Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
-#define B_TAILWIND_TIMER            GEN_8 // In Gen5+, Tailwind lasts 4 turns instead of 3.
-#define B_MEMENTO_FAIL              GEN_8 // In Gen4+, Memento fails if there is no target or if the target is protected or behind substitute. But not if Atk/Sp. Atk are at -6.
+#define B_SOUND_SUBSTITUTE          GEN_7 // In Gen6+, sound moves bypass Substitute.
+#define B_TOXIC_NEVER_MISS          GEN_7 // In Gen6+, if Toxic is used by a Poison-type Pokémon, it will never miss.
+#define B_PAYBACK_SWITCH_BOOST      GEN_7 // In Gen5+, if the opponent switches out, Payback's damage will no longer be doubled.
+#define B_BINDING_TURNS             GEN_7 // In Gen5+, binding moves last for 4-5 turns instead of 2-5 turns. (With Grip Claw, 7 and 5 turns respectively.)
+#define B_UPROAR_TURNS              GEN_7 // In Gen5+, Uproar lasts for 3 turns instead of 2-5 turns.
+#define B_DISABLE_TURNS             GEN_7 // Disable's turns. See Cmd_disablelastusedattack.
+#define B_INCINERATE_GEMS           GEN_7 // In Gen6+, Incinerate can destroy Gems.
+#define B_MINIMIZE_DMG_ACC          GEN_7 // In Gen6+, moves that causes double damage to minimized Pokémon will also skip accuracy checks.
+#define B_PP_REDUCED_BY_SPITE       GEN_7 // In Gen4+, Spite reduces the foe's last move's PP by 4, instead of 2 to 5.
+#define B_CAN_SPITE_FAIL            GEN_7 // In Gen4+, Spite can no longer fail if the foe's last move only has 1 remaining PP.
+#define B_CRASH_IF_TARGET_IMMUNE    GEN_7 // In Gen4+, The user of Jump Kick or High Jump Kick will "keep going and crash" if it attacks a target that is immune to the move.
+#define B_TAILWIND_TIMER            GEN_7 // In Gen5+, Tailwind lasts 4 turns instead of 3.
+#define B_MEMENTO_FAIL              GEN_7 // In Gen4+, Memento fails if there is no target or if the target is protected or behind substitute. But not if Atk/Sp. Atk are at -6.
+#define B_HIDDEN_POWER_DMG          GEN_7 // In Gen6+, Hidden Power's base power was set to always be 60. Before, it was determined by the mon's IVs.
 
 // Ability settings
 #define B_ABILITY_WEATHER           GEN_8 // In Gen6+, ability-induced weather lasts 5 turns. Before, it lasted until the battle ended or until it was changed by a move or a different weather-affecting ability.
