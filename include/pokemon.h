@@ -451,7 +451,7 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
 
 //tx_difficulty_challenges
 void RandomizeSpeciesListEWRAM(u16 seed);
-void RandomizeTypeEffectivenessListEWRAM(u16 seed);
+void RandomizeTypeEffectivenessListEWRAM();
 u16 PickRandomizedSpeciesFromEWRAM(u16 species, u16 depth);
 u16 PickRandomEvo0Species(u16 species);
 u8 GetTypeBySpecies(u16 species, u8 type);

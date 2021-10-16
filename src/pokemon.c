@@ -89,6 +89,7 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA struct Unknown_806F160_Struct *gUnknown_020249B4[2] = {NULL};
 
 //tx_difficulty_challenges
+EWRAM_DATA static u16 stemp[365] = {0};
 EWRAM_DATA static u16 sSpeciesList[NUM_SPECIES] = {0};
 EWRAM_DATA static u8 sTypeEffectivenessList[NUMBER_OF_MON_TYPES] = {0};
 
@@ -9408,7 +9409,26 @@ const u16 gEvolutionLines[NUM_SPECIES][EVOS_PER_LINE] =
     #endif
 };
 
-#define RANDOM_TYPE_COUNT ARRAY_COUNT(sTypeChallengeValidTypes)
+static const u8 sTypeEffectivenessBaseList[NUMBER_OF_MON_TYPES] =
+{
+    TYPE_NORMAL,
+    TYPE_FIGHTING,
+    TYPE_FLYING,
+    TYPE_POISON,
+    TYPE_GROUND,
+    TYPE_ROCK,
+    TYPE_BUG,
+    TYPE_GHOST,
+    TYPE_STEEL,
+    TYPE_FIRE,
+    TYPE_WATER,
+    TYPE_GRASS,
+    TYPE_ELECTRIC,
+    TYPE_PSYCHIC,
+    TYPE_ICE,
+    TYPE_DRAGON,
+    TYPE_DARK,
+};
 static const u8  sTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
 {
     TYPE_NORMAL   ,
@@ -9428,11 +9448,6 @@ static const u8  sTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
     TYPE_ICE      ,
     TYPE_DRAGON   ,
     TYPE_DARK     ,
-    #ifdef POKEMON_EXPANSION
-        #if P_UPDATED_TYPES >= GEN_6
-            TYPE_FAIRY,
-        #endif
-    #endif
 };
 //**********************
 
@@ -14660,7 +14675,6 @@ void RandomizeSpeciesListEWRAM(u16 seed)
 
     if (!gSaveBlock1Ptr->txRandEncounterLegendary)
     {
-        u16 stemp[RANDOM_SPECIES_COUNT];
         memcpy(stemp, sRandomSpecies, sizeof(sRandomSpecies));
         ShuffleListU16(stemp, NELEMS(sRandomSpecies), seed);
 
@@ -14672,12 +14686,12 @@ void RandomizeSpeciesListEWRAM(u16 seed)
             #endif
         }
         #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "**** sSpeciesList[%d] generated ****", NELEMS(sRandomSpecies) );
+            mgba_printf(MGBA_LOG_DEBUG, "NELEMS = %d", NELEMS(sRandomSpecies) );
+            mgba_printf(MGBA_LOG_DEBUG, "**** sSpeciesList[] generated ****");
         #endif
     }
     else //include legendary mons
     {
-        u16 stemp[RANDOM_SPECIES_COUNT_LEGENDARY];
         memcpy(stemp, sRandomSpeciesLegendary, sizeof(sRandomSpeciesLegendary));
         ShuffleListU16(stemp, NELEMS(sRandomSpeciesLegendary), seed);
 
@@ -14689,7 +14703,8 @@ void RandomizeSpeciesListEWRAM(u16 seed)
             #endif
         }
         #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "**** sRandomSpeciesLegendary[%d] generated ****", NELEMS(sRandomSpeciesLegendary) );
+            mgba_printf(MGBA_LOG_DEBUG, "NELEMS = %d", NELEMS(sRandomSpeciesLegendary) );
+            mgba_printf(MGBA_LOG_DEBUG, "**** sRandomSpeciesLegendary[] generated ****");
         #endif
     }
 }
@@ -14866,28 +14881,19 @@ u8 GetPokemonCenterChallenge()
     return !gSaveBlock1Ptr->txRandPkmnCenter;
 }
 
-void RandomizeTypeEffectivenessListEWRAM(u16 seed)
+void RandomizeTypeEffectivenessListEWRAM()
 {
-    u8 i;
-    u8 stemp[RANDOM_TYPE_COUNT];
+    u16 i;
 
-    memcpy(stemp, sTypeChallengeValidTypes, sizeof(sTypeChallengeValidTypes));
-    ShuffleListU8(stemp, NELEMS(sTypeChallengeValidTypes), seed);
+    memcpy(sTypeEffectivenessList, sTypeEffectivenessBaseList, sizeof(sTypeEffectivenessBaseList));
+    ShuffleListU8(sTypeEffectivenessList, NELEMS(sTypeEffectivenessBaseList), 1);
 
-    sTypeEffectivenessList[TYPE_MYSTERY] = TYPE_MYSTERY;
-    for (i=0; i<NUMBER_OF_MON_TYPES; i++)
-    {
-        if (i != TYPE_MYSTERY)
-            sTypeEffectivenessList[i] = stemp[i];
-        
-        #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "sTypeEffectivenessList[%d]: %s => %s", i, ConvertToAscii(gTypeNames[i]), ConvertToAscii(gTypeNames[sTypeEffectivenessList[i]]) );
-        #endif
-    }
-    #ifdef GBA_PRINTF
-        mgba_printf(MGBA_LOG_DEBUG, "**** sTypeEffectivenessList[%d] generated ****", NELEMS(sTypeEffectivenessList));
-        mgba_printf(MGBA_LOG_DEBUG, "");
-    #endif
+    // mgba_printf(MGBA_LOG_DEBUG, "NELEMS = %d", NELEMS(sTypeEffectivenessBaseList) );
+
+    // for (i=0; i<NUMBER_OF_MON_TYPES; i++)
+    // {
+    //     mgba_printf(MGBA_LOG_DEBUG, "sTypeEffectivenessList[%d] = %d", sTypeEffectivenessList[i], stemp[i] );
+    // }
 }
 u8 GetTypeEffectivenessRandom(u8 type)
 {
@@ -14897,6 +14903,6 @@ u8 GetTypeEffectivenessRandom(u8 type)
     if (!gSaveBlock1Ptr->txRandTypeEffectiveness)
         return type;
 
-    return sTypeEffectivenessList[type];
+    return sTypeEffectivenessList[type - 1];
 }
 
