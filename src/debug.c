@@ -304,6 +304,7 @@ void CB2_Debug_Pokemon(void);
 void CB2_Debug_Runner(void);
 void CB2_Debug_Item(void);
 void ResetBGs_Debug_Menu(u16);
+void ReloadPokemonSprites(struct PokemonDebugMenu *data);
 
 extern u8 Debug_Script_1[];
 extern u8 Debug_Script_2[];
@@ -3104,10 +3105,52 @@ void ResetBGs_Debug_Menu(u16 a)
     }
 }
 
+void ReloadPokemonSprites(struct PokemonDebugMenu *data)
+{
+    const struct CompressedSpritePalette *palette;
+
+    DestroySprite(&gSprites[data->frontspriteId]);
+    DestroySprite(&gSprites[data->backspriteId]);
+    DestroySprite(&gSprites[data->iconspriteId]);
+
+    FreeMonSpritesGfx();
+    ResetSpriteData();
+    ResetPaletteFade();
+    FreeAllSpritePalettes();
+    ResetAllPicSprites();
+    AllocateMonSpritesGfx();
+
+    FreeAllSpritePalettes();
+    FreeMonIconPalettes();
+
+    LoadMonIconPalettes();
+
+    HandleLoadSpecialPokePic(&gMonFrontPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[1], data->currentmonId, 0);
+    palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
+    LoadCompressedSpritePalette(palette);
+    SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 1);
+    gMultiuseSpriteTemplate.paletteTag = palette->tag;
+    data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
+    gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
+    gSprites[data->frontspriteId].oam.priority = 0;
+    
+    HandleLoadSpecialPokePic(&gMonBackPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[2], data->currentmonId, 0);
+    palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
+    LoadCompressedSpritePalette(palette);
+    SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 2);
+    gMultiuseSpriteTemplate.paletteTag = palette->tag;
+    data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 40, 0);
+    gSprites[data->backspriteId].callback = SpriteCallbackDummy;
+    gSprites[data->backspriteId].oam.priority = 0;
+
+    //Icon Sprite
+    data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
+    gSprites[data->iconspriteId].oam.priority = 0;
+}
+
 void Handle_Input_Debug_Pokemon(u8 taskId)
 {
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
-    const struct CompressedSpritePalette *palette;
     struct Sprite *Frontsprite = &gSprites[data->frontspriteId];
     struct Sprite *Backsprite = &gSprites[data->backspriteId];
 
@@ -3134,45 +3177,7 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
         {
             data->isshiny = DEBUG_MON_NORMAL;
         }
-
-        DestroySprite(&gSprites[data->frontspriteId]);
-        DestroySprite(&gSprites[data->backspriteId]);
-        DestroySprite(&gSprites[data->iconspriteId]);
-
-        FreeMonSpritesGfx();
-        ResetSpriteData();
-        ResetPaletteFade();
-        FreeAllSpritePalettes();
-        ResetAllPicSprites();
-        AllocateMonSpritesGfx();
-
-        FreeAllSpritePalettes();
-        FreeMonIconPalettes();
-
-        LoadMonIconPalettes();
-
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[1], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 1);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
-        gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->frontspriteId].oam.priority = 0;
-        
-        HandleLoadSpecialPokePic(&gMonBackPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[2], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 2);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 40, 0);
-        gSprites[data->backspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->backspriteId].oam.priority = 0;
-
-        //Icon Sprite
-        data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
-        gSprites[data->iconspriteId].oam.priority = 0;
-
+        ReloadPokemonSprites(data);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -3189,43 +3194,7 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
         }
         PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
 
-        DestroySprite(&gSprites[data->frontspriteId]);
-        DestroySprite(&gSprites[data->backspriteId]);
-        DestroySprite(&gSprites[data->iconspriteId]);
-
-        FreeMonSpritesGfx();
-        ResetSpriteData();
-        ResetPaletteFade();
-        FreeAllSpritePalettes();
-        ResetAllPicSprites();
-        AllocateMonSpritesGfx();
-
-        FreeAllSpritePalettes();
-        FreeMonIconPalettes();
-
-        LoadMonIconPalettes();
-
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[1], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 1);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
-        gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->frontspriteId].oam.priority = 0;
-
-        HandleLoadSpecialPokePic(&gMonBackPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[2], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 2);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 40, 0);
-        gSprites[data->backspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->backspriteId].oam.priority = 0;
-
-        //Icon Sprite
-        data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
-        gSprites[data->iconspriteId].oam.priority = 0;
+        ReloadPokemonSprites(data);
 
         PlaySE(SE_DEX_SCROLL);
 
@@ -3245,43 +3214,7 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
         
         PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
 
-        DestroySprite(&gSprites[data->frontspriteId]);
-        DestroySprite(&gSprites[data->backspriteId]);
-        DestroySprite(&gSprites[data->iconspriteId]);
-
-        FreeMonSpritesGfx();
-        ResetSpriteData();
-        ResetPaletteFade();
-        FreeAllSpritePalettes();
-        ResetAllPicSprites();
-        AllocateMonSpritesGfx();
-
-        FreeAllSpritePalettes();
-        FreeMonIconPalettes();
-
-        LoadMonIconPalettes();
-
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[1], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 1);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
-        gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->frontspriteId].oam.priority = 0;
-
-        HandleLoadSpecialPokePic(&gMonBackPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[2], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 2);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 40, 0);
-        gSprites[data->backspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->backspriteId].oam.priority = 0;
-
-        //Icon Sprite
-        data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
-        gSprites[data->iconspriteId].oam.priority = 0;
+        ReloadPokemonSprites(data);
 
         PlaySE(SE_DEX_SCROLL);
 
@@ -3299,43 +3232,7 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
 
         PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
 
-        DestroySprite(&gSprites[data->frontspriteId]);
-        DestroySprite(&gSprites[data->backspriteId]);
-        DestroySprite(&gSprites[data->iconspriteId]);
-
-        FreeMonSpritesGfx();
-        ResetSpriteData();
-        ResetPaletteFade();
-        FreeAllSpritePalettes();
-        ResetAllPicSprites();
-        AllocateMonSpritesGfx();
-
-        FreeAllSpritePalettes();
-        FreeMonIconPalettes();
-
-        LoadMonIconPalettes();
-
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[1], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 1);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
-        gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->frontspriteId].oam.priority = 0;
-
-        HandleLoadSpecialPokePic(&gMonBackPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[2], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 2);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 40, 0);
-        gSprites[data->backspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->backspriteId].oam.priority = 0;
-
-        //Icon Sprite
-        data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
-        gSprites[data->iconspriteId].oam.priority = 0;
+        ReloadPokemonSprites(data);
 
         PlaySE(SE_DEX_PAGE);
 
@@ -3349,43 +3246,7 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
         }
         PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
 
-        DestroySprite(&gSprites[data->frontspriteId]);
-        DestroySprite(&gSprites[data->backspriteId]);
-        DestroySprite(&gSprites[data->iconspriteId]);
-
-        FreeMonSpritesGfx();
-        ResetSpriteData();
-        ResetPaletteFade();
-        FreeAllSpritePalettes();
-        ResetAllPicSprites();
-        AllocateMonSpritesGfx();
-
-        FreeAllSpritePalettes();
-        FreeMonIconPalettes();
-
-        LoadMonIconPalettes();
-
-        HandleLoadSpecialPokePic(&gMonFrontPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[1], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 1);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_X + 32, DEBUG_MON_Y + 40, 0);
-        gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->frontspriteId].oam.priority = 0;
-
-        HandleLoadSpecialPokePic(&gMonBackPicTable[data->currentmonId], gMonSpritesGfxPtr->sprites.ptr[2], data->currentmonId, 0);
-        palette = GetMonSpritePalStructFromOtIdPersonality(data->currentmonId, 0, data->isshiny);
-        LoadCompressedSpritePalette(palette);
-        SetMultiuseSpriteTemplateToPokemon(data->currentmonId, 2);
-        gMultiuseSpriteTemplate.paletteTag = palette->tag;
-        data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X + 32, DEBUG_MON_BACK_Y + 40, 0);
-        gSprites[data->backspriteId].callback = SpriteCallbackDummy;
-        gSprites[data->backspriteId].oam.priority = 0;
-
-        //Icon Sprite
-        data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
-        gSprites[data->iconspriteId].oam.priority = 0;
+        ReloadPokemonSprites(data);
 
         PlaySE(SE_DEX_PAGE);
 
