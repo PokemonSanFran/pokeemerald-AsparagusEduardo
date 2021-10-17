@@ -1023,22 +1023,27 @@ u32 CanThrowBall(void)
         return 1;   // There are two present pokemon.
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
         return 2;   // No room for mon
+    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+    else if (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE)
+        return 3;   // in semi-invulnerable state
+    #endif
     else if (FlagGet(FLAG_SYS_NO_CATCHING)) //DEBUG
-        return 3;   // No catching flag.
+        return 4;   // No catching flag.
     //tx_difficulty_challenges
     else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsCaptureBlocked)
-        return 4; // Already caught on Area
+        return 5; // Already caught on Area
     else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive == 2)
-        return 5; //already have THIS_mon
+        return 6; //already have THIS_mon
     else if (gSaveBlock1Ptr->txRandTypeChallenge && TypeChallengeCaptureBlocked)
-        return 6; //pkmn not of the TYPE CHALLANGE type
+        return 7; //pkmn not of the TYPE CHALLANGE type
     else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive)
-        return 7; // Already caught mon in Evo line
+        return 8; // Already caught mon in Evo line
     
     return 0;   // usable 
 }
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two pokemon out there!\p");
+static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
@@ -1064,19 +1069,27 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, gText_BoxFull, Task_CloseBattlePyramidBagMessage);
         break;
-    case 3: // No catching flag.
+    #if B_SEMI_INVULNERABLE_CATCH >= GEN_4
+    case 3: // Semi-Invulnerable
+        if (!InBattlePyramid())
+            DisplayItemMessage(taskId, 1, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
+        else
+            DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
+        break;
+    #endif
+    case 4: // No catching flag.
         DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);    
         break;
-    case 4: // Already caught on Area
+    case 5: // Already caught on Area
         DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallRoute);
         break;
-    case 5: //already have THIS_mon
+    case 6: //already have THIS_mon
         DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallAlreadyCaught);
         break;
-    case 6: //pkmn not of the TYPE CHALLANGE type
+    case 7: //pkmn not of the TYPE CHALLANGE type
         DisplayCannotUseItemMessage(taskId, FALSE, gText_TypeChallengeCantThrowPokeBall);
         break;
-    case 7: // Already caught mon in Evo line
+    case 8: // Already caught mon in Evo line
         DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallSpeciesClause);
         break;
     }
