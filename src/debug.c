@@ -298,6 +298,9 @@ static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
 #define MAX_MODIFY_DIGITS 4
+#define MODIFY_DIGITS_ARROW_X 22
+#define MODIFY_DIGITS_ARROW1_Y 12
+#define MODIFY_DIGITS_ARROW2_Y 36
 
 struct PokemonDebugModifyArrows
 {
@@ -752,9 +755,9 @@ static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
 static const struct WindowTemplate sModifyWindowTemplate =
 {
     .bg = 0,
-    .tilemapLeft = 25,
+    .tilemapLeft = 2,
     .tilemapTop = 2,
-    .width = 4,
+    .width = 14,
     .height = 2,
     .paletteNum = 0xF,
     .baseBlock = 0x200
@@ -3187,9 +3190,10 @@ void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
     gSprites[data->iconspriteId].oam.priority = 0;
     
+    //Modify Arrows
     LoadSpritePalette(&gSpritePalette_Arrow);
-    data->modifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, 207 + (data->modifyArrows.currentDigit * 6), 12, 0);
-    data->modifyArrows.arrowSpriteId[1] = CreateSprite(&gSpriteTemplate_Arrow, 207 + (data->modifyArrows.currentDigit * 6), 36, 0);
+    data->modifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X + (data->modifyArrows.currentDigit * 6), MODIFY_DIGITS_ARROW1_Y, 0);
+    data->modifyArrows.arrowSpriteId[1] = CreateSprite(&gSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X + (data->modifyArrows.currentDigit * 6), MODIFY_DIGITS_ARROW2_Y, 0);
     gSprites[data->modifyArrows.arrowSpriteId[1]].animNum = 1;
 }
 
@@ -3297,13 +3301,18 @@ void Exit_Debug_Pokemon(u8 taskId)
 static void PrintDigitChars(struct PokemonDebugMenu *data)
 {
     s32 i;
-    u8 text[MAX_MODIFY_DIGITS + 1];
+    u8 text[MAX_MODIFY_DIGITS + POKEMON_NAME_LENGTH + 4];
 
     for (i = 0; i < data->modifyArrows.maxDigits; i++)
         text[i] = data->modifyArrows.charDigits[i];
+    
+    text[i] = CHAR_SPACE;
+    text[i + 1] = CHAR_HYPHEN;
+    text[i + 2] = CHAR_SPACE;
 
-    text[i] = EOS;
+    StringCopy(&text[i + 3], gSpeciesNames[data->modifyArrows.currValue]);
 
+    FillWindowPixelBuffer(data->modifyWindowId, 0x11);
     AddTextPrinterParameterized(data->modifyWindowId, 1, text, 3, 0, 0, NULL);
 }
 
@@ -3351,8 +3360,8 @@ static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits)
 static void SetUpModifyArrows(struct PokemonDebugMenu *data)
 {
     LoadSpritePalette(&gSpritePalette_Arrow);
-    data->modifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, 207, 12, 0);
-    data->modifyArrows.arrowSpriteId[1] = CreateSprite(&gSpriteTemplate_Arrow, 207, 36, 0);
+    data->modifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X, MODIFY_DIGITS_ARROW1_Y, 0);
+    data->modifyArrows.arrowSpriteId[1] = CreateSprite(&gSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X, MODIFY_DIGITS_ARROW2_Y, 0);
     gSprites[data->modifyArrows.arrowSpriteId[1]].animNum = 1;
 
     data->modifyArrows.minValue = 0;
