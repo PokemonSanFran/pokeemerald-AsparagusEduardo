@@ -66,6 +66,7 @@
 #include "pokemon_icon.h"
 #include "battle.h"
 #include "trainer_pokemon_sprites.h"
+#include "pokemon_animation.h"
 
 
 // *******************************
@@ -160,12 +161,12 @@ enum { //Sound
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
-#define DEBUG_MON_X 16
-#define DEBUG_MON_Y 16
-#define DEBUG_MON_BACK_X 84
-#define DEBUG_MON_BACK_Y 16
+#define DEBUG_MON_X 84
+#define DEBUG_MON_Y 18
+#define DEBUG_MON_BACK_X 16
+#define DEBUG_MON_BACK_Y 18
 #define DEBUG_ICON_X 148
-#define DEBUG_ICON_Y 16
+#define DEBUG_ICON_Y 18
 #define DEBUG_MON_SHINY 0
 #define DEBUG_MON_NORMAL 9
 
@@ -717,7 +718,7 @@ static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
 {
     .bg = 0,
     .tilemapLeft =1,
-    .tilemapTop = 203,
+    .tilemapTop = 205,
     .width = 14,
     .height = 8,
     .paletteNum = 0xF,
@@ -783,7 +784,7 @@ static void PrintOnCurrentItemWindow(u8 windowId, u16 itemId)
 
 static void PrintInstructionsOnWindow(u8 windowId)
 {
-    u8 text[] = _("A - Play Cry\nSelect - Shiny\nStart - Give Pokemon\nR - Animate$");
+    u8 text[] = _("A - Shiny\nL - Animate Back\nR - Animate Front$");
 
     FillWindowPixelBuffer(windowId, 0x11);
     AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
@@ -3105,24 +3106,25 @@ void ResetBGs_Debug_Menu(u16 a)
 
 void Handle_Input_Debug_Pokemon(u8 taskId)
 {
-
     struct PokemonDebugMenu *data = GetStructPtr(taskId);
     const struct CompressedSpritePalette *palette;
     struct Sprite *Frontsprite = &gSprites[data->frontspriteId];
+    struct Sprite *Backsprite = &gSprites[data->backspriteId];
 
-    if ((gMain.newKeys & A_BUTTON))
+    if ((gMain.newKeys & L_BUTTON))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
+        LaunchAnimationTaskForBackSprite(Backsprite, GetSpeciesBackAnimSet(data->currentmonId));
     }
-    else if (gMain.newKeys & START_BUTTON)
+    else if ((gMain.newKeys & R_BUTTON))
     {
-        ScriptGiveMon(data->currentmonId, 30, 0, 0, 0, 0);
-        PlaySE(SE_SUCCESS);
+        PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
+        if (HasTwoFramesAnimation(data->currentmonId))
+            StartSpriteAnim(Frontsprite, 1);
+        BattleAnimateFrontSprite(Frontsprite, data->currentmonId, TRUE, 1);
     }
-    else if (gMain.newKeys & SELECT_BUTTON)
+    else if (gMain.newKeys & A_BUTTON)
     {
-
-
         if( data->isshiny == 9)
         {
             data->isshiny = DEBUG_MON_SHINY;
@@ -3387,10 +3389,6 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
 
         PlaySE(SE_DEX_PAGE);
 
-    }
-    else if (gMain.newKeys & R_BUTTON)
-    {
-        PokemonSummaryDoMonAnimation(Frontsprite, data->currentmonId, 0);
     }
     else
     {
