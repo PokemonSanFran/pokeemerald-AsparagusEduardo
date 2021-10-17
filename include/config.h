@@ -23,7 +23,7 @@
 #define UNITS_METRIC
 #endif
 
-#define GBA_PRINTF
+//#define GBA_PRINTF
 // Uncomment to fix some identified minor bugs
 #define BUGFIX
 
