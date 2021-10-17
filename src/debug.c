@@ -67,6 +67,7 @@
 #include "battle.h"
 #include "trainer_pokemon_sprites.h"
 #include "pokemon_animation.h"
+#include "reset_rtc_screen.h"
 
 
 // *******************************
@@ -296,6 +297,34 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
+#define MAX_MODIFY_DIGITS 4
+
+struct PokemonDebugModifyArrows
+{
+    u8 arrowSpriteId[2];
+    u16 minValue;
+    u16 maxValue;
+    int currValue;
+    u8 currentDigit;
+    u8 maxDigits;
+    u8 charDigits[MAX_MODIFY_DIGITS];
+    void *modifiedValPtr;
+    u8 typeOfVal;
+};
+
+struct PokemonDebugMenu
+{
+    u16 currentmonId;
+    u8 currentmonWindowId;
+    u8 InstructionsWindowId;
+    u8 frontspriteId;
+    u8 backspriteId;
+    u8 iconspriteId;
+    u8 isshiny;
+    struct PokemonDebugModifyArrows modifyArrows;
+    u8 modifyWindowId;
+};
+
 void Handle_Input_Debug_Pokemon(u8);
 void Handle_Input_Debug_Item(u8);
 void Exit_Debug_Pokemon(u8);
@@ -305,6 +334,11 @@ void CB2_Debug_Runner(void);
 void CB2_Debug_Item(void);
 void ResetBGs_Debug_Menu(u16);
 void ReloadPokemonSprites(struct PokemonDebugMenu *data);
+static void PrintDigitChars(struct PokemonDebugMenu *data);
+static void SetUpModifyArrows(struct PokemonDebugMenu *data);
+static void UpdateBattlerValue(struct PokemonDebugMenu *data);
+static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits);
+static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 moveUp);
 
 extern u8 Debug_Script_1[];
 extern u8 Debug_Script_2[];
@@ -693,17 +727,6 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sound),
 };
 
-struct PokemonDebugMenu
-{
-    u16 currentmonId;
-    u8 currentmonWindowId;
-    u8 InstructionsWindowId;
-    u8 frontspriteId;
-    u8 backspriteId;
-    u8 iconspriteId;
-    u8 isshiny;
-};
-
 static const struct WindowTemplate sCurrentTitleTemplate =
 {
     .bg = 0,
@@ -724,6 +747,17 @@ static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
     .height = 8,
     .paletteNum = 0xF,
     .baseBlock = 0x300
+};
+
+static const struct WindowTemplate sModifyWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 25,
+    .tilemapTop = 2,
+    .width = 4,
+    .height = 2,
+    .paletteNum = 0xF,
+    .baseBlock = 0x200
 };
 
 static struct PokemonDebugMenu *GetStructPtr(u8 taskId)
@@ -3016,7 +3050,7 @@ void CB2_Debug_Pokemon(void)
             SetStructPtr(taskId, data);
 
             data->currentmonId = 1;
-            data->currentmonWindowId = AddWindow(&sCurrentTitleTemplate);
+            //data->currentmonWindowId = AddWindow(&sCurrentTitleTemplate);
             PutWindowTilemap(data->currentmonWindowId);
             PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
 
@@ -3047,6 +3081,12 @@ void CB2_Debug_Pokemon(void)
             data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
             gSprites[data->iconspriteId].oam.priority = 0;
 
+            //Modify Arrows
+            data->modifyWindowId = AddWindow(&sModifyWindowTemplate);
+            PutWindowTilemap(data->modifyWindowId);
+            CopyWindowToVram(data->modifyWindowId, 3);
+            SetUpModifyArrows(data);
+            PrintDigitChars(data);
             gMain.state++;
             break;
         case 3:
@@ -3146,6 +3186,11 @@ void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     //Icon Sprite
     data->iconspriteId = CreateMonIcon(data->currentmonId, SpriteCB_MonIcon, DEBUG_ICON_X + 32, DEBUG_ICON_Y + 40, 4, data->isshiny);
     gSprites[data->iconspriteId].oam.priority = 0;
+    
+    LoadSpritePalette(&gSpritePalette_Arrow);
+    data->modifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, 207 + (data->modifyArrows.currentDigit * 6), 12, 0);
+    data->modifyArrows.arrowSpriteId[1] = CreateSprite(&gSpriteTemplate_Arrow, 207 + (data->modifyArrows.currentDigit * 6), 36, 0);
+    gSprites[data->modifyArrows.arrowSpriteId[1]].animNum = 1;
 }
 
 void Handle_Input_Debug_Pokemon(u8 taskId)
@@ -3178,6 +3223,7 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
             data->isshiny = DEBUG_MON_NORMAL;
         }
         ReloadPokemonSprites(data);
+
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -3187,69 +3233,46 @@ void Handle_Input_Debug_Pokemon(u8 taskId)
     }
     else if (gMain.newKeys & DPAD_DOWN) // || gMain.heldKeys & DPAD_DOWN)
     {
-        data->currentmonId++;
-        if (data->currentmonId > (NUM_SPECIES - 1))
+        if (TryMoveDigit(&data->modifyArrows, FALSE))
         {
-            data->currentmonId = NUM_SPECIES - 1;
+            PrintDigitChars(data);
+            UpdateBattlerValue(data);
+            ReloadPokemonSprites(data);
         }
-        PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
-
-        ReloadPokemonSprites(data);
 
         PlaySE(SE_DEX_SCROLL);
 
         while (!(gMain.intrCheck & INTR_FLAG_VBLANK));
-
     }
     else if (gMain.newKeys & DPAD_UP) // || gMain.heldKeys & DPAD_UP)
     {
-        if (data->currentmonId == 1)
+        if (TryMoveDigit(&data->modifyArrows, TRUE))
         {
-            data->currentmonId = 1;
+            PrintDigitChars(data);
+            UpdateBattlerValue(data);
+            ReloadPokemonSprites(data);
         }
-        else
-        {
-            data->currentmonId--;
-        }
-        
-        PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
-
-        ReloadPokemonSprites(data);
 
         PlaySE(SE_DEX_SCROLL);
 
     }
     else if (gMain.newKeys & DPAD_LEFT) // || gMain.heldKeys & DPAD_LEFT)
     {
-        if (data->currentmonId < 10)
+        if (data->modifyArrows.currentDigit != 0)
         {
-            data->currentmonId = 1;
+            data->modifyArrows.currentDigit--;
+            gSprites[data->modifyArrows.arrowSpriteId[0]].x2 -= 6;
+            gSprites[data->modifyArrows.arrowSpriteId[1]].x2 -= 6;
         }
-        else
-        {
-            data->currentmonId = data->currentmonId - 10;
-        }
-
-        PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
-
-        ReloadPokemonSprites(data);
-
-        PlaySE(SE_DEX_PAGE);
-
     }
     else if (gMain.newKeys & DPAD_RIGHT) // || gMain.heldKeys & DPAD_RIGHT)
     {
-        data->currentmonId = data->currentmonId + 10;
-        if (data->currentmonId > (NUM_SPECIES - 1))
+        if (data->modifyArrows.currentDigit != (data->modifyArrows.maxDigits - 1))
         {
-            data->currentmonId = NUM_SPECIES - 1;
+            data->modifyArrows.currentDigit++;
+            gSprites[data->modifyArrows.arrowSpriteId[0]].x2 += 6;
+            gSprites[data->modifyArrows.arrowSpriteId[1]].x2 += 6;
         }
-        PrintOnCurrentMonWindow(data->currentmonWindowId, data->currentmonId);
-
-        ReloadPokemonSprites(data);
-
-        PlaySE(SE_DEX_PAGE);
-
     }
     else
     {
@@ -3266,6 +3289,129 @@ void Exit_Debug_Pokemon(u8 taskId)
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x100);
+    }
+}
+
+#define VAL_U16     0
+
+static void PrintDigitChars(struct PokemonDebugMenu *data)
+{
+    s32 i;
+    u8 text[MAX_MODIFY_DIGITS + 1];
+
+    for (i = 0; i < data->modifyArrows.maxDigits; i++)
+        text[i] = data->modifyArrows.charDigits[i];
+
+    text[i] = EOS;
+
+    AddTextPrinterParameterized(data->modifyWindowId, 1, text, 3, 0, 0, NULL);
+}
+
+static u32 CharDigitsToValue(u8 *charDigits, u8 maxDigits)
+{
+    s32 i;
+    u8 id = 0;
+    u32 newValue = 0;
+    u8 valueDigits[MAX_MODIFY_DIGITS];
+
+    for (i = 0; i < MAX_MODIFY_DIGITS; i++)
+        valueDigits[i] = charDigits[i] - CHAR_0;
+
+    if (maxDigits >= MAX_MODIFY_DIGITS)
+        newValue += valueDigits[id++] * 1000;
+    if (maxDigits >= MAX_MODIFY_DIGITS - 1)
+        newValue += valueDigits[id++] * 100;
+    if (maxDigits >= MAX_MODIFY_DIGITS - 2)
+        newValue += valueDigits[id++] * 10;
+    if (maxDigits >= MAX_MODIFY_DIGITS - 3)
+        newValue += valueDigits[id++];
+
+    return newValue;
+}
+
+static void ValueToCharDigits(u8 *charDigits, u32 newValue, u8 maxDigits)
+{
+    s32 i;
+    u8 valueDigits[MAX_MODIFY_DIGITS];
+    u8 id = 0;
+
+    if (maxDigits >= MAX_MODIFY_DIGITS)
+        valueDigits[id++] = newValue / 1000;
+    if (maxDigits >= MAX_MODIFY_DIGITS - 1)
+        valueDigits[id++] = (newValue % 1000) / 100;
+    if (maxDigits >= MAX_MODIFY_DIGITS - 2)
+        valueDigits[id++] = (newValue % 100) / 10;
+    if (maxDigits >= MAX_MODIFY_DIGITS - 3)
+        valueDigits[id++] = newValue % 10;
+
+    for (i = 0; i < MAX_MODIFY_DIGITS; i++)
+        charDigits[i] = valueDigits[i] + CHAR_0;
+}
+
+static void SetUpModifyArrows(struct PokemonDebugMenu *data)
+{
+    LoadSpritePalette(&gSpritePalette_Arrow);
+    data->modifyArrows.arrowSpriteId[0] = CreateSprite(&gSpriteTemplate_Arrow, 207, 12, 0);
+    data->modifyArrows.arrowSpriteId[1] = CreateSprite(&gSpriteTemplate_Arrow, 207, 36, 0);
+    gSprites[data->modifyArrows.arrowSpriteId[1]].animNum = 1;
+
+    data->modifyArrows.minValue = 0;
+    data->modifyArrows.maxValue = NUM_SPECIES - 1;
+    data->modifyArrows.maxDigits = 4;
+    data->modifyArrows.modifiedValPtr = &data->currentmonId;
+    data->modifyArrows.typeOfVal = VAL_U16;
+    data->modifyArrows.currValue = data->currentmonId;
+
+    data->modifyArrows.currentDigit = 0;
+    ValueToCharDigits(data->modifyArrows.charDigits, data->modifyArrows.currValue, data->modifyArrows.maxDigits);
+}
+
+static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 moveUp)
+{
+    s32 i;
+    u8 charDigits[MAX_MODIFY_DIGITS];
+    u32 newValue;
+
+    for (i = 0; i < MAX_MODIFY_DIGITS; i++)
+        charDigits[i] = modArrows->charDigits[i];
+
+    if (moveUp)
+    {
+        if (charDigits[modArrows->currentDigit] == CHAR_9)
+            charDigits[modArrows->currentDigit] = CHAR_0;
+        else
+            charDigits[modArrows->currentDigit]++;
+    }
+    else
+    {
+        if (charDigits[modArrows->currentDigit] == CHAR_0)
+            charDigits[modArrows->currentDigit] = CHAR_9;
+        else
+            charDigits[modArrows->currentDigit]--;
+    }
+
+    newValue = CharDigitsToValue(charDigits, modArrows->maxDigits);
+    if (newValue > modArrows->maxValue || newValue < modArrows->minValue)
+    {
+        return FALSE;
+    }
+    else
+    {
+        modArrows->currValue = newValue;
+        for (i = 0; i < MAX_MODIFY_DIGITS; i++)
+             modArrows->charDigits[i] = charDigits[i];
+        return TRUE;
+    }
+}
+
+static void UpdateBattlerValue(struct PokemonDebugMenu *data)
+{
+    u32 i;
+    switch (data->modifyArrows.typeOfVal)
+    {
+    case VAL_U16:
+        *(u16*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        break;
     }
 }
 
