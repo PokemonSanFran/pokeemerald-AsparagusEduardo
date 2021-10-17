@@ -161,12 +161,12 @@ enum { //Sound
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
-#define DEBUG_MON_X 84
-#define DEBUG_MON_Y 18
-#define DEBUG_MON_BACK_X 16
-#define DEBUG_MON_BACK_Y 18
+#define DEBUG_MON_X 140
+#define DEBUG_MON_Y 14
+#define DEBUG_MON_BACK_X 32
+#define DEBUG_MON_BACK_Y 50
 #define DEBUG_ICON_X 148
-#define DEBUG_ICON_Y 18
+#define DEBUG_ICON_Y 90
 #define DEBUG_MON_SHINY 0
 #define DEBUG_MON_NORMAL 9
 
@@ -718,7 +718,7 @@ static const struct WindowTemplate sDebugPokemonInstructionsTemplate =
 {
     .bg = 0,
     .tilemapLeft =1,
-    .tilemapTop = 205,
+    .tilemapTop = 207,
     .width = 14,
     .height = 8,
     .paletteNum = 0xF,
@@ -784,7 +784,7 @@ static void PrintOnCurrentItemWindow(u8 windowId, u16 itemId)
 
 static void PrintInstructionsOnWindow(u8 windowId)
 {
-    u8 text[] = _("A - Shiny\nL - Animate Back\nR - Animate Front$");
+    u8 text[] = _("A - Shiny\nL - Back   R - Front$");
 
     FillWindowPixelBuffer(windowId, 0x11);
     AddTextPrinterParameterized(windowId, 1, text, 0, 0, 0, NULL);
