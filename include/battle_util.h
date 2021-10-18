@@ -28,6 +28,8 @@
 #define ABILITYEFFECT_COUNT_BATTLER_SIDE         0x11
 #define ABILITYEFFECT_COUNT_ON_FIELD             0x12
 #define ABILITYEFFECT_CHECK_ON_FIELD             0x13
+#define ABILITYEFFECT_MUD_SPORT                  0xFD
+#define ABILITYEFFECT_WATER_SPORT                0xFE
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ABILITY_ON_OPPOSING_FIELD(battlerId, abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, abilityId, 0, 0))
@@ -60,7 +62,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void PressurePPLoseOnUsingImprison(u8 attacker);
 void MarkAllBattlersForControllerExec(void); // unused
 void MarkBattlerForControllerExec(u8 battlerId);
-void sub_803F850(u8 arg0);
+void MarkBattlerReceivedLinkData(u8 arg0);
 void CancelMultiTurnMoves(u8 battlerId);
 bool8 WasUnableToUseMove(u8 battlerId);
 void PrepareStringBattle(u16 stringId, u8 battlerId);

@@ -62,11 +62,11 @@ static EWRAM_DATA void *sTempTileDataBuffer[0x20] = {NULL};
 
 const u16 gUnknown_0860F074[] = INCBIN_U16("graphics/interface/860F074.gbapal");
 
-static const u8 sTextSpeedFrameDelays[] = 
-{ 
-    [OPTIONS_TEXT_SPEED_SLOW] = 8, 
-    [OPTIONS_TEXT_SPEED_MID]  = 4, 
-    [OPTIONS_TEXT_SPEED_FAST] = 1 
+static const u8 sTextSpeedFrameDelays[] =
+{
+    [OPTIONS_TEXT_SPEED_SLOW] = 8,
+    [OPTIONS_TEXT_SPEED_MID]  = 4,
+    [OPTIONS_TEXT_SPEED_FAST] = 1
 };
 
 static const struct WindowTemplate sStandardTextBox_WindowTemplates[] =
@@ -95,7 +95,7 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
 };
 
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
-const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GREY };
+const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
 // Table of move info icon offsets in graphics/interface_fr/menu.png
 static const struct MenuInfoIcon sMenuInfoIcons[] =
@@ -144,8 +144,8 @@ void task_free_buf_after_copying_tile_data_to_vram(u8 taskId);
 void InitStandardTextBoxWindows(void)
 {
     InitWindows(sStandardTextBox_WindowTemplates);
-    sStartMenuWindowId = 0xFF;
-    sMapNamePopupWindowId = 0xFF;
+    sStartMenuWindowId = WINDOW_NONE;
+    sMapNamePopupWindowId = WINDOW_NONE;
 }
 
 void FreeAllOverworldWindowBuffers(void)
@@ -180,7 +180,7 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
     printer.currentY = 1;
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
-    printer.style = 0;
+    printer.unk = 0;
     printer.fgColor = fgColor;
     printer.bgColor = bgColor;
     printer.shadowColor = shadowColor;
@@ -490,7 +490,7 @@ u8 GetPlayerTextSpeedDelay(void)
 
 u8 sub_81979C4(u8 a1)
 {
-    if (sStartMenuWindowId == 0xFF)
+    if (sStartMenuWindowId == WINDOW_NONE)
         sStartMenuWindowId = sub_8198AA4(0, 0x16, 1, 7, (a1 * 2) + 2, 0xF, 0x139);
     return sStartMenuWindowId;
 }
@@ -502,26 +502,28 @@ u8 GetStartMenuWindowId(void)
 
 void RemoveStartMenuWindow(void)
 {
-    if (sStartMenuWindowId != 0xFF)
+    if (sStartMenuWindowId != WINDOW_NONE)
     {
         RemoveWindow(sStartMenuWindowId);
-        sStartMenuWindowId = 0xFF;
+        sStartMenuWindowId = WINDOW_NONE;
     }
 }
 
-u16 sub_8197A30(void)
+// Unused
+static u16 GetDialogFrameBaseTileNum(void)
 {
     return DLG_WINDOW_BASE_TILE_NUM;
 }
 
-u16 sub_8197A38(void)
+// Unused
+static u16 GetStandardFrameBaseTileNum(void)
 {
     return STD_WINDOW_BASE_TILE_NUM;
 }
 
 u8 AddMapNamePopUpWindow(void)
 {
-    if (sMapNamePopupWindowId == 0xFF)
+    if (sMapNamePopupWindowId == WINDOW_NONE)
         sMapNamePopupWindowId = sub_8198AA4(0, 1, 1, 10, 3, 14, 0x107);
     return sMapNamePopupWindowId;
 }
@@ -533,10 +535,10 @@ u8 GetMapNamePopUpWindowId(void)
 
 void RemoveMapNamePopUpWindow(void)
 {
-    if (sMapNamePopupWindowId != 0xFF)
+    if (sMapNamePopupWindowId != WINDOW_NONE)
     {
         RemoveWindow(sMapNamePopupWindowId);
-        sMapNamePopupWindowId = 0xFF;
+        sMapNamePopupWindowId = WINDOW_NONE;
     }
 }
 
@@ -815,7 +817,7 @@ void sub_8198180(const u8 *string, u8 a2, bool8 copyToVram)
 {
     u16 width = 0;
 
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         PutWindowTilemap(sWindowId);
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
@@ -837,19 +839,19 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
     u8 color[3];
     u16 width = 0;
 
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         if (a3 != 0)
         {
             color[0] = TEXT_COLOR_TRANSPARENT;
             color[1] = TEXT_COLOR_WHITE;
-            color[2] = TEXT_COLOR_DARK_GREY;
+            color[2] = TEXT_COLOR_DARK_GRAY;
         }
         else
         {
             color[0] = TEXT_DYNAMIC_COLOR_6;
             color[1] = TEXT_COLOR_WHITE;
-            color[2] = TEXT_COLOR_DARK_GREY;
+            color[2] = TEXT_COLOR_DARK_GRAY;
         }
         PutWindowTilemap(sWindowId);
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
@@ -872,13 +874,13 @@ void sub_8198204(const u8 *string, const u8 *string2, u8 a3, u8 a4, bool8 copyTo
 
 void sub_81982D8(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
         CopyWindowToVram(sWindowId, 3);
 }
 
 void sub_81982F0(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(15));
         CopyWindowToVram(sWindowId, 3);
@@ -887,13 +889,13 @@ void sub_81982F0(void)
 
 void sub_8198314(void)
 {
-    if (sWindowId != 0xFF)
+    if (sWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sWindowId);
         CopyWindowToVram(sWindowId, 3);
         RemoveWindow(sWindowId);
-        sWindowId = 0xFF;
+        sWindowId = WINDOW_NONE;
     }
 }
 
@@ -1049,13 +1051,13 @@ s8 ProcessMenuInput_other(void)
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(-1);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         Menu_MoveCursor(1);
@@ -1075,17 +1077,17 @@ s8 Menu_ProcessInputNoWrapAround_other(void)
             PlaySE(SE_SELECT);
         return sMenu.cursorPos;
     }
-    if (JOY_NEW(B_BUTTON))
+    else if (JOY_NEW(B_BUTTON))
     {
         return MENU_B_PRESSED;
     }
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(-1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         if (oldPos != Menu_MoveCursorNoWrapAround(1))
             PlaySE(SE_SELECT);
@@ -1095,32 +1097,32 @@ s8 Menu_ProcessInputNoWrapAround_other(void)
     return MENU_NOTHING_CHOSEN;
 }
 
-void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs)
+void PrintTextArray(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions)
 {
     u8 i;
     for (i = 0; i < itemCount; i++)
     {
-        AddTextPrinterParameterized(windowId, fontId, strs[i].text, left, (lineHeight * i) + top, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, 0xFF, NULL);
     }
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_81987BC(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, u8 a6, u8 a7)
+void sub_81987BC(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, u8 a6, u8 a7)
 {
     u8 i;
     for (i = 0; i < itemCount; i++)
     {
-        AddTextPrinterParameterized5(windowId, fontId, strs[i].text, left, (lineHeight * i) + top, 0xFF, NULL, a6, a7);
+        AddTextPrinterParameterized5(windowId, fontId, menuActions[i].text, left, (lineHeight * i) + top, 0xFF, NULL, a6, a7);
     }
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_8198854(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *strs)
+void sub_8198854(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions)
 {
-    PrintTextArray(windowId, fontId, GetFontAttribute(fontId, 0), 1, lineHeight, itemCount, strs);
+    PrintTextArray(windowId, fontId, GetFontAttribute(fontId, 0), 1, lineHeight, itemCount, menuActions);
 }
 
-void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a8)
+void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     struct TextPrinterTemplate printer;
@@ -1130,7 +1132,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
     printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
-    printer.style = GetFontAttribute(fontId, FONTATTR_STYLE);
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
     printer.x = left;
@@ -1138,7 +1140,7 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
 
     for (i = 0; i < itemCount; i++)
     {
-        printer.currentChar = strs[a8[i]].text;
+        printer.currentChar = menuActions[actionIds[i]].text;
         printer.y = (lineHeight * i) + top;
         printer.currentY = printer.y;
         AddTextPrinter(&printer, 0xFF, NULL);
@@ -1147,9 +1149,9 @@ void AddItemMenuActionTextPrinters(u8 windowId, u8 fontId, u8 left, u8 top, u8 l
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_81989B8(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *strs, const u8 *a5)
+void sub_81989B8(u8 windowId, u8 fontId, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
-    AddItemMenuActionTextPrinters(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, strs, a5);
+    AddItemMenuActionTextPrinters(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 1, GetFontAttribute(fontId, FONTATTR_LETTER_SPACING), lineHeight, itemCount, menuActions, actionIds);
 }
 
 void SetWindowTemplateFields(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
@@ -1194,7 +1196,7 @@ void sub_8198AF8(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top
     printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
-    printer.style = GetFontAttribute(fontId, FONTATTR_STYLE);
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
     printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
@@ -1222,7 +1224,7 @@ void sub_8198C78(void)
     RemoveWindow(sYesNoWindowId);
 }
 
-void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7, const struct MenuAction *strs)
+void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u8 a7, const struct MenuAction *menuActions)
 {
     u8 i;
     u8 j;
@@ -1230,18 +1232,18 @@ void sub_8198C94(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 a5, u8 a6, u
     {
         for (j = 0; j < a6; j++)
         {
-            AddTextPrinterParameterized(windowId, fontId, strs[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, fontId, menuActions[(i * a6) + j].text, (a4 * j) + left, (a5 * i) + top, 0xFF, NULL);
         }
     }
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_8198D54(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *strs)
+void sub_8198D54(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *menuActions)
 {
-    sub_8198C94(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a3, a4, a5, strs);
+    sub_8198C94(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a3, a4, a5, menuActions);
 }
 
-void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
+void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     u8 j;
@@ -1252,17 +1254,17 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     printer.fgColor = GetFontAttribute(fontId, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(fontId, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(fontId, FONTATTR_COLOR_SHADOW);
-    printer.style = GetFontAttribute(fontId, FONTATTR_STYLE);
+    printer.unk = GetFontAttribute(fontId, FONTATTR_UNKNOWN);
     printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
     printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
 
-    for (i = 0; i < itemCount2; i++)
+    for (i = 0; i < verticalCount; i++)
     {
-        for (j = 0; j < itemCount; j++)
+        for (j = 0; j < horizontalCount; j++)
         {
-            printer.currentChar = strs[a8[(itemCount * i) + j]].text;
-            printer.x = (a4 * j) + left;
-            printer.y = (GetFontAttribute(fontId, 1) * i) + top;
+            printer.currentChar = menuActions[actionIds[(horizontalCount * i) + j]].text;
+            printer.x = (optionWidth * j) + left;
+            printer.y = (GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT) * i) + top;
             printer.currentX = printer.x;
             printer.currentY = printer.y;
             AddTextPrinter(&printer, 0xFF, NULL);
@@ -1272,9 +1274,10 @@ void sub_8198DBC(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 itemCount, u
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_8198EF8(u8 windowId, u8 fontId, u8 a2, u8 a3, u8 a4, u8 a5, const struct MenuAction *strs, const u8 *a8)
+// Unused
+static void PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, u8 unused, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
-    sub_8198DBC(windowId, fontId, GetFontAttribute(fontId, 0), 0, a2, a4, a5, strs, a8);
+    PrintMenuActionGrid(windowId, fontId, GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH), 0, optionWidth, horizontalCount, verticalCount, menuActions, actionIds);
 }
 
 u8 sub_8198F58(u8 windowId, u8 fontId, u8 left, u8 top, u8 a4, u8 cursorHeight, u8 a6, u8 a7, u8 numChoices, u8 a9)
@@ -1496,25 +1499,25 @@ s8 sub_81993D8(void)
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         PlaySE(SE_SELECT);
         ChangeListMenuCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
@@ -1538,25 +1541,25 @@ s8 sub_8199484(void)
     {
         return MENU_B_PRESSED;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_UP)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, -1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_DOWN)
     {
         if (oldPos != ChangeGridMenuCursorPosition(0, 1))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_LEFT || GetLRKeysPressedAndHeld() == MENU_L_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(-1, 0))
             PlaySE(SE_SELECT);
         return MENU_NOTHING_CHOSEN;
     }
-    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
+    else if ((JOY_REPEAT(DPAD_ANY)) == DPAD_RIGHT || GetLRKeysPressedAndHeld() == MENU_R_PRESSED)
     {
         if (oldPos != ChangeGridMenuCursorPosition(1, 0))
             PlaySE(SE_SELECT);
@@ -1594,19 +1597,19 @@ u8 InitMenuInUpperLeftCornerPlaySoundWhenAPressed(u8 windowId, u8 itemCount, u8 
     return InitMenuInUpperLeftCorner(windowId, itemCount, initialCursorPos, FALSE);
 }
 
-void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *strs)
+void PrintMenuTable(u8 windowId, u8 itemCount, const struct MenuAction *menuActions)
 {
     u32 i;
 
     for (i = 0; i < itemCount; i++)
     {
-        AddTextPrinterParameterized(windowId, 1, strs[i].text, 8, (i * 16) + 1, 0xFF, NULL);
+        AddTextPrinterParameterized(windowId, 1, menuActions[i].text, 8, (i * 16) + 1, 0xFF, NULL);
     }
 
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const u8 *a8)
+void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     struct TextPrinterTemplate printer;
@@ -1616,7 +1619,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
     printer.fgColor = GetFontAttribute(1, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(1, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(1, FONTATTR_COLOR_SHADOW);
-    printer.style = GetFontAttribute(1, FONTATTR_STYLE);
+    printer.unk = GetFontAttribute(1, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
     printer.x = 8;
@@ -1624,7 +1627,7 @@ void sub_81995E4(u8 windowId, u8 itemCount, const struct MenuAction *strs, const
 
     for (i = 0; i < itemCount; i++)
     {
-        printer.currentChar = strs[a8[i]].text;
+        printer.currentChar = menuActions[actionIds[i]].text;
         printer.y = (i * 16) + 1;
         printer.currentY = (i * 16) + 1;
         AddTextPrinter(&printer, 0xFF, NULL);
@@ -1650,7 +1653,7 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     printer.fgColor = GetFontAttribute(1, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(1, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(1, FONTATTR_COLOR_SHADOW);
-    printer.style = GetFontAttribute(1, FONTATTR_STYLE);
+    printer.unk = GetFontAttribute(1, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
 
@@ -1658,19 +1661,19 @@ void CreateYesNoMenu(const struct WindowTemplate *window, u16 baseTileNum, u8 pa
     InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sYesNoWindowId, 2, initialCursorPos);
 }
 
-void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *strs)
+void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const struct MenuAction *menuActions)
 {
     u32 i, j;
 
     for (i = 0; i < rows; i++)
     {
         for (j = 0; j < columns; j++)
-            AddTextPrinterParameterized(windowId, 1, strs[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, 0xFF, NULL);
+            AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, 0xFF, NULL);
     }
     CopyWindowToVram(windowId, 2);
 }
 
-void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *strs, const u8 *a8)
+void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct MenuAction *menuActions, const u8 *actionIds)
 {
     u8 i;
     u8 j;
@@ -1681,7 +1684,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     printer.fgColor = GetFontAttribute(1, FONTATTR_COLOR_FOREGROUND);
     printer.bgColor = GetFontAttribute(1, FONTATTR_COLOR_BACKGROUND);
     printer.shadowColor = GetFontAttribute(1, FONTATTR_COLOR_SHADOW);
-    printer.style = GetFontAttribute(1, FONTATTR_STYLE);
+    printer.unk = GetFontAttribute(1, FONTATTR_UNKNOWN);
     printer.letterSpacing = 0;
     printer.lineSpacing = 0;
 
@@ -1689,7 +1692,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     {
         for (j = 0; j < itemCount; j++)
         {
-            printer.currentChar = strs[a8[(itemCount * i) + j]].text;
+            printer.currentChar = menuActions[actionIds[(itemCount * i) + j]].text;
             printer.x = (a4 * j) + 8;
             printer.y = (16 * i) + 1;
             printer.currentX = printer.x;
@@ -1701,7 +1704,7 @@ void sub_819983C(u8 windowId, u8 a4, u8 itemCount, u8 itemCount2, const struct M
     CopyWindowToVram(windowId, 2);
 }
 
-u8 sub_8199944(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
+u8 InitMenuActionGrid(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
 {
     s32 pos;
 
@@ -1766,9 +1769,7 @@ void ResetTempTileDataBuffers(void)
 {
     int i;
     for (i = 0; i < (int)ARRAY_COUNT(sTempTileDataBuffer); i++)
-    {
         sTempTileDataBuffer[i] = NULL;
-    }
     sTempTileDataBufferIdx = 0;
 }
 
@@ -1781,9 +1782,7 @@ bool8 FreeTempTileDataBuffersIfPossible(void)
         if (sTempTileDataBufferIdx)
         {
             for (i = 0; i < sTempTileDataBufferIdx; i++)
-            {
                 FREE_AND_SET_NULL(sTempTileDataBuffer[i]);
-            }
             sTempTileDataBufferIdx = 0;
         }
         return FALSE;
@@ -1949,7 +1948,7 @@ void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 left, u8 top, const
     printer.currentY = printer.y;
     printer.letterSpacing = GetFontAttribute(fontId, 2);
     printer.lineSpacing = GetFontAttribute(fontId, 3);
-    printer.style = 0;
+    printer.unk = 0;
     printer.fgColor = color[1];
     printer.bgColor = color[0];
     printer.shadowColor = color[2];
@@ -1970,7 +1969,7 @@ void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 left, u8 top, u8 le
     printer.currentY = printer.y;
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
-    printer.style = 0;
+    printer.unk = 0;
     printer.fgColor = color[1];
     printer.bgColor = color[0];
     printer.shadowColor = color[2];
@@ -1991,7 +1990,7 @@ void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left
     printer.currentY = top;
     printer.letterSpacing = letterSpacing;
     printer.lineSpacing = lineSpacing;
-    printer.style = 0;
+    printer.unk = 0;
 
     printer.fgColor = GetFontAttribute(fontId, 5);
     printer.bgColor = GetFontAttribute(fontId, 6);
@@ -2016,7 +2015,7 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
 {
     int loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
     const u8 *pixelsSrc;
-    u16 *pixelsDst;
+    u8 *pixelsDst;
     u16 toOrr;
 
     if (dst->width - dstX < width)
@@ -2036,54 +2035,53 @@ void sub_819A080(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 src
     {
         for (loopSrcX = srcX, loopDstX = dstX; loopSrcX < xEnd; loopSrcX++, loopDstX++)
         {
-            pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 0x1d) >> 0x1B);
-            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)( loopDstY << 0x1d) >> 0x1B);
+            pixelsSrc = src->pixels + ((loopSrcX >> 1) & 3) + ((loopSrcX >> 3) << 5) + (((loopSrcY >> 3) * multiplierSrcY) << 5) + ((u32)(loopSrcY << 29) >> 27);
+            pixelsDst = (void*) dst->pixels + ((loopDstX >> 1) & 3) + ((loopDstX >> 3) << 5) + ((( loopDstY >> 3) * multiplierDstY) << 5) + ((u32)(loopDstY << 29) >> 27);
 
-            if ((uintptr_t )pixelsDst & 0x1)
+            if ((uintptr_t)pixelsDst & 0x1)
             {
-                pixelsDst = (void*)(pixelsDst) - 1;
+                pixelsDst--;
                 if (loopDstX & 0x1)
                 {
-                    toOrr = *pixelsDst & 0x0fff;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0x0fff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 8);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 8);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 12);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 12);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xf0ff;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xf0ff;
                     if (loopSrcX & 0x1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 8);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 8);
                 }
             }
             else
             {
                 if (loopDstX & 1)
                 {
-                    toOrr = *pixelsDst & 0xff0f;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xff0f;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) << 0);
+                        toOrr |= ((*pixelsSrc & 0xf0) << 0);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) << 4);
+                        toOrr |= ((*pixelsSrc & 0x0f) << 4);
                 }
                 else
                 {
-                    toOrr = *pixelsDst & 0xfff0;
+                    toOrr = *(vu16*)pixelsDst;
+                    toOrr &= 0xfff0;
                     if (loopSrcX & 1)
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0xf0) >> 4);
+                        toOrr |= ((*pixelsSrc & 0xf0) >> 4);
                     else
-                        *pixelsDst = toOrr | ((*pixelsSrc & 0x0f) >> 0);
+                        toOrr |= ((*pixelsSrc & 0x0f) >> 0);
                 }
             }
-
-            // Needed to match, urgh.
-            #ifndef NONMATCHING
-            asm("":::"r4");
-            pixelsDst++;pixelsDst--;
-            #endif // NONMATCHING
+            *(vu16*)pixelsDst = toOrr;
         }
     }
 }

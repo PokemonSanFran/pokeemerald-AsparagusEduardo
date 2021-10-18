@@ -1,19 +1,19 @@
 	.align 2
-gText_ConfirmSave:: @ 82C87B4
+gText_ConfirmSave::
 	.string "¿Quieres guardar la partida?$"
 
-gText_AlreadySavedFile:: @ 82C87D5
+gText_AlreadySavedFile::
 	.string "Ya hay una partida guardada.\n"
 	.string "¿Quieres sobrescribirla?$"
 
-gText_SavingDontTurnOff:: @ 82C8810
+gText_SavingDontTurnOff::
 	.string "Guardando…\n"
 	.string "No apagues la consola.$"
 
-gText_PlayerSavedGame:: @ 82C8832
+gText_PlayerSavedGame::
 	.string "{PLAYER} guardó la partida.$"
 
-gText_DifferentSaveFile:: @ 82C8845
+gText_DifferentSaveFile::
 	.string "¡ATENCIÓN!\p"
 	.string "Ya hay una partida guardada.\p"
 	.string "Si guardas, perderás los datos\n"
@@ -22,11 +22,11 @@ gText_DifferentSaveFile:: @ 82C8845
 	.string "¿Seguro que quieres guardar ahora\n"
 	.string "y sobrescribir los otros datos?$"
 
-gText_SaveError:: @ 82C892A
+gText_SaveError::
 	.string "Error al guardar.\p"
 	.string "Por favor cambie la\n"
 	.string "memoria de respaldo.$"
 
-gText_SavingDontTurnOffPower:: @ 82C8959
+gText_SavingDontTurnOffPower::
 	.string "Guardando…\n"
 	.string "No apagues la consola.$"

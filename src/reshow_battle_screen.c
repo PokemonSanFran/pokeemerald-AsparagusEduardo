@@ -23,7 +23,7 @@ static void CreateBattlerSprite(u8 battlerId);
 static void CreateHealthboxSprite(u8 battlerId);
 static void sub_80A95F4(void);
 
-void nullsub_35(void)
+void ReshowBattleScreenDummy(void)
 {
 
 }
@@ -162,7 +162,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(BattleMainCB2);
-        sub_805EF14();
+        FillAroundBattleWindows();
         break;
     }
 

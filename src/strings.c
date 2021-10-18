@@ -1,5 +1,7 @@
 #include "global.h"
 #include "strings.h"
+#include "battle_pyramid_bag.h"
+#include "item_menu.h"
 
 ALIGNED(4)
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
@@ -252,28 +254,28 @@ const u8 gText_ThePokemonList[] = _("a la LISTA Pokémon");
 const u8 gText_TheShop[] = _("a la tienda");
 const u8 gText_ThePC[] = _("al PC");
 
-const u8 *const gReturnToXStringsTable[] =
+const u8 *const gBagMenu_ReturnToStrings[] =
 {
-    gText_TheField,
-    gText_TheBattle,
-    gText_ThePokemonList,
-    gText_TheShop,
-    gText_TheField,
-    gText_TheField,
-    gText_ThePC,
-    gText_TheField,
-    gText_TheField,
-    gText_TheField,
-    gText_TheBattle,
-    gText_ThePC
+    [ITEMMENULOCATION_FIELD]               = gText_TheField,
+    [ITEMMENULOCATION_BATTLE]              = gText_TheBattle,
+    [ITEMMENULOCATION_PARTY]               = gText_ThePokemonList,
+    [ITEMMENULOCATION_SHOP]                = gText_TheShop,
+    [ITEMMENULOCATION_BERRY_TREE]          = gText_TheField,
+    [ITEMMENULOCATION_BERRY_BLENDER_CRUSH] = gText_TheField,
+    [ITEMMENULOCATION_ITEMPC]              = gText_ThePC,
+    [ITEMMENULOCATION_FAVOR_LADY]          = gText_TheField,
+    [ITEMMENULOCATION_QUIZ_LADY]           = gText_TheField,
+    [ITEMMENULOCATION_APPRENTICE]          = gText_TheField,
+    [ITEMMENULOCATION_WALLY]               = gText_TheBattle,
+    [ITEMMENULOCATION_PCBOX]               = gText_ThePC
 };
 
-const u8 *const gReturnToXStringsTable2[] =
+const u8 *const gPyramidBagMenu_ReturnToStrings[] =
 {
-    gText_TheField,
-    gText_TheBattle,
-    gText_ThePokemonList,
-    gText_TheField
+    [PYRAMIDBAG_LOC_FIELD]       = gText_TheField,
+    [PYRAMIDBAG_LOC_BATTLE]      = gText_TheBattle,
+    [PYRAMIDBAG_LOC_PARTY]       = gText_ThePokemonList,
+    [PYRAMIDBAG_LOC_CHOOSE_TOSS] = gText_TheField
 };
 
 const u8 gText_ReturnToVar1[] = _("Volver\n{STR_VAR_1}.");
@@ -285,15 +287,15 @@ const u8 gText_KeyItemsPocket[] = _("Obj. Clave");
 
 const u8 *const gPocketNamesStringsTable[] =
 {
-    gText_ItemsPocket,
-    gText_PokeBallsPocket,
-    gText_TMHMPocket,
-    gText_BerriesPocket,
-    gText_KeyItemsPocket
+    [ITEMS_POCKET] = gText_ItemsPocket,
+    [BALLS_POCKET] = gText_PokeBallsPocket,
+    [TMHM_POCKET]  = gText_TMHMPocket,
+    [BERRIES_POCKET] = gText_BerriesPocket,
+    [KEYITEMS_POCKET] = gText_KeyItemsPocket
 };
 
-const u8 gText_NumberVar1Clear7Var2[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
-const u8 gText_ClearTo11Var1Clear5Var2[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
+const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
+const u8 gText_NumberItem_HM[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_VAR_2}");
 const u8 gText_SizeSlash[] = _("Size /");
 const u8 gText_FirmSlash[] = _("Firm /");
 const u8 gText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}”");
@@ -379,7 +381,7 @@ const u8 gText_PkmnAlreadyInBattle[] = _("¡{STR_VAR_1} ya está\nluchando!{PAUS
 const u8 gText_PkmnAlreadySelected[] = _("{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnHasNoEnergy[] = _("¡A {STR_VAR_1} no le quedan\nfuerzas para luchar!{PAUSE_UNTIL_PRESS}");
 const u8 gText_CantSwitchWithAlly[] = _("You can't switch {STR_VAR_1}'s\nPokémon with one of yours!{PAUSE_UNTIL_PRESS}");
-const u8 gText_EggCantBattle[] = _("An egg can't battle!{PAUSE_UNTIL_PRESS}");
+const u8 gText_EggCantBattle[] = _("An Egg can't battle!{PAUSE_UNTIL_PRESS}");
 const u8 gText_CantUseUntilNewBadge[] = _("This can't be used until a new\nBadge is obtained.{PAUSE_UNTIL_PRESS}");
 const u8 gText_NoMoreThanVar1Pkmn[] = _("No more than {STR_VAR_1} Pokémon\nmay enter.{PAUSE_UNTIL_PRESS}");
 const u8 gText_SendMailToPC[] = _("Send the removed mail to\nyour PC?");
@@ -474,12 +476,12 @@ const u8 gText_PauseUntilPress[] = _("{PAUSE_UNTIL_PRESS}");
 const u8 gJPText_AreYouSureYouWantToSpinTradeMon[] = _("{STR_VAR_1}を ぐるぐるこうかんに\nだして よろしいですか？");
 ALIGNED(4) const u8 gText_OnlyPkmnForBattle[] = _("That's your only\nPokémon for battle.");
 ALIGNED(4) const u8 gText_PkmnCantBeTradedNow[] = _("That Pokémon can't be traded\nnow.");
-ALIGNED(4) const u8 gText_EggCantBeTradedNow[] = _("An egg can't be traded now.");
+ALIGNED(4) const u8 gText_EggCantBeTradedNow[] = _("An Egg can't be traded now.");
 ALIGNED(4) const u8 gText_OtherTrainersPkmnCantBeTraded[] = _("The other Trainer's Pokémon\ncan't be traded now.");
 ALIGNED(4) const u8 gText_OtherTrainerCantAcceptPkmn[] = _("The other Trainer can't accept\nthat Pokémon now.");
 ALIGNED(4) const u8 gText_CantTradeWithTrainer[] = _("You can't trade with that\nTrainer now.");
 ALIGNED(4) const u8 gText_NotPkmnOtherTrainerWants[] = _("That isn't the type of Pokémon\nthat the other Trainer wants.");
-ALIGNED(4) const u8 gText_ThatIsntAnEgg[] = _("That isn't an egg.");
+ALIGNED(4) const u8 gText_ThatIsntAnEgg[] = _("That isn't an Egg.");
 const u8 gText_Register[] = _("Register");
 const u8 gText_Attack3[] = _("Ataque");
 const u8 gText_Defense3[] = _("Defensa");
@@ -981,8 +983,8 @@ const u8 gText_TrainerCloseBy[] = _("That Trainer is close by.\nTalk to the Trai
 const u8 gText_InParty[] = _("In Party");
 const u8 gText_Number2[] = _("N.º ");
 const u8 gText_Ribbons[] = _("Ribbons"); // Unused
-const u8 gText_PokemonMaleLv[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{DYNAMIC 1}"); // Unused
-const u8 gText_PokemonFemaleLv[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{DYNAMIC 1}"); // Unused
+const u8 gText_PokemonMaleLv[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}"); // Unused
+const u8 gText_PokemonFemaleLv[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}"); // Unused
 const u8 gText_PokemonNoGenderLv[] = _("{DYNAMIC 0}/{LV}{DYNAMIC 1}"); // Unused
 const u8 gText_Unknown[] = _("Zona Desconocida");
 const u8 gText_Call[] = _("Llamada");
@@ -990,8 +992,8 @@ const u8 gText_Check[] = _("Ver");
 const u8 gText_Cancel6[] = _("Salir");
 const u8 gText_NumberF700[] = _("N.º {DYNAMIC 0}");
 const u8 gText_RibbonsF700[] = _("Cintas: {DYNAMIC 0}");
-const u8 gText_PokemonMaleLv2[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{DYNAMIC 1}{DYNAMIC 2}"); // Unused
-const u8 gText_PokemonFemaleLv2[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GREY WHITE LIGHT_GREY}/{LV}{DYNAMIC 1}{DYNAMIC 2}"); // Unused
+const u8 gText_PokemonMaleLv2[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_RED WHITE GREEN}♂{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}"); // Unused
+const u8 gText_PokemonFemaleLv2[] = _("{DYNAMIC 0}{COLOR_HIGHLIGHT_SHADOW LIGHT_GREEN WHITE BLUE}♀{COLOR_HIGHLIGHT_SHADOW DARK_GRAY WHITE LIGHT_GRAY}/{LV}{DYNAMIC 1}{DYNAMIC 2}"); // Unused
 const u8 gText_PokemonNoGenderLv2[] = _("{DYNAMIC 0}/{LV}{DYNAMIC 1}{DYNAMIC 2}"); // Unused
 const u8 gText_CombineFourWordsOrPhrases[] = _("Combine four words or phrases");
 const u8 gText_AndMakeYourProfile[] = _("and make your profile.");
@@ -1200,18 +1202,18 @@ const u8 gText_Var1sTrainerCard[] = _("Ficha de Entrenador de {STR_VAR_1}");
 const u8 gText_HallOfFameDebut[] = _("Hall of Fame debut  ");
 const u8 gText_LinkBattles[] = _("Link battles");
 const u8 gText_LinkCableBattles[] = _("Link Cable battles");
-const u8 gText_WinsLosses[] = _("W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}");
+const u8 gText_WinsLosses[] = _("W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}");
 const u8 gText_PokemonTrades[] = _("Pokémon trades");
 const u8 gText_UnionTradesAndBattles[] = _("Union trades & battles");
 const u8 gText_BerryCrush[] = _("Berry Crush");
 const u8 gText_WaitingTrainerFinishReading[] = _("Waiting for the other Trainer to\nfinish reading your Trainer Card.");
 const u8 gText_PokeblocksWithFriends[] = _("{POKEBLOCK}s W/Friends");
-const u8 gText_NumPokeblocks[] = _("{STR_VAR_1}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}");
+const u8 gText_NumPokeblocks[] = _("{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}");
 const u8 gText_WonContestsWFriends[] = _("Won Contests W/Friends");
 const u8 gText_BattlePtsWon[] = _("Battle Points won");
-const u8 gText_NumBP[] = _("{STR_VAR_1}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}BP");
+const u8 gText_NumBP[] = _("{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BP");
 const u8 gText_BattleTower[] = _("Torre Batalla");
-const u8 gText_WinsStraight[] = _("W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}");
+const u8 gText_WinsStraight[] = _("W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}");
 const u8 gText_BattleTower2[] = _("Torre Batalla");
 const u8 gText_BattleDome[] = _("Cúpula Batalla");
 const u8 gText_BattlePalace[] = _("Palacio Batalla");
@@ -1228,7 +1230,7 @@ ALIGNED(4) const u8 gText_Facility[] = _("{STR_VAR_1}");
 
 const u8 gText_Give[] = _("Give");
 const u8 gText_NoNeed[] = _("No need");
-const u8 gText_ColorLightShadowDarkGrey[] = _("{COLOR LIGHT_GREY}{SHADOW DARK_GREY}");
+const u8 gText_ColorLightShadowDarkGray[] = _("{COLOR LIGHT_GRAY}{SHADOW DARK_GRAY}");
 const u8 gText_ColorBlue[] = _("{COLOR BLUE}");
 const u8 gText_ColorTransparent[] = _("{HIGHLIGHT TRANSPARENT}{COLOR TRANSPARENT}");
 const u8 gText_CDot[] = _("C.");
@@ -1238,9 +1240,9 @@ const u8 gText_PreliminaryResults[] = _("The preliminary results!");
 const u8 gText_Round2Results[] = _("Round 2 results!");
 const u8 gText_ContestantsMonWon[] = _("{STR_VAR_1}'s {STR_VAR_2} won!");
 const u8 gText_CommunicationStandby[] = _("Communication standby…");
-const u8 gText_ColorDarkGrey[] = _("{COLOR DARK_GREY}");
+const u8 gText_ColorDarkGray[] = _("{COLOR DARK_GRAY}");
 const u8 gText_ColorDynamic6WhiteDynamic5[] = _("{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR6 WHITE DYNAMIC_COLOR5}"); // Unused
-const u8 gText_HighlightDarkGrey[] = _("{HIGHLIGHT DARK_GREY}");
+const u8 gText_HighlightDarkGray[] = _("{HIGHLIGHT DARK_GRAY}");
 const u8 gText_EmptySpace2[] = _(" "); // Unused
 const u8 gText_DynColor2Male[] = _("{COLOR DYNAMIC_COLOR2}♂");
 const u8 gText_DynColor1Female[] = _("{COLOR DYNAMIC_COLOR1}♀");
@@ -1292,7 +1294,7 @@ const u8 gText_MatchCallMay_Intro1[] = _("Mis Pokémon y yo ayudamos");
 const u8 gText_MatchCallMay_Intro2[] = _("a mi padre a investigar.");
 const u8 gText_HatchedFromEgg[] = _("¡{STR_VAR_1} ha salido del Huevo!");
 const u8 gText_NicknameHatchPrompt[] = _("¿Quieres darle un mote a {STR_VAR_1}?");
-ALIGNED(4) const u8 gText_ReadyToBerryCrush[] = _("Are you ready to Berry-Crush?\nPlease pick a Berry for use.\p");
+ALIGNED(4) const u8 gText_ReadyPickBerry[] = _("Are you ready to Berry-Crush?\nPlease pick a Berry for use.\p");
 ALIGNED(4) const u8 gText_WaitForAllChooseBerry[] = _("Please wait while each member\nchooses a Berry.");
 ALIGNED(4) const u8 gText_EndedWithXUnitsPowder[] = _("{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}You ended up with {STR_VAR_1} units of\nsilky-smooth Berry Powder.{RESUME_MUSIC}\pYour total amount of Berry Powder\nis {STR_VAR_2}.\p");
 ALIGNED(4) const u8 gText_RecordingGameResults[] = _("Recording your game results in the\nsave file.\lPlease wait.");
@@ -1535,7 +1537,7 @@ const u8 gJPText_Player[] = _("プレイヤー"); // Unused
 const u8 gJPText_Sama[] = _("さま"); // Unused
 const u8 gText_DexHoenn[] = _("Hoenn");
 const u8 gText_DexNational[] = _("National");
-const u8 gText_PokedexDiploma[] = _("PLAYER: {CLEAR 0x10}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GREY}{SHADOW LIGHT_GREY}\n\nThis document certifies\nthat you have successfully\ncompleted your\n{STR_VAR_1} Pokédex.\n\n{CLEAR_TO 0x42}{COLOR RED}{SHADOW LIGHT_RED}Game Freak");
+const u8 gText_PokedexDiploma[] = _("PLAYER: {CLEAR 0x10}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\n\nThis document certifies\nthat you have successfully\ncompleted your\n{STR_VAR_1} Pokédex.\n\n{CLEAR_TO 0x42}{COLOR RED}{SHADOW LIGHT_RED}Game Freak");
 const u8 gJPText_GameFreak[] = _("{COLOR RED}{SHADOW LIGHT_RED}ゲ-ムフリ-ク"); // Unused
 const u8 gText_DiplomaEmpty[] = _("{COLOR RED}{SHADOW LIGHT_RED}"); // Unused
 const u8 gText_Hoenn[] = _("Hoenn");
