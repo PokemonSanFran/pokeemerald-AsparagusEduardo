@@ -10,7 +10,7 @@
 
 #define ROTATE_COUNTERCLOCKWISE 0
 #define ROTATE_CLOCKWISE        1
-#define ROTATE_NONE             2 
+#define ROTATE_NONE             2
 
 struct RotatingTileObject
 {
@@ -119,8 +119,8 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
     {
         s32 puzzleTileStart;
         u8 puzzleTileNum;
-        s16 x = objectEvents[i].x + 7;
-        s16 y = objectEvents[i].y + 7;
+        s16 x = objectEvents[i].x + MAP_OFFSET;
+        s16 y = objectEvents[i].y + MAP_OFFSET;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         if (!sRotatingTilePuzzle->isTrickHouse)
@@ -129,7 +129,7 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
             puzzleTileStart = METATILE_TrickHousePuzzle_Arrow_YellowOnWhite_Right;
 
         // Object is on a metatile before the puzzle tile section
-        // UB: Because this is not if (metatile < puzzleTileStart), for the trick house (metatile - puzzleTileStart) below can result in casting a negative value to u8 
+        // UB: Because this is not if (metatile < puzzleTileStart), for the trick house (metatile - puzzleTileStart) below can result in casting a negative value to u8
         if (metatile < METATILE_MossdeepGym_YellowArrow_Right)
             continue;
 
@@ -211,8 +211,8 @@ void TurnRotatingTileObjects(void)
         s32 rotation;
         s8 tileDifference;
         u8 objectEventId;
-        s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + 7;
-        s16 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + 7;
+        s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + MAP_OFFSET;
+        s16 y = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].y + MAP_OFFSET;
         u16 metatile = MapGridGetMetatileIdAt(x, y);
 
         // NOTE: The following 2 assignments and if else could all be replaced with rotation = ROTATE_COUNTERCLOCKWISE
@@ -223,7 +223,7 @@ void TurnRotatingTileObjects(void)
         // Which means tileDifference will always either be -1 or 3 after the below subtraction, and rotation will always be ROTATE_COUNTERCLOCKWISE after the following conditionals
         tileDifference = (u8)((metatile - puzzleTileStart) % 8);
         tileDifference -= (sRotatingTilePuzzle->objects[i].prevPuzzleTileNum);
-        
+
         // Always true, see above
         if (tileDifference < 0 || tileDifference == 3)
         {
@@ -322,8 +322,8 @@ static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
     s32 puzzleTileStart;
     u16 movementType;
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
-    s16 x = objectEvents[eventTemplateId].x + 7;
-    s16 y = objectEvents[eventTemplateId].y + 7;
+    s16 x = objectEvents[eventTemplateId].x + MAP_OFFSET;
+    s16 y = objectEvents[eventTemplateId].y + MAP_OFFSET;
     u16 metatile = MapGridGetMetatileIdAt(x, y);
 
     if (!sRotatingTilePuzzle->isTrickHouse)

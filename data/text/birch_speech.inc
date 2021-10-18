@@ -1,4 +1,4 @@
-gText_Birch_Welcome:: @ 82C897B
+gText_Birch_Welcome::
 	.string "¡Hola! Perdona que te haya\n"
 	.string "hecho esperar.\p"
 	.string "¡Te doy la bienvenida al fabuloso\n"
@@ -8,7 +8,7 @@ gText_Birch_Welcome:: @ 82C897B
 	.string "PROFESOR ABEDUL.\p"
 	.string "$"
 
-gText_Birch_MainSpeech:: @ 82C8A1F
+gText_Birch_MainSpeech::
 	.string "El mundo está habitado por\n"
 	.string "criaturas llamadas POKéMON.\p"
 	.string "Los humanos y los POKéMON vivimos\n"
@@ -25,27 +25,27 @@ gText_Birch_MainSpeech:: @ 82C8A1F
 	.string "Eso es lo que hago.\p"
 	.string "$"
 
-gText_Birch_AndYouAre:: @ 82C8BD0
+gText_Birch_AndYouAre::
 	.string "¿Tú quién eres?$"
 
-gText_Birch_BoyOrGirl:: @ 82C8BDD
+gText_Birch_BoyOrGirl::
 	.string "¿Eres un chico o una chica?$"
 
-gText_Birch_WhatsYourName:: @ 82C8BFF
+gText_Birch_WhatsYourName::
 	.string "Muy bien.\n"
 	.string "¿Y cómo te llamas?$"
 
-gText_Birch_SoItsPlayer:: @ 82C8C1C
+gText_Birch_SoItsPlayer::
 	.string "Así que eres {PLAYER}…$"
 
-gText_Birch_YourePlayer:: @ 82C8C2A
+gText_Birch_YourePlayer::
 	.string "¡Ah, sí, ya me acuerdo!\p"
 	.string "Tú te acabas de mudar a mi\n"
 	.string "pueblo natal, VILLA RAÍZ.\l"
 	.string "¿A que sí?\p"
 	.string "$"
 
-gText_Birch_AreYouReady:: @ 82C8C7A
+gText_Birch_AreYouReady::
 	.string "Vale, escucha bien lo que te\n"
 	.string "voy a decir…\p"
 	.string "Tu propia aventura está a punto\n"

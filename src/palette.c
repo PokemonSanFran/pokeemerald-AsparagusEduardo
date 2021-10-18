@@ -60,7 +60,7 @@ ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
 EWRAM_DATA struct PaletteStruct sPaletteStructs[0x10] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
-static EWRAM_DATA u32 gFiller_2037FE0 = 0;
+static EWRAM_DATA u32 sFiller = 0;
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
 
@@ -586,7 +586,7 @@ static u8 UpdateFastPaletteFade(void)
 
     if (IsSoftwarePaletteFadeFinishing())
         return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
-        
+
 
     if (gPaletteFade.objPaletteToggle)
     {
@@ -624,7 +624,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b < b0)
                 b = b0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_OUT_TO_WHITE:
@@ -642,7 +642,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b > 31)
                 b = 31;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_IN_FROM_BLACK:
@@ -668,7 +668,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b > b0)
                 b = b0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
         break;
     case FAST_FADE_OUT_TO_BLACK:
@@ -686,7 +686,7 @@ static u8 UpdateFastPaletteFade(void)
             if (b < 0)
                 b = 0;
 
-            gPlttBufferFaded[i] = r | (g << 5) | (b << 10);
+            gPlttBufferFaded[i] = RGB(r, g, b);
         }
     }
 
@@ -721,7 +721,7 @@ static u8 UpdateFastPaletteFade(void)
         gPaletteFade.mode = NORMAL_FADE;
         gPaletteFade.softwareFadeFinishing = 1;
     }
-    
+
     // gPaletteFade.active cannot change since the last time it was checked. So this
     // is equivalent to `return PALETTE_FADE_STATUS_ACTIVE;`
     return gPaletteFade.active ? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
@@ -856,13 +856,13 @@ void TintPalette_GrayScale(u16 *palette, u16 count)
 
     for (i = 0; i < count; i++)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
 
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
-        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
+        *palette++ = RGB2(gray, gray, gray);
     }
 }
 
@@ -873,18 +873,18 @@ void TintPalette_GrayScale2(u16 *palette, u16 count)
 
     for (i = 0; i < count; i++)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
 
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
-        if (gray > 0x1F)
-            gray = 0x1F;
+        if (gray > 31)
+            gray = 31;
 
         gray = sRoundedDownGrayscaleMap[gray];
 
-        *palette++ = (gray << 10) | (gray << 5) | (gray << 0);
+        *palette++ = RGB2(gray, gray, gray);
     }
 }
 
@@ -895,9 +895,9 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
 
     for (i = 0; i < count; i++)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
 
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
@@ -908,7 +908,7 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
         if (r > 31)
             r = 31;
 
-        *palette++ = (b << 10) | (g << 5) | (r << 0);
+        *palette++ = RGB2(r, g, b);
     }
 }
 
@@ -919,9 +919,9 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
 
     for (i = 0; i < count; i++)
     {
-        r = (*palette >>  0) & 0x1F;
-        g = (*palette >>  5) & 0x1F;
-        b = (*palette >> 10) & 0x1F;
+        r = GET_R(*palette);
+        g = GET_G(*palette);
+        b = GET_B(*palette);
 
         gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
 
@@ -936,7 +936,7 @@ void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 b
         if (b > 31)
             b = 31;
 
-        *palette++ = (b << 10) | (g << 5) | (r << 0);
+        *palette++ = RGB2(r, g, b);
     }
 }
 
@@ -986,8 +986,8 @@ static bool32 IsBlendPalettesGraduallyTaskActive(u8 id)
     int i;
 
     for (i = 0; i < NUM_TASKS; i++)
-        if ((gTasks[i].isActive == TRUE) 
-            && (gTasks[i].func == Task_BlendPalettesGradually) 
+        if ((gTasks[i].isActive == TRUE)
+            && (gTasks[i].func == Task_BlendPalettesGradually)
             && (gTasks[i].tId == id))
             return TRUE;
 
@@ -1002,7 +1002,7 @@ static void DestroyBlendPalettesGraduallyTask(void)
     while (1)
     {
         taskId = FindTaskIdByFunc(Task_BlendPalettesGradually);
-        if (taskId == 0xFF)
+        if (taskId == TASK_NONE)
             break;
         DestroyTask(taskId);
     }

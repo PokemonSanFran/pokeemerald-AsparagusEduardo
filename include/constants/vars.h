@@ -56,7 +56,7 @@
 #define VAR_CYCLING_ROAD_RECORD_COLLISIONS   0x4027
 #define VAR_CYCLING_ROAD_RECORD_TIME_L       0x4028
 #define VAR_CYCLING_ROAD_RECORD_TIME_H       0x4029
-#define VAR_HAPPINESS_STEP_COUNTER           0x402A
+#define VAR_FRIENDSHIP_STEP_COUNTER          0x402A
 #define VAR_POISON_STEP_COUNTER              0x402B
 #define VAR_RESET_RTC_ENABLE                 0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE           0x402D
@@ -149,7 +149,7 @@
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY      0x4082
 #define VAR_UNUSED_0x4083                    0x4083 // Unused Var
 #define VAR_BIRCH_LAB_STATE                  0x4084
-#define VAR_PETALBURG_GYM_STATE              0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman 
+#define VAR_PETALBURG_GYM_STATE              0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE               0x4086
 #define VAR_CABLE_CLUB_STATE                 0x4087
 #define VAR_CONTEST_TYPE                     0x4088
