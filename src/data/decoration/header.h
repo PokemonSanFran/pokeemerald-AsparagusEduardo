@@ -27,7 +27,7 @@ const struct Decoration gDecorations[] =
     [DECOR_POKEMON_DESK] =
     {
         .id = DECOR_POKEMON_DESK,
-        .name = _("MESA POKéMON")"),
+        .name = _("MESA POKéMON"),
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_DESK,
