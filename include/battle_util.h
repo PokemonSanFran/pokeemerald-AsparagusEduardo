@@ -28,6 +28,8 @@
 #define ABILITYEFFECT_COUNT_BATTLER_SIDE         0x11
 #define ABILITYEFFECT_COUNT_ON_FIELD             0x12
 #define ABILITYEFFECT_CHECK_ON_FIELD             0x13
+#define ABILITYEFFECT_MUD_SPORT                  0xFD
+#define ABILITYEFFECT_WATER_SPORT                0xFE
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          0xFF
 
 #define ABILITY_ON_OPPOSING_FIELD(battlerId, abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, abilityId, 0, 0))
@@ -41,13 +43,26 @@
 #define WEATHER_HAS_EFFECT ((!ABILITY_ON_FIELD(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD(ABILITY_AIR_LOCK)))
 #define WEATHER_HAS_EFFECT2 ((!ABILITY_ON_FIELD2(ABILITY_CLOUD_NINE) && !ABILITY_ON_FIELD2(ABILITY_AIR_LOCK)))
 
+void HandleAction_UseMove(void);
+void HandleAction_Switch(void);
+void HandleAction_UseItem(void);
+void HandleAction_Run(void);
+void HandleAction_WatchesCarefully(void);
+void HandleAction_SafariZoneBallThrow(void);
+void HandleAction_ThrowPokeblock(void);
+void HandleAction_GoNear(void);
+void HandleAction_SafariZoneRun(void);
+void HandleAction_WallyBallThrow(void);
+void HandleAction_TryFinish(void);
+void HandleAction_NothingIsFainted(void);
+void HandleAction_ActionFinished(void);
 u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void PressurePPLoseOnUsingImprison(u8 attacker);
 void MarkAllBattlersForControllerExec(void); // unused
 void MarkBattlerForControllerExec(u8 battlerId);
-void sub_803F850(u8 arg0);
+void MarkBattlerReceivedLinkData(u8 arg0);
 void CancelMultiTurnMoves(u8 battlerId);
 bool8 WasUnableToUseMove(u8 battlerId);
 void PrepareStringBattle(u16 stringId, u8 battlerId);

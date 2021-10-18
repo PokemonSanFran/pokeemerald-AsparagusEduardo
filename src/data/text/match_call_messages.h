@@ -388,7 +388,7 @@ const u8 gText_MatchCallChampion_Wallace_Pokemon[] = _("Los que sean elegantes."
 const u8 gText_MatchCallChampion_Wallace_Intro1[] = _("Represento tanto la belleza");
 const u8 gText_MatchCallChampion_Wallace_Intro2[] = _("como la inteligencia.");
 
-const u8 *const gMatchCallFlavorTexts[REMATCH_TABLE_ENTRIES][CHECK_PAGE_ENTRY_COUNT] = 
+const u8 *const gMatchCallFlavorTexts[REMATCH_TABLE_ENTRIES][CHECK_PAGE_ENTRY_COUNT] =
 {
     [REMATCH_ROSE] = MCFLAVOR(AromaLady_Rose),
     [REMATCH_ANDRES] = MCFLAVOR(RuinManiac_Andres),

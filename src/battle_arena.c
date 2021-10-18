@@ -453,7 +453,7 @@ static const union AnimCmd *const sJudgementIconAnimCmds[] =
 static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
 {
     .tileTag = TAG_JUDGEMENT_ICON,
-    .paletteTag = 0xFFFF,
+    .paletteTag = TAG_NONE,
     .oam = &sJudgementIconOamData,
     .anims = sJudgementIconAnimCmds,
     .images = NULL,
@@ -614,7 +614,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
         HandleBattleWindow(5, 0, 24, 13, WINDOW_CLEAR);
         CopyBgTilemapBufferToVram(0);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         BeginNormalPaletteFade(0x7FFFFF1C, 4, 8, 0, RGB_BLACK);
         (*state)++;
         break;
@@ -774,7 +774,8 @@ void BattleArena_DeductMindPoints(u8 battler, u16 stringId)
     }
 }
 
-void sub_81A586C(u8 battler) // Unused.
+// Unused
+static void UpdateHPAtStart(u8 battler)
 {
     u16 *hpAtStart = gBattleStruct->arenaStartHp;
 
@@ -916,7 +917,7 @@ void DrawArenaRefereeTextBox(void)
     FillBgTilemapBufferRect(0, 0x836, 29, 19, 1,  1, palNum);
 }
 
-void RemoveArenaRefereeTextBox(void)
+void EraseArenaRefereeTextBox(void)
 {
     u8 width;
     u8 height;

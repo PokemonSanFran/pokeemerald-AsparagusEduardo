@@ -1,29 +1,29 @@
-gText_WouldYouLikeToRestYourPkmn:: @ 82726EB
+gText_WouldYouLikeToRestYourPkmn::
     .string "Hola. Éste es el CENTRO POKéMON.\p"
     .string "Nosotros curamos a los POKéMON\n"
     .string "debilitados.\p"
     .string "¿Quieres que nos ocupemos\n"
     .string "de los POKéMON de tu equipo?$"
 
-gText_IllTakeYourPkmn:: @ 8272768
+gText_IllTakeYourPkmn::
     .string "Muy bien. Ten un poco de paciencia.\n"
     .string "Será sólo un momento.$"
 
-gText_RestoredPkmnToFullHealth:: @ 8272798
+gText_RestoredPkmnToFullHealth::
     .string "Gracias por esperar.\p"
     .string "Misión cumplida. Somos especialistas\n"
     .string "en devolver la forma a los POKéMON.$"
 
-gText_WeHopeToSeeYouAgain:: @ 82727DB
+gText_WeHopeToSeeYouAgain::
     .string "¡Vuelve cuando quieras!$"
 
-gText_WelcomeCutShort:: @ 82727F5
+gText_WelcomeCutShort::
     .string "Hola. Éste es el CENTRO POKéMON.\p"
     .string "Nosotros curamos a los POKéMON\n"
     .string "debilitados.\p"
     .string "¿Quieres que…$"
 
-gText_NoticesGoldCard:: @ 8272860
+gText_NoticesGoldCard::
     .string "Esa FICHA…\n"
     .string "¿Es…? ¡¿Es de color ORO?!\p"
     .string "¡Oh, ese color es resplandenciente!\n"
@@ -35,16 +35,16 @@ gText_NoticesGoldCard:: @ 8272860
     .string "Muy bien, {PLAYER}, concédeme\n"
     .string "el honor de curar a tus POKéMON.$"
 
-gText_YouWantTheUsual:: @ 8272982
+gText_YouWantTheUsual::
     .string "¡Qué alegría verte, {PLAYER}!\n"
     .string "Lo de siempre, ¿no?$"
 
-gText_IllTakeYourPkmn2:: @ 82729C0
+gText_IllTakeYourPkmn2::
     .string "Muy bien. Ten un poco de paciencia.\n"
     .string "Será sólo un momento.$"
 
-gText_ThankYouForWaiting:: @ 82729F0
+gText_ThankYouForWaiting::
     .string "Gracias por esperar.$"
 
-gText_WeHopeToSeeYouAgain2:: @ 8272A07
+gText_WeHopeToSeeYouAgain2::
     .string "¡Vuelve cuando quieras!$"

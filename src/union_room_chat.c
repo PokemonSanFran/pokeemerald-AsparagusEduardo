@@ -310,11 +310,11 @@ static void (*const sChatMainFunctions[])(void) = {
     [CHAT_FUNC_SAVE_AND_EXIT] = Chat_SaveAndExit
 };
 
-static const u8 sKeyboardPageMaxRow[UNION_ROOM_KB_PAGE_COUNT] = 
+static const u8 sKeyboardPageMaxRow[UNION_ROOM_KB_PAGE_COUNT] =
 {
-    [UNION_ROOM_KB_PAGE_UPPER]    = 9, 
-    [UNION_ROOM_KB_PAGE_LOWER]    = 9, 
-    [UNION_ROOM_KB_PAGE_EMOJI]    = 9, 
+    [UNION_ROOM_KB_PAGE_UPPER]    = 9,
+    [UNION_ROOM_KB_PAGE_LOWER]    = 9,
+    [UNION_ROOM_KB_PAGE_EMOJI]    = 9,
     [UNION_ROOM_KB_PAGE_REGISTER] = 9
 };
 
@@ -466,45 +466,45 @@ static const u8 sCaseToggleTable[256] = {
 };
 
 // Excludes UNION_ROOM_KB_PAGE_REGISTER, the text for which is chosen by the player
-static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNION_ROOM_KB_ROW_COUNT] = 
+static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNION_ROOM_KB_ROW_COUNT] =
 {
-    [UNION_ROOM_KB_PAGE_UPPER] = 
+    [UNION_ROOM_KB_PAGE_UPPER] =
     {
-        gText_UnionRoomChatKeyboard_ABCDE, 
-        gText_UnionRoomChatKeyboard_FGHIJ, 
-        gText_UnionRoomChatKeyboard_KLMNO, 
-        gText_UnionRoomChatKeyboard_PQRST, 
-        gText_UnionRoomChatKeyboard_UVWXY, 
-        gText_UnionRoomChatKeyboard_Z, 
-        gText_UnionRoomChatKeyboard_01234Upper, 
-        gText_UnionRoomChatKeyboard_56789Upper, 
-        gText_UnionRoomChatKeyboard_PunctuationUpper, 
+        gText_UnionRoomChatKeyboard_ABCDE,
+        gText_UnionRoomChatKeyboard_FGHIJ,
+        gText_UnionRoomChatKeyboard_KLMNO,
+        gText_UnionRoomChatKeyboard_PQRST,
+        gText_UnionRoomChatKeyboard_UVWXY,
+        gText_UnionRoomChatKeyboard_Z,
+        gText_UnionRoomChatKeyboard_01234Upper,
+        gText_UnionRoomChatKeyboard_56789Upper,
+        gText_UnionRoomChatKeyboard_PunctuationUpper,
         gText_UnionRoomChatKeyboard_SymbolsUpper
     },
-    [UNION_ROOM_KB_PAGE_LOWER] = 
+    [UNION_ROOM_KB_PAGE_LOWER] =
     {
-        gText_UnionRoomChatKeyboard_abcde, 
-        gText_UnionRoomChatKeyboard_fghij, 
-        gText_UnionRoomChatKeyboard_klmno, 
-        gText_UnionRoomChatKeyboard_pqrst, 
-        gText_UnionRoomChatKeyboard_uvwxy, 
-        gText_UnionRoomChatKeyboard_z, 
-        gText_UnionRoomChatKeyboard_01234Lower, 
-        gText_UnionRoomChatKeyboard_56789Lower, 
-        gText_UnionRoomChatKeyboard_PunctuationLower, 
+        gText_UnionRoomChatKeyboard_abcde,
+        gText_UnionRoomChatKeyboard_fghij,
+        gText_UnionRoomChatKeyboard_klmno,
+        gText_UnionRoomChatKeyboard_pqrst,
+        gText_UnionRoomChatKeyboard_uvwxy,
+        gText_UnionRoomChatKeyboard_z,
+        gText_UnionRoomChatKeyboard_01234Lower,
+        gText_UnionRoomChatKeyboard_56789Lower,
+        gText_UnionRoomChatKeyboard_PunctuationLower,
         gText_UnionRoomChatKeyboard_SymbolsLower
     },
-    [UNION_ROOM_KB_PAGE_EMOJI] = 
+    [UNION_ROOM_KB_PAGE_EMOJI] =
     {
-        gText_UnionRoomChatKeyboard_Emoji1, 
-        gText_UnionRoomChatKeyboard_Emoji2, 
-        gText_UnionRoomChatKeyboard_Emoji3, 
-        gText_UnionRoomChatKeyboard_Emoji4, 
-        gText_UnionRoomChatKeyboard_Emoji5, 
-        gText_UnionRoomChatKeyboard_Emoji6, 
-        gText_UnionRoomChatKeyboard_Emoji7, 
-        gText_UnionRoomChatKeyboard_Emoji8, 
-        gText_UnionRoomChatKeyboard_Emoji9, 
+        gText_UnionRoomChatKeyboard_Emoji1,
+        gText_UnionRoomChatKeyboard_Emoji2,
+        gText_UnionRoomChatKeyboard_Emoji3,
+        gText_UnionRoomChatKeyboard_Emoji4,
+        gText_UnionRoomChatKeyboard_Emoji5,
+        gText_UnionRoomChatKeyboard_Emoji6,
+        gText_UnionRoomChatKeyboard_Emoji7,
+        gText_UnionRoomChatKeyboard_Emoji8,
+        gText_UnionRoomChatKeyboard_Emoji9,
         gText_UnionRoomChatKeyboard_Emoji10
     }
 };
@@ -610,113 +610,113 @@ static const struct SubtaskInfo sDisplaySubtasks[] = {
 
 static const struct MessageWindowInfo sDisplayStdMessages[] = {
     [STDMESSAGE_QUIT_CHATTING] = {
-        .text = gText_QuitChatting, 
-        .boxType = 1, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_QuitChatting,
+        .boxType = 1,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = FALSE
     },
     [STDMESSAGE_REGISTER_WHERE] = {
-        .text = gText_RegisterTextWhere, 
-        .boxType = 1, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_RegisterTextWhere,
+        .boxType = 1,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = FALSE
     },
     [STDMESSAGE_REGISTER_HERE] = {
-        .text = gText_RegisterTextHere, 
-        .boxType = 1, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_RegisterTextHere,
+        .boxType = 1,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = FALSE
     },
     [STDMESSAGE_INPUT_TEXT] = {
-        .text = gText_InputText, 
-        .boxType = 1, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_InputText,
+        .boxType = 1,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = FALSE
     },
     [STDMESSAGE_EXITING_CHAT] = {
-        .text = gText_ExitingChat, 
-        .boxType = 2, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_ExitingChat,
+        .boxType = 2,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = FALSE
     },
     [STDMESSAGE_LEADER_LEFT] = {
-        .text = gText_LeaderLeftEndingChat, 
-        .boxType = 2, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = TRUE, 
+        .text = gText_LeaderLeftEndingChat,
+        .boxType = 2,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = TRUE,
         .useWiderBox = FALSE
     },
     [STDMESSAGE_ASK_SAVE] = {
-        .text = gText_RegisteredTextChangedOKToSave, 
-        .boxType = 2, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_RegisteredTextChangedOKToSave,
+        .boxType = 2,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = TRUE
     },
     [STDMESSAGE_ASK_OVERWRITE] = {
-        .text = gText_AlreadySavedFile_Chat, 
-        .boxType = 2, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_AlreadySavedFile_Chat,
+        .boxType = 2,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = TRUE
     },
     [STDMESSAGE_SAVING_NO_OFF] = {
-        .text = gText_SavingDontTurnOff_Chat, 
-        .boxType = 2, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_SavingDontTurnOff_Chat,
+        .boxType = 2,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = TRUE
     },
     [STDMESSAGE_SAVED_THE_GAME] = {
-        .text = gText_PlayerSavedGame_Chat, 
-        .boxType = 2, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = TRUE, 
+        .text = gText_PlayerSavedGame_Chat,
+        .boxType = 2,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = TRUE,
         .useWiderBox = TRUE
     },
     [STDMESSAGE_WARN_LEADER_LEAVE] = {
-        .text = gText_IfLeaderLeavesChatEnds, 
-        .boxType = 2, 
-        .x = 0, 
-        .y = 1, 
-        .letterSpacing = 0, 
-        .lineSpacing = 0, 
-        .hasPlaceholders = FALSE, 
+        .text = gText_IfLeaderLeavesChatEnds,
+        .boxType = 2,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .hasPlaceholders = FALSE,
         .useWiderBox = TRUE
     }
 };
@@ -930,8 +930,8 @@ static void CB2_LoadInterface(void)
         RunDisplaySubtasks();
         if (!IsDisplaySubtask0Active())
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;
         }
@@ -997,7 +997,7 @@ static void Chat_Join(void)
         sChat->funcState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             if (SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
                 sChat->funcState++;
@@ -1198,7 +1198,7 @@ static void Chat_AskQuitChatting(void)
             sChat->funcState = 3;
             break;
         case 0:
-            sub_80104B0();
+            Rfu_StopPartnerSearch();
             PrepareSendBuffer_Disband(sChat->sendMessageBuffer);
             sChat->funcState = 4;
             sChat->tryQuitAgainTimer = 0;
@@ -1206,7 +1206,7 @@ static void Chat_AskQuitChatting(void)
         }
         break;
     case 4:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
         {
             if (!sChat->multiplayerId)
                 sChat->funcState = 6;
@@ -1257,15 +1257,15 @@ static void Chat_Exit(void)
         }
         break;
     case 3:
-        if (IsLinkTaskFinished() && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
             sChat->funcState++;
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 1) && !sub_8011A9C())
+        if ((GetBlockReceivedStatus() & 1) && !Rfu_IsPlayerExchangeActive())
             sChat->funcState++;
         break;
     case 5:
-        if (IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
@@ -1300,7 +1300,7 @@ static void Chat_Drop(void)
         }
         break;
     case 1:
-        if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !sub_8011A9C())
+        if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
@@ -1346,7 +1346,7 @@ static void Chat_Disbanded(void)
         }
         break;
     case 2:
-        if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
+        if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !Rfu_IsPlayerExchangeActive())
         {
             SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
@@ -1384,7 +1384,7 @@ static void Chat_SendMessage(void)
         sChat->funcState++;
         // fall through
     case 1:
-        if (IsLinkTaskFinished() == TRUE && !sub_8011A9C() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
+        if (IsLinkTaskFinished() == TRUE && !Rfu_IsPlayerExchangeActive() && SendBlock(0, sChat->sendMessageBuffer, sizeof(sChat->sendMessageBuffer)))
             sChat->funcState++;
         break;
     case 2:
@@ -1567,7 +1567,7 @@ static void Chat_SaveAndExit(void)
             sChat->funcState = 12;
         break;
     case 12:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
         sChat->funcState = 13;
         break;
     case 13:
@@ -1629,7 +1629,7 @@ static bool32 HandleDPadInput(void)
         return FALSE;
     } while (0);
 
-    return TRUE;  
+    return TRUE;
 }
 
 static void AppendTextToMessage(void)
@@ -1642,7 +1642,7 @@ static void AppendTextToMessage(void)
 
     if (sChat->currentPage != UNION_ROOM_KB_PAGE_REGISTER)
     {
-        // Going to append a single character        
+        // Going to append a single character
         charsStr = sUnionRoomKeyboardText[sChat->currentPage][sChat->currentRow];
         for (i = 0; i < sChat->currentCol; i++)
         {
@@ -1819,7 +1819,7 @@ static void PrepareSendBuffer_Leave(u8 *buffer)
     buffer[0] = CHAT_MESSAGE_LEAVE;
     StringCopy(&buffer[1], gSaveBlock2Ptr->playerName);
     buffer[1 + (PLAYER_NAME_LENGTH + 1)] = sChat->multiplayerId;
-    sub_8011A50();
+    RfuSetNormalDisconnectMode();
 }
 
 static void PrepareSendBuffer_Drop(u8 *buffer)
@@ -2028,7 +2028,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
         }
 
         tBlockReceivedStatus = GetBlockReceivedStatus();
-        if (!tBlockReceivedStatus && sub_8011A9C())
+        if (!tBlockReceivedStatus && Rfu_IsPlayerExchangeActive())
             return;
 
         tI = 0;
@@ -2079,13 +2079,12 @@ static void Task_ReceiveChatMessage(u8 taskId)
         {
             if (GetLinkPlayerCount() == 2)
             {
-                sub_80104B0();
+                Rfu_StopPartnerSearch();
                 sChat->exitType = 1;
                 DestroyTask(taskId);
                 return;
             }
-
-            sub_8011DE0(tCurrLinkPlayer);
+            Rfu_DisconnectPlayerById(tCurrLinkPlayer);
         }
 
         tState = 3;
@@ -2101,10 +2100,10 @@ static void Task_ReceiveChatMessage(u8 taskId)
         DestroyTask(taskId);
         break;
     case 2:
-        if (!sub_8011A9C())
+        if (!Rfu_IsPlayerExchangeActive())
         {
             if (!sChat->multiplayerId)
-                sub_80110B8(sChat->linkPlayerCount);
+                SetUnionRoomChatPlayerData(sChat->linkPlayerCount);
 
             tState = 1;
         }
@@ -2121,7 +2120,7 @@ static void Task_ReceiveChatMessage(u8 taskId)
 
 static bool8 TryAllocDisplay(void)
 {
-    sDisplay = Alloc(sizeof(struct UnionRoomChatDisplay));
+    sDisplay = Alloc(sizeof(*sDisplay));
     if (sDisplay && TryAllocSprites())
     {
         ResetBgsAndClearDma3BusyFlags(0);
@@ -2157,8 +2156,8 @@ static void FreeDisplay(void)
 
 static void InitDisplay(struct UnionRoomChatDisplay *display)
 {
-    display->yesNoMenuWindowId = 0xFF;
-    display->messageWindowId = 0xFF;
+    display->yesNoMenuWindowId = WINDOW_NONE;
+    display->messageWindowId = WINDOW_NONE;
     display->currLine = 0;
 }
 
@@ -2724,7 +2723,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
     template.paletteNum = 14;
     template.baseBlock = 0x52;
     sDisplay->yesNoMenuWindowId = AddWindow(&template);
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sDisplay->yesNoMenuWindowId, PIXEL_FILL(1));
         PutWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2737,7 +2736,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
 
 static void HideYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->yesNoMenuWindowId, FALSE);
         ClearWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2746,10 +2745,10 @@ static void HideYesNoMenuWindow(void)
 
 static void DestroyYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->yesNoMenuWindowId);
-        sDisplay->yesNoMenuWindowId = 0xFF;
+        sDisplay->yesNoMenuWindowId = WINDOW_NONE;
     }
 }
 
@@ -2778,7 +2777,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
     sDisplay->messageWindowId = AddWindow(&template);
     windowId = sDisplay->messageWindowId;
-    if (sDisplay->messageWindowId == 0xFF)
+    if (sDisplay->messageWindowId == WINDOW_NONE)
         return;
 
     if (sDisplayStdMessages[msgId].hasPlaceholders)
@@ -2828,7 +2827,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
 static void HideStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->messageWindowId, FALSE);
         ClearWindowTilemap(sDisplay->messageWindowId);
@@ -2839,10 +2838,10 @@ static void HideStdMessageWindow(void)
 
 static void DestroyStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->messageWindowId);
-        sDisplay->messageWindowId = 0xFF;
+        sDisplay->messageWindowId = WINDOW_NONE;
     }
 }
 
@@ -2984,7 +2983,7 @@ static void HideKeyboardSwapMenu(void)
 
 static void PrintChatMessage(u16 row, u8 *str, u8 colorIdx)
 {
-    // colorIdx: 0 = grey, 1 = red, 2 = green, 3 = blue
+    // colorIdx: 0 = gray, 1 = red, 2 = green, 3 = blue
     u8 color[3];
     color[0] = TEXT_COLOR_WHITE;
     color[1] = colorIdx * 2 + 2;
@@ -3011,8 +3010,8 @@ static void ResetGpuBgState(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, 240));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 144));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, DISPLAY_WIDTH));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT - 16));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG2 | WININ_WIN0_BG3
                               | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
@@ -3167,14 +3166,14 @@ static void MoveKeyboardCursor(void)
     if (page != UNION_ROOM_KB_PAGE_REGISTER)
     {
         StartSpriteAnim(sSprites->keyboardCursor, 0);
-        sSprites->keyboardCursor->pos1.x = x * 8 + 10;
-        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
+        sSprites->keyboardCursor->x = x * 8 + 10;
+        sSprites->keyboardCursor->y = y * 12 + 24;
     }
     else
     {
         StartSpriteAnim(sSprites->keyboardCursor, 2);
-        sSprites->keyboardCursor->pos1.x = 24;
-        sSprites->keyboardCursor->pos1.y = y * 12 + 24;
+        sSprites->keyboardCursor->x = 24;
+        sSprites->keyboardCursor->y = y * 12 + 24;
     }
 }
 
@@ -3231,7 +3230,7 @@ static void SpriteCB_TextEntryCursor(struct Sprite *sprite)
     else
     {
         sprite->invisible = FALSE;
-        sprite->pos1.x = pos * 8 + 76;
+        sprite->x = pos * 8 + 76;
     }
 }
 
@@ -3240,8 +3239,8 @@ static void SpriteCB_TextEntryArrow(struct Sprite *sprite)
     if (++sprite->data[0] > 4)
     {
         sprite->data[0] = 0;
-        if (++sprite->pos2.x > 4)
-            sprite->pos2.x = 0;
+        if (++sprite->x2 > 4)
+            sprite->x2 = 0;
     }
 }
 
