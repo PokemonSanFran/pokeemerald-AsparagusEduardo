@@ -6989,7 +6989,6 @@ static u8 ChangeStatBuffs(s8 statValue, u8 statId, u8 flags, const u8 *BS_ptr)
                 gBattleTextBuff2[3] = STRINGID_STATFELL >> 8;
             }
             gBattleTextBuff2[4] = B_BUFF_EOS;
-            gBattleTextBuff2[5] = CHAR_EXCL_MARK;
 
             if (gBattleMons[gActiveBattler].statStages[statId] == MIN_STAT_STAGE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAT_WONT_DECREASE;
