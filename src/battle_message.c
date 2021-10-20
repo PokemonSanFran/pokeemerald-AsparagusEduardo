@@ -447,11 +447,11 @@ const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
     [STAT_EVASION] = sText_Evasiveness,
 };
 
-static const u8 sText_PokeblockWasTooSpicy[] = _("was too spicy!");
-static const u8 sText_PokeblockWasTooDry[] = _("was too dry!");
-static const u8 sText_PokeblockWasTooSweet[] = _("was too sweet!");
-static const u8 sText_PokeblockWasTooBitter[] = _("was too bitter!");
-static const u8 sText_PokeblockWasTooSour[] = _("was too sour!");
+static const u8 sText_PokeblockWasTooSpicy[] = _("demasiado picante!");
+static const u8 sText_PokeblockWasTooDry[] = _("demasiado seca!");
+static const u8 sText_PokeblockWasTooSweet[] = _("demasiado dulce!");
+static const u8 sText_PokeblockWasTooBitter[] = _("demasiado amarga!");
+static const u8 sText_PokeblockWasTooSour[] = _("demasiado ácida!");
 
 const u8 * const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
 {
