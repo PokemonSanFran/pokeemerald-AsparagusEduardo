@@ -13725,6 +13725,7 @@ u16 GetBattleBGM(void)
             return MUS_RG_VS_MEWTWO;
         case SPECIES_MEW:
             return MUS_VS_MEW;
+        /*
         case SPECIES_RAIKOU:
             return HG_SEQ_GS_VS_RAIKOU;
         case SPECIES_ENTEI:
@@ -13737,6 +13738,7 @@ u16 GetBattleBGM(void)
             return HG_SEQ_GS_VS_HOUOU;
         case SPECIES_CELEBI:
             return HG_SEQ_GS_VS_NORAPOKE;
+        */
         case SPECIES_REGIROCK:
         case SPECIES_REGICE:
         case SPECIES_REGISTEEL:
@@ -13772,6 +13774,7 @@ u16 GetBattleBGM(void)
         #endif
             return MUS_RG_VS_DEOXYS;
         #ifdef POKEMON_EXPANSION
+        /*
         case SPECIES_UXIE:
         case SPECIES_MESPRIT:
         case SPECIES_AZELF:
@@ -13843,6 +13846,7 @@ u16 GetBattleBGM(void)
         case SPECIES_KYUREM_WHITE:
         case SPECIES_KYUREM_BLACK:
             return BW_SEQ_BGM_VS_RAI;
+        */
         #endif
         default:
             return MUS_VS_WILD;

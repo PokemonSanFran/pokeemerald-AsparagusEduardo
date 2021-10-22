@@ -3816,60 +3816,6 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_VS_FRONTIER_BRAIN, "MUS-VS-FRONTIER-BRAIN") \
     X(MUS_VS_MEW, "MUS-VS-MEW") \
     X(MUS_B_DOME_LOBBY, "MUS-B-DOME-LOBBY") \
-    X(DP_SEQ_BA_POKE    , "DP-SEQ-BA-POKE") \
-    X(DP_SEQ_WINPOKE    , "DP-SEQ-WINPOKE") \
-    X(DP_SEQ_BA_TRAIN   , "DP-SEQ-BA-TRAIN") \
-    X(DP_SEQ_WINTRAIN   , "DP-SEQ-WINTRAIN") \
-    X(DP_SEQ_BA_RIVAL   , "DP-SEQ-BA-RIVAL") \
-    X(DP_SEQ_BA_GYM     , "DP-SEQ-BA-GYM") \
-    X(DP_SEQ_WINTGYM    , "DP-SEQ-WINTGYM") \
-    X(DP_SEQ_BA_GINGA   , "DP-SEQ-BA-GINGA") \
-    X(DP_SEQ_BA_GINGA3  , "DP-SEQ-BA-GINGA3") \
-    X(DP_SEQ_WINGINGA   , "DP-SEQ-WINGINGA") \
-    X(DP_SEQ_BA_AGAKI             , "DP-SEQ-BA-AGAKI") \
-    X(DP_SEQ_BA_DPOKE2            , "DP-SEQ-BA-DPOKE2") \
-    X(DP_SEQ_BA_DPOKE1            , "DP-SEQ-BA-DPOKE1") \
-    X(DP_SEQ_BA_SECRET2           , "DP-SEQ-BA-SECRET2") \
-    X(DP_SEQ_BA_TENNO             , "DP-SEQ-BA-TENNO") \
-    X(DP_SEQ_WINTENNO             , "DP-SEQ-WINTENNO") \
-    X(DP_SEQ_EYE_CHAMP            , "DP-SEQ-EYE-CHAMP") \
-    X(DP_SEQ_BA_CHANP             , "DP-SEQ-BA-CHANP") \
-    X(DP_SEQ_WINCHAMP             , "DP-SEQ-WINCHAMP") \
-    X(DP_SEQ_BA_SECRET1           , "DP-SEQ-BA-SECRET1") \
-    X(PL_SEQ_TITLE00              , "PL-SEQ-TITLE00") \
-    X(PL_SEQ_TITLE01              , "PL-SEQ-TITLE01") \
-    X(PL_SEQ_TV_HOUSOU            , "PL-SEQ-TV-HOUSOU") \
-    X(PL_SEQ_TV_END               , "PL-SEQ-TV-END") \
-    X(PL_SEQ_PL_HANDSOME          , "PL-SEQ-PL-HANDSOME") \
-    X(PL_SEQ_PL_WIFITOWER         , "PL-SEQ-PL-WIFITOWER") \
-    X(PL_SEQ_PL_WIFIUNION         , "PL-SEQ-PL-WIFIUNION") \
-    X(PL_SEQ_PL_WIFIGAME          , "PL-SEQ-PL-WIFIGAME") \
-    X(PL_SEQ_PL_WINMINI2          , "PL-SEQ-PL-WINMINI2") \
-    X(PL_SEQ_PL_WIFIPARADE        , "PL-SEQ-PL-WIFIPARADE") \
-    X(PL_SEQ_PL_EV_GIRA           , "PL-SEQ-PL-EV-GIRA") \
-    X(PL_SEQ_PL_EV_GIRA2          , "PL-SEQ-PL-EV-GIRA2") \
-    X(PL_SEQ_PL_D_GIRATINA        , "PL-SEQ-PL-D-GIRATINA") \
-    X(PL_SEQ_PL_BA_GIRA           , "PL-SEQ-PL-BA-GIRA") \
-    X(PL_SEQ_PL_GURUGURU          , "PL-SEQ-PL-GURUGURU") \
-    X(PL_SEQ_PL_PTHAIFU           , "PL-SEQ-PL-PTHAIFU") \
-    X(PL_SEQ_PL_MTKAWA            , "PL-SEQ-PL-MTKAWA") \
-    X(PL_SEQ_PL_MTKAKKO           , "PL-SEQ-PL-MTKAKKO") \
-    X(PL_SEQ_PL_MTTAKMA           , "PL-SEQ-PL-MTTAKMA") \
-    X(PL_SEQ_PL_MTUTSUK           , "PL-SEQ-PL-MTUTSUK") \
-    X(PL_SEQ_PL_MTKASHI           , "PL-SEQ-PL-MTKASHI") \
-    X(PL_SEQ_PL_TOWN02            , "PL-SEQ-PL-TOWN02") \
-    X(PL_SEQ_PL_AUDIO             , "PL-SEQ-PL-AUDIO") \
-    X(PL_SEQ_CITY11_D             , "PL-SEQ-CITY11-D") \
-    X(PL_SEQ_PL_BF_ROULETTE       , "PL-SEQ-PL-BF-ROULETTE") \
-    X(PL_SEQ_PL_DON2              , "PL-SEQ-PL-DON2") \
-    X(PL_SEQ_PL_BF_STAGE          , "PL-SEQ-PL-BF-STAGE") \
-    X(PL_SEQ_PL_BF_FACTORY        , "PL-SEQ-PL-BF-FACTORY") \
-    X(PL_SEQ_PL_BF_CASTLE         , "PL-SEQ-PL-BF-CASTLE") \
-    X(PL_SEQ_PL_FRO               , "PL-SEQ-PL-FRO") \
-    X(PL_SEQ_PL_POINTGET3         , "PL-SEQ-PL-POINTGET3") \
-    X(PL_SEQ_PL_BA_BRAIN          , "PL-SEQ-PL-BA-BRAIN") \
-    X(PL_SEQ_PL_WINBRAIN          , "PL-SEQ-PL-WINBRAIN") \
-    X(PL_SEQ_PL_BA_REGI           , "PL-SEQ-PL-BA-REGI") \
     X(PH_TRAP_BLEND, "PH-TRAP-BLEND") \
     X(PH_TRAP_HELD, "PH-TRAP-HELD") \
     X(PH_TRAP_SOLO, "PH-TRAP-SOLO") \
