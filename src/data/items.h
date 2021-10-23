@@ -4868,9 +4868,9 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_RED_ORB,
         .price = 0,
+        .holdEffect = HOLD_EFFECT_PRIMAL_ORB,
         .description = sRedOrbDesc,
-        .importance = 2,
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
@@ -4884,9 +4884,9 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_BLUE_ORB,
         .price = 0,
+        .holdEffect = HOLD_EFFECT_PRIMAL_ORB,
         .description = sBlueOrbDesc,
-        .importance = 2,
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
