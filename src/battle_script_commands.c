@@ -1404,7 +1404,8 @@ static void Cmd_attackcanceler(void)
         return;
     if (AbilityBattleEffects(ABILITYEFFECT_MOVES_BLOCK, gBattlerTarget, 0, 0, 0))
         return;
-    if (!gBattleMons[gBattlerAttacker].pp[gCurrMovePos] && gCurrentMove != MOVE_STRUGGLE && !(gHitMarker & (HITMARKER_x800000 | HITMARKER_NO_ATTACKSTRING))
+    if (!gBattleMons[gBattlerAttacker].pp[gCurrMovePos] && gCurrentMove != MOVE_STRUGGLE 
+     && !(gHitMarker & (HITMARKER_x800000 | HITMARKER_NO_ATTACKSTRING | HITMARKER_NO_PPDEDUCT))
      && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
     {
         gBattlescriptCurrInstr = BattleScript_NoPPForMove;
@@ -4570,7 +4571,8 @@ static void Cmd_playanimation(void)
         || animId == B_ANIM_MEGA_EVOLUTION
         || animId == B_ANIM_ILLUSION_OFF
         || animId == B_ANIM_FORM_CHANGE
-        || animId == B_ANIM_SUBSTITUTE_FADE)
+        || animId == B_ANIM_SUBSTITUTE_FADE
+        || animId == B_ANIM_PRIMAL_REVERSION)
     {
         BtlController_EmitBattleAnimation(0, animId, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -4616,7 +4618,8 @@ static void Cmd_playanimation2(void) // animation Id is stored in the first poin
         || *animationIdPtr == B_ANIM_MEGA_EVOLUTION
         || *animationIdPtr == B_ANIM_ILLUSION_OFF
         || *animationIdPtr == B_ANIM_FORM_CHANGE
-        || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE)
+        || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE
+        || *animationIdPtr == B_ANIM_PRIMAL_REVERSION)
     {
         BtlController_EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -8156,7 +8159,7 @@ static void Cmd_various(void)
         }
         else
         {
-            gStatuses3[gBattlerTarget] |= STATUS3_ELECTRIFIED;
+            gStatuses4[gBattlerTarget] |= STATUS4_ELECTRIFIED;
             gBattlescriptCurrInstr += 7;
         }
         return;
@@ -8235,6 +8238,47 @@ static void Cmd_various(void)
             RecalcBattlerStats(gActiveBattler, mon);
             gBattleStruct->mega.alreadyEvolved[GetBattlerPosition(gActiveBattler)] = TRUE;
             gBattleStruct->mega.evolvedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
+        }
+        // Update healthbox and elevation.
+        else
+        {
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], mon, HEALTHBOX_ALL);
+            CreateMegaIndicatorSprite(gActiveBattler, 0);
+            if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
+                SetBattlerShadowSpriteCallback(gActiveBattler, gBattleMons[gActiveBattler].species);
+        }
+        gBattlescriptCurrInstr += 4;
+        return;
+    case VARIOUS_HANDLE_PRIMAL_REVERSION:
+        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
+            mon = &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]];
+        else
+            mon = &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]];
+
+        // Change species.
+        if (gBattlescriptCurrInstr[3] == 0)
+        {
+            u16 primalSpecies;
+            gBattleStruct->mega.primalRevertedSpecies[gActiveBattler] = gBattleMons[gActiveBattler].species;
+            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT
+                || (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))))
+            {
+                gBattleStruct->mega.playerPrimalRevertedSpecies = gBattleStruct->mega.primalRevertedSpecies[gActiveBattler];
+            }
+            // Checks Primal Reversion
+            primalSpecies = GetMegaEvolutionSpecies(gBattleStruct->mega.primalRevertedSpecies[gActiveBattler], gBattleMons[gActiveBattler].item);
+
+            gBattleMons[gActiveBattler].species = primalSpecies;
+            PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gActiveBattler].species);
+
+            BtlController_EmitSetMonData(0, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]], 2, &gBattleMons[gActiveBattler].species);
+            MarkBattlerForControllerExec(gActiveBattler);
+        }
+        // Change stats.
+        else if (gBattlescriptCurrInstr[3] == 1)
+        {
+            RecalcBattlerStats(gActiveBattler, mon);
+            gBattleStruct->mega.primalRevertedPartyIds[GetBattlerSide(gActiveBattler)] |= gBitTable[gBattlerPartyIndexes[gActiveBattler]];
         }
         // Update healthbox and elevation.
         else
@@ -8954,6 +8998,22 @@ static void Cmd_various(void)
         
         gBattlescriptCurrInstr += 4;
         return;
+    case VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL:
+    {
+        bool8 canDoPrimalReversion = FALSE;
+
+        for (i = 0; i < EVOS_PER_MON; i++)
+        {
+            if (gEvolutionTable[gBattleMons[gActiveBattler].species][i].method == EVO_PRIMAL_REVERSION
+            && gEvolutionTable[gBattleMons[gActiveBattler].species][i].param == gBattleMons[gActiveBattler].item)
+                canDoPrimalReversion = TRUE;
+        }
+        if (!canDoPrimalReversion)
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
