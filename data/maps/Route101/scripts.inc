@@ -263,7 +263,7 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 Route101_Text_HelpMe:
-	.string "!Socorro¡ ¡Ayuda!$"
+	.string "¡Socorro! ¡Ayuda!$"
 
 Route101_Text_PleaseHelp:
 	.string "¡Oye! ¡Sí, tú!\n"

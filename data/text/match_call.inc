@@ -2642,7 +2642,7 @@ MatchCall_Text_Wally6::
 	.string "Parece que Wally está en una zona\n"
 	.string "en la que no hay cobertura…$"
 
-MatchCall_Text_Wally7:: @ 2B5100
+MatchCall_Text_Wally7::
 	.string "Wally: ¡Hola, {PLAYER}!\p"
 	.string "Antes de conocerte, apenas\n"
 	.string "había salido de casa…\p"
@@ -2772,7 +2772,7 @@ MatchCall_Text_Norman7:: @ 82B5A69
 	.string "Okay!\n"
 	.string "I won't be left behind!$"
 
-MatchCall_Text_Norman8:: @ 82B5ACF
+MatchCall_Text_Norman8::
 	.string "Papá: ¿Mm? ¿{PLAYER}?\n"
 	.string "¡Qué sincronización!\p"
 	.string "En esta ocasión, te reto\n"
@@ -2780,7 +2780,7 @@ MatchCall_Text_Norman8:: @ 82B5ACF
 	.string "Te espero en el Gimnasio\n"
 	.string "de Petalia. ¡Ven cuando quieras!$"
 
-MatchCall_Text_Norman9:: @ 82B5B5E
+MatchCall_Text_Norman9::
 	.string "Dad: …You amaze me, {PLAYER}.\n"
 	.string "How much higher will you soar?$"
 
@@ -2834,7 +2834,7 @@ MatchCall_Text_Steven6::
 	.string "Steven appears not to be getting\n"
 	.string "the call…$"
 
-MatchCall_Text_Steven7:: @ 82B5ED9
+MatchCall_Text_Steven7::
 	.string "Steven: {PLAYER}… Enhorabuena por\n"
 	.string "entrar en el Hall de la Fama.\p"
 	.string "(…)\p"
@@ -2955,7 +2955,7 @@ MatchCall_Text_MrStone10:: @ 82B6703
 	.string "I'll always be in your corner!\n"
 	.string "Take care!$"
 
-MatchCall_Text_MrStone11:: @ 82B67ED
+MatchCall_Text_MrStone11::
 	.string "Sr. Stone: Mmm…\n"
 	.string "¿{PLAYER}? ¿Eres tú?\p"
 	.string "Tu voz transmite una seguridad\n"

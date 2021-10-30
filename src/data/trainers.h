@@ -11930,7 +11930,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_LEAF] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_RIVAL,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEAF,
         .trainerName = _("Leaf"),
@@ -11958,7 +11958,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_PLACEHOLDER] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_RS_PROTAG,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_RS_MAY,
         .trainerName = _("May"),
