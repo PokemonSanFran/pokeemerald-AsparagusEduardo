@@ -3545,6 +3545,11 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_SOUL_DEW,
         .price = 0,
+        #if defined(BATTLE_ENGINE) && I_SOUL_DEW_BOOST >= GEN_7
+            .holdEffectParam = 20,
+        #elif defined(BATTLE_ENGINE) && I_SOUL_DEW_BOOST <= GEN_6
+            .holdEffectParam = 50,
+        #endif
         .holdEffect = HOLD_EFFECT_SOUL_DEW,
         .description = sSoulDewDesc,
         .pocket = POCKET_BATTLE_ITEMS,
@@ -7109,6 +7114,9 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_ADAMANT_ORB,
         .price = 0,
+        #if defined(BATTLE_ENGINE)
+            .holdEffectParam = 20,
+        #endif
         .holdEffect = HOLD_EFFECT_ADAMANT_ORB,
         .description = sAdamantOrbDesc,
         .pocket = POCKET_BATTLE_ITEMS,
@@ -7125,6 +7133,9 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_LUSTROUS_ORB,
         .price = 0,
+        #if defined(BATTLE_ENGINE)
+            .holdEffectParam = 20,
+        #endif
         .holdEffect = HOLD_EFFECT_LUSTROUS_ORB,
         .description = sLustrousOrbDesc,
         .pocket = POCKET_BATTLE_ITEMS,
@@ -7141,6 +7152,9 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_GRISEOUS_ORB,
         .price = 0,
+        #if defined(BATTLE_ENGINE)
+            .holdEffectParam = 20,
+        #endif
         .holdEffect = HOLD_EFFECT_GRISEOUS_ORB,
         .description = sGriseousOrbDesc,
         .pocket = POCKET_BATTLE_ITEMS,
