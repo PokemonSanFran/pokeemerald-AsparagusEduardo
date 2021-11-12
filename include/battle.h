@@ -112,6 +112,9 @@ struct DisableStruct
     u8 throatChopTimer;
     u8 usedMoves:4;
     u8 wrapTurns;
+    u8 noRetreat:1;
+    u8 tarShot:1;
+    u8 octolock:1;
 };
 
 struct ProtectStruct
@@ -222,10 +225,7 @@ struct FieldTimer
     u8 wonderRoomTimer;
     u8 magicRoomTimer;
     u8 trickRoomTimer;
-    u8 grassyTerrainTimer;
-    u8 mistyTerrainTimer;
-    u8 electricTerrainTimer;
-    u8 psychicTerrainTimer;
+    u8 terrainTimer;
     u8 gravityTimer;
     u8 fairyLockTimer;
 };
@@ -930,5 +930,6 @@ extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
+extern bool8 gSwapDamageCategory; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 
 #endif // GUARD_BATTLE_H
