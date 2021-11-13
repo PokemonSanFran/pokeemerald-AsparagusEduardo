@@ -3364,7 +3364,7 @@ static void SetUpModifyArrows(struct PokemonDebugMenu *data)
     data->modifyArrows.arrowSpriteId[1] = CreateSprite(&gSpriteTemplate_Arrow, MODIFY_DIGITS_ARROW_X, MODIFY_DIGITS_ARROW2_Y, 0);
     gSprites[data->modifyArrows.arrowSpriteId[1]].animNum = 1;
 
-    data->modifyArrows.minValue = 0;
+    data->modifyArrows.minValue = 1;
     data->modifyArrows.maxValue = NUM_SPECIES - 1;
     data->modifyArrows.maxDigits = 4;
     data->modifyArrows.modifiedValPtr = &data->currentmonId;
@@ -3387,14 +3387,40 @@ static bool32 TryMoveDigit(struct PokemonDebugModifyArrows *modArrows, bool32 mo
     if (moveUp)
     {
         if (charDigits[modArrows->currentDigit] == CHAR_9)
+        {
             charDigits[modArrows->currentDigit] = CHAR_0;
+            for (i = modArrows->currentDigit - 1; i >= 0; i--)
+            {
+                if (charDigits[i] == CHAR_9)
+                    charDigits[i] = CHAR_0;
+                else
+                {
+                    charDigits[i]++;
+                    break;
+                }
+            }
+        }
         else
             charDigits[modArrows->currentDigit]++;
     }
     else
     {
         if (charDigits[modArrows->currentDigit] == CHAR_0)
+        {
             charDigits[modArrows->currentDigit] = CHAR_9;
+            
+            for (i = modArrows->currentDigit - 1; i >= 0; i--)
+            {
+                if (charDigits[i] == CHAR_0)
+                    charDigits[i] = CHAR_9;
+                else
+                {
+                    charDigits[i]--;
+                    break;
+                }
+            }
+        }
+
         else
             charDigits[modArrows->currentDigit]--;
     }
