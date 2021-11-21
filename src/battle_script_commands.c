@@ -563,7 +563,6 @@ static void Cmd_jumpifoppositegenders(void);
 static void Cmd_trygetbaddreamstarget(void);
 static void Cmd_tryworryseed(void);
 static void Cmd_metalburstdamagecalculator(void);
-extern u8 gMaxPartyLevel;
 
 static const u16 sBadgeFlags[8] =
 {
@@ -6670,6 +6669,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
 static void Cmd_getmoneyreward(void)
 {
     u32 money;
+    u8 sPartyLevel = 1;
 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
@@ -6686,10 +6686,8 @@ static void Cmd_getmoneyreward(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
                 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
             {
-                if(GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > gMaxPartyLevel)
-                {
-                    gMaxPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-                }
+                if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > sPartyLevel)
+                    sPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
             }
         }
         for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
@@ -6699,7 +6697,7 @@ static void Cmd_getmoneyreward(void)
                 ++count;
             }
         }
-        money = sWhiteOutBadgeMoney[count] * gMaxPartyLevel;
+        money = sWhiteOutBadgeMoney[count] * sPartyLevel;
         RemoveMoney(&gSaveBlock1Ptr->money, money);
     }
 

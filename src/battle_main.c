@@ -238,7 +238,6 @@ EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
 EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
-EWRAM_DATA u8 gMaxPartyLevel = 1;
 
 // IWRAM common vars
 void (*gPreBattleCallback1)(void);
@@ -3296,18 +3295,6 @@ static void DoBattleIntro(void)
                 gBattleMons[gActiveBattler].status2 = 0;
                 for (i = 0; i < NUM_BATTLE_STATS; i++)
                     gBattleMons[gActiveBattler].statStages[i] = 6;
-                    
-                for (i = 0; i < PARTY_SIZE; i++)
-                {
-                    if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-                        && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
-                    {
-                        if(GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > gMaxPartyLevel)
-                        {
-                            gMaxPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-                        }
-                    }
-                }
             }
 
             // Draw sprite.
