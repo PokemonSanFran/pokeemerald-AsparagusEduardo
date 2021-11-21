@@ -771,7 +771,11 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_SANDYGAST] = _("Sandygast"),
     [SPECIES_PALOSSAND] = _("Palossand"),
     [SPECIES_PYUKUMUKU] = _("Pyukumuku"),
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+    [SPECIES_TYPE_NULL] = _("CódigoCero"),
+#else
     [SPECIES_TYPE_NULL] = _("Type: Null"),
+#endif
     [SPECIES_SILVALLY] = _("Silvally"),
     [SPECIES_MINIOR] = _("Minior"),
     [SPECIES_KOMALA] = _("Komala"),

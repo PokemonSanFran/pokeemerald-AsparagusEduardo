@@ -1233,157 +1233,156 @@ const u16 sTMHMMoves[TMHM_COUNT] =
     [ITEM_TM48 - ITEM_TM01] = MOVE_SKILL_SWAP,
     [ITEM_TM49 - ITEM_TM01] = MOVE_SNATCH,
     [ITEM_TM50 - ITEM_TM01] = MOVE_OVERHEAT,
-    MOVE_NONE,  //51
-    MOVE_NONE,  //52
-    MOVE_NONE,  //53
-    MOVE_NONE,  //54
-    MOVE_NONE,  //55
-    MOVE_NONE,  //56
-    MOVE_NONE,  //57
-    MOVE_NONE,  //58
-    MOVE_NONE,  //59
-    MOVE_NONE,  //60
-    MOVE_NONE,  //61
-    MOVE_NONE,  //62
-    MOVE_NONE,  //63
-    MOVE_EXPLOSION,
-    MOVE_NONE,  //65
-    MOVE_NONE,  //66
-    MOVE_NONE,  //67
-    MOVE_NONE,  //68
-    MOVE_NONE,  //69
-    MOVE_NONE,  //70
-    MOVE_NONE,  //71
-    MOVE_NONE,  //72
-    MOVE_NONE,  //73
-    MOVE_NONE,  //74
-    MOVE_NONE,  //75
-    MOVE_NONE,  //76
-    MOVE_NONE,  //77
-    MOVE_NONE,  //78
-    MOVE_NONE,  //79
-    MOVE_NONE,  //80
-    MOVE_NONE,  //81
-    MOVE_NONE,  //82
-    MOVE_NONE,  //83
-    MOVE_NONE,  //84
-    MOVE_NONE,  //85
-    MOVE_NONE,  //86
-    MOVE_NONE,  //87
-    MOVE_NONE,  //88
-    MOVE_NONE,  //89
-    MOVE_NONE,  //90
-    MOVE_NONE,  //91
-    MOVE_NONE,  //92
-    MOVE_NONE,  //93
-    MOVE_NONE,  //94
-    MOVE_NONE,  //95
-    MOVE_NONE,  //96
-    MOVE_NONE,  //97
-    MOVE_NONE,  //98
-    MOVE_NONE,  //99
-    MOVE_NONE,  //100
-    MOVE_NONE,  //101
-    MOVE_NONE,  //102
-    MOVE_NONE,  //103
-    MOVE_NONE,  //104
-    MOVE_NONE,  //105
-    MOVE_NONE,  //106
-    MOVE_NONE,  //107
-    MOVE_NONE,  //108
-    MOVE_NONE,  //109
-    MOVE_NONE,  //110
-    MOVE_NONE,  //111
-    MOVE_NONE,  //112
-    MOVE_NONE,  //113
-    MOVE_NONE,  //114
-    MOVE_NONE,  //115
-    MOVE_NONE,  //116
-    MOVE_NONE,  //117
-    MOVE_NONE,  //118
-    MOVE_NONE,  //119
-    MOVE_NONE,  //120
-    MOVE_NONE,  //121
-    MOVE_NONE,  //122
-    MOVE_NONE,  //123
-    MOVE_NONE,  //124
-    MOVE_NONE,  //125
-    MOVE_NONE,  //126
-    MOVE_NONE,  //127
-    MOVE_NONE,  //128
-    MOVE_NONE,  //129
-    MOVE_NONE,  //130
-    MOVE_NONE,  //131
-    MOVE_NONE,  //132
-    MOVE_NONE,  //133
-    MOVE_NONE,  //134
-    MOVE_NONE,  //135
-    MOVE_NONE,  //136
-    MOVE_NONE,  //137
-    MOVE_NONE,  //138
-    MOVE_NONE,  //139
-    MOVE_NONE,  //140
-    MOVE_NONE,  //141
-    MOVE_NONE,  //142
-    MOVE_NONE,  //143
-    MOVE_NONE,  //144
-    MOVE_NONE,  //145
-    MOVE_NONE,  //146
-    MOVE_NONE,  //147
-    MOVE_NONE,  //148
-    MOVE_NONE,  //149
-    MOVE_NONE,  //150
-    MOVE_NONE,  //151
-    MOVE_NONE,  //152
-    MOVE_NONE,  //153
-    MOVE_NONE,  //154
-    MOVE_NONE,  //155
-    MOVE_NONE,  //156
-    MOVE_NONE,  //157
-    MOVE_NONE,  //158
-    MOVE_NONE,  //159
-    MOVE_NONE,  //160
-    MOVE_NONE,  //161
-    MOVE_NONE,  //162
-    MOVE_NONE,  //163
-    MOVE_NONE,  //164
-    MOVE_NONE,  //165
-    MOVE_NONE,  //166
-    MOVE_NONE,  //167
-    MOVE_NONE,  //168
-    MOVE_NONE,  //169
-    MOVE_NONE,  //170
-    MOVE_NONE,  //171
-    MOVE_NONE,  //172
-    MOVE_NONE,  //173
-    MOVE_NONE,  //174
-    MOVE_NONE,  //175
-    MOVE_NONE,  //176
-    MOVE_NONE,  //177
-    MOVE_NONE,  //178
-    MOVE_NONE,  //179
-    MOVE_NONE,  //180
-    MOVE_NONE,  //181
-    MOVE_NONE,  //182
-    MOVE_NONE,  //183
-    MOVE_NONE,  //184
-    MOVE_NONE,  //185
-    MOVE_NONE,  //186
-    MOVE_NONE,  //187
-    MOVE_NONE,  //188
-    MOVE_NONE,  //189
-    MOVE_NONE,  //190
-    MOVE_NONE,  //191
-    MOVE_NONE,  //192
-    MOVE_NONE,  //193
-    MOVE_NONE,  //194
-    MOVE_NONE,  //195
-    MOVE_NONE,  //196
-    MOVE_NONE,  //197
-    MOVE_NONE,  //198
-    MOVE_NONE,  //199
-    MOVE_NONE,  //200
-
+    [ITEM_TM51 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM52 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM53 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM54 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM55 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM56 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM57 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM58 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM59 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM60 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM61 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM62 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM63 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM64 - ITEM_TM01] = MOVE_EXPLOSION,
+    [ITEM_TM65 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM66 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM67 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM68 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM69 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM70 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM71 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM72 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM73 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM74 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM75 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM76 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM77 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM78 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM79 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM80 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM81 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM82 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM83 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM84 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM85 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM86 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM87 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM88 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM89 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM90 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM91 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM92 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM93 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM94 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM95 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM96 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM97 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM98 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM99 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM100 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM101 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM102 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM103 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM104 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM105 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM106 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM107 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM108 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM109 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM110 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM111 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM112 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM113 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM114 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM115 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM116 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM117 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM118 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM119 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM120 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM121 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM122 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM123 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM124 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM125 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM126 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM127 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM128 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM129 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM130 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM131 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM132 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM133 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM134 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM135 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM136 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM137 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM138 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM139 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM140 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM141 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM142 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM143 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM144 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM145 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM146 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM147 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM148 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM149 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM150 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM151 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM152 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM153 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM154 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM155 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM156 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM157 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM158 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM159 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM160 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM161 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM162 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM163 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM164 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM165 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM166 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM167 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM168 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM169 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM170 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM171 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM172 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM173 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM174 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM175 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM176 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM177 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM178 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM179 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM180 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM181 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM182 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM183 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM184 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM185 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM186 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM187 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM188 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM189 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM190 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM191 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM192 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM193 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM194 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM195 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM196 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM197 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM198 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM199 - ITEM_TM01] = MOVE_NONE, // Todo
+    [ITEM_TM200 - ITEM_TM01] = MOVE_NONE, // Todo
     [ITEM_HM01 - ITEM_TM01] = MOVE_CUT,
     [ITEM_HM02 - ITEM_TM01] = MOVE_FLY,
     [ITEM_HM03 - ITEM_TM01] = MOVE_SURF,

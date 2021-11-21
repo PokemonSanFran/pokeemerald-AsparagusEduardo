@@ -55,7 +55,7 @@ LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
 	.2byte ITEM_DRAGON_SCALE
 	.2byte ITEM_KINGS_ROCK
 	.2byte ITEM_METAL_COAT
-	.2byte ITEM_UP_GRADE
+	.2byte ITEM_UPGRADE
 	.2byte ITEM_DEEP_SEA_SCALE
 	.2byte ITEM_DEEP_SEA_TOOTH
 	.2byte ITEM_DUBIOUS_DISC

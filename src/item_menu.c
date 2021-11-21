@@ -1650,7 +1650,7 @@ static void OpenContextMenu(u8 taskId)
         gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BerryBlenderCrush);
         break;
     case ITEMMENULOCATION_APPRENTICE:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_Apprentice;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Apprentice);
@@ -1662,7 +1662,7 @@ static void OpenContextMenu(u8 taskId)
         }
         break;
     case ITEMMENULOCATION_FAVOR_LADY:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_FavorLady;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_FavorLady);
@@ -1674,7 +1674,7 @@ static void OpenContextMenu(u8 taskId)
         }
         break;
     case ITEMMENULOCATION_QUIZ_LADY:
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY)
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_ENIGMA_BERRY_E_READER)
         {
             gBagMenu->contextMenuItemsPtr = sContextMenuItems_QuizLady;
             gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_QuizLady);
@@ -2864,7 +2864,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_EVERSTONE] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_METAL_COAT] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_DRAGON_SCALE] = ITEM_TYPE_EVOLUTION_ITEM,
-    [ITEM_UP_GRADE] = ITEM_TYPE_EVOLUTION_ITEM,
+    [ITEM_UPGRADE] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_PROTECTOR] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_MAGMARIZER] = ITEM_TYPE_EVOLUTION_ITEM,
     [ITEM_PRISM_SCALE] = ITEM_TYPE_EVOLUTION_ITEM,
@@ -2923,7 +2923,7 @@ static const u16 sItemsByType[ITEMS_COUNT] =
     [ITEM_LUCKY_PUNCH] = ITEM_TYPE_HELD_ITEM,
     [ITEM_METAL_POWDER] = ITEM_TYPE_HELD_ITEM,
     [ITEM_THICK_CLUB] = ITEM_TYPE_HELD_ITEM,
-    [ITEM_STICK] = ITEM_TYPE_HELD_ITEM,
+    [ITEM_LEEK] = ITEM_TYPE_HELD_ITEM,
     [ITEM_ADAMANT_ORB] = ITEM_TYPE_HELD_ITEM,
     [ITEM_LUSTROUS_ORB] = ITEM_TYPE_HELD_ITEM,
     [ITEM_GRISEOUS_ORB] = ITEM_TYPE_HELD_ITEM,

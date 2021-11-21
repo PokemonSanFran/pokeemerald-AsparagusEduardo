@@ -32,9 +32,6 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *hiddenMonsInfo;
 };
 
-extern bool8 gIsFishingEncounter;
-extern bool8 gIsSurfingEncounter;
-
 extern const struct WildPokemonHeader gWildMonHeaders[];
 extern bool8 gIsFishingEncounter;
 extern bool8 gIsSurfingEncounter;
