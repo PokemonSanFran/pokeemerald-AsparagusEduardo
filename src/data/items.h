@@ -5534,7 +5534,11 @@ const struct Item gItems[] =
 
     [ITEM_NORMALIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Normastal Z"),
+#else
         .name = _("Normalium Z"),
+#endif
         .itemId = ITEM_NORMALIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5547,7 +5551,11 @@ const struct Item gItems[] =
 
     [ITEM_FIRIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Pirostal Z"),
+#else
         .name = _("Firium Z"),
+#endif
         .itemId = ITEM_FIRIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5560,7 +5568,11 @@ const struct Item gItems[] =
 
     [ITEM_WATERIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Hidrostal Z"),
+#else
         .name = _("Waterium Z"),
+#endif
         .itemId = ITEM_WATERIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5573,7 +5585,11 @@ const struct Item gItems[] =
 
     [ITEM_ELECTRIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Electrostal Z"),
+#else
         .name = _("Electrium Z"),
+#endif
         .itemId = ITEM_ELECTRIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5586,7 +5602,11 @@ const struct Item gItems[] =
 
     [ITEM_GRASSIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Fitostal Z"),
+#else
         .name = _("Grassium Z"),
+#endif
         .itemId = ITEM_GRASSIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5599,7 +5619,11 @@ const struct Item gItems[] =
 
     [ITEM_ICIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Criostal Z"),
+#else
         .name = _("Icium Z"),
+#endif
         .itemId = ITEM_ICIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5612,7 +5636,11 @@ const struct Item gItems[] =
 
     [ITEM_FIGHTINIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Lizastal Z"),
+#else
         .name = _("Fightinium Z"),
+#endif
         .itemId = ITEM_FIGHTINIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5625,7 +5653,11 @@ const struct Item gItems[] =
 
     [ITEM_POISONIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Toxistal Z"),
+#else
         .name = _("Poisinium Z"),
+#endif
         .itemId = ITEM_POISONIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5638,7 +5670,11 @@ const struct Item gItems[] =
 
     [ITEM_GROUNDIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Geostal Z"),
+#else
         .name = _("Groundium Z"),
+#endif
         .itemId = ITEM_GROUNDIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5651,7 +5687,11 @@ const struct Item gItems[] =
 
     [ITEM_FLYINIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Aerostal Z"),
+#else
         .name = _("Flyinium Z"),
+#endif
         .itemId = ITEM_FLYINIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5664,7 +5704,11 @@ const struct Item gItems[] =
 
     [ITEM_PSYCHIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Psicostal Z"),
+#else
         .name = _("Psychium Z"),
+#endif
         .itemId = ITEM_PSYCHIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5677,7 +5721,11 @@ const struct Item gItems[] =
 
     [ITEM_BUGINIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Insectostal Z"),
+#else
         .name = _("Buginium Z"),
+#endif
         .itemId = ITEM_BUGINIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5690,7 +5738,11 @@ const struct Item gItems[] =
 
     [ITEM_ROCKIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Litostal Z"),
+#else
         .name = _("Rockium Z"),
+#endif
         .itemId = ITEM_ROCKIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5703,7 +5755,11 @@ const struct Item gItems[] =
 
     [ITEM_GHOSTIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Espectrostal Z"),
+#else
         .name = _("Ghostium Z"),
+#endif
         .itemId = ITEM_GHOSTIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5716,7 +5772,11 @@ const struct Item gItems[] =
 
     [ITEM_DRAGONIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Dracostal Z"),
+#else
         .name = _("Dragonium Z"),
+#endif
         .itemId = ITEM_DRAGONIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5729,7 +5789,11 @@ const struct Item gItems[] =
 
     [ITEM_DARKINIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Nictostal Z"),
+#else
         .name = _("Darkinium Z"),
+#endif
         .itemId = ITEM_DARKINIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5742,7 +5806,11 @@ const struct Item gItems[] =
 
     [ITEM_STEELIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Metalostal Z"),
+#else
         .name = _("Steelium Z"),
+#endif
         .itemId = ITEM_STEELIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5755,7 +5823,11 @@ const struct Item gItems[] =
 
     [ITEM_FAIRIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Feeristal Z"),
+#else
         .name = _("Fairium Z"),
+#endif
         .itemId = ITEM_FAIRIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5768,7 +5840,11 @@ const struct Item gItems[] =
 
     [ITEM_PIKANIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Pikastal Z"),
+#else
         .name = _("Pikanium Z"),
+#endif
         .itemId = ITEM_PIKANIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5781,7 +5857,11 @@ const struct Item gItems[] =
 
     [ITEM_EEVIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Eeveestal Z"),
+#else
         .name = _("Eevium Z"),
+#endif
         .itemId = ITEM_EEVIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5794,7 +5874,11 @@ const struct Item gItems[] =
 
     [ITEM_SNORLIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Snorlastal Z"),
+#else
         .name = _("Snorlium Z"),
+#endif
         .itemId = ITEM_SNORLIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5807,7 +5891,11 @@ const struct Item gItems[] =
 
     [ITEM_MEWNIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Mewstal Z"),
+#else
         .name = _("Mewnium Z"),
+#endif
         .itemId = ITEM_MEWNIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5820,7 +5908,11 @@ const struct Item gItems[] =
 
     [ITEM_DECIDIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Dueyestal Z"),
+#else
         .name = _("Decidium Z"),
+#endif
         .itemId = ITEM_DECIDIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5833,7 +5925,11 @@ const struct Item gItems[] =
 
     [ITEM_INCINIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Incinostal Z"),
+#else
         .name = _("Incinium Z"),
+#endif
         .itemId = ITEM_INCINIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5846,7 +5942,11 @@ const struct Item gItems[] =
 
     [ITEM_PRIMARIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Primastal Z"),
+#else
         .name = _("Primarium Z"),
+#endif
         .itemId = ITEM_PRIMARIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5859,7 +5959,11 @@ const struct Item gItems[] =
 
     [ITEM_LYCANIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Lycanrostal Z"),
+#else
         .name = _("Lycanium Z"),
+#endif
         .itemId = ITEM_LYCANIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5872,7 +5976,11 @@ const struct Item gItems[] =
 
     [ITEM_MIMIKIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Mimikyustal Z"),
+#else
         .name = _("Mimikium Z"),
+#endif
         .itemId = ITEM_MIMIKIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5885,7 +5993,11 @@ const struct Item gItems[] =
 
     [ITEM_KOMMONIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Kommostal Z"),
+#else
         .name = _("Kommonium Z"),
+#endif
         .itemId = ITEM_KOMMONIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5898,7 +6010,11 @@ const struct Item gItems[] =
 
     [ITEM_TAPUNIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Tapistal Z"),
+#else
         .name = _("Tapunium Z"),
+#endif
         .itemId = ITEM_TAPUNIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5911,7 +6027,11 @@ const struct Item gItems[] =
 
     [ITEM_SOLGANIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Solgaleostal Z"),
+#else
         .name = _("Solganium Z"),
+#endif
         .itemId = ITEM_SOLGANIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5924,7 +6044,11 @@ const struct Item gItems[] =
 
     [ITEM_LUNALIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Lunalastal Z"),
+#else
         .name = _("Lunalium Z"),
+#endif
         .itemId = ITEM_LUNALIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5937,7 +6061,11 @@ const struct Item gItems[] =
 
     [ITEM_MARSHADIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Marshastal Z"),
+#else
         .name = _("Marshadium Z"),
+#endif
         .itemId = ITEM_MARSHADIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5950,7 +6078,11 @@ const struct Item gItems[] =
 
     [ITEM_ALORAICHIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Alo-Raistal Z"),
+#else
         .name = _("Aloraichium Z"),
+#endif
         .itemId = ITEM_ALORAICHIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5963,7 +6095,11 @@ const struct Item gItems[] =
 
     [ITEM_PIKASHUNIUM_Z] =
     {
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Ash-Pikastal Z"),
+#else
         .name = _("Pikashunium Z"),
+#endif
         .itemId = ITEM_PIKASHUNIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
@@ -5976,7 +6112,11 @@ const struct Item gItems[] =
 
     [ITEM_ULTRANECROZIUM_Z] =
     {
-        .name = _("U-Necrozium Z"),
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+        .name = _("Ultranecrostal Z"),
+#else
+        .name = _("Ultranecrozium Z"),
+#endif
         .itemId = ITEM_ULTRANECROZIUM_Z,
         .price = 0,
         .holdEffect = HOLD_EFFECT_Z_CRYSTAL,
