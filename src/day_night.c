@@ -51,20 +51,16 @@ static const u16 sTimeOfDayTints[][3] = {
     [14] =  {TINT_DAY},
     [15] =  {TINT_DAY},
     [16] =  {TINT_DAY},
-    [17] =  {Q_8_8(1.0), Q_8_8(0.98), Q_8_8(0.9)},
-    [18] =  {Q_8_8(0.9), Q_8_8(0.7), Q_8_8(0.67)},
-    [19] =  {Q_8_8(0.75), Q_8_8(0.66), Q_8_8(0.77)},
-    [20] =  {Q_8_8(0.7), Q_8_8(0.63), Q_8_8(0.82)},
-    [21] =  {TINT_NIGHT},
+    [17] =  {TINT_DAY},
+    [18] =  {Q_8_8(1.0), Q_8_8(0.98), Q_8_8(0.9)},
+    [19] =  {Q_8_8(0.95), Q_8_8(0.7), Q_8_8(0.67)},
+    [20] =  {Q_8_8(0.80), Q_8_8(0.66), Q_8_8(0.77)},
+    [21] =  {Q_8_8(0.7), Q_8_8(0.63), Q_8_8(0.82)},
     [22] =  {TINT_NIGHT},
     [23] =  {TINT_NIGHT},
 };
 
 #include "strings.h"
-bool8 IsCurrentlyDay(void) //My own custom function
-{
-    return GetCurrentTimeOfDay() != TIME_NIGHT;
-}
 
 const u8 *const gDayOfWeekTable[] = 
 {
@@ -93,10 +89,10 @@ u8 GetTimeOfDay(s8 hours)
         return TIME_NIGHT;
     else if (hours < HOUR_DAY)
         return TIME_MORNING;
-    else if (hours < HOUR_SUNSET)
+    else if (hours < HOUR_DUSK)
         return TIME_DAY;
     else if (hours < HOUR_NIGHT)
-        return TIME_SUNSET;
+        return TIME_DUSK;
     else
         return TIME_NIGHT;
 }

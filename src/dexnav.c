@@ -59,6 +59,7 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
+#include "constants/day_night.h"
 #ifdef GBA_PRINTF
 #include "printf.h"
 #include "mgba.h"
@@ -1538,7 +1539,7 @@ static u8 GetEncounterLevelFromMapData(u16 species, u8 environment)
     switch (environment)
     {
     case ENCOUNTER_TYPE_LAND:    // grass
-        if (IsCurrentlyDay())
+        if (GetCurrentTimeOfDay() != TIME_NIGHT)
         {
             if (landMonsInfo == NULL)
                 return MON_LEVEL_NONEXISTENT; //Hidden pokemon should only appear on walkable tiles or surf tiles
@@ -1760,7 +1761,7 @@ static bool8 CapturedAllLandMons(u8 headerId)
     const struct WildPokemonInfo* landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
     const struct WildPokemonInfo* landMonsNightInfo = gWildMonHeaders[headerId].landMonsNightInfo;
         
-    if (landMonsInfo != NULL && IsCurrentlyDay())
+    if (landMonsInfo != NULL && GetCurrentTimeOfDay() != TIME_NIGHT)
     {        
         for (i = 0; i < LAND_WILD_COUNT; ++i)
         {
@@ -1994,7 +1995,7 @@ static void DexNavLoadEncounterData(void)
     memset(sDexNavUiDataPtr->waterSpecies, 0, sizeof(sDexNavUiDataPtr->waterSpecies));
     memset(sDexNavUiDataPtr->hiddenSpecies, 0, sizeof(sDexNavUiDataPtr->hiddenSpecies));
     
-    if (IsCurrentlyDay())
+    if (GetCurrentTimeOfDay() != TIME_NIGHT)
     {
         // land mons
         if (landMonsInfo != NULL && landMonsInfo->encounterRate != 0)
@@ -2611,7 +2612,7 @@ bool8 TryFindHiddenPokemon(void)
                 isHiddenMon = TRUE;
                 environment = ENCOUNTER_TYPE_HIDDEN;
             }
-            else if (IsCurrentlyDay())
+            else if (GetCurrentTimeOfDay() != TIME_NIGHT)
             {
                 species = gWildMonHeaders[headerId].landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
                 environment = ENCOUNTER_TYPE_LAND;

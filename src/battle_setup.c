@@ -769,18 +769,7 @@ u8 BattleSetup_GetTerrainId(void)
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
     if (MetatileBehavior_IsTallGrass(tileBehavior))
-    {
-        u8 time = GetCurrentTimeOfDay();
-        switch(time)
-        {
-            case TIME_SUNSET:
-                return BATTLE_TERRAIN_GRASS_DUSK;
-            case TIME_NIGHT:
-                return BATTLE_TERRAIN_GRASS_NIGHT;
-            default:
-                return BATTLE_TERRAIN_GRASS;
-        }
-    }
+        return BATTLE_TERRAIN_GRASS;
     if (MetatileBehavior_IsLongGrass(tileBehavior))
         return BATTLE_TERRAIN_LONG_GRASS;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))

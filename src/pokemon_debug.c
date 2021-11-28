@@ -7,6 +7,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "data.h"
+#include "day_night.h"
 #include "decompress.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
@@ -879,7 +880,7 @@ static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
     case MAP_BATTLE_SCENE_NORMAL:
         LZDecompressVram(sBattleTerrainTable[battleTerrain].tileset, (void*)(BG_CHAR_ADDR(2)));
         LZDecompressVram(sBattleTerrainTable[battleTerrain].tilemap, (void*)(BG_SCREEN_ADDR(26)));
-        LoadCompressedPalette(sBattleTerrainTable[battleTerrain].palette, 0x20, 0x60);
+        LoadCompressedPalette(sBattleTerrainTable[battleTerrain].palette[GetCurrentTimeOfDay()], 0x20, 0x60);
         break;
     case MAP_BATTLE_SCENE_GYM:
         LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));

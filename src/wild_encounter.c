@@ -25,8 +25,8 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/weather.h"
+#include "constants/day_night.h"
 #include "tx_difficulty_challenges.h"
-#include "rtc.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 extern const u8 EventScript_LureWoreOff[];
@@ -78,7 +78,7 @@ static bool8 CheckFeebas(void)
         x -= MAP_OFFSET;
         y -= MAP_OFFSET;
 
-        if (IsCurrentlyDay())
+        if (GetCurrentTimeOfDay() != TIME_NIGHT)
         {
             // Encounter Feebas if player is fishing under the bridge during the day
             if ((y == 35 || y == 36))
@@ -617,7 +617,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 }
 
                 // try a regular wild land encounter
-                if (IsCurrentlyDay())
+                if (GetCurrentTimeOfDay() != TIME_NIGHT)
                 {
                     if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                     {
@@ -781,7 +781,7 @@ bool8 SweetScentWildEncounter(void)
                 SetUpMassOutbreakEncounter(0);
             else
             {
-                if(IsCurrentlyDay())
+                if (GetCurrentTimeOfDay() != TIME_NIGHT)
                     TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
                 else
                     TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNightInfo, WILD_AREA_LAND_NIGHT, 0);

@@ -23459,8 +23459,6 @@ Move_SECRET_POWER:
 	jumpargeq 0, STATUS_FIELD_PSYCHIC_TERRAIN,  Move_CONFUSION
 	createvisualtask AnimTask_GetBattleTerrain, 5
 	jumpargeq 0, BATTLE_TERRAIN_GRASS,          Move_NEEDLE_ARM
-	jumpargeq 0, BATTLE_TERRAIN_GRASS_DUSK, 	Move_NEEDLE_ARM
-	jumpargeq 0, BATTLE_TERRAIN_GRASS_NIGHT, 	Move_NEEDLE_ARM
 	jumpargeq 0, BATTLE_TERRAIN_LONG_GRASS,     Move_MAGICAL_LEAF
 	jumpargeq 0, BATTLE_TERRAIN_SAND,           Move_MUD_SHOT
 	jumpargeq 0, BATTLE_TERRAIN_UNDERWATER,     Move_WATERFALL

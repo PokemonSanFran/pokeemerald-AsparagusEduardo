@@ -43,10 +43,12 @@
 #include "pokenav.h"
 #include "menu_specialized.h"
 #include "data.h"
+#include "day_night.h"
 #include "constants/abilities.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
+#include "constants/day_night.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/map_types.h"
@@ -13013,8 +13015,6 @@ u16 GetSecretPowerMoveEffect(void)
         switch (gBattleTerrain)
         {
         case BATTLE_TERRAIN_GRASS:
-        case BATTLE_TERRAIN_GRASS_DUSK:
-        case BATTLE_TERRAIN_GRASS_NIGHT:
             #if B_SECRET_POWER_EFFECT >= GEN_4
                 moveEffect = MOVE_EFFECT_SLEEP;
             #else
@@ -13584,7 +13584,7 @@ static void Cmd_handleballthrow(void)
         #ifdef ITEM_EXPANSION
         case ITEM_DUSK_BALL:
             RtcCalcLocalTime();
-            if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
+            if (GetCurrentTimeOfDay() == TIME_NIGHT || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
                 #if B_DUSK_BALL_MODIFIER >= GEN_7
                     ballMultiplier = 30;
                 #else

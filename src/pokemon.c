@@ -12747,23 +12747,26 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                if (IsCurrentlyDay() && friendship >= 220)
+                if (GetCurrentTimeOfDay() != TIME_NIGHT && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_DAY:
-                if (IsCurrentlyDay() && gEvolutionTable[species][i].param <= level)
+                RtcCalcLocalTime();
+                if (GetCurrentTimeOfDay() != TIME_NIGHT && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                if (!IsCurrentlyDay() && friendship >= 220)
+                if (GetCurrentTimeOfDay() == TIME_NIGHT && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_NIGHT:
-                if (!IsCurrentlyDay() && gEvolutionTable[species][i].param <= level)
+                RtcCalcLocalTime();
+                if (GetCurrentTimeOfDay() == TIME_NIGHT && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_ITEM_HOLD_NIGHT:
-                if (!IsCurrentlyDay() && heldItem == gEvolutionTable[species][i].param)
+                RtcCalcLocalTime();
+                if (GetCurrentTimeOfDay() == TIME_NIGHT && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = 0;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -12771,7 +12774,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 }
                 break;
             case EVO_ITEM_HOLD_DAY:
-                if (IsCurrentlyDay() && heldItem == gEvolutionTable[species][i].param)
+                RtcCalcLocalTime();
+                if (GetCurrentTimeOfDay() != TIME_NIGHT && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = 0;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -12779,7 +12783,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 }
                 break;
             case EVO_LEVEL_DUSK:
-                if (gLocalTime.hours >= 17 && gLocalTime.hours < 18 && gEvolutionTable[species][i].param <= level)
+                RtcCalcLocalTime();
+                if (GetCurrentTimeOfDay() == TIME_DUSK && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL:
@@ -12928,7 +12933,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 break;
             case EVO_LEVEL_NIGHT_ALOLA:
                 RtcCalcLocalTime();
-                if (!IsCurrentlyDay() && gEvolutionTable[species][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
+                if (GetCurrentTimeOfDay() == TIME_NIGHT && gEvolutionTable[species][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
@@ -14822,11 +14827,11 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
                         switch (formChanges[i].param2)
                         {
                         case DAY:
-                            if (IsCurrentlyDay())
+                            if (GetCurrentTimeOfDay() != TIME_NIGHT)
                                 targetSpecies = formChanges[i].targetSpecies;
                             break;
                         case NIGHT:
-                            if (!IsCurrentlyDay())
+                            if (GetCurrentTimeOfDay() == TIME_NIGHT)
                                 targetSpecies = formChanges[i].targetSpecies;
                             break;
                         }
