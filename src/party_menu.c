@@ -6719,14 +6719,25 @@ void CursorCb_MoveItemCallback(u8 taskId)
         }
         else
         {
-            GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
-            CopyItemName(item1, gStringVar2);
-            StringExpandPlaceholders(buffer, gText_XsYAnd);
+            #if GAME_LANGUAGE == LANGUAGE_SPANISH
+                GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+                GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar2);
+                StringExpandPlaceholders(buffer, gText_XsYAnd);
 
-            StringAppend(buffer, gText_XsYWereSwapped);
-            GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
-            CopyItemName(item2, gStringVar2);
-            StringExpandPlaceholders(gStringVar4, buffer);
+                StringAppend(buffer, gText_XsYWereSwapped);
+                CopyItemName(item1, gStringVar1);
+                CopyItemName(item2, gStringVar2);
+                StringExpandPlaceholders(gStringVar4, buffer);
+            #else
+                GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+                CopyItemName(item1, gStringVar2);
+                StringExpandPlaceholders(buffer, gText_XsYAnd);
+
+                StringAppend(buffer, gText_XsYWereSwapped);
+                GetMonNickname(&gPlayerParty[gPartyMenu.slotId2], gStringVar1);
+                CopyItemName(item2, gStringVar2);
+                StringExpandPlaceholders(gStringVar4, buffer);
+            #endif
         }
 
         // display the string
