@@ -1639,11 +1639,11 @@ const u32 gSummaryMoveSelect_Pal[] = INCBIN_U32("graphics/interface/summary_fram
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
 const u32 gStatusScreenBitmap[] = INCBIN_U32("graphics/interface/status_screen_es.4bpp.lz");
 const u32 gStatusScreenPalette[] = INCBIN_U32("graphics/interface/status_screen.gbapal.lz");
-const u32 gPageInfoTilemap[] = INCBIN_U32("graphics/interface/status_screen_es.bin.lz");
+const u32 gPageInfoTilemap[] = INCBIN_U32("graphics/interface/status_screen.bin.lz");
 const u32 gPageSkillsTilemap[] = INCBIN_U32("graphics/interface/status_tilemap1_es.bin.lz");
 const u32 gPageBattleMovesTilemap[] = INCBIN_U32("graphics/interface/status_tilemap2.bin.lz");
 const u32 gPageContestMovesTilemap[] = INCBIN_U32("graphics/interface/status_tilemap3.bin.lz");
-const u32 gUnknown_08D98CC8[] = INCBIN_U32("graphics/interface/status_tilemap0_es.bin.lz");
+const u32 gUnknown_08D98CC8[] = INCBIN_U32("graphics/interface/status_tilemap0.bin.lz");
 #else
 const u32 gStatusScreenBitmap[] = INCBIN_U32("graphics/interface/status_screen.4bpp.lz");
 const u32 gStatusScreenPalette[] = INCBIN_U32("graphics/interface/status_screen.gbapal.lz");
