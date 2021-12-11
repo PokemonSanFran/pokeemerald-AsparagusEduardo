@@ -102,10 +102,7 @@ struct RfuGameCompatibilityData
 struct __attribute__((packed, aligned(2))) RfuGameData
 {
     struct RfuGameCompatibilityData compatibility;
-    u8 partnerInfo[RFU_CHILD_MAX]; // u8 sprite_idx:3;
-    // u8 gender:1;
-    // u8 unk_4:3
-    // u8 active:1
+    u8 partnerInfo[RFU_CHILD_MAX];
     u16 tradeSpecies;
     u8 activity:7;
     u8 startedActivity:1;
@@ -113,7 +110,7 @@ struct __attribute__((packed, aligned(2))) RfuGameData
     u8 tradeLevel:7;
     u8 tradeType:6;
     u8 padding:2;
-}; // size: RFU_GNAME_SIZE
+};
 
 // Constants for getting/setting information in 'partnerInfo' of RfuGameData.
 // This data is used to determine what the link partners look like from
