@@ -44,5 +44,7 @@ porymap.project.cfg
 *.a
 .fuse_hidden*
 *.sna
+*.diff
+*.sym
 log.txt
 mgba.sh

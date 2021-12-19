@@ -30,6 +30,7 @@ struct BagPocket
     u8 capacity;
 };
 
+extern const struct Item gItems[];
 extern struct BagPocket gBagPockets[];
 extern struct ItemSlot gTmHmItemSlots[BAG_TMHM_COUNT];
 

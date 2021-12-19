@@ -7268,7 +7268,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_1] =
     {
         .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
         .trainerName = _("Wally"),
@@ -7285,7 +7285,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7303,7 +7303,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7321,7 +7321,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7339,7 +7339,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7357,7 +7357,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7375,7 +7375,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7393,7 +7393,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7411,7 +7411,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7429,7 +7429,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7447,7 +7447,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7465,7 +7465,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7483,7 +7483,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7501,7 +7501,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7519,7 +7519,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7537,7 +7537,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7555,7 +7555,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7573,7 +7573,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7591,7 +7591,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -8365,7 +8365,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -8383,7 +8383,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -8471,7 +8471,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -8489,7 +8489,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -9274,7 +9274,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_MAUVILLE] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
         .trainerName = _("Wally"),
@@ -9288,7 +9288,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_2] =
     {
         .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
         .trainerName = _("Wally"),
@@ -9302,7 +9302,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_3] =
     {
         .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
         .trainerName = _("Wally"),
@@ -9316,7 +9316,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_4] =
     {
         .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
         .trainerName = _("Wally"),
@@ -9330,7 +9330,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_5] =
     {
         .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
         .trainerName = _("Wally"),
@@ -9347,7 +9347,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -9365,7 +9365,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -9383,7 +9383,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_2,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -9401,7 +9401,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -9419,7 +9419,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -9437,7 +9437,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -10869,7 +10869,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -10887,7 +10887,7 @@ const struct Trainer gTrainers[] = {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #else
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
 #endif
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -11378,7 +11378,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_STEVEN] =
     {
         .partyFlags = F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_MOVESET,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_STEVEN,
         .trainerName = _("Steven"),
@@ -12036,7 +12036,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_RED] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_RED,
         .trainerName = _("Red"),
@@ -12050,7 +12050,7 @@ const struct Trainer gTrainers[] = {
     [TRAINER_LEAF] =
     {
         .partyFlags = 0,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
+        .trainerClass = TRAINER_CLASS_RIVAL,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEAF,
         .trainerName = _("Leaf"),
