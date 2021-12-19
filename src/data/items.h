@@ -9142,12 +9142,12 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_ENIGMA_BERRY_NEW] = // Todo
+    [ITEM_ENIGMA_BERRY] = // Todo
     {
         .name = _("????????"),
         .itemId = ITEM_NONE,
         .price = 0,
-        .description = sEnigmaBerryNewDesc,
+        .description = sDummyDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -9231,7 +9231,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_ENIGMA_BERRY] =
+    [ITEM_ENIGMA_BERRY_E_READER] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
         .name = _("Baya Enigma"),
@@ -9240,7 +9240,7 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_ENIGMA_BERRY,
         .price = 20,
-        .description = sEnigmaBerryDesc,
+        .description = sEnigmaBerryEReaderDesc,
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU, // Type handled by ItemUseOutOfBattle_EnigmaBerry
         .fieldUseFunc = ItemUseOutOfBattle_EnigmaBerry,
