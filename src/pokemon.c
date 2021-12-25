@@ -1873,8 +1873,11 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/form_change_table_pointers.h"
 
 // SPECIES_NONE are ignored in the following two tables, so decrement before accessing these arrays to get the right result
-
+#if P_ENABLE_DEBUG == TRUE
+const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
+#else
 static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
+#endif
 {
     [SPECIES_BULBASAUR - 1]     = ANIM_V_JUMPS_H_JUMPS,
     [SPECIES_IVYSAUR - 1]       = ANIM_V_STRETCH,
@@ -12892,6 +12895,53 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 if (currentMap == gEvolutionTable[species][i].param)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            case EVO_LEVEL_NATURE_AMPED:
+                if (gEvolutionTable[species][i].param <= level)
+                {
+                    u8 nature = GetNature(mon);
+                    switch (nature)
+                    {
+                        case NATURE_HARDY:
+                        case NATURE_BRAVE:
+                        case NATURE_ADAMANT:
+                        case NATURE_NAUGHTY:
+                        case NATURE_DOCILE:
+                        case NATURE_IMPISH:
+                        case NATURE_LAX:
+                        case NATURE_HASTY:
+                        case NATURE_JOLLY:
+                        case NATURE_NAIVE:
+                        case NATURE_RASH:
+                        case NATURE_SASSY:
+                        case NATURE_QUIRKY:
+                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                            break;
+                    }
+                }
+                break;
+            case EVO_LEVEL_NATURE_LOW_KEY:
+                if (gEvolutionTable[species][i].param <= level)
+                {
+                    u8 nature = GetNature(mon);
+                    switch (nature)
+                    {
+                        case NATURE_LONELY:
+                        case NATURE_BOLD:
+                        case NATURE_RELAXED:
+                        case NATURE_TIMID:
+                        case NATURE_SERIOUS:
+                        case NATURE_MODEST:
+                        case NATURE_MILD:
+                        case NATURE_QUIET:
+                        case NATURE_BASHFUL:
+                        case NATURE_CALM:
+                        case NATURE_GENTLE:
+                        case NATURE_CAREFUL:
+                            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                            break;
+                    }
+                }
+                break;
             case EVO_LEVEL_NIGHT_ALOLA:
                 RtcCalcLocalTime();
                 if (!IsCurrentlyDay() && gEvolutionTable[species][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
@@ -14701,17 +14751,23 @@ u16 GetBaseFormSpeciesId(u16 formSpeciesId)
 // returns SPECIES_NONE if no form change is possible
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg) 
 {
+    return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
+}
+
+// Returns SPECIES_NONE if no form change is possible
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg) 
+{
     u32 i;
     u16 targetSpecies = SPECIES_NONE;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 species = GetBoxMonData(mon, MON_DATA_SPECIES, NULL);
     const struct FormChange *formChanges = gFormChangeTablePointers[species];
     u16 heldItem;
     u32 ability;
 
     if (formChanges != NULL)
     {
-        heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
-        ability = GetAbilityBySpecies(species, GetMonData(mon, MON_DATA_ABILITY_NUM, NULL));
+        heldItem = GetBoxMonData(mon, MON_DATA_HELD_ITEM, NULL);
+        ability = GetAbilityBySpecies(species, GetBoxMonData(mon, MON_DATA_ABILITY_NUM, NULL));
 
         for (i = 0; formChanges[i].method != FORM_CHANGE_END; i++)
         {
@@ -14720,7 +14776,7 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
                 switch (method)
                 {
                 case FORM_ITEM_HOLD:
-                    if (heldItem == formChanges[i].param1)
+                    if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_USE:
@@ -14728,11 +14784,12 @@ u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_MOVE:
-                    if (MonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
+                    if (BoxMonKnowsMove(mon, formChanges[i].param1) != formChanges[i].param2)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_HOLD_ABILITY:
-                    if (heldItem == formChanges[i].param1 && ability == formChanges[i].param2)
+                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                        && ability == formChanges[i].param2)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_ITEM_USE_TIME:
