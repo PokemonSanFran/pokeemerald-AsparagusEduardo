@@ -347,7 +347,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 
 void RunTextPrinters(void)
 {
-    int i, j, temp;
+    int i, temp;
 
     if (!gDisableTextPrinters)
     {
@@ -362,35 +362,32 @@ void RunTextPrinters(void)
                         temp = RenderFont(&sTextPrinters[i]);
                         switch (temp)
                         {
-                        case 3:
-                            CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, 2);
-                            if (sTextPrinters[i].callback != 0)
-                                sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
-                            break;
-                        case 1:
-                            CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, 2);
-                            sTextPrinters[i].active = 0;
-                            break;
-                        }
-                    } while (temp != 1 && temp != 3);
-                }
-                else
-                {
-                    for (j = 0; j < 2; j++)
-                    {
-                        temp = RenderFont(&sTextPrinters[i]);
-                        switch (temp)
-                        {
-                        case RENDER_PRINT:
-                            CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                         case RENDER_UPDATE:
+                            CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                             if (sTextPrinters[i].callback != 0)
                                 sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
                             break;
                         case RENDER_FINISH:
+                            CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
                             sTextPrinters[i].active = FALSE;
                             break;
                         }
+                    } while (temp != RENDER_FINISH && temp != RENDER_UPDATE);
+                }
+                else
+                {
+                    temp = RenderFont(&sTextPrinters[i]);
+                    switch (temp)
+                    {
+                    case RENDER_PRINT:
+                        CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
+                    case RENDER_UPDATE:
+                        if (sTextPrinters[i].callback != 0)
+                            sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, temp);
+                        break;
+                    case RENDER_FINISH:
+                        sTextPrinters[i].active = FALSE;
+                        break;
                     }
                 }
             }
