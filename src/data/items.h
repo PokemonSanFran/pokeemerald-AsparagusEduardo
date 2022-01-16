@@ -11905,7 +11905,6 @@ const struct Item gItems[] =
 #endif
         .itemId = ITEM_GRACIDEA,
         .price = 0,
-        .holdEffect = HOLD_EFFECT_GRACIDEA,
         .description = sGracideaDesc,
         .pocket = POCKET_KEY_ITEMS,
         #ifdef POKEMON_EXPANSION

@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
+#include "constants/battle_config.h"
+
 #define TEXT_BUFF_ARRAY_COUNT   18
 
 // for 0xFD

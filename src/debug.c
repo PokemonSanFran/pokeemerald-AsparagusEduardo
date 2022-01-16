@@ -11,6 +11,7 @@
 //Jaizu:                https://jaizu.moe/
 #include "global.h"
 #include "battle.h"
+#include "battle_main.h"
 #include "coins.h"
 #include "credits.h"
 #include "data.h"
@@ -284,8 +285,6 @@ extern u8 Debug_ShowFieldMessageStringVar4[];
 extern u8 Debug_CheatStart[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
-#define ABILITY_NAME_LENGTH 12
-extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 
 
 // *******************************
