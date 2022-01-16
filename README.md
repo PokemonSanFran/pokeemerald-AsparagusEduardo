@@ -3,8 +3,7 @@
 Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly project and inspired by Pokémon Theta Emerald by LCCoolJ95, this project's objective is to improve Pokémon Emerald's experience with features from later generations, including quality of life additions, mechanics and content.
 
 #### Important
-* This decomp hack is still in development and no official releases have been created for public use. As such, save files are constantly shifting, becoming incompatible with previous versions and bugs may appear. Please add to the issues tab any bugs that you might encounter, as I'll do the best I can to fix them.
-* You may use code from this repository on your own projects, just keep in mind who's code is who's and credit them correspondely
+* This an experimental decomp project and no official releases have been created for public use. As such, save files are constantly shifting, becoming incompatible with previous versions and bugs may appear. Please add to the issues tab any bugs that you might encounter, as I'll do the best I can to fix them.
 
 * If you have questions about the hack, need help setting up the repository, or just want to have a cool place to hang out, I'm part of the [RHH Discord Server](https://discord.gg/aha7DBH) and I tend to hang there a lot of the time. There's lots of people happy to help with what you may need!
 
