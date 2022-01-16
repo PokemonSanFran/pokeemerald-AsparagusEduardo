@@ -6451,9 +6451,9 @@ static void Cmd_handlelearnnewmove(void)
     const u8 *learnedMovePtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     const u8 *nothingToLearnPtr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
 
-    u16 learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], gBattlescriptCurrInstr[9], FALSE);
+    u16 learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], gBattlescriptCurrInstr[9]);
     while (learnMove == MON_ALREADY_KNOWS_MOVE)
-        learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], FALSE, FALSE);
+        learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], FALSE);
 
     if (learnMove == MOVE_NONE)
     {
@@ -13437,7 +13437,7 @@ static void Cmd_handleballthrow(void)
             catchRate = gBaseStats[gBattleMons[gBattlerTarget].species].catchRate;
 
         #ifdef POKEMON_EXPANSION
-        if (gBaseStats[gBattleMons[gBattlerTarget].species].flags & F_ULTRA_BEAST)
+        if (gBaseStats[gBattleMons[gBattlerTarget].species].flags & FLAG_ULTRA_BEAST)
         {
             if (gLastUsedItem == ITEM_BEAST_BALL)
                 ballMultiplier = 50;

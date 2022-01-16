@@ -10313,6 +10313,8 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     {
         if (gLevelUpLearnsets[species][i].level > level)
             break;
+        if (gLevelUpLearnsets[species][i].level == 0)
+            continue;
 
         move = (gLevelUpLearnsets[species][i].move & LEVEL_UP_MOVE_ID);
 
@@ -10324,7 +10326,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     }
 }
 
-u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove, bool8 isEvolving)
+u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
 {
     u32 retVal = MOVE_NONE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
@@ -10338,31 +10340,6 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove, bool8 isEvolving
     {
         sLearningMoveTableID = 0;
 
-    }
-    // Added evolution moves; Pokemon will learn moves listed at level zero upon evolution
-    if(isEvolving && (gLevelUpLearnsets[species][sLearningMoveTableID].level == 0))
-    {
-        gMoveToLearn = (gLevelUpLearnsets[species][sLearningMoveTableID].move & LEVEL_UP_MOVE_ID);
-        if (gSaveBlock1Ptr->txRandMoves) //tx_difficulty_challenges
-            gMoveToLearn = (RandomSeeded(gMoveToLearn, !gSaveBlock1Ptr->txRandChaos) % MOVES_COUNT) + 1;
-        sLearningMoveTableID++;
-        retVal = GiveMoveToMon(mon, gMoveToLearn);
-        sLearningMoveTableID++;
-        return retVal;        
-    }
-    
-    if(isEvolving && (gLevelUpLearnsets[species][sLearningMoveTableID].level > 0))
-    {
-        while (gLevelUpLearnsets[species][sLearningMoveTableID].level != level)
-        {
-            sLearningMoveTableID++;
-            if (gLevelUpLearnsets[species][sLearningMoveTableID].move == LEVEL_UP_END)
-                return 0;
-        }
-    }
-
-    if (firstMove)
-    {
         while (gLevelUpLearnsets[species][sLearningMoveTableID].level != level)
         {
             sLearningMoveTableID++;
@@ -11581,6 +11558,7 @@ u8 GetMonsStateToDoubles_2(void)
 
 u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
+    int i;
     if (gSaveBlock1Ptr->txRandAbilities) //tx_difficulty_challenges
     {
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_ABILITY, TRUE, TRUE);
@@ -11592,11 +11570,21 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
     if (abilityNum < NUM_ABILITY_SLOTS)
         gLastUsedAbility = gBaseStats[species].abilities[abilityNum];
     else
-        gLastUsedAbility = gBaseStats[species].abilities[0];
-
-    if (gLastUsedAbility == ABILITY_NONE)
-        gLastUsedAbility = gBaseStats[species].abilities[0];
-
+        gLastUsedAbility = ABILITY_NONE;
+    
+    if (abilityNum >= NUM_NORMAL_ABILITY_SLOTS) // if abilityNum is empty hidden ability, look for other hidden abilities
+    {
+        for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
+        {
+            gLastUsedAbility = gBaseStats[species].abilities[i];
+        }
+    }
+    
+    for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
+    {
+        gLastUsedAbility = gBaseStats[species].abilities[i];
+    }
+    
     return gLastUsedAbility;
 }
 
@@ -14026,27 +14014,27 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
     return GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
 }
 
-const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 formSpeciesId, u32 otId, u32 personality)
+const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
 {
     u32 shinyValue;
 
-    if (formSpeciesId > NUM_SPECIES)
+    if (species > NUM_SPECIES)
         return gMonPaletteTable[SPECIES_NONE].data;
 
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {
-        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
-            return gMonShinyPaletteTableFemale[formSpeciesId].data;
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+            return gMonShinyPaletteTableFemale[species].data;
         else
-            return gMonShinyPaletteTable[formSpeciesId].data;
+            return gMonShinyPaletteTable[species].data;
     }
     else
     {
-        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
-            return gMonPaletteTableFemale[formSpeciesId].data;
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+            return gMonPaletteTableFemale[species].data;
         else
-            return gMonPaletteTable[formSpeciesId].data;
+            return gMonPaletteTable[species].data;
     }
 }
 
@@ -14058,24 +14046,24 @@ const struct CompressedSpritePalette *GetMonSpritePalStruct(struct Pokemon *mon)
     return GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
 }
 
-const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 formSpeciesId, u32 otId , u32 personality)
+const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality)
 {
     u32 shinyValue;
 
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
     {
-        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
-            return &gMonShinyPaletteTableFemale[formSpeciesId];
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+            return &gMonShinyPaletteTableFemale[species];
         else
-            return &gMonShinyPaletteTable[formSpeciesId];
+            return &gMonShinyPaletteTable[species];
     }
     else
     {
-        if (SpeciesHasGenderDifference[formSpeciesId] && GetGenderFromSpeciesAndPersonality(formSpeciesId, personality) == MON_FEMALE)
-            return &gMonPaletteTableFemale[formSpeciesId];
+        if ((gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE)
+            return &gMonPaletteTableFemale[species];
         else
-            return &gMonPaletteTable[formSpeciesId];
+            return &gMonPaletteTable[species];
     }
 }
 
@@ -14815,6 +14803,32 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *mon, u16 method, u32 arg
     }
 
     return species != targetSpecies ? targetSpecies : SPECIES_NONE;
+}
+
+u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+
+    // Since you can learn more than one move per level,
+    // the game needs to know whether you decided to
+    // learn it or keep the old set to avoid asking
+    // you to learn the same move over and over again.
+    if (firstMove)
+    {
+        sLearningMoveTableID = 0;
+    }
+    while(gLevelUpLearnsets[species][sLearningMoveTableID].move != LEVEL_UP_END)
+    {
+        while (gLevelUpLearnsets[species][sLearningMoveTableID].level == 0 || gLevelUpLearnsets[species][sLearningMoveTableID].level == level)
+        {
+            gMoveToLearn = gLevelUpLearnsets[species][sLearningMoveTableID].move;
+            sLearningMoveTableID++;
+            return GiveMoveToMon(mon, gMoveToLearn);
+        }
+        sLearningMoveTableID++;
+    }
+    return 0;
 }
 
 //******************* tx_difficulty_challenges

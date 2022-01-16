@@ -3791,6 +3791,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_VAPOREON] =
@@ -11201,6 +11202,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_STARAVIA] =
@@ -11230,6 +11232,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_STARAPTOR] =
@@ -11291,6 +11294,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_BIBAREL] =
@@ -11346,6 +11350,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_SHED_SKIN, ABILITY_NONE, ABILITY_RUN_AWAY},
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_KRICKETUNE] =
@@ -11375,6 +11380,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_SHINX] =
@@ -11403,6 +11409,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_LUXIO] =
@@ -11742,6 +11749,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_VESPIQUEN] =
@@ -12694,6 +12702,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_HIPPOWDON] =
@@ -12722,6 +12731,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_SKORUPI] =
@@ -14701,6 +14711,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_BLITZLE] =
@@ -16798,6 +16809,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_JELLICENT] =
@@ -16826,6 +16838,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_ALOMOMOLA] =
@@ -18905,6 +18918,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .flags = FLAG_GENDER_DIFFERENCE,
     },
 
     [SPECIES_FLABEBE] =
@@ -22429,7 +22443,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_BUZZWOLE] =
@@ -22459,7 +22473,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_PHEROMOSA] =
@@ -22488,7 +22502,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_XURKITREE] =
@@ -22517,7 +22531,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_CELESTEELA] =
@@ -22548,7 +22562,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_KARTANA] =
@@ -22577,7 +22591,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_GUZZLORD] =
@@ -22606,7 +22620,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_NECROZMA] =
@@ -22721,7 +22735,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_NAGANADEL] =
@@ -22750,7 +22764,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_STAKATAKA] =
@@ -22779,7 +22793,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = TRUE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_BLACEPHALON] =
@@ -22808,7 +22822,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = TRUE,
-        .flags = F_ULTRA_BEAST,
+        .flags = FLAG_ULTRA_BEAST,
     },
 
     [SPECIES_ZERAORA] =
@@ -26771,7 +26785,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_RATICATE_ALOLAN] =
@@ -26801,7 +26815,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_RAICHU_ALOLAN] =
@@ -26830,7 +26844,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_SANDSHREW_ALOLAN] =
@@ -26862,7 +26876,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_SANDSLASH_ALOLAN] =
@@ -26892,7 +26906,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_VULPIX_ALOLAN] =
@@ -26924,7 +26938,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_NINETALES_ALOLAN] =
@@ -26955,7 +26969,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_DIGLETT_ALOLAN] =
@@ -26985,7 +26999,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_DUGTRIO_ALOLAN] =
@@ -27015,7 +27029,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_MEOWTH_ALOLAN] =
@@ -27045,7 +27059,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_PERSIAN_ALOLAN] =
@@ -27075,7 +27089,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_GEODUDE_ALOLAN] =
@@ -27107,7 +27121,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_GRAVELER_ALOLAN] =
@@ -27139,7 +27153,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_GOLEM_ALOLAN] =
@@ -27168,7 +27182,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_GRIMER_ALOLAN] =
@@ -27200,7 +27214,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_MUK_ALOLAN] =
@@ -27230,7 +27244,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_EXEGGUTOR_ALOLAN] =
@@ -27259,7 +27273,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_MAROWAK_ALOLAN] =
@@ -27289,7 +27303,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = F_ALOLAN_FORM,
+        .flags = FLAG_ALOLAN_FORM,
     },
 
     [SPECIES_MEOWTH_GALARIAN] =
@@ -27318,7 +27332,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_PONYTA_GALARIAN] =
@@ -27347,7 +27361,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_RAPIDASH_GALARIAN] =
@@ -27376,7 +27390,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_SLOWPOKE_GALARIAN] =
@@ -27405,9 +27419,8 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
-
 
     [SPECIES_SLOWBRO_GALARIAN] =
     {
@@ -27435,7 +27448,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_FARFETCHD_GALARIAN] =
@@ -27465,7 +27478,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_WEEZING_GALARIAN] =
@@ -27497,7 +27510,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_MR_MIME_GALARIAN] =
@@ -27526,7 +27539,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_ARTICUNO_GALARIAN] =
@@ -27555,7 +27568,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_ZAPDOS_GALARIAN] =
@@ -27584,7 +27597,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_MOLTRES_GALARIAN] =
@@ -27613,7 +27626,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_SLOWKING_GALARIAN] =
@@ -27642,7 +27655,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_CORSOLA_GALARIAN] =
@@ -27671,7 +27684,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_ZIGZAGOON_GALARIAN] =
@@ -27700,7 +27713,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_LINOONE_GALARIAN] =
@@ -27729,7 +27742,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_DARUMAKA_GALARIAN] =
@@ -27754,7 +27767,7 @@ const struct BaseStats gBaseStats[] =
         .abilities = {ABILITY_HUSTLE, ABILITY_NONE, ABILITY_INNER_FOCUS},
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_DARMANITAN_GALARIAN] =
@@ -27783,7 +27796,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_YAMASK_GALARIAN] =
@@ -27812,7 +27825,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_STUNFISK_GALARIAN] =
@@ -27841,7 +27854,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_PIKACHU_COSPLAY] =
@@ -29971,7 +29984,7 @@ const struct BaseStats gBaseStats[] =
         #endif
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
-        .flags = F_GALARIAN_FORM,
+        .flags = FLAG_GALARIAN_FORM,
     },
 
     [SPECIES_DEERLING_SUMMER] =
