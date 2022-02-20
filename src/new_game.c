@@ -100,6 +100,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock2Ptr->optionsUnitSystem = 0;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsHpExpBarSpeed = 0; //tx_optionsPlus
+    gSaveBlock2Ptr->optionsFishReeling = 0;
 }
 
 static void ClearPokedexFlags(void)

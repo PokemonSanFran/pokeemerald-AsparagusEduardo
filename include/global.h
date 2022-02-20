@@ -484,7 +484,10 @@ struct SaveBlock2
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+
+    /*0x13*/ u8 optionsButtonMode:2;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+             u8 optionsFiller1:6;
+
     /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/FASTER/INSTANT]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
     /*0x17*/ u16 optionsSound:3; // OPTIONS_SOUND_[MONO/STEREO/SFX OFF/Music OFF/ALL OFF]
@@ -497,7 +500,8 @@ struct SaveBlock2
              u16 optionsTransitionSpeed:2;
              u16 optionsHpExpBarSpeed:1;
              u16 optionsUnitSystem:1;
-             u16 filler1:11;
+             u16 optionsFishReeling:1;
+             u16 filler1:10;
     /*0x18*/ struct Pokedex pokedex;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;

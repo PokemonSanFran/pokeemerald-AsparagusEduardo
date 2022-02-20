@@ -29,6 +29,7 @@ enum
     MENUITEM_HP_EXP_BAR,
     MENUITEM_UNIT_SYSTEM,
     MENUITEM_FRAMETYPE,
+    MENUITEM_FISHREELING,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -92,6 +93,7 @@ struct
     [MENUITEM_HP_EXP_BAR]   = {DrawChoices_HpExpBar,    ProcessInput_Options_Two},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
+    [MENUITEM_FISHREELING]  = {DrawChoices_FishReeling, ProcessInput_Options_Two},
     [MENUITEM_CANCEL]       = {NULL, NULL},
 };
 
@@ -112,15 +114,16 @@ static const u8 sText_SaveConfirm[] = _("Save confirm");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
-    [MENUITEM_TEXTSPEED]            = gText_TextSpeed,
-    [MENUITEM_BATTLESCENE]          = gText_BattleScene,
-    [MENUITEM_BATTLESTYLE]          = gText_BattleStyle,
-    [MENUITEM_SOUND]                = gText_Sound,
-    [MENUITEM_BUTTONMODE]           = gText_ButtonMode,
-    [MENUITEM_HP_EXP_BAR]           = sText_HpExpBar,
-    [MENUITEM_UNIT_SYSTEM]          = sText_UnitSystem,
-    [MENUITEM_FRAMETYPE]            = gText_Frame,
-    [MENUITEM_CANCEL]               = gText_OptionMenuSave,
+    [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
+    [MENUITEM_BATTLESCENE] = gText_BattleScene,
+    [MENUITEM_BATTLESTYLE] = gText_BattleStyle,
+    [MENUITEM_SOUND]       = gText_Sound,
+    [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
+    [MENUITEM_HP_EXP_BAR]  = sText_HpExpBar,
+    [MENUITEM_UNIT_SYSTEM] = sText_UnitSystem,
+    [MENUITEM_FRAMETYPE]   = gText_Frame,
+    [MENUITEM_FISHREELING] = sText_FishReeling,
+    [MENUITEM_CANCEL]      = gText_OptionMenuSave,
 };
 
 static const u8 sText_Faster[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FASTER");
@@ -268,14 +271,15 @@ void CB2_InitOptionMenu(void)
         taskId = CreateTask(Task_OptionMenuFadeIn, 0);
 
         sOptions = AllocZeroed(sizeof(*sOptions));
-        sOptions->sel[MENUITEM_TEXTSPEED]           = gSaveBlock2Ptr->optionsTextSpeed;
-        sOptions->sel[MENUITEM_BATTLESCENE]         = gSaveBlock2Ptr->optionsBattleSceneOff;
-        sOptions->sel[MENUITEM_BATTLESTYLE]         = gSaveBlock2Ptr->optionsBattleStyle;
-        sOptions->sel[MENUITEM_SOUND]               = gSaveBlock2Ptr->optionsSound;
-        sOptions->sel[MENUITEM_BUTTONMODE]          = gSaveBlock2Ptr->optionsButtonMode;
-        sOptions->sel[MENUITEM_HP_EXP_BAR]          = gSaveBlock2Ptr->optionsHpExpBarSpeed;
-        sOptions->sel[MENUITEM_UNIT_SYSTEM]         = gSaveBlock2Ptr->optionsUnitSystem;
-        sOptions->sel[MENUITEM_FRAMETYPE]           = gSaveBlock2Ptr->optionsWindowFrameType;
+        sOptions->sel[MENUITEM_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
+        sOptions->sel[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
+        sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
+        sOptions->sel[MENUITEM_SOUND]       = gSaveBlock2Ptr->optionsSound;
+        sOptions->sel[MENUITEM_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
+        sOptions->sel[MENUITEM_HP_EXP_BAR]  = gSaveBlock2Ptr->optionsHpExpBarSpeed;
+        sOptions->sel[MENUITEM_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
+        sOptions->sel[MENUITEM_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
+        sOptions->sel[MENUITEM_FISHREELING] = gSaveBlock2Ptr->optionsFishReeling;
 
         for (i = 0; i < 7; i++)
             DrawChoices(i, i * Y_DIFF);
@@ -434,6 +438,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsHpExpBarSpeed    = sOptions->sel[MENUITEM_HP_EXP_BAR];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
+    gSaveBlock2Ptr->optionsFishReeling      = sOptions->sel[MENUITEM_FISHREELING];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
