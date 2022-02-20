@@ -30,6 +30,7 @@ enum
     MENUITEM_UNIT_SYSTEM,
     MENUITEM_FRAMETYPE,
     MENUITEM_FISHREELING,
+    MENUITEM_SAVECONFIRM,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -94,6 +95,7 @@ struct
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_FISHREELING]  = {DrawChoices_FishReeling, ProcessInput_Options_Two},
+    [MENUITEM_SAVECONFIRM]  = {DrawChoices_SaveConfirm, ProcessInput_Options_Two},
     [MENUITEM_CANCEL]       = {NULL, NULL},
 };
 
@@ -123,6 +125,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_UNIT_SYSTEM] = sText_UnitSystem,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_FISHREELING] = sText_FishReeling,
+    [MENUITEM_SAVECONFIRM] = sText_SaveConfirm,
     [MENUITEM_CANCEL]      = gText_OptionMenuSave,
 };
 
@@ -280,6 +283,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
         sOptions->sel[MENUITEM_FISHREELING] = gSaveBlock2Ptr->optionsFishReeling;
+        sOptions->sel[MENUITEM_SAVECONFIRM] = gSaveBlock2Ptr->optionsSaveConfirm;
 
         for (i = 0; i < 7; i++)
             DrawChoices(i, i * Y_DIFF);
@@ -439,6 +443,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
     gSaveBlock2Ptr->optionsFishReeling      = sOptions->sel[MENUITEM_FISHREELING];
+    gSaveBlock2Ptr->optionsSaveConfirm      = sOptions->sel[MENUITEM_SAVECONFIRM];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
