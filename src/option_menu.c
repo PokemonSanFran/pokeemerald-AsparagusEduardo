@@ -100,9 +100,9 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/misc/option_menu_t
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
 
-static const u8 sText_HpBar[] = _("HP BAR");
-static const u8 sText_ExpBar[] = _("EXP BAR");
-static const u8 sText_UnitSystem[] = _("UNIT SYSTEM");
+static const u8 sText_HpBar[] = _("HP bar");
+static const u8 sText_ExpBar[] = _("Exp. bar");
+static const u8 sText_UnitSystem[] = _("Unit System");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
