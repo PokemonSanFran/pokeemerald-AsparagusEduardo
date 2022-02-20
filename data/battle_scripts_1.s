@@ -6084,6 +6084,16 @@ BattleScript_PayDayMoneyAndPickUpItems::
 	pickup
 	end2
 
+BattleScript_PickedUpItem::
+	printstring STRINGID_PICKUP
+	waitmessage 0x40
+	return
+
+BattleScript_PickedUpItemSolo::
+	printstring STRINGID_PICKUPSOLO
+	waitmessage 0x40
+	return
+
 BattleScript_LocalBattleLost::
 	jumpifbattletype BATTLE_TYPE_INGAME_PARTNER, BattleScript_LocalBattleLostPrintWhiteOut
 	jumpifbattletype BATTLE_TYPE_DOME, BattleScript_CheckDomeDrew
