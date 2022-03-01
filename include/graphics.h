@@ -7784,8 +7784,6 @@ extern const u32 gItemIcon_RedOrb[];
 extern const u32 gItemIconPalette_RedOrb[];
 extern const u32 gItemIcon_BlueOrb[];
 extern const u32 gItemIconPalette_BlueOrb[];
-extern const u32 gItemIcon_JadeOrb[];
-extern const u32 gItemIconPalette_JadeOrb[];
 // Mega Stones
 extern const u32 gItemIcon_Venusaurite[];
 extern const u32 gItemIconPalette_Venusaurite[];
@@ -8421,8 +8419,6 @@ extern const u32 gItemIconPalette_NLunarizer[];
 extern const u32 gItemIcon_ReinsOfUnity[];
 extern const u32 gItemIconPalette_ReinsOfUnity[];
 // Battle Mechanic Key Items
-extern const u32 gItemIcon_KeyStone[];
-extern const u32 gItemIconPalette_KeyStone[];
 extern const u32 gItemIcon_MegaRing[];
 extern const u32 gItemIconPalette_MegaRing[];
 extern const u32 gItemIcon_ZPowerRing[];

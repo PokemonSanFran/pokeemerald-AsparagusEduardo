@@ -5394,11 +5394,6 @@ static const u8 sBlueOrbDesc[] = _(
     "said to contain an\n"
     "ancient power.");
 
-static const u8 sJadeOrbDesc[] = _(
-    "A green, shiny orb\n"
-    "said to have a leg-\n"
-    "end tied to it.");
-
 // Mega Stones
 static const u8 sVenusauriteDesc[] = _(
     "This stone enables\n"
@@ -7684,11 +7679,6 @@ static const u8 sReinsOfUnityDesc[] = _(
     "beloved steed.");
 
 // Battle Mechanic Key Items
-static const u8 sKeyStoneDesc[] = _(
-    "A stone of untold\n"
-    "power that allows\n"
-    "Mega Evolution.");
-
 static const u8 sMegaRingDesc[] = _(
     "Enables {PKMN} holding\n"
     "their Mega Stone to\n"
