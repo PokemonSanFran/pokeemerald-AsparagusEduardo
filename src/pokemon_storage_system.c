@@ -7392,7 +7392,7 @@ static u8 HandleInput_InParty(void)
         if (JOY_REPEAT(DPAD_UP))
         {
             if (--cursorPosition < 0)
-                cursorPosition =  GetPartySize(); //tx_difficulty_challenges
+                cursorPosition = GetPartySize(); //tx_difficulty_challenges;
             if (cursorPosition != sCursorPosition)
                 retVal = INPUT_MOVE_CURSOR;
             break;

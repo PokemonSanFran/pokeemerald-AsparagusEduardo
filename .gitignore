@@ -46,5 +46,6 @@ porymap.project.cfg
 *.sna
 *.diff
 *.sym
+*.js
 log.txt
 mgba.sh

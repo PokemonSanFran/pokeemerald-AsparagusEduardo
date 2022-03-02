@@ -1,16 +1,15 @@
 Common_EventScript_PkmnCenterNurse::
-    lock
-    faceplayer
-    specialvar VAR_RESULT, GetPokemonCenterChallenge
-    compare VAR_RESULT, 0
-    goto_if_eq EventScript_PkmnCenterNurse_PkmnCenterChallenge_NoVisits
-    setvar VAR_0x8004, 0
-    specialvar VAR_RESULT, CountPlayerTrainerStars
+	lock
+	faceplayer
+	specialvar VAR_RESULT, GetPokemonCenterChallenge
+    goto_if_eq VAR_RESULT, 0, EventScript_PkmnCenterNurse_PkmnCenterChallenge_NoVisits
+	setvar VAR_0x8004, 0
+	specialvar VAR_RESULT, CountPlayerTrainerStars
 	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_GoldCard
     msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn
 	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_Goodbye
-    end
+	end
 
 EventScript_PkmnCenterNurse_Goodbye::
 	message gText_WeHopeToSeeYouAgain
@@ -126,9 +125,9 @@ EventScript_PkmnCenterNurse_GoldCardHealPkmn::
 	end
 
 Movement_PkmnCenterNurse_Bow:
-    nurse_joy_bow
-    delay_4
-    step_end
+	nurse_joy_bow
+	delay_4
+	step_end
 
 EventScript_PkmnCenterNurse_PkmnCenterChallenge_NoVisits:: @ tx_difficulty_challenges
     message gText_PkmnCenterChallenge_NoVisitsLeft
