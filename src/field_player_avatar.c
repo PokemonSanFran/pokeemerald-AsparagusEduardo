@@ -629,6 +629,13 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     }
     
     gPlayerAvatar.creeping = FALSE;
+
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON))
+    {
+        PlayerWalkFast(direction);
+        return;
+    }
+
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
     {
         if (heldKeys & B_BUTTON)
