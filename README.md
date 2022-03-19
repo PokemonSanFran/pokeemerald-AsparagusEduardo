@@ -56,6 +56,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
     * **Access to DexNav from PokéNav** by Artrios/Paccy
 * [Day/Night lightning System](https://github.com/huderlem/pokeemerald/tree/daynight-diego) by [Sierraffinity](https://github.com/Sierraffinity)
 	* Day/Night encounters.
+    * **Change between Day and Night encounters in the Pokédex by pressing A** by Paccy/Artrios
 * [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
 * [Following Pokémon](https://github.com/aarant/pokeemerald/tree/romhack) by Merrp, with further development by Artrios
 
