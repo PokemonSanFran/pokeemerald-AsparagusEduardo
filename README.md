@@ -18,11 +18,8 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * Berry trees don't wither if their berries aren't picked up.
 * Easier way of getting to Mirage Island.
 * Name Rater can rename foreign Pokémon.
-* Bag improvements
-	* [More bag pockets](https://github.com/AsparagusEduardo/pokeemerald/tree/BetterBag) by me.
-		* Expanded bag slots to have at least one stack of each item.
-	* [Bag sorting](https://www.pokecommunity.com/showthread.php?p=10167488#post10167488) by [ghoulslash](https://github.com/ghoulslash).
-	* [Registering items to L & R](https://www.pokecommunity.com/showthread.php?p=10134388#post10134388) by [ghoulslash](https://github.com/ghoulslash).
+* [More bag pockets](https://github.com/AsparagusEduardo/pokeemerald/tree/BetterBag) by me.
+	* Expanded bag slots so there's space for at least one stack of each item.
 * [Fast surfing](https://www.pokecommunity.com/showthread.php?p=10137446#post10137446) by [ghoulslash](https://github.com/ghoulslash).
 * [Repeated field medicine use](https://www.pokecommunity.com/showthread.php?p=10206290#post10206290) by [ghoulslash](https://github.com/ghoulslash).
 * When blacking out, you no longer lose half your money, instead using the [current formula](https://github.com/AsparagusEduardo/pokeemerald/tree/WhiteOutMoney). Code by me, with help from [lightgod87](https://github.com/lightgod87).
@@ -35,6 +32,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * Expanded move names by Mandll27
 * [Move items between mon in party menu](https://www.pokecommunity.com/showpost.php?p=10120157&postcount=43) by Zeturic
 * [PokéMart items based on badge count](https://github.com/pret/pokeemerald/wiki/Shop-Items-By-Badge-Count) by [ghoulslash](https://github.com/ghoulslash).
+* No need to water berry trees on rainy routes (Credit: BuffelSalt)
 
 #### Branches utilized:
 * [RHH](https://github.com/rh-hideout)'s [Battle Engine](https://github.com/rh-hideout/pokeemerald-expansion/tree/battle_engine).
@@ -43,6 +41,12 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 	* [Strange Souvenir](https://github.com/AsparagusEduardo/pokeemerald/tree/AlolanEvolution), which allows Alola-only evolutions. Code and sprite size-adjusted by me.
 	* Gen 6 Exp Share. Original code by Blurose, ported by [Lunos](https://github.com/LOuroboros).
 	* Lures for attracting more double battles and raising shiny odds.
+* [ghoulslash](https://github.com/ghoulslash)'s branches:
+	* [Bag sorting](https://www.pokecommunity.com/showthread.php?p=10167488#post10167488) by [ghoulslash](https://github.com/ghoulslash).
+	* [Registering items to L & R](https://www.pokecommunity.com/showthread.php?p=10134388#post10134388) by [ghoulslash](https://github.com/ghoulslash).
+	* [DexNav](https://github.com/ghoulslash/pokeemerald/tree/dexnav).
+    	* **Access to DexNav from PokéNav** by Artrios/Paccy
+	* [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
 * [TheXaman](https://github.com/TheXaman/pokeemerald) 's branches:
 	* [HGSS styled Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss). Adds complete information about movesets, abilities, stats and more.
 	* [Options Plus](https://github.com/TheXaman/pokeemerald/tree/tx_optionsPlus). Expands the amount of options available with new pagination and scrolling.
@@ -52,11 +56,8 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * Spanish version in development by syncing with [pokeesmeralda](https://github.com/LOuroboros/pokeemerald/tree/pokeesmeralda) by [Lunos](https://github.com/LOuroboros).
 	* [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/pokeesmeralda_decap) version mantained by me.
 * [Soaring](https://www.pokecommunity.com/showthread.php?t=422107). Code by camthesaxman, ported by paccy.
-* [ghoulslash](https://github.com/ghoulslash)'s [DexNav](https://github.com/ghoulslash/pokeemerald/tree/dexnav).
-    * **Access to DexNav from PokéNav** by Artrios/Paccy
 * [Day/Night lightning System](https://github.com/huderlem/pokeemerald/tree/daynight-diego) by [Sierraffinity](https://github.com/Sierraffinity)
 	* Day/Night encounters.
     * **Change between Day and Night encounters in the Pokédex by pressing A** by Paccy/Artrios
-* [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
 * [Following Pokémon](https://github.com/aarant/pokeemerald/tree/romhack) by Merrp, with further development by Artrios
 
