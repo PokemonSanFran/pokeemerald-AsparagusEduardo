@@ -1928,6 +1928,7 @@ static void Task_DexNavFadeAndExit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        FreePokenavResources();
         SetMainCallback2(sDexNavUiDataPtr->savedCallback);
         DexNavGuiFreeResources();
         DestroyTask(taskId);
