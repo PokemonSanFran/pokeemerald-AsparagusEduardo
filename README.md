@@ -53,6 +53,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 	* [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/pokeesmeralda_decap) version mantained by me.
 * [Soaring](https://www.pokecommunity.com/showthread.php?t=422107). Code by camthesaxman, ported by paccy.
 * [ghoulslash](https://github.com/ghoulslash)'s [DexNav](https://github.com/ghoulslash/pokeemerald/tree/dexnav).
+    * **Access to DexNav from PokéNav** by Artrios/Paccy
 * [Day/Night lightning System](https://github.com/huderlem/pokeemerald/tree/daynight-diego) by [Sierraffinity](https://github.com/Sierraffinity)
 	* Day/Night encounters.
 * [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
