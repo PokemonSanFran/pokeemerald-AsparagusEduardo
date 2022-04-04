@@ -4071,10 +4071,10 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if (FlagGet(FLAG_SYS_NO_BAG_USE) || gBattleTypeFlags & (BATTLE_TYPE_LINK //DEBUG
+                    if (FlagGet(FLAG_SYS_NO_BAG_USE) || (gBattleTypeFlags & (BATTLE_TYPE_LINK //DEBUG
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
-                                            | BATTLE_TYPE_RECORDED_LINK)
+                                            | BATTLE_TYPE_RECORDED_LINK))
                                             // Or if currently held by Sky Drop
                                             || gStatuses3[gActiveBattler] & STATUS3_SKY_DROPPED)
                     {

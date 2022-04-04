@@ -99,10 +99,9 @@ struct
 // EWRAM vars
 EWRAM_DATA static struct OptionMenu *sOptions = NULL;
 
-// const rom data
-static const u16 sUnknown_0855C604[] = INCBIN_U16("graphics/misc/option_menu_text.gbapal");
+static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text.gbapal");
 // note: this is only used in the Japanese release
-static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/misc/option_menu_equals_sign.4bpp");
+static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
 static const u8 sText_HpBar[] = _("Hp Bar Speed");
 static const u8 sText_ExpBar[] = _("Exp Bar Speed");
 static const u8 sText_Transition[] = _("Transition");
@@ -245,7 +244,7 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 5:
-        LoadPalette(sUnknown_0855C604, 0x10, sizeof(sUnknown_0855C604));
+        LoadPalette(sOptionMenuText_Pal, 0x10, sizeof(sOptionMenuText_Pal));
         gMain.state++;
         break;
     case 6:
