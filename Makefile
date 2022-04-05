@@ -150,7 +150,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) libagbsyscall modern tidymodern tidynonmodern debugging debugging_modern
+.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) libagbsyscall modern tidymodern tidynonmodern
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -311,12 +311,6 @@ ifeq ($(DINFO),1)
 override CFLAGS += -g
 endif
 
-# Debug menu
-ifeq ($(DDEBUGGING),1)
-override ASFLAGS += --defsym DEBUGGING=1
-override CPPFLAGS += -D DEBUGGING=1
-endif
-
 # The dep rules have to be explicit or else missing files won't be reported.
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
@@ -449,7 +443,3 @@ libagbsyscall:
 
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@
-
-# Debug menu
-debugging: ; @$(MAKE) DDEBUGGING=1 DINFO=1
-debugging_modern: ; @$(MAKE) MODERN=1 DDEBUGGING=1 DINFO=1
