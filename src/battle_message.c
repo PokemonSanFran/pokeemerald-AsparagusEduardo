@@ -733,6 +733,8 @@ static const u8 sText_PkmnAboutToBeAttackedByItsItem[] = _("{B_DEF_NAME_WITH_PRE
 static const u8 sText_CantEscapeBecauseOfCurrentMove[] = _("{B_DEF_NAME_WITH_PREFIX} can no longer escape\nbecause of {B_CURRENT_MOVE}!");
 static const u8 sText_NeutralizingGasEnters[] = _("¡Un gas reactivo se propaga\npor toda la zona!");
 static const u8 sText_NeutralizingGasOver[] = _("El gas reactivo se ha disipado.");
+static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX} took {B_DEF_NAME_WITH_PREFIX}\ninto the air!");
+static const u8 sText_TargetTooHeavy[] = _("But the target\nwas too heavy!");
 #else
 
 static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
@@ -1110,8 +1112,6 @@ static const u8 sText_ExclamationMark4[] = _("!");
 static const u8 sText_ExclamationMark5[] = _("!");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
-static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX} took {B_DEF_NAME_WITH_PREFIX}\ninto the air!");
-static const u8 sText_TargetTooHeavy[] = _("But the target\nwas too heavy!");
 
 const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
 {
@@ -1416,6 +1416,8 @@ static const u8 sText_PkmnAboutToBeAttackedByItsItem[] = _("{B_DEF_NAME_WITH_PRE
 static const u8 sText_CantEscapeBecauseOfCurrentMove[] = _("{B_DEF_NAME_WITH_PREFIX} can no longer escape\nbecause of {B_CURRENT_MOVE}!");
 static const u8 sText_NeutralizingGasEnters[] = _("Neutralizing Gas filled the area!");
 static const u8 sText_NeutralizingGasOver[] = _("The effects of Neutralizing\nGas wore off!");
+static const u8 sText_PkmnTookTargetHigh[] = _("{B_ATK_NAME_WITH_PREFIX} took {B_DEF_NAME_WITH_PREFIX}\ninto the air!");
+static const u8 sText_TargetTooHeavy[] = _("But the target\nwas too heavy!");
 
 #endif
 
@@ -3821,7 +3823,7 @@ static void GetBattlerNick(u32 battlerId, u8 *dst)
     if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)                     \
     {                                                                   \
         GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_NICKNAME, text);    \
-        StringGetEnd10(text);                                           \
+        StringGet_Nickname(text);                                           \
         toCpy = text;                                                   \
         while (*toCpy != EOS)                                           \
         {                                                               \
@@ -3837,7 +3839,7 @@ static void GetBattlerNick(u32 battlerId, u8 *dst)
     else                                                                \
     {                                                                   \
         GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_NICKNAME, text);   \
-        StringGetEnd10(text);                                           \
+        StringGet_Nickname(text);                                           \
         toCpy = text;                                                   \
     }
 #else
@@ -4506,7 +4508,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 StringAppend(dst, text);
 #endif
             }
@@ -4514,7 +4516,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
                 GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, text);
-                StringGetEnd10(text);
+                StringGet_Nickname(text);
                 StringAppend(dst, text);
 #endif
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)

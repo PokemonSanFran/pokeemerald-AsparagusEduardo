@@ -1747,11 +1747,7 @@ static void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-#if GAME_LANGUAGE == LANGUAGE_SPANISH
-        glyphs = gFontSmallEspLatinGlyphs + (0x20 * glyphId);
-#else
         glyphs = gFontSmallLatinGlyphs + (0x20 * glyphId);
-#endif
         gCurGlyph.width = gFontSmallLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
@@ -1793,11 +1789,7 @@ static void DecompressGlyph_Narrow(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-#if GAME_LANGUAGE == LANGUAGE_SPANISH
-        glyphs = gFontNarrowEspLatinGlyphs + (0x20 * glyphId);
-#else
         glyphs = gFontNarrowLatinGlyphs + (0x20 * glyphId);
-#endif
         gCurGlyph.width = gFontNarrowLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
@@ -1925,11 +1917,7 @@ static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-#if GAME_LANGUAGE == LANGUAGE_SPANISH
-        glyphs = gFontNormalEspLatinGlyphs + (0x20 * glyphId);
-#else
         glyphs = gFontNormalLatinGlyphs + (0x20 * glyphId);
-#endif
         gCurGlyph.width = gFontNormalLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
