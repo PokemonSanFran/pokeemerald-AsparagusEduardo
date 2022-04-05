@@ -262,13 +262,22 @@ $(TILESETGFXDIR)/secondary/mystery_events_house/tiles.4bpp: %.4bpp: %.png
 $(FONTGFXDIR)/small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/small_es.latfont: $(FONTGFXDIR)/latin_small_es.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/normal.latfont: $(FONTGFXDIR)/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/normal_es.latfont: $(FONTGFXDIR)/latin_normal_es.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/narrow_es.latfont: $(FONTGFXDIR)/latin_narrow_es.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
@@ -308,15 +317,6 @@ $(FONTGFXDIR)/unused_frlg_down_arrow.4bpp: %.4bpp: %.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/keypad_icons.4bpp: %.4bpp: %.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/font0_es.latfont: $(FONTGFXDIR)/font0_latin_es.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/font1_es.latfont: $(FONTGFXDIR)/font1_latin_es.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/font7_es.latfont: $(FONTGFXDIR)/font7_latin_es.png
 	$(GFX) $< $@
 
 ### Miscellaneous ###

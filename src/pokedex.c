@@ -411,8 +411,8 @@ static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
 static void CreateTypeIconSprites(void);
 //Stats screen HGSS_Ui
 #define SCROLLING_MON_X 146
-#define HGSS_DECAPPED 0 //0 false, 1 true
-#define HGSS_DARK_MODE 0 //0 false, 1 true
+#define HGSS_DECAPPED TRUE //0 false, 1 true
+#define HGSS_DARK_MODE FALSE //0 false, 1 true
 #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES TRUE //0 false, 1 true
 static u16 NationalPokedexNumToSpeciesHGSS(u16 nationalNum);
 static void LoadTilesetTilemapHGSS(u8 page);

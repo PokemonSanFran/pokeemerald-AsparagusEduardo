@@ -1965,6 +1965,7 @@ const u8 gText_EVO_Buttons_PE[]                     = _("{A_BUTTON}FORMAS");
 const u8 gText_EVO_Buttons_Decapped_PE[]            = _("{A_BUTTON}Formas");
 const u8 gText_EVO_Name[]                           = _("{STR_VAR_3}:");
 const u8 gText_EVO_PreEvo[]                         = _("{STR_VAR_1} evoluciona de {STR_VAR_2}");
+const u8 gText_EVO_PreEvo_PE_Mega[]                 = _("{STR_VAR_1} megaevoluciona con {STR_VAR_2}");
 const u8 gText_EVO_FRIENDSHIP[]                     = _("Nivel, alta amistad");
 const u8 gText_EVO_FRIENDSHIP_DAY[]                 = _("Nivel, alta amistad, día");
 const u8 gText_EVO_FRIENDSHIP_NIGHT[]               = _("Nivel, alta amistad, noche");
@@ -2004,6 +2005,8 @@ const u8 gText_EVO_NONE[]                           = _("{STR_VAR_1} no evolucio
 
 const u8 gText_FORMS_Buttons_PE[]                   = _("{A_BUTTON}EVOLUCIONES");
 const u8 gText_FORMS_Buttons_Decapped_PE[]          = _("{A_BUTTON}Evoluciones");
+const u8 gText_FORMS_Buttons_Submenu_PE[]           = _("{DPAD_NONE}FORMAS {A_BUTTON}SEL. {START_BUTTON}EVOL.");
+const u8 gText_FORMS_Buttons_Submenu_Decapped_PE[]  = _("{START_BUTTON}Evol.");
 const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} no tiene otras formas.");
 
 //tx_difficulty_challenges

@@ -37,7 +37,7 @@ ALIGNED(4) const u8 gFontSmallNarrowLatinGlyphWidths[] = {
 };
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/font0_es.latfont");
+ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/small_es.latfont");
 #else
 ALIGNED(4) const u16 gFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/small.latfont");
 #endif
@@ -84,7 +84,11 @@ ALIGNED(4) const u8 gFontSmallLatinGlyphWidths[] = {
     8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  3,
 };
 
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+ALIGNED(4) const u16 gFontNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/narrow_es.latfont");
+#else
 ALIGNED(4) const u16 gFontNarrowLatinGlyphs[] = INCBIN_U16("graphics/fonts/narrow.latfont");
+#endif
 ALIGNED(4) const u8 gFontNarrowLatinGlyphWidths[] = {
     3,  5,  5,  5,  5,  5,  5,  5,  5,  4,  3,  4,  4,  5,  5,  5,
     8,  5,  5,  5,  5,  6,  5,  5,  3,  5,  5,  5,  5,  5,  4,  3,
@@ -157,7 +161,7 @@ ALIGNED(4) const u8 gFontShortLatinGlyphWidths[] = {
 };
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/font1_es.latfont");
+ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/normal_es.latfont");
 #else
 ALIGNED(4) const u16 gFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/normal.latfont");
 #endif
