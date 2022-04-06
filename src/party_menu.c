@@ -5051,12 +5051,12 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     PlaySE(SE_SELECT);
     if (cannotUseEffect)
     {
-        u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], 0, ITEM_NONE, SPECIES_NONE);
+        u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], EVO_MODE_NORMAL, ITEM_NONE, SPECIES_NONE);
 
         if (targetSpecies != SPECIES_NONE)
         {
             RemoveBagItem(gSpecialVar_ItemId, 1);
-            gTasks[taskId].func = Task_TryLearningNextMove;
+            PartyMenuTryEvolution(taskId);
         }
         else
         {
@@ -5069,6 +5069,11 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             else
                 gTasks[taskId].func = task;
         }
+
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = task;
     }
     else
     {
