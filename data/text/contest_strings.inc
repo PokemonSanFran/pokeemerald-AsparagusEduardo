@@ -1,148 +1,295 @@
 @ Contest move effect descriptions
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-gText_HighlyAppealingMove:: @ 827CB82
+gText_HighlyAppealingMove::
 	.string "Resulta muy llamativo.$"
 
-gText_UserMoreEasilyStartled:: @ 827CB9B
+gText_UserMoreEasilyStartled::
 	.string "Tras usarlo, será facil\nque te asusten.$"
 
-gText_GreatAppealButNoMoreToEnd:: @ 827CBCE
+gText_GreatAppealButNoMoreToEnd::
 	.string "Gusta mucho, pero impide\nseguir participando.$"
 
-gText_UsedRepeatedlyWithoutBoringJudge:: @ 827CC03
+gText_UsedRepeatedlyWithoutBoringJudge::
 	.string "Por más que se use, el Juez\nno se aburrirá nunca.$"
 
-gText_AvoidStartledByOthersOnce:: @ 827CC34
+gText_AvoidStartledByOthersOnce::
 	.string "Puede evitar que\nte asusten una vez.$"
 
-gText_AvoidStartledByOthers:: @ 827CC5D
+gText_AvoidStartledByOthers::
 	.string "Puede evitar\nque te asusten.$"
 
-gText_AvoidStartledByOthersLittle:: @ 827CC81 / Unused
+gText_AvoidStartledByOthersLittle:: @ Unused
 	.string "Can avoid being startled\nby others a little.$"
 
-gText_UserLessLikelyStartled:: @ 827CCAE / Unused
+gText_UserLessLikelyStartled:: @ Unused
 	.string "After this move, the user is\nless likely to be startled.$"
 
-gText_SlightlyStartleFrontMon:: @ 827CCE7 / Unused
+gText_SlightlyStartleFrontMon:: @ Unused
 	.string "Slightly startles the\nPokémon in front.$"
 
-gText_SlightlyStartleAppealed:: @ 827CD0F / Unused
+gText_SlightlyStartleAppealed:: @ Unused
 	.string "Slightly startles those\nthat have made appeals.$"
 
-gText_StartleAppealedBeforeUser:: @ 827CD3F
+gText_StartleAppealedBeforeUser::
 	.string "Asusta al Pokémon que se\nha exhibido antes que tú.$"
 
-gText_StartleAllAppealed:: @ 827CD73
+gText_StartleAllAppealed::
 	.string "Asusta a los Pokémon que\nya se han exhibido.$"
 
-gText_BadlyStartleFrontMon:: @ 827CDA6
+gText_BadlyStartleFrontMon::
 	.string "Aterra al último Pokémon\nque se exhibió.$"
 
-gText_BadlyStartleAppealed:: @ 827CDCB
+gText_BadlyStartleAppealed::
 	.string "Aterra a los que\nya se han exhibido.$"
 
-gText_StartleAppealedBeforeUser2:: @ 827CDF8
+gText_StartleAppealedBeforeUser2::
 	.string "Asusta al Pokémon que se\nha exhibido antes que tú.$"
 
-gText_StartleAllAppealed2:: @ 827CE2C
+gText_StartleAllAppealed2::
 	.string "Asusta a los Pokémon que\nya se han exhibido.$"
 
-gText_ShiftJudgesAttentionFromOthers:: @ 827CE5F
+gText_ShiftJudgesAttentionFromOthers::
 	.string "Hace que el Juez deje de\nprestar atención al resto.$"
 
-gText_StartleMonHasJudgesAttention:: @ 827CE89
+gText_StartleMonHasJudgesAttention::
 	.string "Asusta más al Pokémon que\ncapta la atención del Juez.$"
 
-gText_JamOthersMissesTurn:: @ 827CEBE
+gText_JamOthersMissesTurn::
 	.string "Inhibe a los otros,\npero pierdes un turno.$"
 
-gText_StartleMonsMadeSameTypeAppeal:: @ 827CEEF
+gText_StartleMonsMadeSameTypeAppeal::
 	.string "Asusta más a los que usaron\nrecursos del mismo tipo.$"
 
-gText_BadlyStartleCoolAppeals:: @ 827CF1E / Unused
+gText_BadlyStartleCoolAppeals:: @ Unused
 	.string "Badly startles Pokémon\nthat made Cool appeals.$"
 
-gText_BadlyStartleBeautyAppeals:: @ 827CF4D / Unused
+gText_BadlyStartleBeautyAppeals:: @ Unused
 	.string "Badly startles Pokémon\nthat made Beauty appeals.$"
 
-gText_BadlyStartleCuteAppeals:: @ 827CF7E / Unused
+gText_BadlyStartleCuteAppeals:: @ Unused
 	.string "Badly startles Pokémon\nthat made Cute appeals.$"
 
-gText_BadlyStartleSmartAppeals:: @ 827CFAD / Unused
+gText_BadlyStartleSmartAppeals:: @ Unused
 	.string "Badly startles Pokémon\nthat made Smart appeals.$"
 
-gText_BadlyStartleToughAppeals:: @ 827CFDD / Unused
+gText_BadlyStartleToughAppeals:: @ Unused
 	.string "Badly startles Pokémon\nthat made Tough appeals.$"
 
-gText_MakeMonAfterUserNervous:: @ 827D00D / Unused
+gText_MakeMonAfterUserNervous:: @ Unused
 	.string "Makes one Pokémon after\nthe user nervous.$"
 
-gText_MakeAllMonsAfterUserNervous:: @ 827D037
+gText_MakeAllMonsAfterUserNervous::
 	.string "Inquieta a los Pokémon\nque van detrás de ti.$"
 
-gText_WorsenConditionOfThoseMadeAppeals:: @ 827D061
+gText_WorsenConditionOfThoseMadeAppeals::
 	.string "Baja la forma de los que\nse han exhibido.$"
 
-gText_BadlyStartleMonsGoodCondition:: @ 827D093 / Unused
+gText_BadlyStartleMonsGoodCondition:: @  Unused
 	.string "Badly startles Pokémon in\ngood condition.$"
 
-gText_AppealGreatIfPerformedFirst:: @ 827D0BD
+gText_AppealGreatIfPerformedFirst::
 	.string "La exhibición es un éxito\nsi se es el primero.$"
 
-gText_AppealGreatIfPerformedLast:: @ 827D0E8
+gText_AppealGreatIfPerformedLast::
 	.string "La exhibición es un éxito\nsi se es el ultimo.$"
 
-gText_AppealAsGoodAsThoseBeforeIt:: @ 827D112
+gText_AppealAsGoodAsThoseBeforeIt::
 	.string "La exhibición es tan buena\ncomo las anteriores.$"
 
-gText_AppealAsGoodAsOneBeforeIt:: @ 827D13F
+gText_AppealAsGoodAsOneBeforeIt::
 	.string "La exhibición es tan buena\ncomo la anterior.$"
 
-gText_AppealBetterLaterItsPerformed:: @ 827D16E
+gText_AppealBetterLaterItsPerformed::
 	.string "Causa mayor impacto cuanto\nmás tarde se usa.$"
 
-gText_AppealVariesDependingOnTiming:: @ 827D1A1
+gText_AppealVariesDependingOnTiming::
 	.string "El impacto que tenga varía\nsegún cuándo se use.$"
 
-gText_WorksWellIfSameTypeAsBefore:: @ 827D1D6
+gText_WorksWellIfSameTypeAsBefore::
 	.string "Funciona bien si es del\nmismo tipo que el anterior.$"
 
-gText_WorksWellIfDifferentTypeAsBefore:: @ 827D20A / Unused
+gText_WorksWellIfDifferentTypeAsBefore:: @ Unused
 	.string "Works well if different in\ntype than the one before.$"
 
-gText_AffectedByAppealInFront:: @ 827D23F
+gText_AffectedByAppealInFront::
 	.string "El éxito dependerá de la\nactuación precedente.$"
 
-gText_UpsConditionHelpsPreventNervousness:: @ 827D26E
+gText_UpsConditionHelpsPreventNervousness::
 	.string "Mejora tu forma y te ayuda\na mantener la calma.$"
 
-gText_AppealWorksWellIfConditionGood:: @ 827D2A3
+gText_AppealWorksWellIfConditionGood::
 	.string "Resulta muy lucido\nsi estás en buena forma.$"
 
-gText_NextAppealMadeEarlier:: @ 827D2DA
+gText_NextAppealMadeEarlier::
 	.string "En la siguiente ronda, deja\nque te exhibas antes.$"
 
-gText_NextAppealMadeLater:: @ 827D309
+gText_NextAppealMadeLater::
 	.string "En la siguiente ronda, deja\nque te exhibas más tarde.$"
 
-gText_TurnOrderMoreEasilyScrambled:: @ 827D336 / Unused
+gText_TurnOrderMoreEasilyScrambled:: @ Unused
 	.string "Makes the next turn's order\nmore easily scrambled.$"
 
-gText_ScrambleOrderOfNextAppeals:: @ 827D369
+gText_ScrambleOrderOfNextAppeals::
 	.string "Altera los turnos en la\nsiguiente ronda.$"
 
-gText_AppealExcitesAudienceInAnyContest:: @ 827D39A
+gText_AppealExcitesAudienceInAnyContest::
 	.string "Entusiasma al público\nen cualquier Concurso.$"
 
-gText_BadlyStartlesMonsGoodAppeals:: @ 827D3CE
+gText_BadlyStartlesMonsGoodAppeals::
 	.string "Aterra a todos los Pokémon\nque se han exhibido bien.$"
 
-gText_AppealBestMoreCrowdExcited:: @ 827D401
+gText_AppealBestMoreCrowdExcited::
 	.string "El lucimiento es mayor si\nel público está entregado.$"
 
-gText_TemporarilyStopCrowdExcited:: @ 827D436
+gText_TemporarilyStopCrowdExcited::
 	.string "Templa momentáneamente\nel fervor del público.$"
+
+
+@ Strings for new Summary Screen
+
+gText_FourLine_HighlyAppealingMove::
+	.string "A highly appealing\nmove.$"
+
+gText_FourLine_UserMoreEasilyStartled::
+	.string "After this move,\nthe user is\nmore easily\nstartled.$"
+
+gText_FourLine_GreatAppealButNoMoreToEnd::
+	.string "Makes a great\nappeal, but\nallows no\nmore to the end.$"
+
+gText_FourLine_UsedRepeatedlyWithoutBoringJudge::
+	.string "Can be repeatedly\nused without\nboring the JUDGE.$"
+
+gText_FourLine_AvoidStartledByOthersOnce::
+	.string "Can avoid being\nstartled\nby others once.$"
+
+gText_FourLine_AvoidStartledByOthers::
+	.string "Can avoid being\nstartled\nby others.$"
+
+gText_FourLine_AvoidStartledByOthersLittle::
+	.string "Can avoid being\nstartled\nby others a little.$"
+
+gText_FourLine_UserLessLikelyStartled::
+	.string "After this move,\nthe user is less\nlikely to\nbe startled.$"
+
+gText_FourLine_SlightlyStartleFrontMon::
+	.string "Slightly startles\nthe POKéMON\nin front.$"
+
+gText_FourLine_SlightlyStartleAppealed::
+	.string "Slightly startles\nthose that have\nmade appeals.$"
+
+gText_FourLine_StartleAppealedBeforeUser::
+	.string "Startles the\nPOKéMON that\nappealed before\nthe user.$"
+
+gText_FourLine_StartleAllAppealed::
+	.string "Startles all\nPOKéMON that\nhave done\ntheir appeals.$"
+
+gText_FourLine_BadlyStartleFrontMon::
+	.string "Badly startles\nthe POKéMON\nin front.$"
+
+gText_FourLine_BadlyStartleAppealed::
+	.string "Badly startles\nthose that\nhave made appeals.$"
+
+gText_FourLine_StartleAppealedBeforeUser2::
+	.string "Startles the\nPOKéMON that\nappealed before\nthe user.$"
+
+gText_FourLine_StartleAllAppealed2::
+	.string "Startles all\nPOKéMON that\nhave done\ntheir appeals.$"
+
+gText_FourLine_ShiftJudgesAttentionFromOthers::
+	.string "Shifts the\nJUDGE's attention\nfrom others.$"
+
+gText_FourLine_StartleMonHasJudgesAttention::
+	.string "Startles the\nPOKéMON that\nhas the\nJUDGE's attention.$"
+
+gText_FourLine_JamOthersMissesTurn::
+	.string "Jams the others,\nand misses one\nturn of appeals.$"
+
+gText_FourLine_StartleMonsMadeSameTypeAppeal::
+	.string "Startles POKéMON\nthat made a\nsame-type appeal.$"
+
+gText_FourLine_BadlyStartleCoolAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nCOOL appeals.$"
+
+gText_FourLine_BadlyStartleBeautyAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nBEAUTY appeals.$"
+
+gText_FourLine_BadlyStartleCuteAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nCUTE appeals.$"
+
+gText_FourLine_BadlyStartleSmartAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nSMART appeals.$"
+
+gText_FourLine_BadlyStartleToughAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nTOUGH appeals.$"
+
+gText_FourLine_MakeMonAfterUserNervous::
+	.string "Makes one\nPOKéMON after\nthe user nervous.$"
+
+gText_FourLine_MakeAllMonsAfterUserNervous::
+	.string "Makes all\nPOKéMON after\nthe user nervous.$"
+
+gText_FourLine_WorsenConditionOfThoseMadeAppeals::
+	.string "Worsens the\ncondition of\nthose that\nmade appeals.$"
+
+gText_FourLine_BadlyStartleMonsGoodCondition::
+	.string "Badly startles\nPOKéMON in\ngood condition.$"
+
+gText_FourLine_AppealGreatIfPerformedFirst::
+	.string "The appeal works\ngreat if\nperformed first.$"
+
+gText_FourLine_AppealGreatIfPerformedLast::
+	.string "The appeal works\ngreat if\nperformed last.$"
+
+gText_FourLine_AppealAsGoodAsThoseBeforeIt::
+	.string "Makes the appeal\nas good as\nthose before it.$"
+
+gText_FourLine_AppealAsGoodAsOneBeforeIt::
+	.string "Makes the appeal\nas good as the\none before it.$"
+
+gText_FourLine_AppealBetterLaterItsPerformed::
+	.string "The appeal\nworks better\nthe later\nit is performed.$"
+
+gText_FourLine_AppealVariesDependingOnTiming::
+	.string "The appeal's\nquality varies\ndepending on\nits timing.$"
+
+gText_FourLine_WorksWellIfSameTypeAsBefore::
+	.string "Works well if\nit's the same\ntype as the\none before.$"
+
+gText_FourLine_WorksWellIfDifferentTypeAsBefore::
+	.string "Works well if\ndifferent in\ntype than the\none before.$"
+
+gText_FourLine_AffectedByAppealInFront::
+	.string "Affected by\nhow well the\nappeal in\nfront goes.$"
+
+gText_FourLine_UpsConditionHelpsPreventNervousness::
+	.string "Ups the\nuser's condition.\nHelps prevent\nnervousness.$"
+
+gText_FourLine_AppealWorksWellIfConditionGood::
+	.string "The appeal works\nwell if the\nuser's condition\nis good.$"
+
+gText_FourLine_NextAppealMadeEarlier::
+	.string "The next appeal\ncan be\nmade earlier\nnext turn.$"
+
+gText_FourLine_NextAppealMadeLater::
+	.string "The next appeal\ncan be\nmade later\nnext turn.$"
+
+gText_FourLine_TurnOrderMoreEasilyScrambled::
+	.string "Makes the next\nturn's order\nmore easily\nscrambled.$"
+
+gText_FourLine_ScrambleOrderOfNextAppeals::
+	.string "Scrambles the\norder of\nappeals on\nthe next turn.$"
+
+gText_FourLine_AppealExcitesAudienceInAnyContest::
+	.string "An appeal that\nexcites the\naudience in\nany CONTEST.$"
+
+gText_FourLine_BadlyStartlesMonsGoodAppeals::
+	.string "Badly startles\nall POKéMON\nthat made\ngood appeals.$"
+
+gText_FourLine_AppealBestMoreCrowdExcited::
+	.string "The appeal\nworks best the\nmore the crowd\nis excited.$"
+
+gText_FourLine_TemporarilyStopCrowdExcited::
+	.string "Temporarily\nstops the\ncrowd from\ngrowing excited.$"
 #else
 gText_HighlyAppealingMove::
 	.string "A highly appealing move.$"
@@ -287,7 +434,155 @@ gText_AppealBestMoreCrowdExcited::
 
 gText_TemporarilyStopCrowdExcited::
 	.string "Temporarily stops the\ncrowd from growing excited.$"
+
+
+@ Strings for new Summary Screen
+
+gText_FourLine_HighlyAppealingMove::
+	.string "A highly appealing\nmove.$"
+
+gText_FourLine_UserMoreEasilyStartled::
+	.string "After this move,\nthe user is\nmore easily\nstartled.$"
+
+gText_FourLine_GreatAppealButNoMoreToEnd::
+	.string "Makes a great\nappeal, but\nallows no\nmore to the end.$"
+
+gText_FourLine_UsedRepeatedlyWithoutBoringJudge::
+	.string "Can be repeatedly\nused without\nboring the JUDGE.$"
+
+gText_FourLine_AvoidStartledByOthersOnce::
+	.string "Can avoid being\nstartled\nby others once.$"
+
+gText_FourLine_AvoidStartledByOthers::
+	.string "Can avoid being\nstartled\nby others.$"
+
+gText_FourLine_AvoidStartledByOthersLittle::
+	.string "Can avoid being\nstartled\nby others a little.$"
+
+gText_FourLine_UserLessLikelyStartled::
+	.string "After this move,\nthe user is less\nlikely to\nbe startled.$"
+
+gText_FourLine_SlightlyStartleFrontMon::
+	.string "Slightly startles\nthe POKéMON\nin front.$"
+
+gText_FourLine_SlightlyStartleAppealed::
+	.string "Slightly startles\nthose that have\nmade appeals.$"
+
+gText_FourLine_StartleAppealedBeforeUser::
+	.string "Startles the\nPOKéMON that\nappealed before\nthe user.$"
+
+gText_FourLine_StartleAllAppealed::
+	.string "Startles all\nPOKéMON that\nhave done\ntheir appeals.$"
+
+gText_FourLine_BadlyStartleFrontMon::
+	.string "Badly startles\nthe POKéMON\nin front.$"
+
+gText_FourLine_BadlyStartleAppealed::
+	.string "Badly startles\nthose that\nhave made appeals.$"
+
+gText_FourLine_StartleAppealedBeforeUser2::
+	.string "Startles the\nPOKéMON that\nappealed before\nthe user.$"
+
+gText_FourLine_StartleAllAppealed2::
+	.string "Startles all\nPOKéMON that\nhave done\ntheir appeals.$"
+
+gText_FourLine_ShiftJudgesAttentionFromOthers::
+	.string "Shifts the\nJUDGE's attention\nfrom others.$"
+
+gText_FourLine_StartleMonHasJudgesAttention::
+	.string "Startles the\nPOKéMON that\nhas the\nJUDGE's attention.$"
+
+gText_FourLine_JamOthersMissesTurn::
+	.string "Jams the others,\nand misses one\nturn of appeals.$"
+
+gText_FourLine_StartleMonsMadeSameTypeAppeal::
+	.string "Startles POKéMON\nthat made a\nsame-type appeal.$"
+
+gText_FourLine_BadlyStartleCoolAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nCOOL appeals.$"
+
+gText_FourLine_BadlyStartleBeautyAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nBEAUTY appeals.$"
+
+gText_FourLine_BadlyStartleCuteAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nCUTE appeals.$"
+
+gText_FourLine_BadlyStartleSmartAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nSMART appeals.$"
+
+gText_FourLine_BadlyStartleToughAppeals::
+	.string "Badly startles\nPOKéMON\nthat made\nTOUGH appeals.$"
+
+gText_FourLine_MakeMonAfterUserNervous::
+	.string "Makes one\nPOKéMON after\nthe user nervous.$"
+
+gText_FourLine_MakeAllMonsAfterUserNervous::
+	.string "Makes all\nPOKéMON after\nthe user nervous.$"
+
+gText_FourLine_WorsenConditionOfThoseMadeAppeals::
+	.string "Worsens the\ncondition of\nthose that\nmade appeals.$"
+
+gText_FourLine_BadlyStartleMonsGoodCondition::
+	.string "Badly startles\nPOKéMON in\ngood condition.$"
+
+gText_FourLine_AppealGreatIfPerformedFirst::
+	.string "The appeal works\ngreat if\nperformed first.$"
+
+gText_FourLine_AppealGreatIfPerformedLast::
+	.string "The appeal works\ngreat if\nperformed last.$"
+
+gText_FourLine_AppealAsGoodAsThoseBeforeIt::
+	.string "Makes the appeal\nas good as\nthose before it.$"
+
+gText_FourLine_AppealAsGoodAsOneBeforeIt::
+	.string "Makes the appeal\nas good as the\none before it.$"
+
+gText_FourLine_AppealBetterLaterItsPerformed::
+	.string "The appeal\nworks better\nthe later\nit is performed.$"
+
+gText_FourLine_AppealVariesDependingOnTiming::
+	.string "The appeal's\nquality varies\ndepending on\nits timing.$"
+
+gText_FourLine_WorksWellIfSameTypeAsBefore::
+	.string "Works well if\nit's the same\ntype as the\none before.$"
+
+gText_FourLine_WorksWellIfDifferentTypeAsBefore::
+	.string "Works well if\ndifferent in\ntype than the\none before.$"
+
+gText_FourLine_AffectedByAppealInFront::
+	.string "Affected by\nhow well the\nappeal in\nfront goes.$"
+
+gText_FourLine_UpsConditionHelpsPreventNervousness::
+	.string "Ups the\nuser's condition.\nHelps prevent\nnervousness.$"
+
+gText_FourLine_AppealWorksWellIfConditionGood::
+	.string "The appeal works\nwell if the\nuser's condition\nis good.$"
+
+gText_FourLine_NextAppealMadeEarlier::
+	.string "The next appeal\ncan be\nmade earlier\nnext turn.$"
+
+gText_FourLine_NextAppealMadeLater::
+	.string "The next appeal\ncan be\nmade later\nnext turn.$"
+
+gText_FourLine_TurnOrderMoreEasilyScrambled::
+	.string "Makes the next\nturn's order\nmore easily\nscrambled.$"
+
+gText_FourLine_ScrambleOrderOfNextAppeals::
+	.string "Scrambles the\norder of\nappeals on\nthe next turn.$"
+
+gText_FourLine_AppealExcitesAudienceInAnyContest::
+	.string "An appeal that\nexcites the\naudience in\nany CONTEST.$"
+
+gText_FourLine_BadlyStartlesMonsGoodAppeals::
+	.string "Badly startles\nall POKéMON\nthat made\ngood appeals.$"
+
+gText_FourLine_AppealBestMoreCrowdExcited::
+	.string "The appeal\nworks best the\nmore the crowd\nis excited.$"
+
+gText_FourLine_TemporarilyStopCrowdExcited::
+	.string "Temporarily\nstops the\ncrowd from\ngrowing excited.$"
 #endif
+
 @ Unused move names
 
 gText_RainDance::
