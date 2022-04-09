@@ -17,7 +17,6 @@
 #include "battle_debug.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
-#include "day_night.h"
 #include "constants/abilities.h"
 #include "constants/battle_config.h"
 #include "constants/game_stat.h"
@@ -25,6 +24,7 @@
 #include "constants/layouts.h"
 #include "constants/weather.h"
 #include "tx_difficulty_challenges.h"
+#include "rtc.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 extern const u8 EventScript_LureWoreOff[];

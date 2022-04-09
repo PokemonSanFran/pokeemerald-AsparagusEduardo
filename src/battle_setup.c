@@ -37,8 +37,6 @@
 #include "mirage_tower.h"
 #include "field_screen_effect.h"
 #include "data.h"
-#include "day_night.h"
-#include "constants/day_night.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/game_stat.h"
@@ -51,6 +49,7 @@
 #include "tx_difficulty_challenges.h"
 #include "pokedex.h" //tx_difficulty_challenges
 #include "constants/region_map_sections.h" //tx_difficulty_challenges
+#include "rtc.h"
 
 enum {
     TRANSITION_TYPE_NORMAL,

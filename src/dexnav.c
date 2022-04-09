@@ -35,6 +35,7 @@
 #include "pokemon_summary_screen.h"
 #include "random.h"
 #include "region_map.h"
+#include "rtc.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "script_pokemon_util.h"
@@ -58,7 +59,6 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
-#include "day_night.h"
 #ifdef GBA_PRINTF
 #include "printf.h"
 #include "mgba.h"

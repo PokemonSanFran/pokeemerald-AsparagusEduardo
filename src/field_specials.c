@@ -45,7 +45,6 @@
 #include "tv.h"
 #include "wallclock.h"
 #include "window.h"
-#include "day_night.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_tower.h"
 #include "constants/decorations.h"

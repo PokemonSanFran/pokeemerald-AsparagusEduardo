@@ -38,7 +38,6 @@
 #include "text.h"
 #include "trainer_hill.h"
 #include "util.h"
-#include "day_night.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
@@ -53,7 +52,6 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "constants/battle_config.h"
-#include "day_night.h"
 #include "tx_difficulty_challenges.h"
 #include "constants/party_menu.h" //tx_difficulty_challenges
 

@@ -12,7 +12,6 @@
 #include "coins.h"
 #include "credits.h"
 #include "data.h"
-#include "day_night.h"
 #include "daycare.h"
 #include "debug.h"
 #include "event_data.h"
@@ -1166,7 +1165,7 @@ static void DebugAction_Util_SetWallClock(u8 taskId)
 static void DebugAction_Util_CheckWeekDay(u8 taskId)
 {
     static const u8 gDebugText_WeekDay[] =  _("Aaaaah, yes!\l{STR_VAR_1}s are made for dads!\lAnd dad's car!$");
-
+    RtcCalcLocalTime();
     StringCopy(gStringVar1, GetDayOfWeekString(gLocalTime.dayOfWeek));
     StringExpandPlaceholders(gStringVar4, gDebugText_WeekDay);
     Debug_DestroyMenu(taskId);
