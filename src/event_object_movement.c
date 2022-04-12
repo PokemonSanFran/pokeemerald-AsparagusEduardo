@@ -3,6 +3,7 @@
 #include "battle_pyramid.h"
 #include "berry.h"
 #include "data.h"
+#include "debug.h"
 #include "decoration.h"
 #include "decompress.h"
 #include "event_data.h"
