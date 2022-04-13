@@ -70,25 +70,25 @@ const u8 *const gRegionStringPointers[] =
 	[REGION_ORRE]    = sRegionString_Orre,
 };
 
-const u8 gText_TrainerMemo_Standard[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature.\n\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 5}{DYNAMIC 1}\nMet at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_Hatched[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature.\n\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 5}{DYNAMIC 1}\nHatched at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_Trade[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature.\n\nObtained in {DYNAMIC 0}a trade{DYNAMIC 1}.\n\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_Fateful[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature.\n\nObtained in a\n{DYNAMIC 0}fateful encounter{DYNAMIC 1} at {LV_2}{DYNAMIC 3}.\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_Untrusted[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature.\n\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 5}{DYNAMIC 1}\nApparently met at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_HatchedUntrusted[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature.\n\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 5}{DYNAMIC 1}\nApparently hatched at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Standard[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nMet at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Hatched[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nHatched at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Trade[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\nObtained in {COLOR 5}{SHADOW 6}a trade{COLOR 7}{SHADOW 8}.\n\n\n{DYNAMIC 6}\n\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Fateful[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\nObtained in a\n{COLOR 5}{SHADOW 6}fateful encounter{COLOR 7}{SHADOW 8} at {LV_2}{DYNAMIC 3}.\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Untrusted[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nApparently met at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_HatchedUntrusted[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nApparently hatched at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
 #if CONFIG_DECAPITALIZE_MET_LOCATION_STRINGS
-const u8 gText_TrainerMemo_EggFromDayCare[] = _("An odd Pokémon Egg found\nby {DYNAMIC 0}the Day Care couple{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromDayCare[] = _("An odd Pokémon Egg found\nby {COLOR 5}{SHADOW 6}the Day Care couple{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
 const u8 gText_TrainerMemo_EggTraded[] = _("An peculiar Pokémon Egg\nobtained in a trade.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFateful[] = _("A peculiar Pokémon Egg\nobtained at {DYNAMIC 0}a nice place{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFateful[] = _("A peculiar Pokémon Egg\nobtained at {COLOR 5}{SHADOW 6}a nice place{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
 const u8 gText_TrainerMemo_EggFatefulTraded[] = _("A peculiar Pokémon Egg\nobtained in a trade.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromHotSprings[] = _("A Pokémon Egg obtained\nat {DYNAMIC 0}the hot springs{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromTraveler[] = _("An odd Pokémon Egg\nobtained from {DYNAMIC 0}a traveler{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromKanto[] = _("An odd Pokémon Egg found\nby {DYNAMIC 0}the Day Care couple{DYNAMIC 1}\nin the {DYNAMIC 0}Kanto{DYNAMIC 1} region.\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromBrigette[] = _("A Pokémon Egg obtained\nfrom {DYNAMIC 0}Brigette{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromHotSprings[] = _("A Pokémon Egg obtained\nat {COLOR 5}{SHADOW 6}the hot springs{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromTraveler[] = _("An odd Pokémon Egg\nobtained from {COLOR 5}{SHADOW 6}a traveler{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromKanto[] = _("An odd Pokémon Egg found\nby {COLOR 5}{SHADOW 6}the Day Care couple{COLOR 7}{SHADOW 8}\nin the {COLOR 5}{SHADOW 6}Kanto{COLOR 7}{SHADOW 8} region.\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromBrigette[] = _("A Pokémon Egg obtained\nfrom {COLOR 5}{SHADOW 6}Brigette{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
 const u8 gText_TrainerMemo_BadEgg[] = _("A very mysterious\nPokémon Egg.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_OldFriend[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature,\n\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}'s old friend\nfrom {DYNAMIC 0}Orre{DYNAMIC 1}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_ReceivedFrom[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature,\n\nreceived from {DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}\nin {DYNAMIC 0}Orre{DYNAMIC 1}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_ObtainedFromDad[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature,\n\ngiven to {DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1} by his dad\nin {DYNAMIC 0}Orre{DYNAMIC 1}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_OldFriend[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature,\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{COLOR 7}{SHADOW 8}'s old friend\nfrom {COLOR 5}{SHADOW 6}Orre{COLOR 7}{SHADOW 8}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_ReceivedFrom[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature,\n\nreceived from {COLOR 5}{SHADOW 6}{DYNAMIC 4}{COLOR 7}{SHADOW 8}\nin {COLOR 5}{SHADOW 6}Orre{COLOR 7}{SHADOW 8}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_ObtainedFromDad[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature,\n\ngiven to {COLOR 5}{SHADOW 6}{DYNAMIC 4}{COLOR 7}{SHADOW 8} by his dad\nin {COLOR 5}{SHADOW 6}Orre{COLOR 7}{SHADOW 8}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
 
 //Battle Tower from Ruby/Sapphire
 const u8 gMapName_BattleTower[] = _("Battle Tower");
@@ -133,18 +133,18 @@ static const u8 sMapName_PokemonHQLab[] = _("Pokémon HQ Lab");
 static const u8 sMapName_GateonPort[] = _("Gateon Port");
 static const u8 sMapName_KaminkosHouse[] = _("Kaminko's House");
 #else
-const u8 gText_TrainerMemo_EggFromDayCare[] = _("An odd POKÉMON EGG found\nby {DYNAMIC 0}the DAY CARE couple{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromDayCare[] = _("An odd POKÉMON EGG found\nby {COLOR 5}{SHADOW 6}the DAY CARE couple{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
 const u8 gText_TrainerMemo_EggTraded[] = _("An peculiar POKÉMON EGG\nobtained in a trade.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFateful[] = _("A peculiar POKÉMON EGG\nobtained at {DYNAMIC 0}a nice place{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFateful[] = _("A peculiar POKÉMON EGG\nobtained at {COLOR 5}{SHADOW 6}a nice place{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
 const u8 gText_TrainerMemo_EggFatefulTraded[] = _("A peculiar POKÉMON EGG\nobtained in a trade.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromHotSprings[] = _("A POKÉMON EGG obtained\nat {DYNAMIC 0}the hot springs{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromTraveler[] = _("An odd POKÉMON EGG\nobtained from {DYNAMIC 0}a traveler{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromKanto[] = _("An odd POKÉMON EGG found\nby {DYNAMIC 0}the DAY CARE couple{DYNAMIC 1}\nin the {DYNAMIC 0}KANTO{DYNAMIC 1} region.\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_EggFromBrigette[] = _("A POKÉMON EGG obtained\nfrom {DYNAMIC 0}BRIGETTE{DYNAMIC 1}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromHotSprings[] = _("A POKÉMON EGG obtained\nat {COLOR 5}{SHADOW 6}the hot springs{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromTraveler[] = _("An odd POKÉMON EGG\nobtained from {COLOR 5}{SHADOW 6}a traveler{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromKanto[] = _("An odd POKÉMON EGG found\nby {COLOR 5}{SHADOW 6}the DAY CARE couple{COLOR 7}{SHADOW 8}\nin the {COLOR 5}{SHADOW 6}KANTO{COLOR 7}{SHADOW 8} region.\n\n“The Egg Watch”\n{DYNAMIC 2}");
+const u8 gText_TrainerMemo_EggFromBrigette[] = _("A POKÉMON EGG obtained\nfrom {COLOR 5}{SHADOW 6}BRIGETTE{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
 const u8 gText_TrainerMemo_BadEgg[] = _("A very mysterious\nPOKÉMON EGG.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
-const u8 gText_TrainerMemo_OldFriend[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature,\n\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}'s old friend\nfrom {DYNAMIC 0}ORRE{DYNAMIC 1}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_ReceivedFrom[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature,\n\nreceived from {DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}\nin {DYNAMIC 0}ORRE{DYNAMIC 1}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
-const u8 gText_TrainerMemo_ObtainedFromDad[] = _("{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1} nature,\n\ngiven to {DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1} by his dad\nin {DYNAMIC 0}ORRE{DYNAMIC 1}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_OldFriend[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature,\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{COLOR 7}{SHADOW 8}'s old friend\nfrom {COLOR 5}{SHADOW 6}ORRE{COLOR 7}{SHADOW 8}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_ReceivedFrom[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature,\n\nreceived from {COLOR 5}{SHADOW 6}{DYNAMIC 4}{COLOR 7}{SHADOW 8}\nin {COLOR 5}{SHADOW 6}ORRE{COLOR 7}{SHADOW 8}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_ObtainedFromDad[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature,\n\ngiven to {COLOR 5}{SHADOW 6}{DYNAMIC 4}{COLOR 7}{SHADOW 8} by his dad\nin {COLOR 5}{SHADOW 6}ORRE{COLOR 7}{SHADOW 8}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
 
 
 //Battle Tower from Ruby/Sapphire
