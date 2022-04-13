@@ -520,8 +520,8 @@ static void (*const sTextPrinterFunctions[])(void) =
     [PSS_PAGE_CONTEST_MOVES] = PrintContestMoves
 };
 
-static const u8 sMemoNatureTextColor[] = _("{COLOR 5}{SHADOW 6}");
-static const u8 sMemoMiscTextColor[] = _("{COLOR 7}{SHADOW 8}");
+static const u8 sMemoNatureTextColor[] = _("");
+static const u8 sMemoMiscTextColor[] = _("");
 
 #define TAG_MOVE_SELECTOR   30000
 #define TAG_MON_STATUS      30001
@@ -2854,7 +2854,8 @@ static void BufferMonTrainerMemo(void)
         u8 *metDateString = Alloc(32);
         u8 *metDateString2 = Alloc(32);
         GetMetLevelString(metLevelString);
-        GetDateMetString(metDateString,metDateString2);
+        if (sMonSummaryScreen->summary.monthMet != 0)
+            GetDateMetString(metDateString,metDateString2);
 
         #if CONFIG_EXPANDED_MET_LOCATIONS
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gRegionStringPointers[WhatRegionWasMonCaughtIn(mon)]);
@@ -2903,7 +2904,10 @@ static void BufferMonTrainerMemo(void)
             {
                 DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
                 #if CONFIG_TRUST_OUTSIDERS
-                text = gText_TrainerMemo_Standard;
+                if (sMonSummaryScreen->summary.monthMet != 0)
+                    text = gText_TrainerMemo_Standard_Date;
+                else
+                    text = gText_TrainerMemo_Standard;
                 #else
                 text = gText_TrainerMemo_Untrusted;
                 #endif
@@ -2913,24 +2917,43 @@ static void BufferMonTrainerMemo(void)
         {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
             #if CONFIG_TRUST_OUTSIDERS
-            text = gText_TrainerMemo_Hatched;
+                if (sMonSummaryScreen->summary.monthMet != 0)
+                    text = gText_TrainerMemo_Hatched_Date;
+                else
+                    text = gText_TrainerMemo_Hatched;
             #else
             if (DoesMonOTMatchOwner())
-                text = gText_TrainerMemo_Hatched;
+            {
+                if (sMonSummaryScreen->summary.monthMet != 0)
+                    text = gText_TrainerMemo_Hatched_Date;
+                else
+                    text = gText_TrainerMemo_Hatched;
+            }
             else
-                text = gText_TrainerMemo_HatchedUntrusted;
+            {
+                if (sMonSummaryScreen->summary.monthMet != 0)
+                    text = gText_TrainerMemo_HatchedUntrusted;
+                else
+                    text = gText_TrainerMemo_HatchedUntrusted_Date;
+            }
             #endif
         }
         else if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
         {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
-            text = gText_TrainerMemo_Fateful;
+            if (sMonSummaryScreen->summary.monthMet != 0)
+                text = gText_TrainerMemo_Fateful_Date;
+            else
+                text = gText_TrainerMemo_Fateful;
         }
         else if (sum->metLocation != METLOC_IN_GAME_TRADE)
         {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
             #if CONFIG_TRUST_OUTSIDERS
-            text = gText_TrainerMemo_Standard;
+            if (sMonSummaryScreen->summary.monthMet != 0)
+                text = gText_TrainerMemo_Standard_Date;
+            else
+                text = gText_TrainerMemo_Standard;
             #else
             if (DoesMonOTMatchOwner())
                 text = gText_TrainerMemo_Standard;
@@ -2940,7 +2963,10 @@ static void BufferMonTrainerMemo(void)
         }
         else
         {
-            text = gText_TrainerMemo_Trade;
+            if (sMonSummaryScreen->summary.monthMet != 0)
+                text = gText_TrainerMemo_Trade_Date;
+            else
+                text = gText_TrainerMemo_Trade;
         }
         #else
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, sRegionString_Unknown);
@@ -2953,24 +2979,43 @@ static void BufferMonTrainerMemo(void)
         {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
             #if CONFIG_TRUST_OUTSIDERS
-            text = gText_TrainerMemo_Hatched;
+                if (sMonSummaryScreen->summary.monthMet != 0)
+                    text = gText_TrainerMemo_Hatched_Date;
+                else
+                    text = gText_TrainerMemo_Hatched;
             #else
             if (DoesMonOTMatchOwner())
-                text = gText_TrainerMemo_Hatched;
+            {
+                if (sMonSummaryScreen->summary.monthMet != 0)
+                    text = gText_TrainerMemo_Hatched_Date;
+                else
+                    text = gText_TrainerMemo_Hatched;
+            }
             else
-                text = gText_TrainerMemo_HatchedUntrusted;
+            {
+                if (sMonSummaryScreen->summary.monthMet != 0)
+                    text = gText_TrainerMemo_HatchedUntrusted;
+                else
+                    text = gText_TrainerMemo_HatchedUntrusted_Date;
+            }
             #endif
         }
         else if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
         {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
-            text = gText_TrainerMemo_Fateful;
+            if (sMonSummaryScreen->summary.monthMet != 0)
+                text = gText_TrainerMemo_Fateful_Date;
+            else
+                text = gText_TrainerMemo_Fateful;
         }
         else if (sum->metLocation != METLOC_IN_GAME_TRADE)
         {
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
             #if CONFIG_TRUST_OUTSIDERS
-            text = gText_TrainerMemo_Standard;
+            if (sMonSummaryScreen->summary.monthMet != 0)
+                text = gText_TrainerMemo_Standard_Date;
+            else
+                text = gText_TrainerMemo_Standard;
             #else
             if (DoesMonOTMatchOwner())
                 text = gText_TrainerMemo_Standard;
@@ -2980,7 +3025,10 @@ static void BufferMonTrainerMemo(void)
         }
         else
         {
-            text = gText_TrainerMemo_Trade;
+            if (sMonSummaryScreen->summary.monthMet != 0)
+                text = gText_TrainerMemo_Trade_Date;
+            else
+                text = gText_TrainerMemo_Trade;
         }
         #endif
 
@@ -3078,17 +3126,17 @@ static void GetDateMetString(u8 *output, u8 *output2)
         gText_Month_December,
     };
     if (sMonSummaryScreen->summary.monthMet != 0)
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, monthNames[sMonSummaryScreen->summary.monthMet - 1]);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, monthNames[sMonSummaryScreen->summary.monthMet - 1]);
     else
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, monthNames[0]);
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, monthNames[0]);
 
     data[0] = (sMonSummaryScreen->summary.dayMet == 0) ? 1 : sMonSummaryScreen->summary.dayMet;
     ConvertIntToDecimalStringN(output, data[0], STR_CONV_MODE_LEFT_ALIGN, 6);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(6, output);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, output);
 
     data[1] = sMonSummaryScreen->summary.yearMet;
     ConvertIntToDecimalStringN(output2, data[1], STR_CONV_MODE_LEADING_ZEROS, 2);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(7, output2);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(8, output2);
 }
 
 static bool8 DoesMonOTMatchOwner(void)

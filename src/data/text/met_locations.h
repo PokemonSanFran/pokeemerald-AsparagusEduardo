@@ -76,6 +76,12 @@ const u8 gText_TrainerMemo_Trade[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{
 const u8 gText_TrainerMemo_Fateful[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\nObtained in a\n{COLOR 5}{SHADOW 6}fateful encounter{COLOR 7}{SHADOW 8} at {LV_2}{DYNAMIC 3}.\n{DYNAMIC 6}\n{DYNAMIC 7}");
 const u8 gText_TrainerMemo_Untrusted[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nApparently met at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
 const u8 gText_TrainerMemo_HatchedUntrusted[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nApparently hatched at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Standard_Date[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n{DYNAMIC 0} {DYNAMIC 1}, 20{DYNAMIC 8}\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nMet at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Hatched_Date[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nHatched at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Trade_Date[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\nObtained in {COLOR 5}{SHADOW 6}a trade{COLOR 7}{SHADOW 8}.\n\n\n{DYNAMIC 6}\n\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Fateful_Date[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\nObtained in a\n{COLOR 5}{SHADOW 6}fateful encounter{COLOR 7}{SHADOW 8} at {LV_2}{DYNAMIC 3}.\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_Untrusted_Date[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nApparently met at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
+const u8 gText_TrainerMemo_HatchedUntrusted_Date[] = _("{COLOR 5}{SHADOW 6}{DYNAMIC 2}{COLOR 7}{SHADOW 8} nature.\n\n{COLOR 5}{SHADOW 6}{DYNAMIC 4}{DYNAMIC 5}{COLOR 7}{SHADOW 8}\nApparently hatched at {LV_2}{DYNAMIC 3}.\n\n{DYNAMIC 6}\n{DYNAMIC 7}");
 #if CONFIG_DECAPITALIZE_MET_LOCATION_STRINGS
 const u8 gText_TrainerMemo_EggFromDayCare[] = _("An odd Pokémon Egg found\nby {COLOR 5}{SHADOW 6}the Day Care couple{COLOR 7}{SHADOW 8}.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
 const u8 gText_TrainerMemo_EggTraded[] = _("An peculiar Pokémon Egg\nobtained in a trade.\n\n\n“The Egg Watch”\n{DYNAMIC 2}");
