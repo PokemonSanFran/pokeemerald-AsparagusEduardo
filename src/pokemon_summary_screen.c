@@ -2895,7 +2895,16 @@ static void BufferMonTrainerMemo(void)
                  else
                     text = gText_TrainerMemo_ReceivedFrom; //Duking's Plusle
             }
-            else if (sum->fatefulEncounter && sum->metLocation == 0 && (sum->species == SPECIES_EEVEE || sum->species == SPECIES_VAPOREON || sum->species == SPECIES_JOLTEON || sum->species == SPECIES_FLAREON || sum->species == SPECIES_ESPEON || sum->species == SPECIES_UMBREON))
+            else if (sum->fatefulEncounter && sum->metLocation == 0
+                && (sum->species == SPECIES_EEVEE
+                    || sum->species == SPECIES_VAPOREON
+                    || sum->species == SPECIES_JOLTEON
+                    || sum->species == SPECIES_FLAREON
+                    || sum->species == SPECIES_ESPEON
+                    || sum->species == SPECIES_UMBREON
+                    || sum->species == SPECIES_LEAFEON
+                    || sum->species == SPECIES_GLACEON
+                    || sum->species == SPECIES_SYLVEON))
             {
                 DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, sum->OTName);
                 text = gText_TrainerMemo_ObtainedFromDad; //XD starter
