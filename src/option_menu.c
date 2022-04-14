@@ -26,8 +26,7 @@ enum
     MENUITEM_BATTLESTYLE,
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
-    MENUITEM_HP_BAR,
-    MENUITEM_EXP_BAR,
+    MENUITEM_HP_EXP_BAR,
     MENUITEM_UNIT_SYSTEM,
     MENUITEM_FRAMETYPE,
     MENUITEM_CANCEL,
@@ -61,7 +60,7 @@ static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
-static void DrawChoices_HpBar(int selection, int y);
+static void DrawChoices_HpExpBar(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_SkipBattleIntro(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
@@ -90,8 +89,7 @@ struct
     [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
-    [MENUITEM_HP_BAR]       = {DrawChoices_HpBar,       ProcessInput_Options_Eleven},
-    [MENUITEM_EXP_BAR]      = {DrawChoices_HpBar,       ProcessInput_Options_Eleven},
+    [MENUITEM_HP_EXP_BAR]   = {DrawChoices_HpExpBar,    ProcessInput_Options_Two},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_CANCEL]       = {NULL, NULL},
@@ -104,8 +102,7 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_m
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
 
-static const u8 sText_HpBar[] = _("HP bar speed");
-static const u8 sText_ExpBar[] = _("Exp. bar speed");
+static const u8 sText_HpExpBar[] = _("HP/EXP bar speed");
 static const u8 sText_UnitSystem[] = _("Unit System");
 static const u8 sText_FishReeling[] = _("Fishing Style");
 static const u8 sText_SkipBattleIntro[] = _("Battle Intro");
@@ -120,8 +117,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_BATTLESTYLE]          = gText_BattleStyle,
     [MENUITEM_SOUND]                = gText_Sound,
     [MENUITEM_BUTTONMODE]           = gText_ButtonMode,
-    [MENUITEM_HP_BAR]               = sText_HpBar,
-    [MENUITEM_EXP_BAR]              = sText_ExpBar,
+    [MENUITEM_HP_EXP_BAR]           = sText_HpExpBar,
     [MENUITEM_UNIT_SYSTEM]          = sText_UnitSystem,
     [MENUITEM_FRAMETYPE]            = gText_Frame,
     [MENUITEM_CANCEL]               = gText_OptionMenuSave,
@@ -277,8 +273,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_BATTLESTYLE]         = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel[MENUITEM_SOUND]               = gSaveBlock2Ptr->optionsSound;
         sOptions->sel[MENUITEM_BUTTONMODE]          = gSaveBlock2Ptr->optionsButtonMode;
-        sOptions->sel[MENUITEM_HP_BAR]              = gSaveBlock2Ptr->optionsHpBarSpeed;
-        sOptions->sel[MENUITEM_EXP_BAR]             = gSaveBlock2Ptr->optionsExpBarSpeed;
+        sOptions->sel[MENUITEM_HP_EXP_BAR]          = gSaveBlock2Ptr->optionsHpExpBarSpeed;
         sOptions->sel[MENUITEM_UNIT_SYSTEM]         = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_FRAMETYPE]           = gSaveBlock2Ptr->optionsWindowFrameType;
 
@@ -436,8 +431,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_BATTLESTYLE];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_SOUND];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_BUTTONMODE];
-    gSaveBlock2Ptr->optionsHpBarSpeed       = sOptions->sel[MENUITEM_HP_BAR];
-    gSaveBlock2Ptr->optionsExpBarSpeed      = sOptions->sel[MENUITEM_EXP_BAR];
+    gSaveBlock2Ptr->optionsHpExpBarSpeed    = sOptions->sel[MENUITEM_HP_EXP_BAR];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
 
@@ -653,8 +647,15 @@ static void DrawChoices_ButtonMode(int selection, int y)
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(1, gText_ButtonTypeLEqualsA, 198), y, styles[2]);
 }
 
-static void DrawChoices_HpBar(int selection, int y)
+static void DrawChoices_HpExpBar(int selection, int y)
 {
+    u8 styles[2] = {0};
+
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_TextSpeedFast, 104, y, styles[0]);
+    DrawOptionMenuChoice(sText_Instant, GetStringRightAlignXOffset(1, sText_Instant, 198), y, styles[1]);
+    /*
     if (selection < 10)
     {
         u8 textPlus[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}+1{0x77}{0x77}{0x77}{0x77}{0x77}"); // 0x77 is to clear INSTANT text
@@ -665,6 +666,7 @@ static void DrawChoices_HpBar(int selection, int y)
     {
         DrawOptionMenuChoice(sText_Instant, 104, y, 1);
     }
+    */
 }
 
 static void DrawChoices_UnitSystem(int selection, int y)
