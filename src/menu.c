@@ -78,6 +78,7 @@ static const u8 sTextSpeedFrameDelays[] =
     [OPTIONS_TEXT_SPEED_SLOW] = 8, 
     [OPTIONS_TEXT_SPEED_MID]  = 4, 
     [OPTIONS_TEXT_SPEED_FAST] = 1,
+    [OPTIONS_TEXT_SPEED_FASTER] = 1,    
     [OPTIONS_TEXT_SPEED_INSTANT] = 0 | 0x40,
 };
 
@@ -485,7 +486,7 @@ u8 GetPlayerTextSpeedDelay(void)
 {
     u32 speed;
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_INSTANT)
-        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FASTER;
     speed = GetPlayerTextSpeed();
     return sTextSpeedFrameDelays[speed];
 }
