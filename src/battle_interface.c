@@ -2451,17 +2451,28 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 #define B_EXPBAR_PIXELS 64
 #define B_HEALTHBAR_PIXELS 48
 
+static void SetInstantBarMove(struct BattleBarInfo *bar)
+{
+    bar->oldValue -= bar->receivedValue;
+    if (bar->oldValue > bar->maxValue)
+        bar->oldValue = bar->maxValue;
+    if (bar->oldValue < 0)
+        bar->oldValue = 0;
+
+    bar->receivedValue = 0;;
+}
+
 s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 {
-    s32 i, currentBarValue, previousVal = 0, moveValue;
+    s32 i, currentBarValue, moveValue;
     bool32 instant = (gSaveBlock2Ptr->optionsHpExpBarSpeed == 1);
 
     if (instant)
-        previousVal = SetInstantBarMove(&gBattleSpritesDataPtr->battleBars[battlerId]);
+        SetInstantBarMove(&gBattleSpritesDataPtr->battleBars[battlerId]);
 
     if (whichBar == HEALTH_BAR) // health bar
     {
-        if (gSaveBlock2Ptr->optionsHpExpBarSpeed == 1)
+        if (instant)
             moveValue = B_HEALTHBAR_PIXELS;
         else
             #if B_FAST_HP_DRAIN == TRUE
