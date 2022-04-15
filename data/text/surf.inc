@@ -1,11 +1,11 @@
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-gText_WantToUseSurf:: @ 8272FD6
+gText_WantToUseSurf::
 	.string "El agua tiene buena pinta…\n¿Quieres hacer Surf?$"
 
-Text_ExploudSurf:: @ 8272FD6
+Text_ExploudSurf::
 	.string "El agua tiene buena pinta…\n¿Llamas al Exploud de Papá?$"
 
-gText_PlayerUsedSurf:: @ 827300D
+gText_PlayerUsedSurf::
 	.string "¡{STR_VAR_1} usó Surf!$"
 #else
 gText_WantToUseSurf::
