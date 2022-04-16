@@ -2451,7 +2451,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 #define B_EXPBAR_PIXELS 64
 #define B_HEALTHBAR_PIXELS 48
 
-static void SetInstantBarMove(struct BattleBarInfo *bar)
+static s32 SetInstantBarMove(struct BattleBarInfo *bar)
 {
     bar->oldValue -= bar->receivedValue;
     if (bar->oldValue > bar->maxValue)
@@ -2460,15 +2460,16 @@ static void SetInstantBarMove(struct BattleBarInfo *bar)
         bar->oldValue = 0;
 
     bar->receivedValue = 0;;
+    return bar->oldValue;
 }
 
 s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 {
-    s32 i, currentBarValue, moveValue;
+    s32 i, currentBarValue, previousVal = 0, moveValue;
     bool32 instant = (gSaveBlock2Ptr->optionsHpExpBarSpeed == 1);
 
     if (instant)
-        SetInstantBarMove(&gBattleSpritesDataPtr->battleBars[battlerId]);
+        previousVal = SetInstantBarMove(&gBattleSpritesDataPtr->battleBars[battlerId]);
 
     if (whichBar == HEALTH_BAR) // health bar
     {
@@ -2509,6 +2510,8 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
     if (currentBarValue == -1)
     {
         gBattleSpritesDataPtr->battleBars[battlerId].currValue = 0;
+        if (instant && whichBar == HEALTH_BAR)
+            UpdateHpTextInHealthbox(gHealthboxSpriteIds[battlerId], previousVal, HP_CURRENT);
     }
 
     return currentBarValue;
