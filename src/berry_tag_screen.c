@@ -409,12 +409,11 @@ static void PrintBerryNumberAndName(void)
 static void PrintBerrySize(void)
 {
     const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-    bool32 metric = gSaveBlock2Ptr->optionsUnitSystem == 1;
     AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, gText_SizeSlash, 0, 1, TEXT_SKIP_DRAW, NULL);
 
     if (berry->size != 0)
     {
-        if (!metric)
+        if (gSaveBlock2Ptr->optionsUnitSystem == 0)
         {
             u32 inches, fraction;
 
