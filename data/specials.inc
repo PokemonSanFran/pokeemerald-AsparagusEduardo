@@ -552,3 +552,5 @@ gSpecials::
 
 	@UD Trade
 	def_special OpenUDTradeMenu
+	
+	def_special BufferUnitSystemText

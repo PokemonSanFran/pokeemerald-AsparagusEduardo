@@ -8555,7 +8555,7 @@ const u8 gGurdurrPokedexText[] = _(
     "They strengthen their bodies by carrying\n"
     "steel beams. This Pokémon is so muscular\n"
     "and strongly built that even a group of\n"
-    "wrestlers could not make it budge an inch.");
+    "wrestlers could not make it budge at all.");
 
 const u8 gConkeldurrPokedexText[] = _(
     "They use concrete pillars as walking\n"
