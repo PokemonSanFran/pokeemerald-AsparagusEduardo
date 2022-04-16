@@ -45,8 +45,8 @@
 #include "constants/songs.h"
 #include "soar.h"
 
-#include "tx_difficulty_challenges.h"
-#include "battle_setup.h" //tx_difficulty_challenges
+#include "tx_randomizer_and_challenges.h"
+#include "battle_setup.h" //tx_randomizer_and_challenges
 
 static void SetUpItemUseCallback(u8 taskId);
 static void FieldCB_UseItemOnField(void);
@@ -146,7 +146,7 @@ static void Task_CallItemUseOnFieldCallback(u8 taskId)
         sItemUseOnFieldCB(taskId);
 }
 
-void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField, const u8 *str) //static //tx_difficulty_challenges
+void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField, const u8 *str) //static //tx_randomizer_and_challenges
 {
     StringExpandPlaceholders(gStringVar4, str);
     if (!isUsingRegisteredKeyItemOnField)
@@ -1034,14 +1034,14 @@ static u32 GetBallThrowableState(void)
 #endif
     else if (FlagGet(FLAG_SYS_NO_CATCHING)) //DEBUG
         return BALL_THROW_UNABLE_NO_CATCHING_FLAG;
-    //tx_difficulty_challenges
-    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsCaptureBlocked)
+    //tx_randomizer_and_challenges
+    else if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeIsCaptureBlocked)
         return BALL_THROW_UNABLE_NUZLOCKE_AREA;
-    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive == 2)
+    else if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeIsSpeciesClauseActive == 2) //already have THIS_mon
         return BALL_THROW_UNABLE_NUZLOCKE_SPECIES;
-    else if (gSaveBlock1Ptr->txRandTypeChallenge && TypeChallengeCaptureBlocked)
+    else if (gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge && OneTypeChallengeCaptureBlocked) //pkmn not of the TYPE CHALLENGE type
         return BALL_THROW_UNABLE_TYPE_CHALLENGE;
-    else if (gSaveBlock1Ptr->txRandNuzlocke && NuzlockeIsSpeciesClauseActive)
+    else if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeIsSpeciesClauseActive)
         return BALL_THROW_UNABLE_NUZLOCKE_SPECIES_EVO;
 
     return BALL_THROW_ABLE;
@@ -1086,7 +1086,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
         break;
-    #endif
+    #endif    
     case BALL_THROW_UNABLE_NO_CATCHING_FLAG:
         DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);    
         break;
@@ -1097,7 +1097,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallAlreadyCaught);
         break;
     case BALL_THROW_UNABLE_TYPE_CHALLENGE:
-        DisplayCannotUseItemMessage(taskId, FALSE, gText_TypeChallengeCantThrowPokeBall);
+        DisplayCannotUseItemMessage(taskId, FALSE, gText_OneTypeChallengeCantThrowPokeBall);
         break;
     case BALL_THROW_UNABLE_NUZLOCKE_SPECIES_EVO:
         DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallSpeciesClause);

@@ -73,7 +73,7 @@ void SetWaldaPhrase(const u8 *src);
 bool32 IsWaldaPhraseEmpty(void);
 u8 CountPartyNonEggMons(void);
 
-//tx_difficulty_challenges
+//tx_randomizer_and_challenges
 void PurgeMonOrBoxMon(u8 boxId, u8 position);
 u16 GetFirstBoxPokemon(void);
 void MoveFirstBoxPokemon(void);

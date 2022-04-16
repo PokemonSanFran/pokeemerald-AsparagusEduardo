@@ -388,7 +388,7 @@
 #define EVO_ITEM_ALOLA                    35     // specified item is used on Pokémon while holding a Strange Souvenir
 #define EVO_LEVEL_NIGHT_ALOLA             36     // Pokémon reaches the specified level, is night, holding Strange Souvenir
 
-//tx_difficulty_challenges
+//tx_randomizer_and_challenges
 #define EVOS_PER_MON 10
 #define EVOS_PER_LINE 22
 

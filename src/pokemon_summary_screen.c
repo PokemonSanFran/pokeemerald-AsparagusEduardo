@@ -53,7 +53,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
-#include "tx_difficulty_challenges.h"
+#include "tx_randomizer_and_challenges.h"
 
 // Config options - Note that some config options need external modifications to fully work, such as CONFIG_CAN_FORGET_HM_MOVES, CONFIG_PHYSICAL_SPECIAL_SPLIT, and CONFIG_DECAPITALIZE_MET_LOCATION_STRINGS
 #define CONFIG_CAN_FORGET_HM_MOVES                      TRUE
@@ -2585,7 +2585,7 @@ static bool8 CanReplaceMove(void)
     else if (sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES
         || sMonSummaryScreen->newMove == MOVE_NONE
         || IsMoveHm(sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex]) != TRUE
-        || gSaveBlock1Ptr->txRandNuzlocke) //tx_difficulty_challenges
+        || gSaveBlock1Ptr->tx_Challenges_Nuzlocke) //tx_randomizer_and_challenges
         return TRUE;
     else
         return FALSE;
@@ -3837,8 +3837,8 @@ static void CreateMoveTypeIcons(void)
 static void SetMonTypeIcons(void)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
-    u16 type1 = GetTypeBySpecies(summary->species, 1);
-    u16 type2 = GetTypeBySpecies(summary->species, 2);
+    u16 type1 = GetTypeBySpecies(summary->species, 1); //tx_randomizer_and_challenges
+    u16 type2 = GetTypeBySpecies(summary->species, 2); //tx_randomizer_and_challenges
 
     if (type1 != type2)
     {

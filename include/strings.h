@@ -3175,6 +3175,7 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
+// Days of the week
 extern const u8 gText_Sunday[];
 extern const u8 gText_Monday[];
 extern const u8 gText_Tuesday[];
@@ -3183,11 +3184,13 @@ extern const u8 gText_Thursday[];
 extern const u8 gText_Friday[];
 extern const u8 gText_Saturday[];
 
+// Party item move option
 extern const u8 gMenuText_Move[];
 extern const u8 gText_MoveItemWhere[];
 extern const u8 gText_XsYAnd[];
 extern const u8 gText_XsYWereSwapped[];
 
+// Pokemon Center's Jack
 extern const u8 gText_JackRateNickname[];
 extern const u8 gText_JackRememberMove[];
 extern const u8 gText_JackForgetMove[];
@@ -3201,13 +3204,14 @@ extern const u8 gText_ElectricFan[];
 extern const u8 gText_Lawnmower[];
 extern const u8 gText_Recall[];
 
+// Soot sack quantity
 extern const u8 gText_AshQty[];
 
-//tx_difficulty_challenges
+//tx_randomizer_and_challenges
 extern const u8 gText_NuzlockeCantThrowPokeBallRoute[];
 extern const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[];
 extern const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[];
-extern const u8 gText_TypeChallengeCantThrowPokeBall[];
+extern const u8 gText_OneTypeChallengeCantThrowPokeBall[];
 extern const u8 gText_BattleRules_NoItems_Player[];
 
 #endif // GUARD_STRINGS_H

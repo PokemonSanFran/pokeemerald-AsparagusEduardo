@@ -49,7 +49,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #ifdef TX_DIFFICULTY_CHALLENGES_USED
-    #include "tx_difficulty_challenges.h"
+    #include "tx_randomizer_and_challenges.h"
 #endif
 
 enum
@@ -5425,8 +5425,8 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                 {
                     species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
-                    types[0] = GetTypeBySpecies(species, 1); //tx_difficulty_challenges //types[0] = gBaseStats[species].type1;
-                    types[1] = GetTypeBySpecies(species, 2); //types[1] = gBaseStats[species].type2;
+                    types[0] = GetTypeBySpecies(species, 1); //tx_randomizer_and_challenges
+                    types[1] = GetTypeBySpecies(species, 2); //tx_randomizer_and_challenges
                     if (types[0] == type1 || types[1] == type1)
                     {
                         sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
@@ -5443,8 +5443,8 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                 {
                     species = NationalPokedexNumToSpecies(sPokedexView->pokedexList[i].dexNum);
 
-                    types[0] = GetTypeBySpecies(species, 1); //tx_difficulty_challenges //types[0] = gBaseStats[species].type1;
-                    types[1] = GetTypeBySpecies(species, 2); //types[1] = gBaseStats[species].type2;
+                    types[0] = GetTypeBySpecies(species, 1); //tx_randomizer_and_challenges
+                    types[1] = GetTypeBySpecies(species, 2); //tx_randomizer_and_challenges
                     if ((types[0] == type1 && types[1] == type2) || (types[0] == type2 && types[1] == type1))
                     {
                         sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
@@ -8183,9 +8183,9 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         isEevee = TRUE;
 
     #ifdef TX_DIFFICULTY_CHALLENGES_USED
-        if (gSaveBlock1Ptr->txRandEvolutionMethodes) //tx_difficulty_challenges
+        if (gSaveBlock1Ptr->tx_Random_EvolutionMethodes) //tx_difficulty_challenges
         {
-            species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->txRandEvolutions, !gSaveBlock1Ptr->txRandChaos);
+            species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->tx_Random_Evolutions, !gSaveBlock1Ptr->tx_Random_Chaos);
             if (species == SPECIES_NONE)
                 return SPECIES_NONE;
         }
@@ -8222,8 +8222,8 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
         targetSpecies = gEvolutionTable[species][i].targetSpecies;
         sPokedexView->sEvoScreenData.targetSpecies[sPokedexView->sEvoScreenData.numAllEvolutions++] = targetSpecies;
         #ifdef TX_DIFFICULTY_CHALLENGES_USED
-            if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
-                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->txRandChaos);
+            if (gSaveBlock1Ptr->tx_Random_Evolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
+                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
         #endif
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*base_i, 0);
         HandleTargetSpeciesPrint(taskId, targetSpecies, previousTargetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i, isEevee); //evolution mon name

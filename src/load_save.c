@@ -206,11 +206,9 @@ void CopyPartyAndObjectsToSave(void)
 
 void CopyPartyAndObjectsFromSave(void)
 {
-    if (gSaveBlock1Ptr->txRandEncounterLegendary)
-        RandomizeSpeciesListEWRAMLegendary(1);
-    else
-        RandomizeSpeciesListEWRAMNormal(1);
+    RandomizeSpeciesListEWRAM(1);
     RandomizeTypeEffectivenessListEWRAM(1);
+    PrintTXSaveData();
     LoadPlayerParty();
     LoadObjectEvents();
     DeserializeTmHmItemSlots();

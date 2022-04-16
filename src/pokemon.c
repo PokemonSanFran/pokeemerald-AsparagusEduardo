@@ -54,8 +54,8 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "constants/battle_config.h"
-#include "tx_difficulty_challenges.h"
-#include "constants/party_menu.h" //tx_difficulty_challenges
+#include "tx_randomizer_and_challenges.h"
+#include "constants/party_menu.h" //tx_randomizer_and_challenges
 
 #ifdef GBA_PRINTF //tx_difficulty_challenges
     #include "printf.h"
@@ -79,6 +79,9 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 
+static void RandomizeSpeciesListEWRAMNormal(u16 seed);
+static void RandomizeSpeciesListEWRAMLegendary(u16 seed);
+
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
 EWRAM_DATA u8 gEnemyPartyCount = 0;
@@ -87,7 +90,7 @@ EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 
-//tx_difficulty_challenges
+//tx_randomizer_and_challenges
 EWRAM_DATA static u16 sSpeciesList[NUM_SPECIES] = {0};
 EWRAM_DATA static u8 sTypeEffectivenessList[NUMBER_OF_MON_TYPES] = {0};
 
@@ -3147,7 +3150,7 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
     .callback = SpriteCallbackDummy,
 };
 
-//*********************** //tx_difficulty_challenges
+//*********************** //tx_randomizer_and_challenges
 #define EVO_TYPE_0 0
 #define EVO_TYPE_1 1
 #define EVO_TYPE_2 2
@@ -3981,7 +3984,7 @@ static const u8 gSpeciesMapping[NUM_SPECIES+1] =
     [SPECIES_ORANGURU]          = EVO_TYPE_0,
     [SPECIES_PASSIMIAN]         = EVO_TYPE_0,
     [SPECIES_WIMPOD]            = EVO_TYPE_0,
-    [SPECIES_GOLISOPOD]         = EVO_TYPE_0,
+    [SPECIES_GOLISOPOD]         = EVO_TYPE_1,
     [SPECIES_SANDYGAST]         = EVO_TYPE_0,
     [SPECIES_PALOSSAND]         = EVO_TYPE_1,
     [SPECIES_PYUKUMUKU]         = EVO_TYPE_0,
@@ -8079,7 +8082,6 @@ static const u16 gRandomSpeciesEvo0[] =
     SPECIES_ORANGURU          , //= EVO_TYPE_0,
     SPECIES_PASSIMIAN         , //= EVO_TYPE_0,
     SPECIES_WIMPOD            , //= EVO_TYPE_0,
-    SPECIES_GOLISOPOD         , //= EVO_TYPE_0,
     SPECIES_SANDYGAST         , //= EVO_TYPE_0,
     SPECIES_PYUKUMUKU         , //= EVO_TYPE_0,
     SPECIES_MINIOR            , //= EVO_TYPE_0,
@@ -8504,6 +8506,7 @@ static const u16 gRandomSpeciesEvo1[] =
     SPECIES_SALAZZLE          , //= EVO_TYPE_1,
     SPECIES_BEWEAR            , //= EVO_TYPE_1,
     SPECIES_STEENEE           , //= EVO_TYPE_1,
+    SPECIES_GOLISOPOD         , //= EVO_TYPE_1,
     SPECIES_PALOSSAND         , //= EVO_TYPE_1,
     SPECIES_HAKAMO_O          , //= EVO_TYPE_1,
     SPECIES_THWACKEY          , //= EVO_TYPE_1,
@@ -8726,6 +8729,171 @@ static const u16 gRandomSpeciesEvo2[] =
     SPECIES_FLORGES_BLUE_FLOWER , //= EVO_TYPE_2,
     SPECIES_FLORGES_WHITE_FLOWER , //= EVO_TYPE_2,
     SPECIES_AEGISLASH_BLADE    , //= EVO_TYPE_2,
+    #endif
+};
+#define RANDOM_SPECIES_EVO_LEGENDARY_COUNT ARRAY_COUNT(gRandomSpeciesEvoLegendary)
+static const u16 gRandomSpeciesEvoLegendary[] =
+{
+    SPECIES_ARTICUNO                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZAPDOS                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MOLTRES                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MEWTWO                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MEW                           , //= EVO_TYPE_LEGENDARY,
+    SPECIES_RAIKOU                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ENTEI                         , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SUICUNE                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_LUGIA                         , //= EVO_TYPE_LEGENDARY,
+    SPECIES_HO_OH                         , //= EVO_TYPE_LEGENDARY,
+    SPECIES_CELEBI                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_REGIROCK                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_REGICE                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_REGISTEEL                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KYOGRE                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GROUDON                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_RAYQUAZA                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_LATIAS                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_LATIOS                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_JIRACHI                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_DEOXYS                        , //= EVO_TYPE_LEGENDARY,
+    #ifdef POKEMON_EXPANSION
+    SPECIES_UXIE                          , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MESPRIT                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_AZELF                         , //= EVO_TYPE_LEGENDARY,
+    SPECIES_DIALGA                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_PALKIA                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_HEATRAN                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_REGIGIGAS                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GIRATINA                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_CRESSELIA                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_PHIONE                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MANAPHY                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_DARKRAI                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SHAYMIN                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_VICTINI                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_COBALION                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TERRAKION                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_VIRIZION                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TORNADUS                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_THUNDURUS                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_RESHIRAM                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZEKROM                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_LANDORUS                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KYUREM                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KELDEO                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MELOETTA                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GENESECT                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_XERNEAS                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_YVELTAL                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZYGARDE                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_DIANCIE                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_HOOPA                         , //= EVO_TYPE_LEGENDARY,
+    SPECIES_VOLCANION                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TYPE_NULL                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TAPU_KOKO                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TAPU_LELE                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TAPU_BULU                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TAPU_FINI                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_COSMOG                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_COSMOEM                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SOLGALEO                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_LUNALA                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_NIHILEGO                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_BUZZWOLE                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_PHEROMOSA                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_XURKITREE                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_CELESTEELA                    , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KARTANA                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GUZZLORD                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_NECROZMA                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MAGEARNA                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MARSHADOW                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_POIPOLE                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_NAGANADEL                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_STAKATAKA                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_BLACEPHALON                   , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZERAORA                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MELTAN                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MELMETAL                      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZACIAN                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZAMAZENTA                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ETERNATUS                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KUBFU                         , //= EVO_TYPE_LEGENDARY,
+    SPECIES_URSHIFU                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZARUDE                        , //= EVO_TYPE_LEGENDARY,
+    SPECIES_REGIELEKI                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_REGIDRAGO                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GLASTRIER                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SPECTRIER                     , //= EVO_TYPE_LEGENDARY,
+    SPECIES_CALYREX                       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARTICUNO_GALARIAN             , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZAPDOS_GALARIAN               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MOLTRES_GALARIAN              , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GIRATINA_ORIGIN               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SHAYMIN_SKY                   , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_FIGHTING               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_FLYING                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_POISON                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_GROUND                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_ROCK                   , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_BUG                    , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_GHOST                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_STEEL                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_FIRE                   , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_WATER                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_GRASS                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_ELECTRIC               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_PSYCHIC                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_ICE                    , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_DRAGON                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_DARK                   , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ARCEUS_FAIRY                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_TORNADUS_THERIAN              , //= EVO_TYPE_LEGENDARY,
+    SPECIES_THUNDURUS_THERIAN             , //= EVO_TYPE_LEGENDARY,
+    SPECIES_LANDORUS_THERIAN              , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KYUREM_WHITE                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KYUREM_BLACK                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_KELDEO_RESOLUTE               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MELOETTA_PIROUETTE            , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GENESECT_DOUSE_DRIVE          , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GENESECT_SHOCK_DRIVE          , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GENESECT_BURN_DRIVE           , //= EVO_TYPE_LEGENDARY,
+    SPECIES_GENESECT_CHILL_DRIVE          , //= EVO_TYPE_LEGENDARY,
+    SPECIES_XERNEAS_ACTIVE                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZYGARDE_10                    , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZYGARDE_10_POWER_CONSTRUCT    , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZYGARDE_50_POWER_CONSTRUCT    , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZYGARDE_COMPLETE              , //= EVO_TYPE_LEGENDARY,
+    SPECIES_HOOPA_UNBOUND                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_FIGHTING             , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_FLYING               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_POISON               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_GROUND               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_ROCK                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_BUG                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_GHOST                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_STEEL                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_FIRE                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_WATER                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_GRASS                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_ELECTRIC             , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_PSYCHIC              , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_ICE                  , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_DRAGON               , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_DARK                 , //= EVO_TYPE_LEGENDARY,
+    SPECIES_SILVALLY_FAIRY                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_NECROZMA_DUSK_MANE            , //= EVO_TYPE_LEGENDARY,
+    SPECIES_NECROZMA_DAWN_WINGS           , //= EVO_TYPE_LEGENDARY,
+    SPECIES_NECROZMA_ULTRA                , //= EVO_TYPE_LEGENDARY,
+    SPECIES_MAGEARNA_ORIGINAL_COLOR       , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZACIAN_CROWNED_SWORD          , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZAMAZENTA_CROWNED_SHIELD      , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ETERNATUS_ETERNAMAX           , //= EVO_TYPE_LEGENDARY,
+    SPECIES_URSHIFU_RAPID_STRIKE_STYLE    , //= EVO_TYPE_LEGENDARY,
+    SPECIES_ZARUDE_DADA                   , //= EVO_TYPE_LEGENDARY,
+    SPECIES_CALYREX_ICE_RIDER             , //= EVO_TYPE_LEGENDARY,
+    SPECIES_CALYREX_SHADOW_RIDER          , //= EVO_TYPE_LEGENDARY,
     #endif
 };
 
@@ -9455,8 +9623,8 @@ const u16 gEvolutionLines[NUM_SPECIES][EVOS_PER_LINE] =
     #endif
 };
 
-#define RANDOM_TYPE_COUNT ARRAY_COUNT(sTypeChallengeValidTypes)
-static const u8  sTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
+#define RANDOM_TYPE_COUNT ARRAY_COUNT(sOneTypeChallengeValidTypes)
+static const u8  sOneTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
 {
     TYPE_NORMAL   ,
     TYPE_FIGHTING ,
@@ -9479,6 +9647,793 @@ static const u8  sTypeChallengeValidTypes[NUMBER_OF_MON_TYPES-1] =
         #if P_UPDATED_TYPES >= GEN_6
             TYPE_FAIRY,
         #endif
+    #endif
+};
+
+#define RANDOM_MOVES_COUNT ARRAY_COUNT(sRandomValidMoves)
+static const u16 sRandomValidMoves[MOVES_COUNT-1] =
+{
+    MOVE_POUND,
+    MOVE_KARATE_CHOP,
+    MOVE_DOUBLE_SLAP,
+    MOVE_COMET_PUNCH,
+    MOVE_MEGA_PUNCH,
+    MOVE_PAY_DAY,
+    MOVE_FIRE_PUNCH,
+    MOVE_ICE_PUNCH,
+    MOVE_THUNDER_PUNCH,
+    MOVE_SCRATCH,
+    #ifndef BATTLE_ENGINE
+    MOVE_VICE_GRIP,
+    #else
+    MOVE_VISE_GRIP,
+    #endif
+    MOVE_GUILLOTINE,
+    MOVE_RAZOR_WIND,
+    MOVE_SWORDS_DANCE,
+    MOVE_CUT,
+    MOVE_GUST,
+    MOVE_WING_ATTACK,
+    MOVE_WHIRLWIND,
+    MOVE_FLY,
+    MOVE_BIND,
+    MOVE_SLAM,
+    MOVE_VINE_WHIP,
+    MOVE_STOMP,
+    MOVE_DOUBLE_KICK,
+    MOVE_MEGA_KICK,
+    MOVE_JUMP_KICK,
+    MOVE_ROLLING_KICK,
+    MOVE_SAND_ATTACK,
+    MOVE_HEADBUTT,
+    MOVE_HORN_ATTACK,
+    MOVE_FURY_ATTACK,
+    MOVE_HORN_DRILL,
+    MOVE_TACKLE,
+    MOVE_BODY_SLAM,
+    MOVE_WRAP,
+    MOVE_TAKE_DOWN,
+    MOVE_THRASH,
+    MOVE_DOUBLE_EDGE,
+    MOVE_TAIL_WHIP,
+    MOVE_POISON_STING,
+    MOVE_TWINEEDLE,
+    MOVE_PIN_MISSILE,
+    MOVE_LEER,
+    MOVE_BITE,
+    MOVE_GROWL,
+    MOVE_ROAR,
+    MOVE_SING,
+    MOVE_SUPERSONIC,
+    MOVE_SONIC_BOOM,
+    MOVE_DISABLE,
+    MOVE_ACID,
+    MOVE_EMBER,
+    MOVE_FLAMETHROWER,
+    MOVE_MIST,
+    MOVE_WATER_GUN,
+    MOVE_HYDRO_PUMP,
+    MOVE_SURF,
+    MOVE_ICE_BEAM,
+    MOVE_BLIZZARD,
+    MOVE_PSYBEAM,
+    MOVE_BUBBLE_BEAM,
+    MOVE_AURORA_BEAM,
+    MOVE_HYPER_BEAM,
+    MOVE_PECK,
+    MOVE_DRILL_PECK,
+    MOVE_SUBMISSION,
+    MOVE_LOW_KICK,
+    MOVE_COUNTER,
+    MOVE_SEISMIC_TOSS,
+    MOVE_STRENGTH,
+    MOVE_ABSORB,
+    MOVE_MEGA_DRAIN,
+    MOVE_LEECH_SEED,
+    MOVE_GROWTH,
+    MOVE_RAZOR_LEAF,
+    MOVE_SOLAR_BEAM,
+    MOVE_POISON_POWDER,
+    MOVE_STUN_SPORE,
+    MOVE_SLEEP_POWDER,
+    MOVE_PETAL_DANCE,
+    MOVE_STRING_SHOT,
+    MOVE_DRAGON_RAGE,
+    MOVE_FIRE_SPIN,
+    MOVE_THUNDER_SHOCK,
+    MOVE_THUNDERBOLT,
+    MOVE_THUNDER_WAVE,
+    MOVE_THUNDER,
+    MOVE_ROCK_THROW,
+    MOVE_EARTHQUAKE,
+    MOVE_FISSURE,
+    MOVE_DIG,
+    MOVE_TOXIC,
+    MOVE_CONFUSION,
+    MOVE_PSYCHIC,
+    MOVE_HYPNOSIS,
+    MOVE_MEDITATE,
+    MOVE_AGILITY,
+    MOVE_QUICK_ATTACK,
+    MOVE_RAGE,
+    MOVE_TELEPORT,
+    MOVE_NIGHT_SHADE,
+    MOVE_MIMIC,
+    MOVE_SCREECH,
+    MOVE_DOUBLE_TEAM,
+    MOVE_RECOVER,
+    MOVE_HARDEN,
+    MOVE_MINIMIZE,
+    MOVE_SMOKESCREEN,
+    MOVE_CONFUSE_RAY,
+    MOVE_WITHDRAW,
+    MOVE_DEFENSE_CURL,
+    MOVE_BARRIER,
+    MOVE_LIGHT_SCREEN,
+    MOVE_HAZE,
+    MOVE_REFLECT,
+    MOVE_FOCUS_ENERGY,
+    MOVE_BIDE,
+    MOVE_METRONOME,
+    MOVE_MIRROR_MOVE,
+    MOVE_SELF_DESTRUCT,
+    MOVE_EGG_BOMB,
+    MOVE_LICK,
+    MOVE_SMOG,
+    MOVE_SLUDGE,
+    MOVE_BONE_CLUB,
+    MOVE_FIRE_BLAST,
+    MOVE_WATERFALL,
+    MOVE_CLAMP,
+    MOVE_SWIFT,
+    MOVE_SKULL_BASH,
+    MOVE_SPIKE_CANNON,
+    MOVE_CONSTRICT,
+    MOVE_AMNESIA,
+    MOVE_KINESIS,
+    MOVE_SOFT_BOILED,
+    #ifndef BATTLE_ENGINE
+    MOVE_HI_JUMP_KICK,
+    #else
+    MOVE_HIGH_JUMP_KICK,
+    #endif
+    MOVE_GLARE,
+    MOVE_DREAM_EATER,
+    MOVE_POISON_GAS,
+    MOVE_BARRAGE,
+    MOVE_LEECH_LIFE,
+    MOVE_LOVELY_KISS,
+    MOVE_SKY_ATTACK,
+    MOVE_TRANSFORM,
+    MOVE_BUBBLE,
+    MOVE_DIZZY_PUNCH,
+    MOVE_SPORE,
+    MOVE_FLASH,
+    MOVE_PSYWAVE,
+    MOVE_SPLASH,
+    MOVE_ACID_ARMOR,
+    MOVE_CRABHAMMER,
+    MOVE_EXPLOSION,
+    MOVE_FURY_SWIPES,
+    MOVE_BONEMERANG,
+    MOVE_REST,
+    MOVE_ROCK_SLIDE,
+    MOVE_HYPER_FANG,
+    MOVE_SHARPEN,
+    MOVE_CONVERSION,
+    MOVE_TRI_ATTACK,
+    MOVE_SUPER_FANG,
+    MOVE_SLASH,
+    MOVE_SUBSTITUTE,
+    MOVE_STRUGGLE,
+    MOVE_SKETCH,
+    MOVE_TRIPLE_KICK,
+    MOVE_THIEF,
+    MOVE_SPIDER_WEB,
+    MOVE_MIND_READER,
+    MOVE_NIGHTMARE,
+    MOVE_FLAME_WHEEL,
+    MOVE_SNORE,
+    MOVE_CURSE,
+    MOVE_FLAIL,
+    MOVE_CONVERSION_2,
+    MOVE_AEROBLAST,
+    MOVE_COTTON_SPORE,
+    MOVE_REVERSAL,
+    MOVE_SPITE,
+    MOVE_POWDER_SNOW,
+    MOVE_PROTECT,
+    MOVE_MACH_PUNCH,
+    MOVE_SCARY_FACE,
+    #ifndef BATTLE_ENGINE
+    MOVE_FAINT_ATTACK,
+    #else
+    MOVE_FEINT_ATTACK,
+    #endif
+    MOVE_SWEET_KISS,
+    MOVE_BELLY_DRUM,
+    MOVE_SLUDGE_BOMB,
+    MOVE_MUD_SLAP,
+    MOVE_OCTAZOOKA,
+    MOVE_SPIKES,
+    MOVE_ZAP_CANNON,
+    MOVE_FORESIGHT,
+    MOVE_DESTINY_BOND,
+    MOVE_PERISH_SONG,
+    MOVE_ICY_WIND,
+    MOVE_DETECT,
+    MOVE_BONE_RUSH,
+    MOVE_LOCK_ON,
+    MOVE_OUTRAGE,
+    MOVE_SANDSTORM,
+    MOVE_GIGA_DRAIN,
+    MOVE_ENDURE,
+    MOVE_CHARM,
+    MOVE_ROLLOUT,
+    MOVE_FALSE_SWIPE,
+    MOVE_SWAGGER,
+    MOVE_MILK_DRINK,
+    MOVE_SPARK,
+    MOVE_FURY_CUTTER,
+    MOVE_STEEL_WING,
+    MOVE_MEAN_LOOK,
+    MOVE_ATTRACT,
+    MOVE_SLEEP_TALK,
+    MOVE_HEAL_BELL,
+    MOVE_RETURN,
+    MOVE_PRESENT,
+    MOVE_FRUSTRATION,
+    MOVE_SAFEGUARD,
+    MOVE_PAIN_SPLIT,
+    MOVE_SACRED_FIRE,
+    MOVE_MAGNITUDE,
+    MOVE_DYNAMIC_PUNCH,
+    MOVE_MEGAHORN,
+    MOVE_DRAGON_BREATH,
+    MOVE_BATON_PASS,
+    MOVE_ENCORE,
+    MOVE_PURSUIT,
+    MOVE_RAPID_SPIN,
+    MOVE_SWEET_SCENT,
+    MOVE_IRON_TAIL,
+    MOVE_METAL_CLAW,
+    MOVE_VITAL_THROW,
+    MOVE_MORNING_SUN,
+    MOVE_SYNTHESIS,
+    MOVE_MOONLIGHT,
+    MOVE_HIDDEN_POWER,
+    MOVE_CROSS_CHOP,
+    MOVE_TWISTER,
+    MOVE_RAIN_DANCE,
+    MOVE_SUNNY_DAY,
+    MOVE_CRUNCH,
+    MOVE_MIRROR_COAT,
+    MOVE_PSYCH_UP,
+    MOVE_EXTREME_SPEED,
+    MOVE_ANCIENT_POWER,
+    MOVE_SHADOW_BALL,
+    MOVE_FUTURE_SIGHT,
+    MOVE_ROCK_SMASH,
+    MOVE_WHIRLPOOL,
+    MOVE_BEAT_UP,
+    MOVE_FAKE_OUT,
+    MOVE_UPROAR,
+    MOVE_STOCKPILE,
+    MOVE_SPIT_UP,
+    MOVE_SWALLOW,
+    MOVE_HEAT_WAVE,
+    MOVE_HAIL,
+    MOVE_TORMENT,
+    MOVE_FLATTER,
+    MOVE_WILL_O_WISP,
+    MOVE_MEMENTO,
+    MOVE_FACADE,
+    MOVE_FOCUS_PUNCH,
+    #ifndef BATTLE_ENGINE
+    MOVE_SMELLING_SALT,
+    #else
+    MOVE_SMELLING_SALTS,
+    #endif
+    MOVE_FOLLOW_ME,
+    MOVE_NATURE_POWER,
+    MOVE_CHARGE,
+    MOVE_TAUNT,
+    MOVE_HELPING_HAND,
+    MOVE_TRICK,
+    MOVE_ROLE_PLAY,
+    MOVE_WISH,
+    MOVE_ASSIST,
+    MOVE_INGRAIN,
+    MOVE_SUPERPOWER,
+    MOVE_MAGIC_COAT,
+    MOVE_RECYCLE,
+    MOVE_REVENGE,
+    MOVE_BRICK_BREAK,
+    MOVE_YAWN,
+    MOVE_KNOCK_OFF,
+    MOVE_ENDEAVOR,
+    MOVE_ERUPTION,
+    MOVE_SKILL_SWAP,
+    MOVE_IMPRISON,
+    MOVE_REFRESH,
+    MOVE_GRUDGE,
+    MOVE_SNATCH,
+    MOVE_SECRET_POWER,
+    MOVE_DIVE,
+    MOVE_ARM_THRUST,
+    MOVE_CAMOUFLAGE,
+    MOVE_TAIL_GLOW,
+    MOVE_LUSTER_PURGE,
+    MOVE_MIST_BALL,
+    MOVE_FEATHER_DANCE,
+    MOVE_TEETER_DANCE,
+    MOVE_BLAZE_KICK,
+    MOVE_MUD_SPORT,
+    MOVE_ICE_BALL,
+    MOVE_NEEDLE_ARM,
+    MOVE_SLACK_OFF,
+    MOVE_HYPER_VOICE,
+    MOVE_POISON_FANG,
+    MOVE_CRUSH_CLAW,
+    MOVE_BLAST_BURN,
+    MOVE_HYDRO_CANNON,
+    MOVE_METEOR_MASH,
+    MOVE_ASTONISH,
+    MOVE_WEATHER_BALL,
+    MOVE_AROMATHERAPY,
+    MOVE_FAKE_TEARS,
+    MOVE_AIR_CUTTER,
+    MOVE_OVERHEAT,
+    MOVE_ODOR_SLEUTH,
+    MOVE_ROCK_TOMB,
+    MOVE_SILVER_WIND,
+    MOVE_METAL_SOUND,
+    MOVE_GRASS_WHISTLE,
+    MOVE_TICKLE,
+    MOVE_COSMIC_POWER,
+    MOVE_WATER_SPOUT,
+    MOVE_SIGNAL_BEAM,
+    MOVE_SHADOW_PUNCH,
+    MOVE_EXTRASENSORY,
+    MOVE_SKY_UPPERCUT,
+    MOVE_SAND_TOMB,
+    MOVE_SHEER_COLD,
+    MOVE_MUDDY_WATER,
+    MOVE_BULLET_SEED,
+    MOVE_AERIAL_ACE,
+    MOVE_ICICLE_SPEAR,
+    MOVE_IRON_DEFENSE,
+    MOVE_BLOCK,
+    MOVE_HOWL,
+    MOVE_DRAGON_CLAW,
+    MOVE_FRENZY_PLANT,
+    MOVE_BULK_UP,
+    MOVE_BOUNCE,
+    MOVE_MUD_SHOT,
+    MOVE_POISON_TAIL,
+    MOVE_COVET,
+    MOVE_VOLT_TACKLE,
+    MOVE_MAGICAL_LEAF,
+    MOVE_WATER_SPORT,
+    MOVE_CALM_MIND,
+    MOVE_LEAF_BLADE,
+    MOVE_DRAGON_DANCE,
+    MOVE_ROCK_BLAST,
+    MOVE_SHOCK_WAVE,
+    MOVE_WATER_PULSE,
+    MOVE_DOOM_DESIRE,
+    MOVE_PSYCHO_BOOST,
+    #ifdef BATTLE_ENGINE
+    // Gen 4 moves
+    MOVE_ROOST,
+    MOVE_GRAVITY,
+    MOVE_MIRACLE_EYE,
+    MOVE_WAKE_UP_SLAP,
+    MOVE_HAMMER_ARM,
+    MOVE_GYRO_BALL,
+    MOVE_HEALING_WISH,
+    MOVE_BRINE,
+    MOVE_NATURAL_GIFT,
+    MOVE_FEINT,
+    MOVE_PLUCK,
+    MOVE_TAILWIND,
+    MOVE_ACUPRESSURE,
+    MOVE_METAL_BURST,
+    MOVE_U_TURN,
+    MOVE_CLOSE_COMBAT,
+    MOVE_PAYBACK,
+    MOVE_ASSURANCE,
+    MOVE_EMBARGO,
+    MOVE_FLING,
+    MOVE_PSYCHO_SHIFT,
+    MOVE_TRUMP_CARD,
+    MOVE_HEAL_BLOCK,
+    MOVE_WRING_OUT,
+    MOVE_POWER_TRICK,
+    MOVE_GASTRO_ACID,
+    MOVE_LUCKY_CHANT,
+    MOVE_ME_FIRST,
+    MOVE_COPYCAT,
+    MOVE_POWER_SWAP,
+    MOVE_GUARD_SWAP,
+    MOVE_PUNISHMENT,
+    MOVE_LAST_RESORT,
+    MOVE_WORRY_SEED,
+    MOVE_SUCKER_PUNCH,
+    MOVE_TOXIC_SPIKES,
+    MOVE_HEART_SWAP,
+    MOVE_AQUA_RING,
+    MOVE_MAGNET_RISE,
+    MOVE_FLARE_BLITZ,
+    MOVE_FORCE_PALM,
+    MOVE_AURA_SPHERE,
+    MOVE_ROCK_POLISH,
+    MOVE_POISON_JAB,
+    MOVE_DARK_PULSE,
+    MOVE_NIGHT_SLASH,
+    MOVE_AQUA_TAIL,
+    MOVE_SEED_BOMB,
+    MOVE_AIR_SLASH,
+    MOVE_X_SCISSOR,
+    MOVE_BUG_BUZZ,
+    MOVE_DRAGON_PULSE,
+    MOVE_DRAGON_RUSH,
+    MOVE_POWER_GEM,
+    MOVE_DRAIN_PUNCH,
+    MOVE_VACUUM_WAVE,
+    MOVE_FOCUS_BLAST,
+    MOVE_ENERGY_BALL,
+    MOVE_BRAVE_BIRD,
+    MOVE_EARTH_POWER,
+    MOVE_SWITCHEROO,
+    MOVE_GIGA_IMPACT,
+    MOVE_NASTY_PLOT,
+    MOVE_BULLET_PUNCH,
+    MOVE_AVALANCHE,
+    MOVE_ICE_SHARD,
+    MOVE_SHADOW_CLAW,
+    MOVE_THUNDER_FANG,
+    MOVE_ICE_FANG,
+    MOVE_FIRE_FANG,
+    MOVE_SHADOW_SNEAK,
+    MOVE_MUD_BOMB,
+    MOVE_PSYCHO_CUT,
+    MOVE_ZEN_HEADBUTT,
+    MOVE_MIRROR_SHOT,
+    MOVE_FLASH_CANNON,
+    MOVE_ROCK_CLIMB,
+    MOVE_DEFOG,
+    MOVE_TRICK_ROOM,
+    MOVE_DRACO_METEOR,
+    MOVE_DISCHARGE,
+    MOVE_LAVA_PLUME,
+    MOVE_LEAF_STORM,
+    MOVE_POWER_WHIP,
+    MOVE_ROCK_WRECKER,
+    MOVE_CROSS_POISON,
+    MOVE_GUNK_SHOT,
+    MOVE_IRON_HEAD,
+    MOVE_MAGNET_BOMB,
+    MOVE_STONE_EDGE,
+    MOVE_CAPTIVATE,
+    MOVE_STEALTH_ROCK,
+    MOVE_GRASS_KNOT,
+    MOVE_CHATTER,
+    MOVE_JUDGMENT,
+    MOVE_BUG_BITE,
+    MOVE_CHARGE_BEAM,
+    MOVE_WOOD_HAMMER,
+    MOVE_AQUA_JET,
+    MOVE_ATTACK_ORDER,
+    MOVE_DEFEND_ORDER,
+    MOVE_HEAL_ORDER,
+    MOVE_HEAD_SMASH,
+    MOVE_DOUBLE_HIT,
+    MOVE_ROAR_OF_TIME,
+    MOVE_SPACIAL_REND,
+    MOVE_LUNAR_DANCE,
+    MOVE_CRUSH_GRIP,
+    MOVE_MAGMA_STORM,
+    MOVE_DARK_VOID,
+    MOVE_SEED_FLARE,
+    MOVE_OMINOUS_WIND,
+    MOVE_SHADOW_FORCE,
+    // Gen 5 moves
+    MOVE_HONE_CLAWS,
+    MOVE_WIDE_GUARD,
+    MOVE_GUARD_SPLIT,
+    MOVE_POWER_SPLIT,
+    MOVE_WONDER_ROOM,
+    MOVE_PSYSHOCK,
+    MOVE_VENOSHOCK,
+    MOVE_AUTOTOMIZE,
+    MOVE_RAGE_POWDER,
+    MOVE_TELEKINESIS,
+    MOVE_MAGIC_ROOM,
+    MOVE_SMACK_DOWN,
+    MOVE_STORM_THROW,
+    MOVE_FLAME_BURST,
+    MOVE_SLUDGE_WAVE,
+    MOVE_QUIVER_DANCE,
+    MOVE_HEAVY_SLAM,
+    MOVE_SYNCHRONOISE,
+    MOVE_ELECTRO_BALL,
+    MOVE_SOAK,
+    MOVE_FLAME_CHARGE,
+    MOVE_COIL,
+    MOVE_LOW_SWEEP,
+    MOVE_ACID_SPRAY,
+    MOVE_FOUL_PLAY,
+    MOVE_SIMPLE_BEAM,
+    MOVE_ENTRAINMENT,
+    MOVE_AFTER_YOU,
+    MOVE_ROUND,
+    MOVE_ECHOED_VOICE,
+    MOVE_CHIP_AWAY,
+    MOVE_CLEAR_SMOG,
+    MOVE_STORED_POWER,
+    MOVE_QUICK_GUARD,
+    MOVE_ALLY_SWITCH,
+    MOVE_SCALD,
+    MOVE_SHELL_SMASH,
+    MOVE_HEAL_PULSE,
+    MOVE_HEX,
+    MOVE_SKY_DROP,
+    MOVE_SHIFT_GEAR,
+    MOVE_CIRCLE_THROW,
+    MOVE_INCINERATE,
+    MOVE_QUASH,
+    MOVE_ACROBATICS,
+    MOVE_REFLECT_TYPE,
+    MOVE_RETALIATE,
+    MOVE_FINAL_GAMBIT,
+    MOVE_BESTOW,
+    MOVE_INFERNO,
+    MOVE_WATER_PLEDGE,
+    MOVE_FIRE_PLEDGE,
+    MOVE_GRASS_PLEDGE,
+    MOVE_VOLT_SWITCH,
+    MOVE_STRUGGLE_BUG,
+    MOVE_BULLDOZE,
+    MOVE_FROST_BREATH,
+    MOVE_DRAGON_TAIL,
+    MOVE_WORK_UP,
+    MOVE_ELECTROWEB,
+    MOVE_WILD_CHARGE,
+    MOVE_DRILL_RUN,
+    MOVE_DUAL_CHOP,
+    MOVE_HEART_STAMP,
+    MOVE_HORN_LEECH,
+    MOVE_SACRED_SWORD,
+    MOVE_RAZOR_SHELL,
+    MOVE_HEAT_CRASH,
+    MOVE_LEAF_TORNADO,
+    MOVE_STEAMROLLER,
+    MOVE_COTTON_GUARD,
+    MOVE_NIGHT_DAZE,
+    MOVE_PSYSTRIKE,
+    MOVE_TAIL_SLAP,
+    MOVE_HURRICANE,
+    MOVE_HEAD_CHARGE,
+    MOVE_GEAR_GRIND,
+    MOVE_SEARING_SHOT,
+    MOVE_TECHNO_BLAST,
+    MOVE_RELIC_SONG,
+    MOVE_SECRET_SWORD,
+    MOVE_GLACIATE,
+    MOVE_BOLT_STRIKE,
+    MOVE_BLUE_FLARE,
+    MOVE_FIERY_DANCE,
+    MOVE_FREEZE_SHOCK,
+    MOVE_ICE_BURN,
+    MOVE_SNARL,
+    MOVE_ICICLE_CRASH,
+    MOVE_V_CREATE,
+    MOVE_FUSION_FLARE,
+    MOVE_FUSION_BOLT,
+    // Gen 6 moves
+    MOVE_FLYING_PRESS,
+    MOVE_MAT_BLOCK,
+    MOVE_BELCH,
+    MOVE_ROTOTILLER,
+    MOVE_STICKY_WEB,
+    MOVE_FELL_STINGER,
+    MOVE_PHANTOM_FORCE,
+    MOVE_TRICK_OR_TREAT,
+    MOVE_NOBLE_ROAR,
+    MOVE_ION_DELUGE,
+    MOVE_PARABOLIC_CHARGE,
+    MOVE_FORESTS_CURSE,
+    MOVE_PETAL_BLIZZARD,
+    MOVE_FREEZE_DRY,
+    MOVE_DISARMING_VOICE,
+    MOVE_PARTING_SHOT,
+    MOVE_TOPSY_TURVY,
+    MOVE_DRAINING_KISS,
+    MOVE_CRAFTY_SHIELD,
+    MOVE_FLOWER_SHIELD,
+    MOVE_GRASSY_TERRAIN,
+    MOVE_MISTY_TERRAIN,
+    MOVE_ELECTRIFY,
+    MOVE_PLAY_ROUGH,
+    MOVE_FAIRY_WIND,
+    MOVE_MOONBLAST,
+    MOVE_BOOMBURST,
+    MOVE_FAIRY_LOCK,
+    MOVE_KINGS_SHIELD,
+    MOVE_PLAY_NICE,
+    MOVE_CONFIDE,
+    MOVE_DIAMOND_STORM,
+    MOVE_STEAM_ERUPTION,
+    MOVE_HYPERSPACE_HOLE,
+    MOVE_WATER_SHURIKEN,
+    MOVE_MYSTICAL_FIRE,
+    MOVE_SPIKY_SHIELD,
+    MOVE_AROMATIC_MIST,
+    MOVE_EERIE_IMPULSE,
+    MOVE_VENOM_DRENCH,
+    MOVE_POWDER,
+    MOVE_GEOMANCY,
+    MOVE_MAGNETIC_FLUX,
+    MOVE_HAPPY_HOUR,
+    MOVE_ELECTRIC_TERRAIN,
+    MOVE_DAZZLING_GLEAM,
+    MOVE_CELEBRATE,
+    MOVE_HOLD_HANDS,
+    MOVE_BABY_DOLL_EYES,
+    MOVE_NUZZLE,
+    MOVE_HOLD_BACK,
+    MOVE_INFESTATION,
+    MOVE_POWER_UP_PUNCH,
+    MOVE_OBLIVION_WING,
+    MOVE_THOUSAND_ARROWS,
+    MOVE_THOUSAND_WAVES,
+    MOVE_LANDS_WRATH,
+    MOVE_LIGHT_OF_RUIN,
+    // ORAS Moves
+    MOVE_ORIGIN_PULSE,
+    MOVE_PRECIPICE_BLADES,
+    MOVE_DRAGON_ASCENT,
+    //MOVE_HYPERSPACE_FURY,
+    // Gen 7 moves
+    MOVE_SHORE_UP,
+    MOVE_FIRST_IMPRESSION,
+    MOVE_BANEFUL_BUNKER,
+    MOVE_SPIRIT_SHACKLE,
+    MOVE_DARKEST_LARIAT,
+    MOVE_SPARKLING_ARIA,
+    MOVE_ICE_HAMMER,
+    MOVE_FLORAL_HEALING,
+    MOVE_HIGH_HORSEPOWER,
+    MOVE_STRENGTH_SAP,
+    MOVE_SOLAR_BLADE,
+    MOVE_LEAFAGE,
+    MOVE_SPOTLIGHT,
+    MOVE_TOXIC_THREAD,
+    MOVE_LASER_FOCUS,
+    MOVE_GEAR_UP,
+    MOVE_THROAT_CHOP,
+    MOVE_POLLEN_PUFF,
+    MOVE_ANCHOR_SHOT,
+    MOVE_PSYCHIC_TERRAIN,
+    MOVE_LUNGE,
+    MOVE_FIRE_LASH,
+    MOVE_POWER_TRIP,
+    MOVE_BURN_UP,
+    MOVE_SPEED_SWAP,
+    MOVE_SMART_STRIKE,
+    MOVE_PURIFY,
+    MOVE_REVELATION_DANCE,
+    MOVE_CORE_ENFORCER,
+    MOVE_TROP_KICK,
+    MOVE_INSTRUCT,
+    MOVE_BEAK_BLAST,
+    MOVE_CLANGING_SCALES,
+    MOVE_DRAGON_HAMMER,
+    MOVE_BRUTAL_SWING,
+    MOVE_AURORA_VEIL,
+    MOVE_SHELL_TRAP,
+    MOVE_FLEUR_CANNON,
+    MOVE_PSYCHIC_FANGS,
+    MOVE_STOMPING_TANTRUM,
+    MOVE_SHADOW_BONE,
+    MOVE_ACCELEROCK,
+    MOVE_LIQUIDATION,
+    MOVE_PRISMATIC_LASER,
+    MOVE_SPECTRAL_THIEF,
+    MOVE_SUNSTEEL_STRIKE,
+    MOVE_MOONGEIST_BEAM,
+    MOVE_TEARFUL_LOOK,
+    MOVE_ZING_ZAP,
+    MOVE_NATURES_MADNESS,
+    MOVE_MULTI_ATTACK,
+    // USUM Moves
+    MOVE_MIND_BLOWN,
+    MOVE_PLASMA_FISTS,
+    MOVE_PHOTON_GEYSER,
+    // LGPE Moves
+    MOVE_ZIPPY_ZAP,
+    MOVE_SPLISHY_SPLASH,
+    MOVE_FLOATY_FALL,
+    MOVE_PIKA_PAPOW,
+    MOVE_BOUNCY_BUBBLE,
+    MOVE_BUZZY_BUZZ,
+    MOVE_SIZZLY_SLIDE,
+    MOVE_GLITZY_GLOW,
+    MOVE_BADDY_BAD,
+    MOVE_SAPPY_SEED,
+    MOVE_FREEZY_FROST,
+    MOVE_SPARKLY_SWIRL,
+    MOVE_VEEVEE_VOLLEY,
+    MOVE_DOUBLE_IRON_BASH,
+    // Gen 8 moves
+    MOVE_DYNAMAX_CANNON,
+    MOVE_SNIPE_SHOT,
+    MOVE_JAW_LOCK,
+    MOVE_STUFF_CHEEKS,
+    MOVE_NO_RETREAT,
+    MOVE_TAR_SHOT,
+    MOVE_MAGIC_POWDER,
+    MOVE_DRAGON_DARTS,
+    MOVE_TEATIME,
+    MOVE_OCTOLOCK,
+    MOVE_BOLT_BEAK,
+    MOVE_FISHIOUS_REND,
+    MOVE_COURT_CHANGE,
+    MOVE_CLANGOROUS_SOUL,
+    MOVE_BODY_PRESS,
+    MOVE_DECORATE,
+    MOVE_DRUM_BEATING,
+    MOVE_SNAP_TRAP,
+    MOVE_PYRO_BALL,
+    MOVE_BEHEMOTH_BLADE,
+    MOVE_BEHEMOTH_BASH,
+    MOVE_AURA_WHEEL,
+    MOVE_BREAKING_SWIPE,
+    MOVE_BRANCH_POKE,
+    MOVE_OVERDRIVE,
+    MOVE_APPLE_ACID,
+    MOVE_GRAV_APPLE,
+    MOVE_SPIRIT_BREAK,
+    MOVE_STRANGE_STEAM,
+    MOVE_LIFE_DEW,
+    MOVE_OBSTRUCT,
+    MOVE_FALSE_SURRENDER,
+    MOVE_METEOR_ASSAULT,
+    MOVE_ETERNABEAM,
+    MOVE_STEEL_BEAM,
+    // Isle of Armor Moves
+    MOVE_EXPANDING_FORCE,
+    MOVE_STEEL_ROLLER,
+    MOVE_SCALE_SHOT,
+    MOVE_METEOR_BEAM,
+    MOVE_SHELL_SIDE_ARM,
+    MOVE_MISTY_EXPLOSION,
+    MOVE_GRASSY_GLIDE,
+    MOVE_RISING_VOLTAGE,
+    MOVE_TERRAIN_PULSE,
+    MOVE_SKITTER_SMACK,
+    MOVE_BURNING_JEALOUSY,
+    MOVE_LASH_OUT,
+    MOVE_POLTERGEIST,
+    MOVE_CORROSIVE_GAS,
+    MOVE_COACHING,
+    MOVE_FLIP_TURN,
+    MOVE_TRIPLE_AXEL,
+    MOVE_DUAL_WINGBEAT,
+    MOVE_SCORCHING_SANDS,
+    MOVE_JUNGLE_HEALING,
+    MOVE_WICKED_BLOW,
+    MOVE_SURGING_STRIKES,
+    // Crown Tundra Moves
+    MOVE_THUNDER_CAGE,
+    MOVE_DRAGON_ENERGY,
+    MOVE_FREEZING_GLARE,
+    MOVE_FIERY_WRATH,
+    MOVE_THUNDEROUS_KICK,
+    MOVE_GLACIAL_LANCE,
+    MOVE_ASTRAL_BARRAGE,
+    MOVE_EERIE_SPELL,
     #endif
 };
 //**********************
@@ -9652,7 +10607,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
     }
 
-    if (GetAbilityBySpecies(species, 1) != ABILITY_NONE) //tx_difficulty_challenges //if (gBaseStats[species].abilities[1])
+    if (GetAbilityBySpecies(species, 1) != ABILITY_NONE) //tx_randomizer_and_challenges //if (gBaseStats[species].abilities[1])
     {
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
@@ -10321,8 +11276,8 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 
         move = (gLevelUpLearnsets[species][i].move & LEVEL_UP_MOVE_ID);
 
-        if (gSaveBlock1Ptr->txRandMoves) //tx_difficulty_challenges
-            move = (RandomSeeded(move, !gSaveBlock1Ptr->txRandChaos) % MOVES_COUNT) + 1;
+        if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
+            move = GetRandomMove(move, species);
 
         if (GiveMoveToBoxMon(boxMon, move) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
@@ -10354,6 +11309,8 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     if (gLevelUpLearnsets[species][sLearningMoveTableID].level == level)
     {
         gMoveToLearn = gLevelUpLearnsets[species][sLearningMoveTableID].move;
+        if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
+            gMoveToLearn = GetRandomMove(gMoveToLearn, species);
         sLearningMoveTableID++;
         retVal = GiveMoveToMon(mon, gMoveToLearn);
     }
@@ -11435,19 +12392,19 @@ void CopyMon(void *dest, void *src, size_t size)
 u8 GiveMonToPlayer(struct Pokemon *mon)
 {
     s32 i;
-    u8 typeChallenge = gSaveBlock1Ptr->txRandTypeChallenge;
+    u8 typeChallenge = gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge;
 
     SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
     SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
 
-    for (i = 0; i < GetPartySize(); i++) //tx_difficulty_challenges
+    for (i = 0; i < GetPartySize(); i++) //tx_randomizer_and_challenges
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             break;
     }
 
-    if (i >= GetPartySize()) //tx_difficulty_challenges
+    if (i >= GetPartySize()) //tx_randomizer_and_challenges
         return SendMonToPC(mon);
 
     if (typeChallenge != TX_CHALLENGE_TYPE_OFF && 
@@ -11498,7 +12455,7 @@ u8 CalculatePlayerPartyCount(void)
 {
     gPlayerPartyCount = 0;
 
-    while (gPlayerPartyCount < GetPartySize() //tx_difficulty_challenges
+    while (gPlayerPartyCount < GetPartySize() //tx_randomizer_and_challenges
         && GetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
     {
         gPlayerPartyCount++;
@@ -11562,13 +12519,9 @@ u8 GetMonsStateToDoubles_2(void)
 u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
     int i;
-    if (gSaveBlock1Ptr->txRandAbilities) //tx_difficulty_challenges
+    if (gSaveBlock1Ptr->tx_Random_Abilities) //tx_randomizer_and_challenges
     {
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_ABILITY, TRUE, TRUE);
-        if (gBaseStats[species].abilities[abilityNum] == ABILITY_NONE)
-            abilityNum = 0;
-        else
-            abilityNum = 1;
     }
     if (abilityNum < NUM_ABILITY_SLOTS)
         gLastUsedAbility = gBaseStats[species].abilities[abilityNum];
@@ -11737,8 +12690,8 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->spDefense = GetMonData(src, MON_DATA_SPDEF, NULL);
     dst->abilityNum = GetMonData(src, MON_DATA_ABILITY_NUM, NULL);
     dst->otId = GetMonData(src, MON_DATA_OT_ID, NULL);
-    dst->type1 = GetTypeBySpecies(dst->species, 1); //tx_difficulty_challenges // dst->type1 = gBaseStats[dst->species].type1;
-    dst->type2 = GetTypeBySpecies(dst->species, 2); // dst->type2 = gBaseStats[dst->species].type2;
+    dst->type1 = GetTypeBySpecies(dst->species, 1); //tx_randomizer_and_challenges
+    dst->type2 = GetTypeBySpecies(dst->species, 2); //tx_randomizer_and_challenges
     dst->type3 = TYPE_MYSTERY;
     dst->ability = GetAbilityBySpecies(dst->species, dst->abilityNum);
     GetMonData(src, MON_DATA_NICKNAME, nickname);
@@ -12715,9 +13668,9 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
     u8 holdEffect;
     u16 currentMap;
 
-    if (gSaveBlock1Ptr->txRandEvolutionMethodes) //tx_difficulty_challenges
+    if (gSaveBlock1Ptr->tx_Random_EvolutionMethodes) //tx_randomizer_and_challenges
     {
-        species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->txRandEvolutionMethodes, !gSaveBlock1Ptr->txRandChaos);
+        species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->tx_Random_EvolutionMethodes, !gSaveBlock1Ptr->tx_Random_Chaos);
         if (species == SPECIES_NONE)
             return SPECIES_NONE;
     }
@@ -12989,8 +13942,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
         break;
     }
 
-    if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
-        targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->txRandChaos);
+    if (gSaveBlock1Ptr->tx_Random_Evolutions && targetSpecies != SPECIES_NONE) //tx_randomizer_and_challenges
+        targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
 
     return targetSpecies;
 }
@@ -13629,9 +14582,9 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     const u8 *learnableMoves;
     
-    if (gSaveBlock1Ptr->txRandNuzlocke && (tm >= ITEM_HM01 - ITEM_TM01_FOCUS_PUNCH) )
+    if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && (tm >= ITEM_HM01 - ITEM_TM01_FOCUS_PUNCH) )
         return TRUE;
-    if (gSaveBlock1Ptr->txRandMoves) //tx_difficulty_challenges
+    if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_MOVES + tm, TRUE, TRUE);
 
     if (species == SPECIES_EGG)
@@ -13652,7 +14605,7 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 u32 CanSpeciesLearnTMHM(u16 species, u8 tm) // handle forms
 {
     const u8 *learnableMoves;
-    if (gSaveBlock1Ptr->txRandMoves) //tx_difficulty_challenges
+    if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_MOVES + tm, TRUE, TRUE);
 
     if (species == SPECIES_EGG)
@@ -13678,7 +14631,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     int i, j, k;
 
-    if (gSaveBlock1Ptr->txRandMoves) //tx_difficulty_challenges
+    if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_MOVES, TRUE, TRUE);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -13716,14 +14669,15 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 {
     u8 numMoves = 0;
     int i;
-    u16 move; //tx_difficulty_challenges
+    u16 move; //tx_randomizer_and_challenges
 
     for (i = 0; i < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][i].move != LEVEL_UP_END; i++)
-    { //tx_difficulty_challenges
+    {
+        //tx_randomizer_and_challenges
         move = gLevelUpLearnsets[species][i].move & LEVEL_UP_MOVE_ID;
-        if (gSaveBlock1Ptr->txRandMoves) //tx_difficulty_challenges
-            move = (RandomSeeded(move, !gSaveBlock1Ptr->txRandChaos) % MOVES_COUNT) + 1;
-        moves[numMoves++] = move; //gLevelUpLearnsets[species][i].move & LEVEL_UP_MOVE_ID;
+        if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
+            move = GetRandomMove(move, species);
+        moves[numMoves++] = move;
     }
 
     return numMoves;
@@ -13738,7 +14692,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     int i, j, k;
 
-    if (gSaveBlock1Ptr->txRandMoves) //tx_difficulty_challenges
+    if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_MOVES, TRUE, TRUE);
 
     if (species == SPECIES_EGG)
@@ -14871,53 +15825,22 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
     return 0;
 }
 
-//******************* tx_difficulty_challenges
-void RandomizeSpeciesListEWRAM(u16 seed) //broken (somehow the if statement breaks the game)
+//******************* tx_randomizer_and_challenges
+void RandomizeSpeciesListEWRAM(u16 seed)
 {
-    u16 i;
-
-    if (!gSaveBlock1Ptr->txRandEncounterLegendary)
-    {
-        u16 stemp[RANDOM_SPECIES_COUNT];
-        memcpy(stemp, sRandomSpecies, sizeof(sRandomSpecies));
-        ShuffleListU16(stemp, NELEMS(sRandomSpecies), seed);
-
-        for (i=0; i<RANDOM_SPECIES_COUNT; i++)
-        {
-            sSpeciesList[sRandomSpecies[i]] = stemp[i];
-            #ifdef GBA_PRINTF
-                mgba_printf(MGBA_LOG_DEBUG, "i = %d: sSpeciesList[%d] = %d", i, sRandomSpecies[i], stemp[i] );
-            #endif
-        }
-        #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "**** sSpeciesList[%d] generated ****", NELEMS(sRandomSpecies) );
-        #endif
-    }
-    else //include legendary mons
-    {
-        u16 stemp[RANDOM_SPECIES_COUNT_LEGENDARY];
-        memcpy(stemp, sRandomSpeciesLegendary, sizeof(sRandomSpeciesLegendary));
-        ShuffleListU16(stemp, NELEMS(sRandomSpeciesLegendary), seed);
-
-        for (i=0; i<RANDOM_SPECIES_COUNT_LEGENDARY; i++)
-        {
-            sSpeciesList[sRandomSpeciesLegendary[i]] = stemp[i];
-            #ifdef GBA_PRINTF
-                mgba_printf(MGBA_LOG_DEBUG, "i = %d: sRandomSpeciesLegendary[%d] = %d", i, sRandomSpeciesLegendary[i], stemp[i] );
-            #endif
-        }
-        #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "**** sRandomSpeciesLegendary[%d] generated ****", NELEMS(sRandomSpeciesLegendary) );
-        #endif
-    }
+    if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries) //include legendary mons
+        RandomizeSpeciesListEWRAMLegendary(seed);
+    else
+        RandomizeSpeciesListEWRAMNormal(seed);
 }
-void RandomizeSpeciesListEWRAMNormal(u16 seed)
+static void RandomizeSpeciesListEWRAMNormal(u16 seed)
 {
     u16 i;
-    u16 stemp[RANDOM_SPECIES_COUNT];
+    u16 *stemp = Alloc(sizeof(sRandomSpecies));
 
-    memcpy(stemp, sRandomSpecies, sizeof(sRandomSpecies));
-    ShuffleListU16(stemp, NELEMS(sRandomSpecies), seed);
+    //memcpy(stemp, sRandomSpecies, sizeof(sRandomSpecies));
+    DmaCopy16(3, sRandomSpecies, stemp, sizeof(sRandomSpecies));
+    ShuffleListU16(stemp, RANDOM_SPECIES_COUNT, seed);
 
     for (i=0; i<RANDOM_SPECIES_COUNT; i++)
     {
@@ -14929,14 +15852,17 @@ void RandomizeSpeciesListEWRAMNormal(u16 seed)
     #ifdef GBA_PRINTF
         mgba_printf(MGBA_LOG_DEBUG, "**** sSpeciesList[%d] generated ****", NELEMS(sRandomSpecies) );
     #endif
+
+    free(stemp);
 }
-void RandomizeSpeciesListEWRAMLegendary(u16 seed)
+static void RandomizeSpeciesListEWRAMLegendary(u16 seed)
 {
     u16 i;
-    u16 stemp[RANDOM_SPECIES_COUNT_LEGENDARY];
+    u16 *stemp = Alloc(sizeof(sRandomSpeciesLegendary));
 
-    memcpy(stemp, sRandomSpeciesLegendary, sizeof(sRandomSpeciesLegendary));
-    ShuffleListU16(stemp, NELEMS(sRandomSpeciesLegendary), seed);
+    //memcpy(stemp, sRandomSpeciesLegendary, sizeof(sRandomSpeciesLegendary));
+    DmaCopy16(3, sRandomSpeciesLegendary, stemp, sizeof(sRandomSpeciesLegendary));
+    ShuffleListU16(stemp, RANDOM_SPECIES_COUNT_LEGENDARY, seed);
 
     for (i=0; i<RANDOM_SPECIES_COUNT_LEGENDARY; i++)
     {
@@ -14948,11 +15874,14 @@ void RandomizeSpeciesListEWRAMLegendary(u16 seed)
     #ifdef GBA_PRINTF
         mgba_printf(MGBA_LOG_DEBUG, "**** sRandomSpeciesLegendary[%d] generated ****", NELEMS(sRandomSpeciesLegendary) );
     #endif
+
+    free(stemp);
 }
 
-u16 PickRandomizedSpeciesFromEWRAM(u16 species, u16 depth)
+u16 PickRandomizedSpeciesFromEWRAM(u16 species, u16 depth) //internal use only!
 {
     u8 i;
+    u16 start_depth = depth;
 
     #ifdef GBA_PRINTF
         switch (depth)
@@ -14970,6 +15899,7 @@ u16 PickRandomizedSpeciesFromEWRAM(u16 species, u16 depth)
             mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_MOVES: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
             break;
         case TX_RANDOM_OFFSET_ENCOUNTER:
+            mgba_printf(MGBA_LOG_DEBUG, "gSaveBlock1Ptr->tx_Random_Similar == FALSE");
             mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_ENCOUNTER: species = %d = %s", species, ConvertToAscii(gSpeciesNames[species]) );
             break;
         case TX_RANDOM_OFFSET_EVOLUTION:
@@ -14978,14 +15908,22 @@ u16 PickRandomizedSpeciesFromEWRAM(u16 species, u16 depth)
         }
     #endif
 
+    if ((depth == TX_RANDOM_OFFSET_TRAINER || depth == TX_RANDOM_OFFSET_ENCOUNTER) && gSaveBlock1Ptr->tx_Random_MapBased)
+        depth += NuzlockeGetCurrentRegionMapSectionId() % 3;
+
+    if (depth == TX_RANDOM_OFFSET_MOVES && gSaveBlock1Ptr->tx_Random_MapBased)
+        depth += species % 4;
+
     for (i = 0; i < depth; i++)
     {
         species = sSpeciesList[species];
         #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "depth[%d], species = %d", i, species );
+            //mgba_printf(MGBA_LOG_DEBUG, "depth[%d], species = %d", i, species );
         #endif
     }
     #ifdef GBA_PRINTF
+        if (gSaveBlock1Ptr->tx_Random_MapBased && (start_depth == TX_RANDOM_OFFSET_TRAINER || start_depth == TX_RANDOM_OFFSET_ENCOUNTER || start_depth == TX_RANDOM_OFFSET_MOVES))
+            mgba_printf(MGBA_LOG_DEBUG, "MapBased depth: start=%d/new=%d", start_depth, depth);
         mgba_printf(MGBA_LOG_DEBUG, "depth[%d], species = %d = %s", i, sSpeciesList[species], ConvertToAscii(gSpeciesNames[sSpeciesList[species]]));
         mgba_printf(MGBA_LOG_DEBUG, "");
     #endif
@@ -14998,17 +15936,11 @@ u16 PickRandomEvo0Species(u16 species) //For choosing a starter
     return gRandomSpeciesEvo0[RandomSeeded(species, TRUE) % RANDOM_SPECIES_EVO_0_COUNT];
 }
 
-u8 PickRandomTypeChallengeType()
-{
-    u16 type = (RandomSeeded(1, TRUE) % (NUMBER_OF_MON_TYPES-1));
-    type = sTypeChallengeValidTypes[type];
-}
-
 u8 GetTypeBySpecies(u16 species, u8 type)
 {
     u8 result;
 
-    if (gSaveBlock1Ptr->txRandType)
+    if (gSaveBlock1Ptr->tx_Random_Type)
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_OFFSET_TYPE, TRUE, TRUE);
 
     switch (type)
@@ -15027,51 +15959,81 @@ u8 GetTypeBySpecies(u16 species, u8 type)
 u16 GetSpeciesRandomSeeded(u16 species, u8 depth, u8 random, u8 seeded)
 {
     u8 slot = gSpeciesMapping[species];
-    if (!random || slot == EVO_TYPE_SELF || (slot == EVO_TYPE_LEGENDARY && !gSaveBlock1Ptr->txRandEncounterLegendary))
+    u8 slot_new;
+
+    //if EVO_TYPE is SELF or LEGENDARY and !tx_Random_IncludeLegendaries
+    if (!random || slot == EVO_TYPE_SELF || (slot == EVO_TYPE_LEGENDARY && !gSaveBlock1Ptr->tx_Random_IncludeLegendaries))
         return species;
 
+    //if not seeded, aka chaos
     if (!seeded)
     {
-        if (gSaveBlock1Ptr->txRandEncounterLegendary)
+        if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries)
             return sRandomSpeciesLegendary[(Random() % RANDOM_SPECIES_COUNT) + 1];
         else
             return sRandomSpecies[(Random() % RANDOM_SPECIES_COUNT) + 1];
     }
 
-    if (!gSaveBlock1Ptr->txRandEncounterSimilar)
-        return PickRandomizedSpeciesFromEWRAM(species, depth);  //return sRandomSpecies[(RandomSeeded(species+offset, seeded) % RANDOM_SPECIES_COUNT) + 1];
-
-    //if random, seeded and similar
-    switch (slot)
+    //if random, seeded and similar && Encounter || Trainer
+    if (gSaveBlock1Ptr->tx_Random_Similar && (depth == TX_RANDOM_OFFSET_ENCOUNTER || depth == TX_RANDOM_OFFSET_TRAINER))
     {
-    case  EVO_TYPE_0:
-        return gRandomSpeciesEvo0[RandomSeeded(species+depth*3, seeded) % RANDOM_SPECIES_EVO_0_COUNT];
-        break;
-    case  EVO_TYPE_1:
-        return gRandomSpeciesEvo1[RandomSeeded(species+depth*3, seeded) % RANDOM_SPECIES_EVO_1_COUNT];
-        break;
-    case  EVO_TYPE_2:
-        return gRandomSpeciesEvo2[RandomSeeded(species+depth*3, seeded) % RANDOM_SPECIES_EVO_2_COUNT];
-        break;
+        u16 result;
+        u8 offset = 0;
+
+        if (gSaveBlock1Ptr->tx_Random_MapBased)
+            offset = NuzlockeGetCurrentRegionMapSectionId();
+
+        switch (slot)
+        {
+        case EVO_TYPE_0:
+            result = gRandomSpeciesEvo0[RandomSeeded((species+offset)*7, seeded) % RANDOM_SPECIES_EVO_0_COUNT];
+            break;
+        case EVO_TYPE_1:
+            result = gRandomSpeciesEvo1[RandomSeeded((species+offset)*7, seeded) % RANDOM_SPECIES_EVO_1_COUNT];
+            break;
+        case EVO_TYPE_2:
+            result = gRandomSpeciesEvo2[RandomSeeded((species+offset)*7, seeded) % RANDOM_SPECIES_EVO_2_COUNT];
+            break;
+        case EVO_TYPE_LEGENDARY:
+            result = gRandomSpeciesEvoLegendary[RandomSeeded((species+offset)*7, seeded) % RANDOM_SPECIES_EVO_LEGENDARY_COUNT];
+            break;
+        }
+
+        #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "gSaveBlock1Ptr->tx_Random_Similar == TRUE");
+        mgba_printf(MGBA_LOG_DEBUG, "TX_RANDOM_OFFSET_ENCOUNTER: species = %d = %s; EVO_TYPE = %d", species, ConvertToAscii(gSpeciesNames[species]), slot);
+        mgba_printf(MGBA_LOG_DEBUG, "(species+offset)*7 = (%d + %d)*7 = %d", species, offset, (species+offset)*7);
+        mgba_printf(MGBA_LOG_DEBUG, "RandomSeeded(%d) =%d mod = %d", (species+offset)*7, RandomSeeded((species+offset)*7, seeded), RandomSeeded((species+offset)*7, seeded) % RANDOM_SPECIES_EVO_0_COUNT);
+        slot_new = gSpeciesMapping[result];
+        mgba_printf(MGBA_LOG_DEBUG, "new species = %d = %s; EVO_TYPE = %d", result, ConvertToAscii(gSpeciesNames[result]), slot_new);
+        mgba_printf(MGBA_LOG_DEBUG, "");
+        #endif
+
+        return result;
     }
 
+    //else
+    return PickRandomizedSpeciesFromEWRAM(species, depth);
 }
 
 u16 GetEvolutionTargetSpeciesRandom(u16 species, u8 random, u8 seeded)
 {
     u8 slot = gSpeciesMapping[species];
-    if (!random || slot == EVO_TYPE_SELF || (slot == EVO_TYPE_LEGENDARY && !gSaveBlock1Ptr->txRandEncounterLegendary))
-        return species;
 
+    //if EVO_TYPE is SELF or LEGENDARY and !tx_Random_IncludeLegendaries
+    if (!random || slot == EVO_TYPE_SELF || (slot == EVO_TYPE_LEGENDARY && !gSaveBlock1Ptr->tx_Random_IncludeLegendaries))
+        return species;
+    
+    //if not seeded, aka chaos
     if (!seeded)
     {
-        if (gSaveBlock1Ptr->txRandEncounterLegendary)
+        if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries)
             return sRandomSpeciesLegendary[(Random() % RANDOM_SPECIES_COUNT) + 1];
         else
             return sRandomSpecies[(Random() % RANDOM_SPECIES_COUNT) + 1];
     }
 
-    if (slot == EVO_TYPE_1 && gSaveBlock1Ptr->txRandEvoLimit == 1)
+    if (slot == EVO_TYPE_1 && gSaveBlock1Ptr->tx_Challenges_EvoLimit == 1)
         return SPECIES_NONE;
 
     switch (slot)
@@ -15086,11 +16048,16 @@ u16 GetEvolutionTargetSpeciesRandom(u16 species, u8 random, u8 seeded)
     }
 }
 
-u8 GetPartySize()
+u16 GetRandomMove(u16 move, u16 species)
 {
-    return gSaveBlock1Ptr->txRandPartyLimit;
+    u16 val = RandomSeeded((move + species)*17, !gSaveBlock1Ptr->tx_Random_Chaos) % RANDOM_MOVES_COUNT;
+    #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "Random: move %d, species %d, combined %d, val %d, final: %d", move, species, (move + species)*17, val, sRandomValidMoves[val]);
+    #endif
+    return sRandomValidMoves[val];
 }
 
+// Nuzlocke
 void NuzlockeDeletePartyMon(u8 position)
 {
     PurgeMonOrBoxMon(TOTAL_BOXES_COUNT, position);
@@ -15108,6 +16075,8 @@ void NuzlockeDeleteFaintedPartyPokemon(void) // @Kurausukun
         {
             if (GetMonAilment(pokemon) == AILMENT_FNT)
             {
+                monItem = GetMonData(pokemon, MON_DATA_HELD_ITEM, NULL);
+
                 if (monItem != ITEM_NONE)
                     AddBagItem(monItem, 1);
                 NuzlockeDeletePartyMon(i);
@@ -15117,18 +16086,27 @@ void NuzlockeDeleteFaintedPartyPokemon(void) // @Kurausukun
     CompactPartySlots();
 }
 
+// Challenges
+u8 GetPartySize()
+{
+    return gSaveBlock1Ptr->tx_Challenges_PartyLimit;
+}
 u8 GetPokemonCenterChallenge()
 {
-    return !gSaveBlock1Ptr->txRandPkmnCenter;
+    return !gSaveBlock1Ptr->tx_Challenges_PkmnCenter;
 }
-
+u8 PickRandomOneTypeChallengeType()
+{
+    u16 type = (RandomSeeded(1, TRUE) % (NUMBER_OF_MON_TYPES-1));
+    type = sOneTypeChallengeValidTypes[type];
+}
 void RandomizeTypeEffectivenessListEWRAM(u16 seed)
 {
     u8 i;
     u8 stemp[RANDOM_TYPE_COUNT];
 
-    memcpy(stemp, sTypeChallengeValidTypes, sizeof(sTypeChallengeValidTypes));
-    ShuffleListU8(stemp, NELEMS(sTypeChallengeValidTypes), seed);
+    memcpy(stemp, sOneTypeChallengeValidTypes, sizeof(sOneTypeChallengeValidTypes));
+    ShuffleListU8(stemp, NELEMS(sOneTypeChallengeValidTypes), seed);
 
     sTypeEffectivenessList[TYPE_MYSTERY] = TYPE_MYSTERY;
     for (i=0; i<NUMBER_OF_MON_TYPES; i++)
@@ -15150,9 +16128,35 @@ u8 GetTypeEffectivenessRandom(u8 type)
     if (type == TYPE_NONE)
         return TYPE_NONE;
     
-    if (!gSaveBlock1Ptr->txRandTypeEffectiveness)
+    if (!gSaveBlock1Ptr->tx_Random_TypeEffectiveness)
         return type;
 
     return sTypeEffectivenessList[type];
 }
 
+// DEBUG
+void PrintTXSaveData(void)
+{
+    #ifdef GBA_PRINTF
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_Chaos"                , gSaveBlock1Ptr->tx_Random_Chaos);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_WildPokemon"          , gSaveBlock1Ptr->tx_Random_WildPokemon);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_Similar"              , gSaveBlock1Ptr->tx_Random_Similar);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_MapBased"             , gSaveBlock1Ptr->tx_Random_MapBased);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_IncludeLegendaries"   , gSaveBlock1Ptr->tx_Random_IncludeLegendaries);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_Type"                 , gSaveBlock1Ptr->tx_Random_Type);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_TypeEffectiveness"    , gSaveBlock1Ptr->tx_Random_TypeEffectiveness);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_Abilities"            , gSaveBlock1Ptr->tx_Random_Abilities);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_Moves"                , gSaveBlock1Ptr->tx_Random_Moves);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_Trainer"              , gSaveBlock1Ptr->tx_Random_Trainer);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_Evolutions"           , gSaveBlock1Ptr->tx_Random_Evolutions);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Random_EvolutionMethodes"    , gSaveBlock1Ptr->tx_Random_EvolutionMethodes);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_EvoLimit"         , gSaveBlock1Ptr->tx_Challenges_EvoLimit);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_Nuzlocke"         , gSaveBlock1Ptr->tx_Challenges_Nuzlocke);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_NuzlockeHardcore" , gSaveBlock1Ptr->tx_Challenges_NuzlockeHardcore);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_NoItemPlayer"     , gSaveBlock1Ptr->tx_Challenges_NoItemPlayer);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_NoItemTrainer"    , gSaveBlock1Ptr->tx_Challenges_NoItemTrainer);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_OneTypeChallenge" , gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_PartyLimit"       , gSaveBlock1Ptr->tx_Challenges_PartyLimit);
+    mgba_printf(MGBA_LOG_DEBUG, "%d tx_Challenges_PkmnCenter"       , gSaveBlock1Ptr->tx_Challenges_PkmnCenter);
+    #endif
+}

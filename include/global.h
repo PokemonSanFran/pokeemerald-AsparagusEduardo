@@ -506,7 +506,7 @@ struct SaveBlock2
 
              u16 optionsReserved1;
              u16 optionsReserved2;
-             
+
     /*0x18*/ struct Pokedex pokedex;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
@@ -1048,30 +1048,31 @@ struct SaveBlock1
     /*0x3???*/ u16 registeredItemR;
                u8 dexNavSearchLevels[NUM_SPECIES];
                u8 dexNavChain;
-    /*0x3???*/ u8 NuzlockeEncounterFlags[9]; //tx_difficulty_challenges
-        u8 txRandChaos:1;
-        u8 txRandEncounter:1;
-        u8 txRandEncounterSimilar:1;
-        u8 txRandEncounterLegendary:1;
-        u8 txRandType:1;
-        u8 txRandTypeEffectiveness:1;
-        u8 txRandAbilities:1;
-        u8 txRandMoves:1;
+    /*0x3???*/ u8 NuzlockeEncounterFlags[9]; //tx_randomizer_and_challenges
+        u8 tx_Random_Chaos:1;
+        u8 tx_Random_WildPokemon:1;
+        u8 tx_Random_Similar:1;
+        u8 tx_Random_MapBased:1;
+        u8 tx_Random_IncludeLegendaries:1;
+        u8 tx_Random_Type:1;
+        u8 tx_Random_TypeEffectiveness:1;
+        u8 tx_Random_Abilities:1;
         //
-        u8 txRandTrainer:1;
-        u8 txRandEvolutions:1;
-        u8 txRandEvolutionMethodes:1;
-        u8 txRandEvoLimit:2;
-        u8 txRandNuzlocke:1;
-        u8 txRandNuzlockeHardcore:1;
-        u8 txRandNoItemPlayer:1;
+        u8 tx_Random_Moves:1;
+        u8 tx_Random_Trainer:1;
+        u8 tx_Random_Evolutions:1;
+        u8 tx_Random_EvolutionMethodes:1;
+        u8 tx_Challenges_EvoLimit:2;
+        u8 tx_Challenges_Nuzlocke:1;
+        u8 tx_Challenges_NuzlockeHardcore:1;
         //
-        u8 txRandTypeChallenge:5;
-        u8 txRandPartyLimit:3;
+        u8 tx_Challenges_OneTypeChallenge:5;
+        u8 tx_Challenges_PartyLimit:3;
         //
-        u8 txRandNoItemTrainer:1;
-        u8 txRandPkmnCenter:2;
-    // sizeof: 0x3???
+        u8 tx_Challenges_NoItemPlayer:1;
+        u8 tx_Challenges_NoItemTrainer:1;
+        u8 tx_Challenges_PkmnCenter:2;
+    // sizeof: 0x3D94  // sizeof: 0x3D88
 };
 
 

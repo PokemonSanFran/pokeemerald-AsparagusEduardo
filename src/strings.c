@@ -4021,10 +4021,10 @@ const u8 gText_FORMS_Buttons_Submenu_PE[]           = _("{DPAD_NONE}FORMs {A_BUT
 const u8 gText_FORMS_Buttons_Submenu_Decapped_PE[]  = _("{START_BUTTON}Evos");
 const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} has no alternate forms.");
 
-//tx_difficulty_challenges
+//tx_randomizer_and_challenges
 const u8 gText_NuzlockeCantThrowPokeBallRoute[]             = _("You have already used your encounter\nfor this area!{PAUSE_UNTIL_PRESS}");
 const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[]     = _("You have already caught a Pokémon\nin this evolution line!{PAUSE_UNTIL_PRESS}");
 const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[]     = _("You have already caught this Pokémon!{PAUSE_UNTIL_PRESS}");
-const u8 gText_TypeChallengeCantThrowPokeBall[]             = _("Type Challenge active, capture blocked!{PAUSE_UNTIL_PRESS}");
+const u8 gText_OneTypeChallengeCantThrowPokeBall[]          = _("One Type Challenge active, capture blocked!{PAUSE_UNTIL_PRESS}");
 const u8 gText_BattleRules_NoItems_Player[]                 = _("Competitive rules!\nNo items in battle!{PAUSE_UNTIL_PRESS}");
 #endif

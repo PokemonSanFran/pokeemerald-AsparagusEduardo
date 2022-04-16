@@ -342,7 +342,8 @@ SECTIONS {
         src/mgba.o(.text);
 		src/printf.o(.text);
         src/ud_trade.o(.text);
-        src/tx_difficulty_challenges.o(.text);
+        src/tx_challenges.o(.text);
+        src/tx_randomizer.o(.text);
     } =0
 
     script_data :
@@ -713,7 +714,8 @@ SECTIONS {
         src/dexnav.o(.rodata);
         src/printf.o(.rodata);
         src/ud_trade.o(.rodata);
-        src/tx_difficulty_challenges.o(.rodata);
+        src/tx_challenges.o(.rodata);
+        src/tx_randomizer.o(.rodata);
     } =0
 
     song_data :
