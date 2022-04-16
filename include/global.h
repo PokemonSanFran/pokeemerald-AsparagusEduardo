@@ -502,7 +502,11 @@ struct SaveBlock2
              u16 optionsHpExpBarSpeed:1;
              u16 optionsUnitSystem:1;
              u16 optionsFishReeling:1;
-             u16 filler1:10;
+             u16 optionsFiller2:10;
+
+             u16 optionsReserved1;
+             u16 optionsReserved2;
+             
     /*0x18*/ struct Pokedex pokedex;
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
