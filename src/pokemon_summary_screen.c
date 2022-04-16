@@ -1671,7 +1671,8 @@ static void Task_HandleInput(u8 taskId)
                 PlaySE(SE_SELECT);
                 SwitchToMoveSelection(taskId);
             }
-            else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS && FlagGet(FLAG_SYS_GAME_CLEAR))
+            //else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS && FlagGet(FLAG_SYS_GAME_CLEAR))
+            else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
             {
                 PlaySE(SE_SELECT);
                 SetTaskFuncWithFollowupFunc(taskId, ChangeStatTask, gTasks[taskId].func);
@@ -4566,12 +4567,15 @@ static void PrintInfoBar(u8 pageIndex, bool8 detailsShown)
             StringCopy(gStringVar2, sText_TitlePage);
             break;
         case PSS_PAGE_SKILLS:
+            /*
             if (!FlagGet(FLAG_SYS_GAME_CLEAR))
             {
                 StringCopy(gStringVar1, sText_TitleSkills);
                 StringCopy(gStringVar2, sText_TitlePage);
             }
-            else if (sMonSummaryScreen->currStatIndex == 0)
+            else
+            */
+            if (sMonSummaryScreen->currStatIndex == 0)
             {
                 StringCopy(gStringVar1, sText_TitleSkills);
                 StringCopy(gStringVar2, sText_TitlePageIVs);
