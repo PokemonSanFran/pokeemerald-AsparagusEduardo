@@ -33,6 +33,8 @@ enum
     MENUITEM_FRAMETYPE,
     MENUITEM_FISHREELING,
     MENUITEM_SAVECONFIRM,
+    MENUITEM_FONT,
+    MENUITEM_MATCHCALL,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -70,6 +72,8 @@ static void DrawChoices_SkipBattleIntro(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_FishReeling(int selection, int y);
 static void DrawChoices_SaveConfirm(int selection, int y);
+static void DrawChoices_Font(int selection, int y);
+static void DrawChoices_MatchCall(int selection, int y);
 static void DrawChoices_Options_Four(const u8 *const *const strings, int selection, int y);
 static void DrawTextOption(void);
 static void DrawOptionMenuTexts(void);
@@ -102,6 +106,8 @@ struct
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_FISHREELING]  = {DrawChoices_FishReeling, ProcessInput_Options_Two},
     [MENUITEM_SAVECONFIRM]  = {DrawChoices_SaveConfirm, ProcessInput_Options_Two},
+    [MENUITEM_FONT]         = {DrawChoices_Font,        ProcessInput_Options_Two}, 
+    [MENUITEM_MATCHCALL]    = {DrawChoices_MatchCall,   ProcessInput_Options_Two},
     [MENUITEM_CANCEL]       = {NULL, NULL},
 };
 
@@ -136,6 +142,8 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_FISHREELING] = sText_FishReeling,
     [MENUITEM_SAVECONFIRM] = sText_SaveConfirm,
+    [MENUITEM_FONT]        = gText_Font,
+    [MENUITEM_MATCHCALL]   = gText_OptionMatchCalls,
     [MENUITEM_CANCEL]      = gText_OptionMenuSave,
 };
 
@@ -296,6 +304,8 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
         sOptions->sel[MENUITEM_FISHREELING] = gSaveBlock2Ptr->optionsFishReeling;
         sOptions->sel[MENUITEM_SAVECONFIRM] = gSaveBlock2Ptr->optionsSaveConfirm;
+        sOptions->sel[MENUITEM_FONT]        = gSaveBlock2Ptr->optionsCurrentFont;
+        sOptions->sel[MENUITEM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
 
         AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP,
                                                  240 / 2,
@@ -467,6 +477,8 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
     gSaveBlock2Ptr->optionsFishReeling      = sOptions->sel[MENUITEM_FISHREELING];
     gSaveBlock2Ptr->optionsSaveConfirm      = sOptions->sel[MENUITEM_SAVECONFIRM];
+    gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel[MENUITEM_FONT];
+    gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel[MENUITEM_MATCHCALL];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -807,6 +819,26 @@ static void DrawChoices_FrameType(int selection, int y)
 
     DrawOptionMenuChoice(gText_FrameType, 104, y, 0);
     DrawOptionMenuChoice(text, 128, y, 1);
+}
+
+static void DrawChoices_Font(int selection, int y)
+{
+    u8 styles[2] = {0};
+
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_OptionFontEmerald, 104, y, styles[0]);
+    DrawOptionMenuChoice(gText_OptionFontFireRed, GetStringRightAlignXOffset(1, gText_OptionFontFireRed, 198), y, styles[1]);
+}
+
+static void DrawChoices_MatchCall(int selection, int y)
+{
+    u8 styles[2] = {0};
+
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0]);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1]);
 }
 
 static void DrawTextOption(void)
