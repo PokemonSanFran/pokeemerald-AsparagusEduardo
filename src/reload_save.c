@@ -7,6 +7,7 @@
 #include "new_game.h"
 #include "overworld.h"
 #include "malloc.h"
+#include "sound.h"
 
 // Reloads the game, continuing from the point of the last save
 // Used to gracefully exit after a link connection error
@@ -24,6 +25,8 @@ void ReloadSave(void)
     LoadGameSave(SAVE_NORMAL);
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         Sav2_ClearSetDefault();
+    gDisableMusic = (gSaveBlock2Ptr->optionsMusic == 1);
+    gDisableSFX = (gSaveBlock2Ptr->optionsSFX == 1);
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     InitHeap(gHeap, HEAP_SIZE);
     SetMainCallback2(CB2_ContinueSavedGame);
