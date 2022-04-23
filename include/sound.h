@@ -2,6 +2,7 @@
 #define GUARD_SOUND_H
 
 extern bool8 gDisableMusic;
+extern bool8 gDisableSFX;
 #include "constants/sound.h"
 
 void InitMapMusic(void);

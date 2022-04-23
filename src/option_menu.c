@@ -25,6 +25,8 @@ enum
     MENUITEM_BATTLESCENE,
     MENUITEM_BATTLESTYLE,
     MENUITEM_SOUND,
+    MENUITEM_MUSIC,
+    MENUITEM_SFX,
     MENUITEM_BUTTONMODE,
     MENUITEM_HP_EXP_BAR,
     MENUITEM_UNIT_SYSTEM,
@@ -72,12 +74,14 @@ static void DrawChoices_Options_Four(const u8 *const *const strings, int selecti
 static void DrawTextOption(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
-static int ProcessInput_Sound(int selection);
+static int ProcessInput_Music(int selection);
+static int ProcessInput_SFX(int selection);
 static int ProcessInput_BattleStyle(int selection);
 static int ProcessInput_FrameType(int selection);
 static int ProcessInput_Options_Two(int selection);
 static int ProcessInput_Options_Three(int selection);
 static int ProcessInput_Options_Four(int selection);
+static int ProcessInput_Options_Five(int selection);
 static int ProcessInput_Options_Eleven(int selection);
 
 struct
@@ -89,7 +93,9 @@ struct
     [MENUITEM_TEXTSPEED]    = {DrawChoices_TextSpeed,   ProcessInput_Options_Four},
     [MENUITEM_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
-    [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Sound},
+    [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Options_Two},
+    [MENUITEM_MUSIC]        = {DrawChoices_BattleScene, ProcessInput_Music},
+    [MENUITEM_SFX]          = {DrawChoices_BattleScene, ProcessInput_SFX},
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
     [MENUITEM_HP_EXP_BAR]   = {DrawChoices_HpExpBar,    ProcessInput_Options_Two},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
@@ -106,6 +112,8 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_m
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
 
+static const u8 sText_Music[] = _("Music");
+static const u8 sText_SFX[] = _("SFX");
 static const u8 sText_HpExpBar[] = _("HP/EXP bar speed");
 static const u8 sText_UnitSystem[] = _("Unit System");
 static const u8 sText_FishReeling[] = _("Fishing Style");
@@ -120,6 +128,8 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_BATTLESCENE] = gText_BattleScene,
     [MENUITEM_BATTLESTYLE] = gText_BattleStyle,
     [MENUITEM_SOUND]       = gText_Sound,
+    [MENUITEM_MUSIC]       = sText_Music,
+    [MENUITEM_SFX]         = sText_SFX,
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_HP_EXP_BAR]  = sText_HpExpBar,
     [MENUITEM_UNIT_SYSTEM] = sText_UnitSystem,
@@ -278,6 +288,8 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel[MENUITEM_SOUND]       = gSaveBlock2Ptr->optionsSound;
+        sOptions->sel[MENUITEM_MUSIC]       = gSaveBlock2Ptr->optionsMusic;
+        sOptions->sel[MENUITEM_SFX]         = gSaveBlock2Ptr->optionsSFX;
         sOptions->sel[MENUITEM_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_HP_EXP_BAR]  = gSaveBlock2Ptr->optionsHpExpBarSpeed;
         sOptions->sel[MENUITEM_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
@@ -438,6 +450,8 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_BATTLESTYLE];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_SOUND];
+    gSaveBlock2Ptr->optionsMusic            = sOptions->sel[MENUITEM_MUSIC];
+    gSaveBlock2Ptr->optionsSFX              = sOptions->sel[MENUITEM_SFX];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_BUTTONMODE];
     gSaveBlock2Ptr->optionsHpExpBarSpeed    = sOptions->sel[MENUITEM_HP_EXP_BAR];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNIT_SYSTEM];
@@ -510,6 +524,11 @@ static int ProcessInput_Options_Three(int selection)
 static int ProcessInput_Options_Four(int selection)
 {
     return XOptions_ProcessInput(4, selection);
+}
+
+static int ProcessInput_Options_Five(int selection)
+{
+    return XOptions_ProcessInput(5, selection);
 }
 
 static int ProcessInput_Options_Eleven(int selection)
@@ -596,16 +615,22 @@ static void DrawChoices_BattleStyle(int selection, int y)
     DrawOptionMenuChoice(gText_BattleStyleSet, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleStyleSet, 198), y, styles[1]);
 }
 
-static int ProcessInput_Sound(int selection)
+static void DrawChoices_Sound(int selection, int y)
 {
-    int previous = selection;
+	u8 styles[2] = {0};
 
-    selection = ProcessInput_Options_Three(selection);
-    if (selection == 0 || selection == 1)
+    styles[selection] = 1;
+    DrawOptionMenuChoice(gText_SoundMono, 104, y, styles[0]);
+    DrawOptionMenuChoice(gText_SoundStereo, GetStringRightAlignXOffset(1, gText_SoundStereo, 198), y, styles[1]);
+}
+
+static int ProcessInput_Music(int selection)
+{
+    selection = ProcessInput_Options_Two(selection);
+    if (selection == 0) //Music ON
     {
         gDisableMusic = FALSE;
-        if (previous == 2)
-            PlayNewMapMusic(GetCurrentMapMusic());
+        PlayNewMapMusic(GetCurrentMapMusic());
     }
     else
     {
@@ -616,15 +641,15 @@ static int ProcessInput_Sound(int selection)
     return selection;
 }
 
-static void DrawChoices_Sound(int selection, int y)
+static int ProcessInput_SFX(int selection)
 {
-    u8 styles[3] = {0, 0, 0};
-    int xMid = GetMiddleX(gText_SoundMono, gText_SoundStereo, gText_BattleSceneOff);
+    selection = ProcessInput_Options_Two(selection);
+    if (selection == 0) //SFX ON
+        gDisableSFX = FALSE;
+    else
+        gDisableSFX = TRUE;
 
-    styles[selection] = 1;
-    DrawOptionMenuChoice(gText_SoundMono, 104, y, styles[0]);
-    DrawOptionMenuChoice(gText_SoundStereo, xMid, y, styles[1]);
-    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), y, styles[2]);
+    return selection;
 }
 
 static int ButtonMode_ProcessInput(int selection)
