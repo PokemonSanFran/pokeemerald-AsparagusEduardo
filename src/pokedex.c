@@ -48,7 +48,7 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#ifdef TX_DIFFICULTY_CHALLENGES_USED
+#ifdef TX_RANDOMIZER_AND_CHALLENGES
     #include "tx_randomizer_and_challenges.h"
 #endif
 
@@ -4657,7 +4657,7 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
         dexNum = SpeciesToNationalPokedexNum(species);
     }
     //type icon(s)
-    #ifdef TX_DIFFICULTY_CHALLENGES_USED
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
         type1 = GetTypeBySpecies(species, 1);
         type2 = GetTypeBySpecies(species, 2);
     #else
@@ -8065,10 +8065,15 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     u16 preEvolutionOne = 0;
     u16 preEvolutionTwo = 0;
     u8 numPreEvolutions = 0;
-
+    
     #ifdef POKEMON_EXPANSION
-        bool8 isMega = FALSE;
-        sPokedexView->sEvoScreenData.isMega = FALSE;
+    bool8 isMega = FALSE;
+    sPokedexView->sEvoScreenData.isMega = FALSE;
+    #endif
+
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
+    if (gSaveBlock1Ptr->tx_Random_Evolutions || gSaveBlock1Ptr->tx_Random_EvolutionMethods)
+        return 0;
     #endif
 
     //Calculate previous evolution
@@ -8182,13 +8187,11 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
     if (species == SPECIES_EEVEE)
         isEevee = TRUE;
 
-    #ifdef TX_DIFFICULTY_CHALLENGES_USED
-        if (gSaveBlock1Ptr->tx_Random_EvolutionMethodes) //tx_difficulty_challenges
-        {
-            species = GetEvolutionTargetSpeciesRandom(species, gSaveBlock1Ptr->tx_Random_Evolutions, !gSaveBlock1Ptr->tx_Random_Chaos);
-            if (species == SPECIES_NONE)
-                return SPECIES_NONE;
-        }
+    #ifdef TX_RANDOMIZER_AND_CHALLENGES
+    if (EvolutionBlockedByEvoLimit(species)) //No Evos already previously checked
+        species = SPECIES_NONE;
+    else if (gSaveBlock1Ptr->tx_Random_EvolutionMethods) 
+        species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_EVO_METH);
     #endif
 
     //Calculate number of possible direct evolutions (e.g. Eevee has 5 but torchic has 1)
@@ -8220,10 +8223,9 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
 
         previousTargetSpecies = targetSpecies;
         targetSpecies = gEvolutionTable[species][i].targetSpecies;
-        sPokedexView->sEvoScreenData.targetSpecies[sPokedexView->sEvoScreenData.numAllEvolutions++] = targetSpecies;
         #ifdef TX_DIFFICULTY_CHALLENGES_USED
-            if (gSaveBlock1Ptr->tx_Random_Evolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
-                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_OFFSET_EVOLUTION, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
+            if (gSaveBlock1Ptr->txRandEvolutions && targetSpecies != SPECIES_NONE) //tx_difficulty_challenges
+                targetSpecies = GetSpeciesRandomSeeded(targetSpecies, TX_RANDOM_T_EVO);
         #endif
         CreateCaughtBallEvolutionScreen(targetSpecies, base_x + depth_x*depth-9, base_y + base_y_offset*base_i, 0);
         HandleTargetSpeciesPrint(taskId, targetSpecies, previousTargetSpecies, base_x + depth_x*depth, base_y, base_y_offset, base_i, isEevee); //evolution mon name
