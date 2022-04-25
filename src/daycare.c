@@ -178,7 +178,8 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
     }
 
     daycareMon->mon = mon->box;
-    BoxMonRestorePP(&daycareMon->mon);
+    if (!gSaveBlock1Ptr->tx_Challenges_PkmnCenter)
+        BoxMonRestorePP(&daycareMon->mon);
     daycareMon->steps = 0;
     ZeroMonData(mon);
     CompactPartySlots();
@@ -1008,6 +1009,8 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             }
             else
             {
+                if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeFlagGet(NuzlockeGetCurrentRegionMapSectionId()))
+                    return FALSE;
                 gSpecialVar_0x8004 = i;
                 return TRUE;
             }

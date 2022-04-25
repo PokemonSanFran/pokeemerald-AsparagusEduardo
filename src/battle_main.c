@@ -69,6 +69,13 @@
 #include "tx_randomizer_and_challenges.h"
 #include "overworld.h"
 
+#ifdef GBA_PRINTF
+    //#include "printf.h"
+    //#include "mgba.h"
+    //#include "data.h"                 // for gSpeciesNames, which maps species number to species name.
+    //#include "../gflib/string_util.h" // for ConvertToAscii()
+#endif
+
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 
@@ -1867,6 +1874,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                                                                         | BATTLE_TYPE_EREADER_TRAINER
                                                                         | BATTLE_TYPE_TRAINER_HILL)))
     {
+        #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "******** CreateTrainerParty ********");
+        #endif
+        
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
 
@@ -1908,7 +1919,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 if (gSaveBlock1Ptr->tx_Random_Trainer) //tx_randomizer_and_challenges
                 {
-                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_OFFSET_TRAINER, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
+                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_T_TRAINER);
                     CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 }
                 else
@@ -1926,7 +1937,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 if (gSaveBlock1Ptr->tx_Random_Trainer) //tx_randomizer_and_challenges
                 {
-                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_OFFSET_TRAINER, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
+                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_T_TRAINER);
                     CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 }
                 else
@@ -1959,7 +1970,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 if (gSaveBlock1Ptr->tx_Random_Trainer) //tx_randomizer_and_challenges
                 {
-                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_OFFSET_TRAINER, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
+                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_T_TRAINER);
                     CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 }
                 else
@@ -1979,7 +1990,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 if (gSaveBlock1Ptr->tx_Random_Trainer) //tx_randomizer_and_challenges
                 {
-                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_OFFSET_TRAINER, TRUE, !gSaveBlock1Ptr->tx_Random_Chaos);
+                    species = GetSpeciesRandomSeeded(partyData[i].species, TX_RANDOM_T_TRAINER);
                     CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 }
                 else
@@ -5196,7 +5207,7 @@ static void HandleEndTurn_FinishBattle(void)
         }
 
         //ty_difficulty_challenges
-        if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke)
+        if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && FlagGet(FLAG_SYS_POKEMON_GET))
         {
             NuzlockeDeleteFaintedPartyPokemon();
             if (!(gBattleTypeFlags & (BATTLE_TYPE_DOUBLE
@@ -5214,7 +5225,7 @@ static void HandleEndTurn_FinishBattle(void)
                                         | BATTLE_TYPE_TOWER_LINK_MULTI
                                         | BATTLE_TYPE_RECORDED_LINK)))
             {
-                if (!NuzlockeIsSpeciesClauseActive || !OneTypeChallengeCaptureBlocked)
+                if (!NuzlockeIsSpeciesClauseActive && !OneTypeChallengeCaptureBlocked && FlagGet(FLAG_ADVENTURE_STARTED))
                     NuzlockeFlagSet(NuzlockeGetCurrentRegionMapSectionId());
             }
             NuzlockeIsCaptureBlocked = FALSE;

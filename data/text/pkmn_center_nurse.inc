@@ -51,10 +51,9 @@ gText_WeHopeToSeeYouAgain2:: @ 8272A07
     .string "¡Vuelve cuando quieras!$"
 
 gText_PkmnCenterChallenge_NoVisitsLeft:: @ tx_difficulty_challenge
-    .string "Lo siento, ¡pero ya no te\n"
-    .string "quedan visitas!\p"
-    .string "¡Vuelve cuando quieras y\n"
-    .string "buena suerte en tu desafío!{PAUSE_UNTIL_PRESS}$"
+    .string "Lo siento, ¡pero estás jugando\n"
+    .string "con el desafío sin Centros {PKMN}!\p"
+    .string "¡Buena suerte!{PAUSE_UNTIL_PRESS}$"
 #else
 gText_WouldYouLikeToRestYourPkmn::
     .string "Hello, and welcome to\n"
@@ -109,8 +108,7 @@ gText_WeHopeToSeeYouAgain2::
     .string "We hope to see you again!$"
 
 gText_PkmnCenterChallenge_NoVisitsLeft:: @ tx_difficulty_challenge
-    .string "Sorry, but you have no visits\n"
-    .string "left!\p"
-    .string "Good luck with your Challenge\n"
-    .string "and we hope to see you again!{PAUSE_UNTIL_PRESS}$"
+    .string "Sorry, but you are playing with\n"
+    .string "the PokéCenter challenge!\p"
+    .string "Good luck!{PAUSE_UNTIL_PRESS}$"
 #endif

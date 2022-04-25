@@ -144,7 +144,7 @@ gSpecials::
 	def_special SwapRegisteredBike
 	def_special CalculatePlayerPartyCount
 	def_special GetPartySize @ tx_randomizer_and_challenges
-	def_special GetPokemonCenterChallenge @ tx_randomizer_and_challenges
+	def_special IsPokecenterChallengeActivated @ tx_randomizer_and_challenges
 	def_special CountPartyNonEggMons
 	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	def_special ShouldReadyContestArtist
@@ -554,3 +554,6 @@ gSpecials::
 	def_special OpenUDTradeMenu
 	
 	def_special BufferUnitSystemText
+
+	@ TX challenges
+	def_special IsNuzlockeActivated

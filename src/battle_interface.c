@@ -4,6 +4,8 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_setup.h"
+#include "event_data.h"
 #include "graphics.h"
 #include "sprite.h"
 #include "window.h"
@@ -2195,7 +2197,22 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         return;
     if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
+    {
+        if (!gSaveBlock1Ptr->tx_Challenges_Nuzlocke)
+            return;
+        if (!FlagGet(FLAG_ADVENTURE_STARTED)) //Nuzlocke has not started
+            return;
+        if (NuzlockeIsSpeciesClauseActive || OneTypeChallengeCaptureBlocked || NuzlockeIsCaptureBlocked)
+            return;
+
+        healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
+
+        if (noStatus)
+            CpuCopy32(gNuzlockeFirstEncounterIndicatorGfx, (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
+        else
+            CpuFill32(0, (void*)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
         return;
+    }
 
     healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
 
