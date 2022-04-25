@@ -1518,6 +1518,8 @@ const u8 gText_BattleScene[] = _("Anim. Combate");
 const u8 gText_BattleStyle[] = _("Tipo Combate");
 const u8 gText_Sound[] = _("Sonido");
 const u8 gText_Frame[] = _("Imagen");
+const u8 gText_Font[] = _("Fuente");  //tx_optionsPlus
+const u8 gText_OptionMatchCalls[] = _("Llamadas PokéNav");    //tx_optionsPlus
 const u8 gText_OptionMenuSave[] = _("Guardar");
 const u8 gText_ButtonMode[] = _("Controles");
 const u8 gText_TextSpeedSlow[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Lenta");
@@ -1531,6 +1533,8 @@ const u8 gText_TransitionStyleNormal[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Nor
 const u8 gText_TransitionStyleInstant[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Instantáneo");
 const u8 gText_UnitSystemMetric[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Métrico");
 const u8 gText_UnitSystemImperial[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Imperial");
+const u8 gText_OptionFontEmerald[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Esmeralda");    //tx_optionsPlus
+const u8 gText_OptionFontFireRed[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}RFVH");        //tx_optionsPlus
 const u8 gText_SoundMono[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Mono");
 const u8 gText_SoundStereo[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Estéreo");
 const u8 gText_FrameType[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Tipo");
@@ -2014,7 +2018,7 @@ const u8 gText_FORMS_NONE[]                         = _("{STR_VAR_1} no tiene ot
 const u8 gText_NuzlockeCantThrowPokeBallRoute[]             = _("¡Ya capturaste un Pokémon\nen esta área!{PAUSE_UNTIL_PRESS}");
 const u8 gText_NuzlockeCantThrowPokeBallSpeciesClause[]     = _("¡Ya capturaste un Pokémon de\nesta línea evolutiva!{PAUSE_UNTIL_PRESS}");
 const u8 gText_NuzlockeCantThrowPokeBallAlreadyCaught[]     = _("¡Ya capturaste este Pokémon!{PAUSE_UNTIL_PRESS}");
-const u8 gText_TypeChallengeCantThrowPokeBall[]             = _("Desafío de tipos activo.\n¡Captura negada!{PAUSE_UNTIL_PRESS}");
+const u8 gText_OneTypeChallengeCantThrowPokeBall[]          = _("Desafío de tipos activo.\n¡Captura negada!{PAUSE_UNTIL_PRESS}");
 const u8 gText_BattleRules_NoItems_Player[]                 = _("¡Reglas competitivas!\n¡Sin objetos durante peleas!{PAUSE_UNTIL_PRESS}");
 #else
 
