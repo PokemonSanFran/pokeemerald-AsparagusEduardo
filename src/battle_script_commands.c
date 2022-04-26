@@ -3899,6 +3899,27 @@ static void Cmd_getexp(void)
             #else
                 calculatedExp = gBaseStats[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
             #endif
+            
+            if (gSaveBlock1Ptr->tx_Challenges_ExpMultiplier != 0) //tx_randomizer_and_challenges
+            {
+                if (TX_EXP_MULTIPLER_ONLY_ON_NUZLOCKE_AND_RANDOMIZER) //special for Jaizu
+                {
+                    if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke || IsRandomizerActivated())
+                    {
+                        if (gSaveBlock1Ptr->tx_Challenges_ExpMultiplier == 3)
+                            calculatedExp = 0;
+                        else
+                            calculatedExp *= 1 + 0.5 * gSaveBlock1Ptr->tx_Challenges_ExpMultiplier;
+                    }
+                }
+                else
+                {
+                    if (gSaveBlock1Ptr->tx_Challenges_ExpMultiplier == 3)
+                        calculatedExp = 0;
+                    else
+                        calculatedExp *= 1 + 0.5 * gSaveBlock1Ptr->tx_Challenges_ExpMultiplier;
+                }
+            }
 
             if (gSaveBlock2Ptr->expShare) // exp share is turned on
                 viaExpShare = gSaveBlock1Ptr->playerPartyCount;
@@ -3928,6 +3949,23 @@ static void Cmd_getexp(void)
                     gExpShareExp = 1;
             #endif
 
+            if (gSaveBlock1Ptr->tx_Challenges_ExpMultiplier == 3)
+            {
+                if (TX_EXP_MULTIPLER_ONLY_ON_NUZLOCKE_AND_RANDOMIZER) //special for Jaizu
+                {
+                    if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke || IsRandomizerActivated())
+                    {
+                        *exp = 0;
+                        gExpShareExp = 0;
+                    }
+                }
+                else
+                {
+                    *exp = 0;
+                    gExpShareExp = 0;
+                }
+            }
+
             gBattleScripting.getexpState++;
             gBattleStruct->expGetterMonId = 0;
             gBattleStruct->sentInPokes = sentIn;
@@ -3951,7 +3989,7 @@ static void Cmd_getexp(void)
                 gBattleMoveDamage = 0; // used for exp
             }
             else if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gBattleStruct->expGetterMonId >= 3)
-                  || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+                  || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) >= GetCurrentPartyLevelCap())
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
@@ -4052,7 +4090,7 @@ static void Cmd_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0;
-            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) != MAX_LEVEL)
+            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) < GetCurrentPartyLevelCap())
             {
                 gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
                 gBattleResources->beforeLvlUp->stats[STAT_ATK]   = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
