@@ -15963,10 +15963,6 @@ static u16 PickRandomizedSpeciesFromEWRAM(u16 species) //INTERNAL use only!
     u8 depth = 2;
     u8 start_depth = depth;
 
-    #ifdef GBA_PRINTF
-    mgba_printf(MGBA_LOG_DEBUG, "PickRandomizedSpeciesFromEWRAM(%d = %s)", species, ConvertToAscii(gSpeciesNames[species]) );
-    #endif
-
     if (gSaveBlock1Ptr->tx_Random_MapBased)
         depth += NuzlockeGetCurrentRegionMapSectionId() % 4;
 
@@ -15974,13 +15970,6 @@ static u16 PickRandomizedSpeciesFromEWRAM(u16 species) //INTERNAL use only!
     {
         species = sSpeciesList[species];
     }
-
-    #ifdef GBA_PRINTF
-        if (gSaveBlock1Ptr->tx_Random_MapBased)
-            mgba_printf(MGBA_LOG_DEBUG, "MapBased: start_depth=%d; new_depth=%d", start_depth, depth);
-        mgba_printf(MGBA_LOG_DEBUG, "depth[%d], new species = %d = %s", i, species, ConvertToAscii(gSpeciesNames[species]));
-        mgba_printf(MGBA_LOG_DEBUG, "");
-    #endif
 
     return species;
 }
@@ -15997,10 +15986,6 @@ void RandomizeTypeEffectivenessListEWRAM(u16 seed)
     {
         if (i != TYPE_MYSTERY)
             sTypeEffectivenessList[i] = stemp[i];
-        
-        #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "sTypeEffectivenessList[%d]: %s => %s", i, ConvertToAscii(gTypeNames[i]), ConvertToAscii(gTypeNames[sTypeEffectivenessList[i]]) );
-        #endif
     }
     #ifdef GBA_PRINTF
         mgba_printf(MGBA_LOG_DEBUG, "**** sTypeEffectivenessList[%d] generated ****", NELEMS(sTypeEffectivenessList));
@@ -16050,11 +16035,6 @@ u8 GetTypeBySpecies(u16 species, u8 type)
         result = gBaseStats[species].type2;
         break;
     }
-
-    #ifdef GBA_PRINTF
-    if (gSaveBlock1Ptr->tx_Random_Type)
-        mgba_printf(MGBA_LOG_DEBUG, "TX RANDOM TYPE: species=%d=%s; new species=%d=%s, type=%d=%s", input_species , ConvertToAscii(gSpeciesNames[input_species]), species , ConvertToAscii(gSpeciesNames[species]), result, ConvertToAscii(gTypeNames[result]));
-    #endif
 
     return result;
 }
@@ -16109,11 +16089,6 @@ u16 GetRandomSpecies(u16 species, u8 mapBased, u8 type) //INTERNAL use only!
             result_species = gRandomSpeciesEvoLegendary[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_LEGENDARY_COUNT)];
             break;
         }
-
-        #ifdef GBA_PRINTF
-        slot_new = gSpeciesMapping[result_species];
-        mgba_printf(MGBA_LOG_DEBUG, "%s: species=%d=%s; mapBased=%d; result_species=%d=%s; %s-->>%s", ConvertToAscii(gRandomizationTypes[type]), species, ConvertToAscii(gSpeciesNames[species]), mapBased, result_species, ConvertToAscii(gSpeciesNames[result_species]), ConvertToAscii(gEvoStages[slot]), ConvertToAscii(gEvoStages[slot_new]));
-        #endif
 
         return result_species;
     }
@@ -16177,10 +16152,6 @@ u16 GetRandomMove(u16 move, u16 species)
 {
     u16 val = RandomSeededModulo(move * species * 769, RANDOM_MOVES_COUNT);
     u16 final = sRandomValidMoves[val];
-    
-    #ifdef GBA_PRINTF
-        mgba_printf(MGBA_LOG_DEBUG, "TX RANDOM MOVE     : GetRandomMove: move=%d=%s, species=%d; combined=%d; val=%d; final=%d=%s", move,  ConvertToAscii(gMoveNames[move]), species, move * species * 769, val, final, ConvertToAscii(gMoveNames[final]));
-    #endif
 
     return final;
 }

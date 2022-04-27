@@ -53,6 +53,12 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "tx_randomizer_and_challenges.h"
+#ifdef GBA_PRINTF
+    #include "printf.h"
+    #include "mgba.h"
+    #include "data.h"                 // for gSpeciesNames, which maps species number to species name.
+    #include "../gflib/string_util.h" // for ConvertToAscii()
+#endif
 
 // Config options - Note that some config options need external modifications to fully work, such as CONFIG_CAN_FORGET_HM_MOVES, CONFIG_PHYSICAL_SPECIAL_SPLIT, and CONFIG_DECAPITALIZE_MET_LOCATION_STRINGS
 #define CONFIG_CAN_FORGET_HM_MOVES                      TRUE
@@ -1860,6 +1866,14 @@ static void Task_ChangeSummaryMon(u8 taskId)
 static s8 AdvanceMonIndex(s8 delta)
 {
     struct Pokemon *mon = sMonSummaryScreen->monList.mons;
+
+    #ifdef GBA_PRINTF
+    mgba_printf(MGBA_LOG_DEBUG, "delta:%d", delta);
+    mgba_printf(MGBA_LOG_DEBUG, "currPageIndex:%d", sMonSummaryScreen->currPageIndex);
+    mgba_printf(MGBA_LOG_DEBUG, "maxMonIndex:%d", sMonSummaryScreen->maxMonIndex);
+    mgba_printf(MGBA_LOG_DEBUG, "gPlayerPartyCount:%d", gPlayerPartyCount);
+    mgba_printf(MGBA_LOG_DEBUG, "gPlayerPartyCount:%d", gPlayerPartyCount);
+    #endif
 
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_MEMO)
     {

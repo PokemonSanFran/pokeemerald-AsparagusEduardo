@@ -26,11 +26,11 @@
 #include "tx_randomizer_and_challenges.h"
 
 #ifdef GBA_PRINTF
-    //#include "printf.h"
-    //#include "mgba.h"
-    //#include "data.h"                 // for gSpeciesNames, which maps species number to species name.
-    //#include "../gflib/string_util.h" // for ConvertToAscii()
-    //#include "battle_main.h"          // for Type names
+    #include "printf.h"
+    #include "mgba.h"
+    #include "data.h"                 // for gSpeciesNames, which maps species number to species name.
+    #include "../gflib/string_util.h" // for ConvertToAscii()
+    #include "battle_main.h"          // for Type names
 #endif
 
 #define STARTER_MON_COUNT   3
@@ -381,18 +381,11 @@ u16 GetStarterPokemon(u16 chosenStarterId)
             if (GetTypeBySpecies(mon, 1) == typeChallenge || GetTypeBySpecies(mon, 2) == typeChallenge)
                 break;
         }
-        #ifdef GBA_PRINTF
-            mgba_printf(MGBA_LOG_DEBUG, "typeChallenge = %d = %s; iteratrions=%d", typeChallenge, ConvertToAscii(gTypeNames[typeChallenge]), i);
-        #endif
     }
     else if (gSaveBlock1Ptr->tx_Random_WildPokemon)
     {
         mon = PickRandomStarter(sStarterMon[chosenStarterId]);
     }
-    
-    #ifdef GBA_PRINTF
-        mgba_printf(MGBA_LOG_DEBUG, "new species[%d] = %s", mon, ConvertToAscii(gSpeciesNames[mon]));
-    #endif
 
     return mon;
 }
