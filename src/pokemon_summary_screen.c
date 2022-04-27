@@ -44,7 +44,6 @@
 #include "text.h"
 #include "tv.h"
 #include "window.h"
-#include "constants/battle_config.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/moves.h"

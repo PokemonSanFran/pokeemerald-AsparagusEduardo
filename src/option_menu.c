@@ -118,6 +118,17 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_m
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
 
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+static const u8 sText_Music[] = _("Música");
+static const u8 sText_SFX[] = _("Efec. Sonido");
+static const u8 sText_HpExpBar[] = _("Veloc. Barra PS/EXP");
+static const u8 sText_UnitSystem[] = _("Sist. Unidades");
+static const u8 sText_FishReeling[] = _("Estilo Pesca");
+static const u8 sText_SkipBattleIntro[] = _("Intro Combate");
+static const u8 sText_FishEmerald[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}RZE");
+static const u8 sText_FishFRLG[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}RFVH");
+static const u8 sText_SaveConfirm[] = _("Save confirm");
+#else
 static const u8 sText_Music[] = _("Music");
 static const u8 sText_SFX[] = _("SFX");
 static const u8 sText_HpExpBar[] = _("HP/EXP bar speed");
@@ -127,6 +138,7 @@ static const u8 sText_SkipBattleIntro[] = _("Battle Intro");
 static const u8 sText_FishEmerald[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}RSE");
 static const u8 sText_FishFRLG[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FRLG");
 static const u8 sText_SaveConfirm[] = _("Save confirm");
+#endif
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
