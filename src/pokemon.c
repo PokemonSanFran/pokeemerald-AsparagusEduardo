@@ -78,6 +78,7 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
+static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 
 static void RandomizeSpeciesListEWRAMNormal(u16 seed);
 static void RandomizeSpeciesListEWRAMLegendary(u16 seed);
@@ -10518,6 +10519,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u16 checksum;
     u32 shinyValue;
     struct SiiRtcInfo rtc;
+    u8 i;
+    u8 availableIVs[NUM_STATS];
+    u8 selectedIvs[LEGENDARY_PERFECT_IV_COUNT];
 
     ZeroBoxMonData(boxMon);
 
@@ -10625,6 +10629,51 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+
+        #if P_LEGENDARY_PERFECT_IVS >= GEN_6
+            if (gBaseStats[species].flags & (FLAG_LEGENDARY | FLAG_MYTHICAL | FLAG_ULTRA_BEAST))
+            {
+                iv = MAX_PER_STAT_IVS;
+                // Initialize a list of IV indices.
+                for (i = 0; i < NUM_STATS; i++)
+                {
+                    availableIVs[i] = i;
+                }
+
+                // Select the 3 IVs that will be perfected.
+                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+                {
+                    u8 index = Random() % (NUM_STATS - i);
+                    selectedIvs[i] = availableIVs[index];
+                    RemoveIVIndexFromList(availableIVs, index);
+                }
+                for (i = 0; i < LEGENDARY_PERFECT_IV_COUNT; i++)
+                {
+                    switch (selectedIvs[i])
+                    {
+                        case STAT_HP:
+                            SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+                            break;
+                        case STAT_ATK:
+                            SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+                            break;
+                        case STAT_DEF:
+                            SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+                            break;
+                        case STAT_SPEED:
+                            SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+                            break;
+                        case STAT_SPATK:
+                            SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+                            break;
+                        case STAT_SPDEF:
+                            SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+                            break;
+                    }
+                }
+            }
+        #endif
+        
     }
 
     if (GetAbilityBySpecies(species, 1) != ABILITY_NONE) //tx_randomizer_and_challenges
@@ -13353,7 +13402,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                     case 7: // ITEM4_EVO_STONE
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, SPECIES_NONE);
+                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
@@ -13728,7 +13777,7 @@ u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u16 tradePartnerSpecies)
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {
     int i, j;
     u16 targetSpecies = 0;
@@ -13741,6 +13790,28 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
     u16 currentMap;
+    u16 partnerSpecies;
+    u16 partnerHeldItem;
+    u8 partnerHoldEffect;
+
+    if (tradePartner != NULL)
+    {
+        partnerSpecies = GetMonData(tradePartner, MON_DATA_SPECIES, 0);
+        partnerHeldItem = GetMonData(tradePartner, MON_DATA_HELD_ITEM, 0);
+        
+        /*
+        if (partnerHeldItem == ITEM_ENIGMA_BERRY)
+            partnerHoldEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+        else
+        */
+            partnerHoldEffect = ItemId_GetHoldEffect(partnerHeldItem);
+    }
+    else
+    {
+        partnerSpecies = SPECIES_NONE;
+        partnerHeldItem = ITEM_NONE;
+        partnerHoldEffect = HOLD_EFFECT_NONE;
+    }
 
     //tx_randomizer_and_challenges
     if (EvolutionBlockedByEvoLimit(species)) //No Evos already previously checked
@@ -13758,7 +13829,9 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
         holdEffect = ItemId_GetHoldEffect(heldItem);
 
     // Prevent evolution with Everstone, unless we're just viewing the party menu with an evolution item
-    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE && mode != EVO_MODE_ITEM_CHECK)
+    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE
+        && mode != EVO_MODE_ITEM_CHECK
+        && (P_KADABRA_EVERSTONE < GEN_4 || species != SPECIES_KADABRA))
         return SPECIES_NONE;
 
     switch (mode)
@@ -13985,7 +14058,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, u
                 }
                 break;
             case EVO_TRADE_SPECIFIC_MON:
-                if (gEvolutionTable[species][i].param == tradePartnerSpecies)
+                if (gEvolutionTable[species][i].param == partnerSpecies && partnerHoldEffect != HOLD_EFFECT_PREVENT_EVOLVE)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
@@ -15903,6 +15976,25 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
         sLearningMoveTableID++;
     }
     return 0;
+}
+
+static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
+{
+    s32 i, j;
+    u8 temp[NUM_STATS];
+
+    ivs[selectedIv] = 0xFF;
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        temp[i] = ivs[i];
+    }
+
+    j = 0;
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        if (temp[i] != 0xFF)
+            ivs[j++] = temp[i];
+    }
 }
 
 //******************* tx_randomizer_and_challenges
