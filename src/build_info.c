@@ -114,6 +114,7 @@ static void Task_ShowBuildInfoPrompt(u8 taskId)
         DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x214, 0xE);
 
         AddTextPrinterParameterized(0, FONT_NORMAL, sText_BuildInfoHeader, GetStringCenterAlignXOffset(FONT_NORMAL, sText_BuildInfoHeader, 230) - 2, 1, TEXT_SKIP_DRAW, 0);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gText_RepoName, 0, 16, TEXT_SKIP_DRAW, 0);
         AddTextPrinterParameterized(0, FONT_NORMAL, gText_RepoBranch, 0, 33, TEXT_SKIP_DRAW, 0);
         if (gUncommitedChanges)
         {

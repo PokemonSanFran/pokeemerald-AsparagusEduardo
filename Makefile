@@ -99,7 +99,8 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
 
 GIT_URL := $(shell git remote get-url origin)
-BUILD_REPO_BRANCH := \"$(GIT_URL:https://github.com/%=%)/$(shell git branch --show-current)\"
+BUILD_REPO_NAME := \"$(GIT_URL:https://github.com/%=%)\"
+BUILD_REPO_BRANCH := \"$(shell git branch --show-current)\"
 BUILD_VERSION := \"$(shell git describe --tags --abbrev=7)\"
 BUILD_TIME := \"$(shell date -u +%Y.%m.%d-%H:%M)\"
 BUILD_DIRTY := $(shell if [ -n "$$(git status --porcelain)" ]; then \
@@ -124,7 +125,7 @@ LIBPATH := -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libgcc.a)
 LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
 endif
 
-CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN) -DBUILD_REPO_BRANCH=$(BUILD_REPO_BRANCH) -DBUILD_VERSION=$(BUILD_VERSION) -DBUILD_TIME=$(BUILD_TIME) -DBUILD_DIRTY=$(BUILD_DIRTY)
+CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN) -DBUILD_REPO_NAME=$(BUILD_REPO_NAME) -DBUILD_REPO_BRANCH=$(BUILD_REPO_BRANCH) -DBUILD_VERSION=$(BUILD_VERSION) -DBUILD_TIME=$(BUILD_TIME) -DBUILD_DIRTY=$(BUILD_DIRTY)
 ifneq ($(MODERN),1)
 CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
 endif
