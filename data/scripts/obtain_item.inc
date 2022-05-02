@@ -184,6 +184,7 @@ EventScript_PickUpItem::
 
 EventScript_PutBattlePyramidItemInBag::
 	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
+	hideitemdesc
 	return
 
 EventScript_FoundTMHM::
