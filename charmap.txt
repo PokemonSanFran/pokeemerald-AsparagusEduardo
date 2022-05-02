@@ -156,6 +156,8 @@ EMOJI_DIZZYEGG = F7
 TALL_PLUS   = FC 0C FB
 '$'         = FF
 
+'_' = F9 09
+
 @ Hiragana
 'あ' = 01
 'い' = 02
