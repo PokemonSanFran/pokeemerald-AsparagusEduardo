@@ -2818,7 +2818,7 @@ static bool32 IsPartnerActivityIncompatible(s16 activity, struct RfuGameData *pa
     {
         // Verify that the trade offered hasn't changed 
         struct RfuGameData *original = &gRfu.parent;
-        if (original->tradeSpecies == SPECIES_EGG)
+        if (original->tradeSpecies == SPECIES_DUCK)
         {
             if (partner->tradeSpecies == original->tradeSpecies)
                 return FALSE;

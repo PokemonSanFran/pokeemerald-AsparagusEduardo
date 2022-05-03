@@ -15,7 +15,7 @@
 
 //// SEARCH PROBABILITIES
 // see https://m.bulbapedia.bulbagarden.net/wiki/DexNav#Benefits
-//Chance of encountering egg move at search levels
+//Chance of encountering duck move at search levels
 #define SEARCHLEVEL0_MOVECHANCE         0
 #define SEARCHLEVEL5_MOVECHANCE         21
 #define SEARCHLEVEL10_MOVECHANCE        46

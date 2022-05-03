@@ -29,8 +29,8 @@ extern struct PokemonStorage *gPokemonStoragePtr;
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 arg2, u8 arg3, s32 bytesToBuffer);
 u8 CountMonsInBox(u8 boxId);
 s16 GetFirstFreeBoxSpot(u8 boxId);
-u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore);
-u16 CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(void);
+u8 CountPartyAliveNonDuckMonsExcept(u8 slotToIgnore);
+u16 CountPartyAliveNonDuckMons_IgnoreVar0x8004Slot(void);
 u8 CountPartyMons(void);
 u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n);
 void ShowPokemonStorageSystemPC(void);
@@ -55,7 +55,7 @@ u8 *GetBoxNamePtr(u8 boxId);
 s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 arg3);
 bool8 CheckFreePokemonStorageSpace(void);
 bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition);
-u32 CountStorageNonEggMons(void);
+u32 CountStorageNonDuckMons(void);
 u32 CountAllStorageMons(void);
 bool32 AnyStorageMonWithMove(u16 moveId);
 
@@ -71,7 +71,7 @@ void SetWaldaWallpaperColors(u16 color1, u16 color2);
 u8 *GetWaldaPhrasePtr(void);
 void SetWaldaPhrase(const u8 *src);
 bool32 IsWaldaPhraseEmpty(void);
-u8 CountPartyNonEggMons(void);
+u8 CountPartyNonDuckMons(void);
 
 //tx_randomizer_and_challenges
 void PurgeMonOrBoxMon(u8 boxId, u8 position);

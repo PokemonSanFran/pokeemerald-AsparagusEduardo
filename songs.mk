@@ -1080,7 +1080,7 @@ $(MID_SUBDIR)/se_downpour_stop.s: %.s: %.mid
 $(MID_SUBDIR)/se_orb.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V100 -P5
 
-$(MID_SUBDIR)/se_egg_hatch.s: %.s: %.mid
+$(MID_SUBDIR)/se_duck_hatch.s: %.s: %.mid
 	$(MID) $< $@ -E -R$(STD_REVERB) -G128 -V120 -P5
 
 $(MID_SUBDIR)/se_roulette_ball.s: %.s: %.mid

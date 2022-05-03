@@ -9,12 +9,12 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 
 ## List of Features
 #### Quality of life features
-* [BW2 Repels](https://github.com/DizzyEggg/pokeemerald/tree/repel) functionality by [DizzyEgg](https://github.com/dizzyeggg).
+* [BW2 Repels](https://github.com/DizzyDuckg/pokeemerald/tree/repel) functionality by [DizzyDuck](https://github.com/dizzyduckg).
 * Running Shoes everywhere and from the beginning.
 * Reusable TMs.
 * Deletable HM moves.
 * Shelmet and Karrablast can evolve while the other one is in the party.
-* Eggs hatch at level 1.
+* Ducks hatch at level 1.
 * Berry trees don't wither if their berries aren't picked up.
 * Easier way of getting to Mirage Island.
 * Name Rater can rename foreign Pokémon.

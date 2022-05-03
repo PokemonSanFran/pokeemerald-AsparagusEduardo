@@ -996,9 +996,9 @@
 	.byte 0
 	.endm
 
-	@ Gives the player an Egg of the specified species.
+	@ Gives the player an Duck of the specified species.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome. 
-	.macro giveegg species:req
+	.macro giveduck species:req
 	.byte 0x7a
 	.2byte \species
 	.endm

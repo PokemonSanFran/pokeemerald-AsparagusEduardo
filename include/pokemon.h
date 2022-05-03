@@ -61,7 +61,7 @@ struct PokemonSubstruct3
  /* 0x05 */ u32 speedIV:5;
  /* 0x05 */ u32 spAttackIV:5;
  /* 0x06 */ u32 spDefenseIV:5;
- /* 0x07 */ u32 isEgg:1;
+ /* 0x07 */ u32 isDuck:1;
 
  /* 0x08 */ u32 coolRibbon:3;
  /* 0x08 */ u32 beautyRibbon:3;
@@ -109,9 +109,9 @@ struct BoxPokemon
     u32 otId;
     u8 nickname[POKEMON_NAME_LENGTH];
     u8 language;
-    u8 isBadEgg:1;
+    u8 isBadDuck:1;
     u8 hasSpecies:1;
-    u8 isEgg:1;
+    u8 isDuck:1;
     u8 unused:5;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
@@ -226,11 +226,11 @@ struct BaseStats
  /* 0x0C */ u16 item1;
  /* 0x0E */ u16 item2;
  /* 0x10 */ u8 genderRatio;
- /* 0x11 */ u8 eggCycles;
+ /* 0x11 */ u8 duckCycles;
  /* 0x12 */ u8 friendship;
  /* 0x13 */ u8 growthRate;
- /* 0x14 */ u8 eggGroup1;
- /* 0x15 */ u8 eggGroup2;
+ /* 0x14 */ u8 duckGroup1;
+ /* 0x15 */ u8 duckGroup2;
  /* 0x16 */ u16 abilities[NUM_ABILITY_SLOTS];
             u8 safariZoneFleeRate;
             u8 bodyColor : 7;

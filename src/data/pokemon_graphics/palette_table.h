@@ -102,8 +102,8 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(KINGLER, gMonPalette_Kingler),
     SPECIES_PAL(VOLTORB, gMonPalette_Voltorb),
     SPECIES_PAL(ELECTRODE, gMonPalette_Electrode),
-    SPECIES_PAL(EXEGGCUTE, gMonPalette_Exeggcute),
-    SPECIES_PAL(EXEGGUTOR, gMonPalette_Exeggutor),
+    SPECIES_PAL(EXDUCKCUTE, gMonPalette_Exduckcute),
+    SPECIES_PAL(EXDUCKUTOR, gMonPalette_Exduckutor),
     SPECIES_PAL(CUBONE, gMonPalette_Cubone),
     SPECIES_PAL(MAROWAK, gMonPalette_Marowak),
     SPECIES_PAL(HITMONLEE, gMonPalette_Hitmonlee),
@@ -968,7 +968,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(GOLEM_ALOLAN, gMonPalette_GolemAlolan),
     SPECIES_PAL(GRIMER_ALOLAN, gMonPalette_GrimerAlolan),
     SPECIES_PAL(MUK_ALOLAN, gMonPalette_MukAlolan),
-    SPECIES_PAL(EXEGGUTOR_ALOLAN, gMonPalette_ExeggutorAlolan),
+    SPECIES_PAL(EXDUCKUTOR_ALOLAN, gMonPalette_ExduckutorAlolan),
     SPECIES_PAL(MAROWAK_ALOLAN, gMonPalette_MarowakAlolan),
 
     SPECIES_PAL(MEOWTH_GALARIAN, gMonPalette_MeowthGalarian),
@@ -1272,7 +1272,7 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     SPECIES_PAL(CALYREX_ICE_RIDER, gMonPalette_CalyrexIceRider),
     SPECIES_PAL(CALYREX_SHADOW_RIDER, gMonPalette_CalyrexShadowRider),
 
-    SPECIES_PAL(EGG, gMonPalette_Egg),
+    SPECIES_PAL(DUCK, gMonPalette_Duck),
 };
 
 const struct CompressedSpritePalette gMonPaletteTableFemale[] =
@@ -1398,8 +1398,8 @@ const struct CompressedSpritePalette gFollowMonPaletteTable[] =
     SPECIES_PAL(KINGLER, gFollowMonPalette_Kingler),
     SPECIES_PAL(VOLTORB, gFollowMonPalette_Voltorb),
     SPECIES_PAL(ELECTRODE, gFollowMonPalette_Electrode),
-    SPECIES_PAL(EXEGGCUTE, gFollowMonPalette_Exeggcute),
-    SPECIES_PAL(EXEGGUTOR, gFollowMonPalette_Exeggutor),
+    SPECIES_PAL(EXDUCKCUTE, gFollowMonPalette_Exduckcute),
+    SPECIES_PAL(EXDUCKUTOR, gFollowMonPalette_Exduckutor),
     SPECIES_PAL(CUBONE, gFollowMonPalette_Cubone),
     SPECIES_PAL(MAROWAK, gFollowMonPalette_Marowak),
     SPECIES_PAL(HITMONLEE, gFollowMonPalette_Hitmonlee),
@@ -2264,7 +2264,7 @@ const struct CompressedSpritePalette gFollowMonPaletteTable[] =
     SPECIES_PAL(GOLEM_ALOLAN, gFollowMonPalette_GolemAlolan),
     SPECIES_PAL(GRIMER_ALOLAN, gFollowMonPalette_GrimerAlolan),
     SPECIES_PAL(MUK_ALOLAN, gFollowMonPalette_MukAlolan),
-    SPECIES_PAL(EXEGGUTOR_ALOLAN, gFollowMonPalette_ExeggutorAlolan),
+    SPECIES_PAL(EXDUCKUTOR_ALOLAN, gFollowMonPalette_ExduckutorAlolan),
     SPECIES_PAL(MAROWAK_ALOLAN, gFollowMonPalette_MarowakAlolan),
 
     SPECIES_PAL(MEOWTH_GALARIAN, gMonPalette_MeowthGalarian),
@@ -2568,7 +2568,7 @@ const struct CompressedSpritePalette gFollowMonPaletteTable[] =
     SPECIES_PAL(CALYREX_ICE_RIDER, gMonPalette_CalyrexIceRider),
     SPECIES_PAL(CALYREX_SHADOW_RIDER, gMonPalette_CalyrexShadowRider),
 
-    SPECIES_PAL(EGG, gMonPalette_Egg),
+    SPECIES_PAL(DUCK, gMonPalette_Duck),
 };
 
 const struct CompressedSpritePalette gFollowMonPaletteTableFemale[] =

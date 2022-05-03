@@ -29,7 +29,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_GRIMER] = sGrimerFormSpeciesIdTable,
     [SPECIES_MUK] = sMukFormSpeciesIdTable,
     [SPECIES_GENGAR] = sGengarFormSpeciesIdTable,
-    [SPECIES_EXEGGUTOR] = sExeggutorFormSpeciesIdTable,
+    [SPECIES_EXDUCKUTOR] = sExduckutorFormSpeciesIdTable,
     [SPECIES_MAROWAK] = sMarowakFormSpeciesIdTable,
     [SPECIES_WEEZING] = sWeezingFormSpeciesIdTable,
     [SPECIES_KANGASKHAN] = sKangaskhanFormSpeciesIdTable,
@@ -212,7 +212,7 @@ const u16 *const gFormSpeciesIdTables[NUM_SPECIES] =
     [SPECIES_GOLEM_ALOLAN] = sGolemFormSpeciesIdTable,
     [SPECIES_GRIMER_ALOLAN] = sGrimerFormSpeciesIdTable,
     [SPECIES_MUK_ALOLAN] = sMukFormSpeciesIdTable,
-    [SPECIES_EXEGGUTOR_ALOLAN] = sExeggutorFormSpeciesIdTable,
+    [SPECIES_EXDUCKUTOR_ALOLAN] = sExduckutorFormSpeciesIdTable,
     [SPECIES_MAROWAK_ALOLAN] = sMarowakFormSpeciesIdTable,
     // Galarian Forms
     [SPECIES_MEOWTH_GALARIAN] = sMeowthFormSpeciesIdTable,

@@ -79,7 +79,7 @@ static const u16 sQuizLadyQuestion5[QUIZ_QUESTION_LEN] =
     EC_WORD_YOU,
     EC_WORD_BREAK,
     EC_WORD_QUES,
-    EC_WORD_EGG,
+    EC_WORD_DUCK,
     EC_WORD_MAIL,
     EC_WORD_PHONE
 };
@@ -253,7 +253,7 @@ static const u16 sQuizLadyQuizAnswers[] =
     EC_WORD_DARK,
     EC_WORD_LEVEL,
     EC_WORD_FLOWERS,
-    EC_WORD_EGG,
+    EC_WORD_DUCK,
     EC_WORD_OWN_TEMPO,
     EC_WORD_ROCK,
     EC_WORD_SHADOW_TAG,

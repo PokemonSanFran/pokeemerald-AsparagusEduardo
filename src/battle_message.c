@@ -2526,7 +2526,7 @@ const u8 gText_LineBreak[] = _("\l");
 const u8 gText_NewLine[] = _("\n");
 const u8 gText_Are[] = _("are");
 const u8 gText_Are2[] = _("are");
-const u8 gText_BadEgg[] = _("Huevo malo");
+const u8 gText_BadDuck[] = _("Pato malo");
 const u8 gText_BattleWallyName[] = _("Blasco");
 const u8 gText_Win[] = _("{HIGHLIGHT TRANSPARENT}Win");
 const u8 gText_Loss[] = _("{HIGHLIGHT TRANSPARENT}Loss");
@@ -2692,7 +2692,7 @@ const u8 gText_LineBreak[] = _("\l");
 const u8 gText_NewLine[] = _("\n");
 const u8 gText_Are[] = _("are");
 const u8 gText_Are2[] = _("are");
-const u8 gText_BadEgg[] = _("Bad Egg");
+const u8 gText_BadDuck[] = _("Bad Duck");
 const u8 gText_BattleWallyName[] = _("Wally");
 const u8 gText_Win[] = _("{HIGHLIGHT TRANSPARENT}Win");
 const u8 gText_Loss[] = _("{HIGHLIGHT TRANSPARENT}Loss");
@@ -2820,7 +2820,7 @@ static const u16 sGrammarMoveUsedTable[] =
 {
     MOVE_SWORDS_DANCE, MOVE_STRENGTH, MOVE_GROWTH,
     MOVE_HARDEN, MOVE_MINIMIZE, MOVE_SMOKESCREEN,
-    MOVE_WITHDRAW, MOVE_DEFENSE_CURL, MOVE_EGG_BOMB,
+    MOVE_WITHDRAW, MOVE_DEFENSE_CURL, MOVE_DUCK_BOMB,
     MOVE_SMOG, MOVE_BONE_CLUB, MOVE_FLASH, MOVE_SPLASH,
     MOVE_ACID_ARMOR, MOVE_BONEMERANG, MOVE_REST, MOVE_SHARPEN,
     MOVE_SUBSTITUTE, MOVE_MIND_READER, MOVE_SNORE,
@@ -4451,7 +4451,7 @@ static void IllusionNickHack(u32 battlerId, u32 partyId, u8 *dst)
         else
             partnerMon = mon;
 
-        // Find last alive non-egg pokemon.
+        // Find last alive non-duck pokemon.
         for (i = PARTY_SIZE - 1; i >= 0; i--)
         {
             id = i;
@@ -4840,7 +4840,7 @@ static u32 GetEnemyMonCount(bool32 onlyAlive)
     {
         u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2, NULL);
         if (species != SPECIES_NONE
-            && species != SPECIES_EGG
+            && species != SPECIES_DUCK
             && (!onlyAlive || GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL)))
             count++;
     }

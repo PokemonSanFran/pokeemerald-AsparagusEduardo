@@ -1737,7 +1737,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             {
                 if (partyInfo[i].hp == HP_EMPTY_SLOT)
                 {
-                    // empty slot or an egg
+                    // empty slot or an duck
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
                 }
@@ -1759,7 +1759,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             {
                 if (partyInfo[j].hp == HP_EMPTY_SLOT)
                 {
-                     // empty slot or an egg
+                     // empty slot or an duck
                     gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[var]].data[7] = 1;
                     var--;
@@ -1792,7 +1792,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             {
                 if (partyInfo[i].hp == HP_EMPTY_SLOT)
                 {
-                    // empty slot or an egg
+                    // empty slot or an duck
                     gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[var]].data[7] = 1;
                 }
@@ -1815,7 +1815,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             {
                 if (partyInfo[j].hp == HP_EMPTY_SLOT)
                 {
-                    // empty slot or an egg
+                    // empty slot or an duck
                     gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
                     gSprites[ballIconSpritesIds[i]].data[7] = 1;
                     i++;

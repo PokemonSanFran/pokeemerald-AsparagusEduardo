@@ -1225,24 +1225,24 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_EXEGGCUTE] =
+    [NATIONAL_DEX_EXDUCKCUTE] =
     {
-        .categoryName = _("Huevo"),
+        .categoryName = _("Pato"),
         .height = 4,
         .weight = 25,
-        .description = gExeggcutePokedexText,
+        .description = gExduckcutePokedexText,
         .pokemonScale = 489,
         .pokemonOffset = -4,
         .trainerScale = 256,
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_EXEGGUTOR] =
+    [NATIONAL_DEX_EXDUCKUTOR] =
     {
         .categoryName = _("Coco"),
         .height = 20,
         .weight = 1200,
-        .description = gExeggutorPokedexText,
+        .description = gExduckutorPokedexText,
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 309,
@@ -1359,7 +1359,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHANSEY] =
     {
-        .categoryName = _("Huevo"),
+        .categoryName = _("Pato"),
         .height = 11,
         .weight = 346,
         .description = gChanseyPokedexText,
@@ -12015,24 +12015,24 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_EXEGGCUTE] =
+    [NATIONAL_DEX_EXDUCKCUTE] =
     {
-        .categoryName = _("Egg"),
+        .categoryName = _("Duck"),
         .height = 4,
         .weight = 25,
-        .description = gExeggcutePokedexText,
+        .description = gExduckcutePokedexText,
         .pokemonScale = 489,
         .pokemonOffset = -4,
         .trainerScale = 256,
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_EXEGGUTOR] =
+    [NATIONAL_DEX_EXDUCKUTOR] =
     {
         .categoryName = _("Coconut"),
         .height = 20,
         .weight = 1200,
-        .description = gExeggutorPokedexText,
+        .description = gExduckutorPokedexText,
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 309,
@@ -12149,7 +12149,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CHANSEY] =
     {
-        .categoryName = _("Egg"),
+        .categoryName = _("Duck"),
         .height = 11,
         .weight = 346,
         .description = gChanseyPokedexText,

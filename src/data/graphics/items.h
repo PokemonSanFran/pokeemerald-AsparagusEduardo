@@ -1347,8 +1347,8 @@ const u32 gItemIconPalette_SmokeBall[] = INCBIN_U32("graphics/items/icon_palette
 const u32 gItemIcon_FocusBand[] = INCBIN_U32("graphics/items/icons/focus_band.4bpp.lz");
 const u32 gItemIconPalette_FocusBand[] = INCBIN_U32("graphics/items/icon_palettes/focus_band.gbapal.lz");
 
-const u32 gItemIcon_LuckyEgg[] = INCBIN_U32("graphics/items/icons/lucky_egg.4bpp.lz");
-const u32 gItemIconPalette_LuckyEgg[] = INCBIN_U32("graphics/items/icon_palettes/lucky_egg.gbapal.lz");
+const u32 gItemIcon_LuckyDuck[] = INCBIN_U32("graphics/items/icons/lucky_duck.4bpp.lz");
+const u32 gItemIconPalette_LuckyDuck[] = INCBIN_U32("graphics/items/icon_palettes/lucky_duck.gbapal.lz");
 
 const u32 gItemIcon_ScopeLens[] = INCBIN_U32("graphics/items/icons/scope_lens.4bpp.lz");
 const u32 gItemIconPalette_ScopeLens[] = INCBIN_U32("graphics/items/icon_palettes/scope_lens.gbapal.lz");

@@ -27,8 +27,8 @@ FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon::
 	special ChooseMonForMoveRelearner
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg
+	special IsSelectedMonDuck
+	goto_if_eq VAR_RESULT, TRUE, FallarborTown_MoveRelearnersHouse_EventScript_CantTeachDuck
 	goto_if_eq VAR_0x8005, 0, FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon
 	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove
 	end
@@ -48,8 +48,8 @@ FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon::
 	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	end
 
-FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg, MSGBOX_DEFAULT
+FallarborTown_MoveRelearnersHouse_EventScript_CantTeachDuck::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_CantTeachDuck, MSGBOX_DEFAULT
 	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	end
 
@@ -93,7 +93,7 @@ FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
 	.string "If your Pokémon need to learn a move,\n"
 	.string "come back with a Heart Scale.$"
 
-FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
+FallarborTown_MoveRelearnersHouse_Text_CantTeachDuck:
 	.string "Hunh? There isn't a single move that\n"
-	.string "I can teach an Egg.$"
+	.string "I can teach an Duck.$"
 

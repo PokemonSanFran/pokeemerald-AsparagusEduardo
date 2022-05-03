@@ -4022,7 +4022,7 @@ static void Cmd_getexp(void)
                     // only give exp share bonus in later gens if the mon wasn't sent out
                     if (gSaveBlock2Ptr->expShare || ((holdEffect == HOLD_EFFECT_EXP_SHARE) && ((gBattleMoveDamage == 0) || (B_SPLIT_EXP < GEN_6))))
                         gBattleMoveDamage += gExpShareExp;
-                    if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
+                    if (holdEffect == HOLD_EFFECT_LUCKY_DUCK)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && B_TRAINER_EXP_MULTIPLIER <= GEN_7)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
@@ -4191,7 +4191,7 @@ static bool32 NoAliveMonsForPlayerAndPartner(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK)
              && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
             {
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
@@ -4214,7 +4214,7 @@ static bool32 NoAliveMonsForPlayer(void)
         // In multi battle with Steven, skip his Pokémon
         for (i = 0; i < MULTI_PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK))
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
         }
     }
@@ -4222,7 +4222,7 @@ static bool32 NoAliveMonsForPlayer(void)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK)
              && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostPlayerMons & gBitTable[i])))
             {
                 HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
@@ -4241,7 +4241,7 @@ static bool32 NoAliveMonsForOpponent(void)
     // Get total HP for the enemy's party to determine if the player has won
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG)
+        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_DUCK)
          && (!(gBattleTypeFlags & BATTLE_TYPE_ARENA) || !(gBattleStruct->arenaLostOpponentMons & gBitTable[i])))
         {
             HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
@@ -5788,7 +5788,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
              && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !GetMonData(&party[i], MON_DATA_IS_DUCK)
              && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
                 break;
         }
@@ -5809,7 +5809,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         for (i = lastMonId; i < lastMonId + MULTI_PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !GetMonData(&party[i], MON_DATA_IS_DUCK)
              && GetMonData(&party[i], MON_DATA_HP) != 0
              && gBattlerPartyIndexes[battlerId] != i)
                 break;
@@ -5854,7 +5854,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         for (i = lastMonId; i < lastMonId + MULTI_PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !GetMonData(&party[i], MON_DATA_IS_DUCK)
              && GetMonData(&party[i], MON_DATA_HP) != 0
              && gBattlerPartyIndexes[battlerId] != i)
                 break;
@@ -5873,7 +5873,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         for (i = lastMonId; i < lastMonId + (PARTY_SIZE / 2); i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !GetMonData(&party[i], MON_DATA_IS_DUCK)
              && GetMonData(&party[i], MON_DATA_HP) != 0
              && gBattlerPartyIndexes[battlerId] != i)
                 break;
@@ -5911,7 +5911,7 @@ bool32 CanBattlerSwitch(u32 battlerId)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
              && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !GetMonData(&party[i], MON_DATA_IS_DUCK)
              && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
                 break;
         }
@@ -6811,7 +6811,7 @@ static void Cmd_getmoneyreward(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-                && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+                && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_DUCK)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > sPartyLevel)
                     sPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
@@ -6902,7 +6902,7 @@ static void Cmd_drawpartystatussummary(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_NONE
-            || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+            || GetMonData(&party[i], MON_DATA_SPECIES2) == SPECIES_DUCK)
         {
             hpStatuses[i].hp = 0xFFFF;
             hpStatuses[i].status = 0;
@@ -10662,7 +10662,7 @@ static void Cmd_forcerandomswitch(void)
         for (i = firstMonId; i < lastMonId; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !GetMonData(&party[i], MON_DATA_IS_DUCK)
              && GetMonData(&party[i], MON_DATA_HP) != 0)
              {
                  validMons++;
@@ -10686,7 +10686,7 @@ static void Cmd_forcerandomswitch(void)
             while (i == battler2PartyId
                    || i == battler1PartyId
                    || GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE
-                   || GetMonData(&party[i], MON_DATA_IS_EGG) == TRUE
+                   || GetMonData(&party[i], MON_DATA_IS_DUCK) == TRUE
                    || GetMonData(&party[i], MON_DATA_HP) == 0);
 
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
@@ -11723,7 +11723,7 @@ static void Cmd_healpartystatus(void)
             u16 species = GetMonData(&party[i], MON_DATA_SPECIES2);
             u8 abilityNum = GetMonData(&party[i], MON_DATA_ABILITY_NUM);
 
-            if (species != SPECIES_NONE && species != SPECIES_EGG)
+            if (species != SPECIES_NONE && species != SPECIES_DUCK)
             {
                 u16 ability;
 
@@ -12270,7 +12270,7 @@ static void Cmd_trydobeatup(void)
         {
             if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP)
                 && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2)
-                && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2) != SPECIES_EGG
+                && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES2) != SPECIES_DUCK
                 && !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
                     break;
         }
@@ -12901,7 +12901,7 @@ static void Cmd_assistattackselect(void)
             continue;
         if (GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_NONE)
             continue;
-        if (GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_EGG)
+        if (GetMonData(&party[monId], MON_DATA_SPECIES2) == SPECIES_DUCK)
             continue;
 
         for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
@@ -13171,7 +13171,7 @@ static void Cmd_pickup(void)
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
-                && species != SPECIES_EGG
+                && species != SPECIES_DUCK
                 && heldItem == ITEM_NONE
                 && (Random() % 10) == 0)
             {
@@ -13181,7 +13181,7 @@ static void Cmd_pickup(void)
             #if (defined ITEM_HONEY)
             else if (ability == ABILITY_HONEY_GATHER
                 && species != 0
-                && species != SPECIES_EGG
+                && species != SPECIES_DUCK
                 && heldItem == ITEM_NONE)
             {
                 if ((lvlDivBy10 + 1 ) * 5 > Random() % 100)
@@ -13220,7 +13220,7 @@ static void Cmd_pickup(void)
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
-                && species != SPECIES_EGG
+                && species != SPECIES_DUCK
                 && heldItem == ITEM_NONE
                 && (Random() % 10) == 0)
             {
@@ -13248,7 +13248,7 @@ static void Cmd_pickup(void)
             #if (defined ITEM_HONEY)
             else if (ability == ABILITY_HONEY_GATHER
                 && species != 0
-                && species != SPECIES_EGG
+                && species != SPECIES_DUCK
                 && heldItem == ITEM_NONE)
             {
                 if ((lvlDivBy10 + 1 ) * 5 > Random() % 100)

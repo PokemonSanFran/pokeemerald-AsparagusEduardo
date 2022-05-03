@@ -1462,7 +1462,7 @@ const struct ContestPokemon gContestOpponents[] =
         {
             MOVE_SING,
             MOVE_SOFT_BOILED,
-            MOVE_EGG_BOMB,
+            MOVE_DUCK_BOMB,
             MOVE_DOUBLE_EDGE
         },
         .cool = 20,
@@ -1979,8 +1979,8 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = 0xFFFF
     },
     [CONTEST_OPPONENT_GRACIE] = {
-        .species = SPECIES_EXEGGUTOR,
-        .nickname = _("Eggsor"),
+        .species = SPECIES_EXDUCKUTOR,
+        .nickname = _("Ducksor"),
         .trainerName = _("Gracie"),
         .trainerGfxId = OBJ_EVENT_GFX_PICNICKER,
         .aiFlags = CONTEST_AI_SET_1,
@@ -1994,7 +1994,7 @@ const struct ContestPokemon gContestOpponents[] =
         {
             MOVE_STOMP,
             MOVE_HYPNOSIS,
-            MOVE_EGG_BOMB,
+            MOVE_DUCK_BOMB,
             MOVE_SKILL_SWAP
         },
         .cool = 40,

@@ -29,9 +29,9 @@ Rotom_Appliances_WhichRotom::
 	waitstate
     compare VAR_0x8004, 255
 	goto_if_eq Rotom_Appliances_Exit
-	special IsSelectedMonEgg
+	special IsSelectedMonDuck
 	compare VAR_RESULT, TRUE
-    goto_if_eq Rotom_Appliances_SelectedMonIsEgg
+    goto_if_eq Rotom_Appliances_SelectedMonIsDuck
     specialvar VAR_RESULT, IsSelectedMonRotom
     compare VAR_RESULT, FALSE
     goto_if_eq Rotom_Appliances_SelectedMonIsntRotom
@@ -141,8 +141,8 @@ Rotom_Appliances_AlreadyEnteredThatMotor::
     releaseall
     end
 
-Rotom_Appliances_SelectedMonIsEgg::
-    msgbox Rotom_Text_EggCantEnterMotor, MSGBOX_DEFAULT
+Rotom_Appliances_SelectedMonIsDuck::
+    msgbox Rotom_Text_DuckCantEnterMotor, MSGBOX_DEFAULT
     releaseall
     end
 
@@ -199,8 +199,8 @@ Rotom_Text_WhichRotom:
 Rotom_Text_CantEnterMotor:
     .string "That Pokémon can't enter a motor.$"
 
-Rotom_Text_EggCantEnterMotor:
-    .string "An Egg can't enter a motor.$"
+Rotom_Text_DuckCantEnterMotor:
+    .string "An Duck can't enter a motor.$"
 
 Rotom_Text_WhichAppliancesMotor:
     .string "Which appliance's motor will you\n"

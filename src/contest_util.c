@@ -1934,7 +1934,7 @@ void TryEnterContestMon(void)
 {
     u8 eligibility = GetContestEntryEligibility(&gPlayerParty[gContestMonPartyIndex]);
 
-    // Nonzero eligibility can still be non-eligibile, if mon is fainted or egg
+    // Nonzero eligibility can still be non-eligibile, if mon is fainted or duck
     if (eligibility)
     {
         SetContestants(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);

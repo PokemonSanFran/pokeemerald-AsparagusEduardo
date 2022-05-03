@@ -75,7 +75,7 @@
 
 #define UR_TRADE_MATCH  0
 #define UR_TRADE_NOTYPE 1
-#define UR_TRADE_NOEGG  2
+#define UR_TRADE_NODUCK  2
 
 #define UR_TRADE_READY             0
 #define UR_TRADE_PLAYER_NOT_READY  1

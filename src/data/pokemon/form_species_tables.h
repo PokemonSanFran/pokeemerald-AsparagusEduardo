@@ -188,9 +188,9 @@ static const u16 sGengarFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
-static const u16 sExeggutorFormSpeciesIdTable[] = {
-    SPECIES_EXEGGUTOR,
-    SPECIES_EXEGGUTOR_ALOLAN,
+static const u16 sExduckutorFormSpeciesIdTable[] = {
+    SPECIES_EXDUCKUTOR,
+    SPECIES_EXDUCKUTOR_ALOLAN,
     FORM_SPECIES_END,
 };
 

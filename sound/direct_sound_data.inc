@@ -791,12 +791,12 @@ Cry_Electrode::
 	.incbin "sound/direct_sound_samples/cries/electrode.bin"
 
 	.align 2
-Cry_Exeggcute::
-	.incbin "sound/direct_sound_samples/cries/exeggcute.bin"
+Cry_Exduckcute::
+	.incbin "sound/direct_sound_samples/cries/exduckcute.bin"
 
 	.align 2
-Cry_Exeggutor::
-	.incbin "sound/direct_sound_samples/cries/exeggutor.bin"
+Cry_Exduckutor::
+	.incbin "sound/direct_sound_samples/cries/exduckutor.bin"
 
 	.align 2
 Cry_Cubone::

@@ -108,9 +108,9 @@
 #define ANIM_TAG_WEB                        (ANIM_SPRITES_START + 98) // unused
 #define ANIM_TAG_MILK_BOTTLE                (ANIM_SPRITES_START + 99)
 #define ANIM_TAG_COIN                       (ANIM_SPRITES_START + 100)
-#define ANIM_TAG_CRACKED_EGG                (ANIM_SPRITES_START + 101) // unused
-#define ANIM_TAG_HATCHED_EGG                (ANIM_SPRITES_START + 102) // unused
-#define ANIM_TAG_FRESH_EGG                  (ANIM_SPRITES_START + 103) // unused
+#define ANIM_TAG_CRACKED_DUCK                (ANIM_SPRITES_START + 101) // unused
+#define ANIM_TAG_HATCHED_DUCK                (ANIM_SPRITES_START + 102) // unused
+#define ANIM_TAG_FRESH_DUCK                  (ANIM_SPRITES_START + 103) // unused
 #define ANIM_TAG_FANGS                      (ANIM_SPRITES_START + 104) // unused
 #define ANIM_TAG_EXPLOSION_2                (ANIM_SPRITES_START + 105) // unused
 #define ANIM_TAG_EXPLOSION_3                (ANIM_SPRITES_START + 106) // unused
@@ -182,7 +182,7 @@
 #define ANIM_TAG_PURPLE_GAS_CLOUD           (ANIM_SPRITES_START + 172)
 #define ANIM_TAG_SPARK_H                    (ANIM_SPRITES_START + 173)
 #define ANIM_TAG_YELLOW_STAR                (ANIM_SPRITES_START + 174)
-#define ANIM_TAG_LARGE_FRESH_EGG            (ANIM_SPRITES_START + 175)
+#define ANIM_TAG_LARGE_FRESH_DUCK            (ANIM_SPRITES_START + 175)
 #define ANIM_TAG_SHADOW_BALL                (ANIM_SPRITES_START + 176)
 #define ANIM_TAG_LICK                       (ANIM_SPRITES_START + 177)
 #define ANIM_TAG_VOID_LINES                 (ANIM_SPRITES_START + 178)
@@ -209,7 +209,7 @@
 #define ANIM_TAG_NAIL                       (ANIM_SPRITES_START + 199)
 #define ANIM_TAG_GHOSTLY_SPIRIT             (ANIM_SPRITES_START + 200)
 #define ANIM_TAG_WARM_ROCK                  (ANIM_SPRITES_START + 201)
-#define ANIM_TAG_BREAKING_EGG               (ANIM_SPRITES_START + 202)
+#define ANIM_TAG_BREAKING_DUCK               (ANIM_SPRITES_START + 202)
 #define ANIM_TAG_THIN_RING                  (ANIM_SPRITES_START + 203)
 #define ANIM_TAG_PUNCH_IMPACT               (ANIM_SPRITES_START + 204) // unused
 #define ANIM_TAG_BELL                       (ANIM_SPRITES_START + 205)

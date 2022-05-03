@@ -5,40 +5,40 @@ Route117_EventScript_DaycareMan::
 	faceplayer
 	special GetDaycareMonNicknames
 	specialvar VAR_RESULT, GetDaycareState
-	goto_if_eq VAR_RESULT, DAYCARE_EGG_WAITING, Route117_EventScript_DaycareEggWaiting
+	goto_if_eq VAR_RESULT, DAYCARE_DUCK_WAITING, Route117_EventScript_DaycareDuckWaiting
 	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, Route117_EventScript_CheckOnOneMon
 	goto_if_eq VAR_RESULT, DAYCARE_TWO_MONS, Route117_EventScript_CheckOnTwoMons
 	msgbox Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon, MSGBOX_DEFAULT
 	release
 	end
 
-Route117_EventScript_DaycareEggWaiting::
-	msgbox Route117_Text_DoYouWantEgg, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route117_EventScript_DaycareAcceptEgg
+Route117_EventScript_DaycareDuckWaiting::
+	msgbox Route117_Text_DoYouWantDuck, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route117_EventScript_DaycareAcceptDuck
 	msgbox Route117_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route117_EventScript_DaycareAcceptEgg
+	goto_if_eq VAR_RESULT, YES, Route117_EventScript_DaycareAcceptDuck
 	msgbox Route117_Text_IllKeepIt, MSGBOX_DEFAULT
-	clearflag FLAG_PENDING_DAYCARE_EGG
-	special RejectEggFromDayCare
+	clearflag FLAG_PENDING_DAYCARE_DUCK
+	special RejectDuckFromDayCare
 	release
 	end
 
-Route117_EventScript_DaycareAcceptEgg::
+Route117_EventScript_DaycareAcceptDuck::
 	specialvar VAR_0x8004, GetPartySize @ tx_randomizer_and_challenges
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
-	goto_if_ne VAR_RESULT, VAR_0x8004, Route117_EventScript_DaycareReceiveEgg @ tx_difficulty_challenges
+	goto_if_ne VAR_RESULT, VAR_0x8004, Route117_EventScript_DaycareReceiveDuck @ tx_difficulty_challenges
 	msgbox Route117_Text_YouHaveNoRoomForIt, MSGBOX_DEFAULT
 	release
 	end
 
-Route117_EventScript_DaycareReceiveEgg::
-	message Route117_Text_ReceivedEgg
+Route117_EventScript_DaycareReceiveDuck::
+	message Route117_Text_ReceivedDuck
 	playfanfare MUS_LEVEL_UP
 	waitfanfare
 	waitbuttonpress
 	msgbox Route117_Text_TakeGoodCareOfIt, MSGBOX_DEFAULT
-	special GiveEggFromDaycare
-	clearflag FLAG_PENDING_DAYCARE_EGG
+	special GiveDuckFromDaycare
+	clearflag FLAG_PENDING_DAYCARE_DUCK
 	release
 	end
 
@@ -77,7 +77,7 @@ Route117_PokemonDayCare_EventScript_DaycareWoman::
 	lock
 	faceplayer
 	specialvar VAR_RESULT, GetDaycareState
-	goto_if_eq VAR_RESULT, DAYCARE_EGG_WAITING, Route117_PokemonDayCare_EventScript_EggWaiting
+	goto_if_eq VAR_RESULT, DAYCARE_DUCK_WAITING, Route117_PokemonDayCare_EventScript_DuckWaiting
 	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, Route117_PokemonDayCare_EventScript_OneMonInDaycare
 	goto_if_eq VAR_RESULT, DAYCARE_TWO_MONS, Route117_PokemonDayCare_EventScript_TwoMonsInDaycare
 	msgbox Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon, MSGBOX_YESNO
@@ -87,16 +87,16 @@ Route117_PokemonDayCare_EventScript_DaycareWoman::
 	end
 
 Route117_PokemonDayCare_EventScript_GiveMonToRaise::
-	specialvar VAR_RESULT, CountPartyNonEggMons
+	specialvar VAR_RESULT, CountPartyNonDuckMons
 	goto_if_eq VAR_RESULT, 1, Route117_PokemonDayCare_EventScript_OnlyOneMon
-	specialvar VAR_RESULT, CountPartyAliveNonEggMons
+	specialvar VAR_RESULT, CountPartyAliveNonDuckMons
 	goto_if_eq VAR_RESULT, 2, Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons
 	msgbox Route117_PokemonDayCare_Text_WhichMonShouldWeRaise, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special ChooseSendDaycareMon
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, Route117_PokemonDayCare_EventScript_ComeAgain
-	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
+	specialvar VAR_RESULT, CountPartyAliveNonDuckMons_IgnoreVar0x8004Slot
 	goto_if_eq VAR_RESULT, 0, Route117_PokemonDayCare_EventScript_OnlyOneAliveMon
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	waitse
@@ -137,7 +137,7 @@ Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons::
 	release
 	end
 
-Route117_PokemonDayCare_EventScript_EggWaiting::
+Route117_PokemonDayCare_EventScript_DuckWaiting::
 	msgbox Route117_PokemonDayCare_Text_HusbandWasLookingForYou, MSGBOX_DEFAULT
 	release
 	end
@@ -267,10 +267,10 @@ Route117_PokemonDayCare_EventScript_UnusedRetrieveMon::
 	release
 	end
 
-EventScript_EggHatch::
+EventScript_DuckHatch::
 	lockall
-	msgbox Text_EggHatchHuh, MSGBOX_DEFAULT
-	special EggHatch
+	msgbox Text_DuckHatchHuh, MSGBOX_DEFAULT
+	special DuckHatch
 	waitstate
 	releaseall
 	end
@@ -282,11 +282,11 @@ Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon:
 	.string "If you'd like me to raise your Pokémon,\n"
 	.string "have a word with my wife.$"
 
-Route117_Text_DoYouWantEgg:
+Route117_Text_DoYouWantDuck:
 	.string "Ah, it's you!\p"
 	.string "We were raising your Pokémon,\n"
 	.string "and my goodness, were we surprised!\p"
-	.string "Your Pokémon had an Egg!\p"
+	.string "Your Pokémon had an Duck!\p"
 	.string "We don't know how it got there,\n"
 	.string "but your Pokémon had it.\p"
 	.string "You do want it, yes?$"
@@ -303,8 +303,8 @@ Route117_Text_YouHaveNoRoomForIt:
 	.string "You have no room for it…\n"
 	.string "Come back when you've made room.$"
 
-Route117_Text_ReceivedEgg:
-	.string "{PLAYER} received the Egg from\n"
+Route117_Text_ReceivedDuck:
+	.string "{PLAYER} received the Duck from\n"
 	.string "the Day-Care Man.$"
 
 Route117_Text_TakeGoodCareOfIt:
@@ -407,10 +407,10 @@ Route117_PokemonDayCare_Text_WhatWillYouBattleWith:
 	.string "Come back another time.$"
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-Text_EggHatchHuh: @ 8292668
+Text_DuckHatchHuh: @ 8292668
 	.string "¿Y esto?$"
 #else
-Text_EggHatchHuh:
+Text_DuckHatchHuh:
 	.string "Huh?$"
 #endif
 

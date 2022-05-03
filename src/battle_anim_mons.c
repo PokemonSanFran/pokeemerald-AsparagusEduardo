@@ -2211,7 +2211,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
         {
             coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
         }
-        else if (species <= SPECIES_EGG)
+        else if (species <= SPECIES_DUCK)
         {
             coords = &gMonBackPicCoords[species];
         }

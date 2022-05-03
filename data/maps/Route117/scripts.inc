@@ -9,7 +9,7 @@ Route117_OnTransition:
 	end
 
 Route117_EventScript_TryMoveDayCareMan::
-	goto_if_unset FLAG_PENDING_DAYCARE_EGG, Route117_EventScript_StopMoveDayCareMan
+	goto_if_unset FLAG_PENDING_DAYCARE_DUCK, Route117_EventScript_StopMoveDayCareMan
 	setobjectxyperm LOCALID_DAYCARE_MAN, 47, 6
 Route117_EventScript_StopMoveDayCareMan::
 	return

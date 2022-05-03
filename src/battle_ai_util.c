@@ -3191,7 +3191,7 @@ bool32 ShouldUseWishAromatherapy(u8 battlerAtk, u8 battlerDef, u16 move)
         u16 currHp = GetMonData(&party[i], MON_DATA_HP);
         u16 maxHp = GetMonData(&party[i], MON_DATA_MAX_HP);
 
-        if (!GetMonData(&party[i], MON_DATA_IS_EGG, NULL) && currHp > 0)
+        if (!GetMonData(&party[i], MON_DATA_IS_DUCK, NULL) && currHp > 0)
         {
             if ((currHp * 100) / maxHp < 65 // Less than 65% health remaining
               && i >= firstId && i < lastId) // Can only switch to mon on your team
@@ -3283,7 +3283,7 @@ s32 CountUsablePartyMons(u8 battlerId)
         if (i != battlerOnField1 && i != battlerOnField2
          && GetMonData(&party[i], MON_DATA_HP) != 0
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_DUCK)
         {
             ret++;
         }
@@ -3307,7 +3307,7 @@ bool32 IsPartyFullyHealedExceptBattler(u8 battlerId)
         if (i != gBattlerPartyIndexes[battlerId]
          && GetMonData(&party[i], MON_DATA_HP) != 0
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_DUCK
          && GetMonData(&party[i], MON_DATA_HP) < GetMonData(&party[i], MON_DATA_MAX_HP))
             return FALSE;
     }

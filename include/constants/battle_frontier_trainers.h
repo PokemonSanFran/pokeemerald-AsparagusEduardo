@@ -6,7 +6,7 @@
 #define FRONTIER_TRAINER_BRADLEY        2
 #define FRONTIER_TRAINER_CYBIL          3
 #define FRONTIER_TRAINER_RODETTE        4
-#define FRONTIER_TRAINER_PEGGY          5
+#define FRONTIER_TRAINER_PDUCKY          5
 #define FRONTIER_TRAINER_KEITH          6
 #define FRONTIER_TRAINER_GRAYSON        7
 #define FRONTIER_TRAINER_GLENN          8

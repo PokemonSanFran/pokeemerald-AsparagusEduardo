@@ -12,15 +12,15 @@ BattleFrontier_Lounge5_EventScript_NatureGirl::
 	faceplayer
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	goto_if_eq VAR_RESULT, SPECIES_EGG, BattleFrontier_Lounge5_EventScript_NatureGirlEgg
+	goto_if_eq VAR_RESULT, SPECIES_DUCK, BattleFrontier_Lounge5_EventScript_NatureGirlDuck
 	special ShowNatureGirlMessage
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-BattleFrontier_Lounge5_EventScript_NatureGirlEgg::
-	msgbox BattleFrontier_Lounge5_Text_NatureGirlEgg, MSGBOX_DEFAULT
+BattleFrontier_Lounge5_EventScript_NatureGirlDuck::
+	msgbox BattleFrontier_Lounge5_Text_NatureGirlDuck, MSGBOX_DEFAULT
 	release
 	end
 
@@ -183,8 +183,8 @@ BattleFrontier_Lounge5_Text_NatureGirlCareful::
 	.string "But if it gets enough ouchies,\l"
 	.string "it will turn sneaky!$"
 
-BattleFrontier_Lounge5_Text_NatureGirlEgg::
-	.string "That's silly! An Egg is asleep!\n"
+BattleFrontier_Lounge5_Text_NatureGirlDuck::
+	.string "That's silly! An Duck is asleep!\n"
 	.string "I can't talk to it!$"
 
 BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon::

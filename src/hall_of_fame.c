@@ -582,7 +582,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
         destY = sHallOfFame_MonHalfTeamPositions[currMonId][3];
     }
 
-    if (currMon->species == SPECIES_EGG)
+    if (currMon->species == SPECIES_DUCK)
         destY += 10;
 
     spriteId = CreateMonPicSprite_Affine(currMon->species, currMon->tid, currMon->personality, MON_PIC_AFFINE_FRONT, startX, startY, currMonId, TAG_NONE);
@@ -930,7 +930,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
                 posY = sHallOfFame_MonHalfTeamPositions[i][3];
             }
 
-            if (currMon->species == SPECIES_EGG)
+            if (currMon->species == SPECIES_DUCK)
                 posY += 10;
 
             spriteId = CreateMonPicSprite(currMon->species, currMon->tid, currMon->personality, 1, posX, posY, i, TAG_NONE);
@@ -979,7 +979,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
     BlendPalettesUnfaded(sHofFadePalettes, 0xC, RGB(16, 29, 24));
 
     currMon = &savedTeams->mon[gTasks[taskId].tCurrMonId];
-    if (currMon->species != SPECIES_EGG)
+    if (currMon->species != SPECIES_DUCK)
     {
         StopCryAndClearCrySongs();
         PlayCry_Normal(currMon->species, 0);
@@ -1128,7 +1128,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     PutWindowTilemap(0);
 
     // dex number
-    if (currMon->species != SPECIES_EGG)
+    if (currMon->species != SPECIES_DUCK)
     {
         stringPtr = StringCopy(text, gText_Number);
         dexNumber = SpeciesToPokedexNum(currMon->species);
@@ -1155,7 +1155,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     // nick, species names, gender and level
     memcpy(text, currMon->nick, POKEMON_NAME_LENGTH);
     text[POKEMON_NAME_LENGTH] = EOS;
-    if (currMon->species == SPECIES_EGG)
+    if (currMon->species == SPECIES_DUCK)
     {
         width = GetStringCenterAlignXOffset(FONT_NORMAL, text, 0xD0);
         AddTextPrinterParameterized3(0, FONT_NORMAL, width, 1, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
@@ -1359,7 +1359,7 @@ static void SpriteCB_GetOnScreenAndAnimate(struct Sprite *sprite)
     {
         s16 species = sprite->tSpecies;
 
-        if (species == SPECIES_EGG)
+        if (species == SPECIES_DUCK)
             DoMonFrontSpriteAnimation(sprite, species, TRUE, 3);
         else
             DoMonFrontSpriteAnimation(sprite, species, FALSE, 3);

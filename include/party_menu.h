@@ -95,7 +95,7 @@ void ChoosePartyMon(void);
 void ChooseMonForMoveRelearner(void);
 void BattlePyramidChooseMonHeldItems(void);
 void DoBattlePyramidMonsHaveHeldItem(void);
-void IsSelectedMonEgg(void);
+void IsSelectedMonDuck(void);
 void IsLastMonThatKnowsSurf(void);
 void MoveDeleterForgetMove(void);
 void BufferMoveDeleterNicknameAndMove(void);

@@ -101,8 +101,8 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_KINGLER] = _("Kingler"),
     [SPECIES_VOLTORB] = _("Voltorb"),
     [SPECIES_ELECTRODE] = _("Electrode"),
-    [SPECIES_EXEGGCUTE] = _("Exeggcute"),
-    [SPECIES_EXEGGUTOR] = _("Exeggutor"),
+    [SPECIES_EXDUCKCUTE] = _("Exduckcute"),
+    [SPECIES_EXDUCKUTOR] = _("Exduckutor"),
     [SPECIES_CUBONE] = _("Cubone"),
     [SPECIES_MAROWAK] = _("Marowak"),
     [SPECIES_HITMONLEE] = _("Hitmonlee"),
@@ -973,7 +973,7 @@ const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1] = {
     [SPECIES_GOLEM_ALOLAN] = _("Golem"),
     [SPECIES_GRIMER_ALOLAN] = _("Grimer"),
     [SPECIES_MUK_ALOLAN] = _("Muk"),
-    [SPECIES_EXEGGUTOR_ALOLAN] = _("Exeggutor"),
+    [SPECIES_EXDUCKUTOR_ALOLAN] = _("Exduckutor"),
     [SPECIES_MAROWAK_ALOLAN] = _("Marowak"),
 
     // Galarian Forms

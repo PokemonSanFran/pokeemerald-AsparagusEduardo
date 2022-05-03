@@ -100,7 +100,7 @@ SECTIONS {
         src/util.o(.text);
         src/daycare.o(.text);
         src/debug.o(.text);
-        src/egg_hatch.o(.text);
+        src/duck_hatch.o(.text);
         src/battle_interface.o(.text);
         src/battle_anim_smokescreen.o(.text);
         src/pokeball.o(.text);
@@ -500,7 +500,7 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);
-        src/egg_hatch.o(.rodata);
+        src/duck_hatch.o(.rodata);
         src/battle_gfx_sfx_util.o(.rodata);
         src/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
@@ -839,7 +839,7 @@ SECTIONS {
         sound/songs/midi/se_pokenav_on.o(.rodata);
         sound/songs/midi/se_pokenav_off.o(.rodata);
         sound/songs/midi/se_dex_search.o(.rodata);
-        sound/songs/midi/se_egg_hatch.o(.rodata);
+        sound/songs/midi/se_duck_hatch.o(.rodata);
         sound/songs/midi/se_ball_tray_enter.o(.rodata);
         sound/songs/midi/se_ball_tray_ball.o(.rodata);
         sound/songs/midi/se_ball_tray_exit.o(.rodata);

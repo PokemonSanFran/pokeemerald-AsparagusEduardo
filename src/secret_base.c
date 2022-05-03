@@ -789,7 +789,7 @@ void SetPlayerSecretBaseParty(void)
             party->EVs[i] = 0;
 
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
-            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK))
             {
                 for (moveIdx = 0; moveIdx < MAX_MON_MOVES; moveIdx++)
                     party->moves[partyId * MAX_MON_MOVES + moveIdx] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + moveIdx);

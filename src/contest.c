@@ -2958,8 +2958,8 @@ u8 GetContestEntryEligibility(struct Pokemon *pkmn)
     u8 ribbon;
     u8 eligibility;
 
-    if (GetMonData(pkmn, MON_DATA_IS_EGG))
-        return CANT_ENTER_CONTEST_EGG;
+    if (GetMonData(pkmn, MON_DATA_IS_DUCK))
+        return CANT_ENTER_CONTEST_DUCK;
     if (GetMonData(pkmn, MON_DATA_HP) == 0)
         return CANT_ENTER_CONTEST_FAINTED;
     switch (gSpecialVar_ContestCategory)

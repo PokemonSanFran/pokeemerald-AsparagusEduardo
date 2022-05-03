@@ -1900,7 +1900,7 @@ static const u8 sElectrodeTutorLearnset[] =
     0xFF,
 };
 
-static const u8 sExeggcuteTutorLearnset[] =
+static const u8 sExduckcuteTutorLearnset[] =
 {
     TUTOR(MOVE_SWORDS_DANCE),
     TUTOR(MOVE_DOUBLE_EDGE),
@@ -1916,7 +1916,7 @@ static const u8 sExeggcuteTutorLearnset[] =
     0xFF,
 };
 
-static const u8 sExeggutorTutorLearnset[] =
+static const u8 sExduckutorTutorLearnset[] =
 {
     TUTOR(MOVE_SWORDS_DANCE),
     TUTOR(MOVE_DOUBLE_EDGE),
@@ -14310,7 +14310,7 @@ static const u8 sMukAlolanTutorLearnset[] =
     0xFF,
 };
 
-static const u8 sExeggutorAlolanTutorLearnset[] =
+static const u8 sExduckutorAlolanTutorLearnset[] =
 {
     TUTOR(MOVE_SWORDS_DANCE),
     TUTOR(MOVE_DREAM_EATER),
@@ -14729,8 +14729,8 @@ const u8 *const sTutorLearnsets[] =
     [SPECIES_KINGLER] = sKinglerTutorLearnset,
     [SPECIES_VOLTORB] = sVoltorbTutorLearnset,
     [SPECIES_ELECTRODE] = sElectrodeTutorLearnset,
-    [SPECIES_EXEGGCUTE] = sExeggcuteTutorLearnset,
-    [SPECIES_EXEGGUTOR] = sExeggutorTutorLearnset,
+    [SPECIES_EXDUCKCUTE] = sExduckcuteTutorLearnset,
+    [SPECIES_EXDUCKUTOR] = sExduckutorTutorLearnset,
     [SPECIES_CUBONE] = sCuboneTutorLearnset,
     [SPECIES_MAROWAK] = sMarowakTutorLearnset,
     [SPECIES_HITMONLEE] = sHitmonleeTutorLearnset,
@@ -15537,7 +15537,7 @@ const u8 *const sTutorLearnsets[] =
     [SPECIES_GOLEM_ALOLAN] = sGolemAlolanTutorLearnset,
     [SPECIES_GRIMER_ALOLAN] = sGrimerAlolanTutorLearnset,
     [SPECIES_MUK_ALOLAN] = sMukAlolanTutorLearnset,
-    [SPECIES_EXEGGUTOR_ALOLAN] = sExeggutorAlolanTutorLearnset,
+    [SPECIES_EXDUCKUTOR_ALOLAN] = sExduckutorAlolanTutorLearnset,
     [SPECIES_MAROWAK_ALOLAN] = sMarowakAlolanTutorLearnset,
     [SPECIES_WORMADAM_SANDY_CLOAK] = sWormadamSandyCloakTutorLearnset,
     [SPECIES_WORMADAM_TRASH_CLOAK] = sWormadamTrashCloakTutorLearnset,

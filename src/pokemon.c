@@ -439,8 +439,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(KINGLER),
     SPECIES_TO_NATIONAL(VOLTORB),
     SPECIES_TO_NATIONAL(ELECTRODE),
-    SPECIES_TO_NATIONAL(EXEGGCUTE),
-    SPECIES_TO_NATIONAL(EXEGGUTOR),
+    SPECIES_TO_NATIONAL(EXDUCKCUTE),
+    SPECIES_TO_NATIONAL(EXDUCKUTOR),
     SPECIES_TO_NATIONAL(CUBONE),
     SPECIES_TO_NATIONAL(MAROWAK),
     SPECIES_TO_NATIONAL(HITMONLEE),
@@ -1306,7 +1306,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     [SPECIES_GOLEM_ALOLAN - 1] = NATIONAL_DEX_GOLEM,
     [SPECIES_GRIMER_ALOLAN - 1] = NATIONAL_DEX_GRIMER,
     [SPECIES_MUK_ALOLAN - 1] = NATIONAL_DEX_MUK,
-    [SPECIES_EXEGGUTOR_ALOLAN - 1] = NATIONAL_DEX_EXEGGUTOR,
+    [SPECIES_EXDUCKUTOR_ALOLAN - 1] = NATIONAL_DEX_EXDUCKUTOR,
     [SPECIES_MAROWAK_ALOLAN - 1] = NATIONAL_DEX_MAROWAK,
     // Galarian Forms
     [SPECIES_MEOWTH_GALARIAN - 1] = NATIONAL_DEX_MEOWTH,
@@ -1987,8 +1987,8 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_KINGLER - 1]       = ANIM_ZIGZAG_SLOW,
     [SPECIES_VOLTORB - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ELECTRODE - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_EXEGGCUTE - 1]     = ANIM_H_SLIDE_SLOW,
-    [SPECIES_EXEGGUTOR - 1]     = ANIM_H_JUMPS_V_STRETCH,
+    [SPECIES_EXDUCKCUTE - 1]     = ANIM_H_SLIDE_SLOW,
+    [SPECIES_EXDUCKUTOR - 1]     = ANIM_H_JUMPS_V_STRETCH,
     [SPECIES_CUBONE - 1]        = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
     [SPECIES_MAROWAK - 1]       = ANIM_BOUNCE_ROTATE_TO_SIDES,
     [SPECIES_HITMONLEE - 1]     = ANIM_H_STRETCH,
@@ -3281,8 +3281,8 @@ static const u8 gSpeciesMapping[NUM_SPECIES+1] =
     [SPECIES_KINGLER]           = EVO_TYPE_1,
     [SPECIES_VOLTORB]           = EVO_TYPE_0,
     [SPECIES_ELECTRODE]         = EVO_TYPE_1,
-    [SPECIES_EXEGGCUTE]         = EVO_TYPE_0,
-    [SPECIES_EXEGGUTOR]         = EVO_TYPE_1,
+    [SPECIES_EXDUCKCUTE]         = EVO_TYPE_0,
+    [SPECIES_EXDUCKUTOR]         = EVO_TYPE_1,
     [SPECIES_CUBONE]            = EVO_TYPE_0,
     [SPECIES_MAROWAK]           = EVO_TYPE_1,
     [SPECIES_HITMONLEE]         = EVO_TYPE_1,
@@ -4202,7 +4202,7 @@ static const u8 gSpeciesMapping[NUM_SPECIES+1] =
     [SPECIES_GOLEM_ALOLAN]      = EVO_TYPE_2,
     [SPECIES_GRIMER_ALOLAN]     = EVO_TYPE_0,
     [SPECIES_MUK_ALOLAN]        = EVO_TYPE_1,
-    [SPECIES_EXEGGUTOR_ALOLAN]  = EVO_TYPE_1,
+    [SPECIES_EXDUCKUTOR_ALOLAN]  = EVO_TYPE_1,
     [SPECIES_MAROWAK_ALOLAN]    = EVO_TYPE_1,
     [SPECIES_MEOWTH_GALARIAN]   = EVO_TYPE_0,
     [SPECIES_PONYTA_GALARIAN]   = EVO_TYPE_0,
@@ -4445,7 +4445,7 @@ static const u8 gSpeciesMapping[NUM_SPECIES+1] =
     [SPECIES_CALYREX_ICE_RIDER] = EVO_TYPE_LEGENDARY,
     [SPECIES_CALYREX_SHADOW_RIDER] = EVO_TYPE_LEGENDARY,
     #endif
-    [SPECIES_EGG]             = EVO_TYPE_SELF,
+    [SPECIES_DUCK]             = EVO_TYPE_SELF,
 };
 #define RANDOM_SPECIES_COUNT ARRAY_COUNT(sRandomSpecies)
 static const u16 sRandomSpecies[] =
@@ -4552,8 +4552,8 @@ static const u16 sRandomSpecies[] =
     SPECIES_KINGLER                 ,
     SPECIES_VOLTORB                 ,
     SPECIES_ELECTRODE               ,
-    SPECIES_EXEGGCUTE               ,
-    SPECIES_EXEGGUTOR               ,
+    SPECIES_EXDUCKCUTE               ,
+    SPECIES_EXDUCKUTOR               ,
     SPECIES_CUBONE                  ,
     SPECIES_MAROWAK                 ,
     SPECIES_HITMONLEE               ,
@@ -5441,7 +5441,7 @@ static const u16 sRandomSpecies[] =
     SPECIES_GOLEM_ALOLAN      ,
     SPECIES_GRIMER_ALOLAN     ,
     SPECIES_MUK_ALOLAN        ,
-    SPECIES_EXEGGUTOR_ALOLAN  ,
+    SPECIES_EXDUCKUTOR_ALOLAN  ,
     SPECIES_MAROWAK_ALOLAN    ,
     SPECIES_MEOWTH_GALARIAN   ,
     SPECIES_PONYTA_GALARIAN   ,
@@ -5684,7 +5684,7 @@ static const u16 sRandomSpecies[] =
     //SPECIES_CALYREX_ICE_RIDER ,
     //SPECIES_CALYREX_SHADOW_RIDER ,
     #endif
-    // SPECIES_EGG       ,
+    // SPECIES_DUCK       ,
     #ifdef POKEMON_EXPANSION
     SPECIES_TURTWIG           ,
     SPECIES_GROTLE            ,
@@ -6264,7 +6264,7 @@ static const u16 sRandomSpecies[] =
     SPECIES_GOLEM_ALOLAN      ,
     SPECIES_GRIMER_ALOLAN     ,
     SPECIES_MUK_ALOLAN        ,
-    SPECIES_EXEGGUTOR_ALOLAN  ,
+    SPECIES_EXDUCKUTOR_ALOLAN  ,
     SPECIES_MAROWAK_ALOLAN    ,
     SPECIES_MEOWTH_GALARIAN   ,
     SPECIES_PONYTA_GALARIAN   ,
@@ -6613,8 +6613,8 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_KINGLER                 ,
     SPECIES_VOLTORB                 ,
     SPECIES_ELECTRODE               ,
-    SPECIES_EXEGGCUTE               ,
-    SPECIES_EXEGGUTOR               ,
+    SPECIES_EXDUCKCUTE               ,
+    SPECIES_EXDUCKUTOR               ,
     SPECIES_CUBONE                  ,
     SPECIES_MAROWAK                 ,
     SPECIES_HITMONLEE               ,
@@ -7502,7 +7502,7 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_GOLEM_ALOLAN      ,
     SPECIES_GRIMER_ALOLAN     ,
     SPECIES_MUK_ALOLAN        ,
-    SPECIES_EXEGGUTOR_ALOLAN  ,
+    SPECIES_EXDUCKUTOR_ALOLAN  ,
     SPECIES_MAROWAK_ALOLAN    ,
     SPECIES_MEOWTH_GALARIAN   ,
     SPECIES_PONYTA_GALARIAN   ,
@@ -7745,7 +7745,7 @@ static const u16 sRandomSpeciesLegendary[] =
     SPECIES_CALYREX_ICE_RIDER ,
     SPECIES_CALYREX_SHADOW_RIDER ,
     #endif
-    // SPECIES_EGG       ,
+    // SPECIES_DUCK       ,
 };
 #define RANDOM_SPECIES_EVO_0_COUNT ARRAY_COUNT(gRandomSpeciesEvo0)
 static const u16 gRandomSpeciesEvo0[] =
@@ -7791,7 +7791,7 @@ static const u16 gRandomSpeciesEvo0[] =
     SPECIES_DROWZEE         ,    //= EVO_TYPE_0,
     SPECIES_KRABBY          ,    //= EVO_TYPE_0,
     SPECIES_VOLTORB         ,    //= EVO_TYPE_0,
-    SPECIES_EXEGGCUTE       ,    //= EVO_TYPE_0,
+    SPECIES_EXDUCKCUTE       ,    //= EVO_TYPE_0,
     SPECIES_CUBONE          ,    //= EVO_TYPE_0,
     SPECIES_LICKITUNG       ,    //= EVO_TYPE_0,
     SPECIES_KOFFING         ,    //= EVO_TYPE_0,
@@ -8279,7 +8279,7 @@ static const u16 gRandomSpeciesEvo1[] =
     SPECIES_HYPNO           , //= EVO_TYPE_1,
     SPECIES_KINGLER         , //= EVO_TYPE_1,
     SPECIES_ELECTRODE       , //= EVO_TYPE_1,
-    SPECIES_EXEGGUTOR       , //= EVO_TYPE_1,
+    SPECIES_EXDUCKUTOR       , //= EVO_TYPE_1,
     SPECIES_MAROWAK         , //= EVO_TYPE_1,
     SPECIES_HITMONLEE       , //= EVO_TYPE_1,
     SPECIES_HITMONCHAN      , //= EVO_TYPE_1,
@@ -8567,7 +8567,7 @@ static const u16 gRandomSpeciesEvo1[] =
     SPECIES_PERSIAN_ALOLAN     , //= EVO_TYPE_1,
     SPECIES_GRAVELER_ALOLAN    , //= EVO_TYPE_1,
     SPECIES_MUK_ALOLAN         , //= EVO_TYPE_1,
-    SPECIES_EXEGGUTOR_ALOLAN   , //= EVO_TYPE_1,
+    SPECIES_EXDUCKUTOR_ALOLAN   , //= EVO_TYPE_1,
     SPECIES_MAROWAK_ALOLAN     , //= EVO_TYPE_1,
     SPECIES_RAPIDASH_GALARIAN  , //= EVO_TYPE_1,
     SPECIES_SLOWBRO_GALARIAN   , //= EVO_TYPE_1,
@@ -8983,12 +8983,12 @@ const u16 gEvolutionLines[NUM_SPECIES][EVOS_PER_LINE] =
     [SPECIES_KRABBY ... SPECIES_KINGLER]        = {SPECIES_KRABBY, SPECIES_KINGLER},
     [SPECIES_VOLTORB ... SPECIES_ELECTRODE]     = {SPECIES_VOLTORB, SPECIES_ELECTRODE},
     #ifdef POKEMON_EXPANSION
-    [SPECIES_EXEGGCUTE ... SPECIES_EXEGGUTOR]   = {SPECIES_EXEGGCUTE, SPECIES_EXEGGUTOR, SPECIES_EXEGGUTOR_ALOLAN},
-    [SPECIES_EXEGGUTOR_ALOLAN]                  = {SPECIES_EXEGGCUTE, SPECIES_EXEGGUTOR, SPECIES_EXEGGUTOR_ALOLAN},
+    [SPECIES_EXDUCKCUTE ... SPECIES_EXDUCKUTOR]   = {SPECIES_EXDUCKCUTE, SPECIES_EXDUCKUTOR, SPECIES_EXDUCKUTOR_ALOLAN},
+    [SPECIES_EXDUCKUTOR_ALOLAN]                  = {SPECIES_EXDUCKCUTE, SPECIES_EXDUCKUTOR, SPECIES_EXDUCKUTOR_ALOLAN},
     [SPECIES_CUBONE ... SPECIES_MAROWAK]        = {SPECIES_CUBONE, SPECIES_MAROWAK, SPECIES_MAROWAK_ALOLAN},
     [SPECIES_MAROWAK_ALOLAN]                    = {SPECIES_CUBONE, SPECIES_MAROWAK, SPECIES_MAROWAK_ALOLAN},
     #else
-    [SPECIES_EXEGGCUTE ... SPECIES_EXEGGUTOR]   = {SPECIES_EXEGGCUTE, SPECIES_EXEGGUTOR},
+    [SPECIES_EXDUCKCUTE ... SPECIES_EXDUCKUTOR]   = {SPECIES_EXDUCKCUTE, SPECIES_EXDUCKUTOR},
     [SPECIES_CUBONE ... SPECIES_MAROWAK]        = {SPECIES_CUBONE, SPECIES_MAROWAK},
     #endif
     [SPECIES_HITMONLEE ... SPECIES_HITMONCHAN]  = {SPECIES_TYROGUE, SPECIES_HITMONCHAN, SPECIES_HITMONLEE, SPECIES_HITMONTOP},
@@ -9798,7 +9798,7 @@ static const u16 sRandomValidMoves[MOVES_COUNT-1] =
     MOVE_METRONOME,
     MOVE_MIRROR_MOVE,
     MOVE_SELF_DESTRUCT,
-    MOVE_EGG_BOMB,
+    MOVE_DUCK_BOMB,
     MOVE_LICK,
     MOVE_SMOG,
     MOVE_SLUDGE,
@@ -11833,9 +11833,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
 
         if (CalculateBoxMonChecksum(boxMon) != boxMon->checksum)
         {
-            boxMon->isBadEgg = TRUE;
-            boxMon->isEgg = TRUE;
-            substruct3->isEgg = TRUE;
+            boxMon->isBadDuck = TRUE;
+            boxMon->isDuck = TRUE;
+            substruct3->isDuck = TRUE;
         }
     }
 
@@ -11849,17 +11849,17 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_NICKNAME:
     {
-        if (boxMon->isBadEgg)
+        if (boxMon->isBadDuck)
         {
             for (retVal = 0;
-                retVal < POKEMON_NAME_LENGTH && gText_BadEgg[retVal] != EOS;
-                data[retVal] = gText_BadEgg[retVal], retVal++) {}
+                retVal < POKEMON_NAME_LENGTH && gText_BadDuck[retVal] != EOS;
+                data[retVal] = gText_BadDuck[retVal], retVal++) {}
 
             data[retVal] = EOS;
         }
-        else if (boxMon->isEgg)
+        else if (boxMon->isDuck)
         {
-            StringCopy(data, gText_EggNickname);
+            StringCopy(data, gText_DuckNickname);
             retVal = StringLength(data);
         }
         else if (boxMon->language == LANGUAGE_JAPANESE)
@@ -11888,14 +11888,14 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_LANGUAGE:
         retVal = boxMon->language;
         break;
-    case MON_DATA_SANITY_IS_BAD_EGG:
-        retVal = boxMon->isBadEgg;
+    case MON_DATA_SANITY_IS_BAD_DUCK:
+        retVal = boxMon->isBadDuck;
         break;
     case MON_DATA_SANITY_HAS_SPECIES:
         retVal = boxMon->hasSpecies;
         break;
-    case MON_DATA_SANITY_IS_EGG:
-        retVal = boxMon->isEgg;
+    case MON_DATA_SANITY_IS_DUCK:
+        retVal = boxMon->isDuck;
         break;
     case MON_DATA_OT_NAME:
     {
@@ -11926,7 +11926,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = boxMon->monthMet;
         break;
     case MON_DATA_SPECIES:
-        retVal = boxMon->isBadEgg ? SPECIES_EGG : substruct0->species;
+        retVal = boxMon->isBadDuck ? SPECIES_DUCK : substruct0->species;
         break;
     case MON_DATA_HELD_ITEM:
         retVal = substruct0->heldItem;
@@ -12028,8 +12028,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_SPDEF_IV:
         retVal = substruct3->spDefenseIV;
         break;
-    case MON_DATA_IS_EGG:
-        retVal = substruct3->isEgg;
+    case MON_DATA_IS_DUCK:
+        retVal = substruct3->isDuck;
         break;
     case MON_DATA_ABILITY_NUM:
         retVal = substruct3->abilityNum;
@@ -12093,8 +12093,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_SPECIES2:
         retVal = substruct0->species;
-        if (substruct0->species && (substruct3->isEgg || boxMon->isBadEgg))
-            retVal = SPECIES_EGG;
+        if (substruct0->species && (substruct3->isDuck || boxMon->isBadDuck))
+            retVal = SPECIES_DUCK;
         break;
     case MON_DATA_IVS:
         retVal = substruct3->hpIV
@@ -12105,7 +12105,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
               | (substruct3->spDefenseIV << 25);
         break;
     case MON_DATA_KNOWN_MOVES:
-        if (substruct0->species && !substruct3->isEgg)
+        if (substruct0->species && !substruct3->isDuck)
         {
             u16 *moves = (u16 *)data;
             s32 i = 0;
@@ -12124,7 +12124,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_RIBBON_COUNT:
         retVal = 0;
-        if (substruct0->species && !substruct3->isEgg)
+        if (substruct0->species && !substruct3->isDuck)
         {
             retVal += substruct3->coolRibbon;
             retVal += substruct3->beautyRibbon;
@@ -12147,7 +12147,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_RIBBONS:
         retVal = 0;
-        if (substruct0->species && !substruct3->isEgg)
+        if (substruct0->species && !substruct3->isDuck)
         {
             retVal = substruct3->championRibbon
                 | (substruct3->coolRibbon << 1)
@@ -12246,9 +12246,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
 
         if (CalculateBoxMonChecksum(boxMon) != boxMon->checksum)
         {
-            boxMon->isBadEgg = TRUE;
-            boxMon->isEgg = TRUE;
-            substruct3->isEgg = TRUE;
+            boxMon->isBadDuck = TRUE;
+            boxMon->isDuck = TRUE;
+            substruct3->isDuck = TRUE;
             EncryptBoxMon(boxMon);
             return;
         }
@@ -12272,14 +12272,14 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_LANGUAGE:
         SET8(boxMon->language);
         break;
-    case MON_DATA_SANITY_IS_BAD_EGG:
-        SET8(boxMon->isBadEgg);
+    case MON_DATA_SANITY_IS_BAD_DUCK:
+        SET8(boxMon->isBadDuck);
         break;
     case MON_DATA_SANITY_HAS_SPECIES:
         SET8(boxMon->hasSpecies);
         break;
-    case MON_DATA_SANITY_IS_EGG:
-        SET8(boxMon->isEgg);
+    case MON_DATA_SANITY_IS_DUCK:
+        SET8(boxMon->isDuck);
         break;
     case MON_DATA_OT_NAME:
     {
@@ -12418,12 +12418,12 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_SPDEF_IV:
         SET8(substruct3->spDefenseIV);
         break;
-    case MON_DATA_IS_EGG:
-        SET8(substruct3->isEgg);
-        if (substruct3->isEgg)
-            boxMon->isEgg = TRUE;
+    case MON_DATA_IS_DUCK:
+        SET8(substruct3->isDuck);
+        if (substruct3->isDuck)
+            boxMon->isDuck = TRUE;
         else
-            boxMon->isEgg = FALSE;
+            boxMon->isDuck = FALSE;
         break;
     case MON_DATA_ABILITY_NUM:
         SET8(substruct3->abilityNum);
@@ -12611,7 +12611,7 @@ u8 GetMonsStateToDoubles(void)
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_DUCK
          && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_NONE)
             aliveCount++;
@@ -12628,7 +12628,7 @@ u8 GetMonsStateToDoubles_2(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL);
-        if (species != SPECIES_EGG && species != SPECIES_NONE
+        if (species != SPECIES_DUCK && species != SPECIES_NONE
          && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
             aliveCount++;
     }
@@ -14408,7 +14408,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         holdEffect = ItemId_GetHoldEffect(heldItem);
     }
 
-    if (species && species != SPECIES_EGG)
+    if (species && species != SPECIES_DUCK)
     {
         u8 friendshipLevel = 0;
         s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
@@ -14571,7 +14571,7 @@ void RandomlyGivePartyPokerus(struct Pokemon *party)
             }
             while (!GetMonData(mon, MON_DATA_SPECIES, 0));
         }
-        while (GetMonData(mon, MON_DATA_IS_EGG, 0));
+        while (GetMonData(mon, MON_DATA_IS_DUCK, 0));
 
         if (!(CheckPartyHasHadPokerus(party, gBitTable[rnd])))
         {
@@ -14737,7 +14737,7 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     if (gSaveBlock1Ptr->tx_Random_Moves)
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_MOVES);
 
-    if (species == SPECIES_EGG)
+    if (species == SPECIES_DUCK)
     {
         return 0;
     }
@@ -14761,7 +14761,7 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm) // handle forms
     if (gSaveBlock1Ptr->tx_Random_Moves)
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_MOVES);
 
-    if (species == SPECIES_EGG)
+    if (species == SPECIES_DUCK)
     {
         return 0;
     }
@@ -14848,7 +14848,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
         species = GetSpeciesRandomSeeded(species, TX_RANDOM_T_MOVES);
 
-    if (species == SPECIES_EGG)
+    if (species == SPECIES_DUCK)
         return 0;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -15327,7 +15327,7 @@ void SetWildMonHeldItem(void)
         return;
 
     count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
-    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG, 0)
+    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_DUCK, 0)
         && (GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES
             || GetMonAbility(&gPlayerParty[0]) == ABILITY_SUPER_LUCK))
     {
@@ -15338,7 +15338,7 @@ void SetWildMonHeldItem(void)
         u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
         u16 i;
 
-        if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG, 0)
+        if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_DUCK, 0)
             && (GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES
                 || GetMonAbility(&gPlayerParty[0]) == ABILITY_SUPER_LUCK))
         {
@@ -16262,7 +16262,7 @@ void NuzlockeDeleteFaintedPartyPokemon(void) // @Kurausukun
     for (i = 0; i < PARTY_SIZE; i++)
     {
         pokemon = &gPlayerParty[i];
-        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES, NULL) && !GetMonData(pokemon, MON_DATA_IS_EGG, NULL))
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES, NULL) && !GetMonData(pokemon, MON_DATA_IS_DUCK, NULL))
         {
             if (GetMonAilment(pokemon) == AILMENT_FNT)
             {

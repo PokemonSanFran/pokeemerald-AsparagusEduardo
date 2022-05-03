@@ -7,10 +7,10 @@ SurfPichu_GiveIfPossible:
 	specialvar VAR_GIFT_PICHU_SLOT, CalculatePlayerPartyCount
 	vgoto_if_eq VAR_GIFT_PICHU_SLOT, PARTY_SIZE, SurfPichu_FullParty
 	setflag FLAG_MYSTERY_GIFT_DONE
-	vcall SurfPichu_GiveEgg
+	vcall SurfPichu_GiveDuck
 	lock
 	faceplayer
-	vmessage sText_MysteryGiftEgg
+	vmessage sText_MysteryGiftDuck
 	waitmessage
 	waitbuttonpress
 	playfanfare MUS_OBTAIN_ITEM
@@ -27,8 +27,8 @@ SurfPichu_FullParty:
 	release
 	end
 
-SurfPichu_GiveEgg:
-	giveegg SPECIES_PICHU
+SurfPichu_GiveDuck:
+	giveduck SPECIES_PICHU
 	setmoneventlegal VAR_GIFT_PICHU_SLOT
 	setmonmetlocation VAR_GIFT_PICHU_SLOT, METLOC_FATEFUL_ENCOUNTER
 	vgoto_if_eq VAR_GIFT_PICHU_SLOT, 1, SurfPichu_Slot1
@@ -58,11 +58,11 @@ SurfPichu_Slot5:
 	setmonmove 5, 2, MOVE_SURF
 	return
 
-sText_MysteryGiftEgg:
+sText_MysteryGiftDuck:
 	.string "Thank you for using the Mystery\n"
 	.string "Gift System.\p"
 	.string "From the Pokémon Center we\n"
-	.string "have a gift--a Pokémon Egg!\p"
+	.string "have a gift--a Pokémon Duck!\p"
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
 

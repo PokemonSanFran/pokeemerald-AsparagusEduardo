@@ -48,14 +48,14 @@ static void AnimBreathPuff(struct Sprite *);
 static void AnimPencil(struct Sprite *);
 static void AnimPencil_Step(struct Sprite *);
 static void AnimBlendThinRing(struct Sprite *);
-static void AnimSoftBoiledEgg(struct Sprite *);
-static void AnimSoftBoiledEgg_Step1(struct Sprite *);
-static void AnimSoftBoiledEgg_Step2(struct Sprite *);
-static void AnimSoftBoiledEgg_Step3(struct Sprite *);
-static void AnimSoftBoiledEgg_Step3_Callback1(struct Sprite *);
-static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *);
-static void AnimSoftBoiledEgg_Step4(struct Sprite *);
-static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *);
+static void AnimSoftBoiledDuck(struct Sprite *);
+static void AnimSoftBoiledDuck_Step1(struct Sprite *);
+static void AnimSoftBoiledDuck_Step2(struct Sprite *);
+static void AnimSoftBoiledDuck_Step3(struct Sprite *);
+static void AnimSoftBoiledDuck_Step3_Callback1(struct Sprite *);
+static void AnimSoftBoiledDuck_Step3_Callback2(struct Sprite *);
+static void AnimSoftBoiledDuck_Step4(struct Sprite *);
+static void AnimSoftBoiledDuck_Step4_Callback(struct Sprite *);
 static void AnimSpeedDust(struct Sprite *);
 static void AnimHealBellMusicNote(struct Sprite *);
 static void AnimMagentaHeart(struct Sprite *);
@@ -348,10 +348,10 @@ const struct SpriteTemplate gWaterPulseRingSpriteTemplate =
     .callback = AnimWaterPulseRing,
 };
 
-const struct SpriteTemplate gEggThrowSpriteTemplate =
+const struct SpriteTemplate gDuckThrowSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_LARGE_FRESH_EGG,
-    .paletteTag = ANIM_TAG_LARGE_FRESH_EGG,
+    .tileTag = ANIM_TAG_LARGE_FRESH_DUCK,
+    .paletteTag = ANIM_TAG_LARGE_FRESH_DUCK,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -657,7 +657,7 @@ const struct SpriteTemplate gExplosionSpriteTemplate =
     .callback = AnimSpriteOnMonPos,
 };
 
-const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds1[] =
+const union AffineAnimCmd gSoftBoiledDuckAffineAnimCmds1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 2),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 4),
@@ -665,13 +665,13 @@ const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds1[] =
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds2[] =
+const union AffineAnimCmd gSoftBoiledDuckAffineAnimCmds2[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds3[] =
+const union AffineAnimCmd gSoftBoiledDuckAffineAnimCmds3[] =
 {
     AFFINEANIMCMD_FRAME(0xFFF8, 0x4, 0, 8),
     AFFINEANIMCMD_LOOP(0),
@@ -683,22 +683,22 @@ const union AffineAnimCmd gSoftBoiledEggAffineAnimCmds3[] =
     AFFINEANIMCMD_END,
 };
 
-const union AffineAnimCmd *const gSoftBoiledEggAffineAnimTable[] =
+const union AffineAnimCmd *const gSoftBoiledDuckAffineAnimTable[] =
 {
-    gSoftBoiledEggAffineAnimCmds1,
-    gSoftBoiledEggAffineAnimCmds2,
-    gSoftBoiledEggAffineAnimCmds3,
+    gSoftBoiledDuckAffineAnimCmds1,
+    gSoftBoiledDuckAffineAnimCmds2,
+    gSoftBoiledDuckAffineAnimCmds3,
 };
 
-const struct SpriteTemplate gSoftBoiledEggSpriteTemplate =
+const struct SpriteTemplate gSoftBoiledDuckSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_BREAKING_EGG,
-    .paletteTag = ANIM_TAG_BREAKING_EGG,
+    .tileTag = ANIM_TAG_BREAKING_DUCK,
+    .paletteTag = ANIM_TAG_BREAKING_DUCK,
     .oam = &gOamData_AffineDouble_ObjBlend_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gSoftBoiledEggAffineAnimTable,
-    .callback = AnimSoftBoiledEgg,
+    .affineAnims = gSoftBoiledDuckAffineAnimTable,
+    .callback = AnimSoftBoiledDuck,
 };
 
 const union AffineAnimCmd gThinRingExpandingAffineAnimCmds1[] =
@@ -2723,7 +2723,7 @@ void AnimUproarRing(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-static void AnimSoftBoiledEgg(struct Sprite *sprite)
+static void AnimSoftBoiledDuck(struct Sprite *sprite)
 {
     s16 r1;
     InitSpritePosToAnimAttacker(sprite, FALSE);
@@ -2731,10 +2731,10 @@ static void AnimSoftBoiledEgg(struct Sprite *sprite)
     sprite->data[0] = 0x380;
     sprite->data[1] = r1;
     sprite->data[7] = gBattleAnimArgs[2];
-    sprite->callback = AnimSoftBoiledEgg_Step1;
+    sprite->callback = AnimSoftBoiledDuck_Step1;
 }
 
-static void AnimSoftBoiledEgg_Step1(struct Sprite *sprite)
+static void AnimSoftBoiledDuck_Step1(struct Sprite *sprite)
 {
     s16 add;
     sprite->y2 -= (sprite->data[0] >> 8);
@@ -2750,20 +2750,20 @@ static void AnimSoftBoiledEgg_Step1(struct Sprite *sprite)
         sprite->x2 = 0;
         sprite->data[0] = 0;
         StartSpriteAffineAnim(sprite, 1);
-        sprite->callback = AnimSoftBoiledEgg_Step2;
+        sprite->callback = AnimSoftBoiledDuck_Step2;
     }
 }
 
-static void AnimSoftBoiledEgg_Step2(struct Sprite *sprite)
+static void AnimSoftBoiledDuck_Step2(struct Sprite *sprite)
 {
     if (sprite->data[0]++ > 19)
     {
         StartSpriteAffineAnim(sprite, 2);
-        sprite->callback = AnimSoftBoiledEgg_Step3;
+        sprite->callback = AnimSoftBoiledDuck_Step3;
     }
 }
 
-static void AnimSoftBoiledEgg_Step3(struct Sprite *sprite)
+static void AnimSoftBoiledDuck_Step3(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
@@ -2772,17 +2772,17 @@ static void AnimSoftBoiledEgg_Step3(struct Sprite *sprite)
         if (sprite->data[7] == 0)
         {
             sprite->oam.tileNum += 16;
-            sprite->callback = AnimSoftBoiledEgg_Step3_Callback1;
+            sprite->callback = AnimSoftBoiledDuck_Step3_Callback1;
         }
         else
         {
             sprite->oam.tileNum += 32;
-            sprite->callback = AnimSoftBoiledEgg_Step4;
+            sprite->callback = AnimSoftBoiledDuck_Step4;
         }
     }
 }
 
-static void AnimSoftBoiledEgg_Step3_Callback1(struct Sprite *sprite)
+static void AnimSoftBoiledDuck_Step3_Callback1(struct Sprite *sprite)
 {
     sprite->y2 -= 2;
     if (++sprite->data[0] == 9)
@@ -2791,34 +2791,34 @@ static void AnimSoftBoiledEgg_Step3_Callback1(struct Sprite *sprite)
         sprite->data[1] = 0;
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND((u16)sprite->data[0], 0));
-        sprite->callback = AnimSoftBoiledEgg_Step3_Callback2;
+        sprite->callback = AnimSoftBoiledDuck_Step3_Callback2;
     }
 }
 
-static void AnimSoftBoiledEgg_Step3_Callback2(struct Sprite *sprite)
+static void AnimSoftBoiledDuck_Step3_Callback2(struct Sprite *sprite)
 {
     if (sprite->data[1]++ % 3 == 0)
     {
         sprite->data[0]--;
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sprite->data[0], 16 - sprite->data[0]));
         if (sprite->data[0] == 0)
-            sprite->callback = AnimSoftBoiledEgg_Step4;
+            sprite->callback = AnimSoftBoiledDuck_Step4;
     }
 }
 
-static void AnimSoftBoiledEgg_Step4(struct Sprite *sprite)
+static void AnimSoftBoiledDuck_Step4(struct Sprite *sprite)
 {
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
         sprite->invisible = TRUE;
         if (sprite->data[7] == 0)
-            sprite->callback = AnimSoftBoiledEgg_Step4_Callback;
+            sprite->callback = AnimSoftBoiledDuck_Step4_Callback;
         else
             sprite->callback = DestroyAnimSprite;
     }
 }
 
-static void AnimSoftBoiledEgg_Step4_Callback(struct Sprite *sprite)
+static void AnimSoftBoiledDuck_Step4_Callback(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);

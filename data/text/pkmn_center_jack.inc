@@ -36,9 +36,9 @@ Common_PkmnCenterJack_Text_NameNoDifferentYetSuperior:
 	.string "y, sin embargo, es muchísimo mejor.\l"
 	.string "¡Qué suerte tienes!$"
 
-Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg:
+Common_PkmnCenterJack_Text_ThatIsMerelyAnDuck:
 	.string "Pero vamos a ver…\n"
-	.string "¡Esto es sólo un Huevo!$"
+	.string "¡Esto es sólo un Pato!$"
 
 @Remember Move
 Common_PkmnCenterJack_Text_TutorWhichMon: @ 82015A5
@@ -76,9 +76,9 @@ Common_PkmnCenterJack_Text_ComeAgain:
 	.string "Come again if there are moves that\n"
 	.string "need to be forgotten.$"
 
-Common_PkmnCenterJack_Text_EggCantForgetMoves:
+Common_PkmnCenterJack_Text_DuckCantForgetMoves:
 	.string "What?\n"
-	.string "No Egg should know any moves.$"
+	.string "No Duck should know any moves.$"
 
 Common_PkmnCenterJack_Text_CantForgetSurf:
 	.string "Hm!\p"
@@ -131,9 +131,9 @@ Common_PkmnCenterJack_Text_NameNoDifferentYetSuperior:
 	.string "and yet, this is vastly superior!\p"
 	.string "How fortunate for you!$"
 
-Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg:
+Common_PkmnCenterJack_Text_ThatIsMerelyAnDuck:
 	.string "Now, now…\n"
-	.string "That is merely an Egg.$"
+	.string "That is merely an Duck.$"
 
 @Remember Move
 Common_PkmnCenterJack_Text_TutorWhichMon: @ 82015A5
@@ -171,9 +171,9 @@ Common_PkmnCenterJack_Text_ComeAgain:
 	.string "Come again if there are moves that\n"
 	.string "need to be forgotten.$"
 
-Common_PkmnCenterJack_Text_EggCantForgetMoves:
+Common_PkmnCenterJack_Text_DuckCantForgetMoves:
 	.string "What?\n"
-	.string "No Egg should know any moves.$"
+	.string "No Duck should know any moves.$"
 
 Common_PkmnCenterJack_Text_CantForgetSurf:
 	.string "Hm!\p"

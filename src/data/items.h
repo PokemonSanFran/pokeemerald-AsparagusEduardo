@@ -7820,17 +7820,17 @@ const struct Item gItems[] =
         .flingPower = 10,
     },
 
-    [ITEM_LUCKY_EGG] =
+    [ITEM_LUCKY_DUCK] =
     {
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-        .name = _("Huevo Suerte"),
+        .name = _("Pato Suerte"),
 #else
-        .name = _("Lucky Egg"),
+        .name = _("Lucky Duck"),
 #endif
-        .itemId = ITEM_LUCKY_EGG,
+        .itemId = ITEM_LUCKY_DUCK,
         .price = 10000,
-        .holdEffect = HOLD_EFFECT_LUCKY_EGG,
-        .description = sLuckyEggDesc,
+        .holdEffect = HOLD_EFFECT_LUCKY_DUCK,
+        .description = sLuckyDuckDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

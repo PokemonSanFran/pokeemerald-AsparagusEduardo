@@ -24,25 +24,25 @@
 #define TYPE_FAIRY            18
 #define NUMBER_OF_MON_TYPES   19
 
-// Pokemon egg groups
-#define EGG_GROUP_NONE          0
-#define EGG_GROUP_MONSTER       1
-#define EGG_GROUP_WATER_1       2
-#define EGG_GROUP_BUG           3
-#define EGG_GROUP_FLYING        4
-#define EGG_GROUP_FIELD         5
-#define EGG_GROUP_FAIRY         6
-#define EGG_GROUP_GRASS         7
-#define EGG_GROUP_HUMAN_LIKE    8
-#define EGG_GROUP_WATER_3       9
-#define EGG_GROUP_MINERAL       10
-#define EGG_GROUP_AMORPHOUS     11
-#define EGG_GROUP_WATER_2       12
-#define EGG_GROUP_DITTO         13
-#define EGG_GROUP_DRAGON        14
-#define EGG_GROUP_UNDISCOVERED  15
+// Pokemon duck groups
+#define DUCK_GROUP_NONE          0
+#define DUCK_GROUP_MONSTER       1
+#define DUCK_GROUP_WATER_1       2
+#define DUCK_GROUP_BUG           3
+#define DUCK_GROUP_FLYING        4
+#define DUCK_GROUP_FIELD         5
+#define DUCK_GROUP_FAIRY         6
+#define DUCK_GROUP_GRASS         7
+#define DUCK_GROUP_HUMAN_LIKE    8
+#define DUCK_GROUP_WATER_3       9
+#define DUCK_GROUP_MINERAL       10
+#define DUCK_GROUP_AMORPHOUS     11
+#define DUCK_GROUP_WATER_2       12
+#define DUCK_GROUP_DITTO         13
+#define DUCK_GROUP_DRAGON        14
+#define DUCK_GROUP_UNDISCOVERED  15
 
-#define EGG_GROUPS_PER_MON      2
+#define DUCK_GROUPS_PER_MON      2
 
 // Pokemon natures
 #define NATURE_HARDY    0
@@ -99,9 +99,9 @@
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
 #define MON_DATA_LANGUAGE           3
-#define MON_DATA_SANITY_IS_BAD_EGG  4
+#define MON_DATA_SANITY_IS_BAD_DUCK  4
 #define MON_DATA_SANITY_HAS_SPECIES 5
-#define MON_DATA_SANITY_IS_EGG      6
+#define MON_DATA_SANITY_IS_DUCK      6
 #define MON_DATA_OT_NAME            7
 #define MON_DATA_MARKINGS           8
 #define MON_DATA_CHECKSUM           9
@@ -140,7 +140,7 @@
 #define MON_DATA_SPEED_IV          42
 #define MON_DATA_SPATK_IV          43
 #define MON_DATA_SPDEF_IV          44
-#define MON_DATA_IS_EGG            45
+#define MON_DATA_IS_DUCK            45
 #define MON_DATA_ABILITY_NUM       46
 #define MON_DATA_TOUGH             47
 #define MON_DATA_SHEEN             48

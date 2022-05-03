@@ -188,7 +188,7 @@ static const u8 sText_DexNav_NotFoundHere[] = _("This Pokémon cannot be found h
 static const u8 sText_ThreeQmarks[] = _("???");
 static const u8 sText_SearchLevel[] = _("SEARCH {LV}. {STR_VAR_1}");
 static const u8 sText_MonLevel[] = _("{LV}. {STR_VAR_1}");
-static const u8 sText_EggMove[] = _("MOVE: {STR_VAR_1}");
+static const u8 sText_DuckMove[] = _("MOVE: {STR_VAR_1}");
 static const u8 sText_HeldItem[] = _("{STR_VAR_1}");
 static const u8 sText_StartExit[] = _("{START_BUTTON} EXIT");
 static const u8 sText_DexNavChain[] = _("{NO} {STR_VAR_1}");
@@ -517,7 +517,7 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
         if (searchLevel > 1 && sDexNavSearchDataPtr->moves[0])
         {
             StringCopy(gStringVar1, gMoveNames[sDexNavSearchDataPtr->moves[0]]);
-            StringExpandPlaceholders(gStringVar4, sText_EggMove);
+            StringExpandPlaceholders(gStringVar4, sText_DuckMove);
             AddTextPrinterParameterized3(windowId, 0, WINDOW_MOVE_NAME_X, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar4);
         }
         
@@ -1276,9 +1276,9 @@ static void DexNavGenerateMoveset(u16 species, u8 searchLevel, u8 encounterLevel
     bool8 genMove = FALSE;
     u16 randVal = Random() % 100;
     u16 i;
-    u16 eggMoveBuffer[EGG_MOVES_ARRAY_COUNT];
+    u16 duckMoveBuffer[DUCK_MOVES_ARRAY_COUNT];
 
-    // see if first move slot should be an egg move
+    // see if first move slot should be an duck move
     if (searchLevel < 5)
     {
         #if (SEARCHLEVEL0_MOVECHANCE != 0)
@@ -1329,12 +1329,12 @@ static void DexNavGenerateMoveset(u16 species, u8 searchLevel, u8 encounterLevel
     for (i = 0; i < MAX_MON_MOVES; i++)
         moveDst[i] = GetMonData(&gEnemyParty[0], MON_DATA_MOVE1 + i, NULL);
 
-    // set first move slot to a random egg move if search level is good enough    
+    // set first move slot to a random duck move if search level is good enough    
     if (genMove)
     {
-        u8 numEggMoves = GetEggMoves(&gEnemyParty[0], eggMoveBuffer);
-        if (numEggMoves != 0)
-            moveDst[0] = eggMoveBuffer[Random() % numEggMoves];
+        u8 numDuckMoves = GetDuckMoves(&gEnemyParty[0], duckMoveBuffer);
+        if (numDuckMoves != 0)
+            moveDst[0] = duckMoveBuffer[Random() % numDuckMoves];
     }
 }
 

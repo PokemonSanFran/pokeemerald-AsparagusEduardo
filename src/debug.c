@@ -120,7 +120,7 @@ enum { // Give
     DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX,
     DEBUG_GIVE_MENU_ITEM_MAX_MONEY,
     DEBUG_GIVE_MENU_ITEM_MAX_COINS,
-    DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG,
+    DEBUG_GIVE_MENU_ITEM_DAYCARE_DUCK,
     DEBUG_GIVE_MENU_ITEM_FILL_PC,
     DEBUG_GIVE_MENU_ITEM_CHEAT,
 };
@@ -258,7 +258,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId);
 static void DebugAction_Give_Pokemon_Move(u8 taskId);
 static void DebugAction_Give_MaxMoney(u8 taskId);
 static void DebugAction_Give_MaxCoins(u8 taskId);
-static void DebugAction_Give_DayCareEgg(u8 taskId);
+static void DebugAction_Give_DayCareDuck(u8 taskId);
 static void DebugAction_Give_FillPC(u8 taskId);
 static void DebugAction_Give_CHEAT(u8 taskId);
 static void DebugAction_GiveAllTMs(u8 taskId);
@@ -376,7 +376,7 @@ static const u8 gDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}  
 static const u8 gDebugText_PokemonMove_3[] =            _("Move 3: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 gDebugText_Give_MaxMoney[] =            _("Max Money");
 static const u8 gDebugText_Give_MaxCoins[] =            _("Max Coins");
-static const u8 gDebugText_Give_DaycareEgg[] =          _("Daycare Egg");
+static const u8 gDebugText_Give_DaycareDuck[] =          _("Daycare Duck");
 static const u8 gDebugText_Give_FillPc[] =              _("Fill Pc");
 static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT Start");
 static const u8 gDebugText_AccessPC[] =                 _("Access PC");
@@ -488,7 +488,7 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = {gDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX},
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = {gDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_ITEM_MAX_MONEY},
     [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = {gDebugText_Give_MaxCoins,            DEBUG_GIVE_MENU_ITEM_MAX_COINS},
-    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = {gDebugText_Give_DaycareEgg,          DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG},
+    [DEBUG_GIVE_MENU_ITEM_DAYCARE_DUCK]      = {gDebugText_Give_DaycareDuck,          DEBUG_GIVE_MENU_ITEM_DAYCARE_DUCK},
     [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = {gDebugText_Give_FillPc,              DEBUG_GIVE_MENU_ITEM_FILL_PC},
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = {gDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
 };
@@ -566,7 +566,7 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_ITEM_POKEMON_COMPLEX]  = DebugAction_Give_PokemonComplex,
     [DEBUG_GIVE_MENU_ITEM_MAX_MONEY]        = DebugAction_Give_MaxMoney,
     [DEBUG_GIVE_MENU_ITEM_MAX_COINS]        = DebugAction_Give_MaxCoins,
-    [DEBUG_GIVE_MENU_ITEM_DAYCARE_EGG]      = DebugAction_Give_DayCareEgg,
+    [DEBUG_GIVE_MENU_ITEM_DAYCARE_DUCK]      = DebugAction_Give_DayCareDuck,
     [DEBUG_GIVE_MENU_ITEM_FILL_PC]          = DebugAction_Give_FillPC,
     [DEBUG_GIVE_MENU_ITEM_CHEAT]            = DebugAction_Give_CHEAT,
 };
@@ -1129,7 +1129,7 @@ static void DebugAction_Util_PoisonMons(u8 taskId)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0)
             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_DUCK)
         {
             u32 curStatus = STATUS1_POISON;
             SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &curStatus);
@@ -2770,9 +2770,9 @@ static void DebugAction_Give_MaxCoins(u8 taskId)
     SetCoins(9999);
 }
 
-static void DebugAction_Give_DayCareEgg(u8 taskId)
+static void DebugAction_Give_DayCareDuck(u8 taskId)
 {
-    TriggerPendingDaycareEgg();
+    TriggerPendingDaycareDuck();
 }
 
 static void DebugAction_Give_FillPC(u8 taskId) //Credit: Sierraffinity
@@ -3371,7 +3371,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_POKENAV_ON, "SE-POKENAV-ON") \
     X(SE_POKENAV_OFF, "SE-POKENAV-OFF") \
     X(SE_DEX_SEARCH, "SE-DEX-SEARCH") \
-    X(SE_EGG_HATCH, "SE-EGG-HATCH") \
+    X(SE_DUCK_HATCH, "SE-DUCK-HATCH") \
     X(SE_BALL_TRAY_ENTER, "SE-BALL-TRAY-ENTER") \
     X(SE_BALL_TRAY_BALL, "SE-BALL-TRAY-BALL") \
     X(SE_BALL_TRAY_EXIT, "SE-BALL-TRAY-EXIT") \

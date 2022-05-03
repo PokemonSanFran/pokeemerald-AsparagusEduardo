@@ -572,7 +572,7 @@ static const struct WindowTemplate sUnusedWindowTemplate2 =
 };
 
 // Plain tilemaps for party menu slots.
-// The versions with no HP bar are used by eggs, and in certain displays like registering at a battle facility.
+// The versions with no HP bar are used by ducks, and in certain displays like registering at a battle facility.
 // There is no empty version of the main slot because it shouldn't ever be empty.
 static const u8 sSlotTilemap_Main[]      = INCBIN_U8("graphics/party_menu/slot_main.bin");
 static const u8 sSlotTilemap_MainNoHP[]  = INCBIN_U8("graphics/party_menu/slot_main_no_hp.bin");
@@ -852,11 +852,11 @@ struct
 static const u8 *const sUnionRoomTradeMessages[] =
 {
     [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
-    [UR_TRADE_MSG_NOT_EGG - 1]                     = gText_ThatIsntAnEgg,
+    [UR_TRADE_MSG_NOT_DUCK - 1]                     = gText_ThatIsntAnDuck,
     [UR_TRADE_MSG_MON_CANT_BE_TRADED_1 - 1]        = gText_PkmnCantBeTradedNow,
     [UR_TRADE_MSG_MON_CANT_BE_TRADED_2 - 1]        = gText_PkmnCantBeTradedNow,
     [UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED - 1] = gText_OtherTrainersPkmnCantBeTraded,
-    [UR_TRADE_MSG_EGG_CANT_BE_TRADED -1]           = gText_EggCantBeTradedNow,
+    [UR_TRADE_MSG_DUCK_CANT_BE_TRADED -1]           = gText_DuckCantBeTradedNow,
     [UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON - 1]     = gText_OtherTrainerCantAcceptPkmn,
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1 - 1]   = gText_CantTradeWithTrainer,
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,

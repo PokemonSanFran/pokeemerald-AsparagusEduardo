@@ -1974,7 +1974,7 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 {
     s32 i = 0;
 
-    if (species == SPECIES_EGG || species == SPECIES_NONE)
+    if (species == SPECIES_DUCK || species == SPECIES_NONE)
         return;
 
     for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != species; i++)

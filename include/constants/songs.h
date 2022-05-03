@@ -121,7 +121,7 @@
 #define SE_POKENAV_ON               110 // SE_PN_ON
 #define SE_POKENAV_OFF              111 // SE_PN_OFF
 #define SE_DEX_SEARCH               112 // SE_Z_SEARCH
-#define SE_EGG_HATCH                113 // SE_TAMAGO
+#define SE_DUCK_HATCH                113 // SE_TAMAGO
 #define SE_BALL_TRAY_ENTER          114 // SE_TB_START
 #define SE_BALL_TRAY_BALL           115 // SE_TB_KON
 #define SE_BALL_TRAY_EXIT           116 // SE_TB_KARA

@@ -102,8 +102,8 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_KINGLER] = gMonFootprint_Kingler,
     [SPECIES_VOLTORB] = gMonFootprint_Voltorb,
     [SPECIES_ELECTRODE] = gMonFootprint_Electrode,
-    [SPECIES_EXEGGCUTE] = gMonFootprint_Exeggcute,
-    [SPECIES_EXEGGUTOR] = gMonFootprint_Exeggutor,
+    [SPECIES_EXDUCKCUTE] = gMonFootprint_Exduckcute,
+    [SPECIES_EXDUCKUTOR] = gMonFootprint_Exduckutor,
     [SPECIES_CUBONE] = gMonFootprint_Cubone,
     [SPECIES_MAROWAK] = gMonFootprint_Marowak,
     [SPECIES_HITMONLEE] = gMonFootprint_Hitmonlee,
@@ -899,5 +899,5 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_GLASTRIER] = gMonFootprint_Glastrier,
     [SPECIES_SPECTRIER] = gMonFootprint_Spectrier,
     [SPECIES_CALYREX] = gMonFootprint_Calyrex,
-    [SPECIES_EGG] = gMonFootprint_Bulbasaur,
+    [SPECIES_DUCK] = gMonFootprint_Bulbasaur,
 };

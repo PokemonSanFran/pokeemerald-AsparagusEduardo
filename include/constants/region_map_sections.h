@@ -224,7 +224,7 @@
 #define MAPSEC_SAFARI_ZONE_AREA5            0xDA
 #define MAPSEC_SAFARI_ZONE_AREA6            0xDB
 
-#define METLOC_SPECIAL_EGG                  0xFD
+#define METLOC_SPECIAL_DUCK                  0xFD
 #define METLOC_IN_GAME_TRADE                0xFE
 #define METLOC_FATEFUL_ENCOUNTER            0xFF
 

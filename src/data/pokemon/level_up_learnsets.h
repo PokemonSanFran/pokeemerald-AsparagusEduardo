@@ -2690,7 +2690,7 @@ static const struct LevelUpMove sElectrodeLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sExeggcuteLevelUpLearnset[] = {
+static const struct LevelUpMove sExduckcuteLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_ABSORB),
     LEVEL_UP_MOVE( 1, MOVE_HYPNOSIS),
     LEVEL_UP_MOVE( 1, MOVE_BARRAGE),
@@ -2717,7 +2717,7 @@ static const struct LevelUpMove sExeggcuteLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sExeggutorLevelUpLearnset[] = {
+static const struct LevelUpMove sExduckutorLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 0, MOVE_STOMP),
     LEVEL_UP_MOVE( 1, MOVE_STOMP),
     LEVEL_UP_MOVE( 1, MOVE_SEED_BOMB),
@@ -2738,12 +2738,12 @@ static const struct LevelUpMove sExeggutorLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_REFLECT),
     LEVEL_UP_MOVE( 1, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE( 1, MOVE_POWER_WHIP),
-    LEVEL_UP_MOVE( 1, MOVE_EGG_BOMB),
+    LEVEL_UP_MOVE( 1, MOVE_DUCK_BOMB),
     LEVEL_UP_MOVE( 1, MOVE_BARRAGE),
     LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
     LEVEL_UP_MOVE(17, MOVE_PSYSHOCK),
     LEVEL_UP_MOVE(18, MOVE_STOMP),
-    LEVEL_UP_MOVE(27, MOVE_EGG_BOMB),
+    LEVEL_UP_MOVE(27, MOVE_DUCK_BOMB),
     LEVEL_UP_MOVE(37, MOVE_WOOD_HAMMER),
     LEVEL_UP_MOVE(47, MOVE_LEAF_STORM),
     LEVEL_UP_END
@@ -3057,7 +3057,7 @@ static const struct LevelUpMove sChanseyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(28, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE(32, MOVE_HELPING_HAND),
     LEVEL_UP_MOVE(33, MOVE_HEAL_PULSE),
-    LEVEL_UP_MOVE(39, MOVE_EGG_BOMB),
+    LEVEL_UP_MOVE(39, MOVE_DUCK_BOMB),
     LEVEL_UP_MOVE(41, MOVE_LIGHT_SCREEN),
     LEVEL_UP_MOVE(48, MOVE_LAST_RESORT),
     LEVEL_UP_MOVE(49, MOVE_DOUBLE_EDGE),
@@ -6287,7 +6287,7 @@ static const struct LevelUpMove sBlisseyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(31, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE(32, MOVE_HELPING_HAND),
     LEVEL_UP_MOVE(33, MOVE_HEAL_PULSE),
-    LEVEL_UP_MOVE(38, MOVE_EGG_BOMB),
+    LEVEL_UP_MOVE(38, MOVE_DUCK_BOMB),
     LEVEL_UP_MOVE(40, MOVE_LIGHT_SCREEN),
     LEVEL_UP_MOVE(48, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(48, MOVE_LAST_RESORT),
@@ -21697,7 +21697,7 @@ static const struct LevelUpMove sMukAlolanLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sExeggutorAlolanLevelUpLearnset[] = {
+static const struct LevelUpMove sExduckutorAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 0, MOVE_DRAGON_HAMMER),
     LEVEL_UP_MOVE( 0, MOVE_DRAGON_PULSE),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_HAMMER),
@@ -21720,11 +21720,11 @@ static const struct LevelUpMove sExeggutorAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE( 1, MOVE_DRAGON_PULSE),
     LEVEL_UP_MOVE( 1, MOVE_POWER_WHIP),
-    LEVEL_UP_MOVE( 1, MOVE_EGG_BOMB),
+    LEVEL_UP_MOVE( 1, MOVE_DUCK_BOMB),
     LEVEL_UP_MOVE( 1, MOVE_BARRAGE),
     LEVEL_UP_MOVE( 1, MOVE_STUN_SPORE),
     LEVEL_UP_MOVE(17, MOVE_PSYSHOCK),
-    LEVEL_UP_MOVE(27, MOVE_EGG_BOMB),
+    LEVEL_UP_MOVE(27, MOVE_DUCK_BOMB),
     LEVEL_UP_MOVE(37, MOVE_WOOD_HAMMER),
     LEVEL_UP_MOVE(47, MOVE_LEAF_STORM),
     LEVEL_UP_END

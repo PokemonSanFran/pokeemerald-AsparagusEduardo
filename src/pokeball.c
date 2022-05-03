@@ -1294,7 +1294,7 @@ static void SpriteCB_ReleasedMonFlyOut(struct Sprite *sprite)
     }
     if (sprite->animEnded && r12 && r6)
     {
-        if (gSprites[monSpriteId].data[7] == SPECIES_EGG)
+        if (gSprites[monSpriteId].data[7] == SPECIES_DUCK)
             DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], TRUE, 0);
         else
             DoMonFrontSpriteAnimation(&gSprites[monSpriteId], gSprites[monSpriteId].data[7], FALSE, 0);

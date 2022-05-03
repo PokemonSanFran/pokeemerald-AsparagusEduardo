@@ -591,9 +591,9 @@ static void InitLinkBtlControllers(void)
 bool32 IsValidForBattle(struct Pokemon *mon)
 {
     u32 species = GetMonData(mon, MON_DATA_SPECIES2);
-    return (species != SPECIES_NONE && species != SPECIES_EGG
+    return (species != SPECIES_NONE && species != SPECIES_DUCK
              && GetMonData(mon, MON_DATA_HP) != 0
-             && GetMonData(mon, MON_DATA_IS_EGG) == 0);
+             && GetMonData(mon, MON_DATA_IS_DUCK) == 0);
 }
 
 static void SetBattlePartyIds(void)

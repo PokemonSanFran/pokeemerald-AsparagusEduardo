@@ -106,7 +106,7 @@ Your pokemon seems to be enjoying sliding around!
 Your pokemon is happily gazing at the beautiful, starry sky!
 {STR_VAR_1} is pulling out the grass.
 {STR_VAR_1} is rolling around in the grass.
-{STR_VAR_1} seems to want to return to the lab (after you receive the Mystery egg).
+{STR_VAR_1} seems to want to return to the lab (after you receive the Mystery duck).
 Your pokemon is staring at the various items.
 {STR_VAR_1} is listening to the sound of the waterfall ( Mt. Mortar).
 {STR_VAR_1} is looking up the tall mountain... (Mt. Mortar).

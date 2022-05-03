@@ -55,7 +55,7 @@ This branch combines an ingame randomizer with additional optionial challenges. 
     * Only the first encounter per route can be caught
     * If a Pokémon faints in battle it gets automatically released
       * Held items are returned to the player upon death
-    * Every Pokémon has to be nicknamed, including starter, wild catches, gifted Pokémon, from eggs hatched Pokémon
+    * Every Pokémon has to be nicknamed, including starter, wild catches, gifted Pokémon, from ducks hatched Pokémon
     * Species clause is active, meaining you can not catch a Pokémon in the same evolution line twice
       * Example: you cant catch a Zigzagoon on route 101 and a Zigzagoon on route 102, or any Linoone later
       * But a first encounter with an already caught species does NOT use up the current route first encounter!!!

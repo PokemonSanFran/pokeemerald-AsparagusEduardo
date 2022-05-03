@@ -161,7 +161,7 @@ static u8 CompareMonSize(u16 species, u16 *sizeRecord)
     {
         struct Pokemon *pkmn = &gPlayerParty[gSpecialVar_Result];
 
-        if (GetMonData(pkmn, MON_DATA_IS_EGG) == TRUE || GetMonData(pkmn, MON_DATA_SPECIES) != species)
+        if (GetMonData(pkmn, MON_DATA_IS_DUCK) == TRUE || GetMonData(pkmn, MON_DATA_SPECIES) != species)
         {
             return 1;
         }
@@ -286,7 +286,7 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
         {
             struct Pokemon *mon = &gPlayerParty[i];
 
-            if (GetMonData(mon, MON_DATA_SPECIES) != 0 && GetMonData(mon, MON_DATA_SANITY_IS_EGG) == 0)
+            if (GetMonData(mon, MON_DATA_SPECIES) != 0 && GetMonData(mon, MON_DATA_SANITY_IS_DUCK) == 0)
             {
                 SetMonData(mon, array[index], &data);
                 gotRibbon = TRUE;

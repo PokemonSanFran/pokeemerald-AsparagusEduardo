@@ -124,7 +124,7 @@ static EWRAM_DATA struct {
     /*0x0038*/ bool8 monPresent[PARTY_SIZE * 2];
     /*0x0044*/ bool8 neverRead_44;
     /*0x0045*/ bool8 isLiveMon[2][PARTY_SIZE];
-    /*0x0051*/ bool8 isEgg[2][PARTY_SIZE];
+    /*0x0051*/ bool8 isDuck[2][PARTY_SIZE];
     /*0x005D*/ u8 hpBarLevels[2][PARTY_SIZE];
     /*0x0069*/ u8 bufferPartyState;
     /*0x006A*/ u8 filler_6A[5];
@@ -1541,9 +1541,9 @@ static void TradeMenuProcessInput_SelectedMon(void)
             QueueAction(QUEUE_DELAY_MSG, QUEUE_MON_CANT_BE_TRADED);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
             break;
-        case CANT_TRADE_EGG_YET:
-        case CANT_TRADE_EGG_YET2:
-            QueueAction(QUEUE_DELAY_MSG, QUEUE_EGG_CANT_BE_TRADED);
+        case CANT_TRADE_DUCK_YET:
+        case CANT_TRADE_DUCK_YET2:
+            QueueAction(QUEUE_DELAY_MSG, QUEUE_DUCK_CANT_BE_TRADED);
             sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_REDRAW_MAIN_MENU;
             break;
         }
@@ -1600,10 +1600,10 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
             return PARTNER_MON_INVALID;
     }
 
-    // Partner cant trade Egg or non-Hoenn mon if player doesn't have National Dex
+    // Partner cant trade Duck or non-Hoenn mon if player doesn't have National Dex
     if (!IsNationalPokedexEnabled())
     {
-        if (sTradeMenuData->isEgg[TRADE_PARTNER][partnerMonIdx] || !IsSpeciesInHoennDex(partnerSpecies))
+        if (sTradeMenuData->isDuck[TRADE_PARTNER][partnerMonIdx] || !IsSpeciesInHoennDex(partnerSpecies))
             return PARTNER_MON_INVALID;
     }
 
@@ -1980,7 +1980,7 @@ static void BufferTradeMonMoves(u8 *str, u8 whichParty, u8 partyIdx)
     u16 moves[MAX_MON_MOVES];
     u16 i;
 
-    if (!sTradeMenuData->isEgg[whichParty][partyIdx])
+    if (!sTradeMenuData->isDuck[whichParty][partyIdx])
     {
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -2053,7 +2053,7 @@ static void DrawTradeMenuPartyMonInfo(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 w
     else
         level = GetMonData(&gEnemyParty[monIdx], MON_DATA_LEVEL, NULL);
 
-    if (!sTradeMenuData->isEgg[whichParty][monIdx])
+    if (!sTradeMenuData->isDuck[whichParty][monIdx])
     {
         if (level / 10 != 0)
             sTradeMenuData->tilemapBuffer[x + (y * 32)] = (level / 10) + 0x60;
@@ -2066,7 +2066,7 @@ static void DrawTradeMenuPartyMonInfo(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 w
         sTradeMenuData->tilemapBuffer[x + (y * 32) - 31] = sTradeMenuData->tilemapBuffer[x + (y * 32) - 36] | 0x400;
     }
 
-    if (sTradeMenuData->isEgg[whichParty][monIdx])
+    if (sTradeMenuData->isDuck[whichParty][monIdx])
     {
         symbolTile = 0x480;
     }
@@ -2228,8 +2228,8 @@ static void DoQueuedActions(void)
                 case QUEUE_MON_CANT_BE_TRADED:
                     PrintTradeMessage(TRADE_MSG_MON_CANT_BE_TRADED);
                     break;
-                case QUEUE_EGG_CANT_BE_TRADED:
-                    PrintTradeMessage(TRADE_MSG_EGG_CANT_BE_TRADED);
+                case QUEUE_DUCK_CANT_BE_TRADED:
+                    PrintTradeMessage(TRADE_MSG_DUCK_CANT_BE_TRADED);
                     break;
                 case QUEUE_FRIENDS_MON_CANT_BE_TRADED:
                     PrintTradeMessage(TRADE_MSG_FRIENDS_MON_CANT_BE_TRADED);
@@ -2320,40 +2320,40 @@ static void SetTradePartyLiveStatuses(u8 whichParty)
     case TRADE_PLAYER:
         for (i = 0; i < sTradeMenuData->partyCounts[whichParty]; i++)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) == TRUE)
+            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK) == TRUE)
             {
                 sTradeMenuData->isLiveMon[whichParty][i] = FALSE;
-                sTradeMenuData->isEgg[whichParty][i] = TRUE;
+                sTradeMenuData->isDuck[whichParty][i] = TRUE;
             }
             else if (GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
             {
                 sTradeMenuData->isLiveMon[whichParty][i] = FALSE;
-                sTradeMenuData->isEgg[whichParty][i] = FALSE;
+                sTradeMenuData->isDuck[whichParty][i] = FALSE;
             }
             else
             {
                 sTradeMenuData->isLiveMon[whichParty][i] = TRUE;
-                sTradeMenuData->isEgg[whichParty][i] = FALSE;
+                sTradeMenuData->isDuck[whichParty][i] = FALSE;
             }
         }
         break;
     case TRADE_PARTNER:
         for (i = 0; i < sTradeMenuData->partyCounts[whichParty]; i++)
         {
-            if (GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG) == TRUE)
+            if (GetMonData(&gEnemyParty[i], MON_DATA_IS_DUCK) == TRUE)
             {
                 sTradeMenuData->isLiveMon[whichParty][i] = FALSE;
-                sTradeMenuData->isEgg[whichParty][i] = TRUE;
+                sTradeMenuData->isDuck[whichParty][i] = TRUE;
             }
             else if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
             {
                 sTradeMenuData->isLiveMon[whichParty][i] = FALSE;
-                sTradeMenuData->isEgg[whichParty][i] = FALSE;
+                sTradeMenuData->isDuck[whichParty][i] = FALSE;
             }
             else
             {
                 sTradeMenuData->isLiveMon[whichParty][i] = TRUE;
-                sTradeMenuData->isEgg[whichParty][i] = FALSE;
+                sTradeMenuData->isDuck[whichParty][i] = FALSE;
             }
         }
         break;
@@ -2425,11 +2425,11 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         species[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES);
     }
 
-    // Cant trade Eggs or non-Hoenn mons if player doesn't have National Dex
+    // Cant trade Ducks or non-Hoenn mons if player doesn't have National Dex
     if (!IsNationalPokedexEnabled())
     {
-        if (species2[monIdx] == SPECIES_EGG)
-            return CANT_TRADE_EGG_YET;
+        if (species2[monIdx] == SPECIES_DUCK)
+            return CANT_TRADE_DUCK_YET;
 
         if (!IsSpeciesInHoennDex(species2[monIdx]))
             return CANT_TRADE_NATIONAL;
@@ -2442,8 +2442,8 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         // Does partner not have National Dex
         if (!(player->progressFlagsCopy & 0xF))
         {
-            if (species2[monIdx] == SPECIES_EGG)
-                return CANT_TRADE_EGG_YET2;
+            if (species2[monIdx] == SPECIES_DUCK)
+                return CANT_TRADE_DUCK_YET2;
 
             if (!IsSpeciesInHoennDex(species2[monIdx]))
                 return CANT_TRADE_INVALID_MON;
@@ -2456,10 +2456,10 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
             return CANT_TRADE_INVALID_MON;
     }
 
-    // Make Eggs not count for numMonsLeft
+    // Make Ducks not count for numMonsLeft
     for (i = 0; i < partyCount; i++)
     {
-        if (species2[i] == SPECIES_EGG)
+        if (species2[i] == SPECIES_DUCK)
             species2[i] = SPECIES_NONE;
     }
 
@@ -2548,11 +2548,11 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     if (IsDeoxysOrMewUntradable(playerSpecies, isEventLegal))
         return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
 
-    if (partnerSpecies == SPECIES_EGG)
+    if (partnerSpecies == SPECIES_DUCK)
     {
-        // If partner is trading an Egg then the player must also be trading an Egg
+        // If partner is trading an Duck then the player must also be trading an Duck
         if (playerSpecies2 != partnerSpecies)
-            return UR_TRADE_MSG_NOT_EGG;
+            return UR_TRADE_MSG_NOT_DUCK;
     }
     else
     {
@@ -2560,16 +2560,16 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
             return UR_TRADE_MSG_NOT_MON_PARTNER_WANTS;
     }
 
-    // If the player is trading an Egg then the partner must also be trading an Egg
-    // Odd that this wasn't checked earlier, as by this point we know either the partner doesn't have an Egg or that both do.
-    if (playerSpecies2 == SPECIES_EGG && playerSpecies2 != partnerSpecies)
+    // If the player is trading an Duck then the partner must also be trading an Duck
+    // Odd that this wasn't checked earlier, as by this point we know either the partner doesn't have an Duck or that both do.
+    if (playerSpecies2 == SPECIES_DUCK && playerSpecies2 != partnerSpecies)
         return UR_TRADE_MSG_MON_CANT_BE_TRADED_1;
 
-    // If the player doesn't have the National Dex then Eggs and non-Hoenn Pokémon can't be traded
+    // If the player doesn't have the National Dex then Ducks and non-Hoenn Pokémon can't be traded
     if (!playerHasNationalDex)
     {
-        if (playerSpecies2 == SPECIES_EGG)
-            return UR_TRADE_MSG_EGG_CANT_BE_TRADED;
+        if (playerSpecies2 == SPECIES_DUCK)
+            return UR_TRADE_MSG_DUCK_CANT_BE_TRADED;
 
         if (!IsSpeciesInHoennDex(playerSpecies2))
             return UR_TRADE_MSG_MON_CANT_BE_TRADED_2;
@@ -2596,9 +2596,9 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
     if (hasNationalDex)
         return CAN_REGISTER_MON;
 
-    // Eggs can only be traded if the player has the National Dex
-    if (species2 == SPECIES_EGG)
-        return CANT_REGISTER_EGG;
+    // Ducks can only be traded if the player has the National Dex
+    if (species2 == SPECIES_DUCK)
+        return CANT_REGISTER_DUCK;
 
     if (IsSpeciesInHoennDex(species2))
         return CAN_REGISTER_MON;
@@ -2607,17 +2607,17 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
 }
 
 // Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade
-// Unlike later generations, this version of Spin Trade isnt only for Eggs
+// Unlike later generations, this version of Spin Trade isnt only for Ducks
 int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
 {
     int i, version, versions, canTradeAnyMon, numMonsLeft;
     int speciesArray[PARTY_SIZE];
 
-    // Make Eggs not count for numMonsLeft
+    // Make Ducks not count for numMonsLeft
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         speciesArray[i] = GetMonData(&mon[i], MON_DATA_SPECIES2);
-        if (speciesArray[i] == SPECIES_EGG)
+        if (speciesArray[i] == SPECIES_DUCK)
             speciesArray[i] = SPECIES_NONE;
     }
 
@@ -2654,7 +2654,7 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
             return CANT_TRADE_NATIONAL;
 
         if (speciesArray[monIdx] == SPECIES_NONE)
-            return CANT_TRADE_EGG_YET;
+            return CANT_TRADE_DUCK_YET;
     }
 
     numMonsLeft = 0;
@@ -3098,7 +3098,7 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
 {
     struct Pokemon *mon = &gPlayerParty[partyIdx];
 
-    if (!GetMonData(mon, MON_DATA_IS_EGG))
+    if (!GetMonData(mon, MON_DATA_IS_DUCK))
     {
         u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
         u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
@@ -3133,7 +3133,7 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
     SWAP(*playerMon, *partnerMon, sTradeData->tempMon);
 
     friendship = 70;
-    if (!GetMonData(playerMon, MON_DATA_IS_EGG))
+    if (!GetMonData(playerMon, MON_DATA_IS_DUCK))
         SetMonData(playerMon, MON_DATA_FRIENDSHIP, &friendship);
 
     if (partnerMail != MAIL_NONE)
@@ -3484,7 +3484,7 @@ static bool8 AnimateTradeSequenceCable(void)
         StringExpandPlaceholders(gStringVar4, gText_XWillBeSentToY);
         DrawTextOnTradeWindow(0, gStringVar4, 0);
 
-        if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_EGG)
+        if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_DUCK)
             PlayCry_Normal(sTradeData->monSpecies[TRADE_PLAYER], 0);
 
         sTradeData->state = TS_STATE_BYE_BYE;
@@ -3955,7 +3955,7 @@ static bool8 AnimateTradeSequenceWireless(void)
         StringExpandPlaceholders(gStringVar4, gText_XWillBeSentToY);
         DrawTextOnTradeWindow(0, gStringVar4, 0);
 
-        if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_EGG)
+        if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_DUCK)
             PlayCry_Normal(sTradeData->monSpecies[TRADE_PLAYER], 0);
 
         sTradeData->state = TS_STATE_BYE_BYE;
@@ -4640,7 +4640,7 @@ static void SetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trad
 
 u16 GetTradeSpecies(void)
 {
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
+    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_DUCK))
         return SPECIES_NONE;
     return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
 }

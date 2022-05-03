@@ -616,21 +616,21 @@ static void CB2_InitBattleInternal(void)
             continue;                                               \
                                                                     \
         /* Is healthy mon? */                                       \
-        if (species != SPECIES_EGG && hp != 0 && status == 0)       \
+        if (species != SPECIES_DUCK && hp != 0 && status == 0)       \
             (flags) |= 1 << (i) * 2;                                \
                                                                     \
         if (species == SPECIES_NONE) /* Redundant */                \
             continue;                                               \
                                                                     \
-        /* Is Egg or statused? */                                   \
-        if (hp != 0 && (species == SPECIES_EGG || status != 0))     \
+        /* Is Duck or statused? */                                   \
+        if (hp != 0 && (species == SPECIES_DUCK || status != 0))     \
             (flags) |= 2 << (i) * 2;                                \
                                                                     \
         if (species == SPECIES_NONE) /* Redundant */                \
             continue;                                               \
                                                                     \
         /* Is fainted? */                                           \
-        if (species != SPECIES_EGG && hp == 0)                      \
+        if (species != SPECIES_DUCK && hp == 0)                      \
             (flags) |= 3 << (i) * 2;                                \
     }
 
@@ -3477,7 +3477,7 @@ static void DoBattleIntro(void)
             for (i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-                 || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                 || GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_DUCK)
                 {
                     hpStatus[i].hp = HP_EMPTY_SLOT;
                     hpStatus[i].status = 0;
@@ -3496,7 +3496,7 @@ static void DoBattleIntro(void)
             for (i = 0; i < PARTY_SIZE; i++)
             {
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_NONE
-                 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
+                 || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) == SPECIES_DUCK)
                 {
                     hpStatus[i].hp = HP_EMPTY_SLOT;
                     hpStatus[i].status = 0;
@@ -5255,7 +5255,7 @@ static void HandleEndTurn_FinishBattle(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
-             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_DUCK)
             {
                 CalculateMonStats(&gPlayerParty[i]);
             }

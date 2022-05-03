@@ -19,8 +19,8 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
 	special ChoosePartyMon
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves
+	special IsSelectedMonDuck
+	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_DuckCantForgetMoves
 	special GetNumMovesSelectedMonHas
 	goto_if_eq VAR_RESULT, 1, LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
@@ -52,8 +52,8 @@ LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove::
 	releaseall
 	end
 
-LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves::
-	msgbox LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves, MSGBOX_DEFAULT
+LilycoveCity_MoveDeletersHouse_EventScript_DuckCantForgetMoves::
+	msgbox LilycoveCity_MoveDeletersHouse_Text_DuckCantForgetMoves, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -97,9 +97,9 @@ LilycoveCity_MoveDeletersHouse_Text_ComeAgain:
 	.string "Come again if there are moves that\n"
 	.string "need to be forgotten.$"
 
-LilycoveCity_MoveDeletersHouse_Text_EggCantForgetMoves:
+LilycoveCity_MoveDeletersHouse_Text_DuckCantForgetMoves:
 	.string "What?\n"
-	.string "No Egg should know any moves.$"
+	.string "No Duck should know any moves.$"
 
 LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf:
 	.string "Hm!\p"

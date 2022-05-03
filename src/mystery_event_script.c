@@ -319,8 +319,8 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
     pokemon = *(struct Pokemon *)pokemonPtr;
     species = GetMonData(&pokemon, MON_DATA_SPECIES2);
 
-    if (species == SPECIES_EGG)
-        StringCopyN(gStringVar1, gText_EggNickname, POKEMON_NAME_LENGTH + 1);
+    if (species == SPECIES_DUCK)
+        StringCopyN(gStringVar1, gText_DuckNickname, POKEMON_NAME_LENGTH + 1);
     else
         StringCopyN(gStringVar1, gText_Pokemon, POKEMON_NAME_LENGTH + 1);
 
@@ -334,7 +334,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
         memcpy(&gPlayerParty[PARTY_SIZE - 1], pokemonPtr, sizeof(struct Pokemon));
         memcpy(&mail, mailPtr, sizeof(struct Mail));
 
-        if (species != SPECIES_EGG)
+        if (species != SPECIES_DUCK)
         {
             u16 pokedexNum = SpeciesToNationalPokedexNum(species);
             GetSetPokedexFlag(pokedexNum, FLAG_SET_SEEN);

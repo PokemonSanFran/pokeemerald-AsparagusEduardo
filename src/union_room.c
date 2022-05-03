@@ -248,7 +248,7 @@ static void ResetUnionRoomTrade(struct UnionRoomTrade *);
 static void CreateTask_StartActivity(void);
 static bool32 HasWonderCardOrNewsByLinkGroup(struct RfuGameData *, s16);
 static u8 CreateTask_SearchForChildOrParent(struct RfuIncomingPlayerList *, struct RfuIncomingPlayerList *, u32);
-static bool32 RegisterTradeMonAndGetIsEgg(u32, struct UnionRoomTrade *);
+static bool32 RegisterTradeMonAndGetIsDuck(u32, struct UnionRoomTrade *);
 static void RegisterTradeMon(u32, struct UnionRoomTrade *);
 static void StartScriptInteraction(void);
 static bool32 IsPlayerFacingTradingBoard(void);
@@ -271,7 +271,7 @@ static void GetURoomActivityRejectMsg(u8 *, s32, u32);
 static u32 ConvPartnerUnameAndGetWhetherMetAlready(struct RfuPlayer *);
 static void GetURoomActivityStartMsg(u8 *, u8);
 static void UR_ClearBg0(void);
-static s32 IsRequestedTypeOrEggInPlayerParty(u32, u32);
+static s32 IsRequestedTypeOrDuckInPlayerParty(u32, u32);
 static bool32 UR_PrintFieldMessage(const u8 *);
 static s32 GetChatLeaderActionRequestMessage(u8 *, u32, u16 *, struct WirelessLink_URoom *);
 static void Task_InitUnionRoom(u8 taskId);
@@ -2535,7 +2535,7 @@ static void Task_RunUnionRoom(u8 taskId)
                     SetTradeBoardRegisteredMonInfo(TYPE_NORMAL, SPECIES_NONE, 0);
                     ScheduleFieldMessageAndExit(sText_RegistrationCanceled);
                 }
-                else if (!RegisterTradeMonAndGetIsEgg(GetCursorSelectionMonId(), &sUnionRoomTrade))
+                else if (!RegisterTradeMonAndGetIsDuck(GetCursorSelectionMonId(), &sUnionRoomTrade))
                 {
                     ScheduleFieldMessageWithFollowupState(UR_STATE_REGISTER_REQUEST_TYPE, sText_ChooseRequestedMonType);
                 }
@@ -3045,9 +3045,9 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         else
         {
-            if (GetHostRfuGameData()->tradeSpecies == SPECIES_EGG)
+            if (GetHostRfuGameData()->tradeSpecies == SPECIES_DUCK)
             {
-                StringCopy(gStringVar4, sText_CancelRegistrationOfEgg);
+                StringCopy(gStringVar4, sText_CancelRegistrationOfDuck);
             }
             else
             {
@@ -3177,7 +3177,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 break;
             default:
                 UR_ClearBg0();
-                switch (IsRequestedTypeOrEggInPlayerParty(uroom->playerList->players[input].rfu.data.tradeType, uroom->playerList->players[input].rfu.data.tradeSpecies))
+                switch (IsRequestedTypeOrDuckInPlayerParty(uroom->playerList->players[input].rfu.data.tradeType, uroom->playerList->players[input].rfu.data.tradeSpecies))
                 {
                 case UR_TRADE_MATCH:
                     CopyAndTranslatePlayerName(gStringVar1, &uroom->playerList->players[input]);
@@ -3189,10 +3189,10 @@ static void Task_RunUnionRoom(u8 taskId)
                     StringCopy(gStringVar2, gTypeNames[uroom->playerList->players[input].rfu.data.tradeType]);
                     ScheduleFieldMessageWithFollowupState(UR_STATE_TRADING_BOARD_LOAD, sText_DontHaveTypeTrainerWants);
                     break;
-                case UR_TRADE_NOEGG:
+                case UR_TRADE_NODUCK:
                     CopyAndTranslatePlayerName(gStringVar1, &uroom->playerList->players[input]);
                     StringCopy(gStringVar2, gTypeNames[uroom->playerList->players[input].rfu.data.tradeType]);
-                    ScheduleFieldMessageWithFollowupState(UR_STATE_TRADING_BOARD_LOAD, sText_DontHaveEggTrainerWants);
+                    ScheduleFieldMessageWithFollowupState(UR_STATE_TRADING_BOARD_LOAD, sText_DontHaveDuckTrainerWants);
                     break;
                 }
                 break;
@@ -4102,9 +4102,9 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data
     u8 level = data->tradeLevel;
 
     PrintUnionRoomText(windowId, 1, playerName, 8, y, colorIdx);
-    if (species == SPECIES_EGG)
+    if (species == SPECIES_DUCK)
     {
-        PrintUnionRoomText(windowId, 1, sText_EggTrade, 68, y, colorIdx);
+        PrintUnionRoomText(windowId, 1, sText_DuckTrade, 68, y, colorIdx);
     }
     else
     {
@@ -4168,19 +4168,19 @@ static s32 GetUnionRoomPlayerGender(s32 playerIdx, struct RfuPlayerList *list)
     return list->players[playerIdx].rfu.data.playerGender;
 }
 
-static s32 IsRequestedTypeOrEggInPlayerParty(u32 type, u32 species)
+static s32 IsRequestedTypeOrDuckInPlayerParty(u32 type, u32 species)
 {
     s32 i;
 
-    if (species == SPECIES_EGG)
+    if (species == SPECIES_DUCK)
     {
         for (i = 0; i < gPlayerPartyCount; i++)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-            if (species == SPECIES_EGG)
+            if (species == SPECIES_DUCK)
                 return UR_TRADE_MATCH;
         }
-        return UR_TRADE_NOEGG;
+        return UR_TRADE_NODUCK;
     }
     else
     {
@@ -4261,9 +4261,9 @@ static s32 GetChatLeaderActionRequestMessage(u8 *dst, u32 gender, u16 *activityD
                 break;
             }
         }
-        if (species == SPECIES_EGG)
+        if (species == SPECIES_DUCK)
         {
-            StringCopy(dst, sText_OfferToTradeEgg);
+            StringCopy(dst, sText_OfferToTradeDuck);
         }
         else
         {
@@ -4319,7 +4319,7 @@ static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_DUCK)
             count++;
     }
 
@@ -4346,12 +4346,12 @@ void Script_ResetUnionRoomTrade(void)
     ResetUnionRoomTrade(&sUnionRoomTrade);
 }
 
-static bool32 RegisterTradeMonAndGetIsEgg(u32 monId, struct UnionRoomTrade *trade)
+static bool32 RegisterTradeMonAndGetIsDuck(u32 monId, struct UnionRoomTrade *trade)
 {
     trade->playerSpecies = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES2);
     trade->playerLevel = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
     trade->playerPersonality = GetMonData(&gPlayerParty[monId], MON_DATA_PERSONALITY);
-    if (trade->playerSpecies == SPECIES_EGG)
+    if (trade->playerSpecies == SPECIES_DUCK)
         return TRUE;
     else
         return FALSE;

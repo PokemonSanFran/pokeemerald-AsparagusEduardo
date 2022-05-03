@@ -78,7 +78,7 @@ enum {
     MSG_PARTY_FULL,
     MSG_HOLDING_POKE,
     MSG_WHICH_ONE_WILL_TAKE,
-    MSG_CANT_RELEASE_EGG,
+    MSG_CANT_RELEASE_DUCK,
     MSG_CONTINUE_BOX,
     MSG_CAME_BACK,
     MSG_WORRIED,
@@ -504,7 +504,7 @@ struct PokemonStorageSystemData
     bool8 setMosaic;
     u8 displayMonMarkings;
     u8 displayMonLevel;
-    bool8 displayMonIsEgg;
+    bool8 displayMonIsDuck;
     u8 displayMonName[POKEMON_NAME_LENGTH + 1];
     u8 displayMonNameText[36];
     u8 displayMonSpeciesName[36];
@@ -1086,7 +1086,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,          MSG_VAR_NONE},
     [MSG_HOLDING_POKE]         = {gText_YoureHoldingAPkmn,       MSG_VAR_NONE},
     [MSG_WHICH_ONE_WILL_TAKE]  = {gText_WhichOneWillYouTake,     MSG_VAR_NONE},
-    [MSG_CANT_RELEASE_EGG]     = {gText_YouCantReleaseAnEgg,     MSG_VAR_NONE},
+    [MSG_CANT_RELEASE_DUCK]     = {gText_YouCantReleaseAnDuck,     MSG_VAR_NONE},
     [MSG_CONTINUE_BOX]         = {gText_ContinueBoxOperations,   MSG_VAR_NONE},
     [MSG_CAME_BACK]            = {gText_PkmnCameBack,            MSG_VAR_MON_NAME_1},
     [MSG_WORRIED]              = {gText_WasItWorriedAboutYou,    MSG_VAR_NONE},
@@ -1427,14 +1427,14 @@ s16 GetFirstFreeBoxSpot(u8 boxId)
     return -1; // all spots are taken
 }
 
-u8 CountPartyNonEggMons(void)
+u8 CountPartyNonDuckMons(void)
 {
     u16 i, count;
 
     for (i = 0, count = 0; i < GetPartySize(); i++) //tx_randomizer_and_challenges
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
-            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK))
         {
             count++;
         }
@@ -1443,7 +1443,7 @@ u8 CountPartyNonEggMons(void)
     return count;
 }
 
-u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore)
+u8 CountPartyAliveNonDuckMonsExcept(u8 slotToIgnore)
 {
     u16 i, count;
 
@@ -1451,7 +1451,7 @@ u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore)
     {
         if (i != slotToIgnore
             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
-            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK)
             && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
             count++;
@@ -1461,9 +1461,9 @@ u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore)
     return count;
 }
 
-u16 CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(void)
+u16 CountPartyAliveNonDuckMons_IgnoreVar0x8004Slot(void)
 {
-    return CountPartyAliveNonEggMonsExcept(gSpecialVar_0x8004);
+    return CountPartyAliveNonDuckMonsExcept(gSpecialVar_0x8004);
 }
 
 u8 CountPartyMons(void)
@@ -1733,7 +1733,7 @@ static s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 
     {
         for (i = startIdx + direction; i >= 0 && i <= stopIdx; i += direction)
         {
-            if (GetBoxMonData(box + i, MON_DATA_SPECIES) != 0 && !GetBoxMonData(box + i, MON_DATA_IS_EGG))
+            if (GetBoxMonData(box + i, MON_DATA_SPECIES) != 0 && !GetBoxMonData(box + i, MON_DATA_IS_DUCK))
                 return i;
         }
     }
@@ -2675,9 +2675,9 @@ static void Task_OnSelectedMon(u8 taskId)
             {
                 sStorage->state = 3;
             }
-            else if (sStorage->displayMonIsEgg)
+            else if (sStorage->displayMonIsDuck)
             {
-                sStorage->state = 5; // Cannot release an Egg.
+                sStorage->state = 5; // Cannot release an Duck.
             }
             else if (ItemIsMail(sStorage->displayMonItemId))
             {
@@ -2728,7 +2728,7 @@ static void Task_OnSelectedMon(u8 taskId)
         break;
     case 5:
         PlaySE(SE_FAILURE);
-        PrintMessage(MSG_CANT_RELEASE_EGG);
+        PrintMessage(MSG_CANT_RELEASE_DUCK);
         sStorage->state = 6;
         break;
     case 4:
@@ -6821,7 +6821,7 @@ static void SetMonMarkings(u8 markings)
 
 static bool8 IsRemovingLastPartyMon(void)
 {
-    if (sCursorArea == CURSOR_AREA_IN_PARTY && !sIsMonBeingMoved && CountPartyAliveNonEggMonsExcept(sCursorPosition) == 0)
+    if (sCursorArea == CURSOR_AREA_IN_PARTY && !sIsMonBeingMoved && CountPartyAliveNonDuckMonsExcept(sCursorPosition) == 0)
         return TRUE;
     else
         return FALSE;
@@ -6831,9 +6831,9 @@ static bool8 CanShiftMon(void)
 {
     if (sIsMonBeingMoved)
     {
-        if (sCursorArea == CURSOR_AREA_IN_PARTY && CountPartyAliveNonEggMonsExcept(sCursorPosition) == 0)
+        if (sCursorArea == CURSOR_AREA_IN_PARTY && CountPartyAliveNonDuckMonsExcept(sCursorPosition) == 0)
         {
-            if (sStorage->displayMonIsEgg || GetMonData(&sStorage->movingMon, MON_DATA_HP) == 0)
+            if (sStorage->displayMonIsDuck || GetMonData(&sStorage->movingMon, MON_DATA_HP) == 0)
                 return FALSE;
         }
         return TRUE;
@@ -6915,11 +6915,11 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
 {
     u8 *txtPtr;
     u16 gender;
-    bool8 sanityIsBadEgg;
+    bool8 sanityIsBadDuck;
 
     sStorage->displayMonItemId = ITEM_NONE;
     gender = MON_MALE;
-    sanityIsBadEgg = FALSE;
+    sanityIsBadDuck = FALSE;
     if (mode == MODE_PARTY)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
@@ -6927,11 +6927,11 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES2);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
-            sanityIsBadEgg = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
-            if (sanityIsBadEgg)
-                sStorage->displayMonIsEgg = TRUE;
+            sanityIsBadDuck = GetMonData(mon, MON_DATA_SANITY_IS_BAD_DUCK);
+            if (sanityIsBadDuck)
+                sStorage->displayMonIsDuck = TRUE;
             else
-                sStorage->displayMonIsEgg = GetMonData(mon, MON_DATA_IS_EGG);
+                sStorage->displayMonIsDuck = GetMonData(mon, MON_DATA_IS_DUCK);
 
             GetMonData(mon, MON_DATA_NICKNAME, sStorage->displayMonName);
             StringGet_Nickname(sStorage->displayMonName);
@@ -6951,11 +6951,11 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
             u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
-            sanityIsBadEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
-            if (sanityIsBadEgg)
-                sStorage->displayMonIsEgg = TRUE;
+            sanityIsBadDuck = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_DUCK);
+            if (sanityIsBadDuck)
+                sStorage->displayMonIsDuck = TRUE;
             else
-                sStorage->displayMonIsEgg = GetBoxMonData(boxMon, MON_DATA_IS_EGG);
+                sStorage->displayMonIsDuck = GetBoxMonData(boxMon, MON_DATA_IS_DUCK);
 
             GetBoxMonData(boxMon, MON_DATA_NICKNAME, sStorage->displayMonName);
             StringGet_Nickname(sStorage->displayMonName);
@@ -6981,12 +6981,12 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         StringFill(sStorage->displayMonGenderLvlText, CHAR_SPACE, 8);
         StringFill(sStorage->displayMonItemName, CHAR_SPACE, 8);
     }
-    else if (sStorage->displayMonIsEgg)
+    else if (sStorage->displayMonIsDuck)
     {
-        if (sanityIsBadEgg)
+        if (sanityIsBadDuck)
             StringCopyPadded(sStorage->displayMonNameText, sStorage->displayMonName, CHAR_SPACE, 5);
         else
-            StringCopyPadded(sStorage->displayMonNameText, gText_EggNickname, CHAR_SPACE, 8);
+            StringCopyPadded(sStorage->displayMonNameText, gText_DuckNickname, CHAR_SPACE, 8);
 
         StringFill(sStorage->displayMonSpeciesName, CHAR_SPACE, 8);
         StringFill(sStorage->displayMonGenderLvlText, CHAR_SPACE, 8);
@@ -7733,7 +7733,7 @@ static bool8 SetMenuTexts_Mon(void)
 
 static bool8 SetMenuTexts_Item(void)
 {
-    if (sStorage->displayMonSpecies == SPECIES_EGG)
+    if (sStorage->displayMonSpecies == SPECIES_DUCK)
         return FALSE;
 
     if (!IsMovingItem())
@@ -9648,7 +9648,7 @@ s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex
             else if (i > maxIndex)
                 i = 0;
             if (GetBoxMonData(&boxMons[i], MON_DATA_SPECIES) != SPECIES_NONE
-                && !GetBoxMonData(&boxMons[i], MON_DATA_IS_EGG))
+                && !GetBoxMonData(&boxMons[i], MON_DATA_IS_DUCK))
                 return i;
             i += direction;
             j++;
@@ -9681,14 +9681,14 @@ bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition)
     if (boxId < TOTAL_BOXES_COUNT
         && boxPosition < IN_BOX_COUNT
         && GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES)
-        && !GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_IS_EGG)
-        && !GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_IS_BAD_EGG))
+        && !GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_IS_DUCK)
+        && !GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_IS_BAD_DUCK))
         return TRUE;
     else
         return FALSE;
 }
 
-u32 CountStorageNonEggMons(void)
+u32 CountStorageNonDuckMons(void)
 {
     s32 i, j;
     u32 count = 0;
@@ -9698,7 +9698,7 @@ u32 CountStorageNonEggMons(void)
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
-                && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG))
+                && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_DUCK))
                 count++;
         }
     }
@@ -9716,7 +9716,7 @@ u32 CountAllStorageMons(void)
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
-                || GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG))
+                || GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_DUCK))
                 count++;
         }
     }
@@ -9734,7 +9734,7 @@ bool32 AnyStorageMonWithMove(u16 moveId)
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_HAS_SPECIES)
-                && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_EGG)
+                && !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SANITY_IS_DUCK)
                 && GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_KNOWN_MOVES, (u8*)moves))
                 return TRUE;
         }
@@ -10196,7 +10196,7 @@ u16 GetFirstBoxPokemon(void) // @Kurausukun
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES) != SPECIES_NONE &&
-            !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_EGG))
+            !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_DUCK))
             {
                 return (i * IN_BOX_COUNT) + j;
             }

@@ -397,19 +397,19 @@ MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory::
 	.string "{STR_VAR_3} is a legendary fishing\n"
 	.string "expert!$"
 
-MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle::
-	.string "The Egg-Warming Trainer$"
+MauvilleCity_PokemonCenter_1F_Text_DucksHatchedTitle::
+	.string "The Duck-Warming Trainer$"
 
-MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction::
-	.string "Hatched Eggs$"
+MauvilleCity_PokemonCenter_1F_Text_DucksHatchedAction::
+	.string "Hatched Ducks$"
 
-MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory::
+MauvilleCity_PokemonCenter_1F_Text_DucksHatchedStory::
 	.string "This is a tale of a Trainer\n"
 	.string "named {STR_VAR_3}.\p"
 	.string "This Trainer hatched {STR_VAR_1} Pokémon\n"
-	.string "from Eggs!\p"
+	.string "from Ducks!\p"
 	.string "{STR_VAR_3} is a legendary warmer\n"
-	.string "of Eggs!$"
+	.string "of Ducks!$"
 
 MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedTitle::
 	.string "The Evolver Trainer$"

@@ -102,8 +102,8 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(KINGLER, gMonBackPic_Kingler),
     SPECIES_SPRITE(VOLTORB, gMonBackPic_Voltorb),
     SPECIES_SPRITE(ELECTRODE, gMonBackPic_Electrode),
-    SPECIES_SPRITE(EXEGGCUTE, gMonBackPic_Exeggcute),
-    SPECIES_SPRITE(EXEGGUTOR, gMonBackPic_Exeggutor),
+    SPECIES_SPRITE(EXDUCKCUTE, gMonBackPic_Exduckcute),
+    SPECIES_SPRITE(EXDUCKUTOR, gMonBackPic_Exduckutor),
     SPECIES_SPRITE(CUBONE, gMonBackPic_Cubone),
     SPECIES_SPRITE(MAROWAK, gMonBackPic_Marowak),
     SPECIES_SPRITE(HITMONLEE, gMonBackPic_Hitmonlee),
@@ -968,7 +968,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(GOLEM_ALOLAN, gMonBackPic_GolemAlolan),
     SPECIES_SPRITE(GRIMER_ALOLAN, gMonBackPic_GrimerAlolan),
     SPECIES_SPRITE(MUK_ALOLAN, gMonBackPic_MukAlolan),
-    SPECIES_SPRITE(EXEGGUTOR_ALOLAN, gMonBackPic_ExeggutorAlolan),
+    SPECIES_SPRITE(EXDUCKUTOR_ALOLAN, gMonBackPic_ExduckutorAlolan),
     SPECIES_SPRITE(MAROWAK_ALOLAN, gMonBackPic_MarowakAlolan),
 
     SPECIES_SPRITE(MEOWTH_GALARIAN, gMonBackPic_MeowthGalarian),
@@ -1272,7 +1272,7 @@ const struct CompressedSpriteSheet gMonBackPicTable[] =
     SPECIES_SPRITE(CALYREX_ICE_RIDER, gMonBackPic_CalyrexIceRider),
     SPECIES_SPRITE(CALYREX_SHADOW_RIDER, gMonBackPic_CalyrexShadowRider),
 
-    SPECIES_SPRITE(EGG, gMonFrontPic_Egg),
+    SPECIES_SPRITE(DUCK, gMonFrontPic_Duck),
 };
 
 const struct CompressedSpriteSheet gMonBackPicTableFemale[] =

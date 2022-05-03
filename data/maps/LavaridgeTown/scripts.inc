@@ -232,34 +232,34 @@ LavaridgeTown_EventScript_ExpertF::
 	msgbox LavaridgeTown_Text_OhYouLikeHotSprings, MSGBOX_NPC
 	end
 
-LavaridgeTown_EventScript_EggWoman::
+LavaridgeTown_EventScript_DuckWoman::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_ReceivedEgg
-	msgbox LavaridgeTown_Text_HaveEggWillYouTakeIt, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_DeclineEgg
+	goto_if_set FLAG_RECEIVED_LAVARIDGE_DUCK, LavaridgeTown_EventScript_ReceivedDuck
+	msgbox LavaridgeTown_Text_HaveDuckWillYouTakeIt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_DeclineDuck
 	getpartysize
-	goto_if_eq VAR_RESULT, PARTY_SIZE, LavaridgeTown_EventScript_NoRoomForEgg
-	msgbox LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_LAVARIDGE_EGG
+	goto_if_eq VAR_RESULT, PARTY_SIZE, LavaridgeTown_EventScript_NoRoomForDuck
+	msgbox LavaridgeTown_Text_HopeYoullWalkPlentyWithDuck, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_LAVARIDGE_DUCK
 	playfanfare MUS_OBTAIN_ITEM
-	message LavaridgeTown_Text_ReceivedTheEgg
+	message LavaridgeTown_Text_ReceivedTheDuck
 	waitfanfare
-	giveegg SPECIES_WYNAUT
+	giveduck SPECIES_WYNAUT
 	release
 	end
 
-LavaridgeTown_EventScript_ReceivedEgg::
-	msgbox LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare, MSGBOX_DEFAULT
+LavaridgeTown_EventScript_ReceivedDuck::
+	msgbox LavaridgeTown_Text_EverySoOftenDuckFoundAtDayCare, MSGBOX_DEFAULT
 	release
 	end
 
-LavaridgeTown_EventScript_NoRoomForEgg::
-	msgbox LavaridgeTown_Text_NoRoomForThisEgg, MSGBOX_DEFAULT
+LavaridgeTown_EventScript_NoRoomForDuck::
+	msgbox LavaridgeTown_Text_NoRoomForThisDuck, MSGBOX_DEFAULT
 	release
 	end
 
-LavaridgeTown_EventScript_DeclineEgg::
+LavaridgeTown_EventScript_DeclineDuck::
 	msgbox LavaridgeTown_Text_AsYouWishThen, MSGBOX_DEFAULT
 	release
 	end
@@ -320,8 +320,8 @@ LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
 	.string "he really is tough.\p"
 	.string "See you around!$"
 
-LavaridgeTown_Text_HaveEggWillYouTakeIt:
-	.string "I have here an Egg.\p"
+LavaridgeTown_Text_HaveDuckWillYouTakeIt:
+	.string "I have here an Duck.\p"
 	.string "I'd hoped to hatch it by covering it in\n"
 	.string "hot sand by the hot springs.\l"
 	.string "But that doesn't seem to be enough…\p"
@@ -331,26 +331,26 @@ LavaridgeTown_Text_HaveEggWillYouTakeIt:
 	.string "You are a Trainer, yes?\n"
 	.string "And your Pokémon radiate vitality.\p"
 	.string "So, what say you?\n"
-	.string "Will you take this Egg to hatch?$"
+	.string "Will you take this Duck to hatch?$"
 
-LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg:
+LavaridgeTown_Text_HopeYoullWalkPlentyWithDuck:
 	.string "Good! I hope you'll walk plenty with\n"
-	.string "this here Egg!$"
+	.string "this here Duck!$"
 
-LavaridgeTown_Text_ReceivedTheEgg:
-	.string "{PLAYER} received the Egg.$"
+LavaridgeTown_Text_ReceivedTheDuck:
+	.string "{PLAYER} received the Duck.$"
 
-LavaridgeTown_Text_NoRoomForThisEgg:
+LavaridgeTown_Text_NoRoomForThisDuck:
 	.string "Oh? You've too many Pokémon.\n"
-	.string "There's no room for this Egg…$"
+	.string "There's no room for this Duck…$"
 
 LavaridgeTown_Text_AsYouWishThen:
 	.string "As you wish, then…\p"
 	.string "If you have a change of heart about\n"
-	.string "hatching this Egg, I will be here.$"
+	.string "hatching this Duck, I will be here.$"
 
-LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare:
-	.string "Every so often, an Egg will be found at\n"
+LavaridgeTown_Text_EverySoOftenDuckFoundAtDayCare:
+	.string "Every so often, an Duck will be found at\n"
 	.string "the Pokémon Day Care.\p"
 	.string "Or at least that's how the rumor goes.$"
 

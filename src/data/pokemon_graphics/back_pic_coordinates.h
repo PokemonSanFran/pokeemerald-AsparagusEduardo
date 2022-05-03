@@ -514,12 +514,12 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 40),
         .y_offset = 13,
     },
-    [SPECIES_EXEGGCUTE] =
+    [SPECIES_EXDUCKCUTE] =
     {
         .size = MON_COORDS_SIZE(64, 32),
         .y_offset = 18,
     },
-    [SPECIES_EXEGGUTOR] =
+    [SPECIES_EXDUCKUTOR] =
     {
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 8,
@@ -4832,7 +4832,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 6,
     },
-    [SPECIES_EXEGGUTOR_ALOLAN] =
+    [SPECIES_EXDUCKUTOR_ALOLAN] =
     {
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 4,
@@ -6104,8 +6104,8 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 7,
     },
-    // Egg
-    [SPECIES_EGG] =
+    // Duck
+    [SPECIES_DUCK] =
     {
         .size = MON_COORDS_SIZE(24, 24),
         .y_offset = 20,

@@ -1084,7 +1084,7 @@ static u8 GetPartyIdFromSelectionId(u8 selectionId)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK))
         {
             if (selectionId == 0)
                 return i;
@@ -1095,17 +1095,17 @@ static u8 GetPartyIdFromSelectionId(u8 selectionId)
     return 0;
 }
 
-// Eggs are not viewable on the condition screen, so count how many are skipped over to reach the party id
+// Ducks are not viewable on the condition screen, so count how many are skipped over to reach the party id
 static u8 GetSelectionIdFromPartyId(u8 partyId)
 {
-    u8 i, numEggs;
-    for (i = 0, numEggs = 0; i < partyId; i++)
+    u8 i, numDucks;
+    for (i = 0, numDucks = 0; i < partyId; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-            numEggs++;
+        if (GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK))
+            numDucks++;
     }
 
-    return partyId - numEggs;
+    return partyId - numDucks;
 }
 
 // Unused
@@ -1158,7 +1158,7 @@ static void LoadPartyInfo(void)
 
     for (i = 0, numMons = 0; i < CalculatePlayerPartyCount(); i++)
     {
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK))
         {
             sMenu->party[numMons].boxId = TOTAL_BOXES_COUNT;
             sMenu->party[numMons].monId = i;

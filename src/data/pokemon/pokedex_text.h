@@ -608,17 +608,17 @@ const u8 gElectrodePokedexText[] = _(
     "alimenta de electricidad, causa grandes y\n"
     "caóticos apagones en ciudad próximas.");
 
-const u8 gExeggcutePokedexText[] = _(
-    "Está compuesto de seis huevos que forman\n"
+const u8 gExduckcutePokedexText[] = _(
+    "Está compuesto de seis patos que forman\n"
     "una tupida piña que va girando. Si empiezan\n"
     "a resquebrajarse las cáscaras, no hay duda\n"
     "de que está a punto de evolucionar.");
 
-const u8 gExeggutorPokedexText[] = _(
+const u8 gExduckutorPokedexText[] = _(
     "Es originario del trópico. Cuando se expone\n"
     "a un sol intenso, le empiezan a crecer las\n"
     "cabezas. Dicen que, si caen al suelo, las\n"
-    "cabezas se unen para formar un Exeggcute.");
+    "cabezas se unen para formar un Exduckcute.");
 
 const u8 gCubonePokedexText[] = _(
     "Le apena no volver a ver a su madre. La luna\n"
@@ -675,7 +675,7 @@ const u8 gRhydonPokedexText[] = _(
     "y tiene un cerebro muy bien desarrollado.");
 
 const u8 gChanseyPokedexText[] = _(
-    "Pone a diario huevos con un enorme valor\n"
+    "Pone a diario patos con un enorme valor\n"
     "nutritivo. Están tan ricos que hasta quien\n"
     "no tenga hambre se los comerá en un abrir\n"
     "y cerrar de ojos.");
@@ -713,7 +713,7 @@ const u8 gGoldeenPokedexText[] = _(
 const u8 gSeakingPokedexText[] = _(
     "Perfora agujeros en los cantos rodados\n"
     "de las cuencas de los ríos. Así protege\n"
-    "sus huevos de cualquier ataque y evita\n"
+    "sus patos de cualquier ataque y evita\n"
     "que los arrastre la corriente.");
 
 const u8 gStaryuPokedexText[] = _(
@@ -970,7 +970,7 @@ const u8 gSentretPokedexText[] = _(
 const u8 gFurretPokedexText[] = _(
     "Es de constitución delgada, lo que le sirve\n"
     "en combate para escabullirse con gran\n"
-    "habilidad por cualquier huevo y escapar.\n"
+    "habilidad por cualquier pato y escapar.\n"
     "Aunque tiene patas cortas, es ágil y veloz.");
 
 const u8 gHoothootPokedexText[] = _(
@@ -1289,7 +1289,7 @@ const u8 gSneaselPokedexText[] = _(
     "Trepa los árboles clavando en la\n"
     "corteza sus garras curvadas. Busca\n"
     "nidos desprovistos de vigilancia paterna\n"
-    "para robar huevos y comérselos.");
+    "para robar patos y comérselos.");
 
 const u8 gTeddiursaPokedexText[] = _(
     "Le encanta chuparse las palmas, que tiene\n"
@@ -1451,7 +1451,7 @@ const u8 gBlisseyPokedexText[] = _(
     "Percibe la tristeza a través de su sedoso\n"
     "pelaje. Si ve que alguien está apenado,\n"
     "acudirá a su lado y compartirá un\n"
-    "huevo de la felicidad para animarle.");
+    "pato de la felicidad para animarle.");
 
 const u8 gRaikouPokedexText[] = _(
     "Tiene la velocidad del rayo. Al rugir, emite\n"
@@ -1709,7 +1709,7 @@ const u8 gPelipperPokedexText[] = _(
     "Va esquivando las crestas de las olas.\n"
     "Cuando localiza a su presa, usa el enorme\n"
     "pico que tiene para sacarla del agua.\n"
-    "También protege sus huevos con él.");
+    "También protege sus patos con él.");
 
 const u8 gSurskitPokedexText[] = _(
     "Se agrupan en charcos después de la lluvia\n"
@@ -2809,7 +2809,7 @@ const u8 gTogekissPokedexText[] = _(
     "where there is strife.");
 
 const u8 gYanmegaPokedexText[] = _(
-    "This six-legged Pokémon is easily capable\n"
+    "This six-lducked Pokémon is easily capable\n"
     "of transporting an adult in flight. It is\n"
     "adept at biting apart foes while flying\n"
     "by at high speed.");
@@ -2890,7 +2890,7 @@ const u8 gAzelfPokedexText[] = _(
     "This Pokémon is said to have endowed\n"
     "humans with the determination needed to\n"
     "do things. It is thought that Uxie, Mesprit\n"
-    "and Azelf all came from the same egg.");
+    "and Azelf all came from the same duck.");
 
 const u8 gDialgaPokedexText[] = _(
     "A Pokémon spoken of in legend.\n"
@@ -2954,7 +2954,7 @@ const u8 gShayminPokedexText[] = _(
 
 const u8 gArceusPokedexText[] = _(
     "It is told in mythology that this Pokémon\n"
-    "emerged from an egg and shaped all there\n"
+    "emerged from an duck and shaped all there\n"
     "is in this world, before the universe\n"
     "even existed.");
 
@@ -3184,7 +3184,7 @@ const u8 gExcadrillPokedexText[] = _(
 const u8 gAudinoPokedexText[] = _(
     "Its auditory sense is astounding.\n"
     "Using the feelers on its ears, it can tell\n"
-    "how someone is feeling or when an egg\n"
+    "how someone is feeling or when an duck\n"
     "might hatch.\n"
     "");
 
@@ -3249,7 +3249,7 @@ const u8 gSwadloonPokedexText[] = _(
     "the plant life.");
 
 const u8 gLeavannyPokedexText[] = _(
-    "It keeps its eggs warm with heat from\n"
+    "It keeps its ducks warm with heat from\n"
     "fermenting leaves. It also uses leaves to\n"
     "weave warm wrappings for Sewaddle by\n"
     "using the silk secreted from its mouth.");
@@ -5965,17 +5965,17 @@ const u8 gElectrodePokedexText[] = _(
     "electricity, they cause massive and\n"
     "chaotic blackouts in nearby cities.");
 
-const u8 gExeggcutePokedexText[] = _(
-    "It consists of six eggs that care for each\n"
-    "other. The eggs attract each other and\n"
+const u8 gExduckcutePokedexText[] = _(
+    "It consists of six ducks that care for each\n"
+    "other. The ducks attract each other and\n"
     "spin around. When cracks increasingly\n"
     "appear, it is close to evolution.");
 
-const u8 gExeggutorPokedexText[] = _(
-    "Originally from the tropics, Exeggutor's\n"
+const u8 gExduckutorPokedexText[] = _(
+    "Originally from the tropics, Exduckutor's\n"
     "heads grow larger from exposure to strong\n"
     "sunlight. It is said that when the heads\n"
-    "fall, they group to form an Exeggcute.");
+    "fall, they group to form an Exduckcute.");
 
 const u8 gCubonePokedexText[] = _(
     "It pines for the mother it will never see\n"
@@ -6032,8 +6032,8 @@ const u8 gRhydonPokedexText[] = _(
     "is well developed.");
 
 const u8 gChanseyPokedexText[] = _(
-    "Chansey lay nutritionally excellent eggs\n"
-    "every day. The eggs are so delicious, they\n"
+    "Chansey lay nutritionally excellent ducks\n"
+    "every day. The ducks are so delicious, they\n"
     "are eagerly devoured by even those people\n"
     "who have lost their appetite.");
 
@@ -6070,7 +6070,7 @@ const u8 gGoldeenPokedexText[] = _(
 const u8 gSeakingPokedexText[] = _(
     "It punches holes in boulders on stream-\n"
     "beds. This is a clever innovation that\n"
-    "prevents its eggs from being attacked or\n"
+    "prevents its ducks from being attacked or\n"
     "washed away by the current.");
 
 const u8 gStaryuPokedexText[] = _(
@@ -6646,7 +6646,7 @@ const u8 gHeracrossPokedexText[] = _(
 const u8 gSneaselPokedexText[] = _(
     "A Sneasel scales trees by punching its\n"
     "hooked claws into the bark. It seeks out\n"
-    "unguarded nests and steals eggs for food\n"
+    "unguarded nests and steals ducks for food\n"
     "while the parents are away.");
 
 const u8 gTeddiursaPokedexText[] = _(
@@ -6808,7 +6808,7 @@ const u8 gMiltankPokedexText[] = _(
 const u8 gBlisseyPokedexText[] = _(
     "If it senses sadness with its fluffy fur,\n"
     "a Blissey will rush over to the sad person,\n"
-    "however far away, to share an egg of\n"
+    "however far away, to share an duck of\n"
     "happiness that brings a smile to any face.");
 
 const u8 gRaikouPokedexText[] = _(
@@ -7067,7 +7067,7 @@ const u8 gPelipperPokedexText[] = _(
     "It skims the tops of waves as it flies.\n"
     "When it spots prey, it uses its large beak\n"
     "to scoop up the victim with water.\n"
-    "It protects its eggs in its beak.");
+    "It protects its ducks in its beak.");
 
 const u8 gSurskitPokedexText[] = _(
     "They gather on puddles after evening\n"
@@ -8168,7 +8168,7 @@ const u8 gTogekissPokedexText[] = _(
     "where there is strife.");
 
 const u8 gYanmegaPokedexText[] = _(
-    "This six-legged Pokémon is easily capable\n"
+    "This six-lducked Pokémon is easily capable\n"
     "of transporting an adult in flight. It is\n"
     "adept at biting apart foes while flying\n"
     "by at high speed.");
@@ -8249,7 +8249,7 @@ const u8 gAzelfPokedexText[] = _(
     "This Pokémon is said to have endowed\n"
     "humans with the determination needed to\n"
     "do things. It is thought that Uxie, Mesprit\n"
-    "and Azelf all came from the same egg.");
+    "and Azelf all came from the same duck.");
 
 const u8 gDialgaPokedexText[] = _(
     "A Pokémon spoken of in legend.\n"
@@ -8313,7 +8313,7 @@ const u8 gShayminPokedexText[] = _(
 
 const u8 gArceusPokedexText[] = _(
     "It is told in mythology that this Pokémon\n"
-    "emerged from an egg and shaped all there\n"
+    "emerged from an duck and shaped all there\n"
     "is in this world, before the universe\n"
     "even existed.");
 
@@ -8542,7 +8542,7 @@ const u8 gExcadrillPokedexText[] = _(
 const u8 gAudinoPokedexText[] = _(
     "Its auditory sense is astounding.\n"
     "Using the feelers on its ears, it can tell\n"
-    "how someone is feeling or when an egg\n"
+    "how someone is feeling or when an duck\n"
     "might hatch.");
 
 const u8 gTimburrPokedexText[] = _(
@@ -8606,7 +8606,7 @@ const u8 gSwadloonPokedexText[] = _(
     "the plant life.");
 
 const u8 gLeavannyPokedexText[] = _(
-    "It keeps its eggs warm with heat from\n"
+    "It keeps its ducks warm with heat from\n"
     "fermenting leaves. It also uses leaves to\n"
     "weave warm wrappings for Sewaddle by\n"
     "using the silk secreted from its mouth.");

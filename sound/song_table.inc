@@ -114,7 +114,7 @@ gSongTable::
 	song se_pokenav_on, 1, 1
 	song se_pokenav_off, 1, 1
 	song se_dex_search, 1, 1
-	song se_egg_hatch, 1, 1
+	song se_duck_hatch, 1, 1
 	song se_ball_tray_enter, 1, 1
 	song se_ball_tray_ball, 1, 1
 	song se_ball_tray_exit, 2, 2

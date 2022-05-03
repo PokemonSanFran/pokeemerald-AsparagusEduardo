@@ -974,10 +974,10 @@ static const struct Story sStorytellerStories[] = {
         MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory
     },
     {
-        GAME_STAT_HATCHED_EGGS, 1,
-        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle,
-        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction,
-        MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory
+        GAME_STAT_HATCHED_DUCKS, 1,
+        MauvilleCity_PokemonCenter_1F_Text_DucksHatchedTitle,
+        MauvilleCity_PokemonCenter_1F_Text_DucksHatchedAction,
+        MauvilleCity_PokemonCenter_1F_Text_DucksHatchedStory
     },
     {
         GAME_STAT_EVOLVED_POKEMON, 1,

@@ -101,8 +101,8 @@ gCryTable::
 	cry Cry_Kingler
 	cry Cry_Voltorb
 	cry Cry_Electrode
-	cry Cry_Exeggcute
-	cry Cry_Exeggutor
+	cry Cry_Exduckcute
+	cry Cry_Exduckutor
 	cry Cry_Cubone
 	cry Cry_Marowak
 	cry Cry_Hitmonlee
@@ -969,7 +969,7 @@ gCryTable::
 	cry Cry_Golem
 	cry Cry_Grimer
 	cry Cry_Muk
-	cry Cry_Exeggutor
+	cry Cry_Exduckutor
 	cry Cry_Marowak
 	@ Galarian Forms
 	cry Cry_Meowth
@@ -1377,8 +1377,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Kingler
 	cry_reverse Cry_Voltorb
 	cry_reverse Cry_Electrode
-	cry_reverse Cry_Exeggcute
-	cry_reverse Cry_Exeggutor
+	cry_reverse Cry_Exduckcute
+	cry_reverse Cry_Exduckutor
 	cry_reverse Cry_Cubone
 	cry_reverse Cry_Marowak
 	cry_reverse Cry_Hitmonlee
@@ -2243,7 +2243,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Golem
 	cry_reverse Cry_Grimer
 	cry_reverse Cry_Muk
-	cry_reverse Cry_Exeggutor
+	cry_reverse Cry_Exduckutor
 	cry_reverse Cry_Marowak
 	@ Galarian Forms
 	cry_reverse Cry_Meowth

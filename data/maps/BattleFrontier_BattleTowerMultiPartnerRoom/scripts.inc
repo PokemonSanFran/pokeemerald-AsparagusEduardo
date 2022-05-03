@@ -660,7 +660,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Mon2Ask::
 	.string "{STR_VAR_2}, I did choose.\p"
 	.string "So, what do you say?\n"
 	.string "Come on, make my day!\p"
-	.string "Please, I'm begging you!\n"
+	.string "Please, I'm bducking you!\n"
 	.string "Let me join you, don't leave me blue!$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Accept::

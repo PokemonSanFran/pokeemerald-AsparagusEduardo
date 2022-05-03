@@ -429,10 +429,10 @@ static const struct PyramidWildMon sOpenLevelWildMons_Round9[] =
         .moves = {MOVE_EARTHQUAKE, MOVE_TOXIC, MOVE_SLUDGE_BOMB, MOVE_PSYCHIC}
     },
     {
-        .species = SPECIES_EXEGGUTOR,
+        .species = SPECIES_EXDUCKUTOR,
         .lvl = 8,
         .abilityNum = ABILITY_RANDOM,
-        .moves = {MOVE_EGG_BOMB, MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_NONE}
+        .moves = {MOVE_DUCK_BOMB, MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_NONE}
     },
     {
         .species = SPECIES_SLOWKING,

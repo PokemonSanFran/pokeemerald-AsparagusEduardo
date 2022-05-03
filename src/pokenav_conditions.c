@@ -347,8 +347,8 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 arg3)
     *(str++) = TEXT_COLOR_TRANSPARENT;
     *(str++) = TEXT_COLOR_LIGHT_BLUE;
 
-    if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_EGG, NULL))
-        return StringCopyPadded(str, gText_EggNickname, CHAR_SPACE, 12);
+    if (GetBoxOrPartyMonData(boxId, monId, MON_DATA_IS_DUCK, NULL))
+        return StringCopyPadded(str, gText_DuckNickname, CHAR_SPACE, 12);
 
     GetBoxOrPartyMonData(boxId, monId, MON_DATA_NICKNAME, str);
     StringGet_Nickname(str);
@@ -464,7 +464,7 @@ static void InitPartyConditionListParameters(void)
     menu->inSearchMode = FALSE;
     for (i = 0, count = 0; i < CalculatePlayerPartyCount(); i++)
     {
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_DUCK))
         {
             monListPtr->monData[count].boxId = TOTAL_BOXES_COUNT;
             monListPtr->monData[count].monId = i;

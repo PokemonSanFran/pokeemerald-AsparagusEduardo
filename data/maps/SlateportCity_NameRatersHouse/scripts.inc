@@ -23,7 +23,7 @@ SlateportCity_NameRatersHouse_EventScript_DeclineNameRate::
 
 SlateportCity_NameRatersHouse_EventScript_RateMonNickname::
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	goto_if_eq VAR_RESULT, SPECIES_EGG, SlateportCity_NameRatersHouse_EventScript_CantRateEgg
+	goto_if_eq VAR_RESULT, SPECIES_DUCK, SlateportCity_NameRatersHouse_EventScript_CantRateDuck
 	special BufferMonNickname
 	special IsMonOTIDNotPlayers
 	goto_if_eq VAR_RESULT, TRUE, SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT
@@ -35,8 +35,8 @@ SlateportCity_NameRatersHouse_EventScript_RateMonNickname::
 	goto_if_eq VAR_RESULT, NO, SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
 	end
 
-SlateportCity_NameRatersHouse_EventScript_CantRateEgg::
-	msgbox SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
+SlateportCity_NameRatersHouse_EventScript_CantRateDuck::
+	msgbox SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnDuck, MSGBOX_DEFAULT
 	release
 	end
 
@@ -168,7 +168,7 @@ SlateportCity_NameRatersHouse_Text_MagnificentName:
 	.string "You'll do well to cherish your\n"
 	.string "{STR_VAR_1} now and beyond.$"
 
-SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg:
+SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnDuck:
 	.string "Now, now.\n"
-	.string "That is merely an Egg!$"
+	.string "That is merely an Duck!$"
 

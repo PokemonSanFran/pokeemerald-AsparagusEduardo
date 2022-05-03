@@ -1,6 +1,6 @@
 #include "global.h"
 #include "pokemon.h"
-#include "egg_hatch.h"
+#include "duck_hatch.h"
 #include "pokedex.h"
 #include "constants/items.h"
 #include "script.h"
@@ -37,24 +37,24 @@
 #include "battle.h" // to get rid of later
 #include "constants/rgb.h"
 
-#define GFXTAG_EGG       12345
-#define GFXTAG_EGG_SHARD 23456
+#define GFXTAG_DUCK       12345
+#define GFXTAG_DUCK_SHARD 23456
 
-#define PALTAG_EGG       54321
+#define PALTAG_DUCK       54321
 
-#define EGG_X (DISPLAY_WIDTH / 2)
-#define EGG_Y (DISPLAY_HEIGHT / 2 - 5)
+#define DUCK_X (DISPLAY_WIDTH / 2)
+#define DUCK_Y (DISPLAY_HEIGHT / 2 - 5)
 
-struct EggHatchData
+struct DuckHatchData
 {
-    u8 eggSpriteId;
+    u8 duckSpriteId;
     u8 monSpriteId;
     u8 state;
     u8 delayTimer;
-    u8 eggPartyId;
+    u8 duckPartyId;
     u8 unused_5;
     u8 unused_6;
-    u8 eggShardVelocityId;
+    u8 duckShardVelocityId;
     u8 windowId;
     u8 unused_9;
     u8 unused_A;
@@ -63,30 +63,30 @@ struct EggHatchData
 };
 
 extern const u32 gTradePlatform_Tilemap[];
-extern const u8 gText_HatchedFromEgg[];
+extern const u8 gText_HatchedFromDuck[];
 extern const u8 gText_NicknameHatchPrompt[];
 
-static void Task_EggHatch(u8);
-static void CB2_LoadEggHatch(void);
-static void CB2_EggHatch(void);
-static void SpriteCB_Egg_Shake1(struct Sprite*);
-static void SpriteCB_Egg_Shake2(struct Sprite*);
-static void SpriteCB_Egg_Shake3(struct Sprite*);
-static void SpriteCB_Egg_WaitHatch(struct Sprite*);
-static void SpriteCB_Egg_Hatch(struct Sprite*);
-static void SpriteCB_Egg_Reveal(struct Sprite*);
-static void SpriteCB_EggShard(struct Sprite*);
-static void EggHatchPrintMessage(u8, u8*, u8, u8, u8);
-static void CreateRandomEggShardSprite(void);
-static void CreateEggShardSprite(u8, u8, s16, s16, s16, u8);
+static void Task_DuckHatch(u8);
+static void CB2_LoadDuckHatch(void);
+static void CB2_DuckHatch(void);
+static void SpriteCB_Duck_Shake1(struct Sprite*);
+static void SpriteCB_Duck_Shake2(struct Sprite*);
+static void SpriteCB_Duck_Shake3(struct Sprite*);
+static void SpriteCB_Duck_WaitHatch(struct Sprite*);
+static void SpriteCB_Duck_Hatch(struct Sprite*);
+static void SpriteCB_Duck_Reveal(struct Sprite*);
+static void SpriteCB_DuckShard(struct Sprite*);
+static void DuckHatchPrintMessage(u8, u8*, u8, u8, u8);
+static void CreateRandomDuckShardSprite(void);
+static void CreateDuckShardSprite(u8, u8, s16, s16, s16, u8);
 
-static struct EggHatchData *sEggHatchData;
+static struct DuckHatchData *sDuckHatchData;
 
-static const u16 sEggPalette[]  = INCBIN_U16("graphics/pokemon/egg/normal.gbapal");
-static const u8 sEggHatchTiles[] = INCBIN_U8("graphics/pokemon/egg/hatch.4bpp");
-static const u8 sEggShardTiles[] = INCBIN_U8("graphics/pokemon/egg/shard.4bpp");
+static const u16 sDuckPalette[]  = INCBIN_U16("graphics/pokemon/duck/normal.gbapal");
+static const u8 sDuckHatchTiles[] = INCBIN_U8("graphics/pokemon/duck/hatch.4bpp");
+static const u8 sDuckShardTiles[] = INCBIN_U8("graphics/pokemon/duck/shard.4bpp");
 
-static const struct OamData sOamData_Egg =
+static const struct OamData sOamData_Duck =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -103,77 +103,77 @@ static const struct OamData sOamData_Egg =
     .affineParam = 0,
 };
 
-static const union AnimCmd sSpriteAnim_Egg_Normal[] =
+static const union AnimCmd sSpriteAnim_Duck_Normal[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Egg_Cracked1[] =
+static const union AnimCmd sSpriteAnim_Duck_Cracked1[] =
 {
     ANIMCMD_FRAME(16, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Egg_Cracked2[] =
+static const union AnimCmd sSpriteAnim_Duck_Cracked2[] =
 {
     ANIMCMD_FRAME(32, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Egg_Cracked3[] =
+static const union AnimCmd sSpriteAnim_Duck_Cracked3[] =
 {
     ANIMCMD_FRAME(48, 5),
     ANIMCMD_END
 };
 
 enum {
-    EGG_ANIM_NORMAL,
-    EGG_ANIM_CRACKED_1,
-    EGG_ANIM_CRACKED_2,
-    EGG_ANIM_CRACKED_3,
+    DUCK_ANIM_NORMAL,
+    DUCK_ANIM_CRACKED_1,
+    DUCK_ANIM_CRACKED_2,
+    DUCK_ANIM_CRACKED_3,
 };
 
-static const union AnimCmd *const sSpriteAnimTable_Egg[] =
+static const union AnimCmd *const sSpriteAnimTable_Duck[] =
 {
-    [EGG_ANIM_NORMAL]    = sSpriteAnim_Egg_Normal,
-    [EGG_ANIM_CRACKED_1] = sSpriteAnim_Egg_Cracked1,
-    [EGG_ANIM_CRACKED_2] = sSpriteAnim_Egg_Cracked2,
-    [EGG_ANIM_CRACKED_3] = sSpriteAnim_Egg_Cracked3,
+    [DUCK_ANIM_NORMAL]    = sSpriteAnim_Duck_Normal,
+    [DUCK_ANIM_CRACKED_1] = sSpriteAnim_Duck_Cracked1,
+    [DUCK_ANIM_CRACKED_2] = sSpriteAnim_Duck_Cracked2,
+    [DUCK_ANIM_CRACKED_3] = sSpriteAnim_Duck_Cracked3,
 };
 
-static const struct SpriteSheet sEggHatch_Sheet =
+static const struct SpriteSheet sDuckHatch_Sheet =
 {
-    .data = sEggHatchTiles,
+    .data = sDuckHatchTiles,
     .size = 0x800,
-    .tag = GFXTAG_EGG,
+    .tag = GFXTAG_DUCK,
 };
 
-static const struct SpriteSheet sEggShards_Sheet =
+static const struct SpriteSheet sDuckShards_Sheet =
 {
-    .data = sEggShardTiles,
+    .data = sDuckShardTiles,
     .size = 0x80,
-    .tag = GFXTAG_EGG_SHARD,
+    .tag = GFXTAG_DUCK_SHARD,
 };
 
-static const struct SpritePalette sEgg_SpritePalette =
+static const struct SpritePalette sDuck_SpritePalette =
 {
-    .data = sEggPalette,
-    .tag = PALTAG_EGG
+    .data = sDuckPalette,
+    .tag = PALTAG_DUCK
 };
 
-static const struct SpriteTemplate sSpriteTemplate_Egg =
+static const struct SpriteTemplate sSpriteTemplate_Duck =
 {
-    .tileTag = GFXTAG_EGG,
-    .paletteTag = PALTAG_EGG,
-    .oam = &sOamData_Egg,
-    .anims = sSpriteAnimTable_Egg,
+    .tileTag = GFXTAG_DUCK,
+    .paletteTag = PALTAG_DUCK,
+    .oam = &sOamData_Duck,
+    .anims = sSpriteAnimTable_Duck,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
 
-static const struct OamData sOamData_EggShard =
+static const struct OamData sOamData_DuckShard =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
@@ -190,50 +190,50 @@ static const struct OamData sOamData_EggShard =
     .affineParam = 0,
 };
 
-static const union AnimCmd sSpriteAnim_EggShard0[] =
+static const union AnimCmd sSpriteAnim_DuckShard0[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_EggShard1[] =
+static const union AnimCmd sSpriteAnim_DuckShard1[] =
 {
     ANIMCMD_FRAME(1, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_EggShard2[] =
+static const union AnimCmd sSpriteAnim_DuckShard2[] =
 {
     ANIMCMD_FRAME(2, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_EggShard3[] =
+static const union AnimCmd sSpriteAnim_DuckShard3[] =
 {
     ANIMCMD_FRAME(3, 5),
     ANIMCMD_END
 };
 
-static const union AnimCmd *const sSpriteAnimTable_EggShard[] =
+static const union AnimCmd *const sSpriteAnimTable_DuckShard[] =
 {
-    sSpriteAnim_EggShard0,
-    sSpriteAnim_EggShard1,
-    sSpriteAnim_EggShard2,
-    sSpriteAnim_EggShard3,
+    sSpriteAnim_DuckShard0,
+    sSpriteAnim_DuckShard1,
+    sSpriteAnim_DuckShard2,
+    sSpriteAnim_DuckShard3,
 };
 
-static const struct SpriteTemplate sSpriteTemplate_EggShard =
+static const struct SpriteTemplate sSpriteTemplate_DuckShard =
 {
-    .tileTag = GFXTAG_EGG_SHARD,
-    .paletteTag = PALTAG_EGG,
-    .oam = &sOamData_EggShard,
-    .anims = sSpriteAnimTable_EggShard,
+    .tileTag = GFXTAG_DUCK_SHARD,
+    .paletteTag = PALTAG_DUCK,
+    .oam = &sOamData_DuckShard,
+    .anims = sSpriteAnimTable_DuckShard,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_EggShard
+    .callback = SpriteCB_DuckShard
 };
 
-static const struct BgTemplate sBgTemplates_EggHatch[] =
+static const struct BgTemplate sBgTemplates_DuckHatch[] =
 {
     {
         .bg = 0,
@@ -256,7 +256,7 @@ static const struct BgTemplate sBgTemplates_EggHatch[] =
     },
 };
 
-static const struct WindowTemplate sWinTemplates_EggHatch[] =
+static const struct WindowTemplate sWinTemplates_DuckHatch[] =
 {
     {
         .bg = 0,
@@ -281,7 +281,7 @@ static const struct WindowTemplate sYesNoWinTemplate =
     .baseBlock = 424
 };
 
-static const s16 sEggShardVelocities[][2] =
+static const s16 sDuckShardVelocities[][2] =
 {
     // First shake
     {Q_8_8(-1.5),       Q_8_8(-3.75)},
@@ -309,7 +309,7 @@ static const s16 sEggShardVelocities[][2] =
     {Q_8_8(2.5),        Q_8_8(-7.5)},
 };
 
-static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
+static void CreateHatchedMon(struct Pokemon *duck, struct Pokemon *temp)
 {
     u16 species;
     u32 personality, pokerus;
@@ -317,24 +317,24 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     u16 moves[MAX_MON_MOVES];
     u32 ivs[NUM_STATS];
 
-    species = GetMonData(egg, MON_DATA_SPECIES);
+    species = GetMonData(duck, MON_DATA_SPECIES);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
-        moves[i] = GetMonData(egg, MON_DATA_MOVE1 + i);
+        moves[i] = GetMonData(duck, MON_DATA_MOVE1 + i);
 
-    personality = GetMonData(egg, MON_DATA_PERSONALITY);
+    personality = GetMonData(duck, MON_DATA_PERSONALITY);
 
     for (i = 0; i < NUM_STATS; i++)
-        ivs[i] = GetMonData(egg, MON_DATA_HP_IV + i);
+        ivs[i] = GetMonData(duck, MON_DATA_HP_IV + i);
 
-    // The language is initially read from the Egg but is later overwritten below
-    language = GetMonData(egg, MON_DATA_LANGUAGE);
-    gameMet = GetMonData(egg, MON_DATA_MET_GAME);
-    markings = GetMonData(egg, MON_DATA_MARKINGS);
-    pokerus = GetMonData(egg, MON_DATA_POKERUS);
-    isEventLegal = GetMonData(egg, MON_DATA_EVENT_LEGAL);
+    // The language is initially read from the Duck but is later overwritten below
+    language = GetMonData(duck, MON_DATA_LANGUAGE);
+    gameMet = GetMonData(duck, MON_DATA_MET_GAME);
+    markings = GetMonData(duck, MON_DATA_MARKINGS);
+    pokerus = GetMonData(duck, MON_DATA_POKERUS);
+    isEventLegal = GetMonData(duck, MON_DATA_EVENT_LEGAL);
 
-    CreateMon(temp, species, EGG_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
+    CreateMon(temp, species, DUCK_HATCH_LEVEL, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonData(temp, MON_DATA_MOVE1 + i,  &moves[i]);
@@ -352,12 +352,12 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     SetMonData(temp, MON_DATA_POKERUS, &pokerus);
     SetMonData(temp, MON_DATA_EVENT_LEGAL, &isEventLegal);
 
-    *egg = *temp;
+    *duck = *temp;
 }
 
 static void AddHatchedMonToParty(u8 id)
 {
-    u8 isEgg = 0x46; // ?
+    u8 isDuck = 0x46; // ?
     u16 species;
     u8 name[POKEMON_NAME_LENGTH + 1];
     u16 ball;
@@ -366,7 +366,7 @@ static void AddHatchedMonToParty(u8 id)
     struct Pokemon* mon = &gPlayerParty[id];
 
     CreateHatchedMon(mon, &gEnemyParty[0]);
-    SetMonData(mon, MON_DATA_IS_EGG, &isEgg);
+    SetMonData(mon, MON_DATA_IS_DUCK, &isDuck);
 
     species = GetMonData(mon, MON_DATA_SPECIES);
     GetSpeciesName(name, species);
@@ -420,7 +420,7 @@ bool8 CheckDaycareMonReceivedMail(void)
     return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
 }
 
-static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16* speciesLoc)
+static u8 DuckHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16* speciesLoc)
 {
     u8 position = 0;
     u8 spriteId = 0;
@@ -454,7 +454,7 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16* speciesL
     case 1:
         // Create mon sprite
         SetMultiuseSpriteTemplateToPokemon(GetMonSpritePalStruct(mon)->tag, position);
-        spriteId = CreateSprite(&gMultiuseSpriteTemplate, EGG_X, EGG_Y, 6);
+        spriteId = CreateSprite(&gMultiuseSpriteTemplate, DUCK_X, DUCK_Y, 6);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].callback = SpriteCallbackDummy;
         break;
@@ -462,51 +462,51 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16* speciesL
     return spriteId;
 }
 
-static void VBlankCB_EggHatch(void)
+static void VBlankCB_DuckHatch(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void EggHatch(void)
+void DuckHatch(void)
 {
     if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke)
         NuzlockeFlagSet(NuzlockeGetCurrentRegionMapSectionId());
     ScriptContext2_Enable();
-    CreateTask(Task_EggHatch, 10);
+    CreateTask(Task_DuckHatch, 10);
     FadeScreen(FADE_TO_BLACK, 0);
 }
 
-static void Task_EggHatch(u8 taskId)
+static void Task_DuckHatch(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_LoadEggHatch);
+        SetMainCallback2(CB2_LoadDuckHatch);
         gFieldCallback = FieldCB_ContinueScriptHandleMusic;
         DestroyTask(taskId);
     }
 }
 
-static void CB2_LoadEggHatch(void)
+static void CB2_LoadDuckHatch(void)
 {
     switch (gMain.state)
     {
     case 0:
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
 
-        sEggHatchData = Alloc(sizeof(*sEggHatchData));
+        sDuckHatchData = Alloc(sizeof(*sDuckHatchData));
         AllocateMonSpritesGfx();
-        sEggHatchData->eggPartyId = gSpecialVar_0x8004;
-        sEggHatchData->eggShardVelocityId = 0;
+        sDuckHatchData->duckPartyId = gSpecialVar_0x8004;
+        sDuckHatchData->duckShardVelocityId = 0;
 
-        SetVBlankCallback(VBlankCB_EggHatch);
+        SetVBlankCallback(VBlankCB_DuckHatch);
         gSpecialVar_0x8005 = GetCurrentMapMusic();
 
         ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
-        InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
+        InitBgsFromTemplates(0, sBgTemplates_DuckHatch, ARRAY_COUNT(sBgTemplates_DuckHatch));
 
         ChangeBgX(1, 0, BG_COORD_SET);
         ChangeBgY(1, 0, BG_COORD_SET);
@@ -527,8 +527,8 @@ static void CB2_LoadEggHatch(void)
         gMain.state++;
         break;
     case 1:
-        InitWindows(sWinTemplates_EggHatch);
-        sEggHatchData->windowId = 0;
+        InitWindows(sWinTemplates_DuckHatch);
+        sDuckHatchData->windowId = 0;
         gMain.state++;
         break;
     case 2:
@@ -538,22 +538,22 @@ static void CB2_LoadEggHatch(void)
         gMain.state++;
         break;
     case 3:
-        LoadSpriteSheet(&sEggHatch_Sheet);
-        LoadSpriteSheet(&sEggShards_Sheet);
-        LoadSpritePalette(&sEgg_SpritePalette);
+        LoadSpriteSheet(&sDuckHatch_Sheet);
+        LoadSpriteSheet(&sDuckShards_Sheet);
+        LoadSpritePalette(&sDuck_SpritePalette);
         gMain.state++;
         break;
     case 4:
         CopyBgTilemapBufferToVram(0);
-        AddHatchedMonToParty(sEggHatchData->eggPartyId);
+        AddHatchedMonToParty(sDuckHatchData->duckPartyId);
         gMain.state++;
         break;
     case 5:
-        EggHatchCreateMonSprite(FALSE, 0, sEggHatchData->eggPartyId, &sEggHatchData->species);
+        DuckHatchCreateMonSprite(FALSE, 0, sDuckHatchData->duckPartyId, &sDuckHatchData->species);
         gMain.state++;
         break;
     case 6:
-        sEggHatchData->monSpriteId = EggHatchCreateMonSprite(FALSE, 1, sEggHatchData->eggPartyId, &sEggHatchData->species);
+        sDuckHatchData->monSpriteId = DuckHatchCreateMonSprite(FALSE, 1, sDuckHatchData->duckPartyId, &sDuckHatchData->species);
         gMain.state++;
         break;
     case 7:
@@ -565,8 +565,8 @@ static void CB2_LoadEggHatch(void)
         gMain.state++;
         break;
     case 8:
-        SetMainCallback2(CB2_EggHatch);
-        sEggHatchData->state = 0;
+        SetMainCallback2(CB2_DuckHatch);
+        sDuckHatchData->state = 0;
         break;
     }
     RunTasks();
@@ -576,17 +576,17 @@ static void CB2_LoadEggHatch(void)
     UpdatePaletteFade();
 }
 
-static void EggHatchSetMonNickname(void)
+static void DuckHatchSetMonNickname(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
     FreeMonSpritesGfx();
-    Free(sEggHatchData);
+    Free(sDuckHatchData);
     SetMainCallback2(CB2_ReturnToField);
 }
 
 #define tTimer data[0]
 
-static void Task_EggHatchPlayBGM(u8 taskId)
+static void Task_DuckHatchPlayBGM(u8 taskId)
 {
     if (gTasks[taskId].tTimer == 0)
     {
@@ -605,127 +605,127 @@ static void Task_EggHatchPlayBGM(u8 taskId)
     gTasks[taskId].tTimer++;
 }
 
-static void CB2_EggHatch(void)
+static void CB2_DuckHatch(void)
 {
     u16 species;
     u8 gender;
     u32 personality;
 
-    switch (sEggHatchData->state)
+    switch (sDuckHatchData->state)
     {
     case 0:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        sEggHatchData->eggSpriteId = CreateSprite(&sSpriteTemplate_Egg, EGG_X, EGG_Y, 5);
+        sDuckHatchData->duckSpriteId = CreateSprite(&sSpriteTemplate_Duck, DUCK_X, DUCK_Y, 5);
         ShowBg(0);
         ShowBg(1);
-        sEggHatchData->state++;
-        CreateTask(Task_EggHatchPlayBGM, 5);
+        sDuckHatchData->state++;
+        CreateTask(Task_DuckHatchPlayBGM, 5);
         break;
     case 1:
         if (!gPaletteFade.active)
         {
-            FillWindowPixelBuffer(sEggHatchData->windowId, PIXEL_FILL(0));
-            sEggHatchData->delayTimer = 0;
-            sEggHatchData->state++;
+            FillWindowPixelBuffer(sDuckHatchData->windowId, PIXEL_FILL(0));
+            sDuckHatchData->delayTimer = 0;
+            sDuckHatchData->state++;
         }
         break;
     case 2:
-        if (++sEggHatchData->delayTimer > 30)
+        if (++sDuckHatchData->delayTimer > 30)
         {
             // Start hatching animation
-            sEggHatchData->state++;
-            gSprites[sEggHatchData->eggSpriteId].callback = SpriteCB_Egg_Shake1;
+            sDuckHatchData->state++;
+            gSprites[sDuckHatchData->duckSpriteId].callback = SpriteCB_Duck_Shake1;
         }
         break;
     case 3:
         // Wait for hatching animation to finish
-        if (gSprites[sEggHatchData->eggSpriteId].callback == SpriteCallbackDummy)
+        if (gSprites[sDuckHatchData->duckSpriteId].callback == SpriteCallbackDummy)
         {
-            species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES);
-            DoMonFrontSpriteAnimation(&gSprites[sEggHatchData->monSpriteId], species, FALSE, 1);
-            sEggHatchData->state++;
+            species = GetMonData(&gPlayerParty[sDuckHatchData->duckPartyId], MON_DATA_SPECIES);
+            DoMonFrontSpriteAnimation(&gSprites[sDuckHatchData->monSpriteId], species, FALSE, 1);
+            sDuckHatchData->state++;
         }
         break;
     case 4:
         // Wait for Pokémon's front sprite animation
-        if (gSprites[sEggHatchData->monSpriteId].callback == SpriteCallbackDummy)
-            sEggHatchData->state++;
+        if (gSprites[sDuckHatchData->monSpriteId].callback == SpriteCallbackDummy)
+            sDuckHatchData->state++;
         break;
     case 5:
-        // "{mon} hatched from egg" message/fanfare
-        GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyId], gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_HatchedFromEgg);
-        EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 3, TEXT_SKIP_DRAW);
+        // "{mon} hatched from duck" message/fanfare
+        GetMonNickname2(&gPlayerParty[sDuckHatchData->duckPartyId], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_HatchedFromDuck);
+        DuckHatchPrintMessage(sDuckHatchData->windowId, gStringVar4, 0, 3, TEXT_SKIP_DRAW);
         PlayFanfare(MUS_EVOLVED);
-        sEggHatchData->state++;
-        PutWindowTilemap(sEggHatchData->windowId);
-        CopyWindowToVram(sEggHatchData->windowId, COPYWIN_FULL);
+        sDuckHatchData->state++;
+        PutWindowTilemap(sDuckHatchData->windowId);
+        CopyWindowToVram(sDuckHatchData->windowId, COPYWIN_FULL);
         break;
     case 6:
         if (IsFanfareTaskInactive())
-            sEggHatchData->state++;
+            sDuckHatchData->state++;
         break;
     case 7: // Twice?
         if (IsFanfareTaskInactive())
-            sEggHatchData->state++;
+            sDuckHatchData->state++;
         break;
     case 8:
         // Ready the nickname prompt
-        GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyId], gStringVar1);
+        GetMonNickname2(&gPlayerParty[sDuckHatchData->duckPartyId], gStringVar1);
         if (!gSaveBlock1Ptr->tx_Challenges_Nuzlocke) //tx_randomizer_and_challenges
         {
             StringExpandPlaceholders(gStringVar4, gText_NicknameHatchPrompt);
-            EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 2, 1);
+            DuckHatchPrintMessage(sDuckHatchData->windowId, gStringVar4, 0, 2, 1);
         }
-        sEggHatchData->state++;
+        sDuckHatchData->state++;
         break;
     case 9:
         // Print the nickname prompt
-        if (!IsTextPrinterActive(sEggHatchData->windowId))
+        if (!IsTextPrinterActive(sDuckHatchData->windowId))
         {
-            LoadUserWindowBorderGfx(sEggHatchData->windowId, 0x140, 0xE0);
+            LoadUserWindowBorderGfx(sDuckHatchData->windowId, 0x140, 0xE0);
             if (!gSaveBlock1Ptr->tx_Challenges_Nuzlocke) //tx_randomizer_and_challenges
                 CreateYesNoMenu(&sYesNoWinTemplate, 0x140, 0xE, 0);
-            sEggHatchData->state++;
+            sDuckHatchData->state++;
         }
         break;
     case 10:
         if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke) //tx_randomizer_and_challenges
         {
-            GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyId], gStringVar3);
-            species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES);
-            gender = GetMonGender(&gPlayerParty[sEggHatchData->eggPartyId]);
-            personality = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_PERSONALITY, 0);
-            DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
+            GetMonNickname2(&gPlayerParty[sDuckHatchData->duckPartyId], gStringVar3);
+            species = GetMonData(&gPlayerParty[sDuckHatchData->duckPartyId], MON_DATA_SPECIES);
+            gender = GetMonGender(&gPlayerParty[sDuckHatchData->duckPartyId]);
+            personality = GetMonData(&gPlayerParty[sDuckHatchData->duckPartyId], MON_DATA_PERSONALITY, 0);
+            DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, DuckHatchSetMonNickname);
         }
         // Handle the nickname prompt input
         switch (Menu_ProcessInputNoWrapClearOnChoose())
         {
         case 0: // Yes
-            GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyId], gStringVar3);
-            species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES);
-            gender = GetMonGender(&gPlayerParty[sEggHatchData->eggPartyId]);
-            personality = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_PERSONALITY, 0);
-            DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
+            GetMonNickname2(&gPlayerParty[sDuckHatchData->duckPartyId], gStringVar3);
+            species = GetMonData(&gPlayerParty[sDuckHatchData->duckPartyId], MON_DATA_SPECIES);
+            gender = GetMonGender(&gPlayerParty[sDuckHatchData->duckPartyId]);
+            personality = GetMonData(&gPlayerParty[sDuckHatchData->duckPartyId], MON_DATA_PERSONALITY, 0);
+            DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, DuckHatchSetMonNickname);
             break;
         case 1: // No
         case MENU_B_PRESSED:
-            sEggHatchData->state++;
+            sDuckHatchData->state++;
             break;
         }
         break;
     case 11:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        sEggHatchData->state++;
+        sDuckHatchData->state++;
         break;
     case 12:
         if (!gPaletteFade.active)
         {
             FreeMonSpritesGfx();
-            RemoveWindow(sEggHatchData->windowId);
+            RemoveWindow(sDuckHatchData->windowId);
             UnsetBgTilemapBuffer(0);
             UnsetBgTilemapBuffer(1);
-            Free(sEggHatchData);
+            Free(sDuckHatchData);
             SetMainCallback2(CB2_ReturnToField);
         }
         break;
@@ -742,84 +742,84 @@ static void CB2_EggHatch(void)
 #define sSinIdx     data[1]
 #define sDelayTimer data[2]
 
-static void SpriteCB_Egg_Shake1(struct Sprite* sprite)
+static void SpriteCB_Duck_Shake1(struct Sprite* sprite)
 {
     if (++sprite->sTimer > 20)
     {
-        sprite->callback = SpriteCB_Egg_Shake2;
+        sprite->callback = SpriteCB_Duck_Shake2;
         sprite->sTimer = 0;
     }
     else
     {
-        // Shake egg
+        // Shake duck
         sprite->sSinIdx = (sprite->sSinIdx + 20) & 0xFF;
         sprite->x2 = Sin(sprite->sSinIdx, 1);
         if (sprite->sTimer == 15)
         {
-            // First egg crack
+            // First duck crack
             PlaySE(SE_BALL);
-            StartSpriteAnim(sprite, EGG_ANIM_CRACKED_1);
-            CreateRandomEggShardSprite();
+            StartSpriteAnim(sprite, DUCK_ANIM_CRACKED_1);
+            CreateRandomDuckShardSprite();
         }
     }
 }
 
-static void SpriteCB_Egg_Shake2(struct Sprite* sprite)
+static void SpriteCB_Duck_Shake2(struct Sprite* sprite)
 {
     if (++sprite->sDelayTimer > 30)
     {
         if (++sprite->sTimer > 20)
         {
-            sprite->callback = SpriteCB_Egg_Shake3;
+            sprite->callback = SpriteCB_Duck_Shake3;
             sprite->sTimer = 0;
             sprite->sDelayTimer = 0;
         }
         else
         {
-            // Shake egg
+            // Shake duck
             sprite->sSinIdx = (sprite->sSinIdx + 20) & 0xFF;
             sprite->x2 = Sin(sprite->sSinIdx, 2);
             if (sprite->sTimer == 15)
             {
-                // Second egg crack
+                // Second duck crack
                 PlaySE(SE_BALL);
-                StartSpriteAnim(sprite, EGG_ANIM_CRACKED_2);
+                StartSpriteAnim(sprite, DUCK_ANIM_CRACKED_2);
             }
         }
     }
 }
 
-static void SpriteCB_Egg_Shake3(struct Sprite* sprite)
+static void SpriteCB_Duck_Shake3(struct Sprite* sprite)
 {
     if (++sprite->sDelayTimer > 30)
     {
         if (++sprite->sTimer > 38)
         {
             u16 species;
-            sprite->callback = SpriteCB_Egg_WaitHatch;
+            sprite->callback = SpriteCB_Duck_WaitHatch;
             sprite->sTimer = 0;
-            species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyId], MON_DATA_SPECIES);
-            gSprites[sEggHatchData->monSpriteId].x2 = 0;
-            gSprites[sEggHatchData->monSpriteId].y2 = 0;
+            species = GetMonData(&gPlayerParty[sDuckHatchData->duckPartyId], MON_DATA_SPECIES);
+            gSprites[sDuckHatchData->monSpriteId].x2 = 0;
+            gSprites[sDuckHatchData->monSpriteId].y2 = 0;
         }
         else
         {
-            // Shake egg
+            // Shake duck
             sprite->sSinIdx = (sprite->sSinIdx + 20) & 0xFF;
             sprite->x2 = Sin(sprite->sSinIdx, 2);
             if (sprite->sTimer == 15)
             {
-                // Third egg crack
+                // Third duck crack
                 // This ineffectually sets the animation to the frame it's already using.
-                // They likely meant to use the 3rd and final cracked frame of the egg, which goes unused as a result.
+                // They likely meant to use the 3rd and final cracked frame of the duck, which goes unused as a result.
                 PlaySE(SE_BALL);
             #ifdef BUGFIX
-                StartSpriteAnim(sprite, EGG_ANIM_CRACKED_3);
+                StartSpriteAnim(sprite, DUCK_ANIM_CRACKED_3);
             #else
-                StartSpriteAnim(sprite, EGG_ANIM_CRACKED_2);
+                StartSpriteAnim(sprite, DUCK_ANIM_CRACKED_2);
             #endif
-                CreateRandomEggShardSprite();
-                CreateRandomEggShardSprite();
+                CreateRandomDuckShardSprite();
+                CreateRandomDuckShardSprite();
             }
             if (sprite->sTimer == 30)
                 PlaySE(SE_BALL);
@@ -827,49 +827,49 @@ static void SpriteCB_Egg_Shake3(struct Sprite* sprite)
     }
 }
 
-static void SpriteCB_Egg_WaitHatch(struct Sprite* sprite)
+static void SpriteCB_Duck_WaitHatch(struct Sprite* sprite)
 {
     if (++sprite->sTimer > 50)
     {
-        sprite->callback = SpriteCB_Egg_Hatch;
+        sprite->callback = SpriteCB_Duck_Hatch;
         sprite->sTimer = 0;
     }
 }
 
-static void SpriteCB_Egg_Hatch(struct Sprite* sprite)
+static void SpriteCB_Duck_Hatch(struct Sprite* sprite)
 {
     s16 i;
 
-    // Fade to white to hide transition from egg to Pokémon
+    // Fade to white to hide transition from duck to Pokémon
     if (sprite->sTimer == 0)
         BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_WHITEALPHA);
 
-    // Create a shower of 16 egg shards in 4 groups of 4
+    // Create a shower of 16 duck shards in 4 groups of 4
     if ((u32)sprite->sTimer < 4)
     {
         for (i = 0; i < 4; i++)
-            CreateRandomEggShardSprite();
+            CreateRandomDuckShardSprite();
     }
 
     sprite->sTimer++;
 
     if (!gPaletteFade.active)
     {
-        // Screen is hidden by the fade to white, hide egg
-        PlaySE(SE_EGG_HATCH);
+        // Screen is hidden by the fade to white, hide duck
+        PlaySE(SE_DUCK_HATCH);
         sprite->invisible = TRUE;
-        sprite->callback = SpriteCB_Egg_Reveal;
+        sprite->callback = SpriteCB_Duck_Reveal;
         sprite->sTimer = 0;
     }
 }
 
-static void SpriteCB_Egg_Reveal(struct Sprite* sprite)
+static void SpriteCB_Duck_Reveal(struct Sprite* sprite)
 {
     if (sprite->sTimer == 0)
     {
         // Reveal hatched Pokémon
-        gSprites[sEggHatchData->monSpriteId].invisible = FALSE;
-        StartSpriteAffineAnim(&gSprites[sEggHatchData->monSpriteId], BATTLER_AFFINE_EMERGE);
+        gSprites[sDuckHatchData->monSpriteId].invisible = FALSE;
+        StartSpriteAffineAnim(&gSprites[sDuckHatchData->monSpriteId], BATTLER_AFFINE_EMERGE);
     }
 
     // Fade back from white for reveal
@@ -877,7 +877,7 @@ static void SpriteCB_Egg_Reveal(struct Sprite* sprite)
         BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_WHITEALPHA);
 
     if (sprite->sTimer <= 9)
-        gSprites[sEggHatchData->monSpriteId].y--;
+        gSprites[sDuckHatchData->monSpriteId].y--;
 
     if (sprite->sTimer > 40)
         sprite->callback = SpriteCallbackDummy; // Finished
@@ -891,7 +891,7 @@ static void SpriteCB_Egg_Reveal(struct Sprite* sprite)
 #define sDeltaX data[4]
 #define sDeltaY data[5]
 
-static void SpriteCB_EggShard(struct Sprite* sprite)
+static void SpriteCB_DuckShard(struct Sprite* sprite)
 {
     sprite->sDeltaX += sprite->sVelocX;
     sprite->sDeltaY += sprite->sVelocY;
@@ -905,44 +905,44 @@ static void SpriteCB_EggShard(struct Sprite* sprite)
         DestroySprite(sprite);
 }
 
-static void CreateRandomEggShardSprite(void)
+static void CreateRandomDuckShardSprite(void)
 {
     u16 spriteAnimIndex;
 
-    s16 velocityX = sEggShardVelocities[sEggHatchData->eggShardVelocityId][0];
-    s16 velocityY = sEggShardVelocities[sEggHatchData->eggShardVelocityId][1];
-    sEggHatchData->eggShardVelocityId++;
+    s16 velocityX = sDuckShardVelocities[sDuckHatchData->duckShardVelocityId][0];
+    s16 velocityY = sDuckShardVelocities[sDuckHatchData->duckShardVelocityId][1];
+    sDuckHatchData->duckShardVelocityId++;
 
     // Randomly choose one of the 4 shard images
-    spriteAnimIndex = Random() % ARRAY_COUNT(sSpriteAnimTable_EggShard);
+    spriteAnimIndex = Random() % ARRAY_COUNT(sSpriteAnimTable_DuckShard);
 
-    CreateEggShardSprite(EGG_X, EGG_Y - 15, velocityX, velocityY, 100, spriteAnimIndex);
+    CreateDuckShardSprite(DUCK_X, DUCK_Y - 15, velocityX, velocityY, 100, spriteAnimIndex);
 }
 
-static void CreateEggShardSprite(u8 x, u8 y, s16 velocityX, s16 velocityY, s16 acceleration, u8 spriteAnimIndex)
+static void CreateDuckShardSprite(u8 x, u8 y, s16 velocityX, s16 velocityY, s16 acceleration, u8 spriteAnimIndex)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_EggShard, x, y, 4);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_DuckShard, x, y, 4);
     gSprites[spriteId].sVelocX = velocityX;
     gSprites[spriteId].sVelocY = velocityY;
     gSprites[spriteId].sAccelY = acceleration;
     StartSpriteAnim(&gSprites[spriteId], spriteAnimIndex);
 }
 
-static void EggHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
+static void DuckHatchPrintMessage(u8 windowId, u8* string, u8 x, u8 y, u8 speed)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
-    sEggHatchData->textColor[0] = 0;
-    sEggHatchData->textColor[1] = 5;
-    sEggHatchData->textColor[2] = 6;
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 0, 0, sEggHatchData->textColor, speed, string);
+    sDuckHatchData->textColor[0] = 0;
+    sDuckHatchData->textColor[1] = 5;
+    sDuckHatchData->textColor[2] = 6;
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 0, 0, sDuckHatchData->textColor, speed, string);
 }
 
-u8 GetEggCyclesToSubtract(void)
+u8 GetDuckCyclesToSubtract(void)
 {
     u8 count, i;
     for (count = CalculatePlayerPartyCount(), i = 0; i < count; i++)
     {
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG))
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_DUCK))
         {
             u16 ability = GetMonAbility(&gPlayerParty[i]);
             if (ability == ABILITY_MAGMA_ARMOR
@@ -954,9 +954,9 @@ u8 GetEggCyclesToSubtract(void)
     return 1;
 }
 
-u16 CountPartyAliveNonEggMons(void)
+u16 CountPartyAliveNonDuckMons(void)
 {
-    u16 aliveNonEggMonsCount = CountStorageNonEggMons();
-    aliveNonEggMonsCount += CountPartyAliveNonEggMonsExcept(PARTY_SIZE);
-    return aliveNonEggMonsCount;
+    u16 aliveNonDuckMonsCount = CountStorageNonDuckMons();
+    aliveNonDuckMonsCount += CountPartyAliveNonDuckMonsExcept(PARTY_SIZE);
+    return aliveNonDuckMonsCount;
 }

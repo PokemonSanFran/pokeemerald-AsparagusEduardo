@@ -78,7 +78,7 @@ gText_ApprenticeRejectTeaching0::
 	.string "Oh… B-but…\n"
 	.string "Snivel… Waaaaaaah!\p"
 	.string "Please!\n"
-	.string "I'm begging you, please!$"
+	.string "I'm bducking you, please!$"
 
 gText_ApprenticeWhichLevelMode0::
 	.string "Oh, really? You will?\n"

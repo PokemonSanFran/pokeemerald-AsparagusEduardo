@@ -580,7 +580,7 @@ CableClub_EventScript_AbortLinkIncorrectNumberOfParticipants::
 	release
 	end
 
-CableClub_EventScript_AbortLinkPlayerHasBadEgg::
+CableClub_EventScript_AbortLinkPlayerHasBadDuck::
 	special CloseLink
 	msgbox CableClub_Text_YouHaveAMonThatCantBeTaken, MSGBOX_DEFAULT
 	release
@@ -856,8 +856,8 @@ CableClub_EventScript_UnionRoomAttendant::
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, FACILITY_UNION_ROOM
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
-	specialvar VAR_RESULT, IsBadEggInParty
-	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_AbortLinkPlayerHasBadEgg
+	specialvar VAR_RESULT, IsBadDuckInParty
+	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_AbortLinkPlayerHasBadDuck
 	copyvar VAR_0x8007, VAR_LAST_TALKED
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_UnionRoomAdapterNotConnected
@@ -915,7 +915,7 @@ CableClub_EventScript_EnterUnionRoom::
 	end
 
 CableClub_EventScript_CheckPartyUnionRoomRequirements::
-	specialvar VAR_RESULT, CountPartyNonEggMons
+	specialvar VAR_RESULT, CountPartyNonDuckMons
 	goto_if_lt VAR_RESULT, 2, CableClub_EventScript_NeedTwoMonsForUnionRoom
 	specialvar VAR_RESULT, DoesPartyHaveEnigmaBerry
 	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_NoEnigmaBerryInUnionRoom
@@ -957,8 +957,8 @@ CableClub_EventScript_DirectCornerAttendant::
 	faceplayer
 	setvar VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER  @ Set preemptively for multi battles, ignored otherwise
 	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
-	specialvar VAR_RESULT, IsBadEggInParty
-	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_AbortLinkPlayerHasBadEgg
+	specialvar VAR_RESULT, IsBadDuckInParty
+	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_AbortLinkPlayerHasBadDuck
 	specialvar VAR_RESULT, IsWirelessAdapterConnected
 	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_WelcomeToCableClub
 	message CableClub_Text_WelcomeWhichDirectCornerRoom

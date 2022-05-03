@@ -549,7 +549,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Violet[] = {
     {
     .iv = 0,
     .lvl = 39,
-    .species = SPECIES_EXEGGUTOR_ALOLAN,
+    .species = SPECIES_EXDUCKUTOR_ALOLAN,
     }
 };
 
@@ -6137,7 +6137,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Danny[] = {
     {
     .iv = 0,
     .lvl = 27,
-    .species = SPECIES_EXEGGUTOR_ALOLAN,
+    .species = SPECIES_EXDUCKUTOR_ALOLAN,
     },
     {
     .iv = 0,

@@ -2,7 +2,7 @@ LavaridgeTown_House_MapScripts::
 	.byte 0
 
 LavaridgeTown_House_EventScript_OldMan::
-	msgbox LavaridgeTown_House_Text_WifeWarmingEggInHotSprings, MSGBOX_NPC
+	msgbox LavaridgeTown_House_Text_WifeWarmingDuckInHotSprings, MSGBOX_NPC
 	end
 
 LavaridgeTown_House_EventScript_Zigzagoon::
@@ -15,11 +15,11 @@ LavaridgeTown_House_EventScript_Zigzagoon::
 	release
 	end
 
-LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
-	.string "My wife's warming an Egg in the hot\n"
+LavaridgeTown_House_Text_WifeWarmingDuckInHotSprings:
+	.string "My wife's warming an Duck in the hot\n"
 	.string "springs. This is what she told me.\p"
 	.string "She left two Pokémon with the Day Care.\n"
-	.string "And they discovered that Egg!$"
+	.string "And they discovered that Duck!$"
 
 LavaridgeTown_House_Text_Zigzagoon:
 	.string "Zigzagoon: Pshoo!$"

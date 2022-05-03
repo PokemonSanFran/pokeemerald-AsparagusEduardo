@@ -39,8 +39,8 @@ Common_EventScript_PkmnCenterJack_NameRater_DeclineNameRate::
 
 Common_EventScript_PkmnCenterJack_NameRater_RateMonNickname::
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_CantRateEgg
+	compare VAR_RESULT, SPECIES_DUCK
+	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_CantRateDuck
 	special BufferMonNickname
 	msgbox Common_PkmnCenterJack_Text_FineNameSuggestBetterOne, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -49,8 +49,8 @@ Common_EventScript_PkmnCenterJack_NameRater_RateMonNickname::
 	goto_if_eq Common_EventScript_PkmnCenterJack_NameRater_DeclineNameRate
 	end
 
-Common_EventScript_PkmnCenterJack_NameRater_CantRateEgg::
-	msgbox Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
+Common_EventScript_PkmnCenterJack_NameRater_CantRateDuck::
+	msgbox Common_PkmnCenterJack_Text_ThatIsMerelyAnDuck, MSGBOX_DEFAULT
 	release
 	end
 
@@ -77,9 +77,9 @@ Common_EventScript_PkmnCenterJack_MoveDeleter_ChooseMonAndMoveToForget::
 	waitstate
 	compare VAR_0x8004, 255
 	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_ComeAgain
-	special IsSelectedMonEgg
+	special IsSelectedMonDuck
 	compare VAR_RESULT, TRUE
-	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_EggCantForgetMoves
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_DuckCantForgetMoves
 	special GetNumMovesSelectedMonHas
 	compare VAR_RESULT, 1
 	goto_if_eq Common_EventScript_PkmnCenterJack_MoveDeleter_MonOnlyKnowsOneMove
@@ -114,8 +114,8 @@ Common_EventScript_PkmnCenterJack_MoveDeleter_MonOnlyKnowsOneMove::
 	releaseall
 	end
 
-Common_EventScript_PkmnCenterJack_MoveDeleter_EggCantForgetMoves::
-	msgbox Common_PkmnCenterJack_Text_EggCantForgetMoves, MSGBOX_DEFAULT
+Common_EventScript_PkmnCenterJack_MoveDeleter_DuckCantForgetMoves::
+	msgbox Common_PkmnCenterJack_Text_DuckCantForgetMoves, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -137,9 +137,9 @@ Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon:: @ 82013D6
 	waitstate
 	compare VAR_0x8004, 255
 	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_ComeBackAnytime
-	special IsSelectedMonEgg
+	special IsSelectedMonDuck
 	compare VAR_RESULT, TRUE
-	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_CantTeachEgg
+	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_CantTeachDuck
 	compare VAR_0x8005, 0
 	goto_if_eq Common_EventScript_PkmnCenterJack_MoveReminder_NoMoveToTeachMon
 	goto Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMove
@@ -159,8 +159,8 @@ Common_EventScript_PkmnCenterJack_MoveReminder_NoMoveToTeachMon:: @ 8201436
 	goto Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon
 	end
 
-Common_EventScript_PkmnCenterJack_MoveReminder_CantTeachEgg:: @ 8201444
-	msgbox Common_PkmnCenterJack_Text_ThatIsMerelyAnEgg, MSGBOX_DEFAULT
+Common_EventScript_PkmnCenterJack_MoveReminder_CantTeachDuck:: @ 8201444
+	msgbox Common_PkmnCenterJack_Text_ThatIsMerelyAnDuck, MSGBOX_DEFAULT
 	goto Common_EventScript_PkmnCenterJack_MoveReminder_ChooseMon
 	end
 

@@ -272,7 +272,7 @@ const u16 gSlateportBattleTentTrainerMons_Rebecca[] =
     -1
 };
 
-const u16 gSlateportBattleTentTrainerMons_Reggie[] =
+const u16 gSlateportBattleTentTrainerMons_Rduckie[] =
 {
     SLATEPORT_TENT_MON_MARILL_1,
     SLATEPORT_TENT_MON_WINGULL_1,
@@ -624,7 +624,7 @@ const struct BattleFrontierTrainer gSlateportBattleTentTrainers[NUM_BATTLE_TENT_
     [SLATEPORT_TENT_TRAINER_STEPHON] = {
         .facilityClass = FACILITY_CLASS_COOLTRAINER_M,
         .trainerName = _("Stephon"),
-        .speechBefore = {EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_ENJOY, EC_WORD_AN, EC_WORD_EGG},
+        .speechBefore = {EC_WORD_I_AM, EC_WORD_GOING, EC_WORD_TO, EC_WORD_ENJOY, EC_WORD_AN, EC_WORD_DUCK},
         .speechWin = {EC_WORD_I, EC_WORD_WILL, EC_WORD_ENJOY, EC_WORD_THIS, EC_WORD_TASTY, EC_WORD_VICTORY},
         .speechLose = {EC_WORD_AWFUL, EC_WORD_EXCL_EXCL, -1, EC_WORD_JUST, EC_WORD_AWFUL, EC_WORD_EXCL_EXCL},
         .monSet = gSlateportBattleTentTrainerMons_Stephon
@@ -632,18 +632,18 @@ const struct BattleFrontierTrainer gSlateportBattleTentTrainers[NUM_BATTLE_TENT_
     [SLATEPORT_TENT_TRAINER_REBECCA] = {
         .facilityClass = FACILITY_CLASS_COOLTRAINER_F,
         .trainerName = _("Rebecca"),
-        .speechBefore = {EC_WORD_THAT, EC_WORD_EGG, EC_WORD_HAS, EC_WORD_A, EC_WORD_TASTY, EC_WORD_SHINE},
+        .speechBefore = {EC_WORD_THAT, EC_WORD_DUCK, EC_WORD_HAS, EC_WORD_A, EC_WORD_TASTY, EC_WORD_SHINE},
         .speechWin = {EC_WORD_I, EC_WORD_CAN_T, EC_WORD_EXCL, EC_WORD_SMELL, EC_WORD_THAT, EC_WORD_STENCH},
         .speechLose = {EC_WORD_YOU, EC_WORD_CAN_T, EC_WORD_MAKE, EC_WORD_ME, EC_WORD_STOP, EC_WORD_ELLIPSIS},
         .monSet = gSlateportBattleTentTrainerMons_Rebecca
     },
-    [SLATEPORT_TENT_TRAINER_REGGIE] = {
+    [SLATEPORT_TENT_TRAINER_RDUCKIE] = {
         .facilityClass = FACILITY_CLASS_POKEFAN_M,
-        .trainerName = _("Reggie"),
+        .trainerName = _("Rduckie"),
         .speechBefore = {EC_WORD_POKEMON, EC_WORD_COME, EC_WORD_BEFORE, EC_WORD_MONEY, EC_WORD_OR, EC_WORD_FAMILY},
         .speechWin = {EC_WORD_THAT_S, EC_WORD_WHAT, EC_WORD_IS, EC_WORD_MAKING, EC_WORD_ME, EC_WORD_STRONG},
         .speechLose = {EC_WORD_THAT_S, EC_WORD_WHY, EC_WORD_I_AM, EC_WORD_SO, EC_WORD_THICK, EC_WORD_ELLIPSIS},
-        .monSet = gSlateportBattleTentTrainerMons_Reggie
+        .monSet = gSlateportBattleTentTrainerMons_Rduckie
     },
     [SLATEPORT_TENT_TRAINER_JANAE] = {
         .facilityClass = FACILITY_CLASS_POKEFAN_F,

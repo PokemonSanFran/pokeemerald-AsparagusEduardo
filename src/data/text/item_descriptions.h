@@ -1062,7 +1062,7 @@ static const u8 sSachetDesc[] = _(
 static const u8 sOvalStoneDesc[] = _(
     "Hace evolucionar\n"
     "a cierto Pokémon.\n"
-    "Parece un huevo.");
+    "Parece un pato.");
 
 static const u8 sStrawberrySweetDesc[] = _( // Todo
     "?????");
@@ -2229,7 +2229,7 @@ static const u8 sFocusBandDesc[] = _(
     "Al llevarla, quizá\n"
     "evites debilitarte.");
 
-static const u8 sLuckyEggDesc[] = _(
+static const u8 sLuckyDuckDesc[] = _(
     "Al llevarlo, ganarás\n"
     "muchos más puntos\n"
     "de Exp. en combate.");
@@ -3523,7 +3523,7 @@ static const u8 sHM08Desc[] = _(
 // Charms
 static const u8 sOvalCharmDesc[] = _(
     "Sube la posibil. de\n"
-    "encontrar huevos\n"
+    "encontrar patos\n"
     "en la guardería.");
 
 static const u8 sShinyCharmDesc[] = _(
@@ -5117,7 +5117,7 @@ static const u8 sSachetDesc[] = _(
 static const u8 sOvalStoneDesc[] = _(
     "Makes a certain\n"
     "Pokémon evolve. It's\n"
-    "shaped like an egg.");
+    "shaped like an duck.");
 
 static const u8 sStrawberrySweetDesc[] = _(
     "Strawberry-shaped\n"
@@ -6301,7 +6301,7 @@ static const u8 sFocusBandDesc[] = _(
     "occasionally\n"
     "prevents fainting.");
 
-static const u8 sLuckyEggDesc[] = _(
+static const u8 sLuckyDuckDesc[] = _(
     "A hold item that\n"
     "boosts Exp. points\n"
     "earned in battle.");
@@ -7614,7 +7614,7 @@ static const u8 sHM08Desc[] = _(
 // Charms
 static const u8 sOvalCharmDesc[] = _(
     "Raises the chance\n"
-    "of finding eggs\n"
+    "of finding ducks\n"
     "at the daycare.");
 
 static const u8 sShinyCharmDesc[] = _(

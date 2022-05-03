@@ -2847,7 +2847,7 @@ static const u8 sElectrodeTMHMLearnset[] =
     0xFF,
 };
 
-static const u8 sExeggcuteTMHMLearnset[] =
+static const u8 sExduckcuteTMHMLearnset[] =
 {
     TMHM(TM06_TOXIC),
     TMHM(TM09_BULLET_SEED),
@@ -2874,7 +2874,7 @@ static const u8 sExeggcuteTMHMLearnset[] =
     0xFF,
 };
 
-static const u8 sExeggutorTMHMLearnset[] =
+static const u8 sExduckutorTMHMLearnset[] =
 {
     TMHM(TM04_CALM_MIND),
     TMHM(TM06_TOXIC),
@@ -24015,7 +24015,7 @@ static const u8 sMukAlolanTMHMLearnset[] =
     0xFF,
 };
 
-static const u8 sExeggutorAlolanTMHMLearnset[] =
+static const u8 sExduckutorAlolanTMHMLearnset[] =
 {
     TMHM(TM06_TOXIC),
     TMHM(TM09_BULLET_SEED),
@@ -24692,8 +24692,8 @@ const u8 *const gTMHMLearnsets[] =
     [SPECIES_KINGLER] = sKinglerTMHMLearnset,
     [SPECIES_VOLTORB] = sVoltorbTMHMLearnset,
     [SPECIES_ELECTRODE] = sElectrodeTMHMLearnset,
-    [SPECIES_EXEGGCUTE] = sExeggcuteTMHMLearnset,
-    [SPECIES_EXEGGUTOR] = sExeggutorTMHMLearnset,
+    [SPECIES_EXDUCKCUTE] = sExduckcuteTMHMLearnset,
+    [SPECIES_EXDUCKUTOR] = sExduckutorTMHMLearnset,
     [SPECIES_CUBONE] = sCuboneTMHMLearnset,
     [SPECIES_MAROWAK] = sMarowakTMHMLearnset,
     [SPECIES_HITMONLEE] = sHitmonleeTMHMLearnset,
@@ -25500,7 +25500,7 @@ const u8 *const gTMHMLearnsets[] =
     [SPECIES_GOLEM_ALOLAN] = sGolemAlolanTMHMLearnset,
     [SPECIES_GRIMER_ALOLAN] = sGrimerAlolanTMHMLearnset,
     [SPECIES_MUK_ALOLAN] = sMukAlolanTMHMLearnset,
-    [SPECIES_EXEGGUTOR_ALOLAN] = sExeggutorAlolanTMHMLearnset,
+    [SPECIES_EXDUCKUTOR_ALOLAN] = sExduckutorAlolanTMHMLearnset,
     [SPECIES_MAROWAK_ALOLAN] = sMarowakAlolanTMHMLearnset,
     [SPECIES_WORMADAM_SANDY_CLOAK] = sWormadamSandyCloakTMHMLearnset,
     [SPECIES_WORMADAM_TRASH_CLOAK] = sWormadamTrashCloakTMHMLearnset,

@@ -145,7 +145,7 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     {
         u16 species; // 0x0
         u16 species2; // 0x2
-        u8 isEgg; // 0x4
+        u8 isDuck; // 0x4
         u8 level; // 0x5
         u8 ribbonCount; // 0x6
         u8 ailment; // 0x7
@@ -277,8 +277,8 @@ static bool8 CanReplaceMove(void);
 static void ShowCantForgetHMsWindow(u8 taskId);
 static void ResetWindows(void);
 static void PrintMonInfo(void);
-static void PrintNotEggInfo(void);
-static void PrintEggInfo(void);
+static void PrintNotDuckInfo(void);
+static void PrintDuckInfo(void);
 static void PutPageWindowTilemaps(u8 a);
 static void RemoveWindowByIndex(u8 a);
 static void PrintPageSpecificText(u8 a);
@@ -296,9 +296,9 @@ static bool8 DidMonComeFromFRLG(void);
 static bool8 DidMonComeFromCD(void);
 static bool8 DidMonComeFromDPPt(void);
 static bool8 IsInGamePartnerMon(void);
-static void PrintEggOTID(void);
-static void BufferEggState(void);
-static void BufferEggMemo(void);
+static void PrintDuckOTID(void);
+static void BufferDuckState(void);
+static void BufferDuckMemo(void);
 static void PrintSkillsPage(void);
 static void PrintConditionPage(void);
 static void PrintBattleMoves(void);
@@ -1515,12 +1515,12 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
         sum->item = GetMonData(mon, MON_DATA_HELD_ITEM);
         sum->pid = GetMonData(mon, MON_DATA_PERSONALITY);
-        sum->sanity = GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG);
+        sum->sanity = GetMonData(mon, MON_DATA_SANITY_IS_BAD_DUCK);
 
         if (sum->sanity)
-            sum->isEgg = TRUE;
+            sum->isDuck = TRUE;
         else
-            sum->isEgg = GetMonData(mon, MON_DATA_IS_EGG);
+            sum->isDuck = GetMonData(mon, MON_DATA_IS_DUCK);
 
         break;
     case 1:
@@ -1596,7 +1596,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
     default:
         sum->ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
         sum->fatefulEncounter = GetMonData(mon, MON_DATA_EVENT_LEGAL);
-        if (sum->isEgg)
+        if (sum->isDuck)
         {
             sMonSummaryScreen->minPageIndex = PSS_PAGE_MEMO;
             sMonSummaryScreen->maxPageIndex = PSS_PAGE_MEMO;
@@ -1895,7 +1895,7 @@ static s8 AdvanceMonIndex(s8 delta)
                 index = sMonSummaryScreen->maxMonIndex;
             else if (index > sMonSummaryScreen->maxMonIndex)
                 index = 0;
-        } while (GetMonData(&mon[index], MON_DATA_IS_EGG));
+        } while (GetMonData(&mon[index], MON_DATA_IS_DUCK));
         return index;
     }
 }
@@ -1934,7 +1934,7 @@ static bool8 IsValidToViewInMulti(struct Pokemon* mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
         return FALSE;
-    else if (sMonSummaryScreen->curMonIndex != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
+    else if (sMonSummaryScreen->curMonIndex != 0 || !GetMonData(mon, MON_DATA_IS_DUCK))
         return TRUE;
     else
         return FALSE;
@@ -2660,16 +2660,16 @@ static void PrintMonInfo(void)
     FillWindowPixelBuffer(PSS_LABEL_PANE_LEFT_TOP, PIXEL_FILL(0));
     FillWindowPixelBuffer(PSS_LABEL_PANE_LEFT_BOTTOM, PIXEL_FILL(0));
 
-    if (!sMonSummaryScreen->summary.isEgg)
-        PrintNotEggInfo();
+    if (!sMonSummaryScreen->summary.isDuck)
+        PrintNotDuckInfo();
     else
-        PrintEggInfo();
+        PrintDuckInfo();
     PutWindowTilemap(PSS_LABEL_PANE_LEFT_TOP);
     PutWindowTilemap(PSS_LABEL_PANE_LEFT_BOTTOM);
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static void PrintNotEggInfo(void)
+static void PrintNotDuckInfo(void)
 {
     u8 x;
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
@@ -2716,7 +2716,7 @@ static void PrintNotEggInfo(void)
     AddTextPrinterParameterized4(PSS_LABEL_PANE_LEFT_BOTTOM, 0, x, 19, 0, 0, sTextColors[PSS_COLOR_BLACK_GRAY_SHADOW], 0, gStringVar1);
 }
 
-static void PrintEggInfo(void)
+static void PrintDuckInfo(void)
 {
     u8 x;
 
@@ -2855,8 +2855,8 @@ static void PrintMemoPage(void)
 {
     FillWindowPixelBuffer(PSS_LABEL_PANE_RIGHT, PIXEL_FILL(0));
 
-    if (sMonSummaryScreen->summary.isEgg)
-        BufferEggMemo();
+    if (sMonSummaryScreen->summary.isDuck)
+        BufferDuckMemo();
     else
         BufferMonTrainerMemo();
     PrintTextOnWindow(PSS_LABEL_PANE_RIGHT, gStringVar4, 8, 16, 0, 0);
@@ -3146,7 +3146,7 @@ static void GetMetLevelString(u8 *output)
 {
     u8 level = sMonSummaryScreen->summary.metLevel;
     if (level == 0)
-        level = EGG_HATCH_LEVEL;
+        level = DUCK_HATCH_LEVEL;
     ConvertIntToDecimalStringN(output, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, output);
 }
@@ -3242,35 +3242,35 @@ static bool8 IsInGamePartnerMon(void)
     return FALSE;
 }
 
-static void BufferEggState(void)
+static void BufferDuckState(void)
 {
     const u8 *text;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
 
     if (sMonSummaryScreen->summary.sanity == TRUE)
-        text = gText_EggWillTakeALongTime;
+        text = gText_DuckWillTakeALongTime;
     else if (sum->friendship == 0)
-        text = gText_EggReadyToHatch_Nuzlocke;
+        text = gText_DuckReadyToHatch_Nuzlocke;
     else if (sum->friendship <= 5)
-        text = gText_EggAboutToHatch;
+        text = gText_DuckAboutToHatch;
     else if (sum->friendship <= 10)
-        text = gText_EggWillHatchSoon;
+        text = gText_DuckWillHatchSoon;
     else if (sum->friendship <= 40)
-        text = gText_EggWillTakeSomeTime;
+        text = gText_DuckWillTakeSomeTime;
     else
-        text = gText_EggWillTakeALongTime;
+        text = gText_DuckWillTakeALongTime;
 
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, text);
 }
 
-static void BufferEggMemo(void)
+static void BufferDuckMemo(void)
 {
     const u8 *text;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
 
     //DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sMemoNatureTextColor);
     //DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, sMemoMiscTextColor);
-    BufferEggState();
+    BufferDuckState();
 
     #if CONFIG_EXPANDED_MET_LOCATIONS
     if (sMonSummaryScreen->summary.sanity != 1)
@@ -3279,64 +3279,64 @@ static void BufferEggMemo(void)
         {
             u8 boxOT[17] = _("AZUSA");
             if (!StringCompareWithoutExtCtrlCodes(boxOT, sum->OTName) && sum->OTID == 0)
-                text = gText_TrainerMemo_EggFromBrigette;
+                text = gText_TrainerMemo_DuckFromBrigette;
             else
-                text = gText_TrainerMemo_EggFateful;
+                text = gText_TrainerMemo_DuckFateful;
         }
         #if CONFIG_TRUST_OUTSIDERS == FALSE
         else if (!DoesMonOTMatchOwner())
         {
-            text = gText_TrainerMemo_EggTraded;
+            text = gText_TrainerMemo_DuckTraded;
         }
         #endif
-        else if (sum->metLocation == METLOC_SPECIAL_EGG)
+        else if (sum->metLocation == METLOC_SPECIAL_DUCK)
         {
             if (DidMonComeFromRSE())
-                text = gText_TrainerMemo_EggFromHotSprings;
+                text = gText_TrainerMemo_DuckFromHotSprings;
             else
-                text = gText_TrainerMemo_EggFromTraveler;
+                text = gText_TrainerMemo_DuckFromTraveler;
         }
         else if (DidMonComeFromFRLG())
         {
-            text = gText_TrainerMemo_EggFromKanto;
+            text = gText_TrainerMemo_DuckFromKanto;
         }
         else
         {
-            text = gText_TrainerMemo_EggFromDayCare;
+            text = gText_TrainerMemo_DuckFromDayCare;
         }
     }
     else
     {
-        text = gText_TrainerMemo_BadEgg;
+        text = gText_TrainerMemo_BadDuck;
     }
     #else
     if (sMonSummaryScreen->summary.sanity != 1)
     {
         if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
         {
-            text = gText_TrainerMemo_EggFateful;
+            text = gText_TrainerMemo_DuckFateful;
         }
         #if CONFIG_TRUST_OUTSIDERS == FALSE
         else if (!DoesMonOTMatchOwner())
         {
-            text = gText_TrainerMemo_EggTraded;
+            text = gText_TrainerMemo_DuckTraded;
         }
         #endif
-        else if (sum->metLocation == METLOC_SPECIAL_EGG)
+        else if (sum->metLocation == METLOC_SPECIAL_DUCK)
         {
             if (DidMonComeFromRSE())
-                text = gText_TrainerMemo_EggFromHotSprings;
+                text = gText_TrainerMemo_DuckFromHotSprings;
             else
-                text = gText_TrainerMemo_EggFromTraveler;
+                text = gText_TrainerMemo_DuckFromTraveler;
         }
         else
         {
-            text = gText_TrainerMemo_EggFromDayCare;
+            text = gText_TrainerMemo_DuckFromDayCare;
         }
     }
     else
     {
-        text = gText_TrainerMemo_BadEgg;
+        text = gText_TrainerMemo_BadDuck;
     }
     #endif
 
@@ -4049,7 +4049,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
 static void PlayMonCry(void)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
-    if (!summary->isEgg)
+    if (!summary->isDuck)
     {
         if (ShouldPlayNormalMonCry(&sMonSummaryScreen->currentMon) == TRUE)
             PlayCry_ByMode(summary->species, 0, CRY_MODE_NORMAL);
@@ -4085,7 +4085,7 @@ static void SpriteCB_Pokemon(struct Sprite *sprite)
     {
         sprite->data[1] = IsMonSpriteNotFlipped(sprite->data[0]);
         PlayMonCry();
-        PokemonSummaryDoMonAnimation(sprite, sprite->data[0], summary->isEgg);
+        PokemonSummaryDoMonAnimation(sprite, sprite->data[0], summary->isDuck);
     }
 }
 
@@ -4344,7 +4344,7 @@ static void ConfigureHealthBarSprites(void)
 
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
 
-    if (summary->isEgg)
+    if (summary->isDuck)
         return;
 
     curHp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP);
@@ -4492,7 +4492,7 @@ static void ConfigureExpBarSprites(void)
 
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
 
-    if (summary->isEgg)
+    if (summary->isDuck)
         return;
 
     exp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_EXP);

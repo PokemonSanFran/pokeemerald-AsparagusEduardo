@@ -270,7 +270,7 @@ static u32 BuildPartyMonSearchResults(s32 state)
         struct Pokemon * pokemon = &gPlayerParty[i];
         if (!GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES))
             return LT_INC_AND_CONTINUE;
-        if (!GetMonData(pokemon, MON_DATA_SANITY_IS_EGG))
+        if (!GetMonData(pokemon, MON_DATA_SANITY_IS_DUCK))
         {
             item.monId = i;
             item.data = GetMonData(pokemon, menu->conditionDataId);

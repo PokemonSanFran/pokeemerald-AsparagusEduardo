@@ -6,7 +6,7 @@ const u8 gEasyChatWord_Evolve[] = _("Evolve");
 const u8 gEasyChatWord_Encyclopedia[] = _("Encyclopedia");
 const u8 gEasyChatWord_Nature[] = _("Nature");
 const u8 gEasyChatWord_Center[] = _("Center");
-const u8 gEasyChatWord_Egg[] = _("Egg");
+const u8 gEasyChatWord_Duck[] = _("Duck");
 const u8 gEasyChatWord_Link[] = _("Link");
 const u8 gEasyChatWord_SpAbility[] = _("Sp. Ability");
 const u8 gEasyChatWord_Trainer[] = _("Trainer");
@@ -68,7 +68,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Trainer[] = {
         .enabled = TRUE,
     },
     {
-        .text = gEasyChatWord_Egg,
+        .text = gEasyChatWord_Duck,
         .alphabeticalOrder = 23,
         .enabled = TRUE,
     },

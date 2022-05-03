@@ -142,7 +142,7 @@ static EWRAM_DATA u16 sLastSelectedPokemon = 0;
 static EWRAM_DATA u8 sPokeBallRotation = 0;
 static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 //Pokedex Plus HGSS_Ui
-#define MOVES_COUNT_TOTAL (EGG_MOVES_ARRAY_COUNT + MAX_LEVEL_UP_MOVES + NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES + TUTOR_MOVE_COUNT)
+#define MOVES_COUNT_TOTAL (DUCK_MOVES_ARRAY_COUNT + MAX_LEVEL_UP_MOVES + NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES + TUTOR_MOVE_COUNT)
 EWRAM_DATA static u16 sStatsMoves[MOVES_COUNT_TOTAL] = {0};
 EWRAM_DATA static u16 sStatsMovesTMHM_ID[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES] = {0};
 
@@ -210,9 +210,9 @@ struct PokemonStats
     u8  evYield_SpDefense;
     u8  catchRate;
     u8  growthRate;
-    u8  eggGroup1;
-    u8  eggGroup2;
-    u8  eggCycles;
+    u8  duckGroup1;
+    u8  duckGroup2;
+    u8  duckCycles;
     u8  expYield;
     u8  friendship;
     u16 ability0;
@@ -267,7 +267,7 @@ struct PokedexView
     #ifdef BATTLE_ENGINE
     u8 splitIconSpriteId;  //HGSS_Ui Physical/Special Split from BE
     #endif
-    u8 numEggMoves; //HGSS_Ui
+    u8 numDuckMoves; //HGSS_Ui
     u8 numLevelUpMoves; //HGSS_Ui
     u8 numTMHMMoves; //HGSS_Ui
     u8 numTutorMoves; //HGSS_Ui
@@ -516,7 +516,7 @@ static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
 };
 #endif
 
-//HGSS_Ui Stat bars by DizzyEgg
+//HGSS_Ui Stat bars by DizzyDuck
 #define TAG_STAT_BAR 4097
 #define TAG_STAT_BAR_BG 4098
 static const struct OamData sOamData_StatBar =
@@ -5502,8 +5502,8 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, u8 bodyColor, u8 t
                 resultsCount++;
                 continue;
             }
-            //EGGs
-            if(SpeciesCanLearnEggMove(species, move))
+            //DUCKs
+            if(SpeciesCanLearnDuckMove(species, move))
             {
                 sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
                 resultsCount++;
@@ -6537,9 +6537,9 @@ static void SaveMonDataInStruct(void)
     sPokedexView->sPokemonStats.evYield_SpDefense   = EVs[5];
     sPokedexView->sPokemonStats.catchRate           = gBaseStats[species].catchRate;
     sPokedexView->sPokemonStats.growthRate          = gBaseStats[species].growthRate;
-    sPokedexView->sPokemonStats.eggGroup1           = gBaseStats[species].eggGroup1;
-    sPokedexView->sPokemonStats.eggGroup2           = gBaseStats[species].eggGroup2;
-    sPokedexView->sPokemonStats.eggCycles           = gBaseStats[species].eggCycles;
+    sPokedexView->sPokemonStats.duckGroup1           = gBaseStats[species].duckGroup1;
+    sPokedexView->sPokemonStats.duckGroup2           = gBaseStats[species].duckGroup2;
+    sPokedexView->sPokemonStats.duckCycles           = gBaseStats[species].duckCycles;
     sPokedexView->sPokemonStats.expYield            = gBaseStats[species].expYield;
     sPokedexView->sPokemonStats.friendship          = gBaseStats[species].friendship;
     sPokedexView->sPokemonStats.ability0            = GetAbilityBySpecies(species, 0);
@@ -6602,7 +6602,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         SaveMonDataInStruct();
         sPokedexView->moveSelected = 0;
         sPokedexView->movesTotal = 0;
-        sPokedexView->numEggMoves = 0;
+        sPokedexView->numDuckMoves = 0;
         sPokedexView->numLevelUpMoves = 0;
         sPokedexView->numTMHMMoves = 0;
         if(CalculateMoves())
@@ -6796,22 +6796,22 @@ static bool8 CalculateMoves(void)
 {
     u16 species = NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum);
 
-    u16 statsMovesEgg[EGG_MOVES_ARRAY_COUNT] = {0};
+    u16 statsMovesDuck[DUCK_MOVES_ARRAY_COUNT] = {0};
     u16 statsMovesLevelUp[MAX_LEVEL_UP_MOVES] = {0};
     u16 statsMovesTMHM[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES] = {0};
     u16 statsMovesTutor[TUTOR_MOVE_COUNT] = {0};
 
-    u8 numEggMoves = GetEggMovesSpecies(species, statsMovesEgg);
+    u8 numDuckMoves = GetDuckMovesSpecies(species, statsMovesDuck);
     u8 numLevelUpMoves = GetLevelUpMovesBySpecies(species, statsMovesLevelUp);
     u8 numTMHMMoves = 0;
     u8 numTutorMoves = 0;
     u16 movesTotal = 0;
     u8 i,j;
 
-    //Egg moves
-    for (i=0; i < numEggMoves; i++)
+    //Duck moves
+    for (i=0; i < numDuckMoves; i++)
     {
-        sStatsMoves[movesTotal] = statsMovesEgg[i];
+        sStatsMoves[movesTotal] = statsMovesDuck[i];
         movesTotal++;
     }
 
@@ -6845,7 +6845,7 @@ static bool8 CalculateMoves(void)
         }
     }
 
-    sPokedexView->numEggMoves = numEggMoves;
+    sPokedexView->numDuckMoves = numDuckMoves;
     sPokedexView->numLevelUpMoves = numLevelUpMoves;
     sPokedexView->numTMHMMoves = numTMHMMoves;
     sPokedexView->numTutorMoves = numTutorMoves;
@@ -6862,7 +6862,7 @@ static const u8 sText_HM[] = _("HM");
 #endif
 static void PrintStatsScreen_Moves_Top(u8 taskId)
 {
-    u8 numEggMoves      = sPokedexView->numEggMoves;
+    u8 numDuckMoves      = sPokedexView->numDuckMoves;
     u8 numLevelUpMoves  = sPokedexView->numLevelUpMoves;
     u8 numTMHMMoves     = sPokedexView->numTMHMMoves;
     u8 numTutorMoves    = sPokedexView->numTutorMoves;
@@ -6903,21 +6903,21 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     }
 
     //Calculate and retrieve correct move from the arrays
-    if (selected < numEggMoves)
+    if (selected < numDuckMoves)
     {
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
-        item = ITEM_LUCKY_EGG;
+        item = ITEM_LUCKY_DUCK;
     }
-    else if (selected < (numEggMoves + numLevelUpMoves))
+    else if (selected < (numDuckMoves + numLevelUpMoves))
     {        
         #if defined (BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
-            level = gLevelUpLearnsets[species][(selected-numEggMoves)].level;
+            level = gLevelUpLearnsets[species][(selected-numDuckMoves)].level;
         #else
             //Calculate level of the move
-            while (((gLevelUpLearnsets[species][(selected-numEggMoves)] & LEVEL_UP_MOVE_LV) != (level << 9)) && level < 0xFF)
+            while (((gLevelUpLearnsets[species][(selected-numDuckMoves)] & LEVEL_UP_MOVE_LV) != (level << 9)) && level < 0xFF)
             {
                 level++;
-                if (gLevelUpLearnsets[species][(selected-numEggMoves)] == LEVEL_UP_END)
+                if (gLevelUpLearnsets[species][(selected-numDuckMoves)] == LEVEL_UP_END)
                     level = 0xFF;
             }
         #endif
@@ -6926,14 +6926,14 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 14); //Print level
         item = ITEM_EXP_SHARE;
     }
-    else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves))
+    else if (selected < (numDuckMoves + numLevelUpMoves + numTMHMMoves))
     {
         const u8 zeroNums = 3;
         const u8 *TMHMString;
         u8 TMNumber;
-        item = sStatsMovesTMHM_ID[(selected-numEggMoves-numLevelUpMoves)];
+        item = sStatsMovesTMHM_ID[(selected-numDuckMoves-numLevelUpMoves)];
 
-        move = sStatsMovesTMHM_ID[sPokedexView->moveSelected - numEggMoves - numLevelUpMoves];
+        move = sStatsMovesTMHM_ID[sPokedexView->moveSelected - numDuckMoves - numLevelUpMoves];
         StringCopy(gStringVar3, gMoveNames[move]);
         StringCopy(gStringVar4, gMoveDescriptionPointers[(move - 1)]);
 
@@ -6952,7 +6952,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar1 + 2, TMNumber, STR_CONV_MODE_LEADING_ZEROS, zeroNums);
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gStringVar1, moves_x + 113, moves_y + 9);
     }
-    else if (selected < (numEggMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves))
+    else if (selected < (numDuckMoves + numLevelUpMoves + numTMHMMoves + numTutorMoves))
     {
         PrintStatsScreenTextSmall(WIN_STATS_MOVES_TOP, gText_ThreeDashes, moves_x + 113, moves_y + 9);
         item = ITEM_TEACHY_TV;
@@ -6963,7 +6963,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
         item = ITEM_MASTER_BALL;
     }
 
-    //Egg/TM/Level/Tutor Item Icon
+    //Duck/TM/Level/Tutor Item Icon
     gTasks[taskId].data[3] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, item);
     gSprites[gTasks[taskId].data[3]].x2 = 203;
     gSprites[gTasks[taskId].data[3]].y2 = 39;
@@ -7424,140 +7424,140 @@ static void PrintStatsScreen_Left(u8 taskId)
         PrintStatsScreenTextSmall(WIN_STATS_LEFT, strEV, align_x, base_y + base_y_offset*base_i);
         base_i++;
 
-        //Egg cycles
-        if (sPokedexView->sPokemonStats.eggGroup1 == EGG_GROUP_UNDISCOVERED || sPokedexView->sPokemonStats.eggGroup2 == EGG_GROUP_UNDISCOVERED) //Species without eggs (legendaries etc)
+        //Duck cycles
+        if (sPokedexView->sPokemonStats.duckGroup1 == DUCK_GROUP_UNDISCOVERED || sPokedexView->sPokemonStats.duckGroup2 == DUCK_GROUP_UNDISCOVERED) //Species without ducks (legendaries etc)
         {
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_Stats_EggCycles, base_x, base_y + base_y_offset*base_i);
+            PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_Stats_DuckCycles, base_x, base_y + base_y_offset*base_i);
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_ThreeDashes, 78, base_y + base_y_offset*base_i);
         }
         else
         {
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_Stats_EggCycles, base_x, base_y + base_y_offset*base_i);
-            if (sPokedexView->sPokemonStats.eggCycles <= 10)
+            PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_Stats_DuckCycles, base_x, base_y + base_y_offset*base_i);
+            if (sPokedexView->sPokemonStats.duckCycles <= 10)
             {
-                StringCopy(strEV, gText_Stats_EggCycles_VeryFast);
+                StringCopy(strEV, gText_Stats_DuckCycles_VeryFast);
                 align_x = 76;
             }
-            else if (sPokedexView->sPokemonStats.eggCycles <= 20)
+            else if (sPokedexView->sPokemonStats.duckCycles <= 20)
             {
-                StringCopy(strEV, gText_Stats_EggCycles_Fast);
+                StringCopy(strEV, gText_Stats_DuckCycles_Fast);
                 align_x = 85;
             }
-            else if (sPokedexView->sPokemonStats.eggCycles <= 30)
+            else if (sPokedexView->sPokemonStats.duckCycles <= 30)
             {
-                StringCopy(strEV, gText_Stats_EggCycles_Normal);
+                StringCopy(strEV, gText_Stats_DuckCycles_Normal);
                 align_x = 76;
             }
             else
             {
-                StringCopy(strEV, gText_Stats_EggCycles_Slow);
+                StringCopy(strEV, gText_Stats_DuckCycles_Slow);
                 align_x = 67;
             }
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, strEV, align_x, base_y + base_y_offset*base_i);
         }
         base_i++;
 
-        //Egg group 1
-        switch (sPokedexView->sPokemonStats.eggGroup1)
+        //Duck group 1
+        switch (sPokedexView->sPokemonStats.duckGroup1)
         {
-        case EGG_GROUP_MONSTER     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_MONSTER);
+        case DUCK_GROUP_MONSTER     :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_MONSTER);
             break;
-        case EGG_GROUP_WATER_1     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_WATER_1);
+        case DUCK_GROUP_WATER_1     :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_WATER_1);
             break;
-        case EGG_GROUP_BUG         :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_BUG);
+        case DUCK_GROUP_BUG         :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_BUG);
             break;
-        case EGG_GROUP_FLYING      :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_FLYING);
+        case DUCK_GROUP_FLYING      :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_FLYING);
             break;
-        case EGG_GROUP_FIELD       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_FIELD);
+        case DUCK_GROUP_FIELD       :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_FIELD);
             break;
-        case EGG_GROUP_FAIRY       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_FAIRY);
+        case DUCK_GROUP_FAIRY       :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_FAIRY);
             break;
-        case EGG_GROUP_GRASS       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_GRASS);
+        case DUCK_GROUP_GRASS       :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_GRASS);
             break;
-        case EGG_GROUP_HUMAN_LIKE  :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_HUMAN_LIKE);
+        case DUCK_GROUP_HUMAN_LIKE  :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_HUMAN_LIKE);
             break;
-        case EGG_GROUP_WATER_3     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_WATER_3);
+        case DUCK_GROUP_WATER_3     :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_WATER_3);
             break;
-        case EGG_GROUP_MINERAL     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_MINERAL);
+        case DUCK_GROUP_MINERAL     :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_MINERAL);
             break;
-        case EGG_GROUP_AMORPHOUS   :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_AMORPHOUS);
+        case DUCK_GROUP_AMORPHOUS   :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_AMORPHOUS);
             break;
-        case EGG_GROUP_WATER_2     :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_WATER_2);
+        case DUCK_GROUP_WATER_2     :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_WATER_2);
             break;
-        case EGG_GROUP_DITTO       :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_DITTO);
+        case DUCK_GROUP_DITTO       :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_DITTO);
             break;
-        case EGG_GROUP_DRAGON      :
-            StringCopy(gStringVar1, gText_Stats_eggGroup_DRAGON);
+        case DUCK_GROUP_DRAGON      :
+            StringCopy(gStringVar1, gText_Stats_duckGroup_DRAGON);
             break;
-        case EGG_GROUP_UNDISCOVERED:
-            StringCopy(gStringVar1, gText_Stats_eggGroup_UNDISCOVERED);
+        case DUCK_GROUP_UNDISCOVERED:
+            StringCopy(gStringVar1, gText_Stats_duckGroup_UNDISCOVERED);
             break;
         }
-        //Egg group 2
-        if (sPokedexView->sPokemonStats.eggGroup1 != sPokedexView->sPokemonStats.eggGroup2)
+        //Duck group 2
+        if (sPokedexView->sPokemonStats.duckGroup1 != sPokedexView->sPokemonStats.duckGroup2)
         {
-            switch (sPokedexView->sPokemonStats.eggGroup2)
+            switch (sPokedexView->sPokemonStats.duckGroup2)
             {
-            case EGG_GROUP_MONSTER     :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_MONSTER);
+            case DUCK_GROUP_MONSTER     :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_MONSTER);
                 break;
-            case EGG_GROUP_WATER_1     :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_WATER_1);
+            case DUCK_GROUP_WATER_1     :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_WATER_1);
                 break;
-            case EGG_GROUP_BUG         :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_BUG);
+            case DUCK_GROUP_BUG         :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_BUG);
                 break;
-            case EGG_GROUP_FLYING      :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_FLYING);
+            case DUCK_GROUP_FLYING      :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_FLYING);
                 break;
-            case EGG_GROUP_FIELD       :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_FIELD);
+            case DUCK_GROUP_FIELD       :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_FIELD);
                 break;
-            case EGG_GROUP_FAIRY       :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_FAIRY);
+            case DUCK_GROUP_FAIRY       :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_FAIRY);
                 break;
-            case EGG_GROUP_GRASS       :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_GRASS);
+            case DUCK_GROUP_GRASS       :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_GRASS);
                 break;
-            case EGG_GROUP_HUMAN_LIKE  :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_HUMAN_LIKE);
+            case DUCK_GROUP_HUMAN_LIKE  :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_HUMAN_LIKE);
                 break;
-            case EGG_GROUP_WATER_3     :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_WATER_3);
+            case DUCK_GROUP_WATER_3     :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_WATER_3);
                 break;
-            case EGG_GROUP_MINERAL     :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_MINERAL);
+            case DUCK_GROUP_MINERAL     :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_MINERAL);
                 break;
-            case EGG_GROUP_AMORPHOUS   :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_AMORPHOUS);
+            case DUCK_GROUP_AMORPHOUS   :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_AMORPHOUS);
                 break;
-            case EGG_GROUP_WATER_2     :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_WATER_2);
+            case DUCK_GROUP_WATER_2     :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_WATER_2);
                 break;
-            case EGG_GROUP_DITTO       :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_DITTO);
+            case DUCK_GROUP_DITTO       :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_DITTO);
                 break;
-            case EGG_GROUP_DRAGON      :
-                StringCopy(gStringVar2, gText_Stats_eggGroup_DRAGON);
+            case DUCK_GROUP_DRAGON      :
+                StringCopy(gStringVar2, gText_Stats_duckGroup_DRAGON);
                 break;
-            case EGG_GROUP_UNDISCOVERED:
-                StringCopy(gStringVar2, gText_Stats_eggGroup_UNDISCOVERED);
+            case DUCK_GROUP_UNDISCOVERED:
+                StringCopy(gStringVar2, gText_Stats_duckGroup_UNDISCOVERED);
                 break;
             }
-            StringExpandPlaceholders(gStringVar3, gText_Stats_eggGroup_Groups);
+            StringExpandPlaceholders(gStringVar3, gText_Stats_duckGroup_Groups);
             align_x = GetStringRightAlignXOffset(0, gStringVar3, total_x);
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, gStringVar3, base_x, base_y + base_y_offset*base_i);
         }
@@ -8432,7 +8432,7 @@ static void Task_ExitEvolutionScreen(u8 taskId)
     }
 }
 
-//Stat bars on main screen, code by DizzyEgg, idea by Jaizu
+//Stat bars on main screen, code by DizzyDuck, idea by Jaizu
 #define PIXEL_COORDS_TO_OFFSET(x, y)(			\
 /*Add tiles by X*/								\
 ((y / 8) * 32 * 8)								\

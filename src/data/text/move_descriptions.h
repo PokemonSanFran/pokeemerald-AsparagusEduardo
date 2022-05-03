@@ -479,8 +479,8 @@ static const u8 sSelfDestructDescription[] = _(
     "Potente, pero hace\n"
     "que te debilites.");
 
-static const u8 sEggBombDescription[] = _(
-    "Arroja un huevo\n"
+static const u8 sDuckBombDescription[] = _(
+    "Arroja un pato\n"
     "al enemigo.");
 
 static const u8 sLickDescription[] = _(
@@ -3428,8 +3428,8 @@ static const u8 sSelfDestructDescription[] = _(
     "Inflicts severe damage but\n"
     "makes the user faint.");
 
-static const u8 sEggBombDescription[] = _(
-    "An egg is forcibly hurled at\n"
+static const u8 sDuckBombDescription[] = _(
+    "An duck is forcibly hurled at\n"
     "the foe.");
 
 static const u8 sLickDescription[] = _(
@@ -6017,7 +6017,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] =
     [MOVE_METRONOME - 1] = sMetronomeDescription,
     [MOVE_MIRROR_MOVE - 1] = sMirrorMoveDescription,
     [MOVE_SELF_DESTRUCT - 1] = sSelfDestructDescription,
-    [MOVE_EGG_BOMB - 1] = sEggBombDescription,
+    [MOVE_DUCK_BOMB - 1] = sDuckBombDescription,
     [MOVE_LICK - 1] = sLickDescription,
     [MOVE_SMOG - 1] = sSmogDescription,
     [MOVE_SLUDGE - 1] = sSludgeDescription,
@@ -6790,7 +6790,7 @@ static const u8 sMoveFourLineDescription_Bide[] = _("The user endures\nattacks f
 static const u8 sMoveFourLineDescription_Metronome[] = _("Waggles a finger\nand stimulates the\nbrain into using any\nmove at random.");
 static const u8 sMoveFourLineDescription_MirrorMove[] = _("The user counters\nthe move last used\nby the foe with the\nsame move.");
 static const u8 sMoveFourLineDescription_SelfDestruct[] = _("The user blows up\nto inflict severe\ndamage, even\nmaking itself faint.");
-static const u8 sMoveFourLineDescription_EggBomb[] = _("A large egg is\nhurled with great\nforce at the foe to\ninflict damage.");
+static const u8 sMoveFourLineDescription_DuckBomb[] = _("A large duck is\nhurled with great\nforce at the foe to\ninflict damage.");
 static const u8 sMoveFourLineDescription_Lick[] = _("The foe is licked\nand hit with a long\ntongue. It may\nalso paralyze.");
 static const u8 sMoveFourLineDescription_Smog[] = _("The foe is attacked\nwith exhaust gases.\nIt may also poison\nthe foe.");
 static const u8 sMoveFourLineDescription_Sludge[] = _("Toxic sludge is\nhurled at the foe.\nIt may poison the\ntarget.");
@@ -7158,7 +7158,7 @@ static const u8 sMoveFourLineDescription_Bide[] = _("The user endures\nattacks f
 static const u8 sMoveFourLineDescription_Metronome[] = _("Waggles a finger\nand stimulates the\nbrain into using any\nmove at random.");
 static const u8 sMoveFourLineDescription_MirrorMove[] = _("The user counters\nthe move last used\nby the foe with the\nsame move.");
 static const u8 sMoveFourLineDescription_SelfDestruct[] = _("The user blows up\nto inflict severe\ndamage, even\nmaking itself faint.");
-static const u8 sMoveFourLineDescription_EggBomb[] = _("A large egg is\nhurled with great\nforce at the foe to\ninflict damage.");
+static const u8 sMoveFourLineDescription_DuckBomb[] = _("A large duck is\nhurled with great\nforce at the foe to\ninflict damage.");
 static const u8 sMoveFourLineDescription_Lick[] = _("The foe is licked\nand hit with a long\ntongue. It may\nalso paralyze.");
 static const u8 sMoveFourLineDescription_Smog[] = _("The foe is attacked\nwith exhaust gases.\nIt may also poison\nthe foe.");
 static const u8 sMoveFourLineDescription_Sludge[] = _("Toxic sludge is\nhurled at the foe.\nIt may poison the\ntarget.");
@@ -7942,7 +7942,7 @@ const u8 *const gMoveFourLineDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_METRONOME     - 1] = sMoveFourLineDescription_Metronome,
     [MOVE_MIRROR_MOVE   - 1] = sMoveFourLineDescription_MirrorMove,
     [MOVE_SELF_DESTRUCT - 1] = sMoveFourLineDescription_SelfDestruct,
-    [MOVE_EGG_BOMB      - 1] = sMoveFourLineDescription_EggBomb,
+    [MOVE_DUCK_BOMB      - 1] = sMoveFourLineDescription_DuckBomb,
     [MOVE_LICK          - 1] = sMoveFourLineDescription_Lick,
     [MOVE_SMOG          - 1] = sMoveFourLineDescription_Smog,
     [MOVE_SLUDGE        - 1] = sMoveFourLineDescription_Sludge,

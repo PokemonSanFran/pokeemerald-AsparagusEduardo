@@ -61,7 +61,7 @@
 #define EC_WORD_ENCYCLOPEDIA  (EC_GROUP_TRAINER << 9) | 0x5
 #define EC_WORD_NATURE        (EC_GROUP_TRAINER << 9) | 0x6
 #define EC_WORD_CENTER        (EC_GROUP_TRAINER << 9) | 0x7
-#define EC_WORD_EGG           (EC_GROUP_TRAINER << 9) | 0x8
+#define EC_WORD_DUCK           (EC_GROUP_TRAINER << 9) | 0x8
 #define EC_WORD_LINK          (EC_GROUP_TRAINER << 9) | 0x9
 #define EC_WORD_SP_ABILITY    (EC_GROUP_TRAINER << 9) | 0xa
 #define EC_WORD_TRAINER       (EC_GROUP_TRAINER << 9) | 0xb

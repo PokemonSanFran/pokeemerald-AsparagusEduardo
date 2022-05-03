@@ -98,14 +98,14 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 ability, u32 unused2, u8 u
     return sentToPc;
 }
 
-u8 ScriptGiveEgg(u16 species)
+u8 ScriptGiveDuck(u16 species)
 {
     struct Pokemon mon;
-    u8 isEgg;
+    u8 isDuck;
 
-    CreateEgg(&mon, species, TRUE);
-    isEgg = TRUE;
-    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
+    CreateDuck(&mon, species, TRUE);
+    isDuck = TRUE;
+    SetMonData(&mon, MON_DATA_IS_DUCK, &isDuck);
 
     return GiveMonToPlayer(&mon);
 }
@@ -133,7 +133,7 @@ static bool8 CheckPartyMonHasHeldItem(u16 item)
     for(i = 0; i < PARTY_SIZE; i++)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-        if (species != SPECIES_NONE && species != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == item)
+        if (species != SPECIES_NONE && species != SPECIES_DUCK && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == item)
             return TRUE;
     }
     return FALSE;

@@ -434,7 +434,7 @@ static const u8 *const sTradeMessages[] =
     [TRADE_MSG_WAITING_FOR_FRIEND]         = sText_WaitingForYourFriend,
     [TRADE_MSG_FRIEND_WANTS_TO_TRADE]      = sText_YourFriendWantsToTrade,
     [TRADE_MSG_MON_CANT_BE_TRADED]         = gText_PkmnCantBeTradedNow,
-    [TRADE_MSG_EGG_CANT_BE_TRADED]         = gText_EggCantBeTradedNow,
+    [TRADE_MSG_DUCK_CANT_BE_TRADED]         = gText_DuckCantBeTradedNow,
     [TRADE_MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded
 };
 

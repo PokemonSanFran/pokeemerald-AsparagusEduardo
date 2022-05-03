@@ -359,7 +359,7 @@ BattleFrontier_ReceptionGate_Text_BattleTowerInfo:
 
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo:
 	.string "The Battle Dome is the large building\n"
-	.string "shaped like a huge egg.\p"
+	.string "shaped like a huge duck.\p"
 	.string "Events named Battle Tourneys are held\n"
 	.string "in this facility.\p"
 	.string "The Battle Tourneys are offered in\n"
@@ -454,7 +454,7 @@ BattleFrontier_ReceptionGate_Text_OpenLevelInfo:
 BattleFrontier_ReceptionGate_Text_MonEntryInfo:
 	.string "Virtually any kind of Pokémon may take\n"
 	.string "on the challenges at all facilities.\p"
-	.string "Eggs and certain kinds of Pokémon,\n"
+	.string "Ducks and certain kinds of Pokémon,\n"
 	.string "however, are not permitted.\p"
 	.string "The numbers of Pokémon required for\n"
 	.string "challenges will depend on the facility.\p"

@@ -106,7 +106,7 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestMon::
 	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST, LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
 	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_EQUAL_RANK, LilycoveCity_ContestLobby_EventScript_EnterMon
 	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_HIGH_RANK, LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon
-	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_EGG, LilycoveCity_ContestLobby_EventScript_CantEnterEgg
+	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_DUCK, LilycoveCity_ContestLobby_EventScript_CantEnterDuck
 	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_FAINTED, LilycoveCity_ContestLobby_EventScript_CantEnterFainted
 	end
 
@@ -177,8 +177,8 @@ LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon::
 	case YES, LilycoveCity_ContestLobby_EventScript_EnterMon
 	end
 
-LilycoveCity_ContestLobby_EventScript_CantEnterEgg::
-	msgbox LilycoveCity_ContestLobby_Text_EggCannotTakePart, MSGBOX_DEFAULT
+LilycoveCity_ContestLobby_EventScript_CantEnterDuck::
+	msgbox LilycoveCity_ContestLobby_Text_DuckCannotTakePart, MSGBOX_DEFAULT
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	release
 	end
@@ -1463,8 +1463,8 @@ LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank:
 	.string "is not qualified to compete at this\l"
 	.string "Rank yet…$"
 
-LilycoveCity_ContestLobby_Text_EggCannotTakePart:
-	.string "I'm sorry, but an Egg cannot take part\n"
+LilycoveCity_ContestLobby_Text_DuckCannotTakePart:
+	.string "I'm sorry, but an Duck cannot take part\n"
 	.string "in a Pokémon Contest.$"
 
 LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:
@@ -1684,8 +1684,8 @@ LilycoveCity_ContestLobby_Text_MonInNoCondition2:
 	.string "Your Pokémon appears to be in no\n"
 	.string "condition to take part in a Contest…$"
 
-LilycoveCity_ContestLobby_Text_EggCannotTakePart2:
-	.string "I'm sorry, but an Egg cannot take part\n"
+LilycoveCity_ContestLobby_Text_DuckCannotTakePart2:
+	.string "I'm sorry, but an Duck cannot take part\n"
 	.string "in a Pokémon Contest.$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon3:

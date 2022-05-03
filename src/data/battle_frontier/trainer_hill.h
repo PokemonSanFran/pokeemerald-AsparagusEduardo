@@ -1435,7 +1435,7 @@ static const struct TrHillFloor sDataTagNormal_Floors[] =
                     {
                         .species = SPECIES_BLISSEY,
                         .heldItem = ITEM_LEFTOVERS,
-                        .moves = {MOVE_SKILL_SWAP, MOVE_EGG_BOMB, MOVE_THUNDERBOLT, MOVE_SING},
+                        .moves = {MOVE_SKILL_SWAP, MOVE_DUCK_BOMB, MOVE_THUNDERBOLT, MOVE_SING},
                         .level = 0,
                         .ppBonuses = 0,
                         .defenseEV = 255,
@@ -3803,7 +3803,7 @@ static const struct TrHillFloor sDataTagUnique_Floors[] = {
                             .name = _("Aniya"),
                             .facilityClass = FACILITY_CLASS_TUBER_F,
                             .unused = 0,
-                            .speechBefore = {EC_WORD_SOMEONE, EC_WORD_GOT, EC_WORD_ME, EC_WORD_A_LITTLE, EC_WORD_POKEMON, EC_WORD_EGG},
+                            .speechBefore = {EC_WORD_SOMEONE, EC_WORD_GOT, EC_WORD_ME, EC_WORD_A_LITTLE, EC_WORD_POKEMON, EC_WORD_DUCK},
                             .speechWin = {EC_WORD_I_AM, EC_WORD_NOT, EC_WORD_NEW, EC_WORD_AT, EC_WORD_THIS, EC_WORD_EXCL},
                             .speechLose = {EC_WORD_OH, EC_WORD_BUT, EC_WORD_ELLIPSIS, EC_WORD_WHY, EC_WORD_WHY, EC_WORD_QUES_EXCL},
                             .speechAfter = {EC_WORD_YOU_RE, EC_WORD_BUSY, EC_WORD_QUES, EC_WORD_DON_T, EC_WORD_GIVE_UP, EC_WORD_EXCL},
@@ -5319,7 +5319,7 @@ static const struct TrHillFloor sDataTagExpert_Floors[] = {
                                         },
                                     [2] =
                                         {
-                                            .species = SPECIES_EXEGGUTOR,
+                                            .species = SPECIES_EXDUCKUTOR,
                                             .heldItem = ITEM_SHELL_BELL,
                                             .moves = {MOVE_EXPLOSION, MOVE_HYPNOSIS, MOVE_PSYCHIC, MOVE_SOLAR_BEAM},
                                             .level = 0,
@@ -5335,7 +5335,7 @@ static const struct TrHillFloor sDataTagExpert_Floors[] = {
                                             .spDefenseIV = MAX_PER_STAT_IVS,
                                             .abilityNum = 0,
                                             .personality = 0x7F,
-                                            .nickname = _("Exeggutor"),
+                                            .nickname = _("Exduckutor"),
                                             .friendship = 255,
                                         },
                                     [3] =

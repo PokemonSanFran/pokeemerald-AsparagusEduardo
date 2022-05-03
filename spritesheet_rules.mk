@@ -1021,10 +1021,10 @@ $(OBJEVENTGFXDIR)/pokemon/voltorb.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/electrode.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/exeggcute.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/exduckcute.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/exeggutor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/exduckutor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/pokemon/cubone.4bpp: %.4bpp: %.png
@@ -3259,7 +3259,7 @@ $(OBJEVENTGFXDIR)/pokemon/alolan_grimer.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon/alolan_muk.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/pokemon/alolan_exeggutor.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/pokemon/alolan_exduckutor.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 8
 
 $(OBJEVENTGFXDIR)/pokemon/alolan_marowak.4bpp: %.4bpp: %.png

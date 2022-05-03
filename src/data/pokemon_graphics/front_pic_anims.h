@@ -1207,7 +1207,7 @@ static const union AnimCmd sAnim_ELECTRODE_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_EXEGGCUTE_1[] =
+static const union AnimCmd sAnim_EXDUCKCUTE_1[] =
 {
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_FRAME(1, 10),
@@ -1221,7 +1221,7 @@ static const union AnimCmd sAnim_EXEGGCUTE_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_EXEGGUTOR_1[] =
+static const union AnimCmd sAnim_EXDUCKUTOR_1[] =
 {
     ANIMCMD_FRAME(1, 35),
     ANIMCMD_FRAME(0, 10),
@@ -4577,7 +4577,7 @@ static const union AnimCmd sAnim_CHIMECHO_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_EGG_1[] =
+static const union AnimCmd sAnim_DUCK_1[] =
 {
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(1, 6),
@@ -8920,7 +8920,7 @@ static const union AnimCmd sAnim_MUK_ALOLAN_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_EXEGGUTOR_ALOLAN_1[] =
+static const union AnimCmd sAnim_EXDUCKUTOR_ALOLAN_1[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
@@ -9835,14 +9835,14 @@ static const union AnimCmd *const sAnims_ELECTRODE[] ={
     sAnim_ELECTRODE_1,
 };
 
-static const union AnimCmd *const sAnims_EXEGGCUTE[] ={
+static const union AnimCmd *const sAnims_EXDUCKCUTE[] ={
     sAnim_GeneralFrame0,
-    sAnim_EXEGGCUTE_1,
+    sAnim_EXDUCKCUTE_1,
 };
 
-static const union AnimCmd *const sAnims_EXEGGUTOR[] ={
+static const union AnimCmd *const sAnims_EXDUCKUTOR[] ={
     sAnim_GeneralFrame0,
-    sAnim_EXEGGUTOR_1,
+    sAnim_EXDUCKUTOR_1,
 };
 
 static const union AnimCmd *const sAnims_CUBONE[] ={
@@ -11313,9 +11313,9 @@ static const union AnimCmd *const sAnims_CHIMECHO[] ={
     sAnim_CHIMECHO_1,
 };
 
-static const union AnimCmd *const sAnims_EGG[] ={
+static const union AnimCmd *const sAnims_DUCK[] ={
     sAnim_GeneralFrame0,
-    sAnim_EGG_1,
+    sAnim_DUCK_1,
 };
 
 static const union AnimCmd *const sAnims_UNOWN_B[] ={
@@ -14368,9 +14368,9 @@ static const union AnimCmd *const sAnims_MUK_ALOLAN[] ={
     sAnim_MUK_ALOLAN_1,
 };
 
-static const union AnimCmd *const sAnims_EXEGGUTOR_ALOLAN[] ={
+static const union AnimCmd *const sAnims_EXDUCKUTOR_ALOLAN[] ={
     sAnim_GeneralFrame0,
-    sAnim_EXEGGUTOR_ALOLAN_1,
+    sAnim_EXDUCKUTOR_ALOLAN_1,
 };
 
 static const union AnimCmd *const sAnims_MAROWAK_ALOLAN[] ={
@@ -14773,8 +14773,8 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(KINGLER),
     ANIM_CMD(VOLTORB),
     ANIM_CMD(ELECTRODE),
-    ANIM_CMD(EXEGGCUTE),
-    ANIM_CMD(EXEGGUTOR),
+    ANIM_CMD(EXDUCKCUTE),
+    ANIM_CMD(EXDUCKUTOR),
     ANIM_CMD(CUBONE),
     ANIM_CMD(MAROWAK),
     ANIM_CMD(HITMONLEE),
@@ -15636,7 +15636,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD(GOLEM_ALOLAN),
     ANIM_CMD(GRIMER_ALOLAN),
     ANIM_CMD(MUK_ALOLAN),
-    ANIM_CMD(EXEGGUTOR_ALOLAN),
+    ANIM_CMD(EXDUCKUTOR_ALOLAN),
     ANIM_CMD(MAROWAK_ALOLAN),
     ANIM_CMD(MEOWTH_GALARIAN),
     ANIM_CMD(PONYTA_GALARIAN),
@@ -15878,7 +15878,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[] =
     ANIM_CMD_FULL(ZARUDE_DADA, sAnims_ZARUDE),
     ANIM_CMD_FULL(CALYREX_ICE_RIDER, sAnims_CALYREX),
     ANIM_CMD_FULL(CALYREX_SHADOW_RIDER, sAnims_CALYREX),
-    ANIM_CMD(EGG),
+    ANIM_CMD(DUCK),
 };
 
 #undef ANIM_CMD

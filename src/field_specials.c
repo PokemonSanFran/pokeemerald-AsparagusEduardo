@@ -1194,7 +1194,7 @@ void IsGrassTypeInParty(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         pokemon = &gPlayerParty[i];
-        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_DUCK))
         {
             species = GetMonData(pokemon, MON_DATA_SPECIES);
             if (GetTypeBySpecies(species, 1) == TYPE_GRASS || GetTypeBySpecies(species, 2) == TYPE_GRASS) //tx_randomizer_and_challenges
@@ -1492,7 +1492,7 @@ u8 GetLeadMonIndex(void)
     u8 partyCount = CalculatePlayerPartyCount();
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 0)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_DUCK && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 0)
             return i;
     }
     return 0;
@@ -1603,14 +1603,14 @@ bool8 BufferTMHMMoveName(void)
     return FALSE;
 }
 
-bool8 IsBadEggInParty(void)
+bool8 IsBadDuckInParty(void)
 {
     u8 partyCount = CalculatePlayerPartyCount();
     u8 i;
 
     for (i = 0; i < partyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG) == TRUE)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_DUCK) == TRUE)
             return TRUE;
     }
 

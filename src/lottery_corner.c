@@ -16,7 +16,7 @@ static const u16 sLotteryPrizes[] =
     ITEM_PP_UP,
     ITEM_PP_MAX,
     ITEM_RARE_CANDY,
-    ITEM_LUCKY_EGG,
+    ITEM_LUCKY_DUCK,
     ITEM_MASTER_BALL,
 };
 
@@ -62,8 +62,8 @@ void PickLotteryCornerTicket(void)
 
         if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
         {
-            // do not calculate ticket values for eggs.
-            if (!GetMonData(mon, MON_DATA_IS_EGG))
+            // do not calculate ticket values for ducks.
+            if (!GetMonData(mon, MON_DATA_IS_DUCK))
             {
                 u32 otId = GetMonData(mon, MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
@@ -85,7 +85,7 @@ void PickLotteryCornerTicket(void)
         for (j = 0; j < IN_BOX_COUNT; j++)
         {
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_SPECIES) != SPECIES_NONE &&
-            !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_EGG))
+            !GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_IS_DUCK))
             {
                 u32 otId = GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);

@@ -1884,7 +1884,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .split = SPLIT_PHYSICAL,
     },
 
-    [MOVE_EGG_BOMB] =
+    [MOVE_DUCK_BOMB] =
     {
         .effect = EFFECT_HIT,
         .power = 100,

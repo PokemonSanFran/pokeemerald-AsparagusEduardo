@@ -149,8 +149,8 @@ gSpecials::
 	def_special IsRandomItemsActivated 			@ tx_randomizer_and_challenges
 	def_special RandomItem						@ tx_randomizer_and_challenges
 	def_special RandomItemHidden				@ tx_randomizer_and_challenges
-	def_special CountPartyNonEggMons
-	def_special CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
+	def_special CountPartyNonDuckMons
+	def_special CountPartyAliveNonDuckMons_IgnoreVar0x8004Slot
 	def_special ShouldReadyContestArtist
 	def_special SaveMuseumContestPainting
 	def_special DoesContestCategoryHaveMuseumPainting
@@ -200,8 +200,8 @@ gSpecials::
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
-	def_special RejectEggFromDayCare
-	def_special GiveEggFromDaycare
+	def_special RejectDuckFromDayCare
+	def_special GiveDuckFromDaycare
 	def_special SetDaycareCompatibilityString
 	def_special GetSelectedMonNicknameAndSpecies
 	def_special StoreSelectedPokemonInDaycare
@@ -211,7 +211,7 @@ gSpecials::
 	def_special GetDaycareCost
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
-	def_special EggHatch
+	def_special DuckHatch
 	def_special CheckDaycareMonReceivedMail
 	def_special ShowLinkBattleRecords
 	def_special IsEnoughForCostInVar0x8005
@@ -344,7 +344,7 @@ gSpecials::
 	def_special SetRoute123Weather
 	def_special GetContestMultiplayerId
 	def_special ScriptGetPartyMonSpecies
-	def_special IsSelectedMonEgg
+	def_special IsSelectedMonDuck
 	def_special TryInitBattleTowerAwardManObjectEvent
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
@@ -439,7 +439,7 @@ gSpecials::
 	def_special RetrieveWonderNewsVal
 	def_special ChooseMonForWirelessMinigame
 	def_special Script_ResetUnionRoomTrade
-	def_special IsBadEggInParty
+	def_special IsBadDuckInParty
 	def_special ValidateSavedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special IsPokemonJumpSpeciesInParty
@@ -537,7 +537,7 @@ gSpecials::
 	def_special PlayerFaceTrainerAfterBattle
 	def_special ResetHealLocationFromDewford
 	def_special IsLastMonThatKnowsSurf
-	def_special CountPartyAliveNonEggMons
+	def_special CountPartyAliveNonDuckMons
 	def_special TryPrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
