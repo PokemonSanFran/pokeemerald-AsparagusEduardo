@@ -30,6 +30,7 @@ enum
     MENUITEM_BUTTONMODE,
     MENUITEM_HP_EXP_BAR,
     MENUITEM_UNIT_SYSTEM,
+    MENUITEM_TRANSITION,
     MENUITEM_FRAMETYPE,
     MENUITEM_FISHREELING,
     MENUITEM_SAVECONFIRM,
@@ -68,6 +69,7 @@ static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_HpExpBar(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
+static void DrawChoices_Transition(int selection, int y);
 static void DrawChoices_SkipBattleIntro(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_FishReeling(int selection, int y);
@@ -103,6 +105,7 @@ struct
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
     [MENUITEM_HP_EXP_BAR]   = {DrawChoices_HpExpBar,    ProcessInput_Options_Two},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
+    [MENUITEM_TRANSITION]   = {DrawChoices_Transition,  ProcessInput_Options_Two},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_FISHREELING]  = {DrawChoices_FishReeling, ProcessInput_Options_Two},
     [MENUITEM_SAVECONFIRM]  = {DrawChoices_SaveConfirm, ProcessInput_Options_Two},
@@ -121,8 +124,9 @@ static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equa
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
 static const u8 sText_Music[] = _("Música");
 static const u8 sText_SFX[] = _("Efec. Sonido");
-static const u8 sText_HpExpBar[] = _("Veloc. Barra PS/EXP");
+static const u8 sText_HpExpBar[] = _("Vel. Barra PS/EXP");
 static const u8 sText_UnitSystem[] = _("Sist. Unidades");
+static const u8 sText_Transition[] = _("Transición");
 static const u8 sText_FishReeling[] = _("Estilo Pesca");
 static const u8 sText_SkipBattleIntro[] = _("Intro Combate");
 static const u8 sText_FishEmerald[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}RZE");
@@ -133,6 +137,7 @@ static const u8 sText_Music[] = _("Music");
 static const u8 sText_SFX[] = _("SFX");
 static const u8 sText_HpExpBar[] = _("HP/EXP bar speed");
 static const u8 sText_UnitSystem[] = _("Unit System");
+static const u8 sText_Transition[] = _("Transition");
 static const u8 sText_FishReeling[] = _("Fishing Style");
 static const u8 sText_SkipBattleIntro[] = _("Battle Intro");
 static const u8 sText_FishEmerald[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}RSE");
@@ -151,6 +156,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_HP_EXP_BAR]  = sText_HpExpBar,
     [MENUITEM_UNIT_SYSTEM] = sText_UnitSystem,
+    [MENUITEM_TRANSITION]  = sText_Transition,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_FISHREELING] = sText_FishReeling,
     [MENUITEM_SAVECONFIRM] = sText_SaveConfirm,
@@ -159,8 +165,13 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_CANCEL]      = gText_OptionMenuSave,
 };
 
-static const u8 sText_Faster[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FASTER");
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+static const u8 sText_Faster[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}Ráp.+");
+static const u8 sText_Instant[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTAN.");
+#else
+static const u8 sText_Faster[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST+");
 static const u8 sText_Instant[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INSTANT");
+#endif
 static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast, sText_Faster};
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
@@ -313,6 +324,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_HP_EXP_BAR]  = gSaveBlock2Ptr->optionsHpExpBarSpeed;
         sOptions->sel[MENUITEM_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
+        sOptions->sel[MENUITEM_TRANSITION]  = gSaveBlock2Ptr->optionsTransitionSpeed;
         sOptions->sel[MENUITEM_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
         sOptions->sel[MENUITEM_FISHREELING] = gSaveBlock2Ptr->optionsFishReeling;
         sOptions->sel[MENUITEM_SAVECONFIRM] = gSaveBlock2Ptr->optionsSaveConfirm;
@@ -486,6 +498,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_BUTTONMODE];
     gSaveBlock2Ptr->optionsHpExpBarSpeed    = sOptions->sel[MENUITEM_HP_EXP_BAR];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNIT_SYSTEM];
+    gSaveBlock2Ptr->optionsTransitionSpeed  = sOptions->sel[MENUITEM_TRANSITION];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
     gSaveBlock2Ptr->optionsFishReeling      = sOptions->sel[MENUITEM_FISHREELING];
     gSaveBlock2Ptr->optionsSaveConfirm      = sOptions->sel[MENUITEM_SAVECONFIRM];
@@ -744,7 +757,16 @@ static void DrawChoices_UnitSystem(int selection, int y)
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_UnitSystemImperial, 104, y, styles[0]);
-    DrawOptionMenuChoice(gText_UnitSystemMetric, GetStringRightAlignXOffset(1, gText_UnitSystemMetric, 198), y, styles[1]);
+    DrawOptionMenuChoice(gText_UnitSystemMetric, GetStringRightAlignXOffset(FONT_NORMAL, gText_UnitSystemMetric, 198), y, styles[1]);
+}
+
+static void DrawChoices_Transition(int selection, int y)
+{
+    u8 styles[2] = {0};
+
+    styles[selection] = 1;
+    DrawOptionMenuChoice(gText_TransitionStyleNormal, 104, y, styles[0]);
+    DrawOptionMenuChoice(gText_TransitionStyleInstant, GetStringRightAlignXOffset(FONT_NORMAL, gText_TransitionStyleInstant, 198), y, styles[1]);
 }
 
 static void DrawChoices_SkipBattleIntro(int selection, int y)
@@ -754,7 +776,7 @@ static void DrawChoices_SkipBattleIntro(int selection, int y)
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0]);
-    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(1, gText_BattleSceneOff, 198), y, styles[1]);
+    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), y, styles[1]);
 }
 
 static void DrawChoices_FishReeling(int selection, int y)
