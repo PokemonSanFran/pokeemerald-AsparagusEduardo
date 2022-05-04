@@ -31,6 +31,8 @@ Questionnaire_Text_YouCanAccessMysteryEvent::
 	.string "access the MYSTERY EVENT.$"
 
 MysteryGift_Text_TheresATicketForYou::
+	.string "Thank you for using the MYSTERY\n"
+	.string "EVENT System.\p"
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
