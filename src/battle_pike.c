@@ -846,22 +846,22 @@ static bool8 DoesTypePreventStatus(u16 species, u32 status)
     switch (status)
     {
     case STATUS1_TOXIC_POISON:
-        if (gBaseStats[species].type1 == TYPE_STEEL || gBaseStats[species].type1 == TYPE_POISON
-            || gBaseStats[species].type2 == TYPE_STEEL || gBaseStats[species].type2 == TYPE_POISON)
+        if (GetTypeBySpecies(species, 1) == TYPE_STEEL || GetTypeBySpecies(species, 1) == TYPE_POISON
+            || GetTypeBySpecies(species, 2) == TYPE_STEEL || GetTypeBySpecies(species, 2) == TYPE_POISON)
             ret = TRUE;
         break;
     case STATUS1_FREEZE:
-        if (gBaseStats[species].type1 == TYPE_ICE || gBaseStats[species].type2 == TYPE_ICE)
+        if (GetTypeBySpecies(species, 1) == TYPE_ICE || GetTypeBySpecies(species, 2) == TYPE_ICE)
             ret = TRUE;
         break;
     case STATUS1_PARALYSIS:
-        if (gBaseStats[species].type1 == TYPE_GROUND || gBaseStats[species].type2 == TYPE_GROUND
+        if (GetTypeBySpecies(species, 1) == TYPE_GROUND || GetTypeBySpecies(species, 2) == TYPE_GROUND
             || (B_PARALYZE_ELECTRIC >= GEN_6 &&
-                (gBaseStats[species].type1 == TYPE_ELECTRIC || gBaseStats[species].type2 == TYPE_ELECTRIC)))
+                (GetTypeBySpecies(species, 1) == TYPE_ELECTRIC || GetTypeBySpecies(species, 2) == TYPE_ELECTRIC)))
             ret = TRUE;
         break;
     case STATUS1_BURN:
-        if (gBaseStats[species].type1 == TYPE_FIRE || gBaseStats[species].type2 == TYPE_FIRE)
+        if (GetTypeBySpecies(species, 1) == TYPE_FIRE || GetTypeBySpecies(species, 2) == TYPE_FIRE)
             ret = TRUE;
         break;
     case STATUS1_SLEEP:
@@ -1142,7 +1142,7 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
                MON_DATA_EXP,
                &gExperienceTables[gBaseStats[wildMons[headerId][pikeMonId].species].growthRate][monLevel]);
 
-    if (gBaseStats[wildMons[headerId][pikeMonId].species].abilities[1])
+    if (GetAbilityBySpecies(wildMons[headerId][pikeMonId].species, 1))
         abilityNum = Random() % 2;
     else
         abilityNum = 0;

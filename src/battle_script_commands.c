@@ -3904,7 +3904,7 @@ static void Cmd_getexp(void)
             {
                 if (TX_EXP_MULTIPLER_ONLY_ON_NUZLOCKE_AND_RANDOMIZER) //special for Jaizu
                 {
-                    if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke || IsRandomizerActivated())
+                    if (IsNuzlockeActive() || IsRandomizerActivated())
                     {
                         if (gSaveBlock1Ptr->tx_Challenges_ExpMultiplier == 3)
                             calculatedExp = 0;
@@ -3953,7 +3953,7 @@ static void Cmd_getexp(void)
             {
                 if (TX_EXP_MULTIPLER_ONLY_ON_NUZLOCKE_AND_RANDOMIZER) //special for Jaizu
                 {
-                    if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke || IsRandomizerActivated())
+                    if (IsNuzlockeActive() || IsRandomizerActivated())
                     {
                         *exp = 0;
                         gExpShareExp = 0;
@@ -5708,8 +5708,8 @@ static void Cmd_switchindataupdate(void)
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
         monData[i] = gBattleResources->bufferB[gActiveBattler][4 + i];
 
-    gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
-    gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
+    gBattleMons[gActiveBattler].type1 = GetTypeBySpecies(gBattleMons[gActiveBattler].species, 1);
+    gBattleMons[gActiveBattler].type2 = GetTypeBySpecies(gBattleMons[gActiveBattler].species, 2);
     gBattleMons[gActiveBattler].type3 = TYPE_MYSTERY;
     gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
 
@@ -13165,9 +13165,9 @@ static void Cmd_pickup(void)
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
 
             if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gBaseStats[species].abilities[1];
+                ability = GetAbilityBySpecies(species, 1);
             else
-                ability = gBaseStats[species].abilities[0];
+                ability = GetAbilityBySpecies(species, 0);
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
@@ -13214,9 +13214,9 @@ static void Cmd_pickup(void)
                 lvlDivBy10 = 9;
 
             if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gBaseStats[species].abilities[1];
+                ability = GetAbilityBySpecies(species, 1);
             else
-                ability = gBaseStats[species].abilities[0];
+                ability = GetAbilityBySpecies(species, 0);
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
@@ -14058,7 +14058,7 @@ static void Cmd_trygivecaughtmonnick(void)
     case 0:
         HandleBattleWindow(24, 8, 29, 13, 0);
 
-        if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke) //tx_randomizer_and_challenges
+        if (IsNuzlockeNicknamingActive()) //tx_randomizer_and_challenges
         {
             gBattleCommunication[MULTIUSE_STATE]++;
             BeginFastPaletteFade(3);
@@ -14072,7 +14072,7 @@ static void Cmd_trygivecaughtmonnick(void)
         }
         break;
     case 1:
-        if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke) //tx_randomizer_and_challenges
+        if (IsNuzlockeNicknamingActive()) //tx_randomizer_and_challenges
             gBattleCommunication[MULTIUSE_STATE]++;
 
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)

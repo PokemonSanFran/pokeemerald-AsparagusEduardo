@@ -23,6 +23,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
+#include "tx_randomizer_and_challenges.h"
 
 extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -1009,7 +1010,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             }
             else
             {
-                if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeFlagGet(NuzlockeGetCurrentRegionMapSectionId()))
+                if (IsNuzlockeActive() && NuzlockeFlagGet(NuzlockeGetCurrentRegionMapSectionId()))
                     return FALSE;
                 gSpecialVar_0x8004 = i;
                 return TRUE;

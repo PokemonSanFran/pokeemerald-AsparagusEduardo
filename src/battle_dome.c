@@ -2347,8 +2347,8 @@ static void InitDomeTrainers(void)
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPDEF, NULL);
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_SPEED, NULL);
         rankingScores[0] += GetMonData(&gPlayerParty[trainerId], MON_DATA_MAX_HP, NULL);
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type1];
-        monTypesBits |= gBitTable[gBaseStats[GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL)].type2];
+        monTypesBits |= gBitTable[GetTypeBySpecies(GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL), 1)];
+        monTypesBits |= gBitTable[GetTypeBySpecies(GetMonData(&gPlayerParty[trainerId], MON_DATA_SPECIES, NULL), 2)];
     }
 
     // Count the number of types in the players party, to factor into the ranking
@@ -2780,9 +2780,9 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
     if (move == MOVE_NONE || move == 0xFFFF || gBattleMoves[move].power == 0)
         return 0;
 
-    defType1 = gBaseStats[targetSpecies].type1;
-    defType2 = gBaseStats[targetSpecies].type2;
-    defAbility = gBaseStats[targetSpecies].abilities[0];
+    defType1 = GetTypeBySpecies(targetSpecies, 1);
+    defType2 = GetTypeBySpecies(targetSpecies, 2);
+    defAbility = GetAbilityBySpecies(targetSpecies, 0);
     moveType = gBattleMoves[move].type;
 
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
@@ -5206,9 +5206,9 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
                 targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
 
                 if (personality & 1)
-                    targetAbility = gBaseStats[targetSpecies].abilities[1];
+                    targetAbility = GetAbilityBySpecies(targetSpecies, 1);
                 else
-                    targetAbility = gBaseStats[targetSpecies].abilities[0];
+                    targetAbility = GetAbilityBySpecies(targetSpecies, 0);
 
                 typeMultiplier = CalcPartyMonTypeEffectivenessMultiplier(moveIds[i * 4 + j], targetSpecies, targetAbility);
                 if (typeMultiplier == UQ_4_12(0))

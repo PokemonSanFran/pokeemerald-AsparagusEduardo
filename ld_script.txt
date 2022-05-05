@@ -344,8 +344,8 @@ SECTIONS {
         src/mgba.o(.text);
 		src/printf.o(.text);
         src/ud_trade.o(.text);
-        src/tx_challenges.o(.text);
-        src/tx_randomizer.o(.text);
+        src/tx_rac_menu.o(.text);
+        src/tx_randomizer_and_challenges.o(.text);
         src/build_info.o(.text);
     } =0
 
@@ -607,6 +607,7 @@ SECTIONS {
 		src/battle_ai_util.o(.rodata);
         src/trader.o(.rodata);
         src/starter_choose.o(.rodata);
+        src/event_data.o(.rodata);
         src/wallclock.o(.rodata);
         src/pokeblock.o(.rodata);
         src/fldeff_flash.o(.rodata);
@@ -718,8 +719,8 @@ SECTIONS {
         src/dexnav.o(.rodata);
         src/printf.o(.rodata);
         src/ud_trade.o(.rodata);
-        src/tx_challenges.o(.rodata);
-        src/tx_randomizer.o(.rodata);
+        src/tx_rac_menu.o(.rodata);
+        src/tx_randomizer_and_challenges.o(.rodata);
         src/build_info.o(.rodata);
     } =0
 

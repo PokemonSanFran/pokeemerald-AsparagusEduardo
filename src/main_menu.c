@@ -226,8 +226,7 @@ static void Task_NewGameBirchSpeech_WaitForWhatsYourNameToPrint(u8);
 static void Task_NewGameBirchSpeech_WaitPressBeforeNameChoice(u8);
 static void Task_NewGameBirchSpeech_StartNamingScreen(u8);
 static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void);
-static void CB2_NewGameBirchSpeech_ReturnFromRandomizerOptions(void);
-static void CB2_NewGameBirchSpeech_ReturnFromChallengesOptions(void);
+static void CB2_NewGameBirchSpeech_ReturnFromTxRandomizerChallengesOptions(void);
 //static void NewGameBirchSpeech_SetDefaultPlayerName(u8);
 static void Task_NewGameBirchSpeech_CreateNameYesNo(u8);
 static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8);
@@ -1064,8 +1063,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
                 // gPlttBufferUnfaded[0] = RGB_BLACK;
                 // gPlttBufferFaded[0] = RGB_BLACK;
                 // gTasks[taskId].func = Task_NewGameBirchSpeech_Init;
-                gMain.savedCallback = CB2_NewGameBirchSpeech_ReturnFromRandomizerOptions;
-                SetMainCallback2(CB2_InitRandomizerMenu);
+                gMain.savedCallback = CB2_NewGameBirchSpeech_ReturnFromTxRandomizerChallengesOptions;
+                SetMainCallback2(CB2_InitTxRandomizerChallengesMenu);
                 DestroyTask(taskId);
                 break;
             case ACTION_CONTINUE:
@@ -1269,13 +1268,7 @@ static void HighlightSelectedMainMenuItem(u8 menuType, u8 selectedMenuItem, s16 
 #define tBrendanSpriteId data[10]
 #define tMaySpriteId data[11]
 
-static void CB2_NewGameBirchSpeech_ReturnFromRandomizerOptions(void)
-{
-    gMain.savedCallback = CB2_NewGameBirchSpeech_ReturnFromChallengesOptions;
-    SetMainCallback2(CB2_InitChallengesMenu);
-}
-
-static void CB2_NewGameBirchSpeech_ReturnFromChallengesOptions(void)
+static void CB2_NewGameBirchSpeech_ReturnFromTxRandomizerChallengesOptions(void)
 {
     u8 taskId;
     u8 spriteId;

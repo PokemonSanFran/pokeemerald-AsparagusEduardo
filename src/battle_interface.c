@@ -34,6 +34,16 @@
 #include "constants/songs.h"
 #include "constants/battle_config.h"
 #include "constants/items.h"
+#include "tx_randomizer_and_challenges.h"
+
+struct TestingBar
+{
+    s32 maxValue;
+    s32 oldValue;
+    s32 receivedValue;
+    u32 unkC_0:5;
+    u32 unk10;
+};
 
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
@@ -2198,9 +2208,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
         return;
     if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES)), FLAG_GET_CAUGHT))
     {
-        if (!gSaveBlock1Ptr->tx_Challenges_Nuzlocke)
-            return;
-        if (!FlagGet(FLAG_ADVENTURE_STARTED)) //Nuzlocke has not started
+        if (!IsNuzlockeActive())
             return;
         if (NuzlockeIsSpeciesClauseActive || OneTypeChallengeCaptureBlocked || NuzlockeIsCaptureBlocked)
             return;

@@ -296,6 +296,7 @@ struct FormChange {
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
+extern struct Pokemon gPlayerPartyBackup[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
@@ -478,13 +479,7 @@ void RandomizeTypeEffectivenessListEWRAM(u16 seed);
 u16 PickRandomStarter(u16 species);
 u8 GetTypeBySpecies(u16 species, u8 type);
 u16 GetSpeciesRandomSeeded(u16 species, u8 offset);
-u8 GetPartySize(void);
-u8 GetCurrentPartyLevelCap(void);
 u16 GetRandomMove(u16 input_move, u16 species);
-void NuzlockeDeletePartyMon(u8 position);
-void NuzlockeDeleteFaintedPartyPokemon(void) ;
 u8 EvolutionBlockedByEvoLimit(u16 species);
-void PrintTXSaveData(void);
-void TestRandomizerValues(u8 type);
 
 #endif // GUARD_POKEMON_H

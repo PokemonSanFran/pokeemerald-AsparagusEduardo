@@ -1023,6 +1023,8 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 
 static u32 GetBallThrowableState(void)
 {
+    bool8 nuzlockeActive = IsNuzlockeActive();
+
     if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
      && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
         return BALL_THROW_UNABLE_TWO_MONS;
@@ -1035,13 +1037,13 @@ static u32 GetBallThrowableState(void)
     else if (FlagGet(FLAG_SYS_NO_CATCHING)) //DEBUG
         return BALL_THROW_UNABLE_NO_CATCHING_FLAG;
     //tx_randomizer_and_challenges
-    else if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeIsCaptureBlocked)
+    else if (nuzlockeActive && NuzlockeIsCaptureBlocked)
         return BALL_THROW_UNABLE_NUZLOCKE_AREA;
-    else if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeIsSpeciesClauseActive == 2) //already have THIS_mon
+    else if (nuzlockeActive && NuzlockeIsSpeciesClauseActive == 2) //already have THIS_mon
         return BALL_THROW_UNABLE_NUZLOCKE_SPECIES;
     else if (gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge && OneTypeChallengeCaptureBlocked) //pkmn not of the TYPE CHALLENGE type
         return BALL_THROW_UNABLE_TYPE_CHALLENGE;
-    else if (gSaveBlock1Ptr->tx_Challenges_Nuzlocke && NuzlockeIsSpeciesClauseActive)
+    else if (nuzlockeActive && NuzlockeIsSpeciesClauseActive)
         return BALL_THROW_UNABLE_NUZLOCKE_SPECIES_EVO;
 
     return BALL_THROW_ABLE;
