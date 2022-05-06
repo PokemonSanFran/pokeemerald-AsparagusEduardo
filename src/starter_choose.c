@@ -74,6 +74,8 @@ const u32 gBirchHelpGfx[] = INCBIN_U32("graphics/starter_choose/birch_help.4bpp.
 const u32 gPokeballSelection_Gfx[] = INCBIN_U32("graphics/starter_choose/pokeball_selection.4bpp.lz");
 static const u32 sStarterCircle_Gfx[] = INCBIN_U32("graphics/starter_choose/starter_circle.4bpp.lz");
 
+EWRAM_DATA static u16 sStarterList[3] = {0};
+
 static const struct WindowTemplate sWindowTemplates[] =
 {
     {
@@ -366,26 +368,26 @@ u16 GetStarterPokemon(u16 chosenStarterId)
 {
     //tx_randomizer_and_challenges
     u16 mon = sStarterMon[chosenStarterId];
-    u8 typeChallenge = gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge;
     u16 i;
 
     if (chosenStarterId > STARTER_MON_COUNT)
         chosenStarterId = 0;
 
     //tx_randomizer_and_challenges
-    if (typeChallenge != TX_CHALLENGE_TYPE_OFF)
+    if (gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge != TX_CHALLENGE_TYPE_OFF)
     {
-        for (i=0; i<400; i++)
-        {
-            mon = PickRandomStarter(mon);
-            if (GetTypeBySpecies(mon, 1) == typeChallenge || GetTypeBySpecies(mon, 2) == typeChallenge)
-                break;
-        }
+        if (sStarterList[chosenStarterId] == 0)
+            sStarterList[chosenStarterId] = PickRandomStarterForOneTypeChallenge(sStarterList, chosenStarterId);
+        mon = sStarterList[chosenStarterId];
     }
     else if (gSaveBlock1Ptr->tx_Random_WildPokemon)
     {
         mon = PickRandomStarter(sStarterMon[chosenStarterId]);
     }
+    
+    #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "new species[%d]", mon);
+    #endif
 
     return mon;
 }

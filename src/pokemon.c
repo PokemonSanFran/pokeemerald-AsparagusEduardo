@@ -93,7 +93,7 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 
 //tx_randomizer_and_challenges
-EWRAM_DATA static u16 sSpeciesList[NUM_SPECIES] = {0};
+EWRAM_DATA static u16 sSpeciesList[1] = {0}; //[NUM_SPECIES] = {0};
 EWRAM_DATA static u8 sTypeEffectivenessList[NUMBER_OF_MON_TYPES] = {0};
 
 #include "data/battle_moves.h"
@@ -12523,13 +12523,13 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
     SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
 
-    for (i = 0; i < GetPartySize(); i++) //tx_randomizer_and_challenges
+    for (i = 0; i < GetMaxPartySize(); i++) //tx_randomizer_and_challenges
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             break;
     }
 
-    if (i >= GetPartySize()) //tx_randomizer_and_challenges
+    if (i >= GetMaxPartySize()) //tx_randomizer_and_challenges
         return SendMonToPC(mon);
 
     if (typeChallenge != TX_CHALLENGE_TYPE_OFF && 
@@ -12580,7 +12580,7 @@ u8 CalculatePlayerPartyCount(void)
 {
     gPlayerPartyCount = 0;
 
-    while (gPlayerPartyCount < GetPartySize() //tx_randomizer_and_challenges
+    while (gPlayerPartyCount < GetMaxPartySize() //tx_randomizer_and_challenges
         && GetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
     {
         gPlayerPartyCount++;
@@ -12726,7 +12726,7 @@ bool8 IsPlayerPartyAndPokemonStorageFull(void)
 {
     s32 i;
 
-    for (i = 0; i < GetPartySize(); i++)
+    for (i = 0; i < GetMaxPartySize(); i++)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             return FALSE;
 
@@ -16095,6 +16095,64 @@ u8 GetTypeEffectivenessRandom(u8 type)
 
     return sTypeEffectivenessList[type];
 }
+u16 PickRandomStarterForOneTypeChallenge(u16 *speciesList, u8 starterId)
+{
+    u16 i, species;
+    u8 typeChallenge = gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge;
+
+    #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "PickRandomStarterForOneTypeChallenge(starterId=%d)", starterId);
+    #endif
+
+    if ((IsRandomizerActivated() && gSaveBlock1Ptr->tx_Random_Similar) || !IsRandomizerActivated())
+    {
+        u16 *stemp = Alloc(sizeof(gRandomSpeciesEvo0));
+        DmaCopy16(3, gRandomSpeciesEvo0, stemp, sizeof(gRandomSpeciesEvo0));
+        ShuffleListU16(stemp, RANDOM_SPECIES_EVO_0_COUNT, (starterId+13)*12289);
+        for (i=0; i<RANDOM_SPECIES_EVO_0_COUNT; i++)
+        {
+            species = stemp[i];
+            if ((GetTypeBySpecies(species, 1) == typeChallenge || GetTypeBySpecies(species, 2) == typeChallenge) 
+                && species != speciesList[0] && species != speciesList[1] && species != speciesList[2])
+                break;
+        }
+        free(stemp);
+    }
+    else if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries)
+    {
+        u16 *stemp = Alloc(sizeof(sRandomSpeciesLegendary));
+        DmaCopy16(3, sRandomSpeciesLegendary, stemp, sizeof(sRandomSpeciesLegendary));
+        ShuffleListU16(stemp, RANDOM_SPECIES_COUNT_LEGENDARY, (starterId+13)*12289);
+        for (i=0; i<RANDOM_SPECIES_COUNT_LEGENDARY; i++)
+        {
+            species = stemp[i];
+            if ((GetTypeBySpecies(species, 1) == typeChallenge || GetTypeBySpecies(species, 2) == typeChallenge) 
+                && species != speciesList[0] && species != speciesList[1] && species != speciesList[2])
+                break;
+        }
+        free(stemp);
+    }
+    else
+    {
+        u16 *stemp = Alloc(sizeof(sRandomSpecies));
+        DmaCopy16(3, sRandomSpecies, stemp, sizeof(sRandomSpecies));
+        ShuffleListU16(stemp, RANDOM_SPECIES_COUNT, (starterId+13)*12289);
+        for (i=0; i<RANDOM_SPECIES_COUNT; i++)
+        {
+            species = stemp[i];
+            if ((GetTypeBySpecies(species, 1) == typeChallenge || GetTypeBySpecies(species, 2) == typeChallenge) 
+                && species != speciesList[0] && species != speciesList[1] && species != speciesList[2])
+                break;
+        }
+        free(stemp);
+    }
+
+    #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "starterId=%d; species=%d; iterations=%d", starterId, species, i);
+    #endif
+
+    return species;
+}
 
 //******* non EWRAM functions
 u16 PickRandomStarter(u16 species)
@@ -16102,7 +16160,7 @@ u16 PickRandomStarter(u16 species)
     if (gSaveBlock1Ptr->tx_Random_Chaos)
         return sRandomSpeciesLegendary[RandomSeededModulo(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
     
-    if (gSaveBlock1Ptr->tx_Random_Similar)
+    if (gSaveBlock1Ptr->tx_Random_Similar && !gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge)
         return gRandomSpeciesEvo0[RandomSeededModulo(species*24593, RANDOM_SPECIES_EVO_0_COUNT)];
 
     if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries)
@@ -16111,25 +16169,27 @@ u16 PickRandomStarter(u16 species)
     return sRandomSpecies[RandomSeededModulo(species*24593, RANDOM_SPECIES_COUNT)];
 }
 
-u8 GetTypeBySpecies(u16 species, u8 type)
+u8 GetTypeBySpecies(u16 species, u8 typeNum)
 {
-    u8 result;
-    u16 input_species = species;
+    u8 result, type;
 
+    if (typeNum == 1)
+        type = gBaseStats[species].type1;
+    else
+        type = gBaseStats[species].type2;
+
+    if (!gSaveBlock1Ptr->tx_Random_Type)
+        return type;
+
+    result = sRandomSpecies[RandomSeededModulo(type*12289 + typeNum*species*24593, NUMBER_OF_MON_TYPES-1)];
+    type = sOneTypeChallengeValidTypes[result];
+
+    #ifdef GBA_PRINTF
     if (gSaveBlock1Ptr->tx_Random_Type)
-        species = sRandomSpecies[RandomSeededModulo(species + type*193, RANDOM_SPECIES_COUNT)];
+        mgba_printf(MGBA_LOG_DEBUG, "TX RANDOM TYPE%d: species=%d; type=%d=%s", typeNum, species , type, ConvertToAscii(gTypeNames[type]));
+    #endif
 
-    switch (type)
-    {
-    case 1:
-        result = gBaseStats[species].type1;
-        break;
-    case 2:
-        result = gBaseStats[species].type2;
-        break;
-    }
-
-    return result;
+    return type;
 }
 
 u16 GetRandomSpecies(u16 species, u8 mapBased, u8 type) //INTERNAL use only!

@@ -31,7 +31,8 @@
 #define TX_DIFFICULTY_NO_ITEM_PLAYER 0
 #define TX_DIFFICULTY_NO_ITEM_TRAINER 0
 #define TX_DIFFICULTY_NO_EVS 0
-#define TX_DIFFICULTY_SCALING_IVS_EVS 0
+#define TX_DIFFICULTY_SCALING_IVS 0
+#define TX_DIFFICULTY_SCALING_EVS 0
 #define TX_DIFFICULTY_PKMN_CENTER 0 //0 no limit, 1 none
 
 #define TX_CHALLENGE_EVO_LIMIT 0 //0 off, 1 first, 2 none
@@ -66,7 +67,7 @@ u8 NuzlockeFlagSet(u16 mapsec);
 u8 NuzlockeFlagClear(u16 mapsec);
 void NuzlockeDeletePartyMon(u8 position);
 void NuzlockeDeleteFaintedPartyPokemon(void);
-u8 GetPartySize(void);
+u8 GetMaxPartySize(void);
 u8 GetCurrentPartyLevelCap(void);
 u8 GetCurrentTrainerIVs(void);
 u8 GetCurrentTrainerEVs(void);
