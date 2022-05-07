@@ -31,26 +31,30 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [Removed extra save confirmation](https://www.pokecommunity.com/showthread.php?p=10211835#post10211835), leaving it in line with newer games (by Hiroshi Sotomura)
 * Yellow TM Item Balls. (by Artrios)
 * With the exception of Flash and Fly, you can use HM moves by calling the Gym Leaders' Pokémon. (by Buffelsaft)
+* An NPC in every Pokémon Center that serves as Name Rater and Move Reminder/Deleter/Tutor.
+* Expanded move names by Mandll27
+* Move items in party menu by Zeturic
+* [PokéMart items based on badge count](https://github.com/pret/pokeemerald/wiki/Shop-Items-By-Badge-Count) by [ghoulslash](https://github.com/ghoulslash).
 
-#### New Features:
+#### Branches utilized:
 * [RHH](https://github.com/rh-hideout)'s [Battle Engine](https://github.com/rh-hideout/pokeemerald-expansion/tree/battle_engine).
-* [RHH](https://github.com/rh-hideout)'s [Pokémon Expansion](https://github.com/rh-hideout/pokeemerald-expansion/tree/pokemon_expansion).
-	* [UltimaSoul's](https://github.com/rh-hideout)'s [Form ID system](https://github.com/ultima-soul/pokeemerald/tree/form_system).
+* [RHH](https://github.com/rh-hideout)'s [Pokémon Expansion](https://github.com/rh-hideout/pokeemerald-expansion/tree/pokemon_expansion).}
 * [RHH](https://github.com/rh-hideout)'s [Item Expansion](https://github.com/rh-hideout/pokeemerald-expansion/tree/pokemon_expansion).
 	* [Strange Souvenir](https://github.com/AsparagusEduardo/pokeemerald/tree/AlolanEvolution), which allows Alola-only evolutions. Code and sprite size-adjusted by me.
 	* Gen 6 Exp Share. Original code by Blurose, ported by [Lunos](https://github.com/LOuroboros).
 	* Lures for attracting more double battles and raising shiny odds.
+* [TheXaman](https://github.com/TheXaman/pokeemerald) 's branches:
+	* [HGSS styled Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss). Adds complete information about movesets, abilities, stats and more.
+	* [Options Plus](https://github.com/TheXaman/pokeemerald/tree/tx_optionsPlus). Expands the amount of options available with new pagination and scrolling.
+	* [Debug System](https://github.com/TheXaman/pokeemerald/tree/tx_debug_system).
+	* [Randomizer and Challenges](https://github.com/TheXaman/pokeemerald/blob/tx_randomizer_and_challenges/TX_RAC_FEATURES.md). Adds randomization options for Pokémon, Items and more, plus challenges like Nuzlocke, heal prevention and similar.
 * [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/Decapitalization) every text in the game. Originally by [Wyrserth](https://github.com/Wyrserth) and mantained by me.
-* [Music Expansion](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion) by [CyanSMP64](https://github.com/CyanSMP64/pokeemerald/tree/music_expansion).
 * Spanish version in development by syncing with [pokeesmeralda](https://github.com/LOuroboros/pokeemerald/tree/pokeesmeralda) by [Lunos](https://github.com/LOuroboros).
 	* [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/pokeesmeralda_decap) version mantained by me.
 * [Soaring](https://www.pokecommunity.com/showthread.php?t=422107). Code by camthesaxman, ported by paccy.
 * [ghoulslash](https://github.com/ghoulslash)'s [DexNav](https://github.com/ghoulslash/pokeemerald/tree/dexnav).
 * [Day/Night lightning System](https://github.com/huderlem/pokeemerald/tree/daynight-diego) by [Sierraffinity](https://github.com/Sierraffinity)
 	* Day/Night encounters.
-* [PokéMart items based on badge count](https://github.com/pret/pokeemerald/wiki/Shop-Items-By-Badge-Count) by [ghoulslash](https://github.com/ghoulslash).
-* An NPC in every Pokémon Center that serves as Name Rater and Move Reminder/Deleter/Tutor.
-* Expanded move names by Mandll27
 * [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
-* Following Pokémon by Merrp, with further development by Artrios
-* Move items in party menu by Zeturic
+* [Following Pokémon](https://github.com/aarant/pokeemerald/tree/romhack) by Merrp, with further development by Artrios
+
