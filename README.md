@@ -33,7 +33,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * With the exception of Flash and Fly, you can use HM moves by calling the Gym Leaders' Pokémon. (by Buffelsaft)
 * An NPC in every Pokémon Center that serves as Name Rater and Move Reminder/Deleter/Tutor.
 * Expanded move names by Mandll27
-* Move items in party menu by Zeturic
+* [Move items between mon in party menu](https://www.pokecommunity.com/showpost.php?p=10120157&postcount=43) by Zeturic
 * [PokéMart items based on badge count](https://github.com/pret/pokeemerald/wiki/Shop-Items-By-Badge-Count) by [ghoulslash](https://github.com/ghoulslash).
 
 #### Branches utilized:
