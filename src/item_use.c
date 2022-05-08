@@ -1299,66 +1299,53 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
 
 void ItemUseOutOfBattle_ExpShare(u8 taskId)
 {
-	if (!gSaveBlock2Ptr->expShare)
-	{
-		PlaySE(SE_EXP_MAX);
-		if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
-		{
-			DisplayItemMessageOnField(taskId, gOtherText_ExpShareOn, Task_CloseCantUseKeyItemMessage);
-		}
-		else
-		{
-			DisplayItemMessage(taskId, 1, gOtherText_ExpShareOn, CloseItemMessage);
-		}
-	}
-	else
-	{
-		PlaySE(SE_PC_OFF);
-		if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
-		{
-			DisplayItemMessageOnField(taskId, gOtherText_ExpShareOff, Task_CloseCantUseKeyItemMessage);
-		}
-		else
-		{
-			DisplayItemMessage(taskId, 1, gOtherText_ExpShareOff, CloseItemMessage);
-		}
-	}
-	gSaveBlock2Ptr->expShare = !gSaveBlock2Ptr->expShare;
+    if (!gSaveBlock2Ptr->expShare)
+    {
+        PlaySE(SE_EXP_MAX);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, gOtherText_ExpShareOn, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, 1, gOtherText_ExpShareOn, CloseItemMessage);
+    }
+    else
+    {
+        PlaySE(SE_PC_OFF);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, gOtherText_ExpShareOff, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, 1, gOtherText_ExpShareOff, CloseItemMessage);
+    }
+    gSaveBlock2Ptr->expShare = !gSaveBlock2Ptr->expShare;
 }
 
 void ItemUseOutOfBattle_EonFlute(u8 taskId)
 {
-	s16* data = gTasks[taskId].data;
-	
-	if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
-	{
-		sItemUseOnFieldCB = ItemUseOnFieldCB_EonFlute;
-		SetUpItemUseOnFieldCallback(taskId);
-	}
-	else {
-		DisplayDadsAdviceCannotUseItemMessage(taskId, data[3]);
-	}
+    s16* data = gTasks[taskId].data;
+
+    if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_EonFlute;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+        DisplayDadsAdviceCannotUseItemMessage(taskId, data[3]);
 }
 
 void ItemUseOutOfBattle_SootSack(u8 taskId)
 {
-	ConvertIntToDecimalStringN(gStringVar1, GetAshCount(), STR_CONV_MODE_LEFT_ALIGN, 4);
-	StringExpandPlaceholders(gStringVar4, gText_AshQty);
-	if (!gTasks[taskId].tUsingRegisteredKeyItem)
-	{
-		DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
-	}
-	else
-	{
-		DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
-	}
+    ConvertIntToDecimalStringN(gStringVar1, GetAshCount(), STR_CONV_MODE_LEFT_ALIGN, 4);
+    StringExpandPlaceholders(gStringVar4, gText_AshQty);
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+        DisplayItemMessage(taskId, 1, gStringVar4, CloseItemMessage);
+    else
+        DisplayItemMessageOnField(taskId, gStringVar4, Task_CloseCantUseKeyItemMessage);
 }		
 
 u16 GetAshCount(void)
 {
-	u16 *ashGatherCount;
-	ashGatherCount = GetVarPointer(VAR_ASH_GATHER_COUNT);
-	return *ashGatherCount;
+    u16 *ashGatherCount;
+    ashGatherCount = GetVarPointer(VAR_ASH_GATHER_COUNT);
+    return *ashGatherCount;
 }
 
 #undef tUsingRegisteredKeyItem
