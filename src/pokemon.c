@@ -11383,7 +11383,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
         if (gLevelUpLearnsets[species][i].level == 0)
             continue;
 
-        move = (gLevelUpLearnsets[species][i].move & LEVEL_UP_MOVE_ID);
+        move = (gLevelUpLearnsets[species][i].move);
 
         if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
         {
@@ -14828,7 +14828,7 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
     for (i = 0; i < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][i].move != LEVEL_UP_END; i++)
     {
         //tx_randomizer_and_challenges
-        move = gLevelUpLearnsets[species][i].move & LEVEL_UP_MOVE_ID;
+        move = gLevelUpLearnsets[species][i].move;
         if (gSaveBlock1Ptr->tx_Random_Moves) //tx_randomizer_and_challenges
             move = GetRandomMove(move, species);
         moves[numMoves++] = move;
