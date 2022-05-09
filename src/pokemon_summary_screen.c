@@ -2,7 +2,6 @@
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "battle_interface.h"
 #include "frontier_util.h"
 #include "battle_message.h"
 #include "battle_tent.h"
@@ -19,7 +18,6 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
-#include "item_icon.h"
 #include "link.h"
 #include "m4a.h"
 #include "malloc.h"
@@ -31,7 +29,6 @@
 #include "pokeball.h"
 #include "pokemon.h"
 #include "pokemon_debug.h"
-#include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
@@ -44,13 +41,18 @@
 #include "text.h"
 #include "tv.h"
 #include "window.h"
-#include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+
+#include "item_icon.h"
+#include "pokemon_icon.h"
+#include "constants/flags.h"
+#include "battle_interface.h"
+
 #include "constants/species.h"
 #include "tx_randomizer_and_challenges.h"
 #ifdef GBA_PRINTF
@@ -1825,6 +1827,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
         SetSpriteInvisibility(SPRITE_ARR_ID_MON_ICON, TRUE);
         break;
     case 11:
+        CreateSetStatusSprite();
         data[1] = 0;
         break;
     case 12:
@@ -2023,7 +2026,7 @@ static void Task_SwitchToMoveDetails(u8 taskId)
     switch (data[0])
     {
         case 0:
-            SetSpriteInvisibility(SPRITE_ARR_ID_MON, TRUE);
+            DestroySpriteAndFreeResources(&gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]]);
             SetSpriteInvisibility(SPRITE_ARR_ID_ITEM, TRUE);
             SetSpriteInvisibility(SPRITE_ARR_ID_STATUS, TRUE);
             StopPokemonAnimations();
@@ -2264,24 +2267,19 @@ static void Task_SwitchFromMoveDetails(u8 taskId)
             break;
         case 1:
             ChangeBgX(1, 0x10000, 0);
+            data[1] = 0;
             data[0]++;
             break;
         case 2:
+            sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON] = LoadMonGfxAndSprite(&sMonSummaryScreen->currentMon, &data[1]);
+            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].callback = SpriteCallbackDummy;
+            if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON] != SPRITE_NONE)
+                data[0]++;
+            break;
+        case 3:
             PutWindowTilemap(PSS_LABEL_PANE_LEFT_TOP);
             PutWindowTilemap(PSS_LABEL_PANE_LEFT_BOTTOM);
             PutWindowTilemap(PSS_LABEL_PANE_RIGHT);
-            SetSpriteInvisibility(SPRITE_ARR_ID_MON, FALSE);
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-            CalcCenterToCornerVec(&gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]], gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.shape, gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.size, gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.affineMode);
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].hFlip = !gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].data[1];
-            FreeOamMatrix(gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.matrixNum);
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.matrixNum |= (gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].hFlip << 3);
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.affineMode = ST_OAM_AFFINE_OFF;
-            RequestSpriteFrameImageCopy(gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].anims[0][0].frame.imageValue, gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.tileNum, gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].images);
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].x2 = 0;
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].y2 = 0;
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.x = gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].x + gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].centerToCornerVecX;
-            gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].oam.y = gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].y + gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].centerToCornerVecY;
 
             if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HELD_ITEM))
                 SetSpriteInvisibility(SPRITE_ARR_ID_ITEM, FALSE);
@@ -2292,7 +2290,7 @@ static void Task_SwitchFromMoveDetails(u8 taskId)
             PrintInfoBar(sMonSummaryScreen->currPageIndex, FALSE);
             data[0]++;
             break;
-        case 3:
+        case 4:
             ScheduleBgCopyTilemapToVram(0);
             ScheduleBgCopyTilemapToVram(1);
             ScheduleBgCopyTilemapToVram(2);
