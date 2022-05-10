@@ -187,6 +187,7 @@
 #define MON_DATA_DAY_MET           89
 #define MON_DATA_MONTH_MET         90
 #define MON_DATA_NUZLOCKE_RIBBON   91
+#define MON_DATA_NATURE            92
 
 // Ribbon IDs used by TV and Pokénav
 #define CHAMPION_RIBBON       0

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "battle_pyramid.h"
+#include "battle_util.h"
 #include "berry.h"
 #include "data.h"
 #include "day_night.h"
@@ -17,6 +18,7 @@
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "follower_helper.h"
 #include "mauville_old_man.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -25,21 +27,27 @@
 #include "random.h"
 #include "region_map.h"
 #include "script.h"
+#include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
 #include "trainer_hill.h"
 #include "util.h"
 #include "constants/event_object_movement.h"
+#include "constants/battle.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
 #include "constants/map_types.h"
 #include "constants/mauville_old_man.h"
+#include "constants/rgb.h"
+#include "constants/region_map_sections.h"
+#include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/trainer_types.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
+#include "constants/abilities.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 
@@ -158,11 +166,11 @@ static void SpriteCB_CameraObject(struct Sprite *);
 static void CameraObject_0(struct Sprite *);
 static void CameraObject_1(struct Sprite *);
 static void CameraObject_2(struct Sprite *);
-static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8, struct ObjectEventTemplate *, u8);
+static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, struct ObjectEventTemplate *templates, u8 count);
 static void ObjectEventSetSingleMovement(struct ObjectEvent *, struct Sprite *, u8);
 static void SetSpriteDataForNormalStep(struct Sprite *, u8, u8);
-static void InitSpriteForFigure8Anim(struct Sprite *);
-static bool8 AnimateSpriteInFigure8(struct Sprite *);
+static void InitSpriteForFigure8Anim(struct Sprite *sprite);
+static bool8 AnimateSpriteInFigure8(struct Sprite *sprite);
 u8 GetDirectionToFace(s16 x1, s16 y1, s16 x2, s16 y2);
 static void FollowerSetGraphics(struct ObjectEvent *, u16, u8, bool8);
 static void ObjectEventSetGraphics(struct ObjectEvent *, const struct ObjectEventGraphicsInfo *);
@@ -175,7 +183,7 @@ static u8 DoJumpSpriteMovement(struct Sprite *);
 static u8 DoJumpSpecialSpriteMovement(struct Sprite *);
 static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
-static bool8 NpcTakeStep(struct Sprite *);
+static bool8 NpcTakeStep(struct Sprite *sprite);
 static bool8 AreElevationsCompatible(u8 a, u8 b);
 static bool8 GetFollowerInfo(u16 *species, u8 *form, u8 *shiny);
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny);
@@ -1202,13 +1210,20 @@ void RemoveObjectEventByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
 {
     u8 paletteNum;
-
     struct SpriteFrameImage image;
     image.size = GetObjectEventGraphicsInfo(objectEvent->graphicsId)->size;
     gSprites[objectEvent->spriteId].images = &image;
     paletteNum = gSprites[objectEvent->spriteId].oam.paletteNum;
-    DestroySprite(&gSprites[objectEvent->spriteId]);
-    FieldEffectFreePaletteIfUnused(paletteNum);
+    // It's possible that this function is called while the sprite pointed to `== sDummySprite`, i.e during map resume;
+    // In this case, don't free the palette as `paletteNum` is likely blank dummy data
+    if (!gSprites[objectEvent->spriteId].inUse &&
+        !gSprites[objectEvent->spriteId].oam.paletteNum &&
+        gSprites[objectEvent->spriteId].callback == SpriteCallbackDummy) {
+        DestroySprite(&gSprites[objectEvent->spriteId]);
+    } else {
+        DestroySprite(&gSprites[objectEvent->spriteId]);
+        FieldEffectFreePaletteIfUnused(paletteNum);
+    }
 }
 
 void RemoveAllObjectEventsExceptPlayer(void)
@@ -1258,7 +1273,7 @@ static u8 TrySetupObjectEventSprite(struct ObjectEventTemplate *objectEventTempl
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->x += 8;
     sprite->y += 16 + sprite->centerToCornerVecY;
-    sprite->oam.paletteNum = IndexOfSpritePaletteTag(spriteTemplate->paletteTag);
+    //sprite->oam.paletteNum = IndexOfSpritePaletteTag(spriteTemplate->paletteTag);
     sprite->coordOffsetEnabled = TRUE;
     sprite->sObjEventId = objectEventId;
     objectEvent->spriteId = spriteId;
@@ -1305,7 +1320,13 @@ TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTemplate,
       shiny = gObjectEvents[objectEventId].extra.mon.shiny;
       FollowerSetGraphics(&gObjectEvents[objectEventId], species, form, shiny);
     }
-
+  // Set runtime species based on VAR_TEMP_4, if template has a dynamic graphics ID
+  } else if (objectEventTemplate->graphicsId >= OBJ_EVENT_GFX_VARS && VarGetObjectEventGraphicsId(objectEventTemplate->graphicsId - OBJ_EVENT_GFX_VARS) == OBJ_EVENT_GFX_OW_MON) {
+      gObjectEvents[objectEventId].extra.asU16 = VarGet(VAR_TEMP_4);
+      FollowerSetGraphics(&gObjectEvents[objectEventId],
+          gObjectEvents[objectEventId].extra.mon.species,
+          gObjectEvents[objectEventId].extra.mon.form,
+          gObjectEvents[objectEventId].extra.mon.form);
   }
 
   return objectEventId;
@@ -1483,7 +1504,7 @@ struct Pokemon * GetFirstLiveMon(void) { // Return address of first conscious pa
 struct ObjectEvent * GetFollowerObject(void) { // Return follower ObjectEvent or NULL
   u8 i;
   for (i=0; i < OBJECT_EVENTS_COUNT; i++) {
-    if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER)
+    if (gObjectEvents[i].localId == OBJ_EVENT_ID_FOLLOWER && gObjectEvents[i].active)
       return &gObjectEvents[i];
   }
   return NULL;
@@ -1640,7 +1661,8 @@ void UpdateFollowingPokemon(void) { // Update following pokemon if any
         .graphicsId = OBJ_EVENT_GFX_OW_MON,
         .x = gSaveBlock1Ptr->pos.x,
         .y = gSaveBlock1Ptr->pos.y,
-        .elevation = 3,
+        // If player active, copy player elevation
+        .elevation = gObjectEvents[gPlayerAvatar.objectEventId].active ? gObjectEvents[gPlayerAvatar.objectEventId].currentElevation : 3,
         .movementType = MOVEMENT_TYPE_FOLLOW_PLAYER,
       };
       objEvent = &gObjectEvents[SpawnSpecialObjectEvent(&template)];
@@ -1700,21 +1722,6 @@ static u8 RandomWeightedIndex(u8 *weights, u8 length) {
   }
 }
 
-enum {
-  FOLLOWER_EMOTION_HAPPY = 0,
-  FOLLOWER_EMOTION_NEUTRAL, // Also called "No emotion"
-  FOLLOWER_EMOTION_SAD,
-  FOLLOWER_EMOTION_UPSET,
-  FOLLOWER_EMOTION_ANGRY,
-  FOLLOWER_EMOTION_PENSIVE,
-  FOLLOWER_EMOTION_LOVE,
-  FOLLOWER_EMOTION_SURPRISE,
-  FOLLOWER_EMOTION_CURIOUS,
-  FOLLOWER_EMOTION_MUSIC,
-  FOLLOWER_EMOTION_POISONED,
-  FOLLOWER_EMOTION_LENGTH,
-};
-
 // Pool of "unconditional" follower messages TODO: Should this be elsewhere ?
 static const struct FollowerMessagePool followerBasicMessages[] = {
   [FOLLOWER_EMOTION_HAPPY] = {gFollowerHappyMessages, EventScript_FollowerGeneric, N_FOLLOWER_HAPPY_MESSAGES},
@@ -1754,19 +1761,47 @@ struct SpecialEmote { // Used for storing conditional emotes
   u8 emotion;
 };
 
+// Find and return direction of metatile behavior within distance
+static u32 FindMetatileBehaviorWithinRange(s32 x, s32 y, u32 mb, u8 distance) {
+    s32 i;
+    for (i = y+1; i <= y + distance; i++)
+        if (MapGridGetMetatileBehaviorAt(x, i) == mb)
+            return DIR_SOUTH;
+    for (i = y-1; i >= y - distance; i--)
+        if (MapGridGetMetatileBehaviorAt(x, i) == mb)
+            return DIR_NORTH;
+    for (i = x+1; i <= x + distance; i++)
+        if (MapGridGetMetatileBehaviorAt(i, y) == mb)
+            return DIR_EAST;
+    for (i = x-1; i >= x - distance; i--)
+        if (MapGridGetMetatileBehaviorAt(i, y) == mb)
+            return DIR_WEST;
+
+    return DIR_NONE;
+}
+
 // Call an applicable follower message script
 bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big switch for follower messages
 {
   u16 species;
-  s32 multi;
-  s16 health_percent;
-  u8 friendship;
+  s32 multi, multi2;
   struct SpecialEmote cond_emotes[16] = {0};
-  u8 n_choices = 0;
+  u8 emotion, n_choices = 0;
   struct ObjectEvent *objEvent = GetFollowerObject();
   struct Pokemon *mon = GetFirstLiveMon();
-  u8 emotion;
-  u8 emotion_weight[FOLLOWER_EMOTION_LENGTH] = {0};
+  u8 emotion_weight[FOLLOWER_EMOTION_LENGTH] = {
+      [FOLLOWER_EMOTION_HAPPY] = 10,
+      [FOLLOWER_EMOTION_NEUTRAL] = 15,
+      [FOLLOWER_EMOTION_SAD] = 5,
+      [FOLLOWER_EMOTION_UPSET] = 15,
+      [FOLLOWER_EMOTION_ANGRY] = 15,
+      [FOLLOWER_EMOTION_PENSIVE] = 15,
+      [FOLLOWER_EMOTION_SURPRISE] = 10, // TODO: Scale this with how long the follower has been out?
+      [FOLLOWER_EMOTION_CURIOUS] = 10, // TODO: Increase this if there is an item nearby?
+      [FOLLOWER_EMOTION_MUSIC] = 15,
+  };
+  u32 i, j;
+  bool32 pickedCondition = FALSE;
   if (mon == NULL) {
     ScriptCall(ctx, EventScript_FollowerLovesYou);
     return FALSE;
@@ -1774,77 +1809,149 @@ bool8 ScrFunc_getfolloweraction(struct ScriptContext *ctx) // Essentially a big 
   // If map is not flyable, set the script to jump past the fly check TODO: Should followers ask to fly?
   if (TRUE || !Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType))
     ScriptJump(ctx, EventScript_FollowerEnd);
-  multi = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
   species = GetMonData(mon, MON_DATA_SPECIES);
-  friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-  // Happy weights
-  emotion_weight[FOLLOWER_EMOTION_HAPPY] = 10;
-  if (friendship > 170)
-    emotion_weight[FOLLOWER_EMOTION_HAPPY] = 30;
-  else if (friendship > 80)
+  multi = GetMonData(mon, MON_DATA_FRIENDSHIP);
+  if (multi > 80) {
     emotion_weight[FOLLOWER_EMOTION_HAPPY] = 20;
-  // Neutral weights
-  emotion_weight[FOLLOWER_EMOTION_NEUTRAL] = 15;
-  // Sad weights
-  emotion_weight[FOLLOWER_EMOTION_SAD] = 5;
-  // Upset weights
-  emotion_weight[FOLLOWER_EMOTION_UPSET] = friendship < 80 ? 15 : 5;
-  // Angry weights
-  emotion_weight[FOLLOWER_EMOTION_ANGRY] = friendship < 80 ? 15 : 5;
-  // Pensive weights
-  emotion_weight[FOLLOWER_EMOTION_PENSIVE] = 15;
-  // Love weights
-  if (friendship > 170)
-    emotion_weight[FOLLOWER_EMOTION_LOVE] = 30;
-  else if (friendship > 80)
+    emotion_weight[FOLLOWER_EMOTION_UPSET] = 5;
+    emotion_weight[FOLLOWER_EMOTION_ANGRY] = 5;
     emotion_weight[FOLLOWER_EMOTION_LOVE] = 20;
-  // Surprise weights TODO: Scale this with how long the follower has been out
-  emotion_weight[FOLLOWER_EMOTION_SURPRISE] = 10;
-  // Curious weights TODO: Increase this if there is an item nearby, or if the pokemon has pickup
-  emotion_weight[FOLLOWER_EMOTION_CURIOUS] = 10;
-  // Music weights TODO: Change this depending on music ?
-  emotion_weight[FOLLOWER_EMOTION_MUSIC] = friendship > 80 ? 20 : 15;
-
+    emotion_weight[FOLLOWER_EMOTION_MUSIC] = 20;
+  }
+  if (multi > 170) {
+    emotion_weight[FOLLOWER_EMOTION_HAPPY] = 30;
+    emotion_weight[FOLLOWER_EMOTION_LOVE] = 30;
+  }
   // Conditional messages follow
   // Weather-related
-  if (GetCurrentWeather() == WEATHER_SUNNY || GetCurrentWeather() == WEATHER_SUNNY_CLOUDS)
+  if (GetCurrentWeather() == WEATHER_SUNNY_CLOUDS)
     cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_HAPPY, .index=31};
-  else if (GetCurrentWeather() == WEATHER_RAIN || GetCurrentWeather() == WEATHER_RAIN_THUNDERSTORM) {
-    if (SpeciesHasType(species, TYPE_FIRE)) {
-        emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
-        cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=3};
-        cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_UPSET, .index=3};
-    } else
-        cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_MUSIC, .index=14};
-    cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SURPRISE, .index=20};
-  }
   // Health & status-related
-  health_percent = mon->hp * 100 / mon->maxHP;
-  if (health_percent < 20) {
+  multi = mon->hp * 100 / mon->maxHP;
+  if (multi < 20) {
     emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
     cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=4};
     cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=5};
   }
-  if (health_percent < 50 || mon->status & 0x40) { // STATUS1_PARALYSIS
+  if (multi < 50 || mon->status & STATUS1_PARALYSIS) {
     emotion_weight[FOLLOWER_EMOTION_SAD] = 30;
     cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=6};
   }
+  // Gym type advantage/disadvantage scripts
+  if (GetCurrentMapMusic() == MUS_GYM || GetCurrentMapMusic() == MUS_RG_GYM) {
+    switch (gMapHeader.regionMapSectionId)
+    {
+    case MAPSEC_RUSTBORO_CITY:
+    case MAPSEC_PEWTER_CITY:
+        multi = TYPE_ROCK;
+        break;
+    case MAPSEC_DEWFORD_TOWN:
+        multi = TYPE_FIGHTING;
+        break;
+    case MAPSEC_MAUVILLE_CITY:
+    case MAPSEC_VERMILION_CITY:
+        multi = TYPE_ELECTRIC;
+        break;
+    case MAPSEC_LAVARIDGE_TOWN:
+    case MAPSEC_CINNABAR_ISLAND:
+        multi = TYPE_FIRE;
+        break;
+    case MAPSEC_PETALBURG_CITY:
+        multi = TYPE_NORMAL;
+        break;
+    case MAPSEC_FORTREE_CITY:
+        multi = TYPE_FLYING;
+        break;
+    case MAPSEC_MOSSDEEP_CITY:
+    case MAPSEC_SAFFRON_CITY:
+        multi = TYPE_PSYCHIC;
+        break;
+    case MAPSEC_SOOTOPOLIS_CITY:
+    case MAPSEC_CERULEAN_CITY:
+        multi = TYPE_WATER;
+        break;
+    case MAPSEC_CELADON_CITY:
+        multi = TYPE_GRASS;
+        break;
+    case MAPSEC_FUCHSIA_CITY:
+        multi = TYPE_POISON;
+        break;
+    case MAPSEC_VIRIDIAN_CITY:
+        multi = TYPE_GROUND;
+        break;
+    default:
+        multi = NUMBER_OF_MON_TYPES;
+    }
+    if (multi < NUMBER_OF_MON_TYPES) {
+        multi = GetTypeEffectiveness(mon, multi);
+        if (multi <= UQ_4_12(0.5))
+            cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_HAPPY, .index=32};
+        else if (multi >= UQ_4_12(2.0))
+            cond_emotes[n_choices++] = (struct SpecialEmote) {.emotion=FOLLOWER_EMOTION_SAD, .index=7};
+    }
+  }
 
   emotion = RandomWeightedIndex(emotion_weight, FOLLOWER_EMOTION_LENGTH);
-  if (mon->status & 0x8) // STATUS1_POISON
+  #ifdef BATTLE_ENGINE
+  if ((mon->status & STATUS1_PSN_ANY) && GetMonAbility(mon) != ABILITY_POISON_HEAL)
+  #else
+  if (mon->status & STATUS1_PSN_ANY)
+  #endif
     emotion = FOLLOWER_EMOTION_POISONED;
-  ObjectEventEmote(objEvent, emotion);
   multi = Random() % followerBasicMessages[emotion].length;
-  if (Random() & 1) { // With 50% chance, select special message using reservoir sampling
-    u8 i, j = 1;
-    struct SpecialEmote *choice = 0;
-    for (i = 0; i < n_choices; i++) {
-      if (cond_emotes[i].emotion == emotion && (Random() < 0x10000 / (j++)))  // Replace item with 1/j chance
-        choice = &cond_emotes[i];
-    }
-    if (choice)
-        multi = choice->index;
+  // With 50% chance, select special message using reservoir sampling
+  for (i = (Random() & 1) ? n_choices : 0, j = 1; i < n_choices; i++) {
+    if (cond_emotes[i].emotion == emotion && (Random() < 0x10000 / (j++)))  // Replace item with 1/j chance
+      multi = cond_emotes[i].index;
   }
+  // Match scripted conditional messages
+  // With 50% chance, try to match scripted conditional messages
+  for (i = (Random() & 1) ? 28 : 0, j = 1; i < 28; i++) {
+      const struct FollowerMsgInfoExtended *info = &gFollowerConditionalMessages[i];
+      if (info->stFlags == 1 && species != info->st.species)
+        continue;
+      if (info->stFlags == 2 && (info->st.types.type2 >= NUMBER_OF_MON_TYPES ? SpeciesHasType(species, info->st.types.type1) : !(SpeciesHasType(species, info->st.types.type1) || SpeciesHasType(species, info->st.types.type2))))
+        continue;
+      if (info->stFlags == 3 && !(mon->status & info->st.status))
+        continue;
+      if (info->mmFlags == 1 && gMapHeader.regionMapSectionId != info->mm.mapSec.mapSec)
+        continue;
+      if (info->mmFlags == 2 && !(gSaveBlock1Ptr->location.mapNum == info->mm.map.mapNum && gSaveBlock1Ptr->location.mapGroup == info->mm.map.mapGroup))
+        continue;
+      if (info->mmFlags == 3 && !(objEvent->currentMetatileBehavior == info->mm.mb.behavior1 || objEvent->currentMetatileBehavior == info->mm.mb.behavior2))
+        continue;
+      if (info->wtFlags == 1 && !(GetCurrentWeather() == info->wt.weather.weather1 || GetCurrentWeather() == info->wt.weather.weather2))
+        continue;
+      if (info->wtFlags == 2 && GetCurrentMapMusic() != info->wt.song)
+        continue;
+      if (info->nearFlags == 1) {
+        if ((multi2 = FindMetatileBehaviorWithinRange(objEvent->currentCoords.x, objEvent->currentCoords.y, info->near.mb.behavior, info->near.mb.distance)))
+          gSpecialVar_Result = multi2;
+        else
+          continue;
+      }
+
+      // replace choice with weight/j chance
+      if (Random() < (0x10000 / (j++)) * (info->weight ? info->weight : 1)) {
+        multi = i;
+        pickedCondition = TRUE;
+      }
+  }
+  if (pickedCondition) { // conditional message was chosen
+      emotion = gFollowerConditionalMessages[multi].emotion;
+      ObjectEventEmote(objEvent, emotion);
+      ctx->data[0] = (u32) gFollowerConditionalMessages[multi].text;
+      // text choices are spread across array; pick a random one
+      if (gFollowerConditionalMessages[multi].textSpread) {
+        for (i = 0; i < 4; i++)
+            if (!((u32*)gFollowerConditionalMessages[multi].text)[i])
+                break;
+        ctx->data[0] = i ? ((u32*)gFollowerConditionalMessages[multi].text)[Random() % i] : 0;
+      }
+      ScriptCall(ctx, gFollowerConditionalMessages[multi].script ? gFollowerConditionalMessages[multi].script : followerBasicMessages[emotion].script);
+      return FALSE;
+  }
+  ObjectEventEmote(objEvent, emotion);
   ctx->data[0] = (u32) followerBasicMessages[emotion].messages[multi].text; // Load message text
   ScriptCall(ctx, followerBasicMessages[emotion].messages[multi].script ?
       followerBasicMessages[emotion].messages[multi].script : followerBasicMessages[emotion].script);
@@ -1963,7 +2070,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     spriteFrameImage.size = graphicsInfo->size;
     CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(objectEvent->graphicsId, objectEvent->movementType, &spriteTemplate, &subspriteTables);
     spriteTemplate.images = &spriteFrameImage;
-    if (spriteTemplate.paletteTag != 0xFFFF)
+    if (spriteTemplate.paletteTag != TAG_NONE)
     {
         LoadObjectEventPalette(spriteTemplate.paletteTag, TRUE);
         UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate.paletteTag), GAMMA_ALT);
@@ -2152,12 +2259,6 @@ static void get_berry_tree_graphics(struct ObjectEvent *objectEvent, struct Spri
         if (berryId > ITEM_TO_BERRY(LAST_BERRY_INDEX))
             berryId = 0;
 
-        //LoadObjectEventPalette(gBerryTreePaletteTagTablePointers[berryId][berryStage]);
-        //ObjectEventSetGraphicsId(objectEvent, gBerryTreeObjectEventGraphicsIdTablePointers[berryId][berryStage]);
-        //sprite->images = gBerryTreePicTablePointers[berryId];
-        //sprite->oam.paletteNum = IndexOfSpritePaletteTag(gBerryTreePaletteTagTablePointers[berryId][berryStage]);
-        //UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_ALT);
-        //StartSpriteAnim(sprite, berryStage);
         SetBerryTreeGraphics(objectEvent, berryId, berryStage);
         StartSpriteAnim(sprite, berryStage);
     }
@@ -2263,12 +2364,13 @@ void FreeAndReserveObjectSpritePalettes(void)
     gReservedSpritePaletteCount = 12;
 }
 
-void LoadObjectEventPalette(u16 paletteTag, bool8 shouldTint)
+u8 LoadObjectEventPalette(u16 paletteTag, bool8 shouldTint)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);
 
-    if (i != OBJ_EVENT_PAL_TAG_NONE) // always true
-        LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i], shouldTint);
+    if (i == 0xFF)
+        return i;
+    return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i], shouldTint);
 }
 
 /*/ Unused
@@ -4556,6 +4658,12 @@ bool8 MovementType_FollowPlayer_Shadow(struct ObjectEvent *objectEvent, struct S
       objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
       return FALSE;
     }
+    // Move follower to player, in case we end up in the shadowing state for only 1 frame
+    // This way the player cannot talk to the invisible follower before it appears
+    if (objectEvent->invisible) {
+        MoveObjectEventToMapCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y);
+        objectEvent->triggerGroundEffectsOnMove = FALSE; // Stop endless reflection spawning
+    }
     sprite->data[1] = 1; // Enter active state; if the player moves the follower will appear
     return TRUE;
 }
@@ -6215,8 +6323,8 @@ bool8 MovementAction_WalkInPlaceSlowDown_Step0(struct ObjectEvent *objectEvent, 
 static u8 LoadWhiteFlashPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite) {
   u16 paletteData[16];
   struct SpritePalette dynamicPalette = {.tag = OBJ_EVENT_PAL_TAG_NONE-1, .data = paletteData};  // TODO: Use a proper palette tag here
-  CpuFill16(0xFFFF, &paletteData[1], 30);
-  return sprite->oam.paletteNum;
+  CpuFill16(RGB_WHITE, paletteData, 32);
+  return UpdateSpritePalette(&dynamicPalette, sprite);
 }
 
 bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite) {

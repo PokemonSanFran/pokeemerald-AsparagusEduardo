@@ -9264,6 +9264,27 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilit
     return modifier;
 }
 
+u16 GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
+{
+    u16 modifier = UQ_4_12(1.0);
+    u16 abilityDef = GetMonAbility(mon);
+    u16 speciesDef = GetMonData(&mon, MON_DATA_SPECIES);
+    u8 type1 = GetTypeBySpecies(speciesDef, 1);
+    u8 type2 = GetTypeBySpecies(speciesDef, 2);
+
+    if (moveType != TYPE_MYSTERY)
+    {
+        MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, gBaseStats[speciesDef].type1, 0, FALSE);
+        if (gBaseStats[speciesDef].type2 != gBaseStats[speciesDef].type1)
+            MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, gBaseStats[speciesDef].type2, 0, FALSE);
+
+        if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE)
+            modifier = UQ_4_12(0.0);
+    }
+    
+    return modifier;
+}
+
 u16 GetTypeModifier(u8 atkType, u8 defType)
 {
     if (B_FLAG_INVERSE_BATTLE != 0 && FlagGet(B_FLAG_INVERSE_BATTLE))

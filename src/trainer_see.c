@@ -70,6 +70,7 @@ static const u8 sEmotion_HeartGfx[] = INCBIN_U8("graphics/field_effects/pics/emo
 // TODO: Credit https://www.spriters-resource.com/ds_dsi/pokemonheartgoldsoulsilver/sheet/30497/
 static const u8 sEmotion_Gfx[] = INCBIN_U8("graphics/misc/emotes.4bpp");
 
+
 static u8 (*const sDirectionalApproachDistanceFuncs[])(struct ObjectEvent *trainerObj, s16 range, s16 x, s16 y) =
 {
     GetTrainerApproachDistanceSouth,
@@ -295,8 +296,8 @@ static const union AnimCmd *const sSpriteAnimTable_Emotes[] = {
 
 static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 {
-    .tileTag = 0xffff,
-    .paletteTag = FLDEFF_PAL_TAG_ARROW,   ////LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_BRENDAN)
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_ExclamationQuestionMark,
