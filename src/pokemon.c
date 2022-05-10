@@ -79,6 +79,7 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
+void TrySpecialOverworldEvo();
 
 static void RandomizeSpeciesListEWRAMNormal(u16 seed);
 static void RandomizeSpeciesListEWRAMLegendary(u16 seed);
@@ -91,6 +92,7 @@ EWRAM_DATA struct Pokemon gPlayerPartyBackup[PARTY_SIZE] = {0}; //tx_randomizer_
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
+EWRAM_DATA static u8 sTriedEvolving = 0;
 
 //tx_randomizer_and_challenges
 EWRAM_DATA static u16 sSpeciesList[1] = {0}; //[NUM_SPECIES] = {0};
@@ -14097,6 +14099,47 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             }
         }
         break;
+    #ifdef BATTLE_ENGINE
+    // Battle evolution without leveling; party slot is being passed into the evolutionItem arg.
+    case EVO_MODE_BATTLE_SPECIAL:
+        for (i = 0; i < EVOS_PER_MON; i++)
+        {
+            switch (gEvolutionTable[species][i].method)
+            {
+            case EVO_CRITICAL_HITS:
+                if (gPartyCriticalHits[evolutionItem] >= gEvolutionTable[species][i].param)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            }
+        }
+        break;
+    #endif
+    // Overworld evolution without leveling; evolution method is being passed into the evolutionItem arg.
+    case EVO_MODE_OVERWORLD_SPECIAL:
+        for (i = 0; i < EVOS_PER_MON; i++)
+        {
+            switch (gEvolutionTable[species][i].method)
+            {
+            case EVO_SCRIPT_TRIGGER_DMG:
+            {
+                u16 currentHp = GetMonData(mon, MON_DATA_HP, NULL);
+                if (evolutionItem == EVO_SCRIPT_TRIGGER_DMG
+                    && currentHp != 0
+                    && (GetMonData(mon, MON_DATA_MAX_HP, NULL) - currentHp >= gEvolutionTable[species][i].param))
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            }
+            case EVO_DARK_SCROLL:
+                if (evolutionItem == EVO_DARK_SCROLL)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_WATER_SCROLL:
+                if (evolutionItem == EVO_WATER_SCROLL)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            }
+        }
+        break;
     }
 
     if (gSaveBlock1Ptr->tx_Random_Evolutions && targetSpecies != SPECIES_NONE) //tx_randomizer_and_challenges
@@ -16002,6 +16045,35 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
         if (temp[i] != 0xFF)
             ivs[j++] = temp[i];
     }
+}
+// Attempts to perform non-level/item related overworld evolutions; called by tryspecialevo command.
+void TrySpecialOverworldEvo(void)
+{
+    u8 i;
+    u8 evoMethod = gSpecialVar_0x8000;
+    u16 canStopEvo = gSpecialVar_0x8001;
+    u16 tryMultiple = gSpecialVar_0x8002;    
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_OVERWORLD_SPECIAL, evoMethod, SPECIES_NONE);
+        if (targetSpecies != SPECIES_NONE && !(sTriedEvolving & gBitTable[i]))
+        {
+            sTriedEvolving |= gBitTable[i];
+            if(gMain.callback2 == TrySpecialOverworldEvo) // This fixes small graphics glitches.
+                EvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
+            else
+                BeginEvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
+            if (tryMultiple)
+                gCB2_AfterEvolution = TrySpecialOverworldEvo;
+            else
+                gCB2_AfterEvolution = CB2_ReturnToField;
+            return;
+        }   
+    }
+
+    sTriedEvolving = 0;
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 //******************* tx_randomizer_and_challenges
