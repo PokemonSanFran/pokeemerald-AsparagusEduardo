@@ -7749,8 +7749,8 @@ static const u16 sRandomSpeciesLegendary[] =
     #endif
     // SPECIES_EGG       ,
 };
-#define RANDOM_SPECIES_EVO_0_COUNT ARRAY_COUNT(gRandomSpeciesEvo0)
-static const u16 gRandomSpeciesEvo0[] =
+#define RANDOM_SPECIES_EVO_0_COUNT ARRAY_COUNT(sRandomSpeciesEvo0)
+static const u16 sRandomSpeciesEvo0[] =
 {
     SPECIES_BULBASAUR       ,    //= EVO_TYPE_0,
     SPECIES_CHARMANDER      ,    //= EVO_TYPE_0,
@@ -8237,8 +8237,8 @@ static const u16 gRandomSpeciesEvo0[] =
     SPECIES_MORPEKO_HANGRY     , //= EVO_TYPE_0,
     #endif
 };
-#define RANDOM_SPECIES_EVO_1_COUNT ARRAY_COUNT(gRandomSpeciesEvo1)
-static const u16 gRandomSpeciesEvo1[] =
+#define RANDOM_SPECIES_EVO_1_COUNT ARRAY_COUNT(sRandomSpeciesEvo1)
+static const u16 sRandomSpeciesEvo1[] =
 {
     SPECIES_IVYSAUR         , //= EVO_TYPE_1,
     SPECIES_CHARMELEON      , //= EVO_TYPE_1,
@@ -8611,8 +8611,8 @@ static const u16 gRandomSpeciesEvo1[] =
     SPECIES_INDEEDEE_FEMALE    , //= EVO_TYPE_1,
     #endif
 };
-#define RANDOM_SPECIES_EVO_2_COUNT ARRAY_COUNT(gRandomSpeciesEvo2)
-static const u16 gRandomSpeciesEvo2[] =
+#define RANDOM_SPECIES_EVO_2_COUNT ARRAY_COUNT(sRandomSpeciesEvo2)
+static const u16 sRandomSpeciesEvo2[] =
 {
     SPECIES_VENUSAUR        , //= EVO_TYPE_2,
     SPECIES_CHARIZARD       , //= EVO_TYPE_2,
@@ -8754,8 +8754,8 @@ static const u16 gRandomSpeciesEvo2[] =
     SPECIES_AEGISLASH_BLADE    , //= EVO_TYPE_2,
     #endif
 };
-#define RANDOM_SPECIES_EVO_LEGENDARY_COUNT ARRAY_COUNT(gRandomSpeciesEvoLegendary)
-static const u16 gRandomSpeciesEvoLegendary[] =
+#define RANDOM_SPECIES_EVO_LEGENDARY_COUNT ARRAY_COUNT(sRandomSpeciesEvoLegendary)
+static const u16 sRandomSpeciesEvoLegendary[] =
 {
     SPECIES_ARTICUNO                      , //= EVO_TYPE_LEGENDARY,
     SPECIES_ZAPDOS                        , //= EVO_TYPE_LEGENDARY,
@@ -9686,10 +9686,10 @@ static const u16 sRandomValidMoves[MOVES_COUNT-1] =
     MOVE_ICE_PUNCH,
     MOVE_THUNDER_PUNCH,
     MOVE_SCRATCH,
-    #ifndef BATTLE_ENGINE
-    MOVE_VICE_GRIP,
-    #else
+    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_VISE_GRIP,
+    #else
+    MOVE_VICE_GRIP,
     #endif
     MOVE_GUILLOTINE,
     MOVE_RAZOR_WIND,
@@ -9815,10 +9815,10 @@ static const u16 sRandomValidMoves[MOVES_COUNT-1] =
     MOVE_AMNESIA,
     MOVE_KINESIS,
     MOVE_SOFT_BOILED,
-    #ifndef BATTLE_ENGINE
-    MOVE_HI_JUMP_KICK,
-    #else
+    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_HIGH_JUMP_KICK,
+    #else
+    MOVE_HI_JUMP_KICK,
     #endif
     MOVE_GLARE,
     MOVE_DREAM_EATER,
@@ -9868,10 +9868,10 @@ static const u16 sRandomValidMoves[MOVES_COUNT-1] =
     MOVE_PROTECT,
     MOVE_MACH_PUNCH,
     MOVE_SCARY_FACE,
-    #ifndef BATTLE_ENGINE
-    MOVE_FAINT_ATTACK,
-    #else
+    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_FEINT_ATTACK,
+    #else
+    MOVE_FAINT_ATTACK,
     #endif
     MOVE_SWEET_KISS,
     MOVE_BELLY_DRUM,
@@ -9952,10 +9952,10 @@ static const u16 sRandomValidMoves[MOVES_COUNT-1] =
     MOVE_MEMENTO,
     MOVE_FACADE,
     MOVE_FOCUS_PUNCH,
-    #ifndef BATTLE_ENGINE
-    MOVE_SMELLING_SALT,
-    #else
+    #if defined(BATTLE_ENGINE) || defined (POKEMON_EXPANSION)
     MOVE_SMELLING_SALTS,
+    #else
+    MOVE_SMELLING_SALT,
     #endif
     MOVE_FOLLOW_ME,
     MOVE_NATURE_POWER,
@@ -12090,6 +12090,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_UNUSED_RIBBONS:
         retVal = substruct3->unusedRibbons;
         break;
+    case MON_DATA_NUZLOCKE_RIBBON:
+        retVal = substruct3->nuzlockeRibbon;
+        break;
     case MON_DATA_EVENT_LEGAL:
         retVal = substruct3->eventLegal;
         break;
@@ -12483,6 +12486,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     case MON_DATA_UNUSED_RIBBONS:
         SET8(substruct3->unusedRibbons);
+        break;
+    case MON_DATA_NUZLOCKE_RIBBON:
+        SET8(substruct3->nuzlockeRibbon);
         break;
     case MON_DATA_EVENT_LEGAL:
         SET8(substruct3->eventLegal);
@@ -16106,8 +16112,8 @@ u16 PickRandomStarterForOneTypeChallenge(u16 *speciesList, u8 starterId)
 
     if ((IsRandomizerActivated() && gSaveBlock1Ptr->tx_Random_Similar) || !IsRandomizerActivated())
     {
-        u16 *stemp = Alloc(sizeof(gRandomSpeciesEvo0));
-        DmaCopy16(3, gRandomSpeciesEvo0, stemp, sizeof(gRandomSpeciesEvo0));
+        u16 *stemp = Alloc(sizeof(sRandomSpeciesEvo0));
+        DmaCopy16(3, sRandomSpeciesEvo0, stemp, sizeof(sRandomSpeciesEvo0));
         ShuffleListU16(stemp, RANDOM_SPECIES_EVO_0_COUNT, (starterId+13)*12289);
         for (i=0; i<RANDOM_SPECIES_EVO_0_COUNT; i++)
         {
@@ -16116,6 +16122,10 @@ u16 PickRandomStarterForOneTypeChallenge(u16 *speciesList, u8 starterId)
                 && species != speciesList[0] && species != speciesList[1] && species != speciesList[2])
                 break;
         }
+
+        if (i == RANDOM_SPECIES_EVO_0_COUNT)
+            species = speciesList[starterId-1];
+
         free(stemp);
     }
     else if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries)
@@ -16130,6 +16140,10 @@ u16 PickRandomStarterForOneTypeChallenge(u16 *speciesList, u8 starterId)
                 && species != speciesList[0] && species != speciesList[1] && species != speciesList[2])
                 break;
         }
+
+        if (i == RANDOM_SPECIES_COUNT_LEGENDARY)
+            species = speciesList[starterId-1];
+
         free(stemp);
     }
     else
@@ -16144,6 +16158,10 @@ u16 PickRandomStarterForOneTypeChallenge(u16 *speciesList, u8 starterId)
                 && species != speciesList[0] && species != speciesList[1] && species != speciesList[2])
                 break;
         }
+
+        if (i == RANDOM_SPECIES_COUNT)
+            species = speciesList[starterId-1];
+
         free(stemp);
     }
 
@@ -16155,23 +16173,44 @@ u16 PickRandomStarterForOneTypeChallenge(u16 *speciesList, u8 starterId)
 }
 
 //******* non EWRAM functions
-u16 PickRandomStarter(u16 species)
+u16 PickRandomStarter(u16 *speciesList, u8 starterId)
 {
+    u16 species;
     if (gSaveBlock1Ptr->tx_Random_Chaos)
         return sRandomSpeciesLegendary[RandomSeededModulo(species, RANDOM_SPECIES_COUNT_LEGENDARY)];
     
-    if (gSaveBlock1Ptr->tx_Random_Similar && !gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge)
-        return gRandomSpeciesEvo0[RandomSeededModulo(species*24593, RANDOM_SPECIES_EVO_0_COUNT)];
-
-    if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries)
-        return sRandomSpeciesLegendary[RandomSeededModulo(species*24593, RANDOM_SPECIES_COUNT_LEGENDARY)];
-
-    return sRandomSpecies[RandomSeededModulo(species*24593, RANDOM_SPECIES_COUNT)];
+    if (gSaveBlock1Ptr->tx_Random_Similar)
+    {
+        u16 *stemp = Alloc(sizeof(sRandomSpeciesEvo0));
+        DmaCopy16(3, sRandomSpeciesEvo0, stemp, sizeof(sRandomSpeciesEvo0));
+        ShuffleListU16(stemp, RANDOM_SPECIES_EVO_0_COUNT, 12289);
+        species = stemp[starterId*27];
+        free(stemp);
+        return species;
+    }
+    else if (gSaveBlock1Ptr->tx_Random_IncludeLegendaries)
+    {
+        u16 *stemp = Alloc(sizeof(sRandomSpeciesLegendary));
+        DmaCopy16(3, sRandomSpeciesLegendary, stemp, sizeof(sRandomSpeciesLegendary));
+        ShuffleListU16(stemp, RANDOM_SPECIES_COUNT_LEGENDARY, 12289);
+        species = stemp[starterId*27];
+        free(stemp);
+        return species;
+    }
+    else
+    {
+        u16 *stemp = Alloc(sizeof(sRandomSpecies));
+        DmaCopy16(3, sRandomSpecies, stemp, sizeof(sRandomSpecies));
+        ShuffleListU16(stemp, RANDOM_SPECIES_COUNT, 12289);
+        species = stemp[starterId*27];
+        free(stemp);
+        return species;  
+    } 
 }
 
 u8 GetTypeBySpecies(u16 species, u8 typeNum)
 {
-    u8 result, type;
+    u8 type;
 
     if (typeNum == 1)
         type = gBaseStats[species].type1;
@@ -16181,8 +16220,7 @@ u8 GetTypeBySpecies(u16 species, u8 typeNum)
     if (!gSaveBlock1Ptr->tx_Random_Type)
         return type;
 
-    result = sRandomSpecies[RandomSeededModulo(type*12289 + typeNum*species*24593, NUMBER_OF_MON_TYPES-1)];
-    type = sOneTypeChallengeValidTypes[result];
+    type = sOneTypeChallengeValidTypes[RandomSeededModulo(type*12289 + typeNum*species*24593, NUMBER_OF_MON_TYPES-1)];
 
     #ifdef GBA_PRINTF
     if (gSaveBlock1Ptr->tx_Random_Type)
@@ -16233,16 +16271,16 @@ u16 GetRandomSpecies(u16 species, u8 mapBased, u8 type) //INTERNAL use only!
         switch (slot)
         {
         case EVO_TYPE_0:
-            result_species = gRandomSpeciesEvo0[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_0_COUNT)];
+            result_species = sRandomSpeciesEvo0[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_0_COUNT)];
             break;
         case EVO_TYPE_1:
-            result_species = gRandomSpeciesEvo1[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_1_COUNT)];
+            result_species = sRandomSpeciesEvo1[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_1_COUNT)];
             break;
         case EVO_TYPE_2:
-            result_species = gRandomSpeciesEvo2[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_2_COUNT)];
+            result_species = sRandomSpeciesEvo2[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_2_COUNT)];
             break;
         case EVO_TYPE_LEGENDARY:
-            result_species = gRandomSpeciesEvoLegendary[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_LEGENDARY_COUNT)];
+            result_species = sRandomSpeciesEvoLegendary[RandomSeededModulo(species+offset*multiplier, RANDOM_SPECIES_EVO_LEGENDARY_COUNT)];
             break;
         }
 
@@ -16313,6 +16351,11 @@ u16 GetRandomMove(u16 move, u16 species)
     u16 final = sRandomValidMoves[val];
 
     return final;
+}
+
+u8 GetRandomType(void)
+{
+    return sOneTypeChallengeValidTypes[RandomSeededModulo(12289, NUMBER_OF_MON_TYPES-1)];
 }
 
 // Challenges
