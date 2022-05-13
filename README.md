@@ -38,7 +38,7 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [RHH](https://github.com/rh-hideout)'s [Battle Engine](https://github.com/rh-hideout/pokeemerald-expansion/tree/battle_engine).
 * [RHH](https://github.com/rh-hideout)'s [Pokémon Expansion](https://github.com/rh-hideout/pokeemerald-expansion/tree/pokemon_expansion).}
 * [RHH](https://github.com/rh-hideout)'s [Item Expansion](https://github.com/rh-hideout/pokeemerald-expansion/tree/pokemon_expansion).
-	* [Strange Souvenir](https://github.com/AsparagusEduardo/pokeemerald/tree/AlolanEvolution), which allows Alola-only evolutions. Code and sprite size-adjusted by me.
+	* [Strange Souvenir](https://github.com/AsparagusEduardo/pokeemerald/tree/AlolanEvolution), which allows Alola-only evolutions.
 	* Gen 6 Exp Share. Original code by Blurose, ported by [Lunos](https://github.com/LOuroboros).
 	* Lures for attracting more double battles and raising shiny odds.
 * [ghoulslash](https://github.com/ghoulslash)'s branches:
@@ -59,5 +59,6 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [Day/Night lightning System](https://github.com/huderlem/pokeemerald/tree/daynight-diego) by [Sierraffinity](https://github.com/Sierraffinity)
 	* Day/Night encounters.
     * **Change between Day and Night encounters in the Pokédex by pressing A** by Paccy/Artrios
+	* **Battle background palettes for times of day** by Lunos and ShinyDragonHunter
 * [Following Pokémon](https://github.com/aarant/pokeemerald/tree/romhack) by Merrp, with further development by Artrios
 
