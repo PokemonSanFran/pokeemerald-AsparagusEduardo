@@ -8,6 +8,10 @@
 #include "constants/items.h"
 #include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
+#ifdef GBA_PRINTF
+#include "printf.h"
+#include "mgba.h"
+#endif
 
 // Generic functions
 bool8 IsRandomizerActivated(void)

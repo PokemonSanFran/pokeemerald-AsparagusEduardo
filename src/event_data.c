@@ -3,8 +3,8 @@
 #include "pokedex.h"
 
 #ifdef GBA_PRINTF //tx_randomizer_and_challenges
-    //#include "printf.h"
-    //#include "mgba.h"
+    #include "printf.h"
+    #include "mgba.h"
 #endif
 
 #define NUM_SPECIAL_FLAGS (SPECIAL_FLAGS_END - SPECIAL_FLAGS_START + 1)
