@@ -20,6 +20,7 @@
 
 enum
 {
+    MENU_SOUND,
     MENU_MAIN,
     MENU_CUSTOM,
     MENU_COUNT,
@@ -28,12 +29,18 @@ enum
 // Menu items
 enum
 {
+    MENUITEM_SOUND_SOUND,
+    MENUITEM_SOUND_MUSIC,
+    MENUITEM_SOUND_SFX,
+    MENUITEM_SOUND_CANCEL,
+    MENUITEM_SOUND_COUNT
+};
+
+enum
+{
     MENUITEM_MAIN_TEXTSPEED,
     MENUITEM_MAIN_BATTLESCENE,
     MENUITEM_MAIN_BATTLESTYLE,
-    MENUITEM_MAIN_SOUND,
-    MENUITEM_MAIN_MUSIC,
-    MENUITEM_MAIN_SFX,
     MENUITEM_MAIN_BUTTONMODE,
     MENUITEM_MAIN_UNIT_SYSTEM,
     MENUITEM_MAIN_FRAMETYPE,
@@ -119,6 +126,7 @@ struct OptionMenu
     u8 submenu;
     u8 sel[MENUITEM_MAIN_COUNT];
     u8 sel_custom[MENUITEM_CUSTOM_COUNT];
+    u8 sel_sound[MENUITEM_SOUND_COUNT];
     int menuCursor[MENU_COUNT];
     int visibleCursor[MENU_COUNT];
     u8 arrowTaskId;
@@ -200,6 +208,18 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_m
 #define TEXT_COLOR_OPTIONS_RED_DARK_SHADOW      14
 
 // Menu draw and input functions
+struct // MENU_SOUND
+{
+    void (*drawChoices)(int selection, int y);
+    int (*processInput)(int selection);
+} static const sItemFunctionsSound[MENUITEM_MAIN_COUNT] =
+{
+    [MENUITEM_SOUND_SOUND]       = {DrawChoices_Sound,       ProcessInput_Options_Two},
+    [MENUITEM_SOUND_MUSIC]       = {DrawChoices_Music,       ProcessInput_Music},
+    [MENUITEM_SOUND_SFX]         = {DrawChoices_SFX,         ProcessInput_SFX},
+    [MENUITEM_SOUND_CANCEL]      = {NULL, NULL},
+};
+
 struct // MENU_MAIN
 {
     void (*drawChoices)(int selection, int y);
@@ -209,9 +229,6 @@ struct // MENU_MAIN
     [MENUITEM_MAIN_TEXTSPEED]    = {DrawChoices_TextSpeed,   ProcessInput_Options_Four},
     [MENUITEM_MAIN_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_MAIN_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
-    [MENUITEM_MAIN_SOUND]        = {DrawChoices_Sound,       ProcessInput_Options_Two},
-    [MENUITEM_MAIN_MUSIC]        = {DrawChoices_Music,       ProcessInput_Music},
-    [MENUITEM_MAIN_SFX]          = {DrawChoices_SFX,         ProcessInput_SFX},
     [MENUITEM_MAIN_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
     [MENUITEM_MAIN_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
@@ -246,7 +263,7 @@ static const u8 sText_FishFRLG[] = _("RFVH");
 static const u8 sText_SaveConfirm[] = _("Save confirm");
 #else
 static const u8 sText_Music[] = _("Music");
-static const u8 sText_SFX[] = _("SFX");
+static const u8 sText_SFX[] = _("Sound Effects");
 static const u8 sText_HpExpBar[] = _("HP/EXP bar speed");
 static const u8 sText_UnitSystem[] = _("Unit System");
 static const u8 sText_Transition[] = _("Transition");
@@ -258,14 +275,19 @@ static const u8 sText_SaveConfirm[] = _("Save confirm");
 #endif
 static const u8 sText_HpBar[]       = _("HP BAR");
 static const u8 sText_ExpBar[]      = _("EXP BAR");
+static const u8 *const sOptionMenuItemsNamesSound[MENUITEM_MAIN_COUNT] =
+{
+    [MENUITEM_SOUND_SOUND]       = gText_Sound,
+    [MENUITEM_SOUND_MUSIC]       = sText_Music,
+    [MENUITEM_SOUND_SFX]         = sText_SFX,
+    [MENUITEM_SOUND_CANCEL]      = gText_OptionMenuSave,
+};
+
 static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]   = gText_TextSpeed,
     [MENUITEM_MAIN_BATTLESCENE] = gText_BattleScene,
     [MENUITEM_MAIN_BATTLESTYLE] = gText_BattleStyle,
-    [MENUITEM_MAIN_SOUND]       = gText_Sound,
-    [MENUITEM_MAIN_MUSIC]       = sText_Music,
-    [MENUITEM_MAIN_SFX]         = sText_SFX,
     [MENUITEM_MAIN_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_MAIN_UNIT_SYSTEM] = sText_UnitSystem,
     [MENUITEM_MAIN_FRAMETYPE]   = gText_Frame,
@@ -286,6 +308,7 @@ static const u8 *const OptionTextRight(u8 menuItem)
 {
     switch (sOptions->submenu)
     {
+    case MENU_SOUND:    return sOptionMenuItemsNamesSound[menuItem];
     case MENU_MAIN:     return sOptionMenuItemsNamesMain[menuItem];
     case MENU_CUSTOM:   return sOptionMenuItemsNamesCustom[menuItem];
     }
@@ -296,15 +319,21 @@ static bool8 CheckConditions(int selection)
 {
     switch (sOptions->submenu)
     {
+    case MENU_SOUND:
+        switch(selection)
+        {
+        case MENUITEM_SOUND_SOUND:          return TRUE;
+        case MENUITEM_SOUND_MUSIC:          return TRUE;
+        case MENUITEM_SOUND_SFX:            return TRUE;
+        case MENUITEM_SOUND_CANCEL:         return TRUE;
+        case MENUITEM_SOUND_COUNT:          return TRUE;
+        }
     case MENU_MAIN:
         switch(selection)
         {
         case MENUITEM_MAIN_TEXTSPEED:       return TRUE;
         case MENUITEM_MAIN_BATTLESCENE:     return TRUE;
         case MENUITEM_MAIN_BATTLESTYLE:     return TRUE;
-        case MENUITEM_MAIN_SOUND:           return TRUE;
-        case MENUITEM_MAIN_MUSIC:           return TRUE;
-        case MENUITEM_MAIN_SFX:             return TRUE;
         case MENUITEM_MAIN_BUTTONMODE:      return TRUE;
         case MENUITEM_MAIN_UNIT_SYSTEM:     return TRUE;
         case MENUITEM_MAIN_FRAMETYPE:       return TRUE;
@@ -324,21 +353,30 @@ static bool8 CheckConditions(int selection)
         }
     }
 }
-
-// Descriptions
 static const u8 sText_Empty[]                   = _("");
 static const u8 sText_Desc_Save[]               = _("Save your settings.");
-static const u8 sText_Desc_TextSpeed[]          = _("Choose one of the four text-display\nspeeds.");
-static const u8 sText_Desc_BattleScene_On[]     = _("Show the Pokémon battle animations.");
-static const u8 sText_Desc_BattleScene_Off[]    = _("Skip the Pokémon battle animations.");
-static const u8 sText_Desc_BattleStyle_Shift[]  = _("Get the option to switch your\nPOKéMON after the enemies faints.");
-static const u8 sText_Desc_BattleStyle_Set[]    = _("No free switch after fainting the\nenemies Pokémon.");
+
+// Sound Descriptions
 static const u8 sText_Desc_SoundMono[]          = _("Sound is the same in all speakers.\nRecommended for original hardware.");
 static const u8 sText_Desc_SoundStereo[]        = _("Play the left and right audio channel\nseperatly. Great with headphones.");
 static const u8 sText_Desc_MusicOn[]            = _("Music will play normally.");
 static const u8 sText_Desc_MusicOff[]           = _("Music will not play. Does not affect\nintro, title screen and credits.");
 static const u8 sText_Desc_SFXOn[]              = _("Sound effects will play normally.");
 static const u8 sText_Desc_SFXOff[]             = _("Sound effects will not play.");
+static const u8 *const sOptionMenuItemDescriptionsSound[MENUITEM_SOUND_COUNT][3] =
+{
+    [MENUITEM_SOUND_SOUND]      = {sText_Desc_SoundMono,            sText_Desc_SoundStereo,     sText_Empty},
+    [MENUITEM_SOUND_MUSIC]      = {sText_Desc_MusicOn,              sText_Desc_MusicOff,        sText_Empty},
+    [MENUITEM_SOUND_SFX]        = {sText_Desc_SFXOn,                sText_Desc_SFXOff,          sText_Empty},
+    [MENUITEM_SOUND_CANCEL]     = {sText_Desc_Save,                 sText_Empty,                sText_Empty},
+};
+
+// Descriptions
+static const u8 sText_Desc_TextSpeed[]          = _("Choose one of the four text-display\nspeeds.");
+static const u8 sText_Desc_BattleScene_On[]     = _("Show the Pokémon battle animations.");
+static const u8 sText_Desc_BattleScene_Off[]    = _("Skip the Pokémon battle animations.");
+static const u8 sText_Desc_BattleStyle_Shift[]  = _("Get the option to switch your\nPOKéMON after the enemies faints.");
+static const u8 sText_Desc_BattleStyle_Set[]    = _("No free switch after fainting the\nenemies Pokémon.");
 static const u8 sText_Desc_ButtonMode[]         = _("All buttons work as normal.");
 static const u8 sText_Desc_ButtonMode_LR[]      = _("On some screens the L and R buttons\nact as left and right.");
 static const u8 sText_Desc_ButtonMode_LA[]      = _("The L button acts as another A\nbutton for one-handed play.");
@@ -350,9 +388,6 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
     [MENUITEM_MAIN_TEXTSPEED]   = {sText_Desc_TextSpeed,            sText_Empty,                sText_Empty},
     [MENUITEM_MAIN_BATTLESCENE] = {sText_Desc_BattleScene_On,       sText_Desc_BattleScene_Off, sText_Empty},
     [MENUITEM_MAIN_BATTLESTYLE] = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set, sText_Empty},
-    [MENUITEM_MAIN_SOUND]       = {sText_Desc_SoundMono,            sText_Desc_SoundStereo,     sText_Empty},
-    [MENUITEM_MAIN_MUSIC]       = {sText_Desc_MusicOn,              sText_Desc_MusicOff,        sText_Empty},
-    [MENUITEM_MAIN_SFX]         = {sText_Desc_SFXOn,                sText_Desc_SFXOff,          sText_Empty},
     [MENUITEM_MAIN_BUTTONMODE]  = {sText_Desc_ButtonMode,           sText_Desc_ButtonMode_LR,   sText_Desc_ButtonMode_LA},
     [MENUITEM_MAIN_UNIT_SYSTEM] = {sText_Desc_UnitSystemImperial,   sText_Desc_UnitSystemMetric,sText_Empty},
     [MENUITEM_MAIN_FRAMETYPE]   = {sText_Desc_FrameType,            sText_Empty,                sText_Empty},
@@ -381,6 +416,15 @@ static const u8 *const sOptionMenuItemDescriptionsCustom[MENUITEM_CUSTOM_COUNT][
     [MENUITEM_CUSTOM_CANCEL]      = {sText_Desc_Save,               sText_Empty},
 };
 
+// Disabled Sound Descriptions
+static const u8 *const sOptionMenuItemDescriptionsDisabledSound[MENUITEM_MAIN_COUNT] =
+{
+    [MENUITEM_SOUND_SOUND]      = sText_Empty,
+    [MENUITEM_SOUND_MUSIC]      = sText_Empty,
+    [MENUITEM_SOUND_SFX]        = sText_Empty,
+    [MENUITEM_SOUND_CANCEL]     = sText_Empty,
+};
+
 // Disabled Descriptions
 static const u8 sText_Desc_Disabled_Textspeed[]     = _("Only active if xyz.");
 static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COUNT] =
@@ -388,9 +432,6 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
     [MENUITEM_MAIN_TEXTSPEED]   = sText_Desc_Disabled_Textspeed,
     [MENUITEM_MAIN_BATTLESCENE] = sText_Empty,
     [MENUITEM_MAIN_BATTLESTYLE] = sText_Empty,
-    [MENUITEM_MAIN_SOUND]       = sText_Empty,
-    [MENUITEM_MAIN_MUSIC]       = sText_Empty,
-    [MENUITEM_MAIN_SFX]         = sText_Empty,
     [MENUITEM_MAIN_BUTTONMODE]  = sText_Empty,
     [MENUITEM_MAIN_UNIT_SYSTEM] = sText_Empty,
     [MENUITEM_MAIN_FRAMETYPE]   = sText_Empty,
@@ -416,6 +457,11 @@ static const u8 *const OptionTextDescription(void)
 
     switch (sOptions->submenu)
     {
+    case MENU_SOUND:
+        if (!CheckConditions(menuItem))
+            return sOptionMenuItemDescriptionsDisabledSound[menuItem];
+        selection = sOptions->sel_sound[menuItem];
+        return sOptionMenuItemDescriptionsSound[menuItem][selection];
     case MENU_MAIN:
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledMain[menuItem];
@@ -437,6 +483,7 @@ static u8 MenuItemCount(void)
 {
     switch (sOptions->submenu)
     {
+    case MENU_SOUND:    return MENUITEM_SOUND_COUNT;
     case MENU_MAIN:     return MENUITEM_MAIN_COUNT;
     case MENU_CUSTOM:   return MENUITEM_CUSTOM_COUNT;
     }
@@ -446,6 +493,7 @@ static u8 MenuItemCancel(void)
 {
     switch (sOptions->submenu)
     {
+    case MENU_SOUND:    return MENUITEM_SOUND_CANCEL;
     case MENU_MAIN:     return MENUITEM_MAIN_CANCEL;
     case MENU_CUSTOM:   return MENUITEM_CUSTOM_CANCEL;
     }
@@ -466,11 +514,23 @@ static void VBlankCB(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
-
+#if GAME_LANGUAGE == LANGUAGE_SPANISH
+static const u8 sText_TopBar_Sound[]        = _("AUDIO");
+static const u8 sText_TopBar_Sound_Right[]  = _("{R_BUTTON}GENERAL");
 static const u8 sText_TopBar_Main[]         = _("GENERAL");
+static const u8 sText_TopBar_Main_Left[]    = _("{L_BUTTON}AUDIO");
+static const u8 sText_TopBar_Main_Right[]   = _("{R_BUTTON}OTROS");
+static const u8 sText_TopBar_Custom[]       = _("OTROS");
+static const u8 sText_TopBar_Custom_Left[]  = _("{L_BUTTON}GENERAL");
+#else
+static const u8 sText_TopBar_Sound[]        = _("SOUND");
+static const u8 sText_TopBar_Sound_Right[]  = _("{R_BUTTON}GENERAL");
+static const u8 sText_TopBar_Main[]         = _("GENERAL");
+static const u8 sText_TopBar_Main_Left[]    = _("{L_BUTTON}SOUND");
 static const u8 sText_TopBar_Main_Right[]   = _("{R_BUTTON}CUSTOM");
 static const u8 sText_TopBar_Custom[]       = _("CUSTOM");
 static const u8 sText_TopBar_Custom_Left[]  = _("{L_BUTTON}GENERAL");
+#endif
 static void DrawTopBarText(void)
 {
     const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_OPTIONS_GRAY_FG };
@@ -478,8 +538,13 @@ static void DrawTopBarText(void)
     FillWindowPixelBuffer(WIN_TOPBAR, PIXEL_FILL(15));
     switch (sOptions->submenu)
     {
+        case MENU_SOUND:
+            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 105, 1, color, 0, sText_TopBar_Sound);
+            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 190, 1, color, 0, sText_TopBar_Sound_Right);
+            break;
         case MENU_MAIN:
             AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 105, 1, color, 0, sText_TopBar_Main);
+            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 2, 1, color, 0, sText_TopBar_Main_Left);
             AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 190, 1, color, 0, sText_TopBar_Main_Right);
             break;
         case MENU_CUSTOM:
@@ -566,6 +631,10 @@ static void DrawChoices(u32 id, int y) //right side draw function
 {
     switch (sOptions->submenu)
     {
+        case MENU_SOUND:
+            if (sItemFunctionsSound[id].drawChoices != NULL)
+                sItemFunctionsSound[id].drawChoices(sOptions->sel_sound[id], y);
+            break;
         case MENU_MAIN:
             if (sItemFunctionsMain[id].drawChoices != NULL)
                 sItemFunctionsMain[id].drawChoices(sOptions->sel[id], y);
@@ -642,9 +711,6 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_MAIN_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
         sOptions->sel[MENUITEM_MAIN_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel[MENUITEM_MAIN_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
-        sOptions->sel[MENUITEM_MAIN_SOUND]       = gSaveBlock2Ptr->optionsSound;
-        sOptions->sel[MENUITEM_MAIN_MUSIC]       = gSaveBlock2Ptr->optionsMusic;
-        sOptions->sel[MENUITEM_MAIN_SFX]         = gSaveBlock2Ptr->optionsSFX;
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
@@ -654,6 +720,10 @@ void CB2_InitOptionMenu(void)
         sOptions->sel_custom[MENUITEM_CUSTOM_FONT]        = gSaveBlock2Ptr->optionsCurrentFont;
         sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
         sOptions->sel_custom[MENUITEM_CUSTOM_FISHREELING] = gSaveBlock2Ptr->optionsFishReeling;
+        
+        sOptions->sel_sound[MENUITEM_SOUND_SOUND]       = gSaveBlock2Ptr->optionsSound;
+        sOptions->sel_sound[MENUITEM_SOUND_MUSIC]       = gSaveBlock2Ptr->optionsMusic;
+        sOptions->sel_sound[MENUITEM_SOUND_SFX]         = gSaveBlock2Ptr->optionsSFX;
 
         sOptions->submenu = MENU_MAIN;
 
@@ -806,6 +876,23 @@ static void Task_OptionMenuProcessInput(u8 taskId)
                     DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
             }
         }
+        else if (sOptions->submenu == MENU_SOUND)
+        {
+            int cursor = sOptions->menuCursor[sOptions->submenu];
+            u8 previousOption = sOptions->sel_sound[cursor];
+            if (CheckConditions(cursor))
+            {
+                if (sItemFunctionsSound[cursor].processInput != NULL)
+                {
+                    sOptions->sel_sound[cursor] = sItemFunctionsSound[cursor].processInput(previousOption);
+                    ReDrawAll();
+                    DrawDescriptionText();
+                }
+
+                if (previousOption != sOptions->sel_sound[cursor])
+                    DrawChoices(cursor, sOptions->visibleCursor[sOptions->submenu] * Y_DIFF);
+            }
+        }
     }
     else if (JOY_NEW(R_BUTTON))
     {
@@ -834,9 +921,6 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_MAIN_TEXTSPEED];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_MAIN_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_MAIN_BATTLESTYLE];
-    gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_MAIN_SOUND];
-    gSaveBlock2Ptr->optionsMusic            = sOptions->sel[MENUITEM_MAIN_MUSIC];
-    gSaveBlock2Ptr->optionsSFX              = sOptions->sel[MENUITEM_MAIN_SFX];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
@@ -846,6 +930,10 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel_custom[MENUITEM_CUSTOM_FONT];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL];
     gSaveBlock2Ptr->optionsFishReeling      = sOptions->sel_custom[MENUITEM_CUSTOM_FISHREELING];
+    
+    gSaveBlock2Ptr->optionsSound            = sOptions->sel_sound[MENUITEM_SOUND_SOUND];
+    gSaveBlock2Ptr->optionsMusic            = sOptions->sel_sound[MENUITEM_SOUND_MUSIC];
+    gSaveBlock2Ptr->optionsSFX              = sOptions->sel_sound[MENUITEM_SOUND_SFX];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -1138,7 +1226,7 @@ static void DrawChoices_BattleStyle(int selection, int y)
 
 static void DrawChoices_Sound(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_MAIN_SOUND);
+    bool8 active = CheckConditions(MENUITEM_SOUND_SOUND);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
@@ -1148,7 +1236,7 @@ static void DrawChoices_Sound(int selection, int y)
 
 static void DrawChoices_Music(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_MAIN_MUSIC);
+    bool8 active = CheckConditions(MENUITEM_SOUND_MUSIC);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
@@ -1158,7 +1246,7 @@ static void DrawChoices_Music(int selection, int y)
 
 static void DrawChoices_SFX(int selection, int y)
 {
-    bool8 active = CheckConditions(MENUITEM_MAIN_SFX);
+    bool8 active = CheckConditions(MENUITEM_SOUND_SFX);
     u8 styles[2] = {0};
     styles[selection] = 1;
 
