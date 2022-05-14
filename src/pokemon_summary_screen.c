@@ -3247,7 +3247,7 @@ static void BufferEggState(void)
 
     if (sMonSummaryScreen->summary.sanity == TRUE)
         text = gText_EggWillTakeALongTime;
-    else if (sum->friendship == 0)
+    else if (sum->friendship == 0 && IsNuzlockeActive())
         text = gText_EggReadyToHatch_Nuzlocke;
     else if (sum->friendship <= 5)
         text = gText_EggAboutToHatch;

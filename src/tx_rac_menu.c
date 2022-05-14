@@ -39,6 +39,7 @@ enum
 enum
 {
     MENUITEM_RANDOM_OFF_ON,
+    MENUITEM_RANDOM_STARTER,
     MENUITEM_RANDOM_WILD_PKMN,
     MENUITEM_RANDOM_TRAINER,
     MENUITEM_RANDOM_STATIC,
@@ -210,6 +211,7 @@ static void DrawBgWindowFrames(void);
 static void DrawChoices_Random_OffOn(int selection, int y, bool8 active);
 static void DrawChoices_Random_OffRandom(int selection, int y, bool8 active);
 static void DrawChoices_Random_Toggle(int selection, int y);
+static void DrawChoices_Random_Starter(int selection, int y);
 static void DrawChoices_Random_WildPkmn(int selection, int y);
 static void DrawChoices_Random_Trainer(int selection, int y);
 static void DrawChoices_Random_Static(int selection, int y);
@@ -280,21 +282,22 @@ struct // MENU_RANDOMIZER
     int (*processInput)(int selection);
 } static const sItemFunctionsRandom[MENUITEM_RANDOM_COUNT] =
 {
-    [MENUITEM_RANDOM_OFF_ON]                  = {DrawChoices_Random_Toggle,             ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_WILD_PKMN]               = {DrawChoices_Random_WildPkmn,           ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_TRAINER]                 = {DrawChoices_Random_Trainer,            ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_STATIC]                  = {DrawChoices_Random_Static,             ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_SIMILAR_EVOLUTION_LEVEL] = {DrawChoices_Random_EvoStages,          ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_INCLUDE_LEGENDARIES]     = {DrawChoices_Random_Legendaries,        ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_TYPE]                    = {DrawChoices_Random_Types,              ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_MOVES]                   = {DrawChoices_Random_Moves,              ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_ABILITIES]               = {DrawChoices_Random_Abilities,          ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_EVOLUTIONS]              = {DrawChoices_Random_Evolutions,         ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_EVOLUTIONS_METHODS]      = {DrawChoices_Random_EvolutionMethods,   ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_TYPE_EFFEC]              = {DrawChoices_Random_TypeEffect,         ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_ITEMS]                   = {DrawChoices_Random_Items,              ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_CHAOS]                   = {DrawChoices_Random_OffChaos,           ProcessInput_Options_Two},
-    [MENUITEM_RANDOM_NEXT] = {NULL, NULL},
+    [MENUITEM_RANDOM_OFF_ON]                    = {DrawChoices_Random_Toggle,           ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_STARTER]                   = {DrawChoices_Random_Starter,          ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_WILD_PKMN]                 = {DrawChoices_Random_WildPkmn,         ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_TRAINER]                   = {DrawChoices_Random_Trainer,          ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_STATIC]                    = {DrawChoices_Random_Static,           ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_SIMILAR_EVOLUTION_LEVEL]   = {DrawChoices_Random_EvoStages,        ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_INCLUDE_LEGENDARIES]       = {DrawChoices_Random_Legendaries,      ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_TYPE]                      = {DrawChoices_Random_Types,            ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_MOVES]                     = {DrawChoices_Random_Moves,            ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_ABILITIES]                 = {DrawChoices_Random_Abilities,        ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_EVOLUTIONS]                = {DrawChoices_Random_Evolutions,       ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_EVOLUTIONS_METHODS]        = {DrawChoices_Random_EvolutionMethods, ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_TYPE_EFFEC]                = {DrawChoices_Random_TypeEffect,       ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_ITEMS]                     = {DrawChoices_Random_Items,            ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_CHAOS]                     = {DrawChoices_Random_OffChaos,         ProcessInput_Options_Two},
+    [MENUITEM_RANDOM_NEXT]                      = {NULL, NULL},
 };
 
 struct // MENU_NUZLOCKE
@@ -346,6 +349,7 @@ struct // MENU_CHALLENGES
 // Menu left side option names text
 static const u8 sText_Dummy[] =                     _("DUMMY");
 static const u8 sText_Randomizer[] =                _("RANDOMIZER");
+static const u8 sText_Starter[] =                   _("STARTER POKéMON");
 static const u8 sText_WildPkmn[] =                  _("WILD POKéMON");
 static const u8 sText_Trainer[] =                   _("TRAINER");
 static const u8 sText_Static[] =                    _("STATIC POKéMON");
@@ -363,6 +367,7 @@ static const u8 sText_Next[] =                      _("NEXT");
 static const u8 *const sOptionMenuItemsNamesRandom[MENUITEM_RANDOM_COUNT] =
 {
     [MENUITEM_RANDOM_OFF_ON]                    = sText_Randomizer,
+    [MENUITEM_RANDOM_STARTER]                   = sText_Starter,
     [MENUITEM_RANDOM_WILD_PKMN]                 = sText_WildPkmn,
     [MENUITEM_RANDOM_TRAINER]                   = sText_Trainer,
     [MENUITEM_RANDOM_STATIC]                    = sText_Static,
@@ -455,16 +460,19 @@ static bool8 CheckConditions(int selection)
     case MENU_RANDOMIZER:
         switch(selection)
         {
+            case MENUITEM_RANDOM_STARTER:                   return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON];
             case MENUITEM_RANDOM_WILD_PKMN:                 return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON];
             case MENUITEM_RANDOM_TRAINER:                   return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON];
             case MENUITEM_RANDOM_STATIC:                    return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON];
             case MENUITEM_RANDOM_SIMILAR_EVOLUTION_LEVEL:   return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON] 
                                                                 && (sOptions->sel_randomizer[MENUITEM_RANDOM_WILD_PKMN] 
+                                                                    || sOptions->sel_randomizer[MENUITEM_RANDOM_STARTER]
                                                                     || sOptions->sel_randomizer[MENUITEM_RANDOM_TRAINER] 
                                                                     || sOptions->sel_randomizer[MENUITEM_RANDOM_STATIC])
                                                                 && !sOptions->sel_randomizer[MENUITEM_RANDOM_CHAOS];
             case MENUITEM_RANDOM_INCLUDE_LEGENDARIES:       return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON] 
                                                                 && (sOptions->sel_randomizer[MENUITEM_RANDOM_WILD_PKMN] 
+                                                                    || sOptions->sel_randomizer[MENUITEM_RANDOM_STARTER]
                                                                     || sOptions->sel_randomizer[MENUITEM_RANDOM_TRAINER]
                                                                     || sOptions->sel_randomizer[MENUITEM_RANDOM_STATIC]);
             case MENUITEM_RANDOM_TYPE:                      return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON];
@@ -475,6 +483,7 @@ static bool8 CheckConditions(int selection)
             case MENUITEM_RANDOM_TYPE_EFFEC:                return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON];
             case MENUITEM_RANDOM_ITEMS:                     return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON];
             case MENUITEM_RANDOM_CHAOS:                     return sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON] && (sOptions->sel_randomizer[MENUITEM_RANDOM_WILD_PKMN]
+                                                                || sOptions->sel_randomizer[MENUITEM_RANDOM_STARTER]
                                                                 || sOptions->sel_randomizer[MENUITEM_RANDOM_TRAINER]
                                                                 || sOptions->sel_randomizer[MENUITEM_RANDOM_STATIC]
                                                                 || sOptions->sel_randomizer[MENUITEM_RANDOM_TYPE]
@@ -509,46 +518,49 @@ static bool8 CheckConditions(int selection)
 }
 
 // Descriptions
-static const u8 sText_Empty[]                                    = _("");
-static const u8 sText_Description_Save[]                         = _("Save choices and continue...");
+static const u8 sText_Empty[]               = _("");
+static const u8 sText_Description_Save[]    = _("Save choices and continue...");
 
-static const u8 sText_Description_Randomizer_Off[]             = _("Game will not be randomized.");
-static const u8 sText_Description_Randomizer_On[]              = _("Play the game randomized.\nSettings below!");
-static const u8 sText_Description_WildPokemon_Off[]            = _("Same wild encounter as in the\nbase game.");
-static const u8 sText_Description_WildPokemon_On[]             = _("Randomize wild POKéMON.");
-static const u8 sText_Description_Random_Trainer_Off[]         = _("Trainer will have their expected\nparty.");
-static const u8 sText_Description_Random_Trainer_On[]          = _("Randomize enemy trainer parties.");
-static const u8 sText_Description_Random_Static_Off[]          = _("Static encounter will be the same\nas in the base game.");
-static const u8 sText_Description_Random_Static_On[]           = _("Randomize static encounter POKéMON.");
-static const u8 sText_Description_SimiliarEvolutionLevel_Off[] = _("Distribution of POKéMON {COLOR 7}{COLOR 8}not balanced{COLOR 1}{COLOR 2}\naround their strength!");
-static const u8 sText_Description_SimiliarEvolutionLevel_On[]  = _("{PKMN} replaced with similar tiered ones.\nCurrently based on evo stages.");
-static const u8 sText_Description_IncludeLegendaries_Off[]     = _("Legendary POKéMON will not be\nincluded and randomized.");
-static const u8 sText_Description_IncludeLegendaries_On[]      = _("Include legendary POKéMON in\nrandomization!");
-static const u8 sText_Description_Random_Types_Off[]           = _("POKéMON types stay the same as in\nthe base game.");
-static const u8 sText_Description_Random_Types_On[]            = _("Randomize all POKéMON types.");
-static const u8 sText_Description_Random_Moves_Off[]           = _("POKéMON moves stay the same as in\nthe base game.");
-static const u8 sText_Description_Random_Moves_On[]            = _("Randomize all POKéMON moves.");
-static const u8 sText_Description_Random_Abilities_Off[]       = _("POKéMON abilities stay the same as in\nthe base game.");
-static const u8 sText_Description_Random_Abilities_On[]        = _("Randomize all POKéMON abilities.");
-static const u8 sText_Description_Random_Evos_Off[]            = _("POKéMON evolutions stay the same as\nin the base game.");
-static const u8 sText_Description_Random_Evos_On[]             = _("Randomize all POKéMON evolutions.");
-static const u8 sText_Description_Random_Evo_Methods_Off[]     = _("The POKéMON that can potentially\nevolve are unchanged.");
-static const u8 sText_Description_Random_Evo_Methods_On[]      = _("Randomize evolution lines. Allows\nnew evolution lines to occure!");
-static const u8 sText_Description_Random_Effectiveness_Off[]   = _("Type effectiveness chart will remain\nthe same as in the base game.");
-static const u8 sText_Description_Random_Effectiveness_On[]    = _("Randomize type effectiveness.");
-static const u8 sText_Description_Random_Items_Off[]           = _("All found or recieved items are the\nsame as in the base game.");
-static const u8 sText_Description_Random_Items_On[]            = _("Randomize found, hidden and revieved\nitems. KEY items are excluded!");
-static const u8 sText_Description_Chaos_Mode_Off[]             = _("Chaos mode disabled.");
-static const u8 sText_Description_Chaos_Mode_On[]              = _("Every above choosen option will be\nvery chaotic. {COLOR 7}{COLOR 8}NOT recommended!");
-static const u8 sText_Description_Random_Next[]                = _("Continue to Nuzlocke options.");
+static const u8 sText_Description_Randomizer_Off[]                  = _("Game will not be randomized.");
+static const u8 sText_Description_Randomizer_On[]                   = _("Play the game randomized.\nSettings below!");
+static const u8 sText_Description_Random_Starter_Off[]              = _("Standard starter POKéMON.");
+static const u8 sText_Description_Random_Starter_On[]               = _("Randomize starter POKéMON.");
+static const u8 sText_Description_Random_WildPokemon_Off[]          = _("Same wild encounter as in the\nbase game.");
+static const u8 sText_Description_Random_WildPokemon_On[]           = _("Randomize wild POKéMON.");
+static const u8 sText_Description_Random_Trainer_Off[]              = _("Trainer will have their expected\nparty.");
+static const u8 sText_Description_Random_Trainer_On[]               = _("Randomize enemy trainer parties.");
+static const u8 sText_Description_Random_Static_Off[]               = _("Static encounter will be the same\nas in the base game.");
+static const u8 sText_Description_Random_Static_On[]                = _("Randomize static encounter POKéMON.");
+static const u8 sText_Description_Random_BalanceTiers_Off[]         = _("Distribution of POKéMON {COLOR 7}{COLOR 8}not balanced{COLOR 1}{COLOR 2}\naround their strength!");
+static const u8 sText_Description_Random_BalanceTiers_On[]          = _("{PKMN} replaced with similar tiered ones.\nCurrently based on evo stages.");
+static const u8 sText_Description_Random_IncludeLegendaries_Off[]   = _("Legendary POKéMON will not be\nincluded and randomized.");
+static const u8 sText_Description_Random_IncludeLegendaries_On[]    = _("Include legendary POKéMON in\nrandomization!");
+static const u8 sText_Description_Random_Types_Off[]                = _("POKéMON types stay the same as in\nthe base game.");
+static const u8 sText_Description_Random_Types_On[]                 = _("Randomize all POKéMON types.");
+static const u8 sText_Description_Random_Moves_Off[]                = _("POKéMON moves stay the same as in\nthe base game.");
+static const u8 sText_Description_Random_Moves_On[]                 = _("Randomize all POKéMON moves.");
+static const u8 sText_Description_Random_Abilities_Off[]            = _("POKéMON abilities stay the same as in\nthe base game.");
+static const u8 sText_Description_Random_Abilities_On[]             = _("Randomize all POKéMON abilities.");
+static const u8 sText_Description_Random_Evos_Off[]                 = _("POKéMON evolutions stay the same as\nin the base game.");
+static const u8 sText_Description_Random_Evos_On[]                  = _("Randomize all POKéMON evolutions.");
+static const u8 sText_Description_Random_Evo_Methods_Off[]          = _("The POKéMON that can potentially\nevolve are unchanged.");
+static const u8 sText_Description_Random_Evo_Methods_On[]           = _("Randomize evolution lines. Allows\nnew evolution lines to occure!");
+static const u8 sText_Description_Random_Effectiveness_Off[]        = _("Type effectiveness chart will remain\nthe same as in the base game.");
+static const u8 sText_Description_Random_Effectiveness_On[]         = _("Randomize type effectiveness.");
+static const u8 sText_Description_Random_Items_Off[]                = _("All found or recieved items are the\nsame as in the base game.");
+static const u8 sText_Description_Random_Items_On[]                 = _("Randomize found, hidden and revieved\nitems. KEY items are excluded!");
+static const u8 sText_Description_Random_ChaosMode_Off[]            = _("Chaos mode disabled.");
+static const u8 sText_Description_Random_ChaosMode_On[]             = _("Every above choosen option will be\nvery chaotic. {COLOR 7}{COLOR 8}NOT recommended!");
+static const u8 sText_Description_Random_Next[]                     = _("Continue to Nuzlocke options.");
 static const u8 *const sOptionMenuItemDescriptionsRandomizer[MENUITEM_RANDOM_COUNT][2] =
 {
     [MENUITEM_RANDOM_OFF_ON]                    = {sText_Description_Randomizer_Off,               sText_Description_Randomizer_On},
-    [MENUITEM_RANDOM_WILD_PKMN]                 = {sText_Description_WildPokemon_Off,              sText_Description_WildPokemon_On},
+    [MENUITEM_RANDOM_STARTER]                   = {sText_Description_Random_Starter_Off,                  sText_Description_Random_Starter_On},
+    [MENUITEM_RANDOM_WILD_PKMN]                 = {sText_Description_Random_WildPokemon_Off,              sText_Description_Random_WildPokemon_On},
     [MENUITEM_RANDOM_TRAINER]                   = {sText_Description_Random_Trainer_Off,           sText_Description_Random_Trainer_On},
     [MENUITEM_RANDOM_STATIC]                    = {sText_Description_Random_Static_Off,            sText_Description_Random_Static_On},
-    [MENUITEM_RANDOM_SIMILAR_EVOLUTION_LEVEL]   = {sText_Description_SimiliarEvolutionLevel_On,    sText_Description_SimiliarEvolutionLevel_Off},
-    [MENUITEM_RANDOM_INCLUDE_LEGENDARIES]       = {sText_Description_IncludeLegendaries_Off,       sText_Description_IncludeLegendaries_On},
+    [MENUITEM_RANDOM_SIMILAR_EVOLUTION_LEVEL]   = {sText_Description_Random_BalanceTiers_On,    sText_Description_Random_BalanceTiers_Off},
+    [MENUITEM_RANDOM_INCLUDE_LEGENDARIES]       = {sText_Description_Random_IncludeLegendaries_Off,       sText_Description_Random_IncludeLegendaries_On},
     [MENUITEM_RANDOM_TYPE]                      = {sText_Description_Random_Types_Off,             sText_Description_Random_Types_On},
     [MENUITEM_RANDOM_MOVES]                     = {sText_Description_Random_Moves_Off,             sText_Description_Random_Moves_On},
     [MENUITEM_RANDOM_ABILITIES]                 = {sText_Description_Random_Abilities_Off,         sText_Description_Random_Abilities_On},
@@ -556,94 +568,154 @@ static const u8 *const sOptionMenuItemDescriptionsRandomizer[MENUITEM_RANDOM_COU
     [MENUITEM_RANDOM_EVOLUTIONS_METHODS]        = {sText_Description_Random_Evo_Methods_Off,       sText_Description_Random_Evo_Methods_On},
     [MENUITEM_RANDOM_TYPE_EFFEC]                = {sText_Description_Random_Effectiveness_Off,     sText_Description_Random_Effectiveness_On},
     [MENUITEM_RANDOM_ITEMS]                     = {sText_Description_Random_Items_Off,             sText_Description_Random_Items_On},
-    [MENUITEM_RANDOM_CHAOS]                     = {sText_Description_Chaos_Mode_Off,               sText_Description_Chaos_Mode_On},
+    [MENUITEM_RANDOM_CHAOS]                     = {sText_Description_Random_ChaosMode_Off,               sText_Description_Random_ChaosMode_On},
     [MENUITEM_RANDOM_NEXT]                      = {sText_Description_Random_Next,                  sText_Empty},
 };
 
-static const u8 sText_Description_TXC_Nuzlocke_Base[]               = _("Nuzlocke mode is disabled.");
-static const u8 sText_Description_TXC_Nuzlocke_Normal[]             = _("One catch per route! Fainted POKéMON\ncan't be used anymore.");
-static const u8 sText_Description_TXC_Nuzlocke_Hard[]               = _("Same rules as NORMAL but also\n{COLOR 7}{COLOR 8}deletes SAVE on battle loss!");
-static const u8 sText_Description_TXC_Nuzlocke_SpeciesClause_Off[]  = _("The player always has to catch the\nfirst POKéMON per route.");
-static const u8 sText_Description_TXC_Nuzlocke_SpeciesClause_On[]   = _("Only not prior caught POKéMON count\nas first encounter. {COLOR 7}{COLOR 8}RECOMMENDED!");
-static const u8 sText_Description_TXC_Nuzlocke_ShinyClause_Off[]    = _("The player can only catch a shiny\nPOKéMON if it's the first encounter.");
-static const u8 sText_Description_TXC_Nuzlocke_ShinyClause_On[]     = _("The player can always catch shiny\nPOKéMON. {COLOR 7}{COLOR 8}RECOMMENDED!");
-static const u8 sText_Description_TXC_Nuzlocke_Nicknaming_Off[]     = _("Nicknames are optional.");
-static const u8 sText_Description_TXC_Nuzlocke_Nicknaming_On[]      = _("Forces the player to nickname every\nPOKéMON. {COLOR 7}{COLOR 8}RECOMMENDED!");
-static const u8 sText_Description_TXC_Nuzlocke_Deletion_Cemetery[]  = _("Fainted POKéMON are send to the PC\nafter battle and can't be retrieved.");
-static const u8 sText_Description_TXC_Nuzlocke_Deletion_Deletion[]  = _("Fainted POKéMON are {COLOR 7}{COLOR 8}released{COLOR 1}{COLOR 2} after\nbattle!");
+static const u8 sText_Description_Nuzlocke_Base[]               = _("Nuzlocke mode is disabled.");
+static const u8 sText_Description_Nuzlocke_Normal[]             = _("One catch per route! Fainted POKéMON\ncan't be used anymore.");
+static const u8 sText_Description_Nuzlocke_Hard[]               = _("Same rules as NORMAL but also\n{COLOR 7}{COLOR 8}deletes SAVE on battle loss!");
+static const u8 sText_Description_Nuzlocke_SpeciesClause_Off[]  = _("The player always has to catch the\nfirst POKéMON per route.");
+static const u8 sText_Description_Nuzlocke_SpeciesClause_On[]   = _("Only not prior caught POKéMON count\nas first encounter. {COLOR 7}{COLOR 8}RECOMMENDED!");
+static const u8 sText_Description_Nuzlocke_ShinyClause_Off[]    = _("The player can only catch a shiny\nPOKéMON if it's the first encounter.");
+static const u8 sText_Description_Nuzlocke_ShinyClause_On[]     = _("The player can always catch shiny\nPOKéMON. {COLOR 7}{COLOR 8}RECOMMENDED!");
+static const u8 sText_Description_Nuzlocke_Nicknaming_Off[]     = _("Nicknames are optional.");
+static const u8 sText_Description_Nuzlocke_Nicknaming_On[]      = _("Forces the player to nickname every\nPOKéMON. {COLOR 7}{COLOR 8}RECOMMENDED!");
+static const u8 sText_Description_Nuzlocke_Deletion_Cemetery[]  = _("Fainted POKéMON are send to the PC\nafter battle and can't be retrieved.");
+static const u8 sText_Description_Nuzlocke_Deletion_Deletion[]  = _("Fainted POKéMON are {COLOR 7}{COLOR 8}released{COLOR 1}{COLOR 2} after\nbattle!");
 static const u8 sText_Description_Nuzlocke_Next[]                   = _("Continue to difficulty options.");
 static const u8 *const sOptionMenuItemDescriptionsNuzlocke[MENUITEM_NUZLOCKE_COUNT][4] =
 {
-    [MENUITEM_NUZLOCKE_NUZLOCKE]            = {sText_Description_TXC_Nuzlocke_Base,             sText_Description_TXC_Nuzlocke_Normal,              sText_Description_TXC_Nuzlocke_Hard,        sText_Empty},
-    [MENUITEM_NUZLOCKE_SPECIES_CLAUSE]      = {sText_Description_TXC_Nuzlocke_SpeciesClause_On, sText_Description_TXC_Nuzlocke_SpeciesClause_Off,   sText_Empty,                                sText_Empty},
-    [MENUITEM_NUZLOCKE_SHINY_CLAUSE]        = {sText_Description_TXC_Nuzlocke_ShinyClause_On,   sText_Description_TXC_Nuzlocke_ShinyClause_Off,      sText_Empty,                                sText_Empty},
-    [MENUITEM_NUZLOCKE_NICKNAMING]          = {sText_Description_TXC_Nuzlocke_Nicknaming_On,    sText_Description_TXC_Nuzlocke_Nicknaming_Off,       sText_Empty,                                sText_Empty},
-    [MENUITEM_NUZLOCKE_DELETION]            = {sText_Description_TXC_Nuzlocke_Deletion_Cemetery,sText_Description_TXC_Nuzlocke_Deletion_Deletion,       sText_Empty,                                sText_Empty},
-    [MENUITEM_NUZLOCKE_NEXT]                = {sText_Description_Nuzlocke_Next,                 sText_Empty,                                        sText_Empty,                                sText_Empty},
+    [MENUITEM_NUZLOCKE_NUZLOCKE]            = {sText_Description_Nuzlocke_Base,                 sText_Description_Nuzlocke_Normal,                  sText_Description_Nuzlocke_Hard,    sText_Empty},
+    [MENUITEM_NUZLOCKE_SPECIES_CLAUSE]      = {sText_Description_Nuzlocke_SpeciesClause_On,     sText_Description_Nuzlocke_SpeciesClause_Off,       sText_Empty,                        sText_Empty},
+    [MENUITEM_NUZLOCKE_SHINY_CLAUSE]        = {sText_Description_Nuzlocke_ShinyClause_On,       sText_Description_Nuzlocke_ShinyClause_Off,         sText_Empty,                        sText_Empty},
+    [MENUITEM_NUZLOCKE_NICKNAMING]          = {sText_Description_Nuzlocke_Nicknaming_On,        sText_Description_Nuzlocke_Nicknaming_Off,          sText_Empty,                        sText_Empty},
+    [MENUITEM_NUZLOCKE_DELETION]            = {sText_Description_Nuzlocke_Deletion_Cemetery,    sText_Description_Nuzlocke_Deletion_Deletion,       sText_Empty,                        sText_Empty},
+    [MENUITEM_NUZLOCKE_NEXT]                = {sText_Description_Nuzlocke_Next,                 sText_Empty,                                        sText_Empty,                        sText_Empty},
 };
 
-static const u8 sText_Description_TXC_Party_Limit[]              = _("Limit the amount of POKéMON in the\nplayers party.");
-static const u8 sText_Description_TXC_LevelCap_Base[]            = _("No level cap. Overleveling possible.\n");
-static const u8 sText_Description_TXC_LevelCap_Normal[]          = _("Maximum level is based on the\nnext gym's highest POKéMON level.");
-static const u8 sText_Description_TXC_LevelCap_Hard[]            = _("Maximum level is based on the\nnext gym's {COLOR 7}{COLOR 8}lowest POKéMON level.");
-static const u8 sText_Description_TXC_ExpMultiplier_1_0[]        = _("POKéMON gain normal EXP. Points.");
-static const u8 sText_Description_TXC_ExpMultiplier_1_5[]        = _("POKéMON 50 percent more EXP. Points!");
-static const u8 sText_Description_TXC_ExpMultiplier_2_0[]        = _("POKéMON gain double EXP. Points!");
-static const u8 sText_Description_TXC_ExpMultiplier_0_0[]        = _("POKéMON gain {COLOR 7}{COLOR 8}ZERO EXP. Points!!!");
-static const u8 sText_Description_TXC_Items_Player_Yes[]         = _("The player can use battle items.");
-static const u8 sText_Description_TXC_Items_Player_No[]          = _("The player can {COLOR 7}{COLOR 8}NOT use battle items.\nHold items are allowed!");
-static const u8 sText_Description_TXC_Items_Trainer_Yes[]        = _("Enemy trainer can use battle items.");
-static const u8 sText_Description_TXC_Items_Trainer_No[]         = _("Enemy trainer can {COLOR 7}{COLOR 8}NOT use battle\nitems.");
-static const u8 sText_Description_TXC_Pokecenter_Yes[]           = _("The player can visit Pokécenters and\nother locations to heal their party.");
-static const u8 sText_Description_TXC_Pokecenter_No[]            = _("The player {COLOR 7}{COLOR 8}CAN'T visit Pokécenters or\nother locations to heal their party.");
-static const u8 sText_Description_TXC_NoEVs_Off[]                = _("The players POKéMON gain effort\nvalues as expected.");
-static const u8 sText_Description_TXC_NoEVs_On[]                 = _("The players POKéMON do {COLOR 7}{COLOR 8}NOT{COLOR 1}{COLOR 2} gain\nany effort values!");
-static const u8 sText_Description_TXC_ScalingIVs_Off[]           = _("The POKéMON of enemy Trainer have\nthe expected IVs.");
-static const u8 sText_Description_TXC_ScalingIVs_Scaling[]       = _("The IVs of Trainer POKéMON increase\nwith gym badges!");
-static const u8 sText_Description_TXC_ScalingIVs_Hard[]          = _("All Trainer POKéMON have perfect\nIVs!");
-static const u8 sText_Description_TXC_ScalingEVs_Off[]           = _("The POKéMON of enemy Trainer have\nthe expected EVs.");
-static const u8 sText_Description_TXC_ScalingEVs_Scaling[]       = _("The EVs of Trainer POKéMON increase\nwith gym badges!");
-static const u8 sText_Description_TXC_ScalingEVs_Hard[]          = _("All Trainer POKéMON have high EVs!");
-static const u8 sText_Description_TXC_ScalingEVs_Extreme[]       = _("All Trainer POKéMON have {COLOR 7}{COLOR 8}252 EVs!\nVery Hard!");
+static const u8 sText_Description_Difficulty_Party_Limit[]              = _("Limit the amount of POKéMON in the\nplayers party.");
+static const u8 sText_Description_Difficulty_LevelCap_Base[]            = _("No level cap. Overleveling possible.\n");
+static const u8 sText_Description_Difficulty_LevelCap_Normal[]          = _("Maximum level is based on the\nnext gym's highest POKéMON level.");
+static const u8 sText_Description_Difficulty_LevelCap_Hard[]            = _("Maximum level is based on the\nnext gym's {COLOR 7}{COLOR 8}lowest POKéMON level.");
+static const u8 sText_Description_Difficulty_ExpMultiplier_1_0[]        = _("POKéMON gain normal EXP. Points.");
+static const u8 sText_Description_Difficulty_ExpMultiplier_1_5[]        = _("POKéMON 50 percent more EXP. Points!");
+static const u8 sText_Description_Difficulty_ExpMultiplier_2_0[]        = _("POKéMON gain double EXP. Points!");
+static const u8 sText_Description_Difficulty_ExpMultiplier_0_0[]        = _("POKéMON gain {COLOR 7}{COLOR 8}ZERO EXP. Points!!!");
+static const u8 sText_Description_Difficulty_Items_Player_Yes[]         = _("The player can use battle items.");
+static const u8 sText_Description_Difficulty_Items_Player_No[]          = _("The player can {COLOR 7}{COLOR 8}NOT use battle items.\nHold items are allowed!");
+static const u8 sText_Description_Difficulty_Items_Trainer_Yes[]        = _("Enemy trainer can use battle items.");
+static const u8 sText_Description_Difficulty_Items_Trainer_No[]         = _("Enemy trainer can {COLOR 7}{COLOR 8}NOT use battle\nitems.");
+static const u8 sText_Description_Difficulty_Pokecenter_Yes[]           = _("The player can visit Pokécenters and\nother locations to heal their party.");
+static const u8 sText_Description_Difficulty_Pokecenter_No[]            = _("The player {COLOR 7}{COLOR 8}CAN'T visit Pokécenters or\nother locations to heal their party.");
+static const u8 sText_Description_Difficulty_NoEVs_Off[]                = _("The players POKéMON gain effort\nvalues as expected.");
+static const u8 sText_Description_Difficulty_NoEVs_On[]                 = _("The players POKéMON do {COLOR 7}{COLOR 8}NOT{COLOR 1}{COLOR 2} gain\nany effort values!");
+static const u8 sText_Description_Difficulty_ScalingIVs_Off[]           = _("The POKéMON of enemy Trainer have\nthe expected IVs.");
+static const u8 sText_Description_Difficulty_ScalingIVs_Scaling[]       = _("The IVs of Trainer POKéMON increase\nwith gym badges!");
+static const u8 sText_Description_Difficulty_ScalingIVs_Hard[]          = _("All Trainer POKéMON have perfect\nIVs!");
+static const u8 sText_Description_Difficulty_ScalingEVs_Off[]           = _("The POKéMON of enemy Trainer have\nthe expected EVs.");
+static const u8 sText_Description_Difficulty_ScalingEVs_Scaling[]       = _("The EVs of Trainer POKéMON increase\nwith gym badges!");
+static const u8 sText_Description_Difficulty_ScalingEVs_Hard[]          = _("All Trainer POKéMON have high EVs!");
+static const u8 sText_Description_Difficulty_ScalingEVs_Extreme[]       = _("All Trainer POKéMON have {COLOR 7}{COLOR 8}252 EVs!\nVery Hard!");
 static const u8 sText_Description_Difficulty_Next[]              = _("Continue to challenge options.");
 static const u8 *const sOptionMenuItemDescriptionsDifficulty[MENUITEM_DIFFICULTY_COUNT][4] =
 {
-    [MENUITEM_DIFFICULTY_PARTY_LIMIT]           = {sText_Description_TXC_Party_Limit,               sText_Empty,                                    sText_Empty,                                sText_Empty},
-    [MENUITEM_DIFFICULTY_LEVEL_CAP]             = {sText_Description_TXC_LevelCap_Base,             sText_Description_TXC_LevelCap_Normal,          sText_Description_TXC_LevelCap_Hard,        sText_Empty},
-    [MENUITEM_DIFFICULTY_EXP_MULTIPLIER]        = {sText_Description_TXC_ExpMultiplier_1_0,         sText_Description_TXC_ExpMultiplier_1_5,        sText_Description_TXC_ExpMultiplier_2_0,    sText_Description_TXC_ExpMultiplier_0_0},
-    [MENUITEM_DIFFICULTY_ITEM_PLAYER]           = {sText_Description_TXC_Items_Player_Yes,          sText_Description_TXC_Items_Player_No,          sText_Empty,                                sText_Empty},
-    [MENUITEM_DIFFICULTY_ITEM_TRAINER]          = {sText_Description_TXC_Items_Trainer_Yes,         sText_Description_TXC_Items_Trainer_No,         sText_Empty,                                sText_Empty},
-    [MENUITEM_DIFFICULTY_NO_EVS]                = {sText_Description_TXC_NoEVs_Off,                 sText_Description_TXC_NoEVs_On,                 sText_Empty,                                sText_Empty},
-    [MENUITEM_DIFFICULTY_SCALING_IVS]           = {sText_Description_TXC_ScalingIVs_Off,            sText_Description_TXC_ScalingIVs_Scaling,       sText_Description_TXC_ScalingIVs_Hard,      sText_Empty},
-    [MENUITEM_DIFFICULTY_SCALING_EVS]           = {sText_Description_TXC_ScalingEVs_Off,            sText_Description_TXC_ScalingEVs_Scaling,       sText_Description_TXC_ScalingEVs_Hard,      sText_Description_TXC_ScalingEVs_Extreme},
-    [MENUITEM_DIFFICULTY_POKECENTER]            = {sText_Description_TXC_Pokecenter_Yes,            sText_Description_TXC_Pokecenter_No,            sText_Empty,                                sText_Empty},
-    [MENUITEM_DIFFICULTY_NEXT]                  = {sText_Description_Difficulty_Next,               sText_Empty,                                    sText_Empty,                                sText_Empty},
+    [MENUITEM_DIFFICULTY_PARTY_LIMIT]           = {sText_Description_Difficulty_Party_Limit,        sText_Empty,                                        sText_Empty,                                    sText_Empty},
+    [MENUITEM_DIFFICULTY_LEVEL_CAP]             = {sText_Description_Difficulty_LevelCap_Base,      sText_Description_Difficulty_LevelCap_Normal,       sText_Description_Difficulty_LevelCap_Hard,     sText_Empty},
+    [MENUITEM_DIFFICULTY_EXP_MULTIPLIER]        = {sText_Description_Difficulty_ExpMultiplier_1_0,  sText_Description_Difficulty_ExpMultiplier_1_5,     sText_Description_Difficulty_ExpMultiplier_2_0, sText_Description_Difficulty_ExpMultiplier_0_0},
+    [MENUITEM_DIFFICULTY_ITEM_PLAYER]           = {sText_Description_Difficulty_Items_Player_Yes,   sText_Description_Difficulty_Items_Player_No,       sText_Empty,                                    sText_Empty},
+    [MENUITEM_DIFFICULTY_ITEM_TRAINER]          = {sText_Description_Difficulty_Items_Trainer_Yes,  sText_Description_Difficulty_Items_Trainer_No,      sText_Empty,                                    sText_Empty},
+    [MENUITEM_DIFFICULTY_NO_EVS]                = {sText_Description_Difficulty_NoEVs_Off,          sText_Description_Difficulty_NoEVs_On,              sText_Empty,                                    sText_Empty},
+    [MENUITEM_DIFFICULTY_SCALING_IVS]           = {sText_Description_Difficulty_ScalingIVs_Off,     sText_Description_Difficulty_ScalingIVs_Scaling,    sText_Description_Difficulty_ScalingIVs_Hard,   sText_Empty},
+    [MENUITEM_DIFFICULTY_SCALING_EVS]           = {sText_Description_Difficulty_ScalingEVs_Off,     sText_Description_Difficulty_ScalingEVs_Scaling,    sText_Description_Difficulty_ScalingEVs_Hard,   sText_Description_Difficulty_ScalingEVs_Extreme},
+    [MENUITEM_DIFFICULTY_POKECENTER]            = {sText_Description_Difficulty_Pokecenter_Yes,     sText_Description_Difficulty_Pokecenter_No,         sText_Empty,                                    sText_Empty},
+    [MENUITEM_DIFFICULTY_NEXT]                  = {sText_Description_Difficulty_Next,               sText_Empty,                                        sText_Empty,                                    sText_Empty},
 };  
 
-static const u8 sText_Description_TXC_EvoLimit_Base[]               = _("POKéMON evolve as expected.");
-static const u8 sText_Description_TXC_EvoLimit_First[]              = _("POKéMON can only evolve into\ntheir first evolution.");
-static const u8 sText_Description_TXC_EvoLimit_All[]                = _("POKéMON can {COLOR 7}{COLOR 8}NOT evolve at all!");
-static const u8 sText_Description_TXC_OneTypeChallenge[]            = _("Allow only one POKéMON type the\nplayer can capture and use.");
-static const u8 sText_Description_TXC_BaseStatEqualizer_Base[]      = _("All POKéMON have their original base\nstats.");
-static const u8 sText_Description_TXC_BaseStatEqualizer_100[]       = _("POKéMON stats are calculated with\n100 of each base stat.");
-static const u8 sText_Description_TXC_BaseStatEqualizer_255[]       = _("POKéMON stats are calculated with\n255 of each base stat.");
-static const u8 sText_Description_TXC_BaseStatEqualizer_500[]       = _("POKéMON stats are calculated with\n500 of each base stat.");
-static const u8 sText_Description_TXC_Mirror_Off[]                  = _("The player uses their own party.");
-static const u8 sText_Description_TXC_Mirror_Trainer[]              = _("In Trainer battles the player gets\na copy of the enemies party!");
-static const u8 sText_Description_TXC_Mirror_All[]                  = _("The player gets a copy of the\nenemies party in {COLOR 7}{COLOR 8}ALL battles!");
-static const u8 sText_Description_TXC_MirrorThief_Off[]             = _("The player gets their own party back\nafter battles.");
-static const u8 sText_Description_TXC_MirrorThief_On[]              = _("The player keeps the enemies party\nafter battle!");
+static const u8 sText_Description_Challenges_EvoLimit_Base[]            = _("POKéMON evolve as expected.");
+static const u8 sText_Description_Challenges_EvoLimit_First[]           = _("POKéMON can only evolve into\ntheir first evolution.");
+static const u8 sText_Description_Challenges_EvoLimit_All[]             = _("POKéMON can {COLOR 7}{COLOR 8}NOT evolve at all!");
+static const u8 sText_Description_Challenges_OneTypeChallenge[]         = _("Allow only one POKéMON type the\nplayer can capture and use.");
+static const u8 sText_Description_Challenges_BaseStatEqualizer_Base[]   = _("All POKéMON have their original base\nstats.");
+static const u8 sText_Description_Challenges_BaseStatEqualizer_100[]    = _("POKéMON stats are calculated with\n100 of each base stat.");
+static const u8 sText_Description_Challenges_BaseStatEqualizer_255[]    = _("POKéMON stats are calculated with\n255 of each base stat.");
+static const u8 sText_Description_Challenges_BaseStatEqualizer_500[]    = _("POKéMON stats are calculated with\n500 of each base stat.");
+static const u8 sText_Description_Challenges_Mirror_Off[]               = _("The player uses their own party.");
+static const u8 sText_Description_Challenges_Mirror_Trainer[]           = _("In Trainer battles the player gets\na copy of the enemies party!");
+static const u8 sText_Description_Challenges_Mirror_All[]               = _("The player gets a copy of the\nenemies party in {COLOR 7}{COLOR 8}ALL battles!");
+static const u8 sText_Description_Challenges_MirrorThief_Off[]          = _("The player gets their own party back\nafter battles.");
+static const u8 sText_Description_Challenges_MirrorThief_On[]           = _("The player keeps the enemies party\nafter battle!");
 static const u8 *const sOptionMenuItemDescriptionsChallenges[MENUITEM_CHALLENGES_COUNT][4] =
 {
-    [MENUITEM_CHALLENGES_EVO_LIMIT]             = {sText_Description_TXC_EvoLimit_Base,             sText_Description_TXC_EvoLimit_First,           sText_Description_TXC_EvoLimit_All,         sText_Empty},
-    [MENUITEM_CHALLENGES_ONE_TYPE_CHALLENGE]    = {sText_Description_TXC_OneTypeChallenge,          sText_Empty,                                    sText_Empty,                                sText_Empty},
-    [MENUITEM_CHALLENGES_BASE_STAT_EQUALIZER]   = {sText_Description_TXC_BaseStatEqualizer_Base,    sText_Description_TXC_BaseStatEqualizer_100,    sText_Description_TXC_BaseStatEqualizer_255,sText_Description_TXC_BaseStatEqualizer_500},
-    [MENUITEM_CHALLENGES_MIRROR]                = {sText_Description_TXC_Mirror_Off,                sText_Description_TXC_Mirror_Trainer,           sText_Empty,                                sText_Empty},
-    [MENUITEM_CHALLENGES_MIRROR_THIEF]          = {sText_Description_TXC_MirrorThief_Off,           sText_Description_TXC_MirrorThief_On,           sText_Empty,                                sText_Empty},
-    [MENUITEM_CHALLENGES_SAVE]                  = {sText_Description_Save,                          sText_Empty,                                    sText_Empty,                                sText_Empty},
+    [MENUITEM_CHALLENGES_EVO_LIMIT]             = {sText_Description_Challenges_EvoLimit_Base,          sText_Description_Challenges_EvoLimit_First,        sText_Description_Challenges_EvoLimit_All,          sText_Empty},
+    [MENUITEM_CHALLENGES_ONE_TYPE_CHALLENGE]    = {sText_Description_Challenges_OneTypeChallenge,       sText_Empty,                                        sText_Empty,                                        sText_Empty},
+    [MENUITEM_CHALLENGES_BASE_STAT_EQUALIZER]   = {sText_Description_Challenges_BaseStatEqualizer_Base, sText_Description_Challenges_BaseStatEqualizer_100, sText_Description_Challenges_BaseStatEqualizer_255, sText_Description_Challenges_BaseStatEqualizer_500},
+    [MENUITEM_CHALLENGES_MIRROR]                = {sText_Description_Challenges_Mirror_Off,             sText_Description_Challenges_Mirror_Trainer,        sText_Empty,                                        sText_Empty},
+    [MENUITEM_CHALLENGES_MIRROR_THIEF]          = {sText_Description_Challenges_MirrorThief_Off,        sText_Description_Challenges_MirrorThief_On,        sText_Empty,                                        sText_Empty},
+    [MENUITEM_CHALLENGES_SAVE]                  = {sText_Description_Save,                              sText_Empty,                                        sText_Empty,                                        sText_Empty},
 };
 
+// Disabled descriptions
+static const u8 sText_Description_Disabled_Random_SimiliarEvolutionLevel[]  = _("Only usable with random starter,\nTrainer, wild or static POKéMON.");
+static const u8 sText_Description_Disabled_Random_IncludeLegendaries[]      = _("Only usable with random starter,\nTrainer, wild or static POKéMON.");
+static const u8 sText_Description_Disabled_Random_Chaos_Mode[]              = _("Only usable if other random options\nare activated.");
+static const u8 *const sOptionMenuItemDescriptionsDisabledRandomizer[MENUITEM_RANDOM_COUNT] =
+{
+    [MENUITEM_RANDOM_OFF_ON]                    = sText_Empty,
+    [MENUITEM_RANDOM_STARTER]                   = sText_Empty,
+    [MENUITEM_RANDOM_WILD_PKMN]                 = sText_Empty,
+    [MENUITEM_RANDOM_TRAINER]                   = sText_Empty,
+    [MENUITEM_RANDOM_STATIC]                    = sText_Empty,
+    [MENUITEM_RANDOM_SIMILAR_EVOLUTION_LEVEL]   = sText_Description_Disabled_Random_SimiliarEvolutionLevel,
+    [MENUITEM_RANDOM_INCLUDE_LEGENDARIES]       = sText_Description_Disabled_Random_IncludeLegendaries,
+    [MENUITEM_RANDOM_TYPE]                      = sText_Empty,
+    [MENUITEM_RANDOM_MOVES]                     = sText_Empty,
+    [MENUITEM_RANDOM_ABILITIES]                 = sText_Empty,
+    [MENUITEM_RANDOM_EVOLUTIONS]                = sText_Empty,
+    [MENUITEM_RANDOM_EVOLUTIONS_METHODS]        = sText_Empty,
+    [MENUITEM_RANDOM_TYPE_EFFEC]                = sText_Empty,
+    [MENUITEM_RANDOM_ITEMS]                     = sText_Empty,
+    [MENUITEM_RANDOM_CHAOS]                     = sText_Description_Disabled_Random_Chaos_Mode,
+    [MENUITEM_RANDOM_NEXT]                      = sText_Empty,
+};
 
+static const u8 sText_Description_Disabled_Nuzlocke_Nuzlocke[]   = _("Only usable with Nuzlocke!");
+static const u8 *const sOptionMenuItemDescriptionsDisabledNuzlocke[MENUITEM_NUZLOCKE_COUNT] =
+{
+    [MENUITEM_NUZLOCKE_NUZLOCKE]            = sText_Empty,
+    [MENUITEM_NUZLOCKE_SPECIES_CLAUSE]      = sText_Description_Disabled_Nuzlocke_Nuzlocke,
+    [MENUITEM_NUZLOCKE_SHINY_CLAUSE]        = sText_Description_Disabled_Nuzlocke_Nuzlocke,
+    [MENUITEM_NUZLOCKE_NICKNAMING]          = sText_Description_Disabled_Nuzlocke_Nuzlocke,
+    [MENUITEM_NUZLOCKE_DELETION]            = sText_Description_Disabled_Nuzlocke_Nuzlocke,
+    [MENUITEM_NUZLOCKE_NEXT]                = sText_Empty,
+};
+
+static const u8 *const sOptionMenuItemDescriptionsDisabledDifficulty[MENUITEM_DIFFICULTY_COUNT] =
+{
+    [MENUITEM_DIFFICULTY_PARTY_LIMIT]           = sText_Empty,
+    [MENUITEM_DIFFICULTY_LEVEL_CAP]             = sText_Empty,
+    [MENUITEM_DIFFICULTY_EXP_MULTIPLIER]        = sText_Empty,
+    [MENUITEM_DIFFICULTY_ITEM_PLAYER]           = sText_Empty,
+    [MENUITEM_DIFFICULTY_ITEM_TRAINER]          = sText_Empty,
+    [MENUITEM_DIFFICULTY_NO_EVS]                = sText_Empty,
+    [MENUITEM_DIFFICULTY_SCALING_IVS]           = sText_Empty,
+    [MENUITEM_DIFFICULTY_SCALING_EVS]           = sText_Empty,
+    [MENUITEM_DIFFICULTY_POKECENTER]            = sText_Empty,
+    [MENUITEM_DIFFICULTY_NEXT]                  = sText_Empty,
+};  
+
+static const u8 sText_Description_Disabled_Challenges_MirrorThief[]    = _("Only usable with Mirror Mode!");
+static const u8 *const sOptionMenuItemDescriptionsDisabledChallenges[MENUITEM_CHALLENGES_COUNT] =
+{
+    [MENUITEM_CHALLENGES_EVO_LIMIT]             = sText_Empty,
+    [MENUITEM_CHALLENGES_ONE_TYPE_CHALLENGE]    = sText_Empty,
+    [MENUITEM_CHALLENGES_BASE_STAT_EQUALIZER]   = sText_Empty,
+    [MENUITEM_CHALLENGES_MIRROR]                = sText_Empty,
+    [MENUITEM_CHALLENGES_MIRROR_THIEF]          = sText_Description_Disabled_Challenges_MirrorThief,
+    [MENUITEM_CHALLENGES_SAVE]                  = sText_Empty,
+};
+
+// Functions to dynamically retrieve data
 static const u8 *const OptionTextDescription(void)
 {
     u8 menuItem = sOptions->menuCursor[sOptions->submenu];
@@ -652,18 +724,26 @@ static const u8 *const OptionTextDescription(void)
     switch (sOptions->submenu)
     {
     case MENU_RANDOMIZER:
+        if (!CheckConditions(menuItem) && sOptionMenuItemDescriptionsDisabledRandomizer[menuItem] != sText_Empty)
+            return sOptionMenuItemDescriptionsDisabledRandomizer[menuItem];
         selection = sOptions->sel_randomizer[menuItem];  
         return sOptionMenuItemDescriptionsRandomizer[menuItem][selection];
     case MENU_NUZLOCKE:
+        if (!CheckConditions(menuItem) && sOptionMenuItemDescriptionsDisabledNuzlocke[menuItem] != sText_Empty)
+            return sOptionMenuItemDescriptionsDisabledNuzlocke[menuItem];
         selection = sOptions->sel_nuzlocke[menuItem];
         return sOptionMenuItemDescriptionsNuzlocke[menuItem][selection];
     case MENU_DIFFICULTY:
+        if (!CheckConditions(menuItem) && sOptionMenuItemDescriptionsDisabledDifficulty[menuItem] != sText_Empty)
+            return sOptionMenuItemDescriptionsDisabledDifficulty[menuItem];
         selection = sOptions->sel_difficulty[menuItem];
         if (sOptions->menuCursor[MENU_DIFFICULTY] == MENUITEM_DIFFICULTY_PARTY_LIMIT)
             return sOptionMenuItemDescriptionsDifficulty[menuItem][0];
         else
             return sOptionMenuItemDescriptionsDifficulty[menuItem][selection];
     case MENU_CHALLENGES:
+        if (!CheckConditions(menuItem) && sOptionMenuItemDescriptionsDisabledChallenges[menuItem] != sText_Empty)
+            return sOptionMenuItemDescriptionsDisabledChallenges[menuItem];
         selection = sOptions->sel_challenges[menuItem];
         if (sOptions->menuCursor[MENU_CHALLENGES] == MENUITEM_CHALLENGES_ONE_TYPE_CHALLENGE)
             return sOptionMenuItemDescriptionsChallenges[menuItem][0];
@@ -919,6 +999,7 @@ void CB2_InitTxRandomizerChallengesMenu(void)
         break;
     case 6:
         //tx_randomizer_and_challenges
+        gSaveBlock1Ptr->tx_Random_Starter                   = TX_RANDOM_STARTER;
         gSaveBlock1Ptr->tx_Random_WildPokemon               = TX_RANDOM_WILD_POKEMON;
         gSaveBlock1Ptr->tx_Random_Trainer                   = TX_RANDOM_TRAINER;
         gSaveBlock1Ptr->tx_Random_Static                    = TX_RANDOM_STATIC;
@@ -961,6 +1042,7 @@ void CB2_InitTxRandomizerChallengesMenu(void)
 
         sOptions = AllocZeroed(sizeof(*sOptions));
         sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON]                     = FALSE;
+        sOptions->sel_randomizer[MENUITEM_RANDOM_STARTER]                    = gSaveBlock1Ptr->tx_Random_Starter;
         sOptions->sel_randomizer[MENUITEM_RANDOM_WILD_PKMN]                  = gSaveBlock1Ptr->tx_Random_WildPokemon;
         sOptions->sel_randomizer[MENUITEM_RANDOM_TRAINER]                    = gSaveBlock1Ptr->tx_Random_Trainer;
         sOptions->sel_randomizer[MENUITEM_RANDOM_STATIC]                     = gSaveBlock1Ptr->tx_Random_Static;
@@ -1240,6 +1322,7 @@ void SaveData_TxRandomizerAndChallenges(void)
     // MENU_RANDOMIZER
     if (sOptions->sel_randomizer[MENUITEM_RANDOM_OFF_ON] == TRUE)
     {
+        gSaveBlock1Ptr->tx_Random_Starter            = sOptions->sel_randomizer[MENUITEM_RANDOM_STARTER];
         gSaveBlock1Ptr->tx_Random_WildPokemon        = sOptions->sel_randomizer[MENUITEM_RANDOM_WILD_PKMN];
         gSaveBlock1Ptr->tx_Random_Trainer            = sOptions->sel_randomizer[MENUITEM_RANDOM_TRAINER];
         gSaveBlock1Ptr->tx_Random_Static             = sOptions->sel_randomizer[MENUITEM_RANDOM_STATIC];
@@ -1257,6 +1340,7 @@ void SaveData_TxRandomizerAndChallenges(void)
     }
     else
     {
+        gSaveBlock1Ptr->tx_Random_Starter            = FALSE;
         gSaveBlock1Ptr->tx_Random_WildPokemon        = FALSE;
         gSaveBlock1Ptr->tx_Random_Trainer            = FALSE;
         gSaveBlock1Ptr->tx_Random_Static             = FALSE;
@@ -1569,6 +1653,11 @@ static void DrawChoices_Random_Toggle(int selection, int y)
 {
     bool8 active = CheckConditions(MENUITEM_RANDOM_OFF_ON);
     DrawChoices_Random_OffOn(selection, y, active);
+}
+static void DrawChoices_Random_Starter(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_RANDOM_STARTER);
+    DrawChoices_Random_OffRandom(selection, y, active);
 }
 static void DrawChoices_Random_WildPkmn(int selection, int y)
 {
