@@ -51,8 +51,7 @@ enum
 
 enum
 {
-    MENUITEM_CUSTOM_HP_BAR,
-    MENUITEM_CUSTOM_EXP_BAR,
+    MENUITEM_CUSTOM_HP_EXP_BAR,
     MENUITEM_CUSTOM_FONT,
     MENUITEM_CUSTOM_MATCHCALL,
     MENUITEM_CUSTOM_FISHREELING,
@@ -178,7 +177,7 @@ static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_Music(int selection, int y);
 static void DrawChoices_SFX(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
-static void DrawChoices_BarSpeed(int selection, int y); //HP and EXP
+static void DrawChoices_HpExpBar(int selection, int y); //HP and EXP
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
@@ -244,8 +243,7 @@ struct // MENU_CUSTOM
     int (*processInput)(int selection);
 } static const sItemFunctionsCustom[MENUITEM_CUSTOM_COUNT] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]       = {DrawChoices_BarSpeed,    ProcessInput_Options_Eleven},
-    [MENUITEM_CUSTOM_EXP_BAR]      = {DrawChoices_BarSpeed,    ProcessInput_Options_Eleven},
+    [MENUITEM_CUSTOM_HP_EXP_BAR]   = {DrawChoices_HpExpBar,    ProcessInput_Options_Two},
     [MENUITEM_CUSTOM_FONT]         = {DrawChoices_Font,        ProcessInput_Options_Two}, 
     [MENUITEM_CUSTOM_MATCHCALL]    = {DrawChoices_MatchCall,   ProcessInput_Options_Two},
     [MENUITEM_CUSTOM_FISHREELING]  = {DrawChoices_FishReeling, ProcessInput_Options_Two},
@@ -300,8 +298,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 
 static const u8 *const sOptionMenuItemsNamesCustom[MENUITEM_CUSTOM_COUNT] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]      = sText_HpBar,
-    [MENUITEM_CUSTOM_EXP_BAR]     = sText_ExpBar,
+    [MENUITEM_CUSTOM_HP_EXP_BAR]      = sText_HpExpBar,
     [MENUITEM_CUSTOM_FONT]        = gText_Font,
     [MENUITEM_CUSTOM_MATCHCALL]   = gText_OptionMatchCalls,
     [MENUITEM_CUSTOM_FISHREELING] = sText_FishReeling,
@@ -348,8 +345,7 @@ static bool8 CheckConditions(int selection)
     case MENU_CUSTOM:
         switch(selection)
         {
-        case MENUITEM_CUSTOM_HP_BAR:          return TRUE;
-        case MENUITEM_CUSTOM_EXP_BAR:         return TRUE;
+        case MENUITEM_CUSTOM_HP_EXP_BAR:      return TRUE;
         case MENUITEM_CUSTOM_FONT:            return TRUE;
         case MENUITEM_CUSTOM_MATCHCALL:       return TRUE;
         case MENUITEM_CUSTOM_FISHREELING:     return TRUE;
@@ -402,8 +398,7 @@ static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 };
 
 // Custom
-static const u8 sText_Desc_BattleHPBar[]        = _("Choose how fast the HP Bar will get\ndrained in battles.");
-static const u8 sText_Desc_BattleExpBar[]       = _("Choose how fast the EXP Bar will get\nfilled in battles.");
+static const u8 sText_Desc_BattleHPExpBar[]     = _("Choose how fast the HP and EXP Bars\nwill move in battles.");
 static const u8 sText_Desc_SurfOff[]            = _("Disables the Surf theme when\nusing Surf.");
 static const u8 sText_Desc_SurfOn[]             = _("Enables the Surf theme\nwhen using Surf.");
 static const u8 sText_Desc_BikeOff[]            = _("Disables the Bike theme when\nusing the Bike.");
@@ -415,8 +410,7 @@ static const u8 sText_Desc_FishingStyleRSE[]    = _("You have to time the pressi
 static const u8 sText_Desc_FishingStyleFRLG[]   = _("You will know when the encounter\nis ready. No timing required!");
 static const u8 *const sOptionMenuItemDescriptionsCustom[MENUITEM_CUSTOM_COUNT][2] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]      = {sText_Desc_BattleHPBar,        sText_Empty},
-    [MENUITEM_CUSTOM_EXP_BAR]     = {sText_Desc_BattleExpBar,       sText_Empty},
+    [MENUITEM_CUSTOM_HP_EXP_BAR]  = {sText_Desc_BattleHPExpBar,        sText_Empty},
     [MENUITEM_CUSTOM_FONT]        = {sText_Desc_FontType,           sText_Desc_FontType},
     [MENUITEM_CUSTOM_MATCHCALL]   = {sText_Desc_OverworldCallsOn,   sText_Desc_OverworldCallsOff},
     [MENUITEM_CUSTOM_FISHREELING] = {sText_Desc_FishingStyleRSE,    sText_Desc_FishingStyleFRLG},
@@ -450,8 +444,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
 static const u8 sText_Desc_Disabled_BattleHPBar[]   = _("Only active if xyz.");
 static const u8 *const sOptionMenuItemDescriptionsDisabledCustom[MENUITEM_CUSTOM_COUNT] =
 {
-    [MENUITEM_CUSTOM_HP_BAR]      = sText_Desc_Disabled_BattleHPBar,
-    [MENUITEM_CUSTOM_EXP_BAR]     = sText_Empty,
+    [MENUITEM_CUSTOM_HP_EXP_BAR]  = sText_Desc_Disabled_BattleHPBar,
     [MENUITEM_CUSTOM_FONT]        = sText_Empty,
     [MENUITEM_CUSTOM_MATCHCALL]   = sText_Empty,
     [MENUITEM_CUSTOM_FISHREELING] = sText_Empty,
@@ -481,7 +474,7 @@ static const u8 *const OptionTextDescription(void)
         if (!CheckConditions(menuItem))
             return sOptionMenuItemDescriptionsDisabledMain[menuItem];
         selection = sOptions->sel_custom[menuItem];
-        if (menuItem == MENUITEM_CUSTOM_HP_BAR || menuItem == MENUITEM_CUSTOM_EXP_BAR)
+        if (menuItem == MENUITEM_CUSTOM_HP_EXP_BAR)
             selection = 0;
         return sOptionMenuItemDescriptionsCustom[menuItem][selection];
     }
@@ -724,8 +717,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM] = gSaveBlock2Ptr->optionsUnitSystem;
         sOptions->sel[MENUITEM_MAIN_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
         
-        sOptions->sel_custom[MENUITEM_CUSTOM_HP_BAR]      = gSaveBlock2Ptr->optionsHpBarSpeed;
-        sOptions->sel_custom[MENUITEM_CUSTOM_EXP_BAR]     = gSaveBlock2Ptr->optionsExpBarSpeed;
+        sOptions->sel_custom[MENUITEM_CUSTOM_HP_EXP_BAR]  = gSaveBlock2Ptr->optionsHpExpBarSpeed;
         sOptions->sel_custom[MENUITEM_CUSTOM_FONT]        = gSaveBlock2Ptr->optionsCurrentFont;
         sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
         sOptions->sel_custom[MENUITEM_CUSTOM_FISHREELING] = gSaveBlock2Ptr->optionsFishReeling;
@@ -935,8 +927,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_MAIN_UNIT_SYSTEM];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_MAIN_FRAMETYPE];
 
-    gSaveBlock2Ptr->optionsHpBarSpeed       = sOptions->sel_custom[MENUITEM_CUSTOM_HP_BAR];
-    gSaveBlock2Ptr->optionsExpBarSpeed      = sOptions->sel_custom[MENUITEM_CUSTOM_EXP_BAR];
+    gSaveBlock2Ptr->optionsHpExpBarSpeed    = sOptions->sel_custom[MENUITEM_CUSTOM_HP_EXP_BAR];
     gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel_custom[MENUITEM_CUSTOM_FONT];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel_custom[MENUITEM_CUSTOM_MATCHCALL];
     gSaveBlock2Ptr->optionsFishReeling      = sOptions->sel_custom[MENUITEM_CUSTOM_FISHREELING];
@@ -1286,20 +1277,14 @@ static void DrawChoices_ButtonMode(int selection, int y)
 }
 
 static const u8 sText_Normal[] = _("Normal");
-static void DrawChoices_BarSpeed(int selection, int y) //HP and EXP
+static void DrawChoices_HpExpBar(int selection, int y) //HP and EXP
 {
-    bool8 active = CheckConditions(MENUITEM_CUSTOM_EXP_BAR);
+    bool8 active = CheckConditions(MENUITEM_CUSTOM_HP_EXP_BAR);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
 
-    if (selection == 0)
-         DrawOptionMenuChoice(sText_Normal, 104, y, 1, active);
-    else if (selection < 10)
-    {
-        u8 textPlus[] = _("+1{0x77}{0x77}{0x77}{0x77}{0x77}"); // 0x77 is to clear INSTANT text
-        textPlus[1] = CHAR_0 + selection;
-        DrawOptionMenuChoice(textPlus, 104, y, 1, active);
-    }
-    else
-        DrawOptionMenuChoice(sText_Instant, 104, y, 1, active);
+    DrawOptionMenuChoice(sText_Normal, 104, y, styles[0], active);
+    DrawOptionMenuChoice(sText_Instant, GetStringRightAlignXOffset(FONT_NORMAL, sText_Instant, 198), y, styles[1], active);
 }
 
 static void DrawChoices_UnitSystem(int selection, int y)

@@ -506,9 +506,7 @@ struct SaveBlock2
              u16 optionsHpExpBarSpeed:1;
              u16 optionsUnitSystem:1;
              u16 optionsFishReeling:1;
-             u16 optionsHpBarSpeed:4;
-             u16 optionsExpBarSpeed:4;
-             u16 optionsFiller2:2;
+             u16 optionsFiller2:10;
 
              u16 optionsReserved1;
              u16 optionsReserved2;
