@@ -971,7 +971,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_FlygonSilhouette[] =
     {gIntroFlygonSilhouette_Gfx, 0x400, TAG_FLYGON_SILHOUETTE},
     {},
 };
-const struct SpritePalette sSpritePalettes_Intro1[] =
+static const struct SpritePalette sSpritePalettes_Intro1[] =
 {
     {sIntroDrops_Pal, PALTAG_DROPS},
     {sIntroLogo_Pal, PALTAG_LOGO},
