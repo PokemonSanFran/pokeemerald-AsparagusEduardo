@@ -566,6 +566,7 @@ void CB2_InitTitleScreen(void)
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
+        LoadSpritePalettes(sSpritePalettes_Intro1); //Hacky solution to clear the main menu mon icon palettes.
         gReservedSpritePaletteCount = 9;
         LoadCompressedSpriteSheet(&sSpriteSheet_EmeraldVersion[0]);
         LoadCompressedSpriteSheet(&sSpriteSheet_PressStart[0]);
