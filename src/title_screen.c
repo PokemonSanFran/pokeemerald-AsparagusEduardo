@@ -735,13 +735,15 @@ static void Task_TitleScreenPhase3(u8 taskId)
 {
     if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(START_BUTTON)))
     {
-        PlayCry_Normal(SPECIES_RAYQUAZA, 0);
         
         FadeOutBGM(4);
         if (gSaveBlock2Ptr->optionsQuickLoad)
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         else
+        {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
+            PlayCry_Normal(SPECIES_RAYQUAZA, 0);
+        }
         SetMainCallback2(CB2_GoToMainMenu);
     }
     else if (JOY_HELD(CLEAR_SAVE_BUTTON_COMBO) == CLEAR_SAVE_BUTTON_COMBO)
