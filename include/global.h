@@ -489,7 +489,8 @@ struct SaveBlock2
              u8 optionsSaveConfirm:1; 
              u8 optionsDisableMatchCall:1; //tx_optionsPlus
              u8 optionsCurrentFont:1;  //tx_optionsPlus
-             u8 optionsFiller1:3;
+             u8 optionsQuickLoad:1; // OPTIONS_QUICK_LOAD[OFF/ON]
+             u8 optionsFiller1:2;
 
     /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/FASTER/INSTANT]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes

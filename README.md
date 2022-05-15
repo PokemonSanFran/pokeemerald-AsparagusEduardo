@@ -50,6 +50,8 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [TheXaman](https://github.com/TheXaman/pokeemerald) 's branches:
 	* [HGSS styled Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss). Adds complete information about movesets, abilities, stats and more.
 	* [Options Plus](https://github.com/TheXaman/pokeemerald/tree/tx_optionsPlus). Expands the amount of options available with new pagination and scrolling.
+		* Additional options:
+			* Quick load by FroggestSpirit and Lunos.
 	* [Debug System](https://github.com/TheXaman/pokeemerald/tree/tx_debug_system).
 	* [Randomizer and Challenges](https://github.com/TheXaman/pokeemerald/blob/tx_randomizer_and_challenges/TX_RAC_FEATURES.md). Adds randomization options for Pokémon, Items and more, plus challenges like Nuzlocke, heal prevention and similar.
 * [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/Decapitalization) every text in the game. Originally by [Wyrserth](https://github.com/Wyrserth) and mantained by me.

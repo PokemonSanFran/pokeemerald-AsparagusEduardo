@@ -40,6 +40,7 @@ enum
 {
     MENUITEM_MAIN_TEXTSPEED,
     MENUITEM_MAIN_TRANSITION,
+    MENUITEM_MAIN_QUICKLOAD,
     MENUITEM_MAIN_BATTLESCENE,
     MENUITEM_MAIN_BATTLESTYLE,
     MENUITEM_MAIN_BUTTONMODE,
@@ -171,6 +172,7 @@ static void DrawChoices_Options_Four(const u8 *const *const strings, int selecti
 static void ReDrawAll(void);
 static void DrawChoices_TextSpeed(int selection, int y);
 static void DrawChoices_Transition(int selection, int y);
+static void DrawChoices_QuickLoad(int selection, int y);
 static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
@@ -229,6 +231,7 @@ struct // MENU_MAIN
 {
     [MENUITEM_MAIN_TEXTSPEED]    = {DrawChoices_TextSpeed,   ProcessInput_Options_Four},
     [MENUITEM_MAIN_TRANSITION]   = {DrawChoices_Transition,  ProcessInput_Options_Two},
+    [MENUITEM_MAIN_QUICKLOAD]    = {DrawChoices_QuickLoad,  ProcessInput_Options_Two},
     [MENUITEM_MAIN_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_MAIN_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_MAIN_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Three},
@@ -262,6 +265,7 @@ static const u8 sText_SkipBattleIntro[] = _("Intro Combate");
 static const u8 sText_FishEmerald[] = _("RZE");
 static const u8 sText_FishFRLG[] = _("RFVH");
 static const u8 sText_SaveConfirm[] = _("Save confirm");
+static const u8 sText_QuickLoad[] = _("Carga Rápida");
 #else
 static const u8 sText_Music[] = _("Music");
 static const u8 sText_SFX[] = _("Sound Effects");
@@ -273,9 +277,8 @@ static const u8 sText_SkipBattleIntro[] = _("Battle Intro");
 static const u8 sText_FishEmerald[] = _("RSE");
 static const u8 sText_FishFRLG[] = _("FRLG");
 static const u8 sText_SaveConfirm[] = _("Save confirm");
+static const u8 sText_QuickLoad[] = _("Quick Load");
 #endif
-static const u8 sText_HpBar[]       = _("HP BAR");
-static const u8 sText_ExpBar[]      = _("EXP BAR");
 static const u8 *const sOptionMenuItemsNamesSound[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_SOUND_SOUND]       = gText_Sound,
@@ -288,6 +291,7 @@ static const u8 *const sOptionMenuItemsNamesMain[MENUITEM_MAIN_COUNT] =
 {
     [MENUITEM_MAIN_TEXTSPEED]   = gText_TextSpeed,
     [MENUITEM_MAIN_TRANSITION]  = sText_Transition,
+    [MENUITEM_MAIN_QUICKLOAD]   = sText_QuickLoad,
     [MENUITEM_MAIN_BATTLESCENE] = gText_BattleScene,
     [MENUITEM_MAIN_BATTLESTYLE] = gText_BattleStyle,
     [MENUITEM_MAIN_BUTTONMODE]  = gText_ButtonMode,
@@ -334,6 +338,7 @@ static bool8 CheckConditions(int selection)
         {
         case MENUITEM_MAIN_TEXTSPEED:       return TRUE;
         case MENUITEM_MAIN_TRANSITION:      return TRUE;
+        case MENUITEM_MAIN_QUICKLOAD:       return TRUE;
         case MENUITEM_MAIN_BATTLESCENE:     return TRUE;
         case MENUITEM_MAIN_BATTLESTYLE:     return TRUE;
         case MENUITEM_MAIN_BUTTONMODE:      return TRUE;
@@ -375,6 +380,8 @@ static const u8 *const sOptionMenuItemDescriptionsSound[MENUITEM_SOUND_COUNT][3]
 // Descriptions
 static const u8 sText_Desc_TextSpeed[]          = _("Choose one of the four text-display\nspeeds.");
 static const u8 sText_Desc_Transition[]         = _("Transition\nspeed. (WIP)");
+static const u8 sText_Desc_QuickloadOff[]       = _("After the title screen, the main\nmenu will be shown.");
+static const u8 sText_Desc_QuickloadOn[]        = _("After the title screen, the game\nwill immediatly load the save.");
 static const u8 sText_Desc_BattleScene_On[]     = _("Show the Pokémon battle animations.");
 static const u8 sText_Desc_BattleScene_Off[]    = _("Skip the Pokémon battle animations.");
 static const u8 sText_Desc_BattleStyle_Shift[]  = _("Get the option to switch your\nPOKéMON after the enemies faints.");
@@ -388,7 +395,8 @@ static const u8 sText_Desc_FrameType[]          = _("Choose the frame surroundin
 static const u8 *const sOptionMenuItemDescriptionsMain[MENUITEM_MAIN_COUNT][3] =
 {
     [MENUITEM_MAIN_TEXTSPEED]   = {sText_Desc_TextSpeed,            sText_Empty,                sText_Empty},
-    [MENUITEM_MAIN_TRANSITION]  = {sText_Desc_Transition,            sText_Empty,                sText_Empty},
+    [MENUITEM_MAIN_TRANSITION]  = {sText_Desc_Transition,           sText_Empty,                sText_Empty},
+    [MENUITEM_MAIN_QUICKLOAD]   = {sText_Desc_QuickloadOff,         sText_Desc_QuickloadOn,     sText_Empty},
     [MENUITEM_MAIN_BATTLESCENE] = {sText_Desc_BattleScene_On,       sText_Desc_BattleScene_Off, sText_Empty},
     [MENUITEM_MAIN_BATTLESTYLE] = {sText_Desc_BattleStyle_Shift,    sText_Desc_BattleStyle_Set, sText_Empty},
     [MENUITEM_MAIN_BUTTONMODE]  = {sText_Desc_ButtonMode,           sText_Desc_ButtonMode_LR,   sText_Desc_ButtonMode_LA},
@@ -432,6 +440,7 @@ static const u8 *const sOptionMenuItemDescriptionsDisabledMain[MENUITEM_MAIN_COU
 {
     [MENUITEM_MAIN_TEXTSPEED]   = sText_Desc_Disabled_Textspeed,
     [MENUITEM_MAIN_TRANSITION]  = sText_Empty,
+    [MENUITEM_MAIN_QUICKLOAD]   = sText_Empty,
     [MENUITEM_MAIN_BATTLESCENE] = sText_Empty,
     [MENUITEM_MAIN_BATTLESTYLE] = sText_Empty,
     [MENUITEM_MAIN_BUTTONMODE]  = sText_Empty,
@@ -711,6 +720,7 @@ void CB2_InitOptionMenu(void)
         sOptions = AllocZeroed(sizeof(*sOptions));
         sOptions->sel[MENUITEM_MAIN_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
         sOptions->sel[MENUITEM_MAIN_TRANSITION]  = gSaveBlock2Ptr->optionsTransitionSpeed;
+        sOptions->sel[MENUITEM_MAIN_QUICKLOAD]   = gSaveBlock2Ptr->optionsQuickLoad;
         sOptions->sel[MENUITEM_MAIN_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
         sOptions->sel[MENUITEM_MAIN_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel[MENUITEM_MAIN_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
@@ -921,6 +931,7 @@ static void Task_OptionMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_MAIN_TEXTSPEED];
     gSaveBlock2Ptr->optionsTransitionSpeed  = sOptions->sel[MENUITEM_MAIN_TRANSITION];
+    gSaveBlock2Ptr->optionsQuickLoad        = sOptions->sel[MENUITEM_MAIN_QUICKLOAD];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_MAIN_BATTLESCENE];
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_MAIN_BATTLESTYLE];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_MAIN_BUTTONMODE];
@@ -1212,6 +1223,16 @@ static void DrawChoices_Transition(int selection, int y)
     styles[selection] = 1;
     DrawOptionMenuChoice(gText_TransitionStyleNormal, 104, y, styles[0], active);
     DrawOptionMenuChoice(gText_TransitionStyleInstant, GetStringRightAlignXOffset(FONT_NORMAL, gText_TransitionStyleInstant, 198), y, styles[1], active);
+}
+
+static void DrawChoices_QuickLoad(int selection, int y)
+{
+    bool8 active = CheckConditions(MENUITEM_MAIN_QUICKLOAD);
+    u8 styles[2] = {0};
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleSceneOff, 104, y, styles[0], active);
+    DrawOptionMenuChoice(gText_BattleSceneOn, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOn, 198), y, styles[1], active);
 }
 
 static void DrawChoices_BattleScene(int selection, int y)
