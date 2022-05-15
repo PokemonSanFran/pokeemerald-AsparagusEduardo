@@ -734,6 +734,8 @@ static void Task_TitleScreenPhase3(u8 taskId)
 {
     if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(START_BUTTON)))
     {
+        PlayCry_Normal(SPECIES_RAYQUAZA, 0);
+        
         FadeOutBGM(4);
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
         SetMainCallback2(CB2_GoToMainMenu);
