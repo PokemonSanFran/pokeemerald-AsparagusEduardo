@@ -1758,7 +1758,7 @@ void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
 
-    if (++gMain.state == 60)
+    if (++gMain.state == 60 || !gSaveBlock2Ptr->optionsQuickLoad)
     {
         FieldClearVBlankHBlankCallbacks();
         StopMapMusic();
