@@ -13271,7 +13271,7 @@ static void Cmd_pickup(void)
 
     if (InBattlePike())
     {
-
+        gBattlescriptCurrInstr++;
     }
     else if (InBattlePyramid())
     {
@@ -13318,6 +13318,7 @@ static void Cmd_pickup(void)
                 }
             }
         }
+        gBattlescriptCurrInstr++;
     }
     else
     {
