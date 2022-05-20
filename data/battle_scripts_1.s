@@ -6529,9 +6529,11 @@ BattleScript_LearnMoveReturn::
 BattleScript_RainContinuesOrEnds::
 	printfromtable gRainContinuesStringIds
 	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainContinuesOrEndsEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_RAIN_STOPPED, BattleScript_RainEnds
 	playanimation BS_ATTACKER, B_ANIM_RAIN_CONTINUES
-BattleScript_RainContinuesOrEndsEnd::
+	end2
+BattleScript_RainEnds::
+	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_DamagingWeatherContinues::
@@ -6570,6 +6572,7 @@ BattleScript_DamagingWeatherContinuesEnd::
 BattleScript_SandStormHailEnds::
 	printfromtable gSandStormHailEndStringIds
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_SunlightContinues::
@@ -6581,6 +6584,7 @@ BattleScript_SunlightContinues::
 BattleScript_SunlightFaded::
 	printstring STRINGID_SUNLIGHTFADED
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_WeatherFormChanges
 	end2
 
 BattleScript_OverworldWeatherStarts::
