@@ -52,6 +52,11 @@
 #include "day_night.h"
 #include "constants/day_night.h"
 
+#ifdef GBA_PRINTF //tx_randomizer_and_challenges
+    //#include "printf.h"
+    //#include "mgba.h"
+#endif
+
 enum {
     TRANSITION_TYPE_NORMAL,
     TRANSITION_TYPE_CAVE,
@@ -395,13 +400,11 @@ static void CreateBattleStartTask(u8 transition, u16 song)
 
 void BattleSetup_StartWildBattle(void)
 {
+    SetNuzlockeChecks(); //tx_randomizer_and_challenges
     if (GetSafariZoneFlag())
         DoSafariBattle();
     else
-    {
-        SetNuzlockeChecks(); // tx_randomizer_and_challenges
         DoStandardWildBattle(FALSE);
-    }
 }
 
 void BattleSetup_StartDoubleWildBattle(void)
@@ -1925,8 +1928,9 @@ u8 NuzlockeIsCaptureBlockedBySpeciesClause(u16 species) // @Kurausukun
     if (!gSaveBlock1Ptr->tx_Nuzlocke_SpeciesClause)
         return FALSE;
     
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT)) //disable double catch
-        return TRUE;
+    //disable double catch
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+        return 2; //player already has this exact pokemon
 
     for (i = 0; i < EVOS_PER_LINE; i++)
     {
@@ -1938,10 +1942,12 @@ u8 NuzlockeIsCaptureBlockedBySpeciesClause(u16 species) // @Kurausukun
 
 void SetNuzlockeChecks(void)
 {
-    u8 typeChallenge = gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge; //tx_randomizer_and_challenges
-        OneTypeChallengeCaptureBlocked = (typeChallenge != TX_CHALLENGE_TYPE_OFF && 
-                    GetTypeBySpecies(GetMonData(&gEnemyParty[0], MON_DATA_SPECIES), 1) != typeChallenge && 
-                    GetTypeBySpecies(GetMonData(&gEnemyParty[0], MON_DATA_SPECIES), 2) != typeChallenge);
+    if (IsOneTypeChallengeActive())
+    {
+        u8 typeChallenge = gSaveBlock1Ptr->tx_Challenges_OneTypeChallenge;
+        OneTypeChallengeCaptureBlocked = (GetTypeBySpecies(GetMonData(&gEnemyParty[0], MON_DATA_SPECIES), 1) != typeChallenge && 
+            GetTypeBySpecies(GetMonData(&gEnemyParty[0], MON_DATA_SPECIES), 2) != typeChallenge);
+    }
 
     if (IsNuzlockeActive())
     {
@@ -1954,6 +1960,12 @@ void SetNuzlockeChecks(void)
             NuzlockeIsCaptureBlocked = FALSE;
             NuzlockeIsSpeciesClauseActive = FALSE;
         }
+
+        #ifdef GBA_PRINTF
+        mgba_printf(MGBA_LOG_DEBUG, "NuzlockeIsCaptureBlocked=%d", NuzlockeIsCaptureBlocked);
+        mgba_printf(MGBA_LOG_DEBUG, "NuzlockeIsSpeciesClauseActive=%d", NuzlockeIsSpeciesClauseActive);
+        mgba_printf(MGBA_LOG_DEBUG, "OneTypeChallengeCaptureBlocked=%d", OneTypeChallengeCaptureBlocked);
+        #endif
     }
     else
     {

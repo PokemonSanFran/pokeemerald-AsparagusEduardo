@@ -1098,6 +1098,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
     case BALL_THROW_UNABLE_NO_CATCHING_FLAG:
         DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);    
         break;
+     //tx_randomizer_and_challenges
     case BALL_THROW_UNABLE_NUZLOCKE_AREA:
         DisplayCannotUseItemMessage(taskId, FALSE, gText_NuzlockeCantThrowPokeBallRoute);
         break;
