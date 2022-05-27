@@ -408,9 +408,9 @@ static const struct WindowTemplate sSummaryTemplate[] =
     },
     [PSS_LABEL_PANE_LEFT_BOTTOM] = {
         .bg = 0,
-        .tilemapLeft = 0,
+        .tilemapLeft = 3,
         .tilemapTop = 16,
-        .width = 11,
+        .width = 8,
         .height = 5,
         .paletteNum = 2,
         .baseBlock = 44,
@@ -422,7 +422,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 14,
         .height = 16,
         .paletteNum = 2,
-        .baseBlock = 442,
+        .baseBlock = 418,
     },
     [PSS_LABEL_PANE_RIGHT] = {
         .bg = 0,
@@ -431,7 +431,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 19,
         .height = 18,
         .paletteNum = 2,
-        .baseBlock = 100,
+        .baseBlock = 76,
     },
     [PSS_LABEL_PANE_RIGHT_HP] = {
         .bg = 0,
@@ -440,7 +440,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 19,
         .height = 3,
         .paletteNum = 2,
-        .baseBlock = 100,
+        .baseBlock = 76,
     },
     [PSS_LABEL_PANE_RIGHT_SMALL] = {
         .bg = 0,
@@ -449,7 +449,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 19,
         .height = 15,
         .paletteNum = 2,
-        .baseBlock = 200,
+        .baseBlock = 152,
     },
     [PSS_LABEL_PANE_RIGHT_BOTTOM] = {
         .bg = 0,
@@ -458,7 +458,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 19,
         .height = 6,
         .paletteNum = 2,
-        .baseBlock = 704,
+        .baseBlock = 684,
     },
     [PSS_LABEL_PANE_TITLE] = {
         .bg = 0,
@@ -467,7 +467,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
         .width = 19,
         .height = 2,
         .paletteNum = 2,
-        .baseBlock = 666,
+        .baseBlock = 644,
     },
     [PSS_LABEL_WINDOW_END] = DUMMY_WIN_TEMPLATE
 };
@@ -2709,8 +2709,8 @@ static void PrintNotEggInfo(void)
     else
         CopyItemName(sMonSummaryScreen->summary.item, gStringVar1);
 
-    x = GetStringCenterAlignXOffset(0, gStringVar1, 83);
-    AddTextPrinterParameterized4(PSS_LABEL_PANE_LEFT_BOTTOM, 0, 33, 7, 0, 0, sTextColors[PSS_COLOR_WHITE_BLACK_SHADOW], 0, sText_HeldItem);
+    x = GetStringCenterAlignXOffset(0, gStringVar1, 60);
+    AddTextPrinterParameterized4(PSS_LABEL_PANE_LEFT_BOTTOM, 0, 9, 7, 0, 0, sTextColors[PSS_COLOR_WHITE_BLACK_SHADOW], 0, sText_HeldItem);
     AddTextPrinterParameterized4(PSS_LABEL_PANE_LEFT_BOTTOM, 0, x, 19, 0, 0, sTextColors[PSS_COLOR_BLACK_GRAY_SHADOW], 0, gStringVar1);
 }
 
@@ -2724,8 +2724,8 @@ static void PrintEggInfo(void)
         StringCopy(gStringVar1, sText_None);
     else
         CopyItemName(sMonSummaryScreen->summary.item, gStringVar1);
-    x = GetStringCenterAlignXOffset(0, gStringVar1, 83);
-    AddTextPrinterParameterized4(PSS_LABEL_PANE_LEFT_BOTTOM, 0, 33, 7, 0, 0, sTextColors[PSS_COLOR_WHITE_BLACK_SHADOW], 0, sText_HeldItem);
+    x = GetStringCenterAlignXOffset(0, gStringVar1, 60);
+    AddTextPrinterParameterized4(PSS_LABEL_PANE_LEFT_BOTTOM, 0, 9, 7, 0, 0, sTextColors[PSS_COLOR_WHITE_BLACK_SHADOW], 0, sText_HeldItem);
     AddTextPrinterParameterized4(PSS_LABEL_PANE_LEFT_BOTTOM, 0, x, 19, 0, 0, sTextColors[PSS_COLOR_BLACK_GRAY_SHADOW], 0, gStringVar1);
 }
 
@@ -4059,7 +4059,7 @@ static void PlayMonCry(void)
 static u8 CreateMonSprite(struct Pokemon *unused)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
-    u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, 40, 77, 5);
+    u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, 40, 85, 5);
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
     gSprites[spriteId].data[0] = summary->species2;
@@ -4167,7 +4167,7 @@ static void CreateHeldItemSprite(struct Pokemon *mon)
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_ITEM]].callback = SpriteCallbackDummy;
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_ITEM]].oam.priority = 0;
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_ITEM]].x = 16;
-        gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_ITEM]].y = 141;
+        gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_ITEM]].y = 153;
     }
 }
 
