@@ -5263,6 +5263,9 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
              && gIsCriticalHit
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
+        #if B_SUBSTITUTE >= GEN_5
+             && !(gBattleMons[BATTLE_OPPOSITE(battler)].status2 & STATUS2_SUBSTITUTE)
+        #endif
              && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
             {
                 SET_STATCHANGER(STAT_ATK, MAX_STAT_STAGE - gBattleMons[battler].statStages[STAT_ATK], FALSE);
