@@ -1769,7 +1769,11 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
             break;
         case EFFECT_TRANSFORM:
             if (gBattleMons[battlerAtk].status2 & STATUS2_TRANSFORMED
+            #if B_SUBSTITUTE >= GEN_5
               || (gBattleMons[battlerDef].status2 & (STATUS2_TRANSFORMED | STATUS2_SUBSTITUTE))) //Leave out Illusion b/c AI is supposed to be fooled
+            #else
+              || (gBattleMons[battlerDef].status2 & (STATUS2_TRANSFORMED))) //Leave out Illusion b/c AI is supposed to be fooled
+            #endif
                 score -= 10;
             break;
         case EFFECT_TWO_TURNS_ATTACK:
