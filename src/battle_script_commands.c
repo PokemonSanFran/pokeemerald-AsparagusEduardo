@@ -13496,9 +13496,9 @@ bool32 DoesSubstituteBlockMove(u8 battlerAtk, u8 battlerDef, u32 move)
     #if B_SUBSTITUTE >= GEN_6
         else if (gBattleMoves[move].flags & FLAG_SOUND)
             return FALSE;
+        else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
+            return FALSE;
     #endif
-    else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
-        return FALSE;
     else if (gBattleMoves[move].flags & FLAG_HIT_IN_SUBSTITUTE)
         return FALSE;
     else

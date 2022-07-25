@@ -1300,12 +1300,12 @@ static s16 AI_CheckBadMove(u8 battlerAtk, u8 battlerDef, u16 move, s16 score)
                 score -= 10;
             break;
         case EFFECT_SUBSTITUTE:
-            if (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE || AI_DATA->abilities[battlerDef] == ABILITY_INFILTRATOR)
+            if (gBattleMons[battlerAtk].status2 & STATUS2_SUBSTITUTE)
                 score -= 8;
             else if (AI_DATA->hpPercents[battlerAtk] <= 25)
                 score -= 10;
             #if B_SUBSTITUTE >= GEN_6
-            else if (TestMoveFlagsInMoveset(battlerDef, FLAG_SOUND))
+            else if (AI_DATA->abilities[battlerDef] == ABILITY_INFILTRATOR || TestMoveFlagsInMoveset(battlerDef, FLAG_SOUND))
                 score -= 8;
             #endif
             break;
