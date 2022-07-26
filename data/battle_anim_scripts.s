@@ -815,6 +815,16 @@ gBattleAnims_Moves::
 	.4byte Move_MENACING_MOONRAZE_MAELSTROM
 	.4byte Move_LIGHT_THAT_BURNS_THE_SKY
 	.4byte Move_SOUL_STEALING_7_STAR_STRIKE
+@@@ FRONTIER HIDDEN POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
+	.4byte Move_HIDDEN_POWER
 @@@ Last Move - cannot be reached
 	.4byte Move_COUNT
 

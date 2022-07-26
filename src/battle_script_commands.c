@@ -1003,6 +1003,15 @@ static const u8 sForbiddenMoves[MOVES_COUNT] =
     [MOVE_GLITZY_GLOW] = FORBIDDEN_METRONOME,
     [MOVE_GRAV_APPLE] = FORBIDDEN_METRONOME,
     [MOVE_HELPING_HAND] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT,
+    [MOVE_HIDDEN_POWER_ELECTRIC] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_FIGHTING] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_FIRE] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_FLYING] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_GRASS] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_GROUND] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_ICE] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_ROCK] = FORBIDDEN_METRONOME,
+    [MOVE_HIDDEN_POWER_WATER] = FORBIDDEN_METRONOME,
     [MOVE_HOLD_HANDS] = FORBIDDEN_METRONOME | FORBIDDEN_ASSIST | FORBIDDEN_COPYCAT | FORBIDDEN_SLEEP_TALK | FORBIDDEN_INSTRUCT,
     [MOVE_HYDRO_CANNON] = FORBIDDEN_INSTRUCT,
     [MOVE_HYPER_BEAM] = FORBIDDEN_INSTRUCT,
@@ -11292,6 +11301,9 @@ static void Cmd_transformdataexecution(void)
                 gBattleMons[gBattlerAttacker].pp[i] = gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].pp;
             else
                 gBattleMons[gBattlerAttacker].pp[i] = 5;
+            
+            if (gBattleMons[gBattlerAttacker].moves[i] >= MOVE_HIDDEN_POWER_GROUND && gBattleMons[gBattlerAttacker].moves[i] <= MOVE_HIDDEN_POWER_FLYING)
+                gBattleMons[gBattlerAttacker].moves[i] = MOVE_HIDDEN_POWER;
         }
 
         gActiveBattler = gBattlerAttacker;
@@ -11349,7 +11361,11 @@ static void Cmd_mimicattackcopy(void)
         if (i == MAX_MON_MOVES)
         {
             gChosenMove = 0xFFFF;
-            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastMoves[gBattlerTarget];
+            if (gLastMoves[gBattlerTarget] >= MOVE_HIDDEN_POWER_GROUND && gLastMoves[gBattlerTarget] <= MOVE_HIDDEN_POWER_FLYING)
+                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = MOVE_HIDDEN_POWER;
+            else
+                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastMoves[gBattlerTarget];
+            
             if (gBattleMoves[gLastMoves[gBattlerTarget]].pp < 5)
                 gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gLastMoves[gBattlerTarget]].pp;
             else
@@ -11625,7 +11641,11 @@ static void Cmd_copymovepermanently(void) // sketch
         {
             struct MovePpInfo movePpData;
 
-            gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBattlerTarget];
+            if (gLastMoves[gBattlerTarget] >= MOVE_HIDDEN_POWER_GROUND && gLastMoves[gBattlerTarget] <= MOVE_HIDDEN_POWER_FLYING)
+                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = MOVE_HIDDEN_POWER;
+            else
+                gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBattlerTarget];
+            
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gBattleMoves[gLastPrintedMoves[gBattlerTarget]].pp;
             gActiveBattler = gBattlerAttacker;
 

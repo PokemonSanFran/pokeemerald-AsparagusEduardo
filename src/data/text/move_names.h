@@ -758,6 +758,15 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_GLACIAL_LANCE] = _("Lanza Glacial"),
     [MOVE_ASTRAL_BARRAGE] = _("Orbes Espectro"),
     [MOVE_EERIE_SPELL] = _("Conjuro Funesto"),
+    [MOVE_HIDDEN_POWER_GROUND] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_GRASS] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_FIGHTING] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_FIRE] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_ROCK] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_ELECTRIC] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_ICE] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_WATER] = _("Poder Oculto"),
+    [MOVE_HIDDEN_POWER_FLYING] = _("Poder Oculto"),
 #else
     [MOVE_NONE] = _("-"),
     [MOVE_POUND] = _("Pound"),
@@ -1515,6 +1524,15 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_GLACIAL_LANCE] = _("Glacial Lance"),
     [MOVE_ASTRAL_BARRAGE] = _("Astral Barrage"),
     [MOVE_EERIE_SPELL] = _("Eerie Spell"),
+    [MOVE_HIDDEN_POWER_GROUND] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_GRASS] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_FIGHTING] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_FIRE] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_ROCK] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_ELECTRIC] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_ICE] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_WATER] = _("Hidden Power"),
+    [MOVE_HIDDEN_POWER_FLYING] = _("Hidden Power"),
 #endif
 };
 

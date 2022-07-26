@@ -41,11 +41,12 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 	* [Strange Souvenir](https://github.com/AsparagusEduardo/pokeemerald/tree/AlolanEvolution), which allows Alola-only evolutions.
 	* Gen 6 Exp Share. Original code by Blurose, ported by [Lunos](https://github.com/LOuroboros).
 	* Lures for attracting more double battles and raising shiny odds.
+* [Paccy/Artrios](https://github.com/Artrios)'s[Frontier Expansion](https://github.com/Artrios/pokeemerald/tree/frontier_expansion).
 * [ghoulslash](https://github.com/ghoulslash)'s branches:
 	* [Bag sorting](https://www.pokecommunity.com/showthread.php?p=10167488#post10167488) by [ghoulslash](https://github.com/ghoulslash).
 	* [Registering items to L & R](https://www.pokecommunity.com/showthread.php?p=10134388#post10134388) by [ghoulslash](https://github.com/ghoulslash).
 	* [DexNav](https://github.com/ghoulslash/pokeemerald/tree/dexnav).
-    	* **Access to DexNav from PokéNav** by Artrios/Paccy
+    	* **Access to DexNav from PokéNav** by Paccy/Artrios
 	* [Item description header](https://github.com/ghoulslash/pokeemerald/tree/item_desc_header) by [ghoulslash](https://github.com/ghoulslash).
 * [TheXaman](https://github.com/TheXaman/pokeemerald) 's branches:
 	* [HGSS styled Pokédex](https://github.com/TheXaman/pokeemerald/tree/tx_pokedexPlus_hgss). Adds complete information about movesets, abilities, stats and more.
@@ -57,10 +58,9 @@ Based on the [pokeemerald](https://github.com/pret/pokeemerald) disassembly proj
 * [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/Decapitalization) every text in the game. Originally by [Wyrserth](https://github.com/Wyrserth) and mantained by me.
 * Spanish version in development by syncing with [pokeesmeralda](https://github.com/LOuroboros/pokeemerald/tree/pokeesmeralda) by [Lunos](https://github.com/LOuroboros).
 	* [Decapitalized](https://github.com/AsparagusEduardo/pokeemerald/tree/pokeesmeralda_decap) version mantained by me.
-* [Soaring](https://www.pokecommunity.com/showthread.php?t=422107). Code by camthesaxman, ported by paccy.
+* [Soaring](https://www.pokecommunity.com/showthread.php?t=422107). Code by camthesaxman, ported by Paccy/Artrios.
 * [Day/Night lightning System](https://github.com/huderlem/pokeemerald/tree/daynight-diego) by [Sierraffinity](https://github.com/Sierraffinity)
 	* Day/Night encounters.
     * **Change between Day and Night encounters in the Pokédex by pressing A** by Paccy/Artrios
 	* **Battle background palettes for times of day** by Lunos and ShinyDragonHunter
 * [Following Pokémon](https://github.com/aarant/pokeemerald/tree/romhack) by Merrp, with further development by Artrios
-
