@@ -5,7 +5,8 @@ gText_PkmnTransferredSomeonesPC::
 	.string "“{STR_VAR_1}.”$"
 
 gText_PkmnTransferredLanettesPC::
-	.string "{STR_VAR_2} fue enviado al PC\nde AREDIA.\p"
+	.string "{STR_VAR_2} fue enviado al PC\n"
+	.string "de AREDIA.\p"
 	.string "Se ha guardado en la CAJA\n"
 	.string "“{STR_VAR_1}”.$"
 

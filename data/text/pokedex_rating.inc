@@ -3,7 +3,7 @@ gBirchDexRatingText_AreYouCurious::
 	.string "¿Quieres saber cómo llevas\n"
 	.string "la POKéDEX?$"
 
-gBirchDexRatingText_Cancel:
+gBirchDexRatingText_Cancel::
 	.string "Hm? Oh, you haven't caught enough\n"
 	.string "POKéMON to make it worthwhile.$"
 
