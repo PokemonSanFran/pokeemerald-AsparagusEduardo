@@ -982,6 +982,7 @@ const u8 gText_JustOnePkmn[] = _("Sólo llevas contigo un Pokémon.");
 const u8 gText_PartyFull[] = _("¡Tu equipo está completo!");
 const u8 gText_Box[] = _("Caja");
 const u8 gText_CheckMapOfHoenn[] = _("Ver el mapa de la región de Hoenn.");
+const u8 gText_DexNavDescription[] = _("Buscar Pokémon salvajes.");
 const u8 gText_CheckPokemonInDetail[] = _("Ver Pokémon en detalle.");
 const u8 gText_CallRegisteredTrainer[] = _("Ver información sobre Entrenadores.");
 const u8 gText_CheckObtainedRibbons[] = _("Ver Cintas conseguidas.");
