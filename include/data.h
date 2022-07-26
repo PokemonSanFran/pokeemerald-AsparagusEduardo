@@ -21,6 +21,10 @@ struct MonCoords
     u8 y_offset;
 };
 
+#define MON_COORDS_SIZE(width, height)(DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
+#define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
+#define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
+
 struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;
@@ -67,7 +71,7 @@ struct Trainer
     /*0x01*/ u8 trainerClass;
     /*0x02*/ u8 encounterMusic_gender; // last bit is gender
     /*0x03*/ u8 trainerPic;
-    /*0x04*/ u8 trainerName[12];
+    /*0x04*/ u8 trainerName[TRAINER_NAME_LENGTH + 1];
     /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;

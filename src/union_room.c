@@ -24,8 +24,8 @@
 #include "load_save.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "mevent.h"
 #include "mystery_gift.h"
+#include "mystery_gift_menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -49,7 +49,6 @@
 #include "constants/battle_frontier.h"
 #include "constants/cable_club.h"
 #include "constants/game_stat.h"
-#include "constants/maps.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -219,7 +218,7 @@ static u16 ReadAsU16(const u8 *);
 static void Task_TryBecomeLinkLeader(u8);
 static void Task_TryJoinLinkGroup(u8);
 static void Task_ListenToWireless(u8);
-static void Task_MEvent_Leader(u8);
+static void Task_SendMysteryGift(u8);
 static void Task_CardOrNewsWithFriend(u8);
 static void Task_CardOrNewsOverWireless(u8);
 static void Task_RunUnionRoom(u8);
@@ -306,7 +305,7 @@ static void PrintNumPlayersWaitingForMsg(u8 windowId, u8 capacityCode, u8 string
         break;
     }
 
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 
 static void PrintPlayerNameAndIdOnWindow(u8 windowId)
@@ -434,7 +433,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         FillWindowPixelBuffer(data->bButtonCancelWindowId, PIXEL_FILL(2));
         PrintUnionRoomText(data->bButtonCancelWindowId, 0, sText_BButtonCancel, 8, 1, UR_COLOR_CANCEL);
         PutWindowTilemap(data->bButtonCancelWindowId);
-        CopyWindowToVram(data->bButtonCancelWindowId, 2);
+        CopyWindowToVram(data->bButtonCancelWindowId, COPYWIN_GFX);
 
         DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = sListMenuTemplate_PossibleGroupMembers;
@@ -443,7 +442,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
 
         DrawStdWindowFrame(data->nPlayerModeWindowId, FALSE);
         PutWindowTilemap(data->nPlayerModeWindowId);
-        CopyWindowToVram(data->nPlayerModeWindowId, 2);
+        CopyWindowToVram(data->nPlayerModeWindowId, COPYWIN_GFX);
 
         CopyBgTilemapBufferToVram(0);
         data->playerCount = 1;
@@ -1014,7 +1013,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         FillWindowPixelBuffer(data->bButtonCancelWindowId, PIXEL_FILL(2));
         PrintUnionRoomText(data->bButtonCancelWindowId, 0, sText_ChooseJoinCancel, 8, 1, UR_COLOR_CANCEL);
         PutWindowTilemap(data->bButtonCancelWindowId);
-        CopyWindowToVram(data->bButtonCancelWindowId, 2);
+        CopyWindowToVram(data->bButtonCancelWindowId, COPYWIN_GFX);
 
         DrawStdWindowFrame(data->listWindowId, FALSE);
         gMultiuseListMenuTemplate = sListMenuTemplate_UnionRoomGroups;
@@ -1024,7 +1023,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         DrawStdWindowFrame(data->playerNameAndIdWindowId, FALSE);
         PutWindowTilemap(data->playerNameAndIdWindowId);
         PrintPlayerNameAndIdOnWindow(data->playerNameAndIdWindowId);
-        CopyWindowToVram(data->playerNameAndIdWindowId, 2);
+        CopyWindowToVram(data->playerNameAndIdWindowId, COPYWIN_GFX);
 
         CopyBgTilemapBufferToVram(0);
         data->leaderId = 0;
@@ -1495,14 +1494,14 @@ static void Task_StartUnionRoomTrade(u8 taskId)
         }
         break;
     case 2:
-        memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, sizeof(struct MailStruct) * PARTY_SIZE + 4);
-        if (SendBlock(0, gBlockSendBuffer, sizeof(struct MailStruct) * PARTY_SIZE + 4))
+        memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, sizeof(struct Mail) * PARTY_SIZE + 4);
+        if (SendBlock(0, gBlockSendBuffer, sizeof(struct Mail) * PARTY_SIZE + 4))
             gTasks[taskId].data[0]++;
         break;
     case 3:
         if (GetBlockReceivedStatus() == 3)
         {
-            memcpy(gTradeMail, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct MailStruct) * PARTY_SIZE);
+            memcpy(gTradeMail, gBlockRecvBuffer[GetMultiplayerId() ^ 1], sizeof(struct Mail) * PARTY_SIZE);
             ResetBlockReceivedFlags();
             gSelectedTradeMonPositions[TRADE_PLAYER] = monId;
             gSelectedTradeMonPositions[TRADE_PARTNER] = PARTY_SIZE;
@@ -1533,17 +1532,21 @@ static void Task_ExchangeCards(u8 taskId)
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
                 recvBuff = gBlockRecvBuffer[i];
-                CopyTrainerCardData(&gTrainerCards[i], recvBuff, gLinkPlayers[i].version);
+                CopyTrainerCardData(&gTrainerCards[i], (struct TrainerCard *)recvBuff, gLinkPlayers[i].version);
             }
 
             if (GetLinkPlayerCount() == 2)
             {
+                // Note: hasAllFrontierSymbols is a re-used field.
+                // Here it is set by CreateTrainerCardInBuffer.
+                // If the player has a saved Wonder Card and it is the same Wonder Card
+                // as their partner then mystery gift stats are enabled.
                 recvBuff = gBlockRecvBuffer[GetMultiplayerId() ^ 1];
-                MEventHandleReceivedWonderCard(recvBuff[48]);
+                MysteryGift_TryEnableStatsByFlagId(((struct TrainerCard *)recvBuff)->hasAllFrontierSymbols);
             }
             else
             {
-                ResetReceivedWonderCardFlag();
+                MysteryGift_DisableStats();
             }
 
             ResetBlockReceivedFlags();
@@ -1589,8 +1592,8 @@ void StartUnionRoomBattle(u16 battleFlags)
 static void WarpForWirelessMinigame(u16 linkService, u16 x, u16 y)
 {
     VarSet(VAR_CABLE_CLUB_STATE, linkService);
-    SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
-    SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, -1, x, y);
+    SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE, x, y);
+    SetDynamicWarpWithCoords(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE, x, y);
     WarpIntoMap();
 }
 
@@ -1601,7 +1604,7 @@ static void WarpForCableClubActivity(s8 mapGroup, s8 mapNum, s32 x, s32 y, u16 l
     gFieldLinkPlayerCount = GetLinkPlayerCount();
     gLocalLinkPlayerId = GetMultiplayerId();
     SetCableClubWarp();
-    SetWarpDestination(mapGroup, mapNum, -1, x, y);
+    SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, x, y);
     WarpIntoMap();
 }
 
@@ -1627,18 +1630,19 @@ static void CB2_TransitionToCableClub(void)
 
 static void CreateTrainerCardInBuffer(void *dest, bool32 setWonderCard)
 {
-    u16 *argAsU16Ptr = dest;
+    struct TrainerCard * card = (struct TrainerCard *)dest;
+    TrainerCard_GenerateCardForLinkPlayer(card);
 
-    TrainerCard_GenerateCardForPlayer((struct TrainerCard *)argAsU16Ptr);
+    // Below field is re-used, to be read by Task_ExchangeCards
     if (setWonderCard)
-        argAsU16Ptr[48] = GetWonderCardFlagID();
+        card->hasAllFrontierSymbols = GetWonderCardFlagID();
     else
-        argAsU16Ptr[48] = 0;
+        card->hasAllFrontierSymbols = 0;
 }
 
 static void Task_StartActivity(u8 taskId)
 {
-    ResetReceivedWonderCardFlag();
+    MysteryGift_DisableStats();
     switch (gPlayerCurrActivity)
     {
     case ACTIVITY_BATTLE_SINGLE:
@@ -1858,12 +1862,13 @@ static void CreateTask_StartActivity(void)
     gTasks[taskId].data[0] = 0;
 }
 
-void MEvent_CreateTask_Leader(u32 activity)
+// Sending Wonder Card/News
+void CreateTask_SendMysteryGift(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Leader *data;
 
-    taskId = CreateTask(Task_MEvent_Leader, 0);
+    taskId = CreateTask(Task_SendMysteryGift, 0);
     sWirelessLinkMain.leader = data = (void*)(gTasks[taskId].data);
 
     data->state = 0;
@@ -1872,7 +1877,7 @@ void MEvent_CreateTask_Leader(u32 activity)
     gSpecialVar_Result = LINKUP_ONGOING;
 }
 
-static void Task_MEvent_Leader(u8 taskId)
+static void Task_SendMysteryGift(u8 taskId)
 {
     struct WirelessLink_Leader *data = sWirelessLinkMain.leader;
     struct WindowTemplate winTemplate;
@@ -1934,7 +1939,7 @@ static void Task_MEvent_Leader(u8 taskId)
         }
         break;
     case 6:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_LinkWithFriendDropped))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_LinkWithFriendDropped))
         {
             data->playerCount = LeaderPrunePlayerList(data->playerList);
             RedrawListMenu(data->listTaskId);
@@ -1945,7 +1950,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->state = 7;
         break;
     case 7:
-        switch (mevent_message_print_and_prompt_yes_no(&data->textState, &data->yesNoWindowId, 0, gStringVar4))
+        switch (DoMysteryGiftYesNo(&data->textState, &data->yesNoWindowId, 0, gStringVar4))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
@@ -2031,7 +2036,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->state++;
         break;
     case 14:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_PleaseStartOver))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_PleaseStartOver))
         {
             DestroyTask(taskId);
             gSpecialVar_Result = LINKUP_FAILED;
@@ -2066,7 +2071,7 @@ static void Task_MEvent_Leader(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsWithFriend(u32 activity)
+void CreateTask_LinkMysteryGiftWithFriend(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Group *data;
@@ -2125,7 +2130,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         FillWindowPixelBuffer(data->playerNameAndIdWindowId, PIXEL_FILL(1));
         PutWindowTilemap(data->playerNameAndIdWindowId);
         PrintPlayerNameAndIdOnWindow(data->playerNameAndIdWindowId);
-        CopyWindowToVram(data->playerNameAndIdWindowId, 2);
+        CopyWindowToVram(data->playerNameAndIdWindowId, COPYWIN_GFX);
 
         CopyBgTilemapBufferToVram(0);
         data->leaderId = 0;
@@ -2209,7 +2214,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sLinkDroppedTexts[RfuGetStatus()]))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sLinkDroppedTexts[RfuGetStatus()]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2235,7 +2240,7 @@ static void Task_CardOrNewsWithFriend(u8 taskId)
     }
 }
 
-void MEvent_CreateTask_CardOrNewsOverWireless(u32 activity)
+void CreateTask_LinkMysteryGiftOverWireless(u32 activity)
 {
     u8 taskId;
     struct WirelessLink_Group *data;
@@ -2377,7 +2382,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         data->state++;
         break;
     case 9:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessLinkDropped))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_WirelessLinkDropped))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2386,7 +2391,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         }
         break;
     case 7:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sText_WirelessSearchCanceled))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sText_WirelessSearchCanceled))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -2395,7 +2400,7 @@ static void Task_CardOrNewsOverWireless(u8 taskId)
         }
         break;
     case 11:
-        if (MG_PrintTextOnWindow1AndWaitButton(&data->textState, sNoWonderSharedTexts[data->isWonderNews]))
+        if (PrintMysteryGiftMenuMessage(&data->textState, sNoWonderSharedTexts[data->isWonderNews]))
         {
             DestroyWirelessStatusIndicatorSprite();
             DestroyTask(taskId);
@@ -3631,7 +3636,7 @@ static s8 UnionRoomHandleYesNo(u8 *state, bool32 noDraw)
     case 1:
         if (noDraw)
         {
-            sub_8198C78();
+            EraseYesNoWindow();
             *state = 0;
             return -3;
         }
@@ -3652,7 +3657,7 @@ static u8 CreateTradeBoardWindow(const struct WindowTemplate * template)
     DrawStdWindowFrame(windowId, FALSE);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
     PrintUnionRoomText(windowId, 1, sText_NameWantedOfferLv, 8, 1, UR_COLOR_TRADE_BOARD_OTHER);
-    CopyWindowToVram(windowId, 2);
+    CopyWindowToVram(windowId, COPYWIN_GFX);
     PutWindowTilemap(windowId);
     return windowId;
 }
@@ -3683,7 +3688,7 @@ static s32 ListMenuHandler_AllItemsAvailable(u8 *state, u8 *windowId, u8 *listMe
         gMultiuseListMenuTemplate = *menuTemplate;
         gMultiuseListMenuTemplate.windowId = *windowId;
         *listMenuId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
-        CopyWindowToVram(*windowId, TRUE);
+        CopyWindowToVram(*windowId, COPYWIN_MAP);
         (*state)++;
         break;
     case 1:
@@ -3730,7 +3735,7 @@ static s32 TradeBoardMenuHandler(u8 *state, u8 *mainWindowId, u8 *listMenuId, u8
         (*state)++;
         break;
     case 1:
-        CopyWindowToVram(*mainWindowId, TRUE);
+        CopyWindowToVram(*mainWindowId, COPYWIN_MAP);
         (*state)++;
         break;
     case 2:
@@ -3846,7 +3851,7 @@ static void PrintUnionRoomText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y
         break;
     }
 
-    AddTextPrinter(&printerTemplate, TEXT_SPEED_FF, NULL);
+    AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 }
 
 static void ClearRfuPlayerList(struct RfuPlayer *players, u8 count)
@@ -3976,7 +3981,7 @@ static void PrintGroupMemberOnWindow(u8 windowId, u8 x, u8 y, struct RfuPlayer *
         ConvertIntToDecimalStringN(trainerId, player->rfu.data.compatibility.playerTrainerId[0] | (player->rfu.data.compatibility.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, sText_ID);
         StringAppend(gStringVar4, trainerId);
-        PrintUnionRoomText(windowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x88), y, colorIdx);
+        PrintUnionRoomText(windowId, 1, gStringVar4, GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x88), y, colorIdx);
     }
 }
 
@@ -3991,7 +3996,7 @@ static void PrintGroupCandidateOnWindow(u8 windowId, u8 x, u8 y, struct RfuPlaye
         ConvertIntToDecimalStringN(trainerId, player->rfu.data.compatibility.playerTrainerId[0] | (player->rfu.data.compatibility.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
         StringCopy(gStringVar4, sText_ID);
         StringAppend(gStringVar4, trainerId);
-        PrintUnionRoomText(windowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x68), y, colorIdx);
+        PrintUnionRoomText(windowId, 1, gStringVar4, GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x68), y, colorIdx);
     }
 }
 
@@ -4313,7 +4318,7 @@ static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= 30
+        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= UNION_ROOM_MAX_LEVEL
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
             count++;
     }
@@ -4497,6 +4502,6 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct WirelessLink_URoom *d
 
 static void CopyAndTranslatePlayerName(u8 *dest, struct RfuPlayer *player)
 {
-    StringCopy7(dest, player->rfu.name);
+    StringCopy_PlayerName(dest, player->rfu.name);
     ConvertInternationalString(dest, player->rfu.data.compatibility.language);
 }
