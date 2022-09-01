@@ -9,6 +9,7 @@
 #include "bike.h"
 #include "coins.h"
 #include "data.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
@@ -968,6 +969,10 @@ static u32 GetBallThrowableState(void)
     else if (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE)
         return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
 #endif
+#ifdef TX_DEBUGGING
+    else if (FlagGet(FLAG_SYS_NO_CATCHING)) //DEBUG
+        return BALL_THROW_UNABLE_NO_CATCHING_FLAG;
+#endif
 
     return BALL_THROW_ABLE;
 }
@@ -979,6 +984,7 @@ bool32 CanThrowBall(void)
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
     switch (GetBallThrowableState())
@@ -1009,6 +1015,11 @@ void ItemUseInBattle_PokeBall(u8 taskId)
             DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
         else
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
+        break;
+    #endif
+    #ifdef TX_DEBUGGING
+    case BALL_THROW_UNABLE_NO_CATCHING_FLAG:
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);
         break;
     #endif
     }

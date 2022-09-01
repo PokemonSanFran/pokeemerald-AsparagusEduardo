@@ -16,6 +16,7 @@
 #include "berry.h"
 #include "bg.h"
 #include "data.h"
+#include "debug.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "event_data.h"
@@ -3154,6 +3155,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].spikyShielded = FALSE;
     gProtectStructs[gActiveBattler].kingsShielded = FALSE;
     gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+    gProtectStructs[gActiveBattler].quash = FALSE;
     gProtectStructs[gActiveBattler].obstructed = FALSE;
     gProtectStructs[gActiveBattler].endured = FALSE;
     gProtectStructs[gActiveBattler].noValidMoves = FALSE;
@@ -4019,7 +4021,8 @@ static void HandleTurnActionSelectionState(void)
                                             | BATTLE_TYPE_EREADER_TRAINER
                                             | BATTLE_TYPE_RECORDED_LINK))
                                             // Or if currently held by Sky Drop
-                                            || gStatuses3[gActiveBattler] & STATUS3_SKY_DROPPED)
+                                            || gStatuses3[gActiveBattler] & STATUS3_SKY_DROPPED
+                                            || FlagGet(FLAG_SYS_NO_BAG_USE))
                     {
                         RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
                         gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;
@@ -4530,6 +4533,9 @@ s8 GetMovePriority(u32 battlerId, u16 move)
         }
     }
 
+    if (gProtectStructs[battlerId].quash)
+        priority = -8;
+
     return priority;
 }
 
@@ -4750,6 +4756,7 @@ static void TurnValuesCleanUp(bool8 var0)
             gProtectStructs[gActiveBattler].spikyShielded = FALSE;
             gProtectStructs[gActiveBattler].kingsShielded = FALSE;
             gProtectStructs[gActiveBattler].banefulBunkered = FALSE;
+            gProtectStructs[gActiveBattler].quash = FALSE;
         }
         else
         {
