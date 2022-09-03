@@ -181,6 +181,10 @@ int StringParser::ParseString(long srcPos, unsigned char* dest, int& destLength)
 
     while (m_buffer[m_pos] != '"')
     {
+        //If an underscore is found inside a charmap string, convert it to '-'.
+        if (m_buffer[m_pos] == '_')
+            m_buffer[m_pos] = '-';
+
         std::string sequence = (m_buffer[m_pos] == '{') ? ReadBracketedConstants() : ReadCharOrEscape();
 
         for (const char& c : sequence)
