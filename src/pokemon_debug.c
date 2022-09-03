@@ -678,7 +678,7 @@ static void UpdateBattlerValue(struct PokemonDebugMenu *data)
     switch (data->modifyArrows.typeOfVal)
     {
     case VAL_U16:
-        *(u16*)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
+        *(u16 *)(data->modifyArrows.modifiedValPtr) = data->modifyArrows.currValue;
         break;
     }
 }
