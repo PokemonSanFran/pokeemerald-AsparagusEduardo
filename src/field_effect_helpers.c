@@ -11,14 +11,19 @@
 #include "sound.h"
 #include "sprite.h"
 #include "trig.h"
+#include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
-#include "constants/rgb.h"
 
 #define OBJ_EVENT_PAL_TAG_NONE 0x11FF // duplicate of define in event_object_movement.c
+#define PAL_TAG_REFLECTION_OFFSET 0x2000 // reflection tag value is paletteTag + 0x2000
+#define PAL_RAW_REFLECTION_OFFSET 0x4000 // raw reflection tag is paletteNum + 0x4000
 
 static void UpdateObjectReflectionSprite(struct Sprite *);
 static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *, struct Sprite *sprite);
+static void LoadObjectRegularReflectionPalette(struct ObjectEvent *, struct Sprite *);
+
 static void UpdateGrassFieldEffectSubpriority(struct Sprite *, u8, u8);
 static void FadeFootprintsTireTracks_Step0(struct Sprite *);
 static void FadeFootprintsTireTracks_Step1(struct Sprite *);
@@ -30,12 +35,8 @@ static void SynchroniseSurfAnim(struct ObjectEvent *, struct Sprite *);
 static void SynchroniseSurfPosition(struct ObjectEvent *, struct Sprite *);
 static void UpdateBobbingEffect(struct ObjectEvent *, struct Sprite *, struct Sprite *);
 static void SpriteCB_UnderwaterSurfBlob(struct Sprite *);
-static u32 ShowDisguiseFieldEffect(u8, u8);
-static void LoadFieldEffectPalette_(u8 fieldEffect, bool8 updateGammaType);
-
-void LoadSpecialReflectionPalette(struct Sprite *sprite);
-
-extern u16 gReflectionPaletteBuffer[];
+static u32 ShowDisguiseFieldEffect(u8, u8, u8);
+u32 FldEff_Shadow(void);
 
 // Used by several field effects to determine which of a group it is
 #define sFldEff    data[1]
@@ -72,8 +73,6 @@ static s16 GetReflectionVerticalOffset(struct ObjectEvent *objectEvent)
     return GetObjectEventGraphicsInfo(objectEvent->graphicsId)->height - 2;
 }
 
-#define OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION 0x1102
-
 static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *reflectionSprite)
 {
     u8 bridgeType;
@@ -87,46 +86,89 @@ static void LoadObjectReflectionPalette(struct ObjectEvent *objectEvent, struct 
      && ((bridgeType = MetatileBehavior_GetBridgeType(objectEvent->previousMetatileBehavior))
       || (bridgeType = MetatileBehavior_GetBridgeType(objectEvent->currentMetatileBehavior))))
     {
-        // When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
-        // This is so the sprite blends in with the dark water metatile underneath the bridge.
-        reflectionSprite->sReflectionVerticalOffset = bridgeReflectionVerticalOffsets[bridgeType - 1];
-        LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION);
-        reflectionSprite->oam.paletteNum = IndexOfSpritePaletteTag(OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION);
-        UpdatePaletteGammaType(reflectionSprite->oam.paletteNum, GAMMA_NORMAL);
-        UpdateSpritePaletteWithWeather(reflectionSprite->oam.paletteNum);
+        reflectionSprite->data[2] = bridgeReflectionVerticalOffsets[bridgeType - 1];
+        LoadObjectHighBridgeReflectionPalette(objectEvent, reflectionSprite);
     }
     else
     {
-        LoadSpecialReflectionPalette(reflectionSprite);
+        LoadObjectRegularReflectionPalette(objectEvent, reflectionSprite);
     }
 }
 
-void LoadSpecialReflectionPalette(struct Sprite *sprite)
+// Apply a blue tint effect to a palette
+static void ApplyPondFilter(u8 paletteNum, u16 *dest) {
+  u8 i, val, r, g, b;
+  // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
+  u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
+  for (i = 0; i < 16; i++) {
+    r = src[i] & 0x1F;
+    g = (src[i] >> 5) & 0x1F;
+    b = (src[i] >> 10) & 0x1F;
+    b += 10;
+    if (b > 31)
+      b = 31;
+    *dest++ = (b << 10) | (g << 5) | r;
+  }
+}
+
+// Apply a ice tint effect to a palette
+static void ApplyIceFilter(u8 paletteNum, u16 *dest) {
+  u8 i, val, r, g, b;
+  // CpuCopy16(gPlttBufferUnfaded + 0x100 + paletteNum * 16, dest, 32);
+  u16 *src = gPlttBufferUnfaded + 0x100 + paletteNum * 16;
+  for (i = 0; i < 16; i++) {
+    r = src[i] & 0x1F;
+    r -= 5;
+    if (r > 31)
+      r = 0;
+    g = (src[i] >> 5) & 0x1F;
+    g += 3;
+    if (g > 31)
+      g = 31;
+    b = (src[i] >> 10) & 0x1F;
+    b += 16;
+    if (b > 31)
+      b = 31;
+    *dest++ = (b << 10) | (g << 5) | r;
+  }
+}
+
+static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    u32 R, G, B, i;
-	u16 color;
-	u16* pal;
-	struct SpritePalette reflectionPalette;
-	
-	CpuCopy16(&gPlttBufferUnfaded[0x100 + sprite->oam.paletteNum * 16], gReflectionPaletteBuffer, 32);
-	pal = gReflectionPaletteBuffer;
-	for (i = 0; i < 16; ++i)
-	{
-		color = pal[i];
-		R = GET_R(color) + 8;
-		G = GET_G(color) + 8;
-		B = GET_B(color) + 16;
-		if (R > 31) R = 31;
-		if (G > 31) G = 31;
-		if (B > 31) B = 31;
-		pal[i] = RGB(R, G, B);
-	}
-	reflectionPalette.data = gReflectionPaletteBuffer;
-	reflectionPalette.tag = GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum) + 0x1000;
-	LoadSpritePalette(&reflectionPalette);
-	sprite->oam.paletteNum = IndexOfSpritePaletteTag(reflectionPalette.tag);
-	UpdatePaletteGammaType(sprite->oam.paletteNum, GAMMA_ALT);
-	UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
+    const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+    const struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
+    u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
+    u16 paletteTag = baseTag == 0xFFFF ? mainSprite->oam.paletteNum + PAL_RAW_REFLECTION_OFFSET : baseTag + PAL_TAG_REFLECTION_OFFSET;
+    u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
+    if (paletteNum == 0xFF) { // Load filtered palette
+      u16 filteredData[16] = {0};
+      struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
+      if (sprite->data[7] == FALSE) {
+        ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
+      } else {
+        ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
+      }
+      paletteNum = LoadSpritePalette(&filteredPalette);
+      UpdateSpritePaletteWithWeather(paletteNum);
+    }
+    sprite->oam.paletteNum = paletteNum;
+    sprite->oam.objMode = 1; // Alpha blending
+}
+
+#define HIGH_BRIDGE_PAL_TAG 0x4010
+
+// When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
+// This is so the sprite blends in with the dark water metatile underneath the bridge.
+static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u16 blueData[16] = {0};
+    struct SpritePalette bluePalette = {.tag = HIGH_BRIDGE_PAL_TAG, .data = blueData};
+    u8 i;
+    for (i = 1; i < 16; i++) {
+      blueData[i] = 0x55c9;
+    }
+    sprite->oam.paletteNum = LoadSpritePalette(&bluePalette);
+    UpdateSpritePaletteWithWeather(sprite->oam.paletteNum);
 }
 
 static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
@@ -134,41 +176,65 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
     struct ObjectEvent *objectEvent;
     struct Sprite *mainSprite;
 
-    objectEvent = &gObjectEvents[reflectionSprite->sReflectionObjEventId];
+    objectEvent = &gObjectEvents[reflectionSprite->data[0]];
     mainSprite = &gSprites[objectEvent->spriteId];
-    if (!objectEvent->active || !objectEvent->hasReflection || objectEvent->localId != reflectionSprite->sReflectionObjEventLocalId)
+    if (!objectEvent->active || !objectEvent->hasReflection || objectEvent->localId != reflectionSprite->data[1])
     {
         reflectionSprite->inUse = FALSE;
+        FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
+        return;
     }
-    else
-    {
-        reflectionSprite->oam.shape = mainSprite->oam.shape;
-        reflectionSprite->oam.size = mainSprite->oam.size;
-        reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;
-        reflectionSprite->oam.tileNum = mainSprite->oam.tileNum;
-        reflectionSprite->subspriteTables = mainSprite->subspriteTables;
-        reflectionSprite->subspriteTableNum = mainSprite->subspriteTableNum;
-        reflectionSprite->invisible = mainSprite->invisible;
-        reflectionSprite->x = mainSprite->x;
-        reflectionSprite->y = mainSprite->y + GetReflectionVerticalOffset(objectEvent) + reflectionSprite->sReflectionVerticalOffset;
-        reflectionSprite->centerToCornerVecX = mainSprite->centerToCornerVecX;
-        reflectionSprite->centerToCornerVecY = mainSprite->centerToCornerVecY;
-        reflectionSprite->x2 = mainSprite->x2;
-        reflectionSprite->y2 = -mainSprite->y2;
-        reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
 
-        if (objectEvent->hideReflection == TRUE)
-            reflectionSprite->invisible = TRUE;
-
-        if (reflectionSprite->sIsStillReflection == FALSE)
-        {
-            // Sets the reflection sprite's rot/scale matrix to the appropriate
-            // matrix based on whether or not the main sprite is horizontally flipped.
-            // If the sprite is facing to the east, then it is flipped, and its matrixNum is 8.
-            reflectionSprite->oam.matrixNum = 0;
-            if (mainSprite->oam.matrixNum & ST_OAM_HFLIP)
-                reflectionSprite->oam.matrixNum = 1;
+    // Only filter palette if not using the high bridge blue palette
+    if (IndexOfSpritePaletteTag(HIGH_BRIDGE_PAL_TAG) != reflectionSprite->oam.paletteNum) {
+      u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
+      u16 paletteTag = baseTag == 0xFFFF ? mainSprite->oam.paletteNum + PAL_RAW_REFLECTION_OFFSET : baseTag + PAL_TAG_REFLECTION_OFFSET;
+      u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
+      if (paletteNum == 0xFF) { // Build filtered palette
+        u16 filteredData[16] = {0};
+        struct SpritePalette filteredPalette = {.tag = paletteTag, .data = filteredData};
+        // Free palette if unused
+        reflectionSprite->inUse = FALSE;
+        FieldEffectFreePaletteIfUnused(reflectionSprite->oam.paletteNum);
+        reflectionSprite->inUse = TRUE;
+        if (reflectionSprite->data[7] == FALSE) {
+          ApplyPondFilter(mainSprite->oam.paletteNum, filteredData);
+        } else {
+          ApplyIceFilter(mainSprite->oam.paletteNum, filteredData);
         }
+        paletteNum = LoadSpritePalette(&filteredPalette);
+        UpdateSpritePaletteWithWeather(paletteNum);
+      }
+      reflectionSprite->oam.paletteNum = paletteNum;
+    }
+    reflectionSprite->oam.shape = mainSprite->oam.shape;
+    reflectionSprite->oam.size = mainSprite->oam.size;
+    reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | ST_OAM_VFLIP;
+    reflectionSprite->oam.tileNum = mainSprite->oam.tileNum;
+    reflectionSprite->subspriteTables = mainSprite->subspriteTables;
+    reflectionSprite->subspriteTableNum = mainSprite->subspriteTableNum;
+    reflectionSprite->invisible = mainSprite->invisible;
+    reflectionSprite->x = mainSprite->x;
+    // reflectionSprite->data[2] holds an additional vertical offset, used by the high bridges on Route 120
+    reflectionSprite->y = mainSprite->y + GetReflectionVerticalOffset(objectEvent) + reflectionSprite->data[2];
+    reflectionSprite->centerToCornerVecX = mainSprite->centerToCornerVecX;
+    reflectionSprite->centerToCornerVecY = mainSprite->centerToCornerVecY;
+    reflectionSprite->x2 = mainSprite->x2;
+    reflectionSprite->y2 = -mainSprite->y2;
+    reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
+
+    if (objectEvent->hideReflection == TRUE)
+        reflectionSprite->invisible = TRUE;
+
+    // Check if the reflection is not still.
+    if (reflectionSprite->data[7] == FALSE)
+    {
+        // Sets the reflection sprite's rot/scale matrix to the appropriate
+        // matrix based on whether or not the main sprite is horizontally flipped.
+        // If the sprite is facing to the east, then it is flipped, and its matrixNum is 8.
+        reflectionSprite->oam.matrixNum = 0;
+        if (mainSprite->oam.matrixNum & ST_OAM_HFLIP)
+            reflectionSprite->oam.matrixNum = 1;
     }
 }
 
@@ -184,11 +250,12 @@ u8 CreateWarpArrowSprite(void)
     u8 spriteId;
     struct Sprite *sprite;
 
-    LoadFieldEffectPalette_(FLDEFFOBJ_ARROW, FALSE);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ARROW], 0, 0, 0x52);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
+        // Can use either gender's palette, so try to use the one that should be loaded
+        sprite->oam.paletteNum = LoadObjectEventPalette(gSaveBlock2Ptr->playerGender ? FLDEFF_PAL_TAG_MAY : FLDEFF_PAL_TAG_BRENDAN);
         sprite->oam.priority = 1;
         sprite->coordOffsetEnabled = TRUE;
         sprite->invisible = TRUE;
@@ -243,10 +310,11 @@ u32 FldEff_Shadow(void)
 
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
-    LoadFieldEffectPalette_(sShadowEffectTemplateIds[graphicsInfo->shadowSize], FALSE);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[sShadowEffectTemplateIds[graphicsInfo->shadowSize]], 0, 0, 0x94);
     if (spriteId != MAX_SPRITES)
     {
+        // SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 12));
+        gSprites[spriteId].oam.objMode = 1; // BLEND
         gSprites[spriteId].coordOffsetEnabled = TRUE;
         gSprites[spriteId].data[0] = gFieldEffectArguments[0];
         gSprites[spriteId].data[1] = gFieldEffectArguments[1];
@@ -273,12 +341,11 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         sprite->oam.priority = linkedSprite->oam.priority;
         sprite->x = linkedSprite->x;
         sprite->y = linkedSprite->y + sprite->data[3];
+        sprite->invisible = linkedSprite->invisible;
         if (!objectEvent->active || !objectEvent->hasShadow
          || MetatileBehavior_IsPokeGrass(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfableWaterOrUnderwater(objectEvent->currentMetatileBehavior)
-         || MetatileBehavior_IsSurfableWaterOrUnderwater(objectEvent->previousMetatileBehavior)
-         || MetatileBehavior_IsReflective(objectEvent->currentMetatileBehavior)
-         || MetatileBehavior_IsReflective(objectEvent->previousMetatileBehavior))
+         || MetatileBehavior_IsSurfableWaterOrUnderwater(objectEvent->previousMetatileBehavior))
         {
             FieldEffectStop(sprite, FLDEFF_SHADOW);
         }
@@ -498,7 +565,6 @@ u32 FldEff_JumpLongGrass(void)
     struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    LoadFieldEffectPalette(FLDEFFOBJ_SURF_BLOB);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_JUMP_LONG_GRASS], gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -1025,6 +1091,8 @@ u32 FldEff_SurfBlob(void)
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->tPlayerObjId = gFieldEffectArguments[2];
+        // Can use either gender's palette, so try to use the one that should be loaded
+        sprite->oam.paletteNum = LoadObjectEventPalette(gSaveBlock2Ptr->playerGender ? FLDEFF_PAL_TAG_MAY : FLDEFF_PAL_TAG_BRENDAN);
         sprite->data[3] = -1;
         sprite->data[6] = -1;
         sprite->data[7] = -1;
@@ -1300,13 +1368,13 @@ u32 FldEff_BerryTreeGrowthSparkle(void)
     struct Sprite *sprite;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 4);
-    LoadFieldEffectPalette(FLDEFFOBJ_SPARKLE);
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SPARKLE], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
+        UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SPARKLE], sprite);
         sprite->data[0] = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
     }
     return 0;
@@ -1321,20 +1389,20 @@ u32 FldEff_BerryTreeGrowthSparkle(void)
 
 u32 ShowTreeDisguiseFieldEffect(void)
 {
-    return ShowDisguiseFieldEffect(FLDEFF_TREE_DISGUISE, FLDEFFOBJ_TREE_DISGUISE);
+    return ShowDisguiseFieldEffect(FLDEFF_TREE_DISGUISE, FLDEFFOBJ_TREE_DISGUISE, 4);
 }
 
 u32 ShowMountainDisguiseFieldEffect(void)
 {
-    return ShowDisguiseFieldEffect(FLDEFF_MOUNTAIN_DISGUISE, FLDEFFOBJ_MOUNTAIN_DISGUISE);
+    return ShowDisguiseFieldEffect(FLDEFF_MOUNTAIN_DISGUISE, FLDEFFOBJ_MOUNTAIN_DISGUISE, 3);
 }
 
 u32 ShowSandDisguiseFieldEffect(void)
 {
-    return ShowDisguiseFieldEffect(FLDEFF_SAND_DISGUISE, FLDEFFOBJ_SAND_DISGUISE);
+    return ShowDisguiseFieldEffect(FLDEFF_SAND_DISGUISE, FLDEFFOBJ_SAND_DISGUISE, 2);
 }
 
-static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx)
+static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 fldEffObj, u8 paletteNum)
 {
     u8 spriteId;
     struct Sprite *sprite;
@@ -1344,11 +1412,11 @@ static u32 ShowDisguiseFieldEffect(u8 fldEff, u8 templateIdx)
         FieldEffectActiveListRemove(fldEff);
         return MAX_SPRITES;
     }
-    LoadFieldEffectPalette(templateIdx);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[templateIdx], 0, 0, 0);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[fldEffObj], 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
+        UpdateSpritePaletteByTemplate(gFieldEffectObjectTemplatePointers[fldEffObj], sprite);
         sprite->coordOffsetEnabled ++;
         sprite->sFldEff = fldEff;
         sprite->sLocalId = gFieldEffectArguments[0];
@@ -1694,24 +1762,6 @@ static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 elevatio
             }
         }
     }
-}
-
-static void LoadFieldEffectPalette_(u8 fieldEffect, bool8 updateGammaType)
-{
-    const struct SpriteTemplate *spriteTemplate;
-
-    spriteTemplate = gFieldEffectObjectTemplatePointers[fieldEffect];
-    if (spriteTemplate->paletteTag != 0xffff)
-    {
-        LoadObjectEventPalette(spriteTemplate->paletteTag);
-        if (updateGammaType)
-            UpdatePaletteGammaType(IndexOfSpritePaletteTag(spriteTemplate->paletteTag), GAMMA_NORMAL);
-    }
-}
-
-void LoadFieldEffectPalette(u8 fieldEffect)
-{
-    LoadFieldEffectPalette_(fieldEffect, TRUE);
 }
 
 // Unused, duplicates of data in event_object_movement.c

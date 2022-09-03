@@ -4,7 +4,6 @@
 #include "event_object_movement.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
-#include "field_weather.h"
 #include "pokemon.h"
 #include "script.h"
 #include "script_movement.h"
@@ -19,9 +18,6 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 #include "constants/trainer_types.h"
-
-extern const struct SpritePalette sObjectEventSpritePalettes[];
-extern const struct SpritePalette gObjectEventPal_Npc1;
 
 // this file's functions
 static u8 CheckTrainer(u8 objectEventId);
@@ -169,10 +165,13 @@ static const union AnimCmd *const sSpriteAnimTable_Icons[] =
     sSpriteAnim_Icons2
 };
 
+// TODO: Move these declarations into even_object_movement.h
+#define OBJ_EVENT_PAL_TAG_MAY 0x1110
+
 static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = 0x1100,   ////LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_BRENDAN)
+    .paletteTag = OBJ_EVENT_PAL_TAG_MAY,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_ExclamationQuestionMark,
@@ -183,7 +182,7 @@ static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 static const struct SpriteTemplate sSpriteTemplate_HeartIcon =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
+    .paletteTag = FLDEFF_PAL_TAG_NPC_1,
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_HeartIcon,
@@ -699,13 +698,13 @@ void TryPrepareSecondApproachingTrainer(void)
 
 u8 FldEff_ExclamationMarkIcon(void)
 {
-    u8 spriteId, paletteNum;
-
-    LoadObjectEventPalette(0x1100); //LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_BRENDAN)
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x52);
+    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_ExclamationQuestionMark, 0, 0, 0x53);
 
     if (spriteId != MAX_SPRITES)
+    {
         SetIconSpriteData(&gSprites[spriteId], FLDEFF_EXCLAMATION_MARK_ICON, 0);
+        UpdateSpritePaletteByTemplate(&sSpriteTemplate_ExclamationQuestionMark, &gSprites[spriteId]);
+    }
 
     return 0;
 }
@@ -727,7 +726,6 @@ u8 FldEff_HeartIcon(void)
 {
     u8 spriteId;
 
-    LoadSpritePalette(&gObjectEventPal_Npc1);
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_HeartIcon, 0, 0, 0x52);
 
     if (spriteId != MAX_SPRITES)
@@ -735,7 +733,7 @@ u8 FldEff_HeartIcon(void)
         struct Sprite *sprite = &gSprites[spriteId];
 
         SetIconSpriteData(sprite, FLDEFF_HEART_ICON, 0);
-        sprite->oam.paletteNum = 2;
+        UpdateSpritePaletteByTemplate(&sSpriteTemplate_HeartIcon, sprite);
     }
 
     return 0;

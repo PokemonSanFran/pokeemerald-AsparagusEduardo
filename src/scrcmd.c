@@ -15,6 +15,7 @@
 #include "field_effect.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -52,6 +53,7 @@
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
+typedef bool8 (*ScrFunc)(struct ScriptContext*);
 
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA u32 sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
@@ -134,9 +136,8 @@ bool8 ScrCmd_specialvar(struct ScriptContext *ctx)
 
 bool8 ScrCmd_callnative(struct ScriptContext *ctx)
 {
-    NativeFunc func = (NativeFunc)ScriptReadWord(ctx);
-
-    func();
+    u32 func = ScriptReadWord(ctx);
+    ((NativeFunc) func)();
     return FALSE;
 }
 
