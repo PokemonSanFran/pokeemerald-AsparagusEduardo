@@ -133,9 +133,9 @@ struct SpecialStatus
     u32 ppNotAffectedByPressure:1;
     u32 faintedHasReplacement:1;
     u32 focusBanded:1;
-    s32 dmg;
-    s32 physicalDmg;
-    s32 specialDmg;
+    int dmg;
+    int physicalDmg;
+    int specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
 };
@@ -159,7 +159,7 @@ struct WishFutureKnock
 {
     u8 futureSightCounter[MAX_BATTLERS_COUNT];
     u8 futureSightAttacker[MAX_BATTLERS_COUNT];
-    s32 futureSightDmg[MAX_BATTLERS_COUNT];
+    int futureSightDmg[MAX_BATTLERS_COUNT];
     u16 futureSightMove[MAX_BATTLERS_COUNT];
     u8 wishCounter[MAX_BATTLERS_COUNT];
     u8 wishMonId[MAX_BATTLERS_COUNT];
@@ -477,8 +477,8 @@ struct BattleStruct
 //       in include/constants/battle_script_commands.h
 struct BattleScripting
 {
-    s32 painSplitHp;
-    s32 bideDmg;
+    int painSplitHp;
+    int bideDmg;
     u8 multihitString[6];
     u8 dmgMultiplier;
     u8 twoTurnsMoveStringId;
@@ -569,10 +569,10 @@ struct BattleHealthboxInfo
 struct BattleBarInfo
 {
     u8 healthboxSpriteId;
-    s32 maxValue;
-    s32 oldValue;
-    s32 receivedValue;
-    s32 currValue;
+    int maxValue;
+    int oldValue;
+    int receivedValue;
+    int currValue;
 };
 
 struct BattleSpriteData
@@ -640,9 +640,9 @@ extern u8 gChosenMovePos;
 extern u16 gCurrentMove;
 extern u16 gChosenMove;
 extern u16 gCalledMove;
-extern s32 gBattleMoveDamage;
-extern s32 gHpDealt;
-extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
+extern int gBattleMoveDamage;
+extern int gHpDealt;
+extern int gTakenDmg[MAX_BATTLERS_COUNT];
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
 extern u8 gBattlerAttacker;

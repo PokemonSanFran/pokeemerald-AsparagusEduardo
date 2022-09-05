@@ -259,10 +259,10 @@ struct ContestGraphicsState
 
 struct ContestFinalStandings
 {
-    s32 totalPoints;
-    s32 round1Points;
-    s32 random;
-    s32 contestant;
+    int totalPoints;
+    int round1Points;
+    int random;
+    int contestant;
 };
 
 struct ContestTV
@@ -348,11 +348,11 @@ void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
 s8 Contest_GetMoveExcitement(u16 move);
 bool8 IsContestantAllowedToCombo(u8 contestant);
-void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
+void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, int x, int y, int fontId);
 void ResetContestLinkResults(void);
 bool8 SaveContestWinner(u8 rank);
 u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift);
 void ClearContestWinnerPicsInContestHall(void);
-void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language);
+void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, int language);
 
 #endif //GUARD_CONTEST_H

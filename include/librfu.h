@@ -305,7 +305,7 @@ struct STWIStatus
     u8 timerSelect;
     u8 unk_b;
 #if LIBRFU_VERSION >= 1026
-    s32 timerState;
+    int timerState;
 #else
     u32 timerState;
 #endif
@@ -436,7 +436,7 @@ struct RfuLinkStatus
 struct RfuFixed
 {
     void (*reqCallback)(u16, u16);
-    void (*fastCopyPtr)(const u8 **, u8 **, s32);
+    void (*fastCopyPtr)(const u8 **, u8 **, int);
     u16 fastCopyBuffer[24];
     u32 fastCopyBuffer2[12];
     u32 LLFBuffer[29];
@@ -473,7 +473,7 @@ extern struct RfuSlotStatusNI *gRfuSlotStatusNI[RFU_CHILD_MAX];
 extern struct RfuSlotStatusUNI *gRfuSlotStatusUNI[RFU_CHILD_MAX];
 
 // librfu_sio32id
-s32 AgbRFU_checkID(u8 maxTries);
+int AgbRFU_checkID(u8 maxTries);
 
 // Arguments with "bm..." specify slots of the form (0x01 << slot number) that are the object of a function operation.
 
@@ -598,7 +598,7 @@ void STWI_init_Callback_M(void);
 void STWI_init_Callback_S(void);
 void STWI_set_Callback_M(void *callbackM);
 void STWI_set_Callback_S(void (*callbackS)(u16));
-void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect);
+void STWI_init_timer(IntrFunc *interrupt, int timerSelect);
 void AgbRFU_SoftReset(void);
 void STWI_set_Callback_ID(void (*func)(void));
 u16 STWI_read_status(u8 index);

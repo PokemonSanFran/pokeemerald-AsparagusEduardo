@@ -127,14 +127,14 @@ static void CreateLinkPlayerSprites(void);
 static void ClearAllPlayerKeys(void);
 static void ResetAllPlayerLinkStates(void);
 static void UpdateHeldKeyCode(u16);
-static void UpdateAllLinkPlayers(u16 *, s32);
+static void UpdateAllLinkPlayers(u16 *, int);
 static u8 FlipVerticalAndClearForced(u8, u8);
 static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
 static void CreateLinkPlayerSprite(u8, u8);
 static void GetLinkPlayerCoords(u8, u16 *, u16 *);
 static u8 GetLinkPlayerFacingDirection(u8);
 static u8 GetLinkPlayerElevation(u8);
-static s32 GetLinkPlayerObjectStepTimer(u8);
+static int GetLinkPlayerObjectStepTimer(u8);
 static u8 GetLinkPlayerIdAt(s16, s16);
 static void SetPlayerFacingDirection(u8, u8);
 static void ZeroObjectEvent(struct ObjectEvent *);
@@ -153,7 +153,7 @@ static void InitLinkRoomStartMenuScript(void);
 static void RunInteractLocalPlayerScript(const u8 *);
 static void RunConfirmLeaveCableClubScript(void);
 static void InitMenuBasedScript(const u8 *);
-static void LoadCableClubPlayer(s32, s32, struct CableClubPlayer *);
+static void LoadCableClubPlayer(int, int, struct CableClubPlayer *);
 static bool32 IsCableClubPlayerUnfrozen(struct CableClubPlayer *);
 static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *);
 static u8 *TryGetTileEventScript(struct CableClubPlayer *);
@@ -427,7 +427,7 @@ static void UpdateMiscOverworldStates(void)
 
 void ResetGameStats(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_GAME_STATS; i++)
         SetGameStat(i, 0);
@@ -484,7 +484,7 @@ void LoadSaveblockObjEventScripts(void)
 {
     struct ObjectEventTemplate *mapHeaderObjTemplates = gMapHeader.events->objectEvents;
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
-    s32 i;
+    int i;
 
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
         savObjTemplates[i].script = mapHeaderObjTemplates[i].script;
@@ -492,7 +492,7 @@ void LoadSaveblockObjEventScripts(void)
 
 void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
 {
-    s32 i;
+    int i;
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
 
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
@@ -509,7 +509,7 @@ void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
 
 void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
 {
-    s32 i;
+    int i;
 
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
@@ -643,12 +643,12 @@ void SetWarpDestinationToMapWarp(s8 mapGroup, s8 mapNum, s8 warpId)
     SetWarpDestination(mapGroup, mapNum, warpId, -1, -1);
 }
 
-void SetDynamicWarp(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId)
+void SetDynamicWarp(int unused, s8 mapGroup, s8 mapNum, s8 warpId)
 {
     SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
 }
 
-void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetDynamicWarpWithCoords(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 {
     SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, x, y);
 }
@@ -742,8 +742,8 @@ void SetContinueGameWarpToDynamicWarp(int unused)
 
 const struct MapConnection *GetMapConnection(u8 dir)
 {
-    s32 i;
-    s32 count = gMapHeader.connections->count;
+    int i;
+    int count = gMapHeader.connections->count;
     const struct MapConnection *connection = gMapHeader.connections->connections;
 
     if (connection == NULL)
@@ -786,7 +786,7 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
 
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
-    s32 paletteIndex;
+    int paletteIndex;
 
     SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, -1, -1);
 
@@ -981,7 +981,7 @@ void SetDefaultFlashLevel(void)
         gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;
 }
 
-void SetFlashLevel(s32 flashLevel)
+void SetFlashLevel(int flashLevel)
 {
     if (flashLevel < 0 || flashLevel > gMaxFlashLevel)
         flashLevel = 0;
@@ -2278,7 +2278,7 @@ static void CheckRfuKeepAliveTimer(void)
 
 static void ResetAllPlayerLinkStates(void)
 {
-    s32 i;
+    int i;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
         sPlayerLinkStates[i] = PLAYER_LINK_STATE_IDLE;
 }
@@ -2286,8 +2286,8 @@ static void ResetAllPlayerLinkStates(void)
 // Returns true if all connected players are in state.
 static bool32 AreAllPlayersInLinkState(u16 state)
 {
-    s32 i;
-    s32 count = gFieldLinkPlayerCount;
+    int i;
+    int count = gFieldLinkPlayerCount;
 
     for (i = 0; i < count; i++)
         if (sPlayerLinkStates[i] != state)
@@ -2297,8 +2297,8 @@ static bool32 AreAllPlayersInLinkState(u16 state)
 
 static bool32 IsAnyPlayerInLinkState(u16 state)
 {
-    s32 i;
-    s32 count = gFieldLinkPlayerCount;
+    int i;
+    int count = gFieldLinkPlayerCount;
 
     for (i = 0; i < count; i++)
         if (sPlayerLinkStates[i] == state)
@@ -2416,10 +2416,10 @@ static void HandleLinkPlayerKeyInput(u32 playerId, u16 key, struct CableClubPlay
     }
 }
 
-static void UpdateAllLinkPlayers(u16 *keys, s32 selfId)
+static void UpdateAllLinkPlayers(u16 *keys, int selfId)
 {
     struct CableClubPlayer trainer;
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
@@ -2497,7 +2497,7 @@ static u16 GetDirectionForDpadKey(u16 key)
 // Overwrites the keys with 0x11
 static void ResetPlayerHeldKeys(u16 *keys)
 {
-    s32 i;
+    int i;
     for (i = 0; i < 4; i++)
         keys[i] = LINK_KEY_CODE_EMPTY;
 }
@@ -2680,7 +2680,7 @@ u16 SetStartedCableClubActivity(void)
     return 0;
 }
 
-static void LoadCableClubPlayer(s32 linkPlayerId, s32 myPlayerId, struct CableClubPlayer *trainer)
+static void LoadCableClubPlayer(int linkPlayerId, int myPlayerId, struct CableClubPlayer *trainer)
 {
     s16 x, y;
 
@@ -3008,7 +3008,7 @@ static u8 GetLinkPlayerElevation(u8 linkPlayerId)
     return objEvent->currentElevation;
 }
 
-static s32 GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
+static int GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
 {
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];

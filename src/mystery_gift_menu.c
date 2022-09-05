@@ -373,7 +373,7 @@ void CB2_MysteryGiftEReader(void)
     BuildOamBuffer();
 }
 
-static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
+static bool32 HandleMysteryGiftOrEReaderSetup(int isEReader)
 {
     switch (gMain.state)
     {
@@ -503,7 +503,7 @@ void MG_DrawTextBorder(u8 windowId)
 
 void MG_DrawCheckerboardPattern(u32 bg)
 {
-    s32 i = 0, j;
+    int i = 0, j;
 
     FillBgTilemapBufferRect(bg, 0x003, 0, 0, 32, 2, 0x11);
 
@@ -627,8 +627,8 @@ static u32 MysteryGift_HandleThreeOptionMenu(u8 * unused0, u16 * unused1, u8 whi
 {
     struct ListMenuTemplate listMenuTemplate = sListMenuTemplate_ThreeOptions;
     struct WindowTemplate windowTemplate = sWindowTemplate_ThreeOptions;
-    s32 width;
-    s32 response;
+    int width;
+    int response;
 
     if (whichMenu == 0)
         listMenuTemplate.items = sListMenuItems_CardsOrNews;
@@ -711,10 +711,10 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
 }
 
 // Handle the "Receive/Send/Toss" menu that appears when selecting Wonder Card/News
-static s32 HandleGiftSelectMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
+static int HandleGiftSelectMenu(u8 * textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
 {
     struct WindowTemplate windowTemplate;
-    s32 input;
+    int input;
 
     switch (*textState)
     {
@@ -844,7 +844,7 @@ static bool32 ExitWonderCardOrNews(bool32 isWonderNews, bool32 useCancel)
     }
 }
 
-static s32 AskDiscardGift(u8 * textState, u16 * windowId, bool32 isWonderNews)
+static int AskDiscardGift(u8 * textState, u16 * windowId, bool32 isWonderNews)
 {
     if (!isWonderNews)
         return DoMysteryGiftYesNo(textState, windowId, TRUE, gText_IfThrowAwayCardEventWontHappen);

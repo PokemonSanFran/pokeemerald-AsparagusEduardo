@@ -1119,7 +1119,7 @@ static void SpriteCB_SandPillar_End(struct Sprite *sprite)
 void InteractWithShieldOrTVDecoration(void)
 {
     s16 x, y;
-    s32 metatileId;
+    int metatileId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
 

@@ -749,7 +749,7 @@ static void Task_Hof_HandleExit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        s32 i;
+        int i;
 
         for (i = 0; i < PARTY_SIZE; i++)
         {
@@ -1117,8 +1117,8 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
 {
     u8 text[30];
     u8 *stringPtr;
-    s32 dexNumber;
-    s32 width;
+    int dexNumber;
+    int width;
 
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
@@ -1462,7 +1462,7 @@ static void UpdateDomeConfetti(struct ConfettiUtil *util)
     {
         // Move confetti down
         u8 sineIdx;
-        s32 rand;
+        int rand;
 
         util->yDelta++;
         util->yDelta += util->data[CONFETTI_EXTRA_Y];

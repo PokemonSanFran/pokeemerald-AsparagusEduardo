@@ -214,7 +214,7 @@ static void ShiftDaycareSlots(struct DayCare *daycare)
 
 static void ApplyDaycareExperience(struct Pokemon *mon)
 {
-    s32 i;
+    int i;
     bool8 firstMove;
     u16 learnedMove;
 
@@ -349,7 +349,7 @@ u8 GetNumLevelsGainedFromDaycare(void)
 
 static void ClearDaycareMonMail(struct DaycareMail *mail)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         mail->otName[i] = 0;
@@ -413,12 +413,12 @@ static u16 GetEggSpecies(u16 species)
     return species;
 }
 
-static s32 GetParentToInheritNature(struct DayCare *daycare)
+static int GetParentToInheritNature(struct DayCare *daycare)
 {
     u32 species[DAYCARE_MON_COUNT];
-    s32 i;
-    s32 dittoCount;
-    s32 parent = -1;
+    int i;
+    int dittoCount;
+    int parent = -1;
 
     // search for female gender
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
@@ -456,8 +456,8 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
 
 static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 {
-    s32 parent;
-    s32 natureTries = 0;
+    int parent;
+    int natureTries = 0;
 
     SeedRng2(gMain.vblankCounter2);
     parent = GetParentToInheritNature(daycare);
@@ -510,7 +510,7 @@ static void TriggerPendingDaycareMaleEgg(void)
 // elements to the left.
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
 {
-    s32 i, j;
+    int i, j;
     u8 temp[NUM_STATS];
 
     ivs[selectedIv] = 0xFF;
@@ -1001,7 +1001,7 @@ static u8 GetDaycarePokemonCount(void)
 // same egg groups.
 static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < EGG_GROUPS_PER_MON; i++)
     {

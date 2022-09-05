@@ -37,9 +37,9 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     u8 opposingPosition;
     u8 opposingBattler;
     u8 moveFlags;
-    s32 i, j;
-    s32 firstId;
-    s32 lastId; // + 1
+    int i, j;
+    int firstId;
+    int lastId; // + 1
     struct Pokemon *party = NULL;
     u16 move;
 
@@ -120,10 +120,10 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 battlerIn1, battlerIn2;
     u8 absorbingTypeAbility;
-    s32 firstId;
-    s32 lastId; // + 1
+    int firstId;
+    int lastId; // + 1
     struct Pokemon *party;
-    s32 i;
+    int i;
 
     if (HasSuperEffectiveMoveAgainstOpponents(TRUE) && Random() % 3 != 0)
         return FALSE;
@@ -259,7 +259,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 {
     u8 opposingPosition;
     u8 opposingBattler;
-    s32 i;
+    int i;
     u8 moveFlags;
     u16 move;
 
@@ -314,7 +314,7 @@ static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 static bool8 AreStatsRaised(void)
 {
     u8 buffedStatsValue = 0;
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
     {
@@ -328,10 +328,10 @@ static bool8 AreStatsRaised(void)
 static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
 {
     u8 battlerIn1, battlerIn2;
-    s32 firstId;
-    s32 lastId; // + 1
+    int firstId;
+    int lastId; // + 1
     struct Pokemon *party;
-    s32 i, j;
+    int i, j;
     u16 move;
     u8 moveFlags;
 
@@ -430,11 +430,11 @@ static bool8 ShouldSwitch(void)
 {
     u8 battlerIn1, battlerIn2;
     u8 *activeBattlerPtr; // Needed to match.
-    s32 firstId;
-    s32 lastId; // + 1
+    int firstId;
+    int lastId; // + 1
     struct Pokemon *party;
-    s32 i;
-    s32 availableToSwitch;
+    int i;
+    int availableToSwitch;
 
     if (gBattleMons[*(activeBattlerPtr = &gActiveBattler)].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
         return FALSE;
@@ -529,8 +529,8 @@ void AI_TrySwitchOrUseItem(void)
 {
     struct Pokemon *party;
     u8 battlerIn1, battlerIn2;
-    s32 firstId;
-    s32 lastId; // + 1
+    int firstId;
+    int lastId; // + 1
     u8 battlerIdentity = GetBattlerPosition(gActiveBattler);
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
@@ -544,7 +544,7 @@ void AI_TrySwitchOrUseItem(void)
         {
             if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
             {
-                s32 monToSwitchId = GetMostSuitableMonToSwitchInto();
+                int monToSwitchId = GetMostSuitableMonToSwitchInto();
                 if (monToSwitchId == PARTY_SIZE)
                 {
                     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
@@ -604,7 +604,7 @@ void AI_TrySwitchOrUseItem(void)
 
 static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8 *var)
 {
-    s32 i = 0;
+    int i = 0;
 
     while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
     {
@@ -630,16 +630,16 @@ u8 GetMostSuitableMonToSwitchInto(void)
 {
     u8 opposingBattler;
 #ifdef BUGFIX
-    s32 bestDmg;
+    int bestDmg;
 #else
-    u8 bestDmg; // Note: should be changed to s32 since it is also used for the actual damage done later
+    u8 bestDmg; // Note: should be changed to int since it is also used for the actual damage done later
 #endif
     u8 bestMonId;
     u8 battlerIn1, battlerIn2;
-    s32 firstId;
-    s32 lastId; // + 1
+    int firstId;
+    int lastId; // + 1
     struct Pokemon *party;
-    s32 i, j;
+    int i, j;
     u8 invalidMons;
     u16 move;
 
@@ -808,7 +808,7 @@ static u8 GetAI_ItemType(u8 itemId, const u8 *itemEffect) // NOTE: should take u
 static bool8 ShouldUseItem(void)
 {
     struct Pokemon *party;
-    s32 i;
+    int i;
     u8 validMons = 0;
     bool8 shouldUse = FALSE;
 

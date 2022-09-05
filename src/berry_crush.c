@@ -297,8 +297,8 @@ struct BerryCrushGame
     u16 pressingSpeed;
     s16 targetAPresses;
     s16 totalAPresses;
-    s32 powder;
-    s32 targetDepth;
+    int powder;
+    int targetDepth;
     u8 newDepth;
     bool8 noRoomForPowder:1; // Never read
     bool8 newRecord:1;
@@ -329,7 +329,7 @@ static void MainTask(u8);
 static void SetNamesAndTextSpeed(struct BerryCrushGame *);
 static void RunOrScheduleCommand(u16, u8, u8 *);
 static void SetPaletteFadeArgs(u8 *, bool8, u32, s8, u8, u8, u16);
-static s32 UpdateGame(struct BerryCrushGame *);
+static int UpdateGame(struct BerryCrushGame *);
 static void CreatePlayerNameWindows(struct BerryCrushGame *);
 static void DrawPlayerNameWindows(struct BerryCrushGame *);
 static void CopyPlayerNameWindowGfxToBg(struct BerryCrushGame *);
@@ -1171,7 +1171,7 @@ static void SetNamesAndTextSpeed(struct BerryCrushGame *game)
     }
 }
 
-static s32 ShowGameDisplay(void)
+static int ShowGameDisplay(void)
 {
     struct BerryCrushGame *game = GetBerryCrushGame();
     if (!game)
@@ -1269,7 +1269,7 @@ static s32 ShowGameDisplay(void)
     return 0;
 }
 
-static s32 HideGameDisplay(void)
+static int HideGameDisplay(void)
 {
     struct BerryCrushGame *game = GetBerryCrushGame();
     if (!game)
@@ -1333,7 +1333,7 @@ static s32 HideGameDisplay(void)
 }
 
 // Handles the crusher vibration and the timer
-static s32 UpdateGame(struct BerryCrushGame *game)
+static int UpdateGame(struct BerryCrushGame *game)
 {
     gSpriteCoordOffsetY = game->depth + game->vibration;
     SetGpuReg(REG_OFFSET_BG1VOFS, -gSpriteCoordOffsetY);
@@ -1373,7 +1373,7 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
     u8 spriteId;
     s16 distance, var1;
     s16 *data;
-    s32 amplitude;
+    int amplitude;
     s16 speed;
     u32 var2;
 
@@ -1600,11 +1600,11 @@ static void PrintResultsText(struct BerryCrushGame * game, u8 page, u8 sp14, u8 
     u8 i, j;
     u8 playerId = 0;
     u8 ranking = 0;
-    s32 x;
+    int x;
     u8 stat;
     struct BerryCrushGame_Results * results = &game->results;
     u32 xOffset;
-    s32 y;
+    int y;
 
     baseY -= 16;
     if (page == RESULTS_PAGE_CRUSHING)
@@ -2118,7 +2118,7 @@ static void SpriteCB_Sparkle_Init(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
     s16 xMult, xDiv;
-    s32 var;
+    int var;
     u32 zero = 0;
 
     var = 640;
@@ -2557,7 +2557,7 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
     u8 numPlayersPressed = 0;
     u8 i = 0;
     u16 timeDiff;
-    s32 temp = 0;
+    int temp = 0;
     struct BerryCrushGame_LinkState *linkState;
 
     for (i = 0; i < game->playerCount; i++)
@@ -2627,7 +2627,7 @@ static void HandlePartnerInput(struct BerryCrushGame *game)
     game->totalAPresses += numPlayersPressed;
     if (game->targetAPresses - game->totalAPresses > 0)
     {
-        temp = (s32)game->totalAPresses;
+        temp = (int)game->totalAPresses;
         temp = Q_24_8(temp);
         temp = MathUtil_Div32(temp, game->targetDepth);
         temp = Q_24_8_TO_INT(temp);
@@ -2991,7 +2991,7 @@ static u32 Cmd_HandleTimeUp(struct BerryCrushGame *game, u8 *args)
 static u32 Cmd_TabulateResults(struct BerryCrushGame *game, u8 *args)
 {
     u8 i, j, tempPlayerId;
-    s32 temp1, temp2;
+    int temp1, temp2;
     u16 tempStat;
 
     switch (game->cmdState)

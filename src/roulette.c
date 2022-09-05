@@ -2306,8 +2306,8 @@ static u8 GetMultiplier(u8 selectionId)
 
 static void UpdateWheelPosition(void)
 {
-    s32 bg2x;
-    s32 bg2y;
+    int bg2x;
+    int bg2y;
     SetGpuReg(REG_OFFSET_BG2PA, sRoulette->wheelRotation.a);
     SetGpuReg(REG_OFFSET_BG2PB, sRoulette->wheelRotation.b);
     SetGpuReg(REG_OFFSET_BG2PC, sRoulette->wheelRotation.c);
@@ -3434,7 +3434,7 @@ static void Task_PrintMinBet(u8 taskId)
 
 static void Task_PrintRouletteEntryMsg(u8 taskId)
 {
-    s32 minBet;
+    int minBet;
     PrintCoinsString(gTasks[taskId].tCoins);
     minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_0x8004)];
     ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);

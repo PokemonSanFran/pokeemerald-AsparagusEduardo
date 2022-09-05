@@ -944,7 +944,7 @@ static void Task_BicycleBgAnimation(u8 taskId)
     s16 bg1Speed;
     s16 bg2Speed;
     s16 bg3Speed;
-    s32 offset;
+    int offset;
 
     // Move BG1
     bg1Speed = gTasks[taskId].tBg1Speed;
@@ -1036,7 +1036,7 @@ void CycleSceneryPalette(u8 mode)
 
 static void SpriteCB_MovingScenery(struct Sprite *sprite)
 {
-    s32 x;
+    int x;
     s16 state = gIntroCredits_MovingSceneryState;
 
     if (state != INTROCRED_SCENERY_FROZEN)

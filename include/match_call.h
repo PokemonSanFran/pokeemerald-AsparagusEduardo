@@ -10,7 +10,7 @@ enum {
     MATCH_CALL_TYPE_GYMLEADER_ELITEFOUR
 };
 
-s32 GetRematchIdxByTrainerIdx(s32 trainerIdx);
+int GetRematchIdxByTrainerIdx(int trainerIdx);
 void InitMatchCallCounters(void);
 bool32 TryStartMatchCall(void);
 bool32 IsMatchCallTaskActive(void);

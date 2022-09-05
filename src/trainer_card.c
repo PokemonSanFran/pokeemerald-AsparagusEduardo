@@ -1010,7 +1010,7 @@ static void PrintIdOnCard(void)
 {
     u8 buffer[32];
     u8 *txtPtr;
-    s32 xPos;
+    int xPos;
     u32 top;
     txtPtr = StringCopy(buffer, gText_TrainerCardIDNo);
     ConvertIntToDecimalStringN(txtPtr, sData->trainerCard.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
@@ -1030,7 +1030,7 @@ static void PrintIdOnCard(void)
 
 static void PrintMoneyOnCard(void)
 {
-    s32 xOffset;
+    int xOffset;
     u8 top;
 
     if (!sData->isHoenn)
@@ -1063,7 +1063,7 @@ static u16 GetCaughtMonsCount(void)
 
 static void PrintPokedexOnCard(void)
 {
-    s32 xOffset;
+    int xOffset;
     u8 top;
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
@@ -1092,7 +1092,7 @@ static void PrintTimeOnCard(void)
 {
     u16 hours;
     u16 minutes;
-    s32 width;
+    int width;
     u32 x, y, totalWidth;
 
     if (!sData->isHoenn)

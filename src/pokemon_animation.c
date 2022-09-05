@@ -1179,7 +1179,7 @@ static void Anim_VerticalSlide(struct Sprite *sprite)
 
 static void VerticalJumps(struct Sprite *sprite)
 {
-    s32 counter = sprite->data[2];
+    int counter = sprite->data[2];
     if (counter > 384)
     {
         sprite->callback = WaitAnimEnd;
@@ -1215,7 +1215,7 @@ static void Anim_VerticalJumps_Big(struct Sprite *sprite)
 
 static void Anim_VerticalJumpsHorizontalJumps(struct Sprite *sprite)
 {
-    s32 counter = sprite->data[2];
+    int counter = sprite->data[2];
 
     if (counter > 768)
     {
@@ -1341,7 +1341,7 @@ static void Anim_ZigzagFast(struct Sprite *sprite)
 
 static void HorizontalShake(struct Sprite *sprite)
 {
-    s32 counter = sprite->data[2];
+    int counter = sprite->data[2];
 
     if (counter > 2304)
     {
@@ -1366,7 +1366,7 @@ static void Anim_HorizontalShake(struct Sprite *sprite)
 
 static void VerticalShake(struct Sprite *sprite)
 {
-    s32 counter = sprite->data[2];
+    int counter = sprite->data[2];
 
     if (counter > 2304)
     {
@@ -1399,7 +1399,7 @@ static void Anim_CircularVibrate(struct Sprite *sprite)
     else
     {
         s8 sign;
-        s32 index, amplitude;
+        int index, amplitude;
 
         if (!(sprite->data[2] & 1))
             sign = 1;
@@ -1733,7 +1733,7 @@ static void Anim_HorizontalPivot(struct Sprite *sprite)
 
 static void VerticalSlideWobble(struct Sprite *sprite)
 {
-    s32 var = 0;
+    int var = 0;
     s16 index = 0;
 
     if (sprite->data[2] == 0)
@@ -1767,7 +1767,7 @@ static void Anim_VerticalSlideWobble(struct Sprite *sprite)
 
 static void RisingWobble(struct Sprite *sprite)
 {
-    s32 var = 0;
+    int var = 0;
     s16 index = 0;
 
     if (sprite->data[2] == 0)
@@ -1801,7 +1801,7 @@ static void Anim_RisingWobble(struct Sprite *sprite)
 
 static void Anim_HorizontalSlideWobble(struct Sprite *sprite)
 {
-    s32 var;
+    int var;
     s16 index = 0;
 
     TryFlipX(sprite);
@@ -2718,7 +2718,7 @@ static void Anim_DeepVerticalSquishBounce(struct Sprite *sprite)
 
 static void Anim_HorizontalJumps(struct Sprite *sprite)
 {
-    s32 counter = sprite->data[2];
+    int counter = sprite->data[2];
     TryFlipX(sprite);
     if (counter > 512)
     {
@@ -2773,7 +2773,7 @@ static void HorizontalJumpsVerticalStretch_0(struct Sprite *sprite)
     }
     else
     {
-        s32 counter;
+        int counter;
 
         TryFlipX(sprite);
         counter = sprite->data[2];
@@ -2784,7 +2784,7 @@ static void HorizontalJumpsVerticalStretch_0(struct Sprite *sprite)
         }
         else
         {
-            s32 var = 8 * sAnims[sprite->data[0]].data;
+            int var = 8 * sAnims[sprite->data[0]].data;
             sprite->x2 = var * (counter % 128) / 128;
             sprite->y2 = -(Sin(counter % 128, 8));
             sprite->data[2] += 12;
@@ -2830,7 +2830,7 @@ static void HorizontalJumpsVerticalStretch_1(struct Sprite *sprite)
 
 static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite)
 {
-    s32 counter;
+    int counter;
 
     TryFlipX(sprite);
     counter = sprite->data[2];
@@ -2856,7 +2856,7 @@ static void HorizontalJumpsVerticalStretch_2(struct Sprite *sprite)
     }
     else
     {
-        s32 var = sAnims[sprite->data[0]].data;
+        int var = sAnims[sprite->data[0]].data;
 
         sprite->x2 = var * ((counter % 128) * 8) / 128 + 8 * -var;
         sprite->y2 = -(Sin(counter % 128, 8));
@@ -3873,7 +3873,7 @@ static void Anim_SwingConvex_Fast(struct Sprite *sprite)
 // Very similar to VerticalShake, used by back animations only
 static void VerticalShakeBack(struct Sprite *sprite)
 {
-    s32 counter = sprite->data[2];
+    int counter = sprite->data[2];
     if (counter > 2304)
     {
         sprite->callback = WaitAnimEnd;
@@ -4358,7 +4358,7 @@ static void TriangleDown(struct Sprite *sprite)
     }
     else
     {
-        s32 amplitude = sprite->data[5];
+        int amplitude = sprite->data[5];
         sprite->x2 += (sTriangleDownData[sprite->data[3]][0] * amplitude);
         sprite->y2 += (sTriangleDownData[sprite->data[3]][1] * sprite->data[5]); // Not using amplitude here. No reason for this.
         sprite->data[2]++;
@@ -4970,7 +4970,7 @@ static void ShrinkGrowVibrate(struct Sprite *sprite)
     {
         u8 posY_unsigned;
         s8 posY_signed;
-        s32 posY;
+        int posY;
         s16 index = (u16)(sprite->data[2] % sprite->data[6] * 256) / sprite->data[6] % 256;
         if (sprite->data[2] % 2 == 0)
         {

@@ -80,7 +80,7 @@ void CalcApprenticeChecksum(struct Apprentice *apprentice);
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(u8 lvlMode);
-s32 GetHighestLevelInPlayerParty(void);
+int GetHighestLevelInPlayerParty(void);
 u8 FacilityClassToGraphicsId(u8 facilityClass);
 bool32 ValidateBattleTowerRecord(u8 recordId); // unused
 void TrySetLinkBattleTowerEnemyPartyLevel(void);

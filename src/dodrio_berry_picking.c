@@ -399,7 +399,7 @@ static u32 Min(u32, u32);
 static u32 GetScore(u8);
 static void Task_ShowDodrioBerryPickingRecords(u8);
 static void Task_TryRunGfxFunc(u8);
-static void PrintRecordsText(u8, s32);
+static void PrintRecordsText(u8, int);
 static void SpriteCB_Status(struct Sprite *);
 static void SpriteCB_Dodrio(struct Sprite *);
 static u32 DoDodrioMissedAnim(struct Sprite *);
@@ -1917,7 +1917,7 @@ static void HandlePickBerries(void)
         column = sActiveColumnMap[0][0][j];
         if (sGame->berryState[column] == BERRYSTATE_PICKED)
         {
-            s32 delayRemaining;
+            int delayRemaining;
             u8 playerIdPicked, delayStage = sGame->difficulty[GetPlayerIdAtColumn(column)] / NUM_DIFFICULTIES;
             if (delayStage >= ARRAY_COUNT(sBerryFallDelays) - 1)
                 delayStage = ARRAY_COUNT(sBerryFallDelays) - 1;
@@ -1986,7 +1986,7 @@ static void HandlePickBerries(void)
 
 static bool32 TryPickBerry(u8 playerId, u8 pickState, u8 column)
 {
-    s32 pick = 0;
+    int pick = 0;
     u8 numPlayersIdx = sGame->numPlayers - 1;
     struct DodrioGame_Berries * berries = &sGame->player.berries;
 
@@ -2947,7 +2947,7 @@ static const u8 sRecordNumYCoords[NUM_RECORD_TYPES][2] = {{25}, {41}, {73}};
 static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
 {
     struct WindowTemplate window;
-    s32 i, width, widthCurr;
+    int i, width, widthCurr;
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
@@ -2997,10 +2997,10 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
 #undef tState
 #undef tWindowId
 
-static void PrintRecordsText(u8 windowId, s32 width)
+static void PrintRecordsText(u8 windowId, int width)
 {
-    s32 i, x, numWidth;
-    s32 recordNums[NUM_RECORD_TYPES];
+    int i, x, numWidth;
+    int recordNums[NUM_RECORD_TYPES];
     recordNums[0] = gSaveBlock2Ptr->berryPick.berriesPicked;
     recordNums[1] = gSaveBlock2Ptr->berryPick.bestScore;
     recordNums[2] = gSaveBlock2Ptr->berryPick.berriesPickedInRow;

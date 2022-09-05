@@ -28,9 +28,9 @@
 
 struct TestingBar
 {
-    s32 maxValue;
-    s32 oldValue;
-    s32 receivedValue;
+    int maxValue;
+    int oldValue;
+    int receivedValue;
     u32 unkC_0:5;
     u32 unk10;
 };
@@ -165,7 +165,7 @@ static void RemoveWindowOnHealthbox(u32 windowId);
 static void UpdateHpTextInHealthboxInDoubles(u8, s16, u8);
 static void UpdateStatusIconInHealthbox(u8);
 
-static void TextIntoHealthboxObject(void *, u8 *, s32);
+static void TextIntoHealthboxObject(void *, u8 *, int);
 static void SafariTextIntoHealthboxObject(void *, u8 *, u32);
 static void HpTextIntoHealthboxObject(void *, u8 *, u32);
 static void FillHealthboxObject(void *, u32, u32);
@@ -183,11 +183,11 @@ static void SpriteCB_StatusSummaryBalls_Exit(struct Sprite *);
 static void SpriteCB_StatusSummaryBalls_OnSwitchout(struct Sprite *);
 
 static u8 GetStatusIconForBattlerId(u8, u8);
-static s32 CalcNewBarValue(s32, s32, s32, s32 *, u8, u16);
-static u8 GetScaledExpFraction(s32, s32, s32, u8);
+static int CalcNewBarValue(int, int, int, int *, u8, u16);
+static u8 GetScaledExpFraction(int, int, int, u8);
 static void MoveBattleBarGraphically(u8, u8);
-static u8 CalcBarFilledPixels(s32, s32, s32, s32 *, u8 *, u8);
-static void Debug_TestHealthBar_Helper(struct TestingBar *, s32 *, u16 *);
+static u8 CalcBarFilledPixels(int, int, int, int *, u8 *, u8);
+static void Debug_TestHealthBar_Helper(struct TestingBar *, int *, u16 *);
 
 static const struct OamData sOamData_64x32 =
 {
@@ -739,7 +739,7 @@ static const struct WindowTemplate sHealthboxWindowTemplate = {
     .baseBlock = 0
 };
 
-static s32 DummiedOutFunction(s16 unused1, s16 unused2, s32 unused3)
+static int DummiedOutFunction(s16 unused1, s16 unused2, int unused3)
 {
     return 9;
 }
@@ -985,7 +985,7 @@ static void SpriteCB_HealthBoxOther(struct Sprite *sprite)
     sprite->y2 = gSprites[healthboxMainSpriteId].y2;
 }
 
-void SetBattleBarStruct(u8 battlerId, u8 healthboxSpriteId, s32 maxVal, s32 oldVal, s32 receivedValue)
+void SetBattleBarStruct(u8 battlerId, u8 healthboxSpriteId, int maxVal, int oldVal, int receivedValue)
 {
     gBattleSpritesDataPtr->battleBars[battlerId].healthboxSpriteId = healthboxSpriteId;
     gBattleSpritesDataPtr->battleBars[battlerId].maxValue = maxVal;
@@ -1028,7 +1028,7 @@ void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerO
 
 void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -1285,7 +1285,7 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
 static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 {
     u8 text[20];
-    s32 j, spriteTileNum;
+    int j, spriteTileNum;
     u8 *barFontGfx;
     u8 i, var, nature, healthBarSpriteId;
 
@@ -1348,7 +1348,7 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
 
 void SwapHpBarsWithHpText(void)
 {
-    s32 i;
+    int i;
     u8 healthBarSpriteId;
 
     for (i = 0; i < gBattlersCount; i++)
@@ -1424,7 +1424,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
 {
     bool8 isOpponent;
     s16 bar_X, bar_Y, bar_pos2_X, bar_data0;
-    s32 i, j, var;
+    int i, j, var;
     u8 summaryBarSpriteId;
     u8 ballIconSpritesIds[PARTY_SIZE];
     u8 taskId;
@@ -1647,7 +1647,7 @@ void Task_HidePartyStatusSummary(u8 taskId)
     bool8 isBattleStart;
     u8 summaryBarSpriteId;
     u8 battlerId;
-    s32 i;
+    int i;
 
     isBattleStart = gTasks[taskId].tIsBattleStart;
     summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
@@ -1713,7 +1713,7 @@ static void Task_HidePartyStatusSummary_BattleStart_1(u8 taskId)
 static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId)
 {
     u8 ballIconSpriteIds[PARTY_SIZE];
-    s32 i;
+    int i;
 
     u8 battlerId = gTasks[taskId].tBattler;
     if (--gTasks[taskId].tBlend == -1)
@@ -1752,7 +1752,7 @@ static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId)
 static void Task_HidePartyStatusSummary_DuringBattle(u8 taskId)
 {
     u8 ballIconSpriteIds[PARTY_SIZE];
-    s32 i;
+    int i;
     u8 battlerId = gTasks[taskId].tBattler;
 
     if (--gTasks[taskId].tBlend >= 0)
@@ -1965,7 +1965,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
 
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
 {
-    s32 i;
+    int i;
     u8 battlerId, healthBarSpriteId;
     u32 status, pltAdder;
     const u8 *statusGfxPtr;
@@ -2135,7 +2135,7 @@ static void UpdateLeftNoOfBallsTextOnHealthbox(u8 healthboxSpriteId)
 
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId)
 {
-    s32 maxHp, currHp;
+    int maxHp, currHp;
     u8 battlerId = gSprites[healthboxSpriteId].hMain_Battler;
 
     if (elementId == HEALTHBOX_ALL && !IsDoubleBattle())
@@ -2164,7 +2164,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
         {
             u16 species;
             u32 exp, currLevelExp;
-            s32 currExpBarValue, maxExpBarValue;
+            int currExpBarValue, maxExpBarValue;
             u8 level;
 
             LoadBattleBarGfx(3);
@@ -2208,9 +2208,9 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 #define B_EXPBAR_PIXELS 64
 #define B_HEALTHBAR_PIXELS 48
 
-s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
+int MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 {
-    s32 currentBarValue;
+    int currentBarValue;
 
     if (whichBar == HEALTH_BAR) // health bar
     {
@@ -2304,9 +2304,9 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
     }
 }
 
-static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 scale, u16 toAdd)
+static int CalcNewBarValue(int maxValue, int oldValue, int receivedValue, int *currValue, u8 scale, u16 toAdd)
 {
-    s32 ret, newValue;
+    int ret, newValue;
     scale *= 8;
 
     if (*currValue == -32768) // first function call
@@ -2336,7 +2336,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
 
     if (maxValue < scale) // handle cases of max var having less pixels than the whole bar
     {
-        s32 toAdd = Q_24_8(maxValue) / scale;
+        int toAdd = Q_24_8(maxValue) / scale;
 
         if (receivedValue < 0) // fill bar right
         {
@@ -2383,12 +2383,12 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     return ret;
 }
 
-static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *pixelsArray, u8 scale)
+static u8 CalcBarFilledPixels(int maxValue, int oldValue, int receivedValue, int *currValue, u8 *pixelsArray, u8 scale)
 {
     u8 pixels, filledPixels, totalPixels;
     u8 i;
 
-    s32 newValue = oldValue - receivedValue;
+    int newValue = oldValue - receivedValue;
     if (newValue < 0)
         newValue = 0;
     else if (newValue > maxValue)
@@ -2433,7 +2433,7 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
 
 // Unused
 // These two functions seem as if they were made for testing the health bar.
-static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *dest, s32 unused)
+static s16 Debug_TestHealthBar(struct TestingBar *barInfo, int *currValue, u16 *dest, int unused)
 {
     s16 ret, var;
 
@@ -2453,7 +2453,7 @@ static s16 Debug_TestHealthBar(struct TestingBar *barInfo, s32 *currValue, u16 *
     return ret;
 }
 
-static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, s32 *currValue, u16 *dest)
+static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, int *currValue, u16 *dest)
 {
     u8 pixels[6];
     u16 src[6];
@@ -2468,9 +2468,9 @@ static void Debug_TestHealthBar_Helper(struct TestingBar *barInfo, s32 *currValu
     CpuCopy16(src, dest, sizeof(src));
 }
 
-static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale)
+static u8 GetScaledExpFraction(int oldValue, int receivedValue, int maxValue, u8 scale)
 {
-    s32 newVal, result;
+    int newVal, result;
     s8 oldToMax, newToMax;
 
     scale *= 8;
@@ -2556,7 +2556,7 @@ static void HpTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 window
     CpuCopy32(windowTileData + 256, dest, windowWidth * TILE_SIZE_4BPP);
 }
 
-static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, s32 windowWidth)
+static void TextIntoHealthboxObject(void *dest, u8 *windowTileData, int windowWidth)
 {
     CpuCopy32(windowTileData + 256, dest + 256, windowWidth * TILE_SIZE_4BPP);
 // + 256 as that prevents the top 4 blank rows of sHealthboxWindowTemplate from being copied

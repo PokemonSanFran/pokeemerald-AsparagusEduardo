@@ -539,7 +539,7 @@ static void OpponentHandleGetMonData(void)
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
     u8 monToCheck;
-    s32 i;
+    int i;
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
@@ -567,7 +567,7 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
     u8 *src;
     s16 data16;
     u32 data32;
-    s32 size = 0;
+    int size = 0;
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -905,7 +905,7 @@ static void SetOpponentMonData(u8 monId)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBattler][3];
     struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBattler][3];
-    s32 i;
+    int i;
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -1614,7 +1614,7 @@ static void OpponentHandleChooseItem(void)
 
 static void OpponentHandleChoosePokemon(void)
 {
-    s32 chosenMonId;
+    int chosenMonId;
 
     if (*(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) == PARTY_SIZE)
     {
@@ -1622,7 +1622,7 @@ static void OpponentHandleChoosePokemon(void)
 
         if (chosenMonId == PARTY_SIZE)
         {
-            s32 battler1, battler2, firstId, lastId;
+            int battler1, battler2, firstId, lastId;
 
             if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             {

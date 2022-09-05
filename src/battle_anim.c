@@ -97,7 +97,7 @@ EWRAM_DATA bool8 gAnimScriptActive = FALSE;
 EWRAM_DATA u8 gAnimVisualTaskCount = 0;
 EWRAM_DATA u8 gAnimSoundTaskCount = 0;
 EWRAM_DATA struct DisableStruct *gAnimDisableStructPtr = NULL;
-EWRAM_DATA s32 gAnimMoveDmg = 0;
+EWRAM_DATA int gAnimMoveDmg = 0;
 EWRAM_DATA u16 gAnimMovePower = 0;
 EWRAM_DATA static u16 sAnimSpriteIndexArray[ANIM_SPRITE_INDEX_COUNT] = {0};
 EWRAM_DATA u8 gAnimFriendship = 0;
@@ -169,7 +169,7 @@ static void (* const sScriptCmdTable[])(void) =
 
 void ClearBattleAnimationVars(void)
 {
-    s32 i;
+    int i;
 
     sAnimFramesToWait = 0;
     gAnimScriptActive = FALSE;
@@ -207,7 +207,7 @@ void DoMoveAnim(u16 move)
 
 void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
 {
-    s32 i;
+    int i;
 
     if (!IsContest())
     {
@@ -284,7 +284,7 @@ void DestroyAnimSoundTask(u8 taskId)
 
 static void AddSpriteIndex(u16 index)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
     {
@@ -298,7 +298,7 @@ static void AddSpriteIndex(u16 index)
 
 static void ClearSpriteIndex(u16 index)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
     {
@@ -359,7 +359,7 @@ static void Cmd_unloadspritegfx(void)
 
 static void Cmd_createsprite(void)
 {
-    s32 i;
+    int i;
     const struct SpriteTemplate *template;
     u8 argVar;
     u8 argsCount;
@@ -417,7 +417,7 @@ static void Cmd_createvisualtask(void)
     u8 taskPriority;
     u8 taskId;
     u8 numArgs;
-    s32 i;
+    int i;
 
     sBattleAnimScriptPtr++;
 
@@ -475,7 +475,7 @@ static void Cmd_nop2(void)
 
 static void Cmd_end(void)
 {
-    s32 i;
+    int i;
     bool32 continuousAnim = FALSE;
 
     // Keep waiting as long as there are animations to be done.
@@ -750,7 +750,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 
 static void FlipBattlerBgTiles(void)
 {
-    s32 i, j;
+    int i, j;
     struct BattleAnimBgData animBg;
     u16 *ptr;
 
@@ -776,8 +776,8 @@ static void FlipBattlerBgTiles(void)
 
 void RelocateBattleBgPal(u16 paletteNum, u16 *dest, u32 offset, bool8 largeScreen)
 {
-    s32 i, j;
-    s32 size;
+    int i, j;
+    int size;
 
     if (!largeScreen)
         size = 32;
@@ -1627,7 +1627,7 @@ static void Cmd_createsoundtask(void)
 {
     TaskFunc func;
     u8 numArgs, taskId;
-    s32 i;
+    int i;
 
     sBattleAnimScriptPtr++;
     func = (TaskFunc)T2_READ_32(sBattleAnimScriptPtr);

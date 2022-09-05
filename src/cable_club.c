@@ -266,7 +266,7 @@ static void Task_LinkupConfirmWhenReady(u8 taskId)
 static void Task_LinkupAwaitConfirmation(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s32 linkPlayerCount = GetLinkPlayerCount_2();
+    int linkPlayerCount = GetLinkPlayerCount_2();
 
     if (CheckLinkCanceledBeforeConnection(taskId) == TRUE
      || CheckSioErrored(taskId) == TRUE

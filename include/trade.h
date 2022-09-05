@@ -9,7 +9,7 @@ extern u8 gSelectedTradeMonPositions[2];
 
 extern const struct WindowTemplate gTradeEvolutionSceneYesNoWindowTemplate;
 
-s32 GetGameProgressForLinkTrade(void);
+int GetGameProgressForLinkTrade(void);
 void CB2_StartCreateTradeMenu(void);
 void CB2_LinkTrade(void);
 int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isEventLegal);

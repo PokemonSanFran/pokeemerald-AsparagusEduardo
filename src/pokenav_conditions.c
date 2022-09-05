@@ -234,7 +234,7 @@ static u8 SwitchConditionSummaryIndex(u8 moveUp)
 
 bool32 LoadConditionGraphMenuGfx(void)
 {
-    s32 var;
+    int var;
     struct Pokenav_ConditionMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU);
     struct PokenavMonList *monListPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
 

@@ -926,8 +926,8 @@ u16 GetSaveBlocksPointersBaseOffset(void)
 
 u32 TryReadSpecialSaveSector(u8 sector, u8 *dst)
 {
-    s32 i;
-    s32 size;
+    int i;
+    int size;
     u8 *savData;
 
     if (sector != SECTOR_ID_TRAINER_HILL && sector != SECTOR_ID_RECORDED_BATTLE)
@@ -948,8 +948,8 @@ u32 TryReadSpecialSaveSector(u8 sector, u8 *dst)
 
 u32 TryWriteSpecialSaveSector(u8 sector, u8 *src)
 {
-    s32 i;
-    s32 size;
+    int i;
+    int size;
     u8 *savData;
     void *savDataBuffer;
 

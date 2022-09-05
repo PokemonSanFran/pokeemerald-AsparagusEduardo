@@ -42,16 +42,16 @@ static void HideLeftHeaderSubmenuSprites(bool32);
 static void HideLeftHeaderSprites(bool32);
 static void ShowLeftHeaderSprites(u32, bool32);
 static void ShowLeftHeaderSubmenuSprites(u32, bool32);
-static void MoveLeftHeader(struct Sprite *, s32, s32, s32);
+static void MoveLeftHeader(struct Sprite *, int, int, int);
 static void SpriteCB_MoveLeftHeader(struct Sprite *);
 static void InitPokenavMainMenuResources(void);
 static void CreateLeftHeaderSprites(void);
 static void InitHelpBar(void);
-static u32 LoopedTask_SlideMenuHeaderUp(s32);
-static u32 LoopedTask_SlideMenuHeaderDown(s32);
+static u32 LoopedTask_SlideMenuHeaderUp(int);
+static u32 LoopedTask_SlideMenuHeaderDown(int);
 static void DrawHelpBar(u32);
 static void SpriteCB_SpinningPokenav(struct Sprite *);
-static u32 LoopedTask_InitPokenavMenu(s32);
+static u32 LoopedTask_InitPokenavMenu(int);
 
 static const u16 sSpinningPokenav_Pal[] = INCBIN_U16("graphics/pokenav/nav_icon.gbapal");
 static const u32 sSpinningPokenav_Gfx[] = INCBIN_U32("graphics/pokenav/nav_icon.4bpp.lz");
@@ -330,7 +330,7 @@ bool32 WaitForPokenavShutdownFade(void)
     return TRUE;
 }
 
-static u32 LoopedTask_InitPokenavMenu(s32 state)
+static u32 LoopedTask_InitPokenavMenu(int state)
 {
     struct Pokenav_MainMenu *menu;
 
@@ -410,7 +410,7 @@ bool32 MainMenuLoopedTaskIsBusy(void)
     return IsLoopedTaskActive(menu->currentTaskId);
 }
 
-static u32 LoopedTask_SlideMenuHeaderUp(s32 state)
+static u32 LoopedTask_SlideMenuHeaderUp(int state)
 {
     switch (state)
     {
@@ -431,7 +431,7 @@ static u32 LoopedTask_SlideMenuHeaderUp(s32 state)
     }
 }
 
-static u32 LoopedTask_SlideMenuHeaderDown(s32 state)
+static u32 LoopedTask_SlideMenuHeaderDown(int state)
 {
     if (ChangeBgY(0, 384, BG_COORD_SUB) <= 0)
     {
@@ -507,7 +507,7 @@ void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, int a3, int a
     }
 }
 
-void PokenavFadeScreen(s32 fadeType)
+void PokenavFadeScreen(int fadeType)
 {
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
@@ -579,7 +579,7 @@ static void DrawHelpBar(u32 windowId)
 
 static void InitPokenavMainMenuResources(void)
 {
-    s32 i;
+    int i;
     u8 spriteId;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
@@ -630,13 +630,13 @@ void HideSpinningPokenavSprite(void)
 
 static void CreateLeftHeaderSprites(void)
 {
-    s32 i, spriteId;
+    int i, spriteId;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     LoadCompressedSpriteSheet(&sMenuLeftHeaderSpriteSheet);
     AllocSpritePalette(1);
     AllocSpritePalette(2);
-    for (i = 0; i < (s32)ARRAY_COUNT(menu->leftHeaderSprites); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(menu->leftHeaderSprites); i++)
     {
         // Create main left header
         spriteId = CreateSprite(&sLeftHeaderSpriteTemplate, 0, 0, 1);
@@ -733,10 +733,10 @@ void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide)
 
 void SetLeftHeaderSpritesInvisibility(void)
 {
-    s32 i;
+    int i;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
-    for (i = 0; i < (s32)ARRAY_COUNT(menu->leftHeaderSprites); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(menu->leftHeaderSprites); i++)
     {
         menu->leftHeaderSprites[i]->invisible = TRUE;
         menu->submenuLeftHeaderSprites[i]->invisible = TRUE;
@@ -755,7 +755,7 @@ bool32 AreLeftHeaderSpritesMoving(void)
 
 static void ShowLeftHeaderSprites(u32 startY, bool32 isOnRightSide)
 {
-    s32 start, end, i;
+    int start, end, i;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     if (!isOnRightSide)
@@ -763,7 +763,7 @@ static void ShowLeftHeaderSprites(u32 startY, bool32 isOnRightSide)
     else
         start = 256, end = 160;
 
-    for (i = 0; i < (s32)ARRAY_COUNT(menu->leftHeaderSprites); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(menu->leftHeaderSprites); i++)
     {
         menu->leftHeaderSprites[i]->y = startY;
         MoveLeftHeader(menu->leftHeaderSprites[i], start, end, 12);
@@ -772,7 +772,7 @@ static void ShowLeftHeaderSprites(u32 startY, bool32 isOnRightSide)
 
 static void ShowLeftHeaderSubmenuSprites(u32 startY, bool32 isOnRightSide)
 {
-    s32 start, end, i;
+    int start, end, i;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     if (!isOnRightSide)
@@ -780,7 +780,7 @@ static void ShowLeftHeaderSubmenuSprites(u32 startY, bool32 isOnRightSide)
     else
         start = 256, end = 192;
 
-    for (i = 0; i < (s32)ARRAY_COUNT(menu->submenuLeftHeaderSprites); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(menu->submenuLeftHeaderSprites); i++)
     {
         menu->submenuLeftHeaderSprites[i]->y = startY;
         MoveLeftHeader(menu->submenuLeftHeaderSprites[i], start, end, 12);
@@ -789,7 +789,7 @@ static void ShowLeftHeaderSubmenuSprites(u32 startY, bool32 isOnRightSide)
 
 static void HideLeftHeaderSprites(bool32 isOnRightSide)
 {
-    s32 start, end, i;
+    int start, end, i;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     if (!isOnRightSide)
@@ -797,7 +797,7 @@ static void HideLeftHeaderSprites(bool32 isOnRightSide)
     else
         start = 192, end = 256;
 
-    for (i = 0; i < (s32)ARRAY_COUNT(menu->leftHeaderSprites); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(menu->leftHeaderSprites); i++)
     {
         MoveLeftHeader(menu->leftHeaderSprites[i], start, end, 12);
     }
@@ -805,7 +805,7 @@ static void HideLeftHeaderSprites(bool32 isOnRightSide)
 
 static void HideLeftHeaderSubmenuSprites(bool32 isOnRightSide)
 {
-    s32 start, end, i;
+    int start, end, i;
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     if (!isOnRightSide)
@@ -813,13 +813,13 @@ static void HideLeftHeaderSubmenuSprites(bool32 isOnRightSide)
     else
         start = 192, end = 256;
 
-    for (i = 0; i < (s32)ARRAY_COUNT(menu->submenuLeftHeaderSprites); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(menu->submenuLeftHeaderSprites); i++)
     {
         MoveLeftHeader(menu->submenuLeftHeaderSprites[i], start, end, 12);
     }
 }
 
-static void MoveLeftHeader(struct Sprite *sprite, s32 startX, s32 endX, s32 duration)
+static void MoveLeftHeader(struct Sprite *sprite, int startX, int endX, int duration)
 {
     sprite->x = startX;
     sprite->data[0] = startX * 16;

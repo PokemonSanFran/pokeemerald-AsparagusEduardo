@@ -502,11 +502,11 @@ static void AddPointillismPoints(u16 point)
 
 static u16 ConvertColorToGrayscale(u16 *color)
 {
-    s32 clr = *color;
-    s32 r = GET_R(clr);
-    s32 g = GET_G(clr);
-    s32 b = GET_B(clr);
-    s32 gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
+    int clr = *color;
+    int r = GET_R(clr);
+    int g = GET_G(clr);
+    int b = GET_B(clr);
+    int gray = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
     return RGB2(gray, gray, gray);
 }
 

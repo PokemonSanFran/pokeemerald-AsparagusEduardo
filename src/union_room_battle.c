@@ -53,7 +53,7 @@ static const u8 sTextColors[] = { TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_C
 
 static void CB2_SetUpPartiesAndStartBattle(void)
 {
-    s32 i;
+    int i;
     StartUnionRoomBattle(BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER);
     for (i = 0; i < UNION_ROOM_PARTY_SIZE; i++)
     {
@@ -73,15 +73,15 @@ static void CB2_SetUpPartiesAndStartBattle(void)
     SetMainCallback2(CB2_InitBattle);
 }
 
-static void AddTextPrinterForUnionRoomBattle(u8 windowId, const u8 * str, u8 x, u8 y, s32 speed)
+static void AddTextPrinterForUnionRoomBattle(u8 windowId, const u8 * str, u8 x, u8 y, int speed)
 {
-    s32 letterSpacing = 0;
-    s32 lineSpacing = 1;
+    int letterSpacing = 0;
+    int lineSpacing = 1;
     FillWindowPixelBuffer(windowId, (sTextColors[0] << 4) | sTextColors[0]);
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, lineSpacing, sTextColors, speed, str);
 }
 
-static bool32 PrintUnionRoomBattleMessage(s16 * state, const u8 * str, s32 speed)
+static bool32 PrintUnionRoomBattleMessage(s16 * state, const u8 * str, int speed)
 {
     switch (*state)
     {

@@ -850,7 +850,7 @@ void MarkBattlerForControllerExec(u8 battlerId)
 
 void MarkBattlerReceivedLinkData(u8 battlerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < GetLinkPlayerCount(); i++)
         gBattleControllerExecFlags |= gBitTable[battlerId] << (i << 2);
@@ -896,7 +896,7 @@ void PrepareStringBattle(u16 stringId, u8 battler)
 
 void ResetSentPokesToOpponentValue(void)
 {
-    s32 i;
+    int i;
     u32 bits = 0;
 
     gSentPokesToOpponent[0] = 0;
@@ -911,7 +911,7 @@ void ResetSentPokesToOpponentValue(void)
 
 void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler)
 {
-    s32 i = 0;
+    int i = 0;
     u32 bits = 0;
 
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
@@ -936,7 +936,7 @@ void UpdateSentPokesToOpponentValue(u8 battler)
     }
     else
     {
-        s32 i;
+        int i;
         for (i = 1; i < gBattlersCount; i++)
             gSentPokesToOpponent[(i & BIT_FLANK) >> 1] |= gBitTable[gBattlerPartyIndexes[battler]];
     }
@@ -1067,7 +1067,7 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
 {
     u8 holdEffect;
     u16 *choicedMove = &gBattleStruct->choicedMove[battlerId];
-    s32 i;
+    int i;
 
     if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[battlerId].holdEffect;
@@ -1127,7 +1127,7 @@ bool8 AreAllMovesUnusable(void)
 
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
 {
-    s32 i;
+    int i;
     u8 imprisonedMoves = 0;
     u8 battlerSide = GetBattlerSide(battlerId);
 
@@ -1135,7 +1135,7 @@ u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
     {
         if (battlerSide != GetBattlerSide(i) && gStatuses3[i] & STATUS3_IMPRISONED_OTHERS)
         {
-            s32 j;
+            int j;
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 if (move == gBattleMons[i].moves[j])
@@ -1167,7 +1167,7 @@ enum
 u8 DoFieldEndTurnEffects(void)
 {
     u8 effect = 0;
-    s32 i;
+    int i;
 
     for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBattlerAttacker]; gBattlerAttacker++)
     {
@@ -1189,7 +1189,7 @@ u8 DoFieldEndTurnEffects(void)
             }
             for (i = 0; i < gBattlersCount - 1; i++)
             {
-                s32 j;
+                int j;
                 for (j = i + 1; j < gBattlersCount; j++)
                 {
                     if (GetWhoStrikesFirst(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE))
@@ -1678,7 +1678,7 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_DISABLE:  // disable
                 if (gDisableStructs[gActiveBattler].disableTimer != 0)
                 {
-                    s32 i;
+                    int i;
                     for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         if (gDisableStructs[gActiveBattler].disabledMove == gBattleMons[gActiveBattler].moves[i])
@@ -1853,7 +1853,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
          && gBattleStruct->arenaTurnCounter == 2
          && gBattleMons[0].hp != 0 && gBattleMons[1].hp != 0)
         {
-            s32 i;
+            int i;
 
             for (i = 0; i < 2; i++)
                 CancelMultiTurnMoves(i);
@@ -1879,7 +1879,7 @@ bool8 HandleFaintedMonActions(void)
         return FALSE;
     do
     {
-        s32 i;
+        int i;
         switch (gBattleStruct->faintedActionsState)
         {
         case 0:
@@ -1954,7 +1954,7 @@ bool8 HandleFaintedMonActions(void)
 
 void TryClearRageStatuses(void)
 {
-    s32 i;
+    int i;
     for (i = 0; i < gBattlersCount; i++)
     {
         if ((gBattleMons[i].status2 & STATUS2_RAGE) && gChosenMoveByBattler[i] != MOVE_RAGE)
@@ -1984,7 +1984,7 @@ enum
 u8 AtkCanceller_UnableToUseMove(void)
 {
     u8 effect = 0;
-    s32 *bideDmg = &gBattleScripting.bideDmg;
+    int *bideDmg = &gBattleScripting.bideDmg;
     do
     {
         switch (gBattleStruct->atkCancellerTracker)
@@ -2262,7 +2262,7 @@ bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2)
 {
     u8 playerId, flankId;
     struct Pokemon *party;
-    s32 i;
+    int i;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         return FALSE;
@@ -2445,7 +2445,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI)) // Why isn't that check done at the beginning?
     {
         u8 moveType;
-        s32 i;
+        int i;
         u16 move;
         u8 side;
         u8 target1;
@@ -3897,8 +3897,8 @@ static bool32 IsMonEventLegal(u8 battlerId)
 
 u8 IsMonDisobedient(void)
 {
-    s32 rnd;
-    s32 calc;
+    int rnd;
+    int calc;
     u8 obedienceLevel = 0;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))

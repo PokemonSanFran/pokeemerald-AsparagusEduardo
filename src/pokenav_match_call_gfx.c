@@ -54,7 +54,7 @@ struct Pokenav_MatchCallGfx
 };
 
 static bool32 GetCurrentLoopedTaskActive(void);
-static u32 LoopedTask_OpenMatchCall(s32);
+static u32 LoopedTask_OpenMatchCall(int);
 static void CreateMatchCallList(void);
 static void DestroyMatchCallList(void);
 static void FreeMatchCallSprites(void);
@@ -98,21 +98,21 @@ static struct Sprite *CreateTrainerPicSprite(void);
 static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *);
 static void SpriteCB_TrainerPicSlideOffscreen(struct Sprite *);
 static void SpriteCB_OptionsCursor(struct Sprite *);
-static u32 MatchCallListCursorDown(s32);
-static u32 MatchCallListCursorUp(s32);
-static u32 MatchCallListPageDown(s32);
-static u32 MatchCallListPageUp(s32);
-static u32 SelectMatchCallEntry(s32);
-static u32 MoveMatchCallOptionsCursor(s32);
-static u32 CancelMatchCallSelection(s32);
-static u32 DoMatchCallMessage(s32);
-static u32 DoTrainerCloseByMessage(s32);
-static u32 CloseMatchCallMessage(s32);
-static u32 ShowCheckPage(s32);
-static u32 ShowCheckPageUp(s32);
-static u32 ShowCheckPageDown(s32);
-static u32 ExitCheckPage(s32);
-static u32 ExitMatchCall(s32);
+static u32 MatchCallListCursorDown(int);
+static u32 MatchCallListCursorUp(int);
+static u32 MatchCallListPageDown(int);
+static u32 MatchCallListPageUp(int);
+static u32 SelectMatchCallEntry(int);
+static u32 MoveMatchCallOptionsCursor(int);
+static u32 CancelMatchCallSelection(int);
+static u32 DoMatchCallMessage(int);
+static u32 DoTrainerCloseByMessage(int);
+static u32 CloseMatchCallMessage(int);
+static u32 ShowCheckPage(int);
+static u32 ShowCheckPageUp(int);
+static u32 ShowCheckPageDown(int);
+static u32 ExitCheckPage(int);
+static u32 ExitMatchCall(int);
 
 static const u16 sMatchCallUI_Pal[] = INCBIN_U16("graphics/pokenav/match_call/ui.gbapal");
 static const u32 sMatchCallUI_Gfx[] = INCBIN_U32("graphics/pokenav/match_call/ui.4bpp.lz");
@@ -290,7 +290,7 @@ bool32 OpenMatchCall(void)
     return TRUE;
 }
 
-void CreateMatchCallLoopedTask(s32 index)
+void CreateMatchCallLoopedTask(int index)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     gfx->loopTaskId = CreateLoopedTask(sMatchCallLoopTaskFuncs[index], 1);
@@ -320,7 +320,7 @@ static bool32 GetCurrentLoopedTaskActive(void)
     return IsLoopedTaskActive(gfx->loopTaskId);
 }
 
-static u32 LoopedTask_OpenMatchCall(s32 state)
+static u32 LoopedTask_OpenMatchCall(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -393,7 +393,7 @@ static u32 LoopedTask_OpenMatchCall(s32 state)
     }
 }
 
-static u32 MatchCallListCursorDown(s32 state)
+static u32 MatchCallListCursorDown(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -430,7 +430,7 @@ static u32 MatchCallListCursorDown(s32 state)
     return LT_FINISH;
 }
 
-static u32 MatchCallListCursorUp(s32 state)
+static u32 MatchCallListCursorUp(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -467,7 +467,7 @@ static u32 MatchCallListCursorUp(s32 state)
     return LT_FINISH;
 }
 
-static u32 MatchCallListPageDown(s32 state)
+static u32 MatchCallListPageDown(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -504,7 +504,7 @@ static u32 MatchCallListPageDown(s32 state)
     return LT_FINISH;
 }
 
-static u32 MatchCallListPageUp(s32 state)
+static u32 MatchCallListPageUp(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -541,7 +541,7 @@ static u32 MatchCallListPageUp(s32 state)
     return LT_FINISH;
 }
 
-static u32 SelectMatchCallEntry(s32 state)
+static u32 SelectMatchCallEntry(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -560,7 +560,7 @@ static u32 SelectMatchCallEntry(s32 state)
     return LT_FINISH;
 }
 
-static u32 MoveMatchCallOptionsCursor(s32 state)
+static u32 MoveMatchCallOptionsCursor(int state)
 {
     struct Pokenav_MatchCallGfx *gfx;
     u16 cursorPos;
@@ -572,7 +572,7 @@ static u32 MoveMatchCallOptionsCursor(s32 state)
     return LT_FINISH;
 }
 
-static u32 CancelMatchCallSelection(s32 state)
+static u32 CancelMatchCallSelection(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -591,7 +591,7 @@ static u32 CancelMatchCallSelection(s32 state)
     return LT_FINISH;
 }
 
-static u32 DoMatchCallMessage(s32 state)
+static u32 DoMatchCallMessage(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -623,7 +623,7 @@ static u32 DoMatchCallMessage(s32 state)
     return LT_FINISH;
 }
 
-static u32 DoTrainerCloseByMessage(s32 state)
+static u32 DoTrainerCloseByMessage(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -649,7 +649,7 @@ static u32 DoTrainerCloseByMessage(s32 state)
     return LT_FINISH;
 }
 
-static u32 CloseMatchCallMessage(s32 state)
+static u32 CloseMatchCallMessage(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     u32 result = LT_INC_AND_PAUSE;
@@ -715,7 +715,7 @@ static u32 CloseMatchCallMessage(s32 state)
     return result;
 }
 
-static u32 ShowCheckPage(s32 state)
+static u32 ShowCheckPage(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -744,7 +744,7 @@ static u32 ShowCheckPage(s32 state)
     return LT_FINISH;
 }
 
-static u32 ShowCheckPageDown(s32 state)
+static u32 ShowCheckPageDown(int state)
 {
     int topId;
     int delta;
@@ -783,7 +783,7 @@ static u32 ShowCheckPageDown(s32 state)
     return LT_FINISH;
 }
 
-static u32 ExitCheckPage(s32 state)
+static u32 ExitCheckPage(int state)
 {
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
@@ -809,7 +809,7 @@ static u32 ExitCheckPage(s32 state)
     return LT_FINISH;
 }
 
-static u32 ShowCheckPageUp(s32 state)
+static u32 ShowCheckPageUp(int state)
 {
     int topId;
     int delta;
@@ -848,7 +848,7 @@ static u32 ShowCheckPageUp(s32 state)
     return LT_FINISH;
 }
 
-static u32 ExitMatchCall(s32 state)
+static u32 ExitMatchCall(int state)
 {
     switch (state)
     {

@@ -15,12 +15,12 @@
 #include "strings.h"
 #include "text.h"
 
-static u32 LoopedTask_TransitionMons(s32);
-static u32 LoopedTask_ExitConditionGraphMenu(s32);
-static u32 LoopedTask_MoveCursorNoTransition(s32);
-static u32 LoopedTask_SlideMonOut(s32);
-static u32 LoopedTask_OpenMonMarkingsWindow(s32);
-static u32 LoopedTask_CloseMonMarkingsWindow(s32);
+static u32 LoopedTask_TransitionMons(int);
+static u32 LoopedTask_ExitConditionGraphMenu(int);
+static u32 LoopedTask_MoveCursorNoTransition(int);
+static u32 LoopedTask_SlideMonOut(int);
+static u32 LoopedTask_OpenMonMarkingsWindow(int);
+static u32 LoopedTask_CloseMonMarkingsWindow(int);
 
 static u8 sInitialLoadId; // Never read
 
@@ -141,7 +141,7 @@ struct Pokenav_ConditionMenuGfx
 
 extern s8 GetConditionGraphMenuCurrentLoadIndex(void); // This function's declaration here is s8 vs. u8 in pokenav_conditions.c
 
-static u32 LoopedTask_OpenConditionGraphMenu(s32);
+static u32 LoopedTask_OpenConditionGraphMenu(int);
 static u32 GetConditionGraphMenuLoopedTaskActive(void);
 static void CreateConditionMonPic(u8);
 static void CreateMonMarkingsOrPokeballIndicators(void);
@@ -167,7 +167,7 @@ bool32 OpenConditionGraphMenu(void)
     return TRUE;
 }
 
-void CreateConditionGraphMenuLoopedTask(s32 id)
+void CreateConditionGraphMenuLoopedTask(int id)
 {
     struct Pokenav_ConditionMenuGfx *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX);
     menu->loopedTaskId = CreateLoopedTask(sLoopedTaskFuncs[id], 1);
@@ -186,7 +186,7 @@ static u32 GetConditionGraphMenuLoopedTaskActive(void)
     return IsLoopedTaskActive(menu->loopedTaskId);
 }
 
-static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
+static u32 LoopedTask_OpenConditionGraphMenu(int state)
 {
     struct Pokenav_ConditionMenuGfx *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX);
 
@@ -336,7 +336,7 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_ExitConditionGraphMenu(s32 state)
+static u32 LoopedTask_ExitConditionGraphMenu(int state)
 {
     struct Pokenav_ConditionMenuGfx *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX);
 
@@ -369,7 +369,7 @@ static u32 LoopedTask_ExitConditionGraphMenu(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_TransitionMons(s32 state)
+static u32 LoopedTask_TransitionMons(int state)
 {
     struct Pokenav_ConditionMenuGfx *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX);
     struct ConditionGraph *graph = GetConditionGraphPtr();
@@ -426,7 +426,7 @@ static u32 LoopedTask_TransitionMons(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_MoveCursorNoTransition(s32 state)
+static u32 LoopedTask_MoveCursorNoTransition(int state)
 {
     struct Pokenav_ConditionMenuGfx *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX);
 
@@ -470,7 +470,7 @@ static u32 LoopedTask_MoveCursorNoTransition(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_SlideMonOut(s32 state)
+static u32 LoopedTask_SlideMonOut(int state)
 {
     struct Pokenav_ConditionMenuGfx *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH_MENU_GFX);
 
@@ -508,7 +508,7 @@ static u32 LoopedTask_SlideMonOut(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_OpenMonMarkingsWindow(s32 state)
+static u32 LoopedTask_OpenMonMarkingsWindow(int state)
 {
     switch (state)
     {
@@ -527,7 +527,7 @@ static u32 LoopedTask_OpenMonMarkingsWindow(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_CloseMonMarkingsWindow(s32 state)
+static u32 LoopedTask_CloseMonMarkingsWindow(int state)
 {
     switch (state)
     {

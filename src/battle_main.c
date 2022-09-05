@@ -168,9 +168,9 @@ EWRAM_DATA u8 gChosenMovePos = 0;
 EWRAM_DATA u16 gCurrentMove = 0;
 EWRAM_DATA u16 gChosenMove = 0;
 EWRAM_DATA u16 gCalledMove = 0;
-EWRAM_DATA s32 gBattleMoveDamage = 0;
-EWRAM_DATA s32 gHpDealt = 0;
-EWRAM_DATA s32 gTakenDmg[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA int gBattleMoveDamage = 0;
+EWRAM_DATA int gHpDealt = 0;
+EWRAM_DATA int gTakenDmg[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastUsedItem = 0;
 EWRAM_DATA u8 gLastUsedAbility = 0;
 EWRAM_DATA u8 gBattlerAttacker = 0;
@@ -601,7 +601,7 @@ void CB2_InitBattle(void)
 
 static void CB2_InitBattleInternal(void)
 {
-    s32 i;
+    int i;
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -728,7 +728,7 @@ static void CB2_InitBattleInternal(void)
 static void BufferPartyVsScreenHealth_AtStart(void)
 {
     u16 flags = 0;
-    s32 i;
+    int i;
 
     BUFFER_PARTY_VS_SCREEN_STATUS(gPlayerParty, flags, i);
     gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsLo = flags;
@@ -738,7 +738,7 @@ static void BufferPartyVsScreenHealth_AtStart(void)
 
 static void SetPlayerBerryDataInBattleStruct(void)
 {
-    s32 i;
+    int i;
     struct BattleStruct *battleStruct = gBattleStruct;
     struct BattleEnigmaBerry *battleBerry = &battleStruct->multiBuffer.linkBattlerHeader.battleEnigmaBerry;
 
@@ -772,7 +772,7 @@ static void SetPlayerBerryDataInBattleStruct(void)
 
 static void SetAllPlayersBerryData(void)
 {
-    s32 i, j;
+    int i, j;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -823,7 +823,7 @@ static void SetAllPlayersBerryData(void)
     }
     else
     {
-        s32 numPlayers;
+        int numPlayers;
         struct BattleEnigmaBerry *src;
         u8 battlerId;
 
@@ -897,7 +897,7 @@ static void FindLinkBattleMaster(u8 numPlayers, u8 multiPlayerId)
     if (found == 0)
     {
         // If multiple different versions are being used, player 1 is master.
-        s32 i;
+        int i;
 
         for (i = 0; i < numPlayers; i++)
         {
@@ -1087,7 +1087,7 @@ static void CB2_HandleStartBattle(void)
             // Check if both players are using Emerald
             // to determine if the recorded battle rng
             // seed needs to be sent
-            s32 i;
+            int i;
             for (i = 0; i < 2 && (gLinkPlayers[i].version & 0xFF) == VERSION_EMERALD; i++);
 
             if (i == 2)
@@ -1395,7 +1395,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
 
 static void SetMultiPartnerMenuParty(u8 offset)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
@@ -1417,9 +1417,9 @@ static void SetMultiPartnerMenuParty(u8 offset)
 
 static void CB2_PreInitMultiBattle(void)
 {
-    s32 i;
+    int i;
     u8 playerMultiplierId;
-    s32 numPlayers = MAX_BATTLERS_COUNT;
+    int numPlayers = MAX_BATTLERS_COUNT;
     u8 blockMask = 0xF;
     u32 *savedBattleTypeFlags;
     void (**savedCallback)(void);
@@ -1550,7 +1550,7 @@ static void CB2_PreInitIngamePlayerPartnerBattle(void)
 static void CB2_HandleStartMultiBattle(void)
 {
     u8 playerMultiplayerId;
-    s32 id;
+    int id;
     u8 var;
 
     playerMultiplayerId = GetMultiplayerId();
@@ -1913,9 +1913,9 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
         sprite->sDelay--;
         if (sprite->sDelay == 0)
         {
-            s32 i;
-            s32 r2;
-            s32 r0;
+            int i;
+            int r2;
+            int r0;
 
             sprite->sDelay = 2;
             r2 = sprite->data[1] + sprite->data[3] * 32;
@@ -1946,7 +1946,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u32 nameHash = 0;
     u32 personalityValue;
     u8 fixedIV;
-    s32 i, j;
+    int i, j;
     u8 monsCount;
 
     if (trainerNum == TRAINER_SECRET_BASE)
@@ -2126,7 +2126,7 @@ static void BufferPartyVsScreenHealth_AtEnd(u8 taskId)
     struct Pokemon *party2 = NULL;
     u8 multiplayerId = gBattleScripting.multiplayerId;
     u32 flags;
-    s32 i;
+    int i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
@@ -2161,7 +2161,7 @@ static void BufferPartyVsScreenHealth_AtEnd(u8 taskId)
 
 void CB2_InitEndLinkBattle(void)
 {
-    s32 i;
+    int i;
     u8 taskId;
 
     SetHBlankCallback(NULL);
@@ -2248,7 +2248,7 @@ static void CB2_EndLinkBattle(void)
 
 static void EndLinkBattleInSteps(void)
 {
-    s32 i;
+    int i;
 
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
@@ -2401,7 +2401,7 @@ u32 GetBattleBgTemplateData(u8 arrayId, u8 caseId)
 
 static void CB2_InitAskRecordBattle(void)
 {
-    s32 i;
+    int i;
 
     SetHBlankCallback(NULL);
     SetVBlankCallback(NULL);
@@ -2773,7 +2773,7 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
 
 static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite)
 {
-    s32 i;
+    int i;
 
     if (--sprite->data[4] == 0)
     {
@@ -2954,7 +2954,7 @@ void EndBounceEffect(u8 battler, u8 which)
 static void SpriteCB_BounceEffect(struct Sprite *sprite)
 {
     u8 bouncerSpriteId = sprite->sBouncerSpriteId;
-    s32 index;
+    int index;
 
     if (sprite->sWhich == BOUNCE_HEALTHBOX)
         index = sprite->sSinIndex;
@@ -3020,7 +3020,7 @@ static void BattleMainCB1(void)
 
 static void BattleStartClearSetData(void)
 {
-    s32 i;
+    int i;
     u32 j;
     u8 *dataPtr;
 
@@ -3137,7 +3137,7 @@ static void BattleStartClearSetData(void)
 void SwitchInClearSetData(void)
 {
     struct DisableStruct disableStructCopy = gDisableStructs[gActiveBattler];
-    s32 i;
+    int i;
     u8 *ptr;
 
     if (gBattleMoves[gCurrentMove].effect != EFFECT_BATON_PASS)
@@ -3248,7 +3248,7 @@ void SwitchInClearSetData(void)
 
 void FaintClearSetData(void)
 {
-    s32 i;
+    int i;
     u8 *ptr;
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
@@ -3378,7 +3378,7 @@ static void BattleIntroPrepareBackgroundSlide(void)
 static void BattleIntroDrawTrainersOrMonsSprites(void)
 {
     u8 *ptr;
-    s32 i;
+    int i;
 
     if (gBattleControllerExecFlags)
         return;
@@ -3475,7 +3475,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
 
 static void BattleIntroDrawPartySummaryScreens(void)
 {
-    s32 i;
+    int i;
     struct HpAndStatus hpStatus[PARTY_SIZE];
 
     if (gBattleControllerExecFlags)
@@ -3803,8 +3803,8 @@ static void BattleIntroSwitchInPlayerMons(void)
 
 static void TryDoEventsBeforeFirstTurn(void)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
     u8 effect = 0;
 
     if (gBattleControllerExecFlags)
@@ -3894,7 +3894,7 @@ static void TryDoEventsBeforeFirstTurn(void)
 
 static void HandleEndTurn_ContinueBattle(void)
 {
-    s32 i;
+    int i;
 
     if (gBattleControllerExecFlags == 0)
     {
@@ -3918,7 +3918,7 @@ static void HandleEndTurn_ContinueBattle(void)
 
 void BattleTurnPassed(void)
 {
-    s32 i;
+    int i;
 
     TurnValuesCleanUp(TRUE);
     if (gBattleOutcome == 0)
@@ -3985,7 +3985,7 @@ u8 IsRunningFromBattleImpossible(void)
 {
     u8 holdEffect;
     u8 side;
-    s32 i;
+    int i;
 
     if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[gActiveBattler].holdEffect;
@@ -4048,7 +4048,7 @@ u8 IsRunningFromBattleImpossible(void)
 
 void SwitchPartyOrder(u8 battler)
 {
-    s32 i;
+    int i;
     u8 partyId1;
     u8 partyId2;
 
@@ -4091,7 +4091,7 @@ enum
 
 static void HandleTurnActionSelectionState(void)
 {
-    s32 i;
+    int i;
 
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
@@ -4520,7 +4520,7 @@ static void HandleTurnActionSelectionState(void)
 
 static bool8 AllAtActionConfirmed(void)
 {
-    s32 i, count;
+    int i, count;
 
     for (count = 0, i = 0; i < gBattlersCount; i++)
     {
@@ -4716,8 +4716,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 
 static void SetActionsAndBattlersTurnOrder(void)
 {
-    s32 turnOrderId = 0;
-    s32 i, j;
+    int turnOrderId = 0;
+    int i, j;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
     {
@@ -4817,7 +4817,7 @@ static void SetActionsAndBattlersTurnOrder(void)
 
 static void TurnValuesCleanUp(bool8 var0)
 {
-    s32 i;
+    int i;
     u8 *dataPtr;
 
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
@@ -4856,7 +4856,7 @@ void SpecialStatusesClear(void)
 {
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {
-        s32 i;
+        int i;
         u8 *dataPtr = (u8 *)(&gSpecialStatuses[gActiveBattler]);
 
         for (i = 0; i < sizeof(struct SpecialStatus); i++)
@@ -5140,7 +5140,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 
 static void TryEvolvePokemon(void)
 {
-    s32 i;
+    int i;
 
     while (gLeveledUpInBattle != 0)
     {

@@ -21,7 +21,7 @@ static EWRAM_DATA u32 sUnionObjRefreshTimer = 0;
 
 static u8 CreateTask_AnimateUnionRoomPlayers(void);
 static u32 IsUnionRoomPlayerInvisible(u32, u32);
-static void SetUnionRoomObjectFacingDirection(s32, s32, u8);
+static void SetUnionRoomObjectFacingDirection(int, int, u8);
 
 // + 2 is just to match, those elements are empty and never read
 static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][MAX_UNION_ROOM_LEADERS + 2] = {
@@ -135,13 +135,13 @@ static u8 GetUnionRoomPlayerGraphicsId(u32 gender, u32 id)
     return sUnionRoomObjGfxIds[gender][id % MAX_UNION_ROOM_LEADERS];
 }
 
-static void GetUnionRoomPlayerCoords(u32 leaderId, u32 memberId, s32 * x, s32 * y)
+static void GetUnionRoomPlayerCoords(u32 leaderId, u32 memberId, int * x, int * y)
 {
     *x = sUnionRoomPlayerCoords[leaderId][0] + sUnionRoomGroupOffsets[memberId][0] + MAP_OFFSET;
     *y = sUnionRoomPlayerCoords[leaderId][1] + sUnionRoomGroupOffsets[memberId][1] + MAP_OFFSET;
 }
 
-static bool32 IsUnionRoomPlayerAt(u32 leaderId, u32 memberId, s32 x, s32 y)
+static bool32 IsUnionRoomPlayerAt(u32 leaderId, u32 memberId, int x, int y)
 {
     if ((sUnionRoomPlayerCoords[leaderId][0] + sUnionRoomGroupOffsets[memberId][0] + MAP_OFFSET == x)
     &&  (sUnionRoomPlayerCoords[leaderId][1] + sUnionRoomGroupOffsets[memberId][1] + MAP_OFFSET == y))
@@ -214,7 +214,7 @@ static bool32 TryReleaseUnionRoomPlayerObjectEvent(u32 leaderId)
 
 u8 InitUnionRoomPlayerObjects(struct UnionRoomObject * players)
 {
-    s32 i;
+    int i;
 
     sUnionObjRefreshTimer = 0;
     sUnionObjWork = players;
@@ -359,7 +359,7 @@ static void AnimateUnionRoomPlayer(u32 leaderId, struct UnionRoomObject * object
 
 static void Task_AnimateUnionRoomPlayers(u8 taskId)
 {
-    s32 i;
+    int i;
     for (i = 0; i < MAX_UNION_ROOM_LEADERS; i++)
         AnimateUnionRoomPlayer(i, &sUnionObjWork[i]);
 }
@@ -381,7 +381,7 @@ static void DestroyTask_AnimateUnionRoomPlayers(void)
 
 void DestroyUnionRoomPlayerObjects(void)
 {
-    s32 i;
+    int i;
     for (i = 0; i < MAX_UNION_ROOM_LEADERS; i++)
     {
         if (!IsUnionRoomPlayerHidden(i))
@@ -394,12 +394,12 @@ void DestroyUnionRoomPlayerObjects(void)
     DestroyTask_AnimateUnionRoomPlayers();
 }
 
-void CreateUnionRoomPlayerSprites(u8 * spriteIds, s32 leaderId)
+void CreateUnionRoomPlayerSprites(u8 * spriteIds, int leaderId)
 {
-    s32 memberId;
+    int memberId;
     for (memberId = 0; memberId < MAX_RFU_PLAYERS; memberId++)
     {
-        s32 id = UR_PLAYER_SPRITE_ID(leaderId, memberId);
+        int id = UR_PLAYER_SPRITE_ID(leaderId, memberId);
         spriteIds[id] = CreateVirtualObject(OBJ_EVENT_GFX_MAN_4,
                                            id - UR_SPRITE_START_ID,
                                            sUnionRoomPlayerCoords[leaderId][0] + sUnionRoomGroupOffsets[memberId][0],
@@ -411,7 +411,7 @@ void CreateUnionRoomPlayerSprites(u8 * spriteIds, s32 leaderId)
 
 void DestroyUnionRoomPlayerSprites(u8 * spriteIds)
 {
-    s32 i;
+    int i;
     for (i = 0; i < NUM_UNION_ROOM_SPRITES; i++)
         DestroySprite(&gSprites[spriteIds[i]]);
 }
@@ -420,7 +420,7 @@ void DestroyUnionRoomPlayerSprites(u8 * spriteIds)
 // to prevent the player from walking through the group member sprites.
 void SetTilesAroundUnionRoomPlayersPassable(void)
 {
-    s32 i, memberId, x, y;
+    int i, memberId, x, y;
     for (i = 0; i < MAX_UNION_ROOM_LEADERS; i++)
     {
         for (memberId = 0; memberId < MAX_RFU_PLAYERS; memberId++)
@@ -448,8 +448,8 @@ static bool32 IsUnionRoomPlayerInvisible(u32 leaderId, u32 memberId)
 
 static void SpawnGroupMember(u32 leaderId, u32 memberId, u8 graphicsId, struct RfuGameData * gameData)
 {
-    s32 x, y;
-    s32 id = UR_PLAYER_SPRITE_ID(leaderId, memberId);
+    int x, y;
+    int id = UR_PLAYER_SPRITE_ID(leaderId, memberId);
     if (IsUnionRoomPlayerInvisible(leaderId, memberId) == TRUE)
     {
         SetVirtualObjectInvisibility(id - UR_SPRITE_START_ID, FALSE);
@@ -463,7 +463,7 @@ static void SpawnGroupMember(u32 leaderId, u32 memberId, u8 graphicsId, struct R
 
 static void DespawnGroupMember(u32 leaderId, u32 memberId)
 {
-    s32 x, y;
+    int x, y;
     SetVirtualObjectSpriteAnim(UR_PLAYER_SPRITE_ID(leaderId, memberId) - UR_SPRITE_START_ID, UNION_ROOM_SPAWN_OUT);
     GetUnionRoomPlayerCoords(leaderId, memberId, &x, &y);
     MapGridSetMetatileImpassabilityAt(x, y, FALSE);
@@ -472,7 +472,7 @@ static void DespawnGroupMember(u32 leaderId, u32 memberId)
 static void AssembleGroup(u32 leaderId, struct RfuGameData * gameData)
 {
     s16 x, y, x2, y2;
-    s32 i;
+    int i;
 
     PlayerGetDestCoords(&x, &y);
     player_get_pos_including_state_based_drift(&x2, &y2);
@@ -523,7 +523,7 @@ static void SpawnGroupLeaderAndMembers(u32 leaderId, struct RfuGameData * gameDa
 
 static void DespawnGroupLeaderAndMembers(u32 leaderId, struct RfuGameData *gameData)
 {
-    s32 i;
+    int i;
     DespawnGroupLeader(leaderId);
     for (i = 0; i < MAX_RFU_PLAYERS; i++)
         DespawnGroupMember(leaderId, i);
@@ -531,7 +531,7 @@ static void DespawnGroupLeaderAndMembers(u32 leaderId, struct RfuGameData *gameD
 
 static void UpdateUnionRoomPlayerSprites(struct WirelessLink_URoom *uroom)
 {
-    s32 i;
+    int i;
     struct RfuPlayer * leaders;
     sUnionObjRefreshTimer = 0;
     for (i = 0, leaders = uroom->playerList->players; i < MAX_UNION_ROOM_LEADERS; i++)
@@ -557,7 +557,7 @@ void HandleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom)
 bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdPtr, s16 *leaderIdPtr, u8 *spriteIds)
 {
     s16 x, y;
-    s32 i, memberId;
+    int i, memberId;
     struct RfuPlayer * leaders;
     if (!IsPlayerStandingStill())
         return FALSE;
@@ -567,7 +567,7 @@ bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdP
     {
         for (memberId = 0; memberId < MAX_RFU_PLAYERS; memberId++)
         {
-            s32 id = UR_PLAYER_SPRITE_ID(i, memberId);
+            int id = UR_PLAYER_SPRITE_ID(i, memberId);
             
             // Is the player in front of a group member position?
             if (x != sUnionRoomPlayerCoords[i][0] + sUnionRoomGroupOffsets[memberId][0] + 7)
@@ -593,7 +593,7 @@ bool32 TryInteractWithUnionRoomMember(struct RfuPlayerList *list, s16 *memberIdP
     return FALSE;
 }
 
-static void SetUnionRoomObjectFacingDirection(s32 memberId, s32 leaderId, u8 newDirection)
+static void SetUnionRoomObjectFacingDirection(int memberId, int leaderId, u8 newDirection)
 {
     TurnVirtualObject(MAX_RFU_PLAYERS * leaderId - UR_SPRITE_START_ID + memberId, newDirection);
     // should be line below, but order is swapped here

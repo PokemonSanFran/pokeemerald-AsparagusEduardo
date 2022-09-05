@@ -288,7 +288,7 @@ bool8 InSlateportBattleTent(void)
 
 static void GenerateInitialRentalMons(void)
 {
-    s32 i, j;
+    int i, j;
     u8 firstMonId;
     u16 monSetId;
     u16 currSpecies;
@@ -351,11 +351,11 @@ static void GenerateInitialRentalMons(void)
 static void GenerateOpponentMons(void)
 {
     u16 trainerId;
-    s32 i, j, k;
+    int i, j, k;
     const u16 *monSet;
     u16 species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
-    s32 numMons = 0;
+    int numMons = 0;
 
     gFacilityTrainers = gSlateportBattleTentTrainers;
     gFacilityTrainerMons = gSlateportBattleTentMons;

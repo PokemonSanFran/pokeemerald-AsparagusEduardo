@@ -108,11 +108,11 @@ void FreeBattleSpritesData(void)
 // Pokemon chooses move to use in Battle Palace rather than player
 u16 ChooseMoveAndTargetInBattlePalace(void)
 {
-    s32 i, var1, var2;
-    s32 chosenMoveId = -1;
+    int i, var1, var2;
+    int chosenMoveId = -1;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
-    s32 percent = Random() % 100;
+    int percent = Random() % 100;
 
     // Heavy variable re-use here makes this hard to read without defines
     // Possibly just optimization? might still match with additional vars
@@ -881,7 +881,7 @@ static void ClearSpritesBattlerHealthboxAnimData(void)
 
 void CopyAllBattleSpritesInvisibilities(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < gBattlersCount; i++)
         gBattleSpritesDataPtr->battlerData[i].invisible = gSprites[gBattlerSpriteIds[i]].invisible;
@@ -993,7 +993,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 castform)
 
 void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
 {
-    s32 i, position, palOffset;
+    int i, position, palOffset;
 
     if (!loadMonSprite)
     {
@@ -1118,7 +1118,7 @@ void HandleBattleLowHpMusicChange(void)
 
 void SetBattlerSpriteAffineMode(u8 affineMode)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -1220,8 +1220,8 @@ void HideBattlerShadowSprite(u8 battlerId)
 void FillAroundBattleWindows(void)
 {
     u16 *vramPtr = (u16 *)(VRAM + 0x240);
-    s32 i;
-    s32 j;
+    int i;
+    int j;
 
     for (i = 0; i < 9; i++)
     {
@@ -1292,7 +1292,7 @@ void FreeMonSpritesGfx(void)
 bool32 ShouldPlayNormalMonCry(struct Pokemon *mon)
 {
     s16 hp, maxHP;
-    s32 barLevel;
+    int barLevel;
 
     if (GetMonData(mon, MON_DATA_STATUS) & (STATUS1_ANY | STATUS1_TOXIC_COUNTER))
         return FALSE;

@@ -23,7 +23,7 @@ enum {
 
 struct MysteryGiftLink
 {
-    s32 state;
+    int state;
     u8 sendPlayerId;
     u8 recvPlayerId;
     u16 recvIdent;

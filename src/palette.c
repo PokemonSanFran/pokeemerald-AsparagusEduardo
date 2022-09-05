@@ -239,8 +239,8 @@ static void PaletteStruct_Run(u8 a1, u32 *unkFlags)
 
 static void PaletteStruct_Copy(struct PaletteStruct *palStruct, u32 *unkFlags)
 {
-    s32 srcIndex;
-    s32 srcCount;
+    int srcIndex;
+    int srcCount;
     u8 i = 0;
     u16 srcOffset = palStruct->srcIndex * palStruct->template->size;
 
@@ -319,7 +319,7 @@ static void PaletteStruct_TryEnd(struct PaletteStruct *pal)
 {
     if (pal->countdown2 == 0)
     {
-        s32 state = pal->template->state;
+        int state = pal->template->state;
 
         if (state == 0)
         {
@@ -771,7 +771,7 @@ static u8 UpdateHardwarePaletteFade(void)
     }
     else
     {
-        s32 y = gPaletteFade.y--;
+        int y = gPaletteFade.y--;
         if (y - 1 < gPaletteFade.targetY)
         {
             gPaletteFade.hardwareFadeFinishing++;
@@ -853,7 +853,7 @@ void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u16 color)
 
 void TintPalette_GrayScale(u16 *palette, u16 count)
 {
-    s32 r, g, b, i;
+    int r, g, b, i;
     u32 gray;
 
     for (i = 0; i < count; i++)
@@ -870,7 +870,7 @@ void TintPalette_GrayScale(u16 *palette, u16 count)
 
 void TintPalette_GrayScale2(u16 *palette, u16 count)
 {
-    s32 r, g, b, i;
+    int r, g, b, i;
     u32 gray;
 
     for (i = 0; i < count; i++)
@@ -892,7 +892,7 @@ void TintPalette_GrayScale2(u16 *palette, u16 count)
 
 void TintPalette_SepiaTone(u16 *palette, u16 count)
 {
-    s32 r, g, b, i;
+    int r, g, b, i;
     u32 gray;
 
     for (i = 0; i < count; i++)
@@ -916,7 +916,7 @@ void TintPalette_SepiaTone(u16 *palette, u16 count)
 
 void TintPalette_CustomTone(u16 *palette, u16 count, u16 rTone, u16 gTone, u16 bTone)
 {
-    s32 r, g, b, i;
+    int r, g, b, i;
     u32 gray;
 
     for (i = 0; i < count; i++)

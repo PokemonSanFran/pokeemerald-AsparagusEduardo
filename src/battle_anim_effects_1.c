@@ -2999,14 +2999,14 @@ bool8 moveAlongLinearPath(struct Sprite *sprite)
 {
     u16 xStartPos = (u8)(sprite->data[5] >> 8);
     u16 yStartPos = (u8)sprite->data[5];
-    s32 xEndPos = (u8)(sprite->data[6] >> 8);
-    s32 yEndPos = (u8)sprite->data[6];
+    int xEndPos = (u8)(sprite->data[6] >> 8);
+    int yEndPos = (u8)sprite->data[6];
     s16 totalTime = sprite->data[7] >> 8;
     s16 currentTime = sprite->data[7] & 0xFF;
     s16 yEndPos_2;
     s16 r0;
-    s32 var1;
-    s32 vaxEndPos;
+    int var1;
+    int vaxEndPos;
 
     if (xEndPos == 0)
         xEndPos = -32;

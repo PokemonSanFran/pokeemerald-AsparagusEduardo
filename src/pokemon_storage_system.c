@@ -481,8 +481,8 @@ struct PokemonStorageSystemData
     u16 menuWindowId;
     struct Sprite *cursorSprite;
     struct Sprite *cursorShadowSprite;
-    s32 cursorNewX;
-    s32 cursorNewY;
+    int cursorNewX;
+    int cursorNewY;
     u32 cursorSpeedX;
     u32 cursorSpeedY;
     s16 cursorTargetX;
@@ -1325,9 +1325,9 @@ static const u8 sHandCursorShadow_Gfx[] = INCBIN_U8("graphics/pokemon_storage/ha
 //------------------------------------------------------------------------------
 
 
-void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 bytesToBuffer)
+void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, int bytesToBuffer)
 {
-    s32 i, tileBytesToBuffer, remainingBytes;
+    int i, tileBytesToBuffer, remainingBytes;
     u16 windowId;
     u8 txtColor[3];
     u8 *tileData1, *tileData2;
@@ -1928,7 +1928,7 @@ static void ChooseBoxMenu_PrintInfo(void)
     u8 *boxName = GetBoxNamePtr(sChooseBoxMenu->curBox);
     u8 numInBox = CountMonsInBox(sChooseBoxMenu->curBox);
     u32 winTileData;
-    s32 center;
+    int center;
 
     memset(&template, 0, sizeof(template));
     template.width = 8;
@@ -4187,7 +4187,7 @@ static void SetPartySlotTilemaps(void)
     // as if it has a Pokémon in it
     for (i = 1; i < PARTY_SIZE; i++)
     {
-        s32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        int species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
         SetPartySlotTilemap(i, species != SPECIES_NONE);
     }
 }
@@ -4570,7 +4570,7 @@ static void DestroyBoxMonIconsInColumn(u8 column)
 // Create the appearing icons for the incoming scrolling box
 static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
 {
-    s32 i;
+    int i;
     u16 y = 44;
     s16 xDest = 8 * (3 * column) + 100;
     u16 x = xDest - ((distance + 1) * speed);
@@ -4706,7 +4706,7 @@ static bool8 UpdateBoxMonIconScroll(void)
 
 static void GetIncomingBoxMonData(u8 boxId)
 {
-    s32 i, j, boxPosition;
+    int i, j, boxPosition;
 
     boxPosition = 0;
     for (i = 0; i < IN_BOX_ROWS; i++)
@@ -6507,7 +6507,7 @@ struct
 
 static void GetRestrictedReleaseMoves(u16 *moves)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < ARRAY_COUNT(sRestrictedReleaseMoves); i++)
     {
@@ -6574,8 +6574,8 @@ static void InitCanReleaseMonVars(void)
 
 static bool32 AtLeastThreeUsableMons(void)
 {
-    s32 i, j;
-    s32 count = (sIsMonBeingMoved != FALSE);
+    int i, j;
+    int count = (sIsMonBeingMoved != FALSE);
 
     // Check party for usable Pokémon
     for (j = 0; j < PARTY_SIZE; j++)
@@ -8026,7 +8026,7 @@ static bool8 IsMenuLoading(void)
 
 static s16 HandleMenuInput(void)
 {
-    s32 input = MENU_NOTHING_CHOSEN;
+    int input = MENU_NOTHING_CHOSEN;
 
     do
     {
@@ -8497,8 +8497,8 @@ static u8 MultiMove_UpdateMove(void)
 // Store the Pokémon that the player is picking up
 static void MultiMove_GetMonsFromSelection(void)
 {
-    s32 i, j;
-    s32 columnCount, rowCount;
+    int i, j;
+    int columnCount, rowCount;
     u8 boxId;
     u8 monArrayId;
 
@@ -8532,9 +8532,9 @@ static void MultiMove_GetMonsFromSelection(void)
 // them from their original positions
 static void MultiMove_RemoveMonsFromBox(void)
 {
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
+    int i, j;
+    int columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
+    int rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
     u8 boxId = StorageGetCurrentBox();
 
     for (i = sMultiMove->minRow; i < rowCount; i++)
@@ -8551,9 +8551,9 @@ static void MultiMove_RemoveMonsFromBox(void)
 
 static void MultiMove_CreatePlacedMonIcons(void)
 {
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
+    int i, j;
+    int columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
+    int rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
     u8 monArrayId = 0;
 
     for (i = sMultiMove->minRow; i < rowCount; i++)
@@ -8571,9 +8571,9 @@ static void MultiMove_CreatePlacedMonIcons(void)
 
 static void MultiMove_SetPlacedMonData(void)
 {
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
+    int i, j;
+    int columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
+    int rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
     u8 boxId = StorageGetCurrentBox();
     u8 monArrayId = 0;
 
@@ -8607,9 +8607,9 @@ static u8 MultiMove_GetOrigin(void)
 
 static bool8 MultiMove_CanPlaceSelection(void)
 {
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
+    int i, j;
+    int columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
+    int rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
     u8 monArrayId = 0;
 
     for (i = sMultiMove->minRow; i < rowCount; i++)
@@ -8728,7 +8728,7 @@ static const struct SpriteTemplate sSpriteTemplate_ItemIcon =
 
 static void CreateItemIconSprites(void)
 {
-    s32 i;
+    int i;
     u8 spriteId;
     struct CompressedSpriteSheet spriteSheet;
     struct SpriteTemplate spriteTemplate;
@@ -8940,7 +8940,7 @@ static void MoveItemFromCursorToBag(void)
 // up along with the closing menu.
 static void MoveHeldItemWithPartyMenu(void)
 {
-    s32 i;
+    int i;
 
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
         return;
@@ -8955,7 +8955,7 @@ static void MoveHeldItemWithPartyMenu(void)
 
 static bool8 IsItemIconAnimActive(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
@@ -8974,7 +8974,7 @@ static bool8 IsItemIconAnimActive(void)
 
 static bool8 IsMovingItem(void)
 {
-    s32 i;
+    int i;
 
     if (sStorage->boxOption == OPTION_MOVE_ITEMS)
     {
@@ -9015,7 +9015,7 @@ static u8 GetNewItemIconIdx(void)
 
 static bool32 IsItemIconAtPosition(u8 cursorArea, u8 cursorPos)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_ITEM_ICONS; i++)
     {
@@ -9091,7 +9091,7 @@ static void SetItemIconPosition(u8 id, u8 cursorArea, u8 cursorPos)
 
 static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
 {
-    s32 i;
+    int i;
 
     if (id >= MAX_ITEM_ICONS)
         return;
@@ -9202,7 +9202,7 @@ static void InitItemInfoWindow(void)
 
 static bool8 UpdateItemInfoWindowSlideIn(void)
 {
-    s32 i, pos;
+    int i, pos;
 
     if (sStorage->itemInfoWindowOffset == 0)
         return FALSE;
@@ -9218,7 +9218,7 @@ static bool8 UpdateItemInfoWindowSlideIn(void)
 
 static bool8 UpdateItemInfoWindowSlideOut(void)
 {
-    s32 i, pos;
+    int i, pos;
 
     if (sStorage->itemInfoWindowOffset == 22)
         return FALSE;
@@ -9416,7 +9416,7 @@ static void SetCurrentBox(u8 boxId)
         gPokemonStoragePtr->currentBox = boxId;
 }
 
-u32 GetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request)
+u32 GetBoxMonDataAt(u8 boxId, u8 boxPosition, int request)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
         return GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], request);
@@ -9424,18 +9424,18 @@ u32 GetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request)
         return 0;
 }
 
-void SetBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, const void *value)
+void SetBoxMonDataAt(u8 boxId, u8 boxPosition, int request, const void *value)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
         SetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], request, value);
 }
 
-u32 GetCurrentBoxMonData(u8 boxPosition, s32 request)
+u32 GetCurrentBoxMonData(u8 boxPosition, int request)
 {
     return GetBoxMonDataAt(gPokemonStoragePtr->currentBox, boxPosition, request);
 }
 
-void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value)
+void SetCurrentBoxMonData(u8 boxPosition, int request, const void *value)
 {
     SetBoxMonDataAt(gPokemonStoragePtr->currentBox, boxPosition, request, value);
 }
@@ -9468,7 +9468,7 @@ void SetBoxMonNickAt(u8 boxId, u8 boxPosition, const u8 *nick)
         SetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_NICKNAME, nick);
 }
 
-u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, void *dst)
+u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, int request, void *dst)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
         return GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], request, dst);
@@ -9575,7 +9575,7 @@ s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex
 
 bool8 CheckFreePokemonStorageSpace(void)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
     {
@@ -9603,7 +9603,7 @@ bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition)
 
 u32 CountStorageNonEggMons(void)
 {
-    s32 i, j;
+    int i, j;
     u32 count = 0;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
@@ -9621,7 +9621,7 @@ u32 CountStorageNonEggMons(void)
 
 u32 CountAllStorageMons(void)
 {
-    s32 i, j;
+    int i, j;
     u32 count = 0;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
@@ -9640,7 +9640,7 @@ u32 CountAllStorageMons(void)
 bool32 AnyStorageMonWithMove(u16 moveId)
 {
     u16 moves[] = {moveId, MOVES_COUNT};
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < TOTAL_BOXES_COUNT; i++)
     {
@@ -9794,7 +9794,7 @@ static void TilemapUtil_Free(void)
 // Unused
 static void TilemapUtil_UpdateAll(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < sNumTilemapUtilIds; i++)
     {
@@ -9936,7 +9936,7 @@ static void TilemapUtil_Update(u8 id)
 
 static void TilemapUtil_DrawPrev(u8 id)
 {
-    s32 i;
+    int i;
     u32 adder = sTilemapUtil[id].tileSize * sTilemapUtil[id].altWidth;
     const void *tiles = (sTilemapUtil[id].savedTilemap + (adder * sTilemapUtil[id].prev.destY))
                       + (sTilemapUtil[id].tileSize * sTilemapUtil[id].prev.destX);
@@ -9955,7 +9955,7 @@ static void TilemapUtil_DrawPrev(u8 id)
 
 static void TilemapUtil_Draw(u8 id)
 {
-    s32 i;
+    int i;
     u32 adder = sTilemapUtil[id].tileSize * sTilemapUtil[id].width;
     const void *tiles = (sTilemapUtil[id].tilemap + (adder * sTilemapUtil[id].cur.y))
                       + (sTilemapUtil[id].tileSize * sTilemapUtil[id].cur.x);

@@ -550,7 +550,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
     u32 data = 0;
     if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
     {
-        s32 i;
+        int i;
         struct Pokemon *shedinja = &gPlayerParty[gPlayerPartyCount];
 
         CopyMon(&gPlayerParty[gPlayerPartyCount], mon, sizeof(struct Pokemon));
@@ -1582,7 +1582,7 @@ static void Task_AnimateBg(u8 taskId)
 
 static void InitMovingBgPalette(u16 *palette)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < (int)ARRAY_COUNT(sBgAnim_PalIndexes); i++)
     {

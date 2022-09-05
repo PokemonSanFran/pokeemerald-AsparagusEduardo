@@ -60,7 +60,7 @@
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
 // Converts a number to Q24.8 fixed-point format
-#define Q_24_8(n)  ((s32)((n) << 8))
+#define Q_24_8(n)  ((int)((n) << 8))
 
 // Converts a Q8.8 fixed-point format number to a regular integer
 #define Q_8_8_TO_INT(n) ((int)((n) / 256))
@@ -165,8 +165,8 @@ struct UCoords16
 
 struct Coords32
 {
-    s32 x;
-    s32 y;
+    int x;
+    int y;
 };
 
 struct UCoords32

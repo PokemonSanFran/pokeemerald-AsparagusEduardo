@@ -353,7 +353,7 @@ bool8 FldEff_CutGrass(void)
 // set map grid metatile depending on x, y
 static void SetCutGrassMetatile(s16 x, s16 y)
 {
-    s32 metatileId = MapGridGetMetatileIdAt(x, y);
+    int metatileId = MapGridGetMetatileIdAt(x, y);
 
     switch (metatileId)
     {
@@ -619,7 +619,7 @@ void FixLongGrassMetatilesWindowBottom(s16 x, s16 y)
         u8 metatileBehavior = MapGridGetMetatileBehaviorAt(x, y + 1);
         if (MetatileBehavior_IsLongGrassSouthEdge(metatileBehavior))
         {
-            s32 metatileId = MapGridGetMetatileIdAt(x, y + 1);
+            int metatileId = MapGridGetMetatileIdAt(x, y + 1);
             switch (metatileId)
             {
             case METATILE_Fortree_LongGrass_Root:

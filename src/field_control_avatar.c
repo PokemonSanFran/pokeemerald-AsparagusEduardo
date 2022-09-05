@@ -261,7 +261,7 @@ static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileB
 const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
     u8 objectEventId;
-    s32 i;
+    int i;
 
     if (!MetatileBehavior_IsCounter(MapGridGetMetatileBehaviorAt(position->x, position->y)))
         objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
@@ -860,7 +860,7 @@ static bool8 TryDoorWarp(struct MapPosition *position, u16 metatileBehavior, u8 
 
 static s8 GetWarpEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
-    s32 i;
+    int i;
     struct WarpEvent *warpEvent = mapHeader->events->warps;
     u8 warpCount = mapHeader->events->warpCount;
 
@@ -897,7 +897,7 @@ static u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
 
 static u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
-    s32 i;
+    int i;
     struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
     u8 coordEventCount = mapHeader->events->coordEventCount;
 

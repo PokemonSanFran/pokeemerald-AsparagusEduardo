@@ -189,7 +189,7 @@ static void InitPocketListPositions(void);
 static void InitPocketScrollPositions(void);
 static u8 CreateBagInputHandlerTask(u8);
 static void DrawItemListBgRow(u8);
-static void BagMenu_MoveCursorCallback(s32, bool8, struct ListMenu *);
+static void BagMenu_MoveCursorCallback(int, bool8, struct ListMenu *);
 static void BagMenu_ItemPrintCallback(u8, u32, u8);
 static void ItemMenu_UseOutOfBattle(u8);
 static void ItemMenu_Toss(u8);
@@ -924,7 +924,7 @@ static void GetItemName(s8 *dest, u16 itemId)
     }
 }
 
-static void BagMenu_MoveCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void BagMenu_MoveCursorCallback(int itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
     {
@@ -1213,7 +1213,7 @@ static void Task_BagMenu_HandleInput(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
-    s32 listPosition;
+    int listPosition;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
     {
@@ -1459,7 +1459,7 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
         }
         else
         {
-            s32 input = ListMenu_ProcessInput(tListTaskId);
+            int input = ListMenu_ProcessInput(tListTaskId);
             ListMenuGetScrollAndRow(tListTaskId, &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
             SetItemMenuSwapLineInvisibility(FALSE);
             UpdateItemMenuSwapLinePos(gBagPosition.cursorPosition[gBagPosition.pocket]);

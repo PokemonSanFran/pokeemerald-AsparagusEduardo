@@ -157,7 +157,7 @@ static void ContestBG_FillBoxWithTile(u8, u16, u8, u8, u8, u8, u8);
 static void Contest_PrintTextToBg0WindowStd(u32, const u8 *);
 static s16 GetContestantRound2Points(u8);
 static void DetermineFinalStandings(void);
-static bool8 DidContestantPlaceHigher(s32, s32, struct ContestFinalStandings *);
+static bool8 DidContestantPlaceHigher(int, int, struct ContestFinalStandings *);
 static void Task_UpdateAppealHearts(u8);
 static void SpriteCB_UpdateHeartSlider(struct Sprite *);
 static void Task_FlashJudgeAttentionEye(u8);
@@ -186,7 +186,7 @@ static void SetConestLiveUpdateTVData(void);
 static void SetContestLiveUpdateFlags(u8);
 static void ContestDebugPrintBitStrings(void);
 static void StripPlayerNameForLinkContest(u8 *);
-static void StripMonNameForLinkContest(u8 *, s32);
+static void StripMonNameForLinkContest(u8 *, int);
 static void SwapMoveDescAndContestTilemaps(void);
 
 // An index into a palette where the text color for each contestant is stored.
@@ -1026,7 +1026,7 @@ static void SetupContestGpuRegs(void)
 
 void LoadContestBgAfterMoveAnim(void)
 {
-    s32 i;
+    int i;
 
     LZDecompressVram(gContestInterfaceGfx, (void *)VRAM);
     LZDecompressVram(gContestAudienceGfx, (void *)(BG_SCREEN_ADDR(4)));
@@ -1044,7 +1044,7 @@ void LoadContestBgAfterMoveAnim(void)
 
 static void InitContestInfoBgs(void)
 {
-    s32 i;
+    int i;
 
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sContestBgTemplates, ARRAY_COUNT(sContestBgTemplates));
@@ -1071,7 +1071,7 @@ static void InitContestWindows(void)
 
 static void LoadContestPalettes(void)
 {
-    s32 i;
+    int i;
 
     LoadPalette(sText_Pal, 0xf0, 0x20);
     FillPalette(RGB_BLACK, 0, 2);
@@ -1082,7 +1082,7 @@ static void LoadContestPalettes(void)
 
 static void InitContestResources(void)
 {
-    s32 i;
+    int i;
 
     eContest = (struct Contest){};
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -1430,7 +1430,7 @@ static void Task_RaiseCurtainAtStart(u8 taskId)
 
 static void CB2_ContestMain(void)
 {
-    s32 i;
+    int i;
 
     AnimateSprites();
     RunTasks();
@@ -1554,7 +1554,7 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
 static void Task_HandleMoveSelectInput(u8 taskId)
 {
     u8 numMoves = 0;
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1656,7 +1656,7 @@ static void Task_EndCommunicateMoveSelections(u8 taskId)
 
 static void Task_HideMoveSelectScreen(u8 taskId)
 {
-    s32 i;
+    int i;
 
     ContestClearGeneralTextWindow();
     gBattle_BG0_Y = 0;
@@ -1710,7 +1710,7 @@ static void Task_AppealSetup(u8 taskId)
         eContest.unusedRng = gRngValue;
         if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && IsPlayerLinkLeader())
         {
-            s32 i;
+            int i;
 
             for (i = 0; i + gNumLinkContestPlayers < CONTESTANT_COUNT; i++)
             {
@@ -1725,7 +1725,7 @@ static void Task_AppealSetup(u8 taskId)
 static void Task_DoAppeals(u8 taskId)
 {
     u8 spriteId;
-    s32 i;
+    int i;
     u8 contestant = eContest.currentContestant;
     s8 r3;
 
@@ -1974,7 +1974,7 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_UPDATE_OPPONENT:
         {
             // Update each other contestant as a result of this move appeal
-            s32 j = 0;
+            int j = 0;
 
             r3 = FALSE; // Can't get this to use local variable. Should be "needsUpdate"
             for (i = gTasks[taskId].data[1]; i < CONTESTANT_COUNT; i++)
@@ -2656,7 +2656,7 @@ static void Task_StartNewRoundOfAppeals(u8 taskId)
 
 static void Task_EndAppeals(u8 taskId)
 {
-    s32 i;
+    int i;
 
     gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
@@ -2849,7 +2849,7 @@ void CreateContestMonFromParty(u8 partyIndex)
 
 void SetContestants(u8 contestType, u8 rank)
 {
-    s32 i;
+    int i;
     u8 opponentsCount = 0;
     u8 opponents[100];
     bool8 allowPostgameContestants = FALSE;
@@ -2894,7 +2894,7 @@ void SetContestants(u8 contestType, u8 rank)
     for (i = 0; i < CONTESTANT_COUNT - 1; i++)
     {
         u16 rnd = Random() % opponentsCount;
-        s32 j;
+        int j;
 
         gContestMons[i] = gContestOpponents[opponents[rnd]];
         for (j = rnd; opponents[j] != 0xFF; j++)
@@ -2907,7 +2907,7 @@ void SetContestants(u8 contestType, u8 rank)
 
 void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame)
 {
-    s32 i, j;
+    int i, j;
     u8 opponentsCount = 0;
     u8 opponents[100];
 
@@ -2997,7 +2997,7 @@ u8 GetContestEntryEligibility(struct Pokemon *pkmn)
 
 static void DrawContestantWindowText(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -3024,7 +3024,7 @@ static void PrintContestantTrainerName(u8 contestant)
 static void PrintContestantTrainerNameWithColor(u8 contestant, u8 color)
 {
     u8 buffer[32];
-    s32 offset;
+    int offset;
 
     StringCopy(buffer, gText_Slash);
     StringAppend(buffer, gContestMons[contestant].trainerName);
@@ -3086,7 +3086,7 @@ static u16 CalculateContestantRound1Points(u8 who, u8 contestCategory)
 
 void CalculateRound1Points(u8 contestCategory)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         gContestMonRound1Points[i] = CalculateContestantRound1Points(i, contestCategory);
@@ -3253,7 +3253,7 @@ static void DrawMoveEffectSymbol(u16 move, u8 contestant)
 // Unused
 static void DrawMoveEffectSymbols(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         DrawMoveEffectSymbol(eContestantStatus[i].currMove, i);
@@ -3267,7 +3267,7 @@ static u16 GetStarTileOffset(void)
 static bool8 UpdateConditionStars(u8 contestantIdx, bool8 resetMod)
 {
     u8 contestantOffset;
-    s32 numStars;
+    int numStars;
 
     if (eContestantStatus[contestantIdx].conditionMod == CONDITION_NO_CHANGE)
         return FALSE;
@@ -3296,8 +3296,8 @@ static bool8 UpdateConditionStars(u8 contestantIdx, bool8 resetMod)
 
 static void DrawConditionStars(void)
 {
-    s32 i;
-    s32 numStars;
+    int i;
+    int numStars;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -3368,7 +3368,7 @@ static bool8 DrawStatusSymbol(u8 contestant)
 
 static void DrawStatusSymbols(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         DrawStatusSymbol(i);
@@ -3401,7 +3401,7 @@ static u16 GetChosenMove(u8 contestant)
 
 static void GetAllChosenMoves(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         eContestantStatus[i].currMove = GetChosenMove(i);
@@ -3409,8 +3409,8 @@ static void GetAllChosenMoves(void)
 
 static void RankContestants(void)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
     s16 arr[CONTESTANT_COUNT];
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -3458,7 +3458,7 @@ static void RankContestants(void)
 
 static void SetAttentionLevels(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -3491,7 +3491,7 @@ static bool8 ContestantCanUseTurn(u8 contestant)
 
 static void SetContestantStatusesForNextRound(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -3552,7 +3552,7 @@ static void CalculateTotalPointsForContestant(u8 contestant)
 
 static void CalculateFinalScores(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         CalculateTotalPointsForContestant(i);
@@ -3568,12 +3568,12 @@ static void DetermineFinalStandings(void)
 {
     u16 randomOrdering[CONTESTANT_COUNT] = {0};
     struct ContestFinalStandings standings[CONTESTANT_COUNT];
-    s32 i;
+    int i;
 
     // Seed random order in case of ties
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        s32 j;
+        int j;
         randomOrdering[i] = Random();
         for (j = 0; j < i; j++)
         {
@@ -3597,7 +3597,7 @@ static void DetermineFinalStandings(void)
     // Rank contestants
     for (i = 0; i < CONTESTANT_COUNT - 1; i++)
     {
-        s32 j;
+        int j;
         for (j = CONTESTANT_COUNT - 1; j > i; j--)
         {
             if (DidContestantPlaceHigher(j - 1, j, standings))
@@ -3639,7 +3639,7 @@ void SaveLinkContestResults(void)
     }
 }
 
-static bool8 DidContestantPlaceHigher(s32 a, s32 b, struct ContestFinalStandings *standings)
+static bool8 DidContestantPlaceHigher(int a, int b, struct ContestFinalStandings *standings)
 {
     bool8 retVal;
 
@@ -3834,7 +3834,7 @@ static void Task_UpdateAppealHearts(u8 taskId)
 
 static void CreateSliderHeartSprites(void)
 {
-    s32 i;
+    int i;
 
     LoadSpriteSheet(&sSpriteSheet_SliderHeart);
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -3873,7 +3873,7 @@ static void UpdateHeartSlider(u8 contestant)
 
 static void UpdateHeartSliders(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         UpdateHeartSlider(i);
@@ -3881,7 +3881,7 @@ static void UpdateHeartSliders(void)
 
 static bool8 SlidersDoneUpdating(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -3914,7 +3914,7 @@ static void SpriteCB_UpdateHeartSlider(struct Sprite *sprite)
 // Y positions change as the contestants change order
 static void UpdateSliderHeartSpriteYPositions(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         gSprites[eContestGfxState[i].sliderHeartSpriteId].y = sSliderHeartYPositions[gContestantTurnOrder[i]];
@@ -3923,7 +3923,7 @@ static void UpdateSliderHeartSpriteYPositions(void)
 // Used to hide (or subsequently reshow) the bottom two slider hearts that get hidden by text windows by moving them offscreen
 static void SetBottomSliderHeartsInvisibility(bool8 invisible)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -3940,7 +3940,7 @@ static void SetBottomSliderHeartsInvisibility(bool8 invisible)
 
 static void CreateNextTurnSprites(void)
 {
-    s32 i;
+    int i;
 
     LoadSpritePalette(&sSpritePalette_NextTurn);
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -4035,7 +4035,7 @@ static void Task_FlashJudgeAttentionEye(u8 taskId)
 //       at something similar to what CreateJudgeAttentionEyeTask does
 static void CreateUnusedBlendTask(void)
 {
-    s32 i;
+    int i;
 
     eContest.blendTaskId = CreateTask(Task_UnusedBlend, 30);
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -4050,7 +4050,7 @@ static void InitUnusedBlendTaskData(u8 contestant)
 
 static void UpdateBlendTaskContestantsData(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         UpdateBlendTaskContestantData(i);
@@ -4296,13 +4296,13 @@ void SortContestants(bool8 useRanking)
 {
     u8 scratch[CONTESTANT_COUNT];
     u16 randomOrdering[CONTESTANT_COUNT] = {0};
-    s32 i;
-    s32 v3;
+    int i;
+    int v3;
 
     // Generate a unique random number for each contestant.
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        s32 j;
+        int j;
         randomOrdering[i] = Random();
 
         // Loop through all the numbers generated so far.
@@ -4333,7 +4333,7 @@ void SortContestants(bool8 useRanking)
                  || (gContestMonRound1Points[gContestantTurnOrder[v3]] == gContestMonRound1Points[i] && randomOrdering[gContestantTurnOrder[v3]] < randomOrdering[i]))
                 {
                     // Shift everything larger up to make room.
-                    s32 j;
+                    int j;
                     for (j = i; j > v3; j--)
                         gContestantTurnOrder[j] = gContestantTurnOrder[j - 1];
 
@@ -4409,11 +4409,11 @@ void SortContestants(bool8 useRanking)
 
 static void DrawContestantWindows(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        s32 windowId = i + 5;
+        int windowId = i + 5;
         LoadPalette(eContestTempSave.cachedWindowPalettes[windowId], (gContestantTurnOrder[i] + 5) * 16, sizeof(eContestTempSave.cachedWindowPalettes[0]));
     }
     DrawContestantWindowText();
@@ -4424,7 +4424,7 @@ static void CalculateAppealMoveImpact(u8 contestant)
     u16 move;
     u8 effect;
     u8 rnd;
-    s32 i;
+    int i;
 
     eContestantStatus[contestant].appeal = 0;
     eContestantStatus[contestant].baseAppeal = 0;
@@ -4599,8 +4599,8 @@ void MakeContestantNervous(u8 p)
 static void ApplyNextTurnOrder(void)
 {
     u8 nextContestant = 0;
-    s32 i;
-    s32 j;
+    int i;
+    int j;
     u8 newTurnOrder[CONTESTANT_COUNT];
     bool8 isContestantOrdered[CONTESTANT_COUNT];
 
@@ -4724,7 +4724,7 @@ static void DoJudgeSpeechBubble(u8 symbolId)
 
 static void UpdateApplauseMeter(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < APPLAUSE_METER_SIZE; i++)
     {
@@ -5010,7 +5010,7 @@ static void Task_BlendAudienceBackground(u8 taskId)
 
 static void ShowHideNextTurnGfx(bool8 show)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -5037,7 +5037,7 @@ static const u8 *GetTurnOrderNumberGfx(u8 contestant)
 
 static void DrawUnnervedSymbols(void)
 {
-    s32 i = 0;
+    int i = 0;
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         if (eContestAppealResults.unnervedPokes[i] != 0 && !Contest_IsMonsTurnDisabled(i))
@@ -5063,7 +5063,7 @@ bool8 IsContestantAllowedToCombo(u8 contestant)
 
 static void SetBgForCurtainDrop(void)
 {
-    s32 i;
+    int i;
     u16 bg0Cnt, bg1Cnt, bg2Cnt;
 
     bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
@@ -5101,7 +5101,7 @@ static void SetBgForCurtainDrop(void)
 
 static void UpdateContestantBoxOrder(void)
 {
-    s32 i;
+    int i;
     u16 bg1Cnt;
 
     RequestDma3Fill(0,(void *)(BG_CHAR_ADDR(2)), 0x2000, 1);
@@ -5148,7 +5148,7 @@ static void Task_UpdateCurtainDropAtRoundEnd(u8 taskId)
 
 static void Task_ResetForNextRound(u8 taskId)
 {
-    s32 i;
+    int i;
 
     switch (gTasks[taskId].data[0])
     {
@@ -5250,7 +5250,7 @@ static void Task_StartRaiseCurtainAtRoundEnd(u8 taskId)
 
 static void AnimateSliderHearts(u8 animId)
 {
-    s32 i;
+    int i;
     u8 taskId;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -5271,7 +5271,7 @@ static void AnimateSliderHearts(u8 animId)
 
 static void Task_WaitForSliderHeartAnim(u8 taskId)
 {
-    s32 i;
+    int i;
 
     if (gSprites[eContestGfxState[0].sliderHeartSpriteId].affineAnimEnded)
     {
@@ -5305,7 +5305,7 @@ static u16 SanitizeSpecies(u16 species)
 
 static void SetMoveSpecificAnimData(u8 contestant)
 {
-    s32 i;
+    int i;
     u16 move = SanitizeMove(eContestantStatus[contestant].currMove);
     u16 species = SanitizeSpecies(gContestMons[contestant].species);
     u8 targetContestant;
@@ -5427,7 +5427,7 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
     Contest_SetBgCopyFlags(0);
 }
 
-void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId)
+void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, int x, int y, int fontId)
 {
     struct TextPrinterTemplate printerTemplate;
 
@@ -5510,8 +5510,8 @@ static void Contest_SetBgCopyFlags(u32 flagIndex)
 
 void ResetContestLinkResults(void)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
 
     for(i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
         for(j = 0; j < CONTESTANT_COUNT; j++)
@@ -5520,7 +5520,7 @@ void ResetContestLinkResults(void)
 
 bool8 SaveContestWinner(u8 rank)
 {
-    s32 i;
+    int i;
     u8 captionId = Random() % NUM_PAINTING_CAPTIONS;
 
     // Get the index of the winner among the contestants
@@ -5592,7 +5592,7 @@ bool8 SaveContestWinner(u8 rank)
 // If actually preparing to insert the winner into the saveblock, shift is TRUE
 u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift)
 {
-    s32 i;
+    int i;
 
     switch (rank)
     {
@@ -5628,7 +5628,7 @@ u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift)
 
 void ClearContestWinnerPicsInContestHall(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MUSEUM_CONTEST_WINNERS_START; i++)
         gSaveBlock1Ptr->contestWinners[i] = gDefaultContestWinners[i];
@@ -5636,7 +5636,7 @@ void ClearContestWinnerPicsInContestHall(void)
 
 static void SetContestLiveUpdateFlags(u8 contestant)
 {
-    s32 i;
+    int i;
 
     if (!eContestExcitement.frozen
         && eContestExcitement.moveExcitement > 0
@@ -5699,7 +5699,7 @@ static void SetContestLiveUpdateFlags(u8 contestant)
 static void CalculateContestLiveUpdateData(void)
 {
     u8 loser;
-    s32 i, j;
+    int i, j;
     bool32 notLastInRound1, notLastInRound2;
     u16 appealMoves[CONTEST_NUM_APPEALS + 1];
     u8 numMoveUses[CONTEST_NUM_APPEALS + 1];
@@ -5809,7 +5809,7 @@ static void CalculateContestLiveUpdateData(void)
 
 static void SetConestLiveUpdateTVData(void)
 {
-    s32 i;
+    int i;
     u32 flags;
     u8 winner;
     u8 round1Placing, round2Placing;
@@ -6059,7 +6059,7 @@ static void StripPlayerNameForLinkContest(u8 *playerName)
     playerName[PLAYER_NAME_LENGTH] = chr;
 }
 
-static void StripMonNameForLinkContest(u8 *monName, s32 language)
+static void StripMonNameForLinkContest(u8 *monName, int language)
 {
     u8 chr;
 
@@ -6077,7 +6077,7 @@ static void StripMonNameForLinkContest(u8 *monName, s32 language)
     }
 }
 
-void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language)
+void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, int language)
 {
     u8 *name = mon->nickname;
 

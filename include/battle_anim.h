@@ -40,7 +40,7 @@ extern bool8 gAnimScriptActive;
 extern u8 gAnimVisualTaskCount;
 extern u8 gAnimSoundTaskCount;
 extern struct DisableStruct *gAnimDisableStructPtr;
-extern s32 gAnimMoveDmg;
+extern int gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;

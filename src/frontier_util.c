@@ -851,7 +851,7 @@ static void GetFrontierData(void)
 
 static void SetFrontierData(void)
 {
-    s32 i;
+    int i;
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
     u8 hasSymbol = GetPlayerSymbolCountForFacility(facility);
     if (hasSymbol == 2)
@@ -886,7 +886,7 @@ static void SetFrontierData(void)
 
 static void SetSelectedPartyOrder(void)
 {
-    s32 i;
+    int i;
 
     ClearSelectedPartyOrder();
     for (i = 0; i < gSpecialVar_0x8005; i++)
@@ -957,16 +957,16 @@ static bool8 IsWinStreakActive(u32 challenge)
         return FALSE;
 }
 
-static void PrintAligned(const u8 *str, s32 y)
+static void PrintAligned(const u8 *str, int y)
 {
-    s32 x = GetStringCenterAlignXOffset(FONT_NORMAL, str, DISPLAY_WIDTH - 16);
+    int x = GetStringCenterAlignXOffset(FONT_NORMAL, str, DISPLAY_WIDTH - 16);
     y = (y * 8) + 1;
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void PrintHyphens(s32 y)
+static void PrintHyphens(int y)
 {
-    s32 i;
+    int i;
     u8 text[37];
 
     for (i = 0; i < (int)ARRAY_COUNT(text) - 1; i++)
@@ -1480,8 +1480,8 @@ static void ShowPyramidResultsWindow(void)
 static void ShowLinkContestResultsWindow(void)
 {
     const u8 *str;
-    s32 i, j;
-    s32 x;
+    int i, j;
+    int x;
 
     gRecordsWindowId = AddWindow(&sLinkContestResultsWindowTemplate);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
@@ -1530,9 +1530,9 @@ static void ShowLinkContestResultsWindow(void)
 static void CheckPutFrontierTVShowOnAir(void)
 {
     u8 name[32];
-    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (facility)
     {
@@ -1655,12 +1655,12 @@ static void Script_GetFrontierBrainStatus(void)
 
 u8 GetFrontierBrainStatus(void)
 {
-    s32 status = FRONTIER_BRAIN_NOT_READY;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    int status = FRONTIER_BRAIN_NOT_READY;
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u16 winStreakNoModifier = GetCurrentFacilityWinStreak();
-    s32 winStreak = winStreakNoModifier + sFrontierBrainStreakAppearances[facility][3];
-    s32 symbolsCount;
+    int winStreak = winStreakNoModifier + sFrontierBrainStreakAppearances[facility][3];
+    int symbolsCount;
 
     if (battleMode != FRONTIER_MODE_SINGLES)
         return FRONTIER_BRAIN_NOT_READY;
@@ -1775,7 +1775,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
 
 void ResetWinStreaks(void)
 {
-    s32 battleMode, lvlMode;
+    int battleMode, lvlMode;
 
     gSaveBlock2Ptr->frontier.winStreakActiveFlags = 0;
     for (battleMode = 0; battleMode < FRONTIER_MODE_COUNT; battleMode++)
@@ -1803,9 +1803,9 @@ void ResetWinStreaks(void)
 
 u32 GetCurrentFacilityWinStreak(void)
 {
-    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
 
     switch (facility)
     {
@@ -1830,7 +1830,7 @@ u32 GetCurrentFacilityWinStreak(void)
 
 void ResetFrontierTrainerIds(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.trainerIds); i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
@@ -1852,11 +1852,11 @@ u8 GetPlayerSymbolCountForFacility(u8 facility)
 
 static void GiveBattlePoints(void)
 {
-    s32 challengeNum = 0;
-    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    s32 points;
+    int challengeNum = 0;
+    int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    int points;
 
     switch (facility)
     {
@@ -1911,13 +1911,13 @@ static void GiveBattlePoints(void)
 
 static void GetFacilitySymbolCount(void)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
     gSpecialVar_Result = GetPlayerSymbolCountForFacility(facility);
 }
 
 static void GiveFacilitySymbol(void)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
     if (GetPlayerSymbolCountForFacility(facility) == 0)
         FlagSet(FLAG_SYS_TOWER_SILVER + facility * 2);
     else
@@ -1932,7 +1932,7 @@ static void CheckBattleTypeFlag(void)
         gSpecialVar_Result = FALSE;
 }
 
-static u8 AppendCaughtBannedMonSpeciesName(u16 species, u8 count, s32 numBannedMonsCaught)
+static u8 AppendCaughtBannedMonSpeciesName(u16 species, u8 count, int numBannedMonsCaught)
 {
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
@@ -1973,7 +1973,7 @@ static u8 AppendCaughtBannedMonSpeciesName(u16 species, u8 count, s32 numBannedM
 
 static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count)
 {
-    s32 i = 0;
+    int i = 0;
 
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
@@ -2011,11 +2011,11 @@ static void CheckPartyIneligibility(void)
 {
     u16 speciesArray[PARTY_SIZE];
     u16 itemArray[PARTY_SIZE];
-    s32 monId = 0;
-    s32 toChoose = 0;
+    int monId = 0;
+    int toChoose = 0;
     u8 count = 0;
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    s32 monIdLooper;
+    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    int monIdLooper;
 
     // count is re-used, define for clarity
     #define numEligibleMons count
@@ -2067,9 +2067,9 @@ static void CheckPartyIneligibility(void)
 
     if (numEligibleMons < toChoose)
     {
-        s32 i;
-        s32 caughtBannedMons = 0;
-        s32 species = gFrontierBannedSpecies[0];
+        int i;
+        int caughtBannedMons = 0;
+        int species = gFrontierBannedSpecies[0];
         for (i = 0; species != 0xFFFF; i++, species = gFrontierBannedSpecies[i])
         {
             if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
@@ -2110,9 +2110,9 @@ static void ValidateVisitingTrainer(void)
 
 static void IncrementWinStreak(void)
 {
-    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
 
     switch (facility)
     {
@@ -2220,7 +2220,7 @@ static void SetFacilityBrainObjectEvent(void)
 }
 
 // Battle Frontier Ranking Hall records.
-static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hallRecord, s32 hallFacilityId)
+static void Print1PRecord(int position, int x, int y, struct RankingHall1P *hallRecord, int hallFacilityId)
 {
     u8 text[32];
     u16 winStreak;
@@ -2240,7 +2240,7 @@ static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hall
     }
 }
 
-static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hallRecord)
+static void Print2PRecord(int position, int x, int y, struct RankingHall2P *hallRecord)
 {
     u8 text[32];
     u16 winStreak;
@@ -2267,9 +2267,9 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
     }
 }
 
-static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvlMode)
+static void Fill1PRecords(struct RankingHall1P *dst, int hallFacilityId, int lvlMode)
 {
-    s32 i, j;
+    int i, j;
     struct RankingHall1P record1P[HALL_RECORDS_COUNT + 1];
     struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
     GetPlayerHallRecords(playerHallRecords);
@@ -2281,8 +2281,8 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
 
     for (i = 0; i < HALL_RECORDS_COUNT; i++)
     {
-        s32 highestWinStreak = 0;
-        s32 highestId = 0;
+        int highestWinStreak = 0;
+        int highestId = 0;
         for (j = 0; j < HALL_RECORDS_COUNT + 1; j++)
         {
             if (record1P[j].winStreak > highestWinStreak)
@@ -2301,9 +2301,9 @@ static void Fill1PRecords(struct RankingHall1P *dst, s32 hallFacilityId, s32 lvl
     free(playerHallRecords);
 }
 
-static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
+static void Fill2PRecords(struct RankingHall2P *dst, int lvlMode)
 {
-    s32 i, j;
+    int i, j;
     struct RankingHall2P record2P[HALL_RECORDS_COUNT + 1];
     struct PlayerHallRecords *playerHallRecords = calloc(1, sizeof(struct PlayerHallRecords));
     GetPlayerHallRecords(playerHallRecords);
@@ -2315,8 +2315,8 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
 
     for (i = 0; i < HALL_RECORDS_COUNT; i++)
     {
-        s32 highestWinStreak = 0;
-        s32 highestId = 0;
+        int highestWinStreak = 0;
+        int highestId = 0;
         for (j = 0; j < HALL_RECORDS_COUNT; j++)
         {
             if (record2P[j].winStreak > highestWinStreak)
@@ -2335,10 +2335,10 @@ static void Fill2PRecords(struct RankingHall2P *dst, s32 lvlMode)
     free(playerHallRecords);
 }
 
-static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
+static void PrintHallRecords(int hallFacilityId, int lvlMode)
 {
-    s32 i;
-    s32 x;
+    int i;
+    int x;
     struct RankingHall1P records1P[HALL_RECORDS_COUNT];
     struct RankingHall2P records2P[HALL_RECORDS_COUNT];
 
@@ -2382,7 +2382,7 @@ void ScrollRankingHallRecordsWindow(void)
 
 void ClearRankingHallRecords(void)
 {
-    s32 i, j, k;
+    int i, j, k;
 
     // UB: Passing 0 as a pointer instead of a pointer holding a value of 0.
 #ifdef UBFIX
@@ -2420,7 +2420,7 @@ void ClearRankingHallRecords(void)
 
 void SaveGameFrontier(void)
 {
-    s32 i;
+    int i;
     struct Pokemon *monsParty = calloc(PARTY_SIZE, sizeof(struct Pokemon));
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -2442,7 +2442,7 @@ void SaveGameFrontier(void)
 // Frontier Brain functions.
 u8 GetFrontierBrainTrainerPicIndex(void)
 {
-    s32 facility;
+    int facility;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         facility = GetRecordedBattleFrontierFacility();
@@ -2454,7 +2454,7 @@ u8 GetFrontierBrainTrainerPicIndex(void)
 
 u8 GetFrontierBrainTrainerClass(void)
 {
-    s32 facility;
+    int facility;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         facility = GetRecordedBattleFrontierFacility();
@@ -2466,8 +2466,8 @@ u8 GetFrontierBrainTrainerClass(void)
 
 void CopyFrontierBrainTrainerName(u8 *dst)
 {
-    s32 i;
-    s32 facility;
+    int i;
+    int facility;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         facility = GetRecordedBattleFrontierFacility();
@@ -2482,13 +2482,13 @@ void CopyFrontierBrainTrainerName(u8 *dst)
 
 bool8 IsFrontierBrainFemale(void)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
     return sFrontierBrainObjEventGfx[facility][1];
 }
 
 void SetFrontierBrainObjEventGfx_2(void)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
     VarSet(VAR_OBJ_GFX_ID_0, sFrontierBrainObjEventGfx[facility][0]);
 }
 
@@ -2496,13 +2496,13 @@ void SetFrontierBrainObjEventGfx_2(void)
 
 void CreateFrontierBrainPokemon(void)
 {
-    s32 i, j;
-    s32 selectedMonBits;
-    s32 monPartyId;
-    s32 monLevel = 0;
+    int i, j;
+    int selectedMonBits;
+    int monPartyId;
+    int monLevel = 0;
     u8 friendship;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetFronterBrainSymbol();
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int symbol = GetFronterBrainSymbol();
 
     if (facility == FRONTIER_FACILITY_DOME)
         selectedMonBits = GetDomeTrainerSelectedMons(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
@@ -2548,8 +2548,8 @@ void CreateFrontierBrainPokemon(void)
 
 u16 GetFrontierBrainMonSpecies(u8 monId)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetFronterBrainSymbol();
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int symbol = GetFronterBrainSymbol();
 
     return sFrontierBrainsMons[facility][symbol][monId].species;
 }
@@ -2562,32 +2562,32 @@ void SetFrontierBrainObjEventGfx(u8 facility)
 
 u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetFronterBrainSymbol();
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int symbol = GetFronterBrainSymbol();
 
     return sFrontierBrainsMons[facility][symbol][monId].moves[moveSlotId];
 }
 
 u8 GetFrontierBrainMonNature(u8 monId)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetFronterBrainSymbol();
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int symbol = GetFronterBrainSymbol();
 
     return sFrontierBrainsMons[facility][symbol][monId].nature;
 }
 
 u8 GetFrontierBrainMonEvs(u8 monId, u8 evStatId)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetFronterBrainSymbol();
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int symbol = GetFronterBrainSymbol();
 
     return sFrontierBrainsMons[facility][symbol][monId].evs[evStatId];
 }
 
-s32 GetFronterBrainSymbol(void)
+int GetFronterBrainSymbol(void)
 {
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetPlayerSymbolCountForFacility(facility);
+    int facility = VarGet(VAR_FRONTIER_FACILITY);
+    int symbol = GetPlayerSymbolCountForFacility(facility);
 
     if (symbol == 2)
     {
@@ -2606,8 +2606,8 @@ s32 GetFronterBrainSymbol(void)
 // Called for intro speech as well despite the fact that its handled in the map scripts files instead
 static void CopyFrontierBrainText(bool8 playerWonText)
 {
-    s32 facility;
-    s32 symbol;
+    int facility;
+    int symbol;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
     {

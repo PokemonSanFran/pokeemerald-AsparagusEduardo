@@ -350,7 +350,7 @@ static void InitMoveRelearnerBackgroundLayers(void);
 static void AddScrollArrows(void);
 static void HandleInput(u8);
 static void ShowTeachMoveText(u8);
-static s32 GetCurrentSelectedMove(void);
+static int GetCurrentSelectedMove(void);
 static void FreeMoveRelearnerResources(void);
 static void RemoveScrollArrows(void);
 static void HideHeartSpritesAndShowTeachMoveText(bool8);
@@ -755,7 +755,7 @@ static void FreeMoveRelearnerResources(void)
 // which is called whenever the cursor in either list changes.
 static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < 16; i++)
     {
@@ -772,7 +772,7 @@ static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
 
 static void HandleInput(bool8 showContest)
 {
-    s32 itemId = ListMenu_ProcessInput(sMoveRelearnerStruct->moveListMenuTask);
+    int itemId = ListMenu_ProcessInput(sMoveRelearnerStruct->moveListMenuTask);
     ListMenuGetScrollAndRow(sMoveRelearnerStruct->moveListMenuTask, &sMoveRelearnerMenuSate.listOffset, &sMoveRelearnerMenuSate.listRow);
 
     switch (itemId)
@@ -819,7 +819,7 @@ static void HandleInput(bool8 showContest)
     }
 }
 
-static s32 GetCurrentSelectedMove(void)
+static int GetCurrentSelectedMove(void)
 {
     return sMoveRelearnerStruct->menuItems[sMoveRelearnerMenuSate.listRow + sMoveRelearnerMenuSate.listOffset].id;
 }
@@ -900,7 +900,7 @@ static void RemoveScrollArrows(void)
 
 static void CreateLearnableMovesList(void)
 {
-    s32 i;
+    int i;
     u8 nickname[POKEMON_NAME_LENGTH + 1];
 
     sMoveRelearnerStruct->numMenuChoices = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearnerStruct->partyMon], sMoveRelearnerStruct->movesToLearn);
@@ -919,7 +919,7 @@ static void CreateLearnableMovesList(void)
     sMoveRelearnerStruct->numToShowAtOnce = LoadMoveRelearnerMovesList(sMoveRelearnerStruct->menuItems, sMoveRelearnerStruct->numMenuChoices);
 }
 
-void MoveRelearnerShowHideHearts(s32 moveId)
+void MoveRelearnerShowHideHearts(int moveId)
 {
     u16 numHearts;
     u16 i;

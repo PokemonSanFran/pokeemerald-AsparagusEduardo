@@ -577,7 +577,7 @@ static void CreateStarterPokemonLabel(u8 selection)
     u8 categoryText[32];
     struct WindowTemplate winTemplate;
     const u8 *speciesName;
-    s32 width;
+    int width;
     u8 labelLeft, labelRight, labelTop, labelBottom;
 
     u16 species = GetStarterPokemon(selection);

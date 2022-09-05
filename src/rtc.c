@@ -16,7 +16,7 @@ struct Time gLocalTime;
 
 static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
 
-static const s32 sNumDaysInMonths[12] =
+static const int sNumDaysInMonths[12] =
 {
     31,
     28,
@@ -64,7 +64,7 @@ bool8 IsLeapYear(u32 year)
 
 u16 ConvertDateToDayCount(u8 year, u8 month, u8 day)
 {
-    s32 i;
+    int i;
     u16 dayCount = 0;
 
     for (i = year - 1; i >= 0; i--)
@@ -154,9 +154,9 @@ void RtcGetRawInfo(struct SiiRtcInfo *rtc)
 u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
 {
     u16 errorFlags = 0;
-    s32 year;
-    s32 month;
-    s32 value;
+    int year;
+    int month;
+    int value;
 
     if (rtc->status & SIIRTCINFO_POWER)
         errorFlags |= RTC_ERR_POWER_FAILURE;
@@ -215,7 +215,7 @@ void RtcReset(void)
     RtcRestoreInterrupts();
 }
 
-void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second)
+void FormatDecimalTime(u8 *dest, int hour, int minute, int second)
 {
     dest = ConvertIntToDecimalStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
     *dest++ = CHAR_COLON;
@@ -225,7 +225,7 @@ void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second)
     *dest = EOS;
 }
 
-void FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second)
+void FormatHexTime(u8 *dest, int hour, int minute, int second)
 {
     dest = ConvertIntToHexStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
     *dest++ = CHAR_COLON;
@@ -240,7 +240,7 @@ void FormatHexRtcTime(u8 *dest)
     FormatHexTime(dest, sRtc.hour, sRtc.minute, sRtc.second);
 }
 
-void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day)
+void FormatDecimalDate(u8 *dest, int year, int month, int day)
 {
     dest = ConvertIntToDecimalStringN(dest, year, STR_CONV_MODE_LEADING_ZEROS, 4);
     *dest++ = CHAR_HYPHEN;
@@ -250,7 +250,7 @@ void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day)
     *dest = EOS;
 }
 
-void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day)
+void FormatHexDate(u8 *dest, int year, int month, int day)
 {
     dest = ConvertIntToHexStringN(dest, year, STR_CONV_MODE_LEADING_ZEROS, 4);
     *dest++ = CHAR_HYPHEN;
@@ -293,12 +293,12 @@ void RtcCalcLocalTime(void)
     RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2Ptr->localTimeOffset);
 }
 
-void RtcInitLocalTimeOffset(s32 hour, s32 minute)
+void RtcInitLocalTimeOffset(int hour, int minute)
 {
     RtcCalcLocalTimeOffset(0, hour, minute, 0);
 }
 
-void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)
+void RtcCalcLocalTimeOffset(int days, int hours, int minutes, int seconds)
 {
     gLocalTime.days = days;
     gLocalTime.hours = hours;

@@ -2009,7 +2009,7 @@ static void DrawTradeMenuPartyMonInfo(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 w
 
 static void DrawTradeMenuPartyInfo(u8 whichParty)
 {
-    s32 i;
+    int i;
     for (i = 0; i < sTradeMenuData->partyCounts[whichParty]; i++)
     {
         const u8 (*r5)[2];
@@ -2384,11 +2384,11 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         return CANT_TRADE_LAST_MON;
 }
 
-s32 GetGameProgressForLinkTrade(void)
+int GetGameProgressForLinkTrade(void)
 {
     // isGameFrLg could have been a bool but they use 2 and > 0 instead
     // possible other checks (for other game versions?) were planned/removed
-    s32 isGameFrLg;
+    int isGameFrLg;
     u16 version;
 
     if (gReceivedRemoteLinkPlayers != 0)
@@ -4532,7 +4532,7 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
 
 static void SetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trade)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAIL_WORDS_COUNT; i++)
     {

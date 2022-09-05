@@ -108,7 +108,7 @@ static void CB2_RecordedBattle(void);
 
 void RecordedBattle_Init(u8 mode)
 {
-    s32 i, j;
+    int i, j;
 
     sRecordMode = mode;
     sIsPlaybackFinished = FALSE;
@@ -131,7 +131,7 @@ void RecordedBattle_Init(u8 mode)
 
 void RecordedBattle_SetTrainerInfo(void)
 {
-    s32 i, j;
+    int i, j;
 
     if (sRecordMode == B_RECORD_MODE_RECORDING)
     {
@@ -199,7 +199,7 @@ void RecordedBattle_SetBattlerAction(u8 battlerId, u8 action)
 
 void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < bytesToClear; i++)
     {
@@ -257,7 +257,7 @@ u8 RecordedBattle_BufferNewBattlerData(u8 *dst)
 
 void RecordedBattle_RecordAllBattlerData(u8 *src)
 {
-    s32 i;
+    int i;
     u8 idx = 2;
     u8 size;
 
@@ -324,7 +324,7 @@ static bool32 RecordedBattleToSave(struct RecordedBattleSave *battleSave, struct
 
 bool32 MoveRecordedBattleToSaveData(void)
 {
-    s32 i, j;
+    int i, j;
     bool32 ret;
     struct RecordedBattleSave *battleSave, *savSection;
     u8 saveAttempts;
@@ -530,7 +530,7 @@ static void Task_StartAfterCountdown(u8 taskId)
 static void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 {
     bool8 var;
-    s32 i, j;
+    int i, j;
 
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
@@ -630,7 +630,7 @@ u8 GetRecordedBattleFronterBrainSymbol(void)
 
 void RecordedBattle_SaveParties(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -641,7 +641,7 @@ void RecordedBattle_SaveParties(void)
 
 static void RecordedBattle_RestoreSavedParties(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -652,7 +652,7 @@ static void RecordedBattle_RestoreSavedParties(void)
 
 u8 GetActiveBattlerLinkPlayerGender(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
@@ -694,7 +694,7 @@ u8 GetTextSpeedInRecordedBattle(void)
 
 void RecordedBattle_CopyBattlerMoves(void)
 {
-    s32 i;
+    int i;
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
         return;
@@ -713,7 +713,7 @@ void RecordedBattle_CopyBattlerMoves(void)
 
 void RecordedBattle_CheckMovesetChanges(u8 mode)
 {
-    s32 battlerId, j, k;
+    int battlerId, j, k;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
@@ -833,7 +833,7 @@ bool8 RecordedBattle_CanStopPlayback(void)
 
 void GetRecordedBattleRecordMixFriendName(u8 *dst)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         dst[i] = sRecordMixFriendName[i];

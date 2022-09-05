@@ -165,7 +165,7 @@ bool8 FuncIsActiveTask(TaskFunc func)
 
 u8 FindTaskIdByFunc(TaskFunc func)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_TASKS; i++)
         if (gTasks[i].isActive == TRUE && gTasks[i].func == func)

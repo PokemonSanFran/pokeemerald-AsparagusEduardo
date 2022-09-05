@@ -485,10 +485,10 @@ void ScrollWindow(u8 windowId, u8 direction, u8 distance, u8 fillValue)
     struct WindowTemplate window = gWindows[windowId].window;
     u8 *tileData = gWindows[windowId].tileData;
     u32 fillValue32 = (fillValue << 24) | (fillValue << 16) | (fillValue << 8) | fillValue;
-    s32 size = window.height * window.width * 32;
+    int size = window.height * window.width * 32;
     u32 width = window.width;
-    s32 i;
-    s32 srcOffset, destOffset;
+    int i;
+    int srcOffset, destOffset;
     u32 distanceLoop;
 
     switch (direction)
@@ -588,7 +588,7 @@ u32 GetWindowAttribute(u8 windowId, u8 attributeId)
 static u8 GetNumActiveWindowsOnBg(u8 bgId)
 {
     u8 windowsNum = 0;
-    s32 i;
+    int i;
     for (i = 0; i < WINDOWS_MAX; i++)
     {
         if (gWindows[i].window.bg == bgId)
@@ -621,7 +621,7 @@ u16 AddWindow8Bit(const struct WindowTemplate *template)
         u16 attribute = GetBgAttribute(bgLayer, BG_ATTR_METRIC);
         if (attribute != 0xFFFF)
         {
-            s32 i;
+            int i;
             memAddress = Alloc(attribute);
             if (memAddress == NULL)
                 return WINDOW_NONE;
@@ -651,8 +651,8 @@ u16 AddWindow8Bit(const struct WindowTemplate *template)
 
 void FillWindowPixelBuffer8Bit(u8 windowId, u8 fillValue)
 {
-    s32 i;
-    s32 size;
+    int i;
+    int size;
 
     size = (u16)(64 * (gWindows[windowId].window.width * gWindows[windowId].window.height));
     for (i = 0; i < size; i++)
@@ -709,7 +709,7 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode)
 static u8 GetNumActiveWindowsOnBg8Bit(u8 bgId)
 {
     u8 windowsNum = 0;
-    s32 i;
+    int i;
     for (i = 0; i < WINDOWS_MAX; i++)
     {
         if (gWindows[i].window.bg == bgId)

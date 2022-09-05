@@ -105,7 +105,7 @@ static void LimitMenuScrollAndRow(void);
 static void SetInitialScroll(void);
 static void UpdatePokeblockList(void);
 static void CreateScrollArrows(void);
-static void MovePokeblockMenuCursor(s32, bool8, struct ListMenu *);
+static void MovePokeblockMenuCursor(int, bool8, struct ListMenu *);
 static void DrawPokeblockMenuTitleText(void);
 static void DrawPokeblockMenuHighlight(u16, u16);
 static void PutPokeblockListMenuString(u8 *, u16);
@@ -123,7 +123,7 @@ static void Task_HandlePokeblockActionsInput(u8);
 static void ShowPokeblockActionsWindow(u8);
 static void Task_HandlePokeblocksSwapInput(u8);
 static void SpriteCB_ShakePokeblockCase(struct Sprite *);
-static void DrawPokeblockInfo(s32);
+static void DrawPokeblockInfo(int);
 static void UpdatePokeblockSwapMenu(u8, bool8);
 static void UsePokeblockOnField(void);
 static void ReturnToPokeblockCaseOnField(void);
@@ -690,7 +690,7 @@ static void HandleInitWindows(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-static void PrintOnPokeblockWindow(u8 windowId, const u8 *string, s32 x)
+static void PrintOnPokeblockWindow(u8 windowId, const u8 *string, int x)
 {
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, 1, 0, 0, sTextColor, 0, string);
 }
@@ -747,7 +747,7 @@ static void PutPokeblockListMenuString(u8 *dst, u16 pkblId)
     StringExpandPlaceholders(txtPtr, gText_LvVar1);
 }
 
-static void MovePokeblockMenuCursor(s32 pkblId, bool8 onInit, struct ListMenu *list)
+static void MovePokeblockMenuCursor(int pkblId, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
     {
@@ -759,7 +759,7 @@ static void MovePokeblockMenuCursor(s32 pkblId, bool8 onInit, struct ListMenu *l
         DrawPokeblockInfo(pkblId);
 }
 
-static void DrawPokeblockInfo(s32 pkblId)
+static void DrawPokeblockInfo(int pkblId)
 {
     u8 i;
     struct Pokeblock *pokeblock;
@@ -1022,7 +1022,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
         else
         {
             u16 oldPosition = sSavedPokeblockData.selectedRow;
-            s32 input = ListMenu_ProcessInput(tListTaskId);
+            int input = ListMenu_ProcessInput(tListTaskId);
             ListMenuGetScrollAndRow(tListTaskId, &sSavedPokeblockData.scrollOffset, &sSavedPokeblockData.selectedRow);
 
             if (oldPosition != sSavedPokeblockData.selectedRow)
@@ -1071,7 +1071,7 @@ static void Task_HandlePokeblocksSwapInput(u8 taskId)
     {
         u16 i = sSavedPokeblockData.scrollOffset;
         u16 row = sSavedPokeblockData.selectedRow;
-        s32 input = ListMenu_ProcessInput(tListTaskId);
+        int input = ListMenu_ProcessInput(tListTaskId);
         ListMenuGetScrollAndRow(tListTaskId, &sSavedPokeblockData.scrollOffset, &sSavedPokeblockData.selectedRow);
 
         if (i != sSavedPokeblockData.scrollOffset || row != sSavedPokeblockData.selectedRow)

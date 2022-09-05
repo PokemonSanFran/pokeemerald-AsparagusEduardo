@@ -867,7 +867,7 @@ static void AnimFallingFeather_Step(struct Sprite *sprite)
             break;
         }
 
-        sprite->x2 = ((s32)data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
+        sprite->x2 = ((int)data->unkC[data->unk0_0b] * gSineTable[data->unk2]) >> 8;
         matrixNum = sprite->oam.matrixNum;
 
         sinIndex = (-sprite->x2 >> 1) + data->unkA;

@@ -274,7 +274,7 @@ static void BerryFix_Main(void)
 
 static void BerryFix_GpuSet(void)
 {
-    s32 width, left;
+    int width, left;
 
     SetGpuReg(REG_OFFSET_BG0CNT, 0);
     SetGpuReg(REG_OFFSET_BG1CNT, 0);

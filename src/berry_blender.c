@@ -160,7 +160,7 @@ struct BerryBlender
     u8 yesNoAnswer;
     u8 stringVar[100];
     u32 gameFrameTime;
-    s32 framesToWait;
+    int framesToWait;
     u32 unk1; // never read
     u8 unused3[4];
     u8 playerToThrowBerry;
@@ -200,7 +200,7 @@ static void SpriteCB_ScoreSymbolBest(struct Sprite *);
 static void InitLocalPlayers(u8);
 static void CB2_LoadBerryBlender(void);
 static void UpdateBlenderCenter(void);
-static bool32 Blender_PrintText(s16 *, const u8 *, s32 );
+static bool32 Blender_PrintText(s16 *, const u8 *, int );
 static void StartBlender(void);
 static void CB2_StartBlenderLink(void);
 static void CB2_StartBlenderLocal(void);
@@ -212,7 +212,7 @@ static void SetPlayerIdMaps(void);
 static void PrintPlayerNames(void);
 static void InitBlenderBgs(void);
 static void SetPlayerBerryData(u8, u16);
-static void Blender_AddTextPrinter(u8, const u8 *, u8, u8, s32, s32);
+static void Blender_AddTextPrinter(u8, const u8 *, u8, u8, int, int);
 static void ResetLinkCmds(void);
 static void CreateParticleSprites(void);
 static void ShakeBgCoordForHit(s16 *, u16);
@@ -230,8 +230,8 @@ static void PrintMadePokeblockString(struct Pokeblock *, u8 *);
 static bool32 TryAddContestLinkTvShow(struct Pokeblock *, struct TvBlenderStruct *);
 
 EWRAM_DATA static struct BerryBlender *sBerryBlender = NULL;
-EWRAM_DATA static s32 sDebug_PokeblockFactorFlavors[FLAVOR_COUNT] = {0};
-EWRAM_DATA static s32 sDebug_PokeblockFactorFlavorsAfterRPM[FLAVOR_COUNT] = {0};
+EWRAM_DATA static int sDebug_PokeblockFactorFlavors[FLAVOR_COUNT] = {0};
+EWRAM_DATA static int sDebug_PokeblockFactorFlavorsAfterRPM[FLAVOR_COUNT] = {0};
 EWRAM_DATA static u32 sDebug_PokeblockFactorRPM = 0;
 
 static s16 sPokeblockFlavors[FLAVOR_COUNT + 1]; // + 1 for feel
@@ -1023,7 +1023,7 @@ static void InitBerryBlenderWindows(void)
 {
     if (InitWindows(sWindowTemplates))
     {
-        s32 i;
+        int i;
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 5; i++)
@@ -1052,7 +1052,7 @@ void DoBerryBlending(void)
 // Show the blender screen initially and prompt to choose a berry
 static void CB2_LoadBerryBlender(void)
 {
-    s32 i;
+    int i;
 
     switch (sBerryBlender->mainState)
     {
@@ -1262,7 +1262,7 @@ static void InitLocalPlayers(u8 opponentsNum)
 
 static void StartBlender(void)
 {
-    s32 i;
+    int i;
 
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     if (sBerryBlender == NULL)
@@ -1284,7 +1284,7 @@ static void StartBlender(void)
 
 static void CB2_StartBlenderLink(void)
 {
-    s32 i, j;
+    int i, j;
 
     switch (sBerryBlender->mainState)
     {
@@ -1573,7 +1573,7 @@ static void SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, struct B
 
 static void SetPlayerIdMaps(void)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
     {
@@ -1592,7 +1592,7 @@ static void SetPlayerIdMaps(void)
 
 static void PrintPlayerNames(void)
 {
-    s32 i, xPos;
+    int i, xPos;
     u32 playerId = 0;
     u8 text[20];
 
@@ -1623,7 +1623,7 @@ static void PrintPlayerNames(void)
 
 static void CB2_StartBlenderLocal(void)
 {
-    s32 i, j;
+    int i, j;
 
     switch (sBerryBlender->mainState)
     {
@@ -1798,7 +1798,7 @@ static void CB2_StartBlenderLocal(void)
 
 static void ResetLinkCmds(void)
 {
-    s32 i;
+    int i;
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
     {
         gSendCmd[BLENDER_COMM_INPUT_STATE] = 0;
@@ -2083,7 +2083,7 @@ static bool32 CheckRecvCmdMatches(u16 recvCmd, u16 linkCmd, u16 rfuCmd)
 
 static void UpdateOpponentScores(void)
 {
-    s32 i;
+    int i;
 
     if (gSpecialVar_0x8004 != 0)
     {
@@ -2263,7 +2263,7 @@ static bool8 AreBlenderBerriesSame(struct BlenderBerry* berries, u8 a, u8 b)
 static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, u8 numPlayers, u8 negativeFlavors)
 {
     s16 flavors[FLAVOR_COUNT + 1];
-    s32 i, j;
+    int i, j;
     u8 numFlavors;
 
     for (i = 0; i < FLAVOR_COUNT + 1; i++)
@@ -2326,7 +2326,7 @@ static u32 CalculatePokeblockColor(struct BlenderBerry* berries, s16 *_flavors, 
     if (numFlavors == 2)
     {
         // Determine which 2 flavors are present
-        s32 idx = 0;
+        int idx = 0;
         for (i = 0; i < FLAVOR_COUNT; i++)
         {
             if (flavors[i] > 0)
@@ -2388,8 +2388,8 @@ static s16 Debug_GetGameTimeStage(void)
 
 static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *pokeblock, u8 numPlayers, u8 *flavors, u16 maxRPM)
 {
-    s32 i, j;
-    s32 multiuseVar;
+    int i, j;
+    int multiuseVar;
     u8 numNegatives;
 
     for (i = 0; i < FLAVOR_COUNT + 1; i++)
@@ -2443,8 +2443,8 @@ static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *p
     sDebug_PokeblockFactorRPM = multiuseVar = maxRPM / 333 + 100;
     for (i = 0; i < FLAVOR_COUNT; i++)
     {
-        s32 remainder;
-        s32 flavor = sPokeblockFlavors[i];
+        int remainder;
+        int flavor = sPokeblockFlavors[i];
         flavor = (flavor * multiuseVar) / 10;
         remainder = flavor % 10;
         flavor /= 10;
@@ -3172,13 +3172,13 @@ static void SpriteCB_Particle(struct Sprite *sprite)
 
 static void CreateParticleSprites(void)
 {
-    s32 limit = (Random() % 2) + 1;
-    s32 i;
+    int limit = (Random() % 2) + 1;
+    int i;
 
     for (i = 0; i < limit; i++)
     {
         u16 rand;
-        s32 x, y;
+        int x, y;
         u8 spriteId;
 
         rand = sBerryBlender->arrowPos + (Random() % 20);
@@ -3315,7 +3315,7 @@ static void TryUpdateProgressBar(u16 current, u16 limit)
 
 static void UpdateProgressBar(u16 value, u16 limit)
 {
-    s32 amountFilled, maxFilledSegment, subSegmentsFilled, i;
+    int amountFilled, maxFilledSegment, subSegmentsFilled, i;
     u16 *vram;
 
     vram = (u16 *)(BG_SCREEN_ADDR(12));
@@ -3400,7 +3400,7 @@ static void RestoreBgCoords(void)
 
 static void BlenderLandShakeBgCoord(s16 *coord, u16 timer)
 {
-    s32 strength;
+    int strength;
 
     if (timer < 10)
         strength = 16;
@@ -3458,7 +3458,7 @@ static void TryUpdateBerryBlenderRecord(void)
 static bool8 PrintBlendingResults(void)
 {
     u16 i;
-    s32 xPos, yPos;
+    int xPos, yPos;
 
     struct Pokeblock pokeblock;
     u8 flavors[FLAVOR_COUNT + 1];
@@ -3619,7 +3619,7 @@ static void PrintMadePokeblockString(struct Pokeblock *pokeblock, u8 *dst)
 
 static void SortBasedOnPoints(u8 *places, u8 playersNum, u32 *scores)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < playersNum; i++)
     {
@@ -3668,7 +3668,7 @@ static void SortScores(void)
 static bool8 PrintBlendingRanking(void)
 {
     u16 i;
-    s32 xPos, yPos;
+    int xPos, yPos;
 
     switch (sBerryBlender->mainState)
     {
@@ -3757,8 +3757,8 @@ static bool8 PrintBlendingRanking(void)
 
 void ShowBerryBlenderRecordWindow(void)
 {
-    s32 i;
-    s32 xPos, yPos;
+    int i;
+    int xPos, yPos;
     struct WindowTemplate winTemplate;
     u8 text[32];
 
@@ -3849,7 +3849,7 @@ static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlen
     return FALSE;
 }
 
-static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s32 speed, s32 caseId)
+static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, int speed, int caseId)
 {
     u8 txtColor[3];
     u32 letterSpacing = 0;
@@ -3882,7 +3882,7 @@ static void Blender_AddTextPrinter(u8 windowId, const u8 *string, u8 x, u8 y, s3
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, letterSpacing, 1, txtColor, speed, string);
 }
 
-static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)
+static bool32 Blender_PrintText(s16 *textState, const u8 *string, int textSpeed)
 {
     switch (*textState)
     {

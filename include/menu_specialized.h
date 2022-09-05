@@ -107,7 +107,7 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 
 void GetConditionMenuMonGfx(void *tilesDst, void *palDst, u16 boxId, u16 monId, u16 partyId, u16 numMons, bool8 excludesCancel);
 void LoadConditionMonPicTemplate(struct SpriteSheet *sheet, struct SpriteTemplate *template, struct SpritePalette *pal);
 void LoadConditionSelectionIcons(struct SpriteSheet *sheets, struct SpriteTemplate * template, struct SpritePalette *pals);
-s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst);
+int GetBoxOrPartyMonData(u16 boxId, u16 monId, int request, u8 *dst);
 
 // Condition sparkles
 void LoadConditionSparkle(struct SpriteSheet *sheet, struct SpritePalette *pal);

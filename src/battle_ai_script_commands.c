@@ -286,7 +286,7 @@ static const u16 sIgnoredPowerfulMoveEffects[] =
 // code
 void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
 {
-    s32 i;
+    int i;
     u8 *data = (u8 *)BATTLE_HISTORY;
 
     for (i = 0; i < sizeof(struct BattleHistory); i++)
@@ -315,7 +315,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
 
 void BattleAI_SetupAIData(u8 defaultScoreMoves)
 {
-    s32 i;
+    int i;
     u8 *data = (u8 *)AI_THINKING_STRUCT;
     u8 moveLimitations;
 
@@ -402,7 +402,7 @@ static u8 ChooseMoveOrAction_Singles(void)
     u8 currentMoveArray[MAX_MON_MOVES];
     u8 consideredMoveArray[MAX_MON_MOVES];
     u8 numOfBestMoves;
-    s32 i;
+    int i;
 
     RecordLastUsedMoveByTarget();
 
@@ -451,10 +451,10 @@ static u8 ChooseMoveOrAction_Singles(void)
 
 static u8 ChooseMoveOrAction_Doubles(void)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
 #ifndef BUGFIX
-    s32 scriptsToRun;
+    int scriptsToRun;
 #else
     // the value assigned to this is a u32 (aiFlags)
     // this becomes relevant because aiFlags can have bit 31 set
@@ -468,8 +468,8 @@ static u8 ChooseMoveOrAction_Doubles(void)
     u8 actionOrMoveIndex[MAX_BATTLERS_COUNT];
     u8 mostViableMovesScores[MAX_MON_MOVES];
     u8 mostViableMovesIndices[MAX_MON_MOVES];
-    s32 mostViableTargetsNo;
-    s32 mostViableMovesNo;
+    int mostViableTargetsNo;
+    int mostViableMovesNo;
     s16 mostMovePoints;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
@@ -621,7 +621,7 @@ static void BattleAI_DoAIProcessing(void)
 
 static void RecordLastUsedMoveByTarget(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -638,7 +638,7 @@ static void RecordLastUsedMoveByTarget(void)
 
 void ClearBattlerMoveHistory(u8 battlerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         BATTLE_HISTORY->usedMoves[battlerId].moves[i] = MOVE_NONE;
@@ -1078,7 +1078,7 @@ static void Cmd_if_not_in_hwords(void)
 
 static void Cmd_if_user_has_attacking_move(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1095,7 +1095,7 @@ static void Cmd_if_user_has_attacking_move(void)
 
 static void Cmd_if_user_has_no_attacking_moves(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1177,8 +1177,8 @@ static void Cmd_get_considered_move_power(void)
 
 static void Cmd_get_how_powerful_move_is(void)
 {
-    s32 i, checkedMove;
-    s32 moveDmgs[MAX_MON_MOVES];
+    int i, checkedMove;
+    int moveDmgs[MAX_MON_MOVES];
 
     for (i = 0; sIgnoredPowerfulMoveEffects[i] != IGNORED_MOVES_END; i++)
     {
@@ -1298,7 +1298,7 @@ static void Cmd_count_usable_party_mons(void)
     u8 battlerId;
     u8 battlerOnField1, battlerOnField2;
     struct Pokemon *party;
-    s32 i;
+    int i;
 
     AI_THINKING_STRUCT->funcResult = 0;
 
@@ -1470,7 +1470,7 @@ static void Cmd_check_ability(void)
 
 static void Cmd_get_highest_type_effectiveness(void)
 {
-    s32 i;
+    int i;
     u8 *dynamicMoveType;
 
     gDynamicBasePower = 0;
@@ -1557,7 +1557,7 @@ static void Cmd_nop_33(void)
 static void Cmd_if_status_in_party(void)
 {
     struct Pokemon *party;
-    s32 i;
+    int i;
     u32 statusToCompareTo;
     u8 battlerId;
 
@@ -1594,7 +1594,7 @@ static void Cmd_if_status_in_party(void)
 static void Cmd_if_status_not_in_party(void)
 {
     struct Pokemon *party;
-    s32 i;
+    int i;
     u32 statusToCompareTo;
     u8 battlerId;
 
@@ -1782,7 +1782,7 @@ static void Cmd_if_cant_faint(void)
 
 static void Cmd_if_has_move(void)
 {
-    s32 i;
+    int i;
     const u16 *movePtr = (u16 *)(gAIScriptPtr + 2);
 
     switch (gAIScriptPtr[1])
@@ -1834,7 +1834,7 @@ static void Cmd_if_has_move(void)
 
 static void Cmd_if_doesnt_have_move(void)
 {
-    s32 i;
+    int i;
     const u16 *movePtr = (u16 *)(gAIScriptPtr + 2);
 
     switch(gAIScriptPtr[1])
@@ -1868,7 +1868,7 @@ static void Cmd_if_doesnt_have_move(void)
 
 static void Cmd_if_has_move_with_effect(void)
 {
-    s32 i;
+    int i;
 
     switch (gAIScriptPtr[1])
     {
@@ -1907,7 +1907,7 @@ static void Cmd_if_has_move_with_effect(void)
 
 static void Cmd_if_doesnt_have_move_with_effect(void)
 {
-    s32 i;
+    int i;
 
     switch (gAIScriptPtr[1])
     {

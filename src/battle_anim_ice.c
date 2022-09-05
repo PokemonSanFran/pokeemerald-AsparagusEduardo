@@ -14,10 +14,10 @@
 #include "constants/rgb.h"
 
 struct HailStruct {
-    s32 x:10;
-    s32 y:10;
-    s32 bPosition:8;
-    s32 unk3:4;
+    int x:10;
+    int y:10;
+    int bPosition:8;
+    int unk3:4;
 };
 
 static void AnimUnusedIceCrystalThrow(struct Sprite *);

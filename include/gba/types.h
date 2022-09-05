@@ -119,8 +119,8 @@ struct OamData
 
 struct BgAffineSrcData
 {
-    s32 texX;
-    s32 texY;
+    int texX;
+    int texY;
     s16 scrX;
     s16 scrY;
     s16 sx;
@@ -134,8 +134,8 @@ struct BgAffineDstData
     s16 pb;
     s16 pc;
     s16 pd;
-    s32 dx;
-    s32 dy;
+    int dx;
+    int dy;
 };
 
 struct ObjAffineSrcData

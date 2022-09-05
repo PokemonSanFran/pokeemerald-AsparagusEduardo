@@ -3,7 +3,7 @@
 
 u8 InitUnionRoomPlayerObjects(struct UnionRoomObject *players);
 void DestroyUnionRoomPlayerObjects(void);
-void CreateUnionRoomPlayerSprites(u8 *spriteIds, s32 leaderId);
+void CreateUnionRoomPlayerSprites(u8 *spriteIds, int leaderId);
 void DestroyUnionRoomPlayerSprites(u8 *spriteIds);
 void SetTilesAroundUnionRoomPlayersPassable(void);
 void ScheduleUnionRoomPlayerRefresh(struct WirelessLink_URoom *uroom);

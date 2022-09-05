@@ -907,7 +907,7 @@ void HofPCTopBar_RemoveWindow(void)
 
 static u8 InitMenu(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos, bool8 muteAPress)
 {
-    s32 pos;
+    int pos;
 
     sMenu.left = left;
     sMenu.top = top;
@@ -1289,7 +1289,7 @@ static void PrintMenuActionGrid_TopLeft(u8 windowId, u8 fontId, u8 optionWidth, 
 
 static u8 InitMenuGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 optionHeight, u8 columns, u8 rows, u8 numChoices, u8 cursorPos)
 {
-    s32 pos;
+    int pos;
 
     sMenu.left = left;
     sMenu.top = top;
@@ -1572,7 +1572,7 @@ static s8 Menu_ProcessGridInputRepeat(void)
 
 u8 InitMenuInUpperLeftCorner(u8 windowId, u8 itemCount, u8 initialCursorPos, bool8 APressMuted)
 {
-    s32 pos;
+    int pos;
 
     sMenu.left = 0;
     sMenu.top = 1;
@@ -1707,7 +1707,7 @@ static void PrintMenuActionGridTextNoSpacing(u8 windowId, u8 optionWidth, u8 col
 
 u8 InitMenuActionGrid(u8 windowId, u8 optionWidth, u8 columns, u8 rows, u8 initialCursorPos)
 {
-    s32 pos;
+    int pos;
 
     sMenu.left = 0;
     sMenu.top = 1;
@@ -2121,8 +2121,8 @@ void BlitMenuInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y)
 
 void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
 {
-    s32 curFlag;
-    s32 flagCount;
+    int curFlag;
+    int flagCount;
     u8 *endOfString;
     u8 *string = dest;
 

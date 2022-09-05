@@ -720,9 +720,9 @@ u32 GetTrainerIdxByRematchIdx(u32 rematchIdx)
     return gRematchTable[rematchIdx].trainerIds[0];
 }
 
-s32 GetRematchIdxByTrainerIdx(s32 trainerIdx)
+int GetRematchIdxByTrainerIdx(int trainerIdx)
 {
-    s32 rematchIdx;
+    int rematchIdx;
 
     for (rematchIdx = 0; rematchIdx < REMATCH_TABLE_ENTRIES; rematchIdx++)
     {
@@ -803,7 +803,7 @@ static u8 MatchCall_GetMapSec_Trainer(match_call_t matchCall)
 
 static u8 MatchCall_GetMapSec_Wally(match_call_t matchCall)
 {
-    s32 i;
+    int i;
 
     for (i = 0; matchCall.wally->locationData[i].flag != 0xFFFF; i++)
     {

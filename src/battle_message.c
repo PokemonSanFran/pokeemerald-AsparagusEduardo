@@ -2056,7 +2056,7 @@ static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
 void BufferStringBattle(u16 stringID)
 {
-    s32 i;
+    int i;
     const u8 *stringPtr = NULL;
 
     gBattleMsgDataPtr = (struct BattleMsgData *)(&gBattleBufferA[gActiveBattler][4]);
@@ -2409,7 +2409,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     const u8 *toCpy = NULL;
     u8 text[30];
     u8 multiplayerId;
-    s32 i;
+    int i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
         multiplayerId = gRecordedBattleMultiplayerId;
@@ -2628,7 +2628,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_TRAINER1_NAME: // trainer1 name
                 if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
                 {
-                    for (i = 0; i < (s32) ARRAY_COUNT(gBattleResources->secretBase->trainerName); i++)
+                    for (i = 0; i < (int) ARRAY_COUNT(gBattleResources->secretBase->trainerName); i++)
                         text[i] = gBattleResources->secretBase->trainerName[i];
                     text[i] = EOS;
                     ConvertInternationalString(text, gBattleResources->secretBase->language);
@@ -2968,7 +2968,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 // below to effect changes in the meaning of the line.
 static void ChooseMoveUsedParticle(u8 *textBuff)
 {
-    s32 counter = 0;
+    int counter = 0;
     u32 i = 0;
 
     while (counter != MAX_MON_MOVES)
@@ -3008,8 +3008,8 @@ static void ChooseMoveUsedParticle(u8 *textBuff)
 // "<NAME>'s <ATTACK> attack!".
 static void ChooseTypeOfMoveUsedString(u8 *dst)
 {
-    s32 counter = 0;
-    s32 i = 0;
+    int counter = 0;
+    int i = 0;
 
     while (*dst != EOS)
         dst++;
@@ -3077,7 +3077,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
     if (printerTemplate.x == 0xFF)
     {
         u32 width = GetBattleWindowTemplatePixelWidth(gBattleScripting.windowsType, windowId);
-        s32 alignX = GetStringCenterAlignXOffsetWithLetterSpacing(printerTemplate.fontId, printerTemplate.currentChar, width, printerTemplate.letterSpacing);
+        int alignX = GetStringCenterAlignXOffsetWithLetterSpacing(printerTemplate.fontId, printerTemplate.currentChar, width, printerTemplate.letterSpacing);
         printerTemplate.x = printerTemplate.currentX = alignX;
     }
 

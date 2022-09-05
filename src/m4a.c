@@ -69,9 +69,9 @@ void MPlayFadeOut(struct MusicPlayerInfo *mplayInfo, u16 speed)
 
 void m4aSoundInit(void)
 {
-    s32 i;
+    int i;
 
-    CpuCopy32((void *)((s32)SoundMainRAM & ~1), SoundMainRAM_Buffer, sizeof(SoundMainRAM_Buffer));
+    CpuCopy32((void *)((int)SoundMainRAM & ~1), SoundMainRAM_Buffer, sizeof(SoundMainRAM_Buffer));
 
     SoundInit(&gSoundInfo);
     MPlayExtender(gCgbChans);
@@ -174,7 +174,7 @@ void m4aSongNumContinue(u16 n)
 
 void m4aMPlayAllStop(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
         m4aMPlayStop(gMPlayTable[i].info);
@@ -190,7 +190,7 @@ void m4aMPlayContinue(struct MusicPlayerInfo *mplayInfo)
 
 void m4aMPlayAllContinue(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
         MPlayContinue(gMPlayTable[i].info);
@@ -231,7 +231,7 @@ void m4aMPlayFadeIn(struct MusicPlayerInfo *mplayInfo, u16 speed)
 
 void m4aMPlayImmInit(struct MusicPlayerInfo *mplayInfo)
 {
-    s32 trackCount = mplayInfo->trackCount;
+    int trackCount = mplayInfo->trackCount;
     struct MusicPlayerTrack *track = mplayInfo->tracks;
 
     while (trackCount > 0)
@@ -352,10 +352,10 @@ void SoundInit(struct SoundInfo *soundInfo)
                    | SOUND_ALL_MIX_FULL;
     REG_SOUNDBIAS_H = (REG_SOUNDBIAS_H & 0x3F) | 0x40;
 
-    REG_DMA1SAD = (s32)soundInfo->pcmBuffer;
-    REG_DMA1DAD = (s32)&REG_FIFO_A;
-    REG_DMA2SAD = (s32)soundInfo->pcmBuffer + PCM_DMA_BUF_SIZE;
-    REG_DMA2DAD = (s32)&REG_FIFO_B;
+    REG_DMA1SAD = (int)soundInfo->pcmBuffer;
+    REG_DMA1DAD = (int)&REG_FIFO_A;
+    REG_DMA2SAD = (int)soundInfo->pcmBuffer + PCM_DMA_BUF_SIZE;
+    REG_DMA2DAD = (int)&REG_FIFO_B;
 
     SOUND_INFO_PTR = soundInfo;
     CpuFill32(0, soundInfo, sizeof(struct SoundInfo));
@@ -470,7 +470,7 @@ void m4aSoundMode(u32 mode)
 void SoundClear(void)
 {
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
-    s32 i;
+    int i;
     void *chan;
 
     if (soundInfo->ident != ID_NUMBER)
@@ -485,7 +485,7 @@ void SoundClear(void)
     {
         ((struct SoundChannel *)chan)->statusFlags = 0;
         i--;
-        chan = (void *)((s32)chan + sizeof(struct SoundChannel));
+        chan = (void *)((int)chan + sizeof(struct SoundChannel));
     }
 
     chan = soundInfo->cgbChans;
@@ -499,7 +499,7 @@ void SoundClear(void)
             soundInfo->CgbOscOff(i);
             ((struct CgbChannel *)chan)->statusFlags = 0;
             i++;
-            chan = (void *)((s32)chan + sizeof(struct CgbChannel));
+            chan = (void *)((int)chan + sizeof(struct CgbChannel));
         }
     }
 
@@ -590,7 +590,7 @@ void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 
 void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader)
 {
-    s32 i;
+    int i;
     u8 unk_B;
     struct MusicPlayerTrack *track;
 
@@ -647,7 +647,7 @@ void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader
 
 void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo)
 {
-    s32 i;
+    int i;
     struct MusicPlayerTrack *track;
 
     if (mplayInfo->ident != ID_NUMBER)
@@ -671,7 +671,7 @@ void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo)
 
 void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
 {
-    s32 i;
+    int i;
     struct MusicPlayerTrack *track;
     u16 fadeOV;
 
@@ -746,8 +746,8 @@ void TrkVolPitSet(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tr
 {
     if (track->flags & MPT_FLG_VOLSET)
     {
-        s32 x;
-        s32 y;
+        int x;
+        int y;
 
         x = (u32)(track->vol * track->volX) >> 5;
 
@@ -770,8 +770,8 @@ void TrkVolPitSet(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tr
 
     if (track->flags & MPT_FLG_PITSET)
     {
-        s32 bend = track->bend * track->bendRange;
-        s32 x = (track->tune + bend)
+        int bend = track->bend * track->bendRange;
+        int x = (track->tune + bend)
               * 4
               + (track->keyShift << 8)
               + (track->keyShiftX << 8)
@@ -806,8 +806,8 @@ u32 MidiKeyToCgbFreq(u8 chanNum, u8 key, u8 fineAdjust)
     }
     else
     {
-        s32 val1;
-        s32 val2;
+        int val1;
+        int val2;
 
         if (key <= 35)
         {
@@ -904,16 +904,16 @@ void CgbModVol(struct CgbChannel *chan)
 
 void CgbSound(void)
 {
-    s32 ch;
+    int ch;
     struct CgbChannel *channels;
-    s32 prevC15;
+    int prevC15;
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
     vu8 *nrx0ptr;
     vu8 *nrx1ptr;
     vu8 *nrx2ptr;
     vu8 *nrx3ptr;
     vu8 *nrx4ptr;
-    s32 envelopeStepTimeAndDir;
+    int envelopeStepTimeAndDir;
 
     // Most comparision operations that cast to s8 perform 'and' by 0xFF.
     int mask = 0xff;
@@ -1224,7 +1224,7 @@ void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo)
 
 void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume)
 {
-    s32 i;
+    int i;
     u32 bit;
     struct MusicPlayerTrack *track;
 
@@ -1258,7 +1258,7 @@ void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16
 
 void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 pitch)
 {
-    s32 i;
+    int i;
     u32 bit;
     struct MusicPlayerTrack *track;
 
@@ -1293,7 +1293,7 @@ void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s16 
 
 void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s8 pan)
 {
-    s32 i;
+    int i;
     u32 bit;
     struct MusicPlayerTrack *track;
 
@@ -1338,7 +1338,7 @@ void ClearModM(struct MusicPlayerTrack *track)
 
 void m4aMPlayModDepthSet(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u8 modDepth)
 {
-    s32 i;
+    int i;
     u32 bit;
     struct MusicPlayerTrack *track;
 
@@ -1374,7 +1374,7 @@ void m4aMPlayModDepthSet(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u8 mo
 
 void m4aMPlayLFOSpeedSet(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u8 lfoSpeed)
 {
-    s32 i;
+    int i;
     u32 bit;
     struct MusicPlayerTrack *track;
 
@@ -1640,8 +1640,8 @@ void DummyFunc(void)
 struct MusicPlayerInfo *SetPokemonCryTone(struct ToneData *tone)
 {
     u32 maxClock = 0;
-    s32 maxClockIndex = 0;
-    s32 i;
+    int maxClockIndex = 0;
+    int i;
     struct MusicPlayerInfo *mplayInfo;
 
     for (i = 0; i < MAX_POKEMON_CRIES; i++)

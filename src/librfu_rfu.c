@@ -60,7 +60,7 @@ static void rfu_STC_readChildList(void);
 static void rfu_STC_readParentCandidateList(void);
 static void rfu_STC_REQ_callback(u8 reqCommand, u16 reqResult);
 static void rfu_STC_removeLinkData(u8, u8);
-static void rfu_STC_fastCopy(const u8 **, u8 **, s32);
+static void rfu_STC_fastCopy(const u8 **, u8 **, int);
 static void rfu_STC_clearLinkStatus(u8);
 static void rfu_NI_checkCommFailCounter(void);
 static u16 rfu_STC_setSendData_org(u8, u8, u8, const void *, u32);
@@ -286,7 +286,7 @@ static void rfu_STC_REQ_callback(u8 reqCommand, u16 reqResult)
 
 static void rfu_CB_defaultCallback(u8 reqCommand, u16 reqResult)
 {
-    s32 bmSlotFlags;
+    int bmSlotFlags;
     u8 i;
 
     if (reqCommand == ID_CLOCK_SLAVE_MS_CHANGE_ERROR_BY_DMA_REQ)
@@ -473,7 +473,7 @@ void rfu_REQ_configGameData(u8 mbootFlag, u16 serialNo, const u8 *gname, const u
 
 static void rfu_CB_configGameData(u8 reqCommand, u16 reqResult)
 {
-    s32 serialNo;
+    int serialNo;
     u8 *gname_uname_p;
     u8 i;
     u8 *packet_p;
@@ -838,7 +838,7 @@ void rfu_REQ_endConnectParent(void)
 u16 rfu_syncVBlank(void)
 {
     u8 masterSlave, i;
-    s32 bmSlotFlag;
+    int bmSlotFlag;
 
     rfu_NI_checkCommFailCounter();
     if (gRfuLinkStatus->parentChild == MODE_NEUTRAL)
@@ -883,7 +883,7 @@ u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason
     u8 reasonMaybe = 0;
     u8 reqResult = 0;
     u8 i;
-    s32 stwiCommand, stwiParam;
+    int stwiCommand, stwiParam;
     u8 *packet_p;
     u8 to_req_disconnect, newLinkLossFlag, num_packets, connSlotFlag, to_disconnect;
 
@@ -1066,7 +1066,7 @@ u16 rfu_REQBN_watchLink(u16 reqCommandId, u8 *bmLinkLossSlot, u8 *linkLossReason
 static void rfu_STC_removeLinkData(u8 bmConnectedPartnerId, u8 bmDisconnect)
 {
     u8 bmLinkLossFlag = 1 << bmConnectedPartnerId;
-    s32 bmLinkRetainedFlag;
+    int bmLinkRetainedFlag;
 
 #if LIBRFU_VERSION >= 1026
     gRfuStatic->lsFixedCount[bmConnectedPartnerId] = 0;
@@ -1208,11 +1208,11 @@ void rfu_REQ_CHILD_endConnectRecovery(void)
     STWI_send_CPR_EndREQ();
 }
 
-static void rfu_STC_fastCopy(const u8 **src_p, u8 **dst_p, s32 size)
+static void rfu_STC_fastCopy(const u8 **src_p, u8 **dst_p, int size)
 {
     const u8 *src = *src_p;
     u8 *dst = *dst_p;
-    s32 i;
+    int i;
 
     for (i = size - 1; i != -1; --i)
         *dst++ = *src++;
@@ -1532,7 +1532,7 @@ u16 rfu_changeSendTarget(u8 connType, u8 slotStatusIndex, u8 bmNewTgtSlot)
     {
         if (connType == 16)
         {
-            s32 bmSlot;
+            int bmSlot;
 
             if (gRfuSlotStatusUNI[slotStatusIndex]->send.state != SLOT_STATE_SEND_UNI)
                 return ERR_SLOT_NOT_SENDING;
@@ -2009,7 +2009,7 @@ static u16 rfu_STC_analyzeLLSF(u8 slot_id, const u8 *src, u16 last_frame)
         }
         else
         {
-            s32 conSlots = gRfuLinkStatus->connSlotFlag & llsf_NI.connSlotFlag;
+            int conSlots = gRfuLinkStatus->connSlotFlag & llsf_NI.connSlotFlag;
 
             if (conSlots)
             {

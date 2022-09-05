@@ -1198,7 +1198,7 @@ const u8 *GetMonIconTiles(u16 species, bool32 handleDeoxys)
 
 void TryLoadAllMonIconPalettesAtOffset(u16 offset)
 {
-    s32 i;
+    int i;
     const struct SpritePalette* monIconPalettePtr;
 
     if (offset <= 0xA0)

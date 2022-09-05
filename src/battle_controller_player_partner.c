@@ -358,7 +358,7 @@ static void Task_GiveExpToMon(u8 taskId)
 static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 {
     u8 monIndex = gTasks[taskId].tExpTask_monId;
-    s32 gainedExp = gTasks[taskId].tExpTask_gainedExp;
+    int gainedExp = gTasks[taskId].tExpTask_gainedExp;
     u8 battlerId = gTasks[taskId].tExpTask_bank;
     struct Pokemon *mon = &gPlayerParty[monIndex];
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
@@ -392,9 +392,9 @@ static void Task_GiveExpWithExpBar(u8 taskId)
         if (r4 == -1)
         {
             u8 level;
-            s32 currExp;
+            int currExp;
             u16 species;
-            s32 expOnNextLvl;
+            int expOnNextLvl;
 
             m4aSongNumStop(SE_EXP);
             level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
@@ -610,7 +610,7 @@ static void PlayerPartnerHandleGetMonData(void)
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
     u8 monToCheck;
-    s32 i;
+    int i;
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
@@ -638,7 +638,7 @@ static u32 CopyPlayerPartnerMonData(u8 monId, u8 *dst)
     u8 *src;
     s16 data16;
     u32 data32;
-    s32 size = 0;
+    int size = 0;
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -967,7 +967,7 @@ static void SetPlayerPartnerMonData(u8 monId)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBattler][3];
     struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBattler][3];
-    s32 i;
+    int i;
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -1538,7 +1538,7 @@ static void PlayerPartnerHandleChooseItem(void)
 
 static void PlayerPartnerHandleChoosePokemon(void)
 {
-    s32 chosenMonId = GetMostSuitableMonToSwitchInto();
+    int chosenMonId = GetMostSuitableMonToSwitchInto();
 
     if (chosenMonId == 6) // just switch to the next mon
     {

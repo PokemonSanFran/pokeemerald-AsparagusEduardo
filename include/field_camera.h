@@ -5,10 +5,10 @@ struct CameraObject
 {
     void (*callback)(struct CameraObject *);
     u32 spriteId;
-    s32 movementSpeedX;
-    s32 movementSpeedY;
-    s32 x;
-    s32 y;
+    int movementSpeedX;
+    int movementSpeedY;
+    int x;
+    int y;
 };
 
 extern struct CameraObject gFieldCamera;

@@ -138,7 +138,7 @@ void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)
 void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
 {
     u8 *txtPtr;
-    s32 strLength;
+    int strLength;
 
     ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, 6);
 

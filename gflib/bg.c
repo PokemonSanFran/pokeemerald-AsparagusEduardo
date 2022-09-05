@@ -34,8 +34,8 @@ struct BgConfig2
     u32 unk_3:18;
 
     void *tilemap;
-    s32 bg_x;
-    s32 bg_y;
+    int bg_x;
+    int bg_y;
 };
 
 static struct BgControl sGpuBgConfigs;
@@ -241,7 +241,7 @@ void SetTextModeAndHideBgs(void)
     SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) & ~DISPCNT_ALL_BG_AND_MODE_BITS);
 }
 
-static void SetBgAffineInternal(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
+static void SetBgAffineInternal(u8 bg, int srcCenterX, int srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
 {
     struct BgAffineSrcData src;
     struct BgAffineDstData dest;
@@ -540,7 +540,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
     }
 }
 
-s32 ChangeBgX(u8 bg, s32 value, u8 op)
+int ChangeBgX(u8 bg, int value, u8 op)
 {
     u8 mode;
     u16 temp1;
@@ -610,7 +610,7 @@ s32 ChangeBgX(u8 bg, s32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_x;
 }
 
-s32 GetBgX(u8 bg)
+int GetBgX(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return -1;
@@ -620,7 +620,7 @@ s32 GetBgX(u8 bg)
         return sGpuBgConfigs2[bg].bg_x;
 }
 
-s32 ChangeBgY(u8 bg, s32 value, u8 op)
+int ChangeBgY(u8 bg, int value, u8 op)
 {
     u8 mode;
     u16 temp1;
@@ -690,7 +690,7 @@ s32 ChangeBgY(u8 bg, s32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_y;
 }
 
-s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
+int ChangeBgY_ScreenOff(u8 bg, int value, u8 op)
 {
     u8 mode;
     u16 temp1;
@@ -761,7 +761,7 @@ s32 ChangeBgY_ScreenOff(u8 bg, s32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_y;
 }
 
-s32 GetBgY(u8 bg)
+int GetBgY(u8 bg)
 {
     if (IsInvalidBg32(bg))
         return -1;
@@ -771,7 +771,7 @@ s32 GetBgY(u8 bg)
         return sGpuBgConfigs2[bg].bg_y;
 }
 
-void SetBgAffine(u8 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
+void SetBgAffine(u8 bg, int srcCenterX, int srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
 {
     SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
 }
@@ -1144,7 +1144,7 @@ u32 GetBgMetricAffineMode(u8 bg, u8 whichMetric)
     return 0;
 }
 
-u32 GetTileMapIndexFromCoords(s32 x, s32 y, s32 screenSize, u32 screenWidth, u32 screenHeight)
+u32 GetTileMapIndexFromCoords(int x, int y, int screenSize, u32 screenWidth, u32 screenHeight)
 {
     x = x & (screenWidth - 1);
     y = y & (screenHeight - 1);
@@ -1168,7 +1168,7 @@ u32 GetTileMapIndexFromCoords(s32 x, s32 y, s32 screenSize, u32 screenWidth, u32
     return (y * 0x20) + x;
 }
 
-void CopyTileMapEntry(const u16 *src, u16 *dest, s32 palette1, s32 tileOffset, s32 palette2)
+void CopyTileMapEntry(const u16 *src, u16 *dest, int palette1, int tileOffset, int palette2)
 {
     u16 var;
 

@@ -2868,7 +2868,7 @@ static void Swap_Task_SlideCycleBalls(u8 taskId)
 static void Swap_Task_SlideButtonOnOffScreen(u8 taskId)
 {
     u8 i, j;
-    s32 posX = 0;
+    int posX = 0;
     s8 deltaX = gTasks[taskId].tXIncrement;
     bool8 sliding;
     s16 currPosX;
@@ -3808,7 +3808,7 @@ static void Swap_PrintYesNoOptions(void)
 
 static void Swap_PrintActionString(const u8 *str, u32 y, u32 windowId)
 {
-    s32 x = GetStringRightAlignXOffset(FONT_SMALL, str, 0x46);
+    int x = GetStringRightAlignXOffset(FONT_SMALL, str, 0x46);
     AddTextPrinterParameterized3(windowId, FONT_SMALL, x, y, sSwapMenuOptionsTextColors, 0, str);
 }
 

@@ -212,7 +212,7 @@ void WonderCard_Destroy(void)
     }
 }
 
-s32 WonderCard_Enter(void)
+int WonderCard_Enter(void)
 {
     if (sWonderCardData == NULL)
         return -1;
@@ -277,7 +277,7 @@ s32 WonderCard_Enter(void)
     return 0;
 }
 
-s32 WonderCard_Exit(bool32 useCancel)
+int WonderCard_Exit(bool32 useCancel)
 {
     if (sWonderCardData == NULL)
         return -1;
@@ -415,7 +415,7 @@ static void BufferCardText(void)
 static void DrawCardWindow(u8 whichWindow)
 {
     s8 i = 0;
-    s32 windowId = sWonderCardData->windowIds[whichWindow];
+    int windowId = sWonderCardData->windowIds[whichWindow];
     PutWindowTilemap(windowId);
     FillWindowPixelBuffer(windowId, 0);
     switch (whichWindow)
@@ -423,7 +423,7 @@ static void DrawCardWindow(u8 whichWindow)
     case CARD_WIN_HEADER:
     {
         // Print card title/subtitle
-        s32 x;
+        int x;
         AddTextPrinterParameterized3(windowId, FONT_SHORT_COPY_1, 0, 1, sCard_TextColorTable[sWonderCardData->gfx->titleTextPal], 0, sWonderCardData->titleText);
         x = 160 - GetStringWidth(FONT_SHORT_COPY_1, sWonderCardData->subtitleText, GetFontAttribute(FONT_SHORT_COPY_1, FONTATTR_LETTER_SPACING));
         if (x < 0)
@@ -459,9 +459,9 @@ static void DrawCardWindow(u8 whichWindow)
         }
         else
         {
-            s32 x = 0;
-            s32 y = sCard_FooterTextOffsets[sWonderCardData->card.type] + 16;
-            s32 spacing = GetFontAttribute(FONT_SHORT_COPY_1, FONTATTR_LETTER_SPACING);
+            int x = 0;
+            int y = sCard_FooterTextOffsets[sWonderCardData->card.type] + 16;
+            int spacing = GetFontAttribute(FONT_SHORT_COPY_1, FONTATTR_LETTER_SPACING);
             for (; i < sWonderCardData->statFooterWidth; i++)
             {
                 // Print stat text
@@ -664,7 +664,7 @@ void WonderNews_Destroy(void)
     }
 }
 
-s32 WonderNews_Enter(void)
+int WonderNews_Enter(void)
 {
     if (sWonderNewsData == NULL)
         return -1;
@@ -740,7 +740,7 @@ s32 WonderNews_Enter(void)
     return 0;
 }
 
-s32 WonderNews_Exit(bool32 useCancel)
+int WonderNews_Exit(bool32 useCancel)
 {
     if (sWonderNewsData == NULL)
         return -1;
@@ -885,7 +885,7 @@ static void BufferNewsText(void)
 static void DrawNewsWindows(void)
 {
     u8 i = 0;
-    s32 x;
+    int x;
     PutWindowTilemap(sWonderNewsData->windowIds[NEWS_WIN_TITLE]);
     PutWindowTilemap(sWonderNewsData->windowIds[NEWS_WIN_BODY]);
     FillWindowPixelBuffer(sWonderNewsData->windowIds[NEWS_WIN_TITLE], 0);

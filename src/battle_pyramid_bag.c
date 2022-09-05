@@ -86,7 +86,7 @@ static bool8 LoadPyramidBagMenu(void);
 static void ShowItemIcon(u16, u8);
 static void CopyBagItemName(u8 *, u16);
 static void FreeItemIconSpriteByAltId(u8);
-static void PrintItemDescription(s32);
+static void PrintItemDescription(int);
 static void PrintSelectorArrowAtPos(u8, u8);
 static void PyramidBagPrint(u8, const u8 *, u8, u8, u8, u8, u8, u8);
 static void PyramidBagPrint_Quantity(u8, const u8 *, u8, u8, u8, u8, u8, u8);
@@ -105,7 +105,7 @@ static void BagAction_Toss(u8);
 static void BagAction_Give(u8);
 static void BagAction_Cancel(u8);
 static void BagAction_UseInBattle(u8);
-static void BagCursorMoved(s32, bool8, struct ListMenu *);
+static void BagCursorMoved(int, bool8, struct ListMenu *);
 static void PrintItemQuantity(u8 windowId, u32 itemId, u8 y);
 static void TossItem(u8);
 static void DontTossItem(u8);
@@ -632,7 +632,7 @@ static void CopyBagItemName(u8 *dst, u16 itemId)
     }
 }
 
-static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void BagCursorMoved(int itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
     {
@@ -653,7 +653,7 @@ static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 
 static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
 {
-    s32 xAlign;
+    int xAlign;
     if (itemIndex == LIST_CANCEL)
         return;
 
@@ -676,7 +676,7 @@ static void PrintItemQuantity(u8 windowId, u32 itemIndex, u8 y)
     PyramidBagPrint_Quantity(windowId, gStringVar4, xAlign, y, 0, 0, TEXT_SKIP_DRAW, COLORID_DARK_GRAY);
 }
 
-static void PrintItemDescription(s32 listMenuId)
+static void PrintItemDescription(int listMenuId)
 {
     const u8 *desc;
     if (listMenuId != LIST_CANCEL)
@@ -902,7 +902,7 @@ static void Task_HandlePyramidBagInput(u8 taskId)
     }
     else
     {
-        s32 listId = ListMenu_ProcessInput(tListTaskId);
+        int listId = ListMenu_ProcessInput(tListTaskId);
         ListMenuGetScrollAndRow(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
         switch (listId)
         {
@@ -992,7 +992,7 @@ static void HandleMenuActionInput_SingleRow(u8 taskId)
 {
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
-        s32 id = Menu_ProcessInputNoWrap();
+        int id = Menu_ProcessInputNoWrap();
         switch (id)
         {
         case MENU_NOTHING_CHOSEN:
@@ -1166,7 +1166,7 @@ static void DontTossItem(u8 taskId)
 
 static void ShowNumToToss(void)
 {
-    s32 x;
+    int x;
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     DrawTossNumberWindow(WIN_TOSS_NUM);
@@ -1176,7 +1176,7 @@ static void ShowNumToToss(void)
 
 static void UpdateNumToToss(s16 num)
 {
-    s32 x;
+    int x;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 0x28);
@@ -1335,7 +1335,7 @@ static void Task_ItemSwapHandleInput(u8 taskId)
         }
         else
         {
-            s32 id = ListMenu_ProcessInput(tListTaskId);
+            int id = ListMenu_ProcessInput(tListTaskId);
             ListMenuGetScrollAndRow(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
             SetSwapLineInvisibility(FALSE);
             UpdateSwapLinePos(gPyramidBagMenuState.cursorPosition);

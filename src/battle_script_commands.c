@@ -914,7 +914,7 @@ static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
 
 static void Cmd_attackcanceler(void)
 {
-    s32 i;
+    int i;
 
     if (gBattleOutcome != 0)
     {
@@ -1204,7 +1204,7 @@ static void Cmd_attackstring(void)
 
 static void Cmd_ppreduce(void)
 {
-    s32 ppToDeduct = 1;
+    int ppToDeduct = 1;
 
     if (gBattleControllerExecFlags)
         return;
@@ -1354,7 +1354,7 @@ static void ModulateDmgByType(u8 multiplier)
 
 static void Cmd_typecalc(void)
 {
-    s32 i = 0;
+    int i = 0;
     u8 moveType;
 
     if (gCurrentMove == MOVE_STRUGGLE)
@@ -1426,7 +1426,7 @@ static void Cmd_typecalc(void)
 static void CheckWonderGuardAndLevitate(void)
 {
     u8 flags = 0;
-    s32 i = 0;
+    int i = 0;
     u8 moveType;
 
     if (gCurrentMove == MOVE_STRUGGLE || !gBattleMoves[gCurrentMove].power)
@@ -1535,7 +1535,7 @@ static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
 
 u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 {
-    s32 i = 0;
+    int i = 0;
     u8 flags = 0;
     u8 moveType;
 
@@ -1593,7 +1593,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 
 u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
 {
-    s32 i = 0;
+    int i = 0;
     u8 flags = 0;
     u8 type1 = gBaseStats[targetSpecies].type1, type2 = gBaseStats[targetSpecies].type2;
     u8 moveType;
@@ -1817,8 +1817,8 @@ static void Cmd_healthbarupdate(void)
         {
             s16 healthValue;
 
-            s32 currDmg = gBattleMoveDamage;
-            s32 maxPossibleDmgValue = 10000; // not present in R/S, ensures that huge damage values don't change sign
+            int currDmg = gBattleMoveDamage;
+            int maxPossibleDmgValue = 10000; // not present in R/S, ensures that huge damage values don't change sign
 
             if (currDmg <= maxPossibleDmgValue)
                 healthValue = currDmg;
@@ -2186,7 +2186,7 @@ static void Cmd_printselectionstringfromtable(void)
 
 u8 GetBattlerTurnOrderNum(u8 battlerId)
 {
-    s32 i;
+    int i;
     for (i = 0; i < gBattlersCount; i++)
     {
         if (gBattlerByTurnOrder[i] == battlerId)
@@ -3222,10 +3222,10 @@ static void Cmd_jumpiftype(void)
 static void Cmd_getexp(void)
 {
     u16 item;
-    s32 i; // also used as stringId
+    int i; // also used as stringId
     u8 holdEffect;
-    s32 sentIn;
-    s32 viaExpShare = 0;
+    int sentIn;
+    int viaExpShare = 0;
     u16 *exp = &gBattleStruct->expValue;
 
     gBattlerFainted = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
@@ -3254,7 +3254,7 @@ static void Cmd_getexp(void)
     case 1: // calculate experience points to redistribute
         {
             u16 calculatedExp;
-            s32 viaSentIn;
+            int viaSentIn;
 
             for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
             {
@@ -3504,7 +3504,7 @@ static void Cmd_getexp(void)
 static void Cmd_checkteamslost(void)
 {
     u16 HP_count = 0;
-    s32 i;
+    int i;
 
     if (gBattleControllerExecFlags)
         return;
@@ -3551,8 +3551,8 @@ static void Cmd_checkteamslost(void)
     // In non-multi battles, jump to pointer if 1 spot is missing on both sides
     if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
     {
-        s32 emptyPlayerSpots = 0;
-        s32 emptyOpponentSpots;
+        int emptyPlayerSpots = 0;
+        int emptyOpponentSpots;
 
         for (i = 0; i < gBattlersCount; i += 2)
         {
@@ -3808,9 +3808,9 @@ static void Cmd_copyarray(void)
 {
     u8 *dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     const u8 *src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
-    s32 size = gBattlescriptCurrInstr[9];
+    int size = gBattlescriptCurrInstr[9];
 
-    s32 i;
+    int i;
     for (i = 0; i < size; i++)
         dest[i] = src[i];
 
@@ -3822,9 +3822,9 @@ static void Cmd_copyarraywithindex(void)
     u8 *dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
     const u8 *src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
     const u8 *index = T2_READ_PTR(gBattlescriptCurrInstr + 9);
-    s32 size = gBattlescriptCurrInstr[13];
+    int size = gBattlescriptCurrInstr[13];
 
-    s32 i;
+    int i;
     for (i = 0; i < size; i++)
         dest[i] = src[i + *index];
 
@@ -4082,7 +4082,7 @@ static void Cmd_playstatchangeanimation(void)
 {
     u32 currStat = 0;
     u16 statAnimId = 0;
-    s32 changeableStatsCount = 0;
+    int changeableStatsCount = 0;
     u8 statsToCheck = 0;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
@@ -4179,7 +4179,7 @@ static void Cmd_playstatchangeanimation(void)
 
 static void Cmd_moveend(void)
 {
-    s32 i;
+    int i;
     bool32 effect = FALSE;
     u8 moveType = 0;
     u8 holdEffectAtk = 0;
@@ -4470,7 +4470,7 @@ static void Cmd_moveend(void)
 static void Cmd_typecalc2(void)
 {
     u8 flags = 0;
-    s32 i = 0;
+    int i = 0;
     u8 moveType = gBattleMoves[gCurrentMove].type;
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
@@ -4591,7 +4591,7 @@ static void Cmd_getswitchedmondata(void)
 static void Cmd_switchindataupdate(void)
 {
     struct BattlePokemon oldData;
-    s32 i;
+    int i;
     u8 *monData;
 
     if (gBattleControllerExecFlags)
@@ -4669,8 +4669,8 @@ static void Cmd_switchinanim(void)
 
 static void Cmd_jumpifcantswitch(void)
 {
-    s32 i;
-    s32 lastMonId;
+    int i;
+    int lastMonId;
     struct Pokemon *party;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~SWITCH_IGNORE_ESCAPE_PREVENTION);
@@ -5121,7 +5121,7 @@ static void Cmd_openpartyscreen(void)
 
 static void Cmd_switchhandleorder(void)
 {
-    s32 i;
+    int i;
     if (gBattleControllerExecFlags)
         return;
 
@@ -5188,7 +5188,7 @@ static void Cmd_switchhandleorder(void)
 
 static void Cmd_switchineffects(void)
 {
-    s32 i;
+    int i;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
     UpdateSentPokesToOpponentValue(gActiveBattler);
@@ -5629,7 +5629,7 @@ static void Cmd_updatebattlermoves(void)
     case 1:
          if (gBattleControllerExecFlags == 0)
          {
-            s32 i;
+            int i;
             struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleBufferB[gActiveBattler][4];
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
@@ -5666,7 +5666,7 @@ static void Cmd_incrementgamestat(void)
 
 static void Cmd_drawpartystatussummary(void)
 {
-    s32 i;
+    int i;
     struct Pokemon *party;
     struct HpAndStatus hpStatuses[PARTY_SIZE];
 
@@ -5819,7 +5819,7 @@ static void Cmd_yesnobox(void)
 
 static void Cmd_cancelallactions(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < gBattlersCount; i++)
         gActionsByTurnOrder[i] = B_ACTION_CANCEL_PARTNER;
@@ -6228,7 +6228,7 @@ static void Cmd_jumpifplayerran(void)
 static void Cmd_hpthresholds(void)
 {
     u8 opposingBattler;
-    s32 result;
+    int result;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
@@ -6255,7 +6255,7 @@ static void Cmd_hpthresholds(void)
 static void Cmd_hpthresholds2(void)
 {
     u8 opposingBattler;
-    s32 result;
+    int result;
     u8 hpSwitchout;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
@@ -6288,7 +6288,7 @@ static void Cmd_useitemonopponent(void)
 static void Cmd_various(void)
 {
     u8 side;
-    s32 i;
+    int i;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
@@ -6602,8 +6602,8 @@ static void Cmd_tryhealhalfhealth(void)
 
 static void Cmd_trymirrormove(void)
 {
-    s32 validMovesCount;
-    s32 i;
+    int validMovesCount;
+    int i;
     u16 move;
     u16 validMoves[MAX_BATTLERS_COUNT];
 
@@ -6770,7 +6770,7 @@ static void Cmd_nop(void)
 
 bool8 UproarWakeUpCheck(u8 battlerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -7077,7 +7077,7 @@ static void Cmd_statbuffchange(void)
 // Haze
 static void Cmd_normalisebuffs(void)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -7154,16 +7154,16 @@ static bool8 TryDoForceSwitchOut(void)
 
 static void Cmd_forcerandomswitch(void)
 {
-    s32 i;
-    s32 battler1PartyId = 0;
-    s32 battler2PartyId = 0;
+    int i;
+    int battler1PartyId = 0;
+    int battler2PartyId = 0;
 
-    s32 firstMonId;
-    s32 lastMonId = 0; // + 1
-    s32 monsCount;
+    int firstMonId;
+    int lastMonId = 0; // + 1
+    int monsCount;
     struct Pokemon *party = NULL;
-    s32 validMons = 0;
-    s32 minNeeded;
+    int validMons = 0;
+    int minNeeded;
 
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER))
     {
@@ -7697,7 +7697,7 @@ static void Cmd_transformdataexecution(void)
     }
     else
     {
-        s32 i;
+        int i;
         u8 *battleMonAttacker, *battleMonTarget;
 
         gBattleMons[gBattlerAttacker].status2 |= STATUS2_TRANSFORMED;
@@ -7758,7 +7758,7 @@ static void Cmd_setsubstitute(void)
 
 static bool8 IsMoveUncopyableByMimic(u16 move)
 {
-    s32 i;
+    int i;
     for (i = 0; sMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END
                 && sMovesForbiddenToCopy[i] != move; i++);
 
@@ -7810,7 +7810,7 @@ static void Cmd_metronome(void)
 {
     while (TRUE)
     {
-        s32 i;
+        int i;
 
         gCurrentMove = (Random() & 0x1FF) + 1;
         if (gCurrentMove >= MOVES_COUNT)
@@ -7846,7 +7846,7 @@ static void Cmd_dmgtolevel(void)
 
 static void Cmd_psywavedamageeffect(void)
 {
-    s32 randDamage;
+    int randDamage;
 
     while ((randDamage = Random() % 16) > 10);
 
@@ -7906,7 +7906,7 @@ static void Cmd_mirrorcoatdamagecalculator(void)
 
 static void Cmd_disablelastusedattack(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -7931,7 +7931,7 @@ static void Cmd_disablelastusedattack(void)
 
 static void Cmd_trysetencore(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -7965,8 +7965,8 @@ static void Cmd_painsplitdmgcalc(void)
 {
     if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE))
     {
-        s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
-        s32 painSplitHp = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hpDiff;
+        int hpDiff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
+        int painSplitHp = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hpDiff;
         u8 *storeLoc = (void *)(&gBattleScripting.painSplitHp);
 
         storeLoc[0] = (painSplitHp);
@@ -8000,7 +8000,7 @@ static void Cmd_settypetorandomresistance(void)
     }
     else
     {
-        s32 i, j, rands;
+        int i, j, rands;
 
         for (rands = 0; rands < 1000; rands++)
         {
@@ -8065,7 +8065,7 @@ static void Cmd_copymovepermanently(void)
         && gLastPrintedMoves[gBattlerTarget] != MOVE_UNAVAILABLE
         && gLastPrintedMoves[gBattlerTarget] != MOVE_SKETCH)
     {
-        s32 i;
+        int i;
 
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -8155,7 +8155,7 @@ static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a c
 
 static void Cmd_trychoosesleeptalkmove(void)
 {
-    s32 i;
+    int i;
     u8 unusableMovesBits = 0;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -8217,10 +8217,10 @@ static void Cmd_trysetdestinybondtohappen(void)
 
 static void Cmd_remaininghptopower(void)
 {
-    s32 i;
-    s32 hpFraction = GetScaledHPFraction(gBattleMons[gBattlerAttacker].hp, gBattleMons[gBattlerAttacker].maxHP, 48);
+    int i;
+    int hpFraction = GetScaledHPFraction(gBattleMons[gBattlerAttacker].hp, gBattleMons[gBattlerAttacker].maxHP, 48);
 
-    for (i = 0; i < (s32) sizeof(sFlailHpScaleToPowerTable); i += 2)
+    for (i = 0; i < (int) sizeof(sFlailHpScaleToPowerTable); i += 2)
     {
         if (hpFraction <= sFlailHpScaleToPowerTable[i])
             break;
@@ -8235,7 +8235,7 @@ static void Cmd_tryspiteppreduce(void)
     if (gLastMoves[gBattlerTarget] != MOVE_NONE
      && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
     {
-        s32 i;
+        int i;
 
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -8245,7 +8245,7 @@ static void Cmd_tryspiteppreduce(void)
 
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > 1)
         {
-            s32 ppToDeduct = (Random() & 3) + 2;
+            int ppToDeduct = (Random() & 3) + 2;
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
 
@@ -8290,7 +8290,7 @@ static void Cmd_healpartystatus(void)
     if (gCurrentMove == MOVE_HEAL_BELL)
     {
         struct Pokemon *party;
-        s32 i;
+        int i;
 
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_BELL;
 
@@ -8422,8 +8422,8 @@ static void Cmd_setforesight(void)
 
 static void Cmd_trysetperishsong(void)
 {
-    s32 i;
-    s32 notAffectedCount = 0;
+    int i;
+    int notAffectedCount = 0;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -8457,7 +8457,7 @@ static void Cmd_rolloutdamagecalculation(void)
     }
     else
     {
-        s32 i;
+        int i;
 
         if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)) // first hit
         {
@@ -8501,7 +8501,7 @@ static void Cmd_furycuttercalc(void)
     }
     else
     {
-        s32 i;
+        int i;
 
         if (gDisableStructs[gBattlerAttacker].furyCutterCounter != 5)
             gDisableStructs[gBattlerAttacker].furyCutterCounter++;
@@ -8527,7 +8527,7 @@ static void Cmd_friendshiptodamagecalculation(void)
 
 static void Cmd_presentdamagecalculation(void)
 {
-    s32 rand = Random() & 0xFF;
+    int rand = Random() & 0xFF;
 
     if (rand < 102)
         gDynamicBasePower = 40;
@@ -8573,7 +8573,7 @@ static void Cmd_setsafeguard(void)
 
 static void Cmd_magnitudedamagecalculation(void)
 {
-    s32 magnitude = Random() % 100;
+    int magnitude = Random() % 100;
 
     if (magnitude < 5)
     {
@@ -8648,7 +8648,7 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
         && !gDisableStructs[gBattlerTarget].truantCounter
         && gChosenMoveByBattler[gBattlerTarget] == MOVE_PURSUIT)
     {
-        s32 i;
+        int i;
 
         for (i = 0; i < gBattlersCount; i++)
         {
@@ -8712,7 +8712,7 @@ static void Cmd_maxattackhalvehp(void)
 // Psych Up
 static void Cmd_copyfoestats(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_BATTLE_STATS; i++)
     {
@@ -9324,10 +9324,10 @@ static void Cmd_tryimprison(void)
         {
             if (sideAttacker != GetBattlerSide(battlerId))
             {
-                s32 attackerMoveId;
+                int attackerMoveId;
                 for (attackerMoveId = 0; attackerMoveId < MAX_MON_MOVES; attackerMoveId++)
                 {
-                    s32 i;
+                    int i;
                     for (i = 0; i < MAX_MON_MOVES; i++)
                     {
                         if (gBattleMons[gBattlerAttacker].moves[attackerMoveId] == gBattleMons[battlerId].moves[i]
@@ -9365,7 +9365,7 @@ static void Cmd_trysetgrudge(void)
 
 static void Cmd_weightdamagecalculation(void)
 {
-    s32 i;
+    int i;
     for (i = 0; sWeightToDamageTable[i] != 0xFFFF; i += 2)
     {
         if (sWeightToDamageTable[i] > GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1))
@@ -9382,9 +9382,9 @@ static void Cmd_weightdamagecalculation(void)
 
 static void Cmd_assistattackselect(void)
 {
-    s32 chooseableMovesNo = 0;
+    int chooseableMovesNo = 0;
     struct Pokemon *party;
-    s32 monId, moveId;
+    int monId, moveId;
     u16 *validMoves = gBattleStruct->assistPossibleMoves;
 
     if (GET_BATTLER_SIDE(gBattlerAttacker) != B_SIDE_PLAYER)
@@ -9403,7 +9403,7 @@ static void Cmd_assistattackselect(void)
 
         for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)
         {
-            s32 i = 0;
+            int i = 0;
             u16 move = GetMonData(&party[monId], MON_DATA_MOVE1 + moveId);
 
             if (IsInvalidForSleepTalkOrAssist(move))
@@ -9552,7 +9552,7 @@ static void Cmd_getsecretpowereffect(void)
 
 static void Cmd_pickup(void)
 {
-    s32 i;
+    int i;
     u16 species, heldItem;
     u8 ability;
 
@@ -9601,8 +9601,8 @@ static void Cmd_pickup(void)
                 && heldItem == ITEM_NONE
                 && (Random() % 10) == 0)
             {
-                s32 j;
-                s32 rand = Random() % 100;
+                int j;
+                int rand = Random() % 100;
                 u8 lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) - 1) / 10;
                 if (lvlDivBy10 > 9)
                     lvlDivBy10 = 9;
@@ -10048,7 +10048,7 @@ static void Cmd_displaydexinfo(void)
 
 void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)
 {
-    s32 destY, destX;
+    int destY, destX;
     u16 var = 0;
 
     for (destY = yStart; destY <= yEnd; destY++)

@@ -195,7 +195,7 @@ void CompareLotadSize(void)
 
 void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
 {
-    s32 i;
+    int i;
     bool32 gotRibbon = FALSE;
     u8 data = 1;
     u8 array[ARRAY_COUNT(sGiftRibbonsMonDataIds)];

@@ -338,7 +338,7 @@ static void UnusedEndBounceEffect(void)
 
 static void HandleInputChooseTarget(void)
 {
-    s32 i;
+    int i;
     u8 identities[MAX_BATTLERS_COUNT];
     memcpy(identities, sTargetIdentities, ARRAY_COUNT(sTargetIdentities));
 
@@ -677,7 +677,7 @@ static void HandleMoveSwitching(void)
         if (gMoveSelectionCursor[gActiveBattler] != gMultiUsePlayerCursor)
         {
             struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
-            s32 i;
+            int i;
 
             // swap moves and pp
             i = moveInfo->moves[gMoveSelectionCursor[gActiveBattler]];
@@ -1200,7 +1200,7 @@ static void Task_GiveExpToMon(u8 taskId)
 static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 {
     u8 monIndex = gTasks[taskId].tExpTask_monId;
-    s32 gainedExp = gTasks[taskId].tExpTask_gainedExp;
+    int gainedExp = gTasks[taskId].tExpTask_gainedExp;
     u8 battlerId = gTasks[taskId].tExpTask_battler;
     struct Pokemon *mon = &gPlayerParty[monIndex];
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
@@ -1234,9 +1234,9 @@ static void Task_GiveExpWithExpBar(u8 taskId)
         if (newExpPoints == -1) // The bar has been filled with given exp points.
         {
             u8 level;
-            s32 currExp;
+            int currExp;
             u16 species;
-            s32 expOnNextLvl;
+            int expOnNextLvl;
 
             m4aSongNumStop(SE_EXP);
             level = GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL);
@@ -1455,7 +1455,7 @@ static void PlayerHandleYesNoInput(void)
 
 static void MoveSelectionDisplayMoveNames(void)
 {
-    s32 i;
+    int i;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     gNumberOfMovesToChoose = 0;
 
@@ -1584,7 +1584,7 @@ static void PlayerHandleGetMonData(void)
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
     u8 monToCheck;
-    s32 i;
+    int i;
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
@@ -1612,7 +1612,7 @@ static u32 CopyPlayerMonData(u8 monId, u8 *dst)
     u8 *src;
     s16 data16;
     u32 data32;
-    s32 size = 0;
+    int size = 0;
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -1950,7 +1950,7 @@ static void SetPlayerMonData(u8 monId)
 {
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBattler][3];
     struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBattler][3];
-    s32 i;
+    int i;
 
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -2574,7 +2574,7 @@ static void HandleChooseActionAfterDma3(void)
 
 static void PlayerHandleChooseAction(void)
 {
-    s32 i;
+    int i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattleTv_ClearExplosionFaintCause();
@@ -2652,7 +2652,7 @@ void InitMoveSelectionsVarsAndStrings(void)
 
 static void PlayerHandleChooseItem(void)
 {
-    s32 i;
+    int i;
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
@@ -2664,7 +2664,7 @@ static void PlayerHandleChooseItem(void)
 
 static void PlayerHandleChoosePokemon(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
         gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][4 + i];

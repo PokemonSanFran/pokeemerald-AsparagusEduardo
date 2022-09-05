@@ -208,7 +208,7 @@ static void CB2_InitWirelessCommunicationScreen(void)
 
 static void CB2_ExitWirelessCommunicationStatusScreen(void)
 {
-    s32 i;
+    int i;
     FreeAllWindowBuffers();
     for (i = 0; i < (int)ARRAY_COUNT(sBgTemplates); i++)
     {
@@ -232,7 +232,7 @@ static void WCSS_CyclePalette(s16 * counter, s16 * palIdx)
 
 static void PrintHeaderTexts(void)
 {
-    s32 i;
+    int i;
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
@@ -252,7 +252,7 @@ static void PrintHeaderTexts(void)
 
 static void Task_WirelessCommunicationScreen(u8 taskId)
 {
-    s32 i;
+    int i;
     switch (gTasks[taskId].tState)
     {
     case 0:
@@ -383,7 +383,7 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * gr
 
 static bool32 HaveCountsChanged(u32 * currCounts, u32 * prevCounts)
 {
-    s32 i;
+    int i;
     for (i = 0; i < NUM_GROUPTYPES; i++)
     {
         if (currCounts[i] != prevCounts[i])
@@ -397,7 +397,7 @@ static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts
     bool32 activitiesChanged = FALSE;
     u32 groupCountBuffer[NUM_GROUPTYPES] = {0, 0, 0, 0};
     struct RfuPlayer ** players = (void *)gTasks[taskId].data;
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_TASK_DATA; i++)
     {

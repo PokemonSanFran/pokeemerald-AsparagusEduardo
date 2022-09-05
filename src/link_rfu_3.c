@@ -312,8 +312,8 @@ static const struct SpriteTemplate sWirelessStatusIndicatorSpriteTemplate = {
 
 void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
 
     for (i = 0; i < RECV_QUEUE_NUM_SLOTS; i++)
     {
@@ -328,8 +328,8 @@ void RfuRecvQueue_Reset(struct RfuRecvQueue *queue)
 
 void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
 
     for (i = 0; i < SEND_QUEUE_NUM_SLOTS; i++)
     {
@@ -344,8 +344,8 @@ void RfuSendQueue_Reset(struct RfuSendQueue *queue)
 
 static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
 {
-    s32 i;
-    s32 j;
+    int i;
+    int j;
 
     for (i = 0; i < UNUSED_QUEUE_NUM_SLOTS; i++)
     {
@@ -360,7 +360,7 @@ static void RfuUnusedQueue_Reset(struct RfuUnusedQueue *queue)
 
 void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data)
 {
-    s32 i;
+    int i;
     u16 imeBak;
     u8 count;
 
@@ -396,7 +396,7 @@ void RfuRecvQueue_Enqueue(struct RfuRecvQueue *queue, u8 *data)
 
 void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *data)
 {
-    s32 i;
+    int i;
     u16 imeBak;
 
     if (queue->count < SEND_QUEUE_NUM_SLOTS)
@@ -430,7 +430,7 @@ void RfuSendQueue_Enqueue(struct RfuSendQueue *queue, u8 *data)
 bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *src)
 {
     u16 imeBak;
-    s32 i;
+    int i;
 
     imeBak = REG_IME;
     REG_IME = 0;
@@ -455,7 +455,7 @@ bool8 RfuRecvQueue_Dequeue(struct RfuRecvQueue *queue, u8 *src)
 
 bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *src)
 {
-    s32 i;
+    int i;
     u16 imeBak;
 
     if (queue->recvSlot == queue->sendSlot || queue->full)
@@ -475,7 +475,7 @@ bool8 RfuSendQueue_Dequeue(struct RfuSendQueue *queue, u8 *src)
 
 void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *data)
 {
-    s32 i;
+    int i;
 
     if (data[1] == 0)
     {
@@ -498,7 +498,7 @@ void RfuBackupQueue_Enqueue(struct RfuBackupQueue *queue, const u8 *data)
 
 bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *src)
 {
-    s32 i;
+    int i;
 
     if (queue->count == 0)
         return FALSE;
@@ -516,7 +516,7 @@ bool8 RfuBackupQueue_Dequeue(struct RfuBackupQueue *queue, u8 *src)
 
 static void RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *data)
 {
-    s32 i;
+    int i;
 
     if (queue->count < UNUSED_QUEUE_NUM_SLOTS)
     {
@@ -535,7 +535,7 @@ static void RfuUnusedQueue_Enqueue(struct RfuUnusedQueue *queue, u8 *data)
 
 static bool8 RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u8 *dest)
 {
-    s32 i;
+    int i;
 
     if (queue->recvSlot == queue->sendSlot || queue->full)
         return FALSE;
@@ -555,7 +555,7 @@ static bool8 RfuUnusedQueue_Dequeue(struct RfuUnusedQueue *queue, u8 *dest)
 #define SEQ_ARRAY_MAX_SIZE 200
 static void PopulateArrayWithSequence(u8 *arr, u8 mode)
 {
-    s32 i;
+    int i;
     u8 rval;
     u16 total = 0;
     switch (mode)
@@ -609,7 +609,7 @@ static void PopulateArrayWithSequence(u8 *arr, u8 mode)
 
 static void PkmnStrToASCII(u8 *asciiStr, const u8 *pkmnStr)
 {
-    s32 i;
+    int i;
 
     for (i = 0; pkmnStr[i] != EOS; i++)
         asciiStr[i] = sWireless_RSEtoASCIITable[pkmnStr[i]];
@@ -618,7 +618,7 @@ static void PkmnStrToASCII(u8 *asciiStr, const u8 *pkmnStr)
 
 static void ASCIIToPkmnStr(u8 *pkmnStr, const u8 *asciiStr)
 {
-    s32 i;
+    int i;
 
     for (i = 0; asciiStr[i] != 0; i++)
         pkmnStr[i] = sWireless_ASCIItoRSETable[asciiStr[i]];
@@ -657,11 +657,11 @@ static u8 GetConnectedChildStrength(u8 maxFlags)
     return 0;
 }
 
-void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedActivity, s32 partnerInfo)
+void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedActivity, int partnerInfo)
 {
-    s32 i;
+    int i;
 
-    for (i = 0; i < (s32)ARRAY_COUNT(data->compatibility.playerTrainerId); i++)
+    for (i = 0; i < (int)ARRAY_COUNT(data->compatibility.playerTrainerId); i++)
         data->compatibility.playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
 
     for (i = 0; i < RFU_CHILD_MAX; i++)
@@ -807,7 +807,7 @@ static u8 GetParentSignalStrength(void)
     return 0;
 }
 
-static void SetWirelessStatusIndicatorAnim(struct Sprite *sprite, s32 animNum)
+static void SetWirelessStatusIndicatorAnim(struct Sprite *sprite, int animNum)
 {
     if (sprite->sCurrAnimNum != animNum)
     {
@@ -894,7 +894,7 @@ static void CopyTrainerRecord(struct TrainerNameRecord *dest, u32 trainerId, con
 
 static bool32 NameIsNotEmpty(const u8 *name)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
     {
@@ -909,10 +909,10 @@ void SaveLinkTrainerNames(void)
 {
     if (gWirelessCommType != 0)
     {
-        s32 i;
-        s32 j;
-        s32 nextSpace;
-        s32 connectedTrainerRecordIndices[MAX_RFU_PLAYERS];
+        int i;
+        int j;
+        int nextSpace;
+        int connectedTrainerRecordIndices[MAX_RFU_PLAYERS];
         struct TrainerNameRecord *newRecords = calloc(ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords), sizeof(struct TrainerNameRecord));
 
         // Check if we already have a record saved for connected trainers.
@@ -961,7 +961,7 @@ void SaveLinkTrainerNames(void)
 
 bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {
@@ -976,7 +976,7 @@ bool32 PlayerHasMetTrainerBefore(u16 id, u8 *name)
 
 void WipeTrainerNameRecords(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock1Ptr->trainerNameRecords); i++)
     {

@@ -11,7 +11,7 @@ EWRAM_DATA static u8 sUnknownStringVar[16] = {0};
 
 static const u8 sDigits[] = __("0123456789ABCDEF");
 
-static const s32 sPowersOfTen[] =
+static const int sPowersOfTen[] =
 {
              1,
             10,
@@ -57,8 +57,8 @@ u8 *StringGet_Nickname(u8 *str)
 
 u8 *StringCopy_PlayerName(u8 *dest, const u8 *src)
 {
-    s32 i;
-    s32 limit = PLAYER_NAME_LENGTH;
+    int i;
+    int limit = PLAYER_NAME_LENGTH;
 
     for (i = 0; i < limit; i++)
     {
@@ -121,7 +121,7 @@ u16 StringLength(const u8 *str)
     return length;
 }
 
-s32 StringCompare(const u8 *str1, const u8 *str2)
+int StringCompare(const u8 *str1, const u8 *str2)
 {
     while (*str1 == *str2)
     {
@@ -134,7 +134,7 @@ s32 StringCompare(const u8 *str1, const u8 *str2)
     return *str1 - *str2;
 }
 
-s32 StringCompareN(const u8 *str1, const u8 *str2, u32 n)
+int StringCompareN(const u8 *str1, const u8 *str2, u32 n)
 {
     while (*str1 == *str2)
     {
@@ -149,7 +149,7 @@ s32 StringCompareN(const u8 *str1, const u8 *str2, u32 n)
     return *str1 - *str2;
 }
 
-bool8 IsStringLengthAtLeast(const u8 *str, s32 n)
+bool8 IsStringLengthAtLeast(const u8 *str, int n)
 {
     u8 i;
 
@@ -160,11 +160,11 @@ bool8 IsStringLengthAtLeast(const u8 *str, s32 n)
     return FALSE;
 }
 
-u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
+u8 *ConvertIntToDecimalStringN(u8 *dest, int value, enum StringConvertMode mode, u8 n)
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
-    s32 powerOfTen;
-    s32 largestPowerOfTen = sPowersOfTen[n - 1];
+    int powerOfTen;
+    int largestPowerOfTen = sPowersOfTen[n - 1];
 
     state = WAITING_FOR_NONZERO_DIGIT;
 
@@ -178,7 +178,7 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
     {
         u8 c;
         u16 digit = value / powerOfTen;
-        s32 temp = value - (powerOfTen * digit);
+        int temp = value - (powerOfTen * digit);
 
         if (state == WRITING_DIGITS)
         {
@@ -219,8 +219,8 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
 u8 *ConvertUIntToDecimalStringN(u8 *dest, u32 value, enum StringConvertMode mode, u8 n)
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
-    s32 powerOfTen;
-    s32 largestPowerOfTen = sPowersOfTen[n - 1];
+    int powerOfTen;
+    int largestPowerOfTen = sPowersOfTen[n - 1];
 
     state = WAITING_FOR_NONZERO_DIGIT;
 
@@ -272,12 +272,12 @@ u8 *ConvertUIntToDecimalStringN(u8 *dest, u32 value, enum StringConvertMode mode
     return dest;
 }
 
-u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
+u8 *ConvertIntToHexStringN(u8 *dest, int value, enum StringConvertMode mode, u8 n)
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
     u8 i;
-    s32 powerOfSixteen;
-    s32 largestPowerOfSixteen = 1;
+    int powerOfSixteen;
+    int largestPowerOfSixteen = 1;
 
     for (i = 1; i < n; i++)
         largestPowerOfSixteen *= 16;
@@ -294,7 +294,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
     {
         u8 c;
         u32 digit = value / powerOfSixteen;
-        s32 temp = value % powerOfSixteen;
+        int temp = value % powerOfSixteen;
 
         if (state == WRITING_DIGITS)
         {
@@ -639,9 +639,9 @@ bool32 IsStringJapanese(u8 *str)
     return FALSE;
 }
 
-bool32 IsStringNJapanese(u8 *str, s32 n)
+bool32 IsStringNJapanese(u8 *str, int n)
 {
-    s32 i;
+    int i;
 
     for (i = 0; *str != EOS && i < n; i++)
     {
@@ -702,9 +702,9 @@ static const u8 *SkipExtCtrlCode(const u8 *s)
     return s;
 }
 
-s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2)
+int StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2)
 {
-    s32 retVal = 0;
+    int retVal = 0;
 
     while (1)
     {

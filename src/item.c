@@ -452,7 +452,7 @@ void ClearItemSlots(struct ItemSlot *itemSlots, u8 itemCount)
     }
 }
 
-static s32 FindFreePCItemSlot(void)
+static int FindFreePCItemSlot(void)
 {
     s8 i;
 

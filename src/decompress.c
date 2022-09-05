@@ -7,7 +7,7 @@
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
 
-static void DuplicateDeoxysTiles(void *pointer, s32 species);
+static void DuplicateDeoxysTiles(void *pointer, int species);
 
 void LZDecompressWram(const u32 *src, void *dest)
 {
@@ -61,7 +61,7 @@ void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePale
     LoadSpritePalette(&dest);
 }
 
-void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffer, s32 species)
+void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffer, int species)
 {
     if (species > NUM_SPECIES)
         LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
@@ -70,7 +70,7 @@ void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffe
     DuplicateDeoxysTiles(buffer, species);
 }
 
-void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality)
+void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, int species, u32 personality)
 {
     bool8 isFrontPic;
 
@@ -82,7 +82,7 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *des
     LoadSpecialPokePic_2(src, dest, species, personality, isFrontPic);
 }
 
-void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
+void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, int species, u32 personality, bool8 isFrontPic)
 {
     if (species == SPECIES_UNOWN)
     {
@@ -113,7 +113,7 @@ void Unused_LZDecompressWramIndirect(const void **src, void *dest)
     LZ77UnCompWram(*src, dest);
 }
 
-static void StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)
+static void StitchObjectsOn8x8Canvas(int object_size, int object_count, u8 *src_tiles, u8 *dest_tiles)
 {
     /*
       This function appears to emulate behaviour found in the GB(C) versions regarding how the Pokemon images
@@ -121,7 +121,7 @@ static void StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u8 *src_
       Given "compacted" tiles, an object count and a bounding box/object size, place the tiles in such a way
       that the result will have each object centered in a 8x8 tile canvas.
     */
-    s32 i, j, k, l;
+    int i, j, k, l;
     u8 *src = src_tiles, *dest = dest_tiles;
     u8 bottom_off;
 
@@ -295,7 +295,7 @@ bool8 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette 
     return FALSE;
 }
 
-void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, void *buffer, s32 species) // a copy of DecompressPicFromTable
+void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, void *buffer, int species) // a copy of DecompressPicFromTable
 {
     if (species > NUM_SPECIES)
         LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
@@ -304,7 +304,7 @@ void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, void *buf
     DuplicateDeoxysTiles(buffer, species);
 }
 
-void LoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic) // a copy of LoadSpecialPokePic
+void LoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, int species, u32 personality, bool8 isFrontPic) // a copy of LoadSpecialPokePic
 {
     if (species == SPECIES_UNOWN)
     {
@@ -330,7 +330,7 @@ void LoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, s
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }
 
-void HandleLoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality) // a copy of HandleLoadSpecialPokePic
+void HandleLoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *dest, int species, u32 personality) // a copy of HandleLoadSpecialPokePic
 {
     bool8 isFrontPic;
 
@@ -342,7 +342,7 @@ void HandleLoadSpecialPokePic_2(const struct CompressedSpriteSheet *src, void *d
     LoadSpecialPokePic_2(src, dest, species, personality, isFrontPic);
 }
 
-void DecompressPicFromTable_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *buffer, s32 species)
+void DecompressPicFromTable_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *buffer, int species)
 {
     if (species > NUM_SPECIES)
         LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
@@ -350,7 +350,7 @@ void DecompressPicFromTable_DontHandleDeoxys(const struct CompressedSpriteSheet 
         LZ77UnCompWram(src->data, buffer);
 }
 
-void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality)
+void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, int species, u32 personality)
 {
     bool8 isFrontPic;
 
@@ -362,7 +362,7 @@ void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteShee
     LoadSpecialPokePic_DontHandleDeoxys(src, dest, species, personality, isFrontPic);
 }
 
-void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality, bool8 isFrontPic)
+void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, int species, u32 personality, bool8 isFrontPic)
 {
     if (species == SPECIES_UNOWN)
     {
@@ -387,7 +387,7 @@ void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }
 
-static void DuplicateDeoxysTiles(void *pointer, s32 species)
+static void DuplicateDeoxysTiles(void *pointer, int species)
 {
     if (species == SPECIES_DEOXYS)
         CpuCopy32(pointer + MON_PIC_SIZE, pointer, MON_PIC_SIZE);

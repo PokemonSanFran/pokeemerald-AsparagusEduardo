@@ -49,8 +49,8 @@ struct CityMapEntry
 static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *);
 static u32 HandleRegionMapInputZoomDisabled(struct Pokenav_RegionMapMenu *);
 static u32 GetExitRegionMapMenuId(struct Pokenav_RegionMapMenu *);
-static u32 LoopedTask_OpenRegionMap(s32);
-static u32 LoopedTask_DecompressCityMaps(s32);
+static u32 LoopedTask_OpenRegionMap(int);
+static u32 LoopedTask_DecompressCityMaps(int);
 static bool32 GetCurrentLoopedTaskActive(void);
 static void FreeCityZoomViewGfx(void);
 static void LoadCityZoomViewGfx(void);
@@ -69,10 +69,10 @@ static void SetCityZoomTextInvisibility(bool32);
 static void Task_ChangeBgYForZoom(u8 taskId);
 static void UpdateCityZoomTextPosition(void);
 static void SpriteCB_CityZoomText(struct Sprite *sprite);
-static u32 LoopedTask_UpdateInfoAfterCursorMove(s32);
-static u32 LoopedTask_RegionMapZoomOut(s32);
-static u32 LoopedTask_RegionMapZoomIn(s32);
-static u32 LoopedTask_ExitRegionMap(s32);
+static u32 LoopedTask_UpdateInfoAfterCursorMove(int);
+static u32 LoopedTask_RegionMapZoomOut(int);
+static u32 LoopedTask_RegionMapZoomIn(int);
+static u32 LoopedTask_ExitRegionMap(int);
 
 extern const u16 gRegionMapCityZoomTiles_Pal[];
 extern const u32 gRegionMapCityZoomText_Gfx[];
@@ -253,7 +253,7 @@ bool32 OpenPokenavRegionMap(void)
     return TRUE;
 }
 
-void CreateRegionMapLoopedTask(s32 index)
+void CreateRegionMapLoopedTask(int index)
 {
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     state->loopTaskId = CreateLoopedTask(sRegionMapLoopTaskFuncs[index], 1);
@@ -300,7 +300,7 @@ static bool8 ShouldOpenRegionMapZoomed(void)
     return gSaveBlock2Ptr->regionMapZoom == TRUE;
 }
 
-static u32 LoopedTask_OpenRegionMap(s32 taskState)
+static u32 LoopedTask_OpenRegionMap(int taskState)
 {
     int menuGfxId;
     struct RegionMap *regionMap;
@@ -378,7 +378,7 @@ static u32 LoopedTask_OpenRegionMap(s32 taskState)
     }
 }
 
-static u32 LoopedTask_UpdateInfoAfterCursorMove(s32 taskState)
+static u32 LoopedTask_UpdateInfoAfterCursorMove(int taskState)
 {
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     switch (taskState)
@@ -395,7 +395,7 @@ static u32 LoopedTask_UpdateInfoAfterCursorMove(s32 taskState)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
+static u32 LoopedTask_RegionMapZoomOut(int taskState)
 {
     switch (taskState)
     {
@@ -421,7 +421,7 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
+static u32 LoopedTask_RegionMapZoomIn(int taskState)
 {
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     switch (taskState)
@@ -454,7 +454,7 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_ExitRegionMap(s32 taskState)
+static u32 LoopedTask_ExitRegionMap(int taskState)
 {
     switch (taskState)
     {
@@ -622,7 +622,7 @@ static bool32 IsDecompressCityMapsActive(void)
     return FuncIsActiveLoopedTask(LoopedTask_DecompressCityMaps);
 }
 
-static u32 LoopedTask_DecompressCityMaps(s32 taskState)
+static u32 LoopedTask_DecompressCityMaps(int taskState)
 {
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     if (taskState < NUM_CITY_MAPS)

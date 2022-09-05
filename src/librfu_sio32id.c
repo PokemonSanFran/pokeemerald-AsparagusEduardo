@@ -2,7 +2,7 @@
 
 static void Sio32IDIntr(void);
 static void Sio32IDInit(void);
-static s32 Sio32IDMain(void);
+static int Sio32IDMain(void);
 
 struct RfuSIO32Id
 {
@@ -20,11 +20,11 @@ struct RfuSIO32Id gRfuSIO32Id;
 static const u16 Sio32ConnectionData[] = { 0x494e, 0x544e, 0x4e45, 0x4f44 }; // NINTENDO
 static const char Sio32IDLib_Var[] = "Sio32ID_030820";
 
-s32 AgbRFU_checkID(u8 maxTries)
+int AgbRFU_checkID(u8 maxTries)
 {
     u16 ieBak;
     vu16 *regTMCNTL;
-    s32 id;
+    int id;
 
     // Interrupts must be enabled
     if (REG_IME == 0)
@@ -68,7 +68,7 @@ static void Sio32IDInit(void)
     REG_IF = INTR_FLAG_SERIAL;
 }
 
-static s32 Sio32IDMain(void)
+static int Sio32IDMain(void)
 {
     switch (gRfuSIO32Id.state)
     {

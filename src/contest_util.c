@@ -162,7 +162,7 @@ static void Task_EndShowContestResults(u8);
 static void CalculateContestantsResultData(void);
 static void ShowLinkResultsTextBox(const u8 *);
 static void HideLinkResultsTextBox(void);
-static s32 DrawResultsTextWindow(const u8 *, u8);
+static int DrawResultsTextWindow(const u8 *, u8);
 static void StartTextBoxSlideIn(s16, u16, u16, u16);
 static void UpdateContestResultBars(bool8, u8);
 static void Task_UpdateContestResultBar(u8);
@@ -1164,7 +1164,7 @@ static void TryCreateWirelessSprites(void)
     }
 }
 
-static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
+static int DrawResultsTextWindow(const u8 *text, u8 spriteId)
 {
     u16 windowId;
     int origWidth;
@@ -1186,7 +1186,7 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 
     AddTextPrinterParameterized3(windowId, FONT_NORMAL, (strWidth * 8 - origWidth) / 2, 1, sContestLinkTextColors, TEXT_SKIP_DRAW, text);
     {
-        s32 i;
+        int i;
         struct Sprite *sprite;
         const u8 *src, *windowTilesPtr;
         windowTilesPtr = (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA);

@@ -1140,7 +1140,7 @@ static void Task_PassAreaZoom(u8 taskId)
 
 static void ShowAndPrintWindows(void)
 {
-    s32 x;
+    int x;
     u8 i;
 
     for (i = 0; i < WINDOW_COUNT; i++)

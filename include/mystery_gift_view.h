@@ -11,10 +11,10 @@ enum {
 
 bool32 WonderCard_Init(struct WonderCard * card, struct WonderCardMetadata * metadata);
 bool32 WonderNews_Init(const struct WonderNews * news);
-s32 WonderCard_Enter(void);
-s32 WonderNews_Enter(void);
-s32 WonderCard_Exit(bool32 flag);
-s32 WonderNews_Exit(bool32 flag);
+int WonderCard_Enter(void);
+int WonderNews_Enter(void);
+int WonderCard_Exit(bool32 flag);
+int WonderNews_Exit(bool32 flag);
 void WonderCard_Destroy(void);
 void WonderNews_Destroy(void);
 u32 WonderNews_GetInput(u16 input);

@@ -16,7 +16,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3);
 static void TrySetBattleSeminarShow(void);
 static void AddPointsOnFainting(bool8 targetFainted);
 static void AddPointsBasedOnWeather(u16 weatherFlags, u16 moveId, u8 moveSlot);
-static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride);
+static bool8 ShouldCalculateDamage(u16 moveId, int *dmg, u16 *powerOverride);
 
 #define TABLE_END ((u16)-1)
 
@@ -953,7 +953,7 @@ void BattleTv_SetDataBasedOnString(u16 stringId)
 
 static bool8 IsNotSpecialBattleString(u16 stringId)
 {
-    s32 i = 0;
+    int i = 0;
 
     do
     {
@@ -1057,7 +1057,7 @@ void TryPutLinkBattleTvShowOnAir(void)
     s16 sum = 0;
     u16 species = 0;
     u16 moveId = 0;
-    s32 i, j;
+    int i, j;
     int zero = 0, one = 1; //needed for matching
 
     if (gBattleStruct->anyMonHasTransformed)
@@ -1150,7 +1150,7 @@ static void AddMovePoints(u8 caseId, u16 arg1, u8 arg2, u8 arg3)
     u32 atkSide = GetBattlerSide(gBattlerAttacker);
     u32 defSide = GetBattlerSide(gBattlerTarget);
     const u16 *ptr;
-    s32 i;
+    int i;
 
     switch (caseId)
     {
@@ -1271,7 +1271,7 @@ static void AddPointsOnFainting(bool8 targetFainted)
     u32 atkSide = GetBattlerSide(gBattlerAttacker);
     u32 defSide = GetBattlerSide(gBattlerTarget);
     u32 atkArrId = tvPtr->side[atkSide].faintCauseMonId;
-    s32 i;
+    int i;
 
     if (tvPtr->side[atkSide].faintCause != FNT_NONE)
     {
@@ -1418,8 +1418,8 @@ static void AddPointsOnFainting(bool8 targetFainted)
 
 static void TrySetBattleSeminarShow(void)
 {
-    s32 i;
-    s32 dmgByMove[MAX_MON_MOVES];
+    int i;
+    int dmgByMove[MAX_MON_MOVES];
     u16 powerOverride;
     u16 currMoveSaved;
 
@@ -1481,7 +1481,7 @@ static void TrySetBattleSeminarShow(void)
         if (i != gMoveSelectionCursor[gBattlerAttacker] && dmgByMove[i] > dmgByMove[gMoveSelectionCursor[gBattlerAttacker]])
         {
             u16 opponentSpecies, playerSpecies;
-            s32 bestMoveId;
+            int bestMoveId;
 
             if (gMoveSelectionCursor[gBattlerAttacker] != 0)
                 bestMoveId = 0;
@@ -1505,7 +1505,7 @@ static void TrySetBattleSeminarShow(void)
     gCurrentMove = currMoveSaved;
 }
 
-static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
+static bool8 ShouldCalculateDamage(u16 moveId, int *dmg, u16 *powerOverride)
 {
     if (gBattleMoves[moveId].power == 0)
     {
@@ -1514,7 +1514,7 @@ static bool8 ShouldCalculateDamage(u16 moveId, s32 *dmg, u16 *powerOverride)
     }
     else
     {
-        s32 i = 0;
+        int i = 0;
         do
         {
             if (moveId == sVariableDmgMoves[i])
@@ -1570,7 +1570,7 @@ void BattleTv_ClearExplosionFaintCause(void)
 
 u8 GetBattlerMoveSlotId(u8 battlerId, u16 moveId)
 {
-    s32 i;
+    int i;
     struct Pokemon *party;
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)

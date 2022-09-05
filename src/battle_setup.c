@@ -860,7 +860,7 @@ static u8 GetTrainerBattleTransition(void)
 }
 
 #define RANDOM_TRANSITION(table)(table[Random() % ARRAY_COUNT(table)])
-u8 GetSpecialBattleTransition(s32 id)
+u8 GetSpecialBattleTransition(int id)
 {
     u16 var;
     u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
@@ -1542,9 +1542,9 @@ static const u8 *GetTrainerCantBattleSpeech(void)
     return ReturnEmptyStringIfNull(sTrainerCannotBattleSpeech);
 }
 
-static s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId)
+static int FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
@@ -1555,9 +1555,9 @@ static s32 FirstBattleTrainerIdToRematchTableId(const struct RematchTrainer *tab
     return -1;
 }
 
-static s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId)
+static int TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 trainerId)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
@@ -1574,7 +1574,7 @@ static s32 TrainerIdToRematchTableId(const struct RematchTrainer *table, u16 tra
 
 // Returns TRUE if the given trainer (by their entry in the rematch table) is not allowed to have rematches.
 // This applies to the Elite Four and Victory Road Wally (if he's not been defeated yet)
-static bool32 IsRematchForbidden(s32 rematchTableId)
+static bool32 IsRematchForbidden(int rematchTableId)
 {
     if (rematchTableId >= REMATCH_ELITE_FOUR_ENTRIES)
         return TRUE;
@@ -1586,7 +1586,7 @@ static bool32 IsRematchForbidden(s32 rematchTableId)
 
 static void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 tableId)
 {
-    s32 i;
+    int i;
 
     for (i = 1; i < REMATCHES_COUNT; i++)
     {
@@ -1603,7 +1603,7 @@ static void SetRematchIdForTrainer(const struct RematchTrainer *table, u32 table
 
 static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
 {
-    s32 i;
+    int i;
     bool32 ret = FALSE;
 
     for (i = 0; i <= REMATCH_SPECIAL_TRAINER_START; i++)
@@ -1627,7 +1627,7 @@ static bool32 UpdateRandomTrainerRematches(const struct RematchTrainer *table, u
     return ret;
 }
 
-void UpdateRematchIfDefeated(s32 rematchTableId)
+void UpdateRematchIfDefeated(int rematchTableId)
 {
     if (HasTrainerBeenFought(gRematchTable[rematchTableId].trainerIds[0]) == TRUE)
         SetRematchIdForTrainer(gRematchTable, rematchTableId);
@@ -1635,7 +1635,7 @@ void UpdateRematchIfDefeated(s32 rematchTableId)
 
 static bool32 DoesSomeoneWantRematchIn_(const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
@@ -1648,7 +1648,7 @@ static bool32 DoesSomeoneWantRematchIn_(const struct RematchTrainer *table, u16 
 
 static bool32 IsRematchTrainerIn_(const struct RematchTrainer *table, u16 mapGroup, u16 mapNum)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
@@ -1661,7 +1661,7 @@ static bool32 IsRematchTrainerIn_(const struct RematchTrainer *table, u16 mapGro
 
 static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
-    s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
+    int tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
     if (tableId == -1)
         return FALSE;
@@ -1675,7 +1675,7 @@ static bool8 IsFirstTrainerIdReadyForRematch(const struct RematchTrainer *table,
 
 static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 trainerId)
 {
-    s32 tableId = TrainerIdToRematchTableId(table, trainerId);
+    int tableId = TrainerIdToRematchTableId(table, trainerId);
 
     if (tableId == -1)
         return FALSE;
@@ -1690,8 +1690,8 @@ static bool8 IsTrainerReadyForRematch_(const struct RematchTrainer *table, u16 t
 static u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
     const struct RematchTrainer *trainerEntry;
-    s32 i;
-    s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
+    int i;
+    int tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
     if (tableId == -1)
         return FALSE;
@@ -1711,8 +1711,8 @@ static u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 
 static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
     const struct RematchTrainer *trainerEntry;
-    s32 i;
-    s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
+    int i;
+    int tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
     if (tableId == -1)
         return FALSE;
@@ -1731,7 +1731,7 @@ static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *t
 
 static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
-    s32 tableId = TrainerIdToRematchTableId(table, firstBattleTrainerId);
+    int tableId = TrainerIdToRematchTableId(table, firstBattleTrainerId);
 
     if (tableId != -1)
         gSaveBlock1Ptr->trainerRematches[tableId] = 0;
@@ -1739,7 +1739,7 @@ static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16
 
 static u32 GetTrainerMatchCallFlag(u32 trainerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
@@ -1762,7 +1762,7 @@ static void RegisterTrainerInMatchCall(void)
 
 static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
-    s32 tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
+    int tableId = FirstBattleTrainerIdToRematchTableId(table, firstBattleTrainerId);
 
     if (tableId == -1)
         return FALSE;
@@ -1774,7 +1774,7 @@ static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBa
 
 static bool32 HasAtLeastFiveBadges(void)
 {
-    s32 i, count;
+    int i, count;
 
     for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
     {
@@ -1871,7 +1871,7 @@ void ShouldTryGetTrainerScript(void)
 
 u16 CountBattledRematchTeams(u16 trainerId)
 {
-    s32 i;
+    int i;
 
     if (HasTrainerBeenFought(gRematchTable[trainerId].trainerIds[0]) != TRUE)
         return 0;

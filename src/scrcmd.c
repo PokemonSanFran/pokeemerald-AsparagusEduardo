@@ -1485,7 +1485,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
 {
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
     struct WindowTemplate winTemplate;
-    s32 i;
+    int i;
     u8 width, height;
     u8 xWindow, yWindow, xText, yText;
     u8 temp;

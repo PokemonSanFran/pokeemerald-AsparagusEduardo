@@ -21,7 +21,7 @@
 #include "constants/rgb.h"
 
 static void CB2_MysteryEventMenu(void);
-static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed);
+static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, int speed);
 
 static EWRAM_DATA u8 sUnused = 0; // set but unused
 
@@ -84,7 +84,7 @@ void CB2_InitMysteryEventMenu(void)
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     if (InitWindows(sWindowTemplates))
     {
-        s32 i;
+        int i;
 
         DeactivateAllTextPrinters();
         for (i = 0; i < 2; i++)
@@ -302,7 +302,7 @@ static void CB2_MysteryEventMenu(void)
     UpdatePaletteFade();
 }
 
-static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, s32 speed)
+static void PrintMysteryMenuText(u8 windowId, const u8 *text, u8 x, u8 y, int speed)
 {
     u8 textColor[3];
     u8 letterSpacing = 0;

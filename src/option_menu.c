@@ -429,7 +429,7 @@ static u8 TextSpeed_ProcessInput(u8 selection)
 static void TextSpeed_DrawChoices(u8 selection)
 {
     u8 styles[3];
-    s32 widthSlow, widthMid, widthFast, xMid;
+    int widthSlow, widthMid, widthFast, xMid;
 
     styles[0] = 0;
     styles[1] = 0;
@@ -602,7 +602,7 @@ static u8 ButtonMode_ProcessInput(u8 selection)
 
 static void ButtonMode_DrawChoices(u8 selection)
 {
-    s32 widthNormal, widthLR, widthLA, xLR;
+    int widthNormal, widthLR, widthLA, xLR;
     u8 styles[3];
 
     styles[0] = 0;

@@ -38,8 +38,8 @@ struct SpriteCopyRequest
 
 struct OamDimensions32
 {
-    s32 width;
-    s32 height;
+    int width;
+    int height;
 };
 
 struct OamDimensions
@@ -94,7 +94,7 @@ static void ApplyAffineAnimFrame(u8 matrixNum, struct AffineAnimFrameCmd *frameC
 static u8 IndexOfSpriteTileTag(u16 tag);
 static void AllocSpriteTileRange(u16 tag, u16 start, u16 count);
 static void DoLoadSpritePalette(const u16 *src, u16 paletteOffset);
-static void UpdateSpriteMatrixAnchorPos(struct Sprite *, s32, s32);
+static void UpdateSpriteMatrixAnchorPos(struct Sprite *, int, int);
 
 typedef void (*AnimFunc)(struct Sprite *);
 typedef void (*AnimCmdFunc)(struct Sprite *);
@@ -1208,9 +1208,9 @@ void SetSpriteMatrixAnchor(struct Sprite *sprite, s16 x, s16 y)
     sprite->anchored = TRUE;
 }
 
-static s32 GetAnchorCoord(s32 a0, s32 a1, s32 coord)
+static int GetAnchorCoord(int a0, int a1, int coord)
 {
-    s32 subResult, var1;
+    int subResult, var1;
 
     subResult = a1 - a0;
     if (subResult < 0)
@@ -1220,9 +1220,9 @@ static s32 GetAnchorCoord(s32 a0, s32 a1, s32 coord)
     return coord - ((u32)(coord * a1) / (u32)(a0) + var1);
 }
 
-static void UpdateSpriteMatrixAnchorPos(struct Sprite *sprite, s32 x, s32 y)
+static void UpdateSpriteMatrixAnchorPos(struct Sprite *sprite, int x, int y)
 {
-    s32 dimension, var1, var2;
+    int dimension, var1, var2;
 
     u32 matrixNum = sprite->oam.matrixNum;
     if (x != NO_ANCHOR)
@@ -1313,7 +1313,7 @@ void ApplyAffineAnimFrameRelativeAndUpdateMatrix(u8 matrixNum, struct AffineAnim
 
 s16 ConvertScaleParam(s16 scale)
 {
-    s32 val = 0x10000;
+    int val = 0x10000;
     return SAFE_DIV(val, scale);
 }
 
@@ -1707,8 +1707,8 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
 
         tileNum = oam->tileNum;
         subspriteCount = subspriteTable->subspriteCount;
-        hFlip = ((s32)oam->matrixNum >> 3) & 1;
-        vFlip = ((s32)oam->matrixNum >> 4) & 1;
+        hFlip = ((int)oam->matrixNum >> 3) & 1;
+        vFlip = ((int)oam->matrixNum >> 4) & 1;
         baseX = oam->x - sprite->centerToCornerVecX;
         baseY = oam->y - sprite->centerToCornerVecY;
 

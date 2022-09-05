@@ -879,7 +879,7 @@ static void SpriteCB_Ball_Throw(struct Sprite *sprite)
 
 static void SpriteCB_Ball_Arc(struct Sprite *sprite)
 {
-    s32 i;
+    int i;
     u8 ballId;
 
     if (TranslateAnimHorizontalArc(sprite))
@@ -1511,7 +1511,7 @@ static void SpriteCB_Ball_Release_Wait(struct Sprite *sprite)
 
 static void SpriteCB_Ball_Block(struct Sprite *sprite)
 {
-    s32 i;
+    int i;
 
     sprite->x += sprite->x2;
     sprite->y += sprite->y2;
@@ -1972,7 +1972,7 @@ static void PremierBallOpenParticleAnimation_Step1(struct Sprite *sprite)
 
 static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
 {
-    s32 i, j;
+    int i, j;
 
     if (!gMain.inBattle)
     {

@@ -571,7 +571,7 @@ static void CreateApprenticeMenu(u8 menu)
     u8 width;
     u8 left;
     u8 top;
-    s32 pixelWidth;
+    int pixelWidth;
 
     switch (menu)
     {
@@ -630,7 +630,7 @@ static void CreateApprenticeMenu(u8 menu)
     pixelWidth = 0;
     for (i = 0; i < count; i++)
     {
-        s32 width = GetStringWidth(FONT_NORMAL, strings[i], 0);
+        int width = GetStringWidth(FONT_NORMAL, strings[i], 0);
         if (width > pixelWidth)
             pixelWidth = width;
     }
@@ -785,7 +785,7 @@ static void GetNumApprenticePartyMonsAssigned(void)
 // Never called, APPRENTICE_FUNC_IS_FINAL_QUESTION is unused
 static void IsFinalQuestion(void)
 {
-    s32 questionNum = CURRENT_QUESTION_NUM;
+    int questionNum = CURRENT_QUESTION_NUM;
 
     if (questionNum < 0)
     {
@@ -926,7 +926,7 @@ static void ApprenticeGetQuestion(void)
     }
     else
     {
-        s32 id = CURRENT_QUESTION_NUM;
+        int id = CURRENT_QUESTION_NUM;
         switch (PLAYER_APPRENTICE.questions[id].questionId)
         {
         case QUESTION_ID_WHAT_ITEM:
@@ -1138,9 +1138,9 @@ static void TrySetApprenticeHeldItem(void)
 
 static void ShiftSavedApprentices(void)
 {
-    s32 i;
-    s32 apprenticeNum;
-    s32 apprenticeIdx;
+    int i;
+    int apprenticeNum;
+    int apprenticeIdx;
 
     if (gSaveBlock2Ptr->apprentices[0].playerName[0] == EOS)
         return;
@@ -1256,7 +1256,7 @@ static void GetShouldApprenticeLeave(void)
     gSpecialVar_0x8004 = TRUE;
 }
 
-const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
+const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, int language)
 {
     const struct ApprenticeTrainer *apprentice = &gApprentices[apprenticeId];
 

@@ -347,7 +347,7 @@ static void ShowMapNamePopUpWindow(void)
 
 static void DrawMapNamePopUpFrame(u8 bg, u8 x, u8 y, u8 deltaX, u8 deltaY, u8 unused)
 {
-    s32 i;
+    int i;
 
     // Draw top edge
     for (i = 0; i < 1 + TILE_TOP_EDGE_END - TILE_TOP_EDGE_START; i++)

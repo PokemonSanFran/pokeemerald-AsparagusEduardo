@@ -31,9 +31,9 @@ void CpuSet(const void *src, void *dest, u32 control);
 
 void CpuFastSet(const void *src, void *dest, u32 control);
 
-void BgAffineSet(struct BgAffineSrcData *src, struct BgAffineDstData *dest, s32 count);
+void BgAffineSet(struct BgAffineSrcData *src, struct BgAffineDstData *dest, int count);
 
-void ObjAffineSet(struct ObjAffineSrcData *src, void *dest, s32 count, s32 offset);
+void ObjAffineSet(struct ObjAffineSrcData *src, void *dest, int count, int offset);
 
 void LZ77UnCompWram(const u32 *src, void *dest);
 
@@ -45,6 +45,6 @@ void RLUnCompVram(const void *src, void *dest);
 
 int MultiBoot(struct MultiBootParam *mp);
 
-s32 Div(s32 num, s32 denom);
+int Div(int num, int denom);
 
 #endif // GUARD_GBA_SYSCALL_H

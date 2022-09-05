@@ -1301,7 +1301,7 @@ static void Task_Scene1_PanUp(u8 taskId)
 {
     if (gIntroFrameCounter < TIMER_END_PAN_UP)
     {
-        s32 offset;
+        int offset;
 
         // Slide bg 2 downward
         offset = (gTasks[taskId].tBg2PosHi << 16) + (u16)gTasks[taskId].tBg2PosLo;

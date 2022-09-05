@@ -113,7 +113,7 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
 
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
-        s32 puzzleTileStart;
+        int puzzleTileStart;
         u8 puzzleTileNum;
         s16 x = objectEvents[i].x + MAP_OFFSET;
         s16 y = objectEvents[i].y + MAP_OFFSET;
@@ -190,7 +190,7 @@ u16 MoveRotatingTileObjects(u8 puzzleNumber)
 void TurnRotatingTileObjects(void)
 {
     u8 i;
-    s32 puzzleTileStart;
+    int puzzleTileStart;
     struct ObjectEventTemplate *objectEvents;
 
     if (sRotatingTilePuzzle == NULL)
@@ -204,7 +204,7 @@ void TurnRotatingTileObjects(void)
     objectEvents = gSaveBlock1Ptr->objectEventTemplates;
     for (i = 0; i < sRotatingTilePuzzle->numObjects; i++)
     {
-        s32 rotation;
+        int rotation;
         s8 tileDifference;
         u8 objectEventId;
         s16 x = objectEvents[sRotatingTilePuzzle->objects[i].eventTemplateId].x + MAP_OFFSET;
@@ -314,8 +314,8 @@ static void SaveRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
 static void TurnUnsavedRotatingTileObject(u8 eventTemplateId, u8 puzzleTileNum)
 {
     s8 tileDifference;
-    s32 rotation;
-    s32 puzzleTileStart;
+    int rotation;
+    int puzzleTileStart;
     u16 movementType;
     struct ObjectEventTemplate *objectEvents = gSaveBlock1Ptr->objectEventTemplates;
     s16 x = objectEvents[eventTemplateId].x + MAP_OFFSET;

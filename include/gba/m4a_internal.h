@@ -199,9 +199,9 @@ struct SoundInfo
     u8 pcmDmaPeriod; // number of V-blanks per PCM DMA
     u8 maxLines;
     u8 gap[3];
-    s32 pcmSamplesPerVBlank;
-    s32 pcmFreq;
-    s32 divFreq;
+    int pcmSamplesPerVBlank;
+    int pcmFreq;
+    int divFreq;
     struct CgbChannel *cgbChans;
     MPlayMainFunc MPlayMainHead;
     struct MusicPlayerInfo *musicPlayerHead;

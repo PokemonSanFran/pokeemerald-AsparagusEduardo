@@ -31,10 +31,10 @@ extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;
 
-static void MailboxMenu_MoveCursorFunc(s32, bool8, struct ListMenu *);
+static void MailboxMenu_MoveCursorFunc(int, bool8, struct ListMenu *);
 static void ConditionGraph_CalcRightHalf(struct ConditionGraph *);
 static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *);
-static void MoveRelearnerCursorCallback(s32, bool8, struct ListMenu *);
+static void MoveRelearnerCursorCallback(int, bool8, struct ListMenu *);
 static void MoveRelearnerDummy(void);
 static void SetNextConditionSparkle(struct Sprite *);
 static void SpriteCB_ConditionSparkle(struct Sprite *);
@@ -291,7 +291,7 @@ u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page)
     return ListMenuInit(&gMultiuseListMenuTemplate, page->itemsAbove, page->cursorPos);
 }
 
-static void MailboxMenu_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void MailboxMenu_MoveCursorFunc(int itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
@@ -352,7 +352,7 @@ void ConditionGraph_Init(struct ConditionGraph *graph)
 void ConditionGraph_SetNewPositions(struct ConditionGraph *graph, struct UCoords16 *old, struct UCoords16 *new)
 {
     u16 i, j;
-    s32 coord, increment;
+    int coord, increment;
 
     for (i = 0; i < CONDITION_COUNT; i++)
     {
@@ -471,7 +471,7 @@ static void ConditionGraph_CalcLine(struct ConditionGraph *graph, u16 *scanline,
 {
     u16 i, height, top, bottom, x2;
     u16 *ptr;
-    s32 x, xIncrement = 0;
+    int x, xIncrement = 0;
 
     if (pos1->y < pos2->y)
     {
@@ -620,7 +620,7 @@ static void ConditionGraph_CalcRightHalf(struct ConditionGraph *graph)
 
 static void ConditionGraph_CalcLeftHalf(struct ConditionGraph *graph)
 {
-    s32 i, y, bottom;
+    int i, y, bottom;
 
     // Calculate Cool -> Tough line
     if (graph->curPositions[GRAPH_COOL].y < graph->curPositions[GRAPH_TOUGH].y)
@@ -752,7 +752,7 @@ u8 LoadMoveRelearnerMovesList(const struct ListMenuItem *items, u16 numChoices)
 
 static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 {
-    s32 x;
+    int x;
     const struct BattleMove *move;
     u8 buffer[32];
     const u8 *str;
@@ -813,7 +813,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
 
 static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
 {
-    s32 x;
+    int x;
     const u8 *str;
     const struct ContestMove *move;
 
@@ -847,7 +847,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     CopyWindowToVram(1, COPYWIN_GFX);
 }
 
-static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+static void MoveRelearnerCursorCallback(int itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
@@ -880,9 +880,9 @@ void MoveRelearnerCreateYesNoMenu(void)
 // Condition menu
 //----------------
 
-s32 GetBoxOrPartyMonData(u16 boxId, u16 monId, s32 request, u8 *dst)
+int GetBoxOrPartyMonData(u16 boxId, u16 monId, int request, u8 *dst)
 {
-    s32 ret;
+    int ret;
 
     if (boxId == TOTAL_BOXES_COUNT) // Party mon.
     {

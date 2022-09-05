@@ -86,7 +86,7 @@ static void SpriteCallback_RedArrowCursor(struct Sprite *sprite);
 
 // EWRAM vars
 static EWRAM_DATA struct {
-    s32 currItemId;
+    int currItemId;
     u8 state;
     u8 windowId;
     u8 listTaskId;
@@ -312,7 +312,7 @@ static void ListMenuDummyTask(u8 taskId)
 
 }
 
-s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 drawMode, u16 tileNum, u16 palNum)
+int DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 drawMode, u16 tileNum, u16 palNum)
 {
     switch (sMysteryGiftLinkMenu.state)
     {
@@ -389,7 +389,7 @@ u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 scrollOffset, u16
 // unused
 u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenuWindowRect *rect, u16 scrollOffset, u16 selectedRow)
 {
-    s32 i;
+    int i;
 
     u8 taskId = ListMenuInitInternal(listMenuTemplate, scrollOffset, selectedRow);
     for (i = 0; rect[i].palNum != 0xFF; i++)
@@ -406,7 +406,7 @@ u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenu
     return taskId;
 }
 
-s32 ListMenu_ProcessInput(u8 listTaskId)
+int ListMenu_ProcessInput(u8 listTaskId)
 {
     struct ListMenu *list = (void *) gTasks[listTaskId].data;
 
@@ -512,7 +512,7 @@ void ChangeListMenuCoords(u8 listTaskId, u8 x, u8 y)
 }
 
 // unused
-s32 ListMenuTestInput(struct ListMenuTemplate *template, u32 scrollOffset, u32 selectedRow, u16 keys, u16 *newScrollOffset, u16 *newSelectedRow)
+int ListMenuTestInput(struct ListMenuTemplate *template, u32 scrollOffset, u32 selectedRow, u16 keys, u16 *newScrollOffset, u16 *newSelectedRow)
 {
     struct ListMenu list;
 
@@ -623,7 +623,7 @@ static void ListMenuPrint(struct ListMenu *list, const u8 *str, u8 x, u8 y)
 
 static void ListMenuPrintEntries(struct ListMenu *list, u16 startIndex, u16 yOffset, u16 count)
 {
-    s32 i;
+    int i;
     u8 x, y;
     u8 yMultiplier = GetFontAttribute(list->template.fontId, FONTATTR_MAX_LETTER_HEIGHT) + list->template.itemVerticalPadding;
 
@@ -893,14 +893,14 @@ void ListMenuOverrideSetColors(u8 cursorPal, u8 fillValue, u8 cursorShadowPal)
     gListMenuOverride.enabled = TRUE;
 }
 
-void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+void ListMenuDefaultCursorMoveFunc(int itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (!onInit)
         PlaySE(SE_SELECT);
 }
 
 // unused
-s32 ListMenuGetUnkIndicatorsStructFields(u8 taskId, u8 field)
+int ListMenuGetUnkIndicatorsStructFields(u8 taskId, u8 field)
 {
     struct UnkIndicatorsStruct *data = (void *) gTasks[taskId].data;
 
@@ -908,7 +908,7 @@ s32 ListMenuGetUnkIndicatorsStructFields(u8 taskId, u8 field)
     {
     case 0:
     case 1:
-        return (s32)(data->field_4);
+        return (int)(data->field_4);
     case 2:
         return data->field_C;
     case 3:
@@ -944,7 +944,7 @@ s32 ListMenuGetUnkIndicatorsStructFields(u8 taskId, u8 field)
     }
 }
 
-void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value)
+void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, int value)
 {
     struct UnkIndicatorsStruct *data = (void *) &gTasks[taskId].data;
 
@@ -1011,7 +1011,7 @@ void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value)
 
 static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite)
 {
-    s32 multiplier;
+    int multiplier;
 
     switch (sprite->tState)
     {
@@ -1108,7 +1108,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     return taskId;
 }
 
-u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *scrollOffset)
+u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, int commonPos, int firstPos, int secondPos, int fullyDownThreshold, int tileTag, int palTag, u16 *scrollOffset)
 {
     if (arrowType == SCROLL_ARROW_UP || arrowType == SCROLL_ARROW_DOWN)
     {
@@ -1235,8 +1235,8 @@ static void Task_RedOutlineCursor(u8 taskId)
 
 u8 ListMenuGetRedOutlineCursorSpriteCount(u16 rowWidth, u16 rowHeight)
 {
-    s32 i;
-    s32 count = 4;
+    int i;
+    int count = 4;
 
     if (rowWidth > 16)
     {
@@ -1254,7 +1254,7 @@ u8 ListMenuGetRedOutlineCursorSpriteCount(u16 rowWidth, u16 rowHeight)
 
 void ListMenuSetUpRedOutlineCursorSpriteOamTable(u16 rowWidth, u16 rowHeight, struct Subsprite *subsprites)
 {
-    s32 i, j, id = 0;
+    int i, j, id = 0;
 
     subsprites[id] = sSubsprite_RedOutline1;
     subsprites[id].x = 136;

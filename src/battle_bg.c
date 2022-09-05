@@ -867,7 +867,7 @@ void LoadBattleTextboxAndBackground(void)
 
 static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 bgId, u8 destX, u8 destY)
 {
-    s32 i;
+    int i;
     u16 pokeballStatuses = 0;
     u16 tiles[6];
 
@@ -1016,7 +1016,7 @@ void InitLinkBattleVsScreen(u8 taskId)
 {
     struct LinkPlayer *linkPlayer;
     u8 *name;
-    s32 i, palId;
+    int i, palId;
 
     switch (gTasks[taskId].data[0])
     {

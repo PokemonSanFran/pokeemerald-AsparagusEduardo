@@ -357,7 +357,7 @@ u8 GetQuizLadyState(void)
 
 u8 GetQuizAuthor(void)
 {
-    s32 i, j;
+    int i, j;
     u8 authorNameId;
     struct LilycoveLadyQuiz *quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
 

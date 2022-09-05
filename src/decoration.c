@@ -146,11 +146,11 @@ static void ExitDecorationCategoriesMenu(u8 taskId);
 static void ReturnToActionsMenuFromCategories(u8 taskId);
 static void ExitTraderDecorationMenu(u8 taskId);
 static void CopyDecorationMenuItemName(u8 *dest, u16 decoration);
-static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct ListMenu *menu);
+static void DecorationItemsMenu_OnCursorMove(int itemIndex, bool8 flag, struct ListMenu *menu);
 static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, u32 itemIndex, u8 y);
 static void ShowDecorationItemsWindow(u8 taskId);
 static void HandleDecorationItemsMenuInput(u8 taskId);
-static void PrintDecorationItemDescription(s32 itemIndex);
+static void PrintDecorationItemDescription(int itemIndex);
 static void RemoveDecorationItemsOtherWindows(void);
 static bool8 IsDecorationIndexInSecretBase(u8 idx);
 static bool8 IsDecorationIndexInPlayersRoom(u8 idx);
@@ -904,7 +904,7 @@ static void CopyDecorationMenuItemName(u8 *dest, u16 decoration)
     StringAppend(dest, gDecorations[decoration].name);
 }
 
-static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct ListMenu *menu)
+static void DecorationItemsMenu_OnCursorMove(int itemIndex, bool8 flag, struct ListMenu *menu)
 {
     if (flag != TRUE)
         PlaySE(SE_SELECT);
@@ -978,7 +978,7 @@ static void ShowDecorationItemsWindow(u8 taskId)
 static void HandleDecorationItemsMenuInput(u8 taskId)
 {
     s16 *data;
-    s32 input;
+    int input;
 
     data = gTasks[taskId].data;
     if (!gPaletteFade.active)
@@ -1012,7 +1012,7 @@ static void ShowDecorationCategorySummaryWindow(u8 category)
     PrintDecorationCategoryMenuItem(AddDecorationWindow(WINDOW_DECORATION_CATEGORY_SUMMARY), category, 0, 0, 0, 0);
 }
 
-static void PrintDecorationItemDescription(s32 itemIndex)
+static void PrintDecorationItemDescription(int itemIndex)
 {
     u8 windowId;
     const u8 *str;

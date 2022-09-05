@@ -459,7 +459,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
     {
         struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
         u16 *lyrics;
-        s32 i;
+        int i;
 
         // Copy lyrics
         if (gSpecialVar_0x8004 == 0)
@@ -701,7 +701,7 @@ void SetMauvilleOldManObjEventGfx(void)
 
 void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 {
-    s32 i;
+    int i;
     u8 playerName[PLAYER_NAME_LENGTH + 1];
 
     switch (oldMan->common.id)
@@ -742,7 +742,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 // Unused
 static void SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 language2, u32 language3)
 {
-    s32 i;
+    int i;
 
     switch (oldMan->common.id)
     {
@@ -808,7 +808,7 @@ static void SetMauvilleOldManLanguage(union OldMan * oldMan, u32 language1, u32 
 void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
     u8 playerName[PLAYER_NAME_LENGTH + 1];
-    s32 i;
+    int i;
     if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
     {
         struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
@@ -837,7 +837,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
     case MAUVILLE_MAN_TRADER:
     {
         struct MauvilleOldManTrader * trader = &oldMan->trader;
-        s32 i;
+        int i;
 
         if (isRuby)
         {
@@ -869,7 +869,7 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
     {
 
         struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
-        s32 i;
+        int i;
 
         if (isRuby)
         {
@@ -1143,12 +1143,12 @@ static const struct Story sStorytellerStories[] = {
     }
 };
 
-static const s32 sNumStories = ARRAY_COUNT(sStorytellerStories);
+static const int sNumStories = ARRAY_COUNT(sStorytellerStories);
 static const u32 sUnused = 8;
 
 static void StorytellerSetup(void)
 {
-    s32 i;
+    int i;
     sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
 
     sStorytellerPtr->id = MAUVILLE_MAN_STORYTELLER;
@@ -1177,7 +1177,7 @@ static u32 StorytellerGetGameStat(u8 stat)
 
 static const struct Story *GetStoryByStat(u32 stat)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < sNumStories; i++)
     {
@@ -1265,9 +1265,9 @@ static void StorytellerRecordNewStat(u32 player, u32 stat)
     sStorytellerPtr->language[player] = gGameLanguage;
 }
 
-static void ScrambleStatList(u8 * arr, s32 count)
+static void ScrambleStatList(u8 * arr, int count)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < count; i++)
         arr[i] = i;
@@ -1283,7 +1283,7 @@ static void ScrambleStatList(u8 * arr, s32 count)
 static bool8 StorytellerInitializeRandomStat(void)
 {
     u8 storyIds[sNumStories];
-    s32 i, j;
+    int i, j;
 
     ScrambleStatList(storyIds, sNumStories);
     for (i = 0; i < sNumStories; i++)
@@ -1322,11 +1322,11 @@ static void StorytellerDisplayStory(u32 player)
 
 static void PrintStoryList(void)
 {
-    s32 i;
-    s32 width = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
+    int i;
+    int width = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
-        s32 curWidth;
+        int curWidth;
         u16 gameStatID = sStorytellerPtr->gameStatIDs[i];
 
         if (gameStatID == 0)
@@ -1352,7 +1352,7 @@ static void PrintStoryList(void)
 static void Task_StoryListMenu(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    s32 selection;
+    int selection;
 
     switch (task->data[0])
     {

@@ -279,7 +279,7 @@ void CallTrainerHillFunction(void)
 
 void ResetTrainerHillResults(void)
 {
-    s32 i;
+    int i;
 
     gSaveBlock2Ptr->frontier.savedGame = 0;
     gSaveBlock2Ptr->frontier.unk_EF9 = 0;
@@ -302,7 +302,7 @@ u8 GetTrainerHillOpponentClass(u16 trainerId)
 
 void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)
 {
-    s32 i;
+    int i;
     u8 id = trainerId - 1;
 
     for (i = 0; i < TRAINER_NAME_LENGTH + 1; i++)
@@ -323,7 +323,7 @@ u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
 
 void InitTrainerHillBattleStruct(void)
 {
-    s32 i, j;
+    int i, j;
 
     SetUpDataStruct();
     sFloorTrainers = AllocZeroed(sizeof(*sFloorTrainers));
@@ -506,7 +506,7 @@ static void TrainerHillGetChallengeStatus(void)
 
 static void BufferChallengeTime(void)
 {
-    s32 total, minutes, secondsWhole, secondsFraction;
+    int total, minutes, secondsWhole, secondsFraction;
 
     total = gSaveBlock1Ptr->trainerHill.timer;
     if (total >= HILL_MAX_TIME)
@@ -583,7 +583,7 @@ static void TrainerHillDummy(void)
 
 void PrintOnTrainerHillRecordsWindow(void)
 {
-    s32 i, x, y;
+    int i, x, y;
     u32 total, minutes, secondsWhole, secondsFraction;
 
     SetUpDataStruct();
@@ -684,7 +684,7 @@ static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floo
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
 {
-    s32 y, x;
+    int y, x;
     u16 *src, *dst;
     u8 mapId = GetCurrentTrainerHillMapId();
 
@@ -860,7 +860,7 @@ static void ShowTrainerHillPostBattleText(void)
 static void CreateNPCTrainerHillParty(u16 trainerId, u8 firstMonId)
 {
     u8 trId, level;
-    s32 i, floorId, partySlot;
+    int i, floorId, partySlot;
 
     if (trainerId == 0 || trainerId > HILL_TRAINERS_PER_FLOOR)
         return;
@@ -904,7 +904,7 @@ u32 GetTrainerHillAIFlags(void)
 
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
 {
-    s32 i;
+    int i;
     u8 trId, facilityClass;
 
     SetUpDataStruct();
@@ -1027,7 +1027,7 @@ static u16 GetPrizeItemId(void)
 {
     u8 i;
     const u16 *prizeList;
-    s32 trainerNumSum = 0, prizeListSetId, minutes, id;
+    int trainerNumSum = 0, prizeListSetId, minutes, id;
 
     // First determine which set of prize lists to use. The sets of lists only differ in
     // what TMs they can offer as the "grand prize" for a time under 12 minutes.

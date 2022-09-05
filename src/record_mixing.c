@@ -652,7 +652,7 @@ static void ReceiveBattleTowerData(void *records, size_t recordSize, u8 multipla
     struct EmeraldBattleTowerRecord *battleTowerRecord;
     struct BattleTowerPokemon *btPokemon;
     u32 mixIndices[MAX_LINK_PLAYERS];
-    s32 i;
+    int i;
 
     ShufflePlayerIndices(mixIndices);
     if (Link_AnyPartnersPlayingRubyOrSapphire())
@@ -743,7 +743,7 @@ static void SwapDaycareMail(struct RecordMixingDaycareMail *records, size_t reco
 static void CalculateDaycareMailRandSum(const u8 *src)
 {
     u8 sum;
-    s32 i;
+    int i;
 
     sum = 0;
     for (i = 0; i < 256; i++)
@@ -1061,9 +1061,9 @@ static void Task_DoRecordMixing(u8 taskId)
 
 static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src)
 {
-    s32 i, id;
-    s32 apprenticeSaveId, oldPlayerApprenticeSaveId;
-    s32 numOldPlayerApprentices, numMixApprentices;
+    int i, id;
+    int apprenticeSaveId, oldPlayerApprenticeSaveId;
+    int numOldPlayerApprentices, numMixApprentices;
 
     dst[0].playerName[0] = EOS;
     dst[1].playerName[0] = EOS;
@@ -1115,7 +1115,7 @@ static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src)
 
 void GetPlayerHallRecords(struct PlayerHallRecords *dst)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
@@ -1154,7 +1154,7 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
 
 static bool32 IsApprenticeAlreadySaved(struct Apprentice *mixApprentice, struct Apprentice *apprentices)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < APPRENTICE_COUNT; i++)
     {
@@ -1168,7 +1168,7 @@ static bool32 IsApprenticeAlreadySaved(struct Apprentice *mixApprentice, struct 
 
 static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize, u32 multiplayerId)
 {
-    s32 i, numApprentices, apprenticeId;
+    int i, numApprentices, apprenticeId;
     struct Apprentice *mixApprentice;
     u32 mixIndices[MAX_LINK_PLAYERS];
     u32 apprenticeSaveId;
@@ -1204,10 +1204,10 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
     }
 }
 
-static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records, size_t recordSize, u32 multiplayerId, s32 linkPlayerCount)
+static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records, size_t recordSize, u32 multiplayerId, int linkPlayerCount)
 {
-    s32 i, j, k, l;
-    s32 repeatTrainers;
+    int i, j, k, l;
+    int repeatTrainers;
 
     // Load sPartnerHallRecords with link partners' hall records
     k = 0;
@@ -1285,14 +1285,14 @@ static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records
 
 static void FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct RankingHall1P *mixRecords)
 {
-    s32 i, j;
+    int i, j;
 
     // Fill the player's 1P records with the highest win streaks from the mixed records
     for (i = 0; i < HALL_RECORDS_COUNT; i++)
     {
         // Get the highest remaining win streak in the mixed hall records
-        s32 highestWinStreak = 0;
-        s32 highestId = -1;
+        int highestWinStreak = 0;
+        int highestId = -1;
         for (j = 0; j < HALL_RECORDS_COUNT * 2; j++)
         {
             if (mixRecords[j].winStreak > highestWinStreak)
@@ -1313,14 +1313,14 @@ static void FillWinStreakRecords1P(struct RankingHall1P *playerRecords, struct R
 
 static void FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct RankingHall2P *mixRecords)
 {
-    s32 i, j;
+    int i, j;
 
     // Fill the player's 2P records with the highest win streaks from the mixed records
     for (i = 0; i < HALL_RECORDS_COUNT; i++)
     {
         // Get the highest remaining win streak in the mixed hall records
-        s32 highestWinStreak = 0;
-        s32 highestId = -1;
+        int highestWinStreak = 0;
+        int highestId = -1;
         for (j = 0; j < HALL_RECORDS_COUNT * 2; j++)
         {
             if (mixRecords[j].winStreak > highestWinStreak)
@@ -1341,7 +1341,7 @@ static void FillWinStreakRecords2P(struct RankingHall2P *playerRecords, struct R
 
 static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallRecords)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
@@ -1373,7 +1373,7 @@ static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)
 
 static void SanitizeDaycareMailForRuby(struct RecordMixingDaycareMail *src)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < src->numDaycareMons; i++)
     {
@@ -1395,7 +1395,7 @@ static void SanitizeRubyBattleTowerRecord(struct RSBattleTowerRecord *src)
 
 static void SanitizeEmeraldBattleTowerRecord(struct EmeraldBattleTowerRecord *dst)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
     {

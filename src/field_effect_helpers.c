@@ -1100,7 +1100,7 @@ void SynchroniseSurfPosition(struct ObjectEvent *playerObj, struct Sprite *sprit
     u8 i;
     s16 x = playerObj->currentCoords.x;
     s16 y = playerObj->currentCoords.y;
-    s32 spriteY = sprite->y2;
+    int spriteY = sprite->y2;
 
     if (spriteY == 0 && (x != sprite->data[6] || y != sprite->data[7]))
     {

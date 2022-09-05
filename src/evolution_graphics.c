@@ -517,7 +517,7 @@ u8 CycleEvolutionMonSprite(u8 preEvoSpriteId, u8 postEvoSpriteId)
     u16 i;
     u16 monPalette[16];
     u8 taskId;
-    s32 toDiv;
+    int toDiv;
 
     for (i = 0; i < ARRAY_COUNT(monPalette); i++)
         monPalette[i] = RGB_WHITE;

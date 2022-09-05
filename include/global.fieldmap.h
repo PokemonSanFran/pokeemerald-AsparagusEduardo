@@ -48,8 +48,8 @@ struct Tileset
 
 struct MapLayout
 {
-    /*0x00*/ s32 width;
-    /*0x04*/ s32 height;
+    /*0x00*/ int width;
+    /*0x04*/ int height;
     /*0x08*/ u16 *border;
     /*0x0c*/ u16 *map;
     /*0x10*/ struct Tileset *primaryTileset;
@@ -58,8 +58,8 @@ struct MapLayout
 
 struct BackupMapLayout
 {
-    s32 width;
-    s32 height;
+    int width;
+    int height;
     u16 *map;
 };
 
@@ -135,7 +135,7 @@ struct MapConnection
 
 struct MapConnections
 {
-    s32 count;
+    int count;
     struct MapConnection *connections;
 };
 
@@ -330,8 +330,8 @@ struct PlayerAvatar
 struct Camera
 {
     bool8 active:1;
-    s32 x;
-    s32 y;
+    int x;
+    int y;
 };
 
 extern struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];

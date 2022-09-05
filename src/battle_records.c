@@ -100,7 +100,7 @@ static void ClearLinkBattleRecord(struct LinkBattleRecord *record)
 
 static void ClearLinkBattleRecords(struct LinkBattleRecord *records)
 {
-    s32 i;
+    int i;
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
     {
         ClearLinkBattleRecord(records + i);
@@ -110,14 +110,14 @@ static void ClearLinkBattleRecords(struct LinkBattleRecord *records)
     SetGameStat(GAME_STAT_LINK_BATTLE_DRAWS, 0);
 }
 
-static s32 GetLinkBattleRecordTotalBattles(struct LinkBattleRecord *record)
+static int GetLinkBattleRecordTotalBattles(struct LinkBattleRecord *record)
 {
     return record->wins + record->losses + record->draws;
 }
 
-static s32 FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name, u16 trainerId)
+static int FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name, u16 trainerId)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
     {
@@ -130,14 +130,14 @@ static s32 FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name
 
 static void SortLinkBattleRecords(struct LinkBattleRecords *records)
 {
-    s32 i, j;
+    int i, j;
 
     for (i = LINK_B_RECORDS_COUNT - 1; i > 0; i--)
     {
         for (j = i - 1; j >= 0; j--)
         {
-            s32 totalBattlesI = GetLinkBattleRecordTotalBattles(&records->entries[i]);
-            s32 totalBattlesJ = GetLinkBattleRecordTotalBattles(&records->entries[j]);
+            int totalBattlesI = GetLinkBattleRecordTotalBattles(&records->entries[i]);
+            int totalBattlesJ = GetLinkBattleRecordTotalBattles(&records->entries[j]);
 
             if (totalBattlesI > totalBattlesJ)
             {
@@ -156,7 +156,7 @@ static void SortLinkBattleRecords(struct LinkBattleRecords *records)
     }
 }
 
-static void UpdateLinkBattleRecord(struct LinkBattleRecord *record, s32 battleOutcome)
+static void UpdateLinkBattleRecord(struct LinkBattleRecord *record, int battleOutcome)
 {
     switch (battleOutcome)
     {
@@ -178,7 +178,7 @@ static void UpdateLinkBattleRecord(struct LinkBattleRecord *record, s32 battleOu
     }
 }
 
-static void UpdateLinkBattleGameStats(s32 battleOutcome)
+static void UpdateLinkBattleGameStats(int battleOutcome)
 {
     u8 stat;
 
@@ -201,9 +201,9 @@ static void UpdateLinkBattleGameStats(s32 battleOutcome)
         IncrementGameStat(stat);
 }
 
-static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, s32 battleOutcome, u8 battlerId)
+static void UpdateLinkBattleRecords(struct LinkBattleRecords *records, const u8 *name, u16 trainerId, int battleOutcome, u8 battlerId)
 {
-    s32 index;
+    int index;
 
     UpdateLinkBattleGameStats(battleOutcome);
     SortLinkBattleRecords(records);
@@ -225,7 +225,7 @@ void ClearPlayerLinkBattleRecords(void)
     ClearLinkBattleRecords(gSaveBlock1Ptr->linkBattleRecords.entries);
 }
 
-static void IncTrainerCardWins(s32 battlerId)
+static void IncTrainerCardWins(int battlerId)
 {
     u16 *wins = &gTrainerCards[battlerId].linkBattleWins;
     (*wins)++;
@@ -233,7 +233,7 @@ static void IncTrainerCardWins(s32 battlerId)
         *wins = 9999;
 }
 
-static void IncTrainerCardLosses(s32 battlerId)
+static void IncTrainerCardLosses(int battlerId)
 {
     u16 *losses = &gTrainerCards[battlerId].linkBattleLosses;
     (*losses)++;
@@ -241,7 +241,7 @@ static void IncTrainerCardLosses(s32 battlerId)
         *losses = 9999;
 }
 
-static void UpdateTrainerCardWinsLosses(s32 battlerId)
+static void UpdateTrainerCardWinsLosses(int battlerId)
 {
     switch (gBattleOutcome)
     {
@@ -256,7 +256,7 @@ static void UpdateTrainerCardWinsLosses(s32 battlerId)
     }
 }
 
-void UpdatePlayerLinkBattleRecords(s32 battlerId)
+void UpdatePlayerLinkBattleRecords(int battlerId)
 {
     if (InUnionRoom() != TRUE)
     {
@@ -272,7 +272,7 @@ void UpdatePlayerLinkBattleRecords(s32 battlerId)
 
 static void PrintLinkBattleWinsLossesDraws(struct LinkBattleRecord *records)
 {
-    s32 x;
+    int x;
 
     ConvertIntToDecimalStringN(gStringVar1, GetGameStat(GAME_STAT_LINK_BATTLE_WINS), STR_CONV_MODE_LEFT_ALIGN, 4);
     ConvertIntToDecimalStringN(gStringVar2, GetGameStat(GAME_STAT_LINK_BATTLE_LOSSES), STR_CONV_MODE_LEFT_ALIGN, 4);
@@ -283,7 +283,7 @@ static void PrintLinkBattleWinsLossesDraws(struct LinkBattleRecord *records)
     AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x, 0x11, 0, NULL);
 }
 
-static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, s32 language)
+static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, int language)
 {
     if (record->wins == 0 && record->losses == 0 && record->draws == 0)
     {
@@ -314,7 +314,7 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, s32 lan
 
 void ShowLinkBattleRecords(void)
 {
-    s32 i, x;
+    int i, x;
 
     gRecordsWindowId = AddWindow(&sLinkBattleRecordsWindow);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);

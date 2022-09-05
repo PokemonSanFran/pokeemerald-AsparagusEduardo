@@ -862,7 +862,7 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
     }
     if (sprite->animEnded && affineAnimEnded)
     {
-        s32 i, doneBattlers;
+        int i, doneBattlers;
 
         gSprites[gBattlerSpriteIds[battlerId]].y2 = 0;
         gDoingBattleAnim = FALSE;

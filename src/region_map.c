@@ -902,10 +902,10 @@ bool8 UpdateRegionMapZoom(void)
 
 static void CalcZoomScrollParams(s16 scrollX, s16 scrollY, s16 c, s16 d, u16 e, u16 f, u8 rotation)
 {
-    s32 var1;
-    s32 var2;
-    s32 var3;
-    s32 var4;
+    int var1;
+    int var2;
+    int var3;
+    int var4;
 
     sRegionMap->bg2pa = e * gSineTable[rotation + 64] >> 8;
     sRegionMap->bg2pc = e * -gSineTable[rotation] >> 8;

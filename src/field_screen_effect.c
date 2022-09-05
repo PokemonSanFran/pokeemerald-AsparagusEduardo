@@ -51,7 +51,7 @@ static void Task_EnableScriptAfterMusicFade(u8 taskId);
 
 // Smaller flash level -> larger flash radius
 static const u16 sFlashLevelToRadius[] = { 200, 72, 64, 56, 48, 40, 32, 24, 0 };
-const s32 gMaxFlashLevel = ARRAY_COUNT(sFlashLevelToRadius) - 1;
+const int gMaxFlashLevel = ARRAY_COUNT(sFlashLevelToRadius) - 1;
 
 static const struct ScanlineEffectParams sFlashEffectParams =
 {
@@ -763,7 +763,7 @@ void DoContestHallWarp(void)
     CreateTask(Task_DoContestHallWarp, 10);
 }
 
-static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
+static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, int left, int right)
 {
     if (y <= 160)
     {
@@ -779,11 +779,11 @@ static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32
     }
 }
 
-static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
+static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, int centerX, int centerY, int radius)
 {
-    s32 r = radius;
-    s32 v2 = radius;
-    s32 v3 = 0;
+    int r = radius;
+    int v2 = radius;
+    int v3 = 0;
     while (r >= v3)
     {
         SetFlashScanlineEffectWindowBoundary(dest, centerY - v3, centerX - r, centerX + r);
@@ -800,7 +800,7 @@ static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 c
     }
 }
 
-static void SetOrbFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
+static void SetOrbFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, int left, int right)
 {
     if (y <= 160)
     {
@@ -816,11 +816,11 @@ static void SetOrbFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, 
     }
 }
 
-static void SetOrbFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
+static void SetOrbFlashScanlineEffectWindowBoundaries(u16 *dest, int centerX, int centerY, int radius)
 {
-    s32 r = radius;
-    s32 v2 = radius;
-    s32 v3 = 0;
+    int r = radius;
+    int v2 = radius;
+    int v3 = 0;
     while (r >= v3)
     {
         SetOrbFlashScanlineEffectWindowBoundary(dest, centerY - v3, centerX - r, centerX + r);
@@ -927,7 +927,7 @@ static void StartWaitForFlashUpdate(void)
         CreateTask(Task_WaitForFlashUpdate, 80);
 }
 
-static u8 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
+static u8 StartUpdateFlashLevelEffect(int centerX, int centerY, int initialFlashRadius, int destFlashRadius, int clearScanlineEffect, u8 delta)
 {
     u8 taskId = CreateTask(UpdateFlashLevelEffect, 80);
     s16 *data = gTasks[taskId].data;
@@ -946,7 +946,7 @@ static u8 StartUpdateFlashLevelEffect(s32 centerX, s32 centerY, s32 initialFlash
     return taskId;
 }
 
-static u8 StartUpdateOrbFlashEffect(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
+static u8 StartUpdateOrbFlashEffect(int centerX, int centerY, int initialFlashRadius, int destFlashRadius, int clearScanlineEffect, u8 delta)
 {
     u8 taskId = CreateTask(UpdateOrbFlashEffect, 80);
     s16 *data = gTasks[taskId].data;
@@ -1166,7 +1166,7 @@ static void Task_OrbEffect(u8 taskId)
     case 4:
         if (--tShakeDelay == 0)
         {
-            s32 panning;
+            int panning;
             tShakeDelay = 4;
             tShakeDir ^= 1;
             if (tShakeDir)

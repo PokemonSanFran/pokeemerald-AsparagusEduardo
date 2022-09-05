@@ -1,7 +1,7 @@
 #ifndef GUARD_FIELD_SCREEN_EFFECT_H
 #define GUARD_FIELD_SCREEN_EFFECT_H
 
-extern const s32 gMaxFlashLevel;
+extern const int gMaxFlashLevel;
 
 void WarpFadeInScreen(void);
 void WarpFadeOutScreen(void);

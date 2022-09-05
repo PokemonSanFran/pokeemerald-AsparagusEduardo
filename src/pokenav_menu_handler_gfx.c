@@ -52,25 +52,25 @@ struct Pokenav_MenuGfx
 
 static struct Pokenav_MenuGfx * OpenPokenavMenu(void);
 static bool32 GetCurrentLoopedTaskActive(void);
-static u32 LoopedTask_OpenMenu(s32);
-static u32 LoopedTask_MoveMenuCursor(s32);
-static u32 LoopedTask_OpenConditionMenu(s32);
-static u32 LoopedTask_ReturnToMainMenu(s32);
-static u32 LoopedTask_OpenConditionSearchMenu(s32);
-static u32 LoopedTask_ReturnToConditionMenu(s32);
-static u32 LoopedTask_SelectRibbonsNoWinners(s32);
-static u32 LoopedTask_ReShowDescription(s32);
-static u32 LoopedTask_OpenPokenavFeature(s32);
+static u32 LoopedTask_OpenMenu(int);
+static u32 LoopedTask_MoveMenuCursor(int);
+static u32 LoopedTask_OpenConditionMenu(int);
+static u32 LoopedTask_ReturnToMainMenu(int);
+static u32 LoopedTask_OpenConditionSearchMenu(int);
+static u32 LoopedTask_ReturnToConditionMenu(int);
+static u32 LoopedTask_SelectRibbonsNoWinners(int);
+static u32 LoopedTask_ReShowDescription(int);
+static u32 LoopedTask_OpenPokenavFeature(int);
 static void LoadPokenavOptionPalettes(void);
 static void FreeAndDestroyMainMenuSprites(void);
 static void CreateMenuOptionSprites(void);
 static void DestroyMenuOptionSprites(void);
 static void DrawCurrentMenuOptionLabels(void);
-static void DrawOptionLabelGfx(const u16 *const *, s32, s32);
+static void DrawOptionLabelGfx(const u16 *const *, int, int);
 static void StartOptionAnimations_Enter(void);
 static void StartOptionAnimations_CursorMoved(void);
 static void StartOptionAnimations_Exit(void);
-static void StartOptionSlide(struct Sprite **, s32, s32, s32);
+static void StartOptionSlide(struct Sprite **, int, int, int);
 static void StartOptionZoom(struct Sprite **);
 static bool32 AreMenuOptionSpritesMoving(void);
 static void SetOptionInvisibility(struct Sprite **, bool32);
@@ -365,7 +365,7 @@ static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
 
 static bool32 AreAnyTrainerRematchesNearby(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
     {
@@ -414,7 +414,7 @@ static struct Pokenav_MenuGfx * OpenPokenavMenu(void)
     return gfx;
 }
 
-void CreateMenuHandlerLoopedTask(s32 ltIdx)
+void CreateMenuHandlerLoopedTask(int ltIdx)
 {
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     gfx->loopedTaskId = CreateLoopedTask(sMenuHandlerLoopTaskFuncs[ltIdx], 1);
@@ -445,7 +445,7 @@ static bool32 GetCurrentLoopedTaskActive(void)
     return IsLoopedTaskActive(gfx->loopedTaskId);
 }
 
-static u32 LoopedTask_OpenMenu(s32 state)
+static u32 LoopedTask_OpenMenu(int state)
 {
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
@@ -552,7 +552,7 @@ static u32 LoopedTask_OpenMenu(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_MoveMenuCursor(s32 state)
+static u32 LoopedTask_MoveMenuCursor(int state)
 {
     switch (state)
     {
@@ -572,7 +572,7 @@ static u32 LoopedTask_MoveMenuCursor(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_OpenConditionMenu(s32 state)
+static u32 LoopedTask_OpenConditionMenu(int state)
 {
     switch (state)
     {
@@ -611,7 +611,7 @@ static u32 LoopedTask_OpenConditionMenu(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_ReturnToMainMenu(s32 state)
+static u32 LoopedTask_ReturnToMainMenu(int state)
 {
     switch (state)
     {
@@ -649,7 +649,7 @@ static u32 LoopedTask_ReturnToMainMenu(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_OpenConditionSearchMenu(s32 state)
+static u32 LoopedTask_OpenConditionSearchMenu(int state)
 {
     switch (state)
     {
@@ -682,7 +682,7 @@ static u32 LoopedTask_OpenConditionSearchMenu(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_ReturnToConditionMenu(s32 state)
+static u32 LoopedTask_ReturnToConditionMenu(int state)
 {
     switch (state)
     {
@@ -713,7 +713,7 @@ static u32 LoopedTask_ReturnToConditionMenu(s32 state)
     return LT_FINISH;
 }
 
-static u32 LoopedTask_SelectRibbonsNoWinners(s32 state)
+static u32 LoopedTask_SelectRibbonsNoWinners(int state)
 {
     switch (state)
     {
@@ -730,7 +730,7 @@ static u32 LoopedTask_SelectRibbonsNoWinners(s32 state)
 }
 
 // For redisplaying the Ribbons description to replace the No Ribbon Winners message
-static u32 LoopedTask_ReShowDescription(s32 state)
+static u32 LoopedTask_ReShowDescription(int state)
 {
     switch (state)
     {
@@ -747,7 +747,7 @@ static u32 LoopedTask_ReShowDescription(s32 state)
 }
 
 // For selecting a feature option from a menu, e.g. the Map, Match Call, Beauty search, etc.
-static u32 LoopedTask_OpenPokenavFeature(s32 state)
+static u32 LoopedTask_OpenPokenavFeature(int state)
 {
     switch (state)
     {
@@ -791,7 +791,7 @@ static u32 LoopedTask_OpenPokenavFeature(s32 state)
 
 static void LoadPokenavOptionPalettes(void)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < ARRAY_COUNT(sPokenavOptionsSpriteSheets); i++)
         LoadCompressedSpriteSheet(&sPokenavOptionsSpriteSheets[i]);
@@ -814,7 +814,7 @@ static void FreeAndDestroyMainMenuSprites(void)
 
 static void CreateMenuOptionSprites(void)
 {
-    s32 i, j;
+    int i, j;
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
@@ -830,7 +830,7 @@ static void CreateMenuOptionSprites(void)
 
 static void DestroyMenuOptionSprites(void)
 {
-    s32 i, j;
+    int i, j;
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
@@ -845,15 +845,15 @@ static void DestroyMenuOptionSprites(void)
 
 static void DrawCurrentMenuOptionLabels(void)
 {
-    s32 menuType = GetPokenavMenuType();
+    int menuType = GetPokenavMenuType();
     DrawOptionLabelGfx(sPokenavMenuOptionLabelGfx[menuType].gfx, sPokenavMenuOptionLabelGfx[menuType].yStart, sPokenavMenuOptionLabelGfx[menuType].deltaY);
 }
 
-static void DrawOptionLabelGfx(const u16 *const *optionGfx, s32 yPos, s32 deltaY)
+static void DrawOptionLabelGfx(const u16 *const *optionGfx, int yPos, int deltaY)
 {
-    s32 i, j;
+    int i, j;
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    s32 baseTile = GetSpriteTileStartByTag(GFXTAG_OPTIONS);
+    int baseTile = GetSpriteTileStartByTag(GFXTAG_OPTIONS);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
     {
@@ -884,11 +884,11 @@ static void DrawOptionLabelGfx(const u16 *const *optionGfx, s32 yPos, s32 deltaY
 
 static void StartOptionAnimations_Enter(void)
 {
-    s32 i;
+    int i;
     struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    s32 cursorPos = GetPokenavCursorPos();
-    s32 iconCount = 0;
-    s32 x;
+    int cursorPos = GetPokenavCursorPos();
+    int iconCount = 0;
+    int x;
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
     {
@@ -918,10 +918,10 @@ static void StartOptionAnimations_Enter(void)
 
 static void StartOptionAnimations_CursorMoved(void)
 {
-    s32 i;
+    int i;
     struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    s32 prevPos = GetPokenavCursorPos();
-    s32 newPos;
+    int prevPos = GetPokenavCursorPos();
+    int newPos;
 
     // Get the index of the next visible option
     for (i = 0, newPos = 0; i < MAX_POKENAV_MENUITEMS; i++)
@@ -946,7 +946,7 @@ static void StartOptionAnimations_CursorMoved(void)
 
 static void StartOptionAnimations_Exit(void)
 {
-    s32 i;
+    int i;
     struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
@@ -965,7 +965,7 @@ static void StartOptionAnimations_Exit(void)
 
 static bool32 AreMenuOptionSpritesMoving(void)
 {
-    s32 i;
+    int i;
     struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
 
     for (i = 0; i < MAX_POKENAV_MENUITEMS; i++)
@@ -985,9 +985,9 @@ static bool32 AreMenuOptionSpritesMoving(void)
 #define sSlideSpeed data[2]
 #define sSlideEndX  data[7]
 
-static void StartOptionSlide(struct Sprite ** sprites, s32 startX, s32 endX, s32 time)
+static void StartOptionSlide(struct Sprite ** sprites, int startX, int endX, int time)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_OPTION_SUBSPRITES; i++)
     {
@@ -1016,7 +1016,7 @@ static void StartOptionSlide(struct Sprite ** sprites, s32 startX, s32 endX, s32
 // of the transition to the next screen.
 static void StartOptionZoom(struct Sprite ** sprites)
 {
-    s32 i;
+    int i;
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     u8 taskId;
 
@@ -1041,7 +1041,7 @@ static void StartOptionZoom(struct Sprite ** sprites)
 
 static void SetOptionInvisibility(struct Sprite ** sprites, bool32 invisible)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < NUM_OPTION_SUBSPRITES; i++)
     {
@@ -1072,8 +1072,8 @@ static void SpriteCB_OptionSlide(struct Sprite * sprite)
 
 static void SpriteCB_OptionZoom(struct Sprite * sprite)
 {
-    s32 temp;
-    s32 x;
+    int temp;
+    int x;
     if (sprite->sZoomDelay == 0)
     {
         if (!sprite->sZoomSetAffine)

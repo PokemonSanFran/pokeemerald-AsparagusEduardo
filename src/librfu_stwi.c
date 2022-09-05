@@ -2,11 +2,11 @@
 
 static void STWI_intr_timer(void);
 static u16 STWI_init(u8 request);
-static s32 STWI_start_Command(void);
+static int STWI_start_Command(void);
 static void STWI_set_timer(u8 unk);
 static void STWI_stop_timer(void);
-static s32 STWI_restart_Command(void);
-static s32 STWI_reset_ClockCounter(void);
+static int STWI_restart_Command(void);
+static int STWI_reset_ClockCounter(void);
 
 struct STWIStatus *gSTWIStatus;
 
@@ -47,7 +47,7 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
     IntrEnable(INTR_FLAG_SERIAL);
 }
 
-void STWI_init_timer(IntrFunc *interrupt, s32 timerSelect)
+void STWI_init_timer(IntrFunc *interrupt, int timerSelect)
 {
     *interrupt = STWI_intr_timer;
     gSTWIStatus->timerSelect = timerSelect;
@@ -198,7 +198,7 @@ void STWI_send_ConfigStatusREQ(void)
 void STWI_send_GameConfigREQ(const u8 *serial_gname, const u8 *uname)
 {
     u8 *packetBytes;
-    s32 i;
+    int i;
 
     if (!STWI_init(ID_GAME_CONFIG_REQ))
     {
@@ -590,7 +590,7 @@ static u16 STWI_init(u8 request)
     }
 }
 
-static s32 STWI_start_Command(void)
+static int STWI_start_Command(void)
 {
     u16 imeTemp;
 
@@ -609,7 +609,7 @@ static s32 STWI_start_Command(void)
     return 0;
 }
 
-static s32 STWI_restart_Command(void)
+static int STWI_restart_Command(void)
 {
     if (gSTWIStatus->recoveryCount < 2)
     {
@@ -637,7 +637,7 @@ static s32 STWI_restart_Command(void)
     return 0;
 }
 
-static s32 STWI_reset_ClockCounter(void)
+static int STWI_reset_ClockCounter(void)
 {
     gSTWIStatus->state = 5; // slave receive req init
     gSTWIStatus->reqLength = 0;

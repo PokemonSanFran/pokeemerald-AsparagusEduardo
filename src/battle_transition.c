@@ -1375,7 +1375,7 @@ static void Task_Kyogre(u8 taskId)
 
 static void InitPatternWeaveTransition(struct Task *task)
 {
-    s32 i;
+    int i;
 
     InitTransitionData();
     ScanlineEffect_Clear();
@@ -2349,7 +2349,7 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
     u8 i, sinIndex;
     u16 *toStore;
     s16 x;
-    s32 mergedValue;
+    int mergedValue;
 
     sTransitionData->VBlank_DMA = FALSE;
 
@@ -2388,7 +2388,7 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
     if (task->tBottomBannerX < 0)
         task->tBottomBannerX = 0;
 
-    mergedValue = *(s32 *)(&task->tTopBannerX);
+    mergedValue = *(int *)(&task->tTopBannerX);
     if (mergedValue == DISPLAY_WIDTH)
         task->tState++;
 
@@ -3042,7 +3042,7 @@ static void Task_BlackholePulsate(u8 taskId)
 // Init is shared by both transitions
 static bool8 Blackhole_Init(struct Task *task)
 {
-    s32 i;
+    int i;
 
     InitTransitionData();
     ScanlineEffect_Clear();

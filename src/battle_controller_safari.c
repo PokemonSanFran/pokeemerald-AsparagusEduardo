@@ -448,7 +448,7 @@ static void HandleChooseActionAfterDma3(void)
 
 static void SafariHandleChooseAction(void)
 {
-    s32 i;
+    int i;
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattlePutTextOnWindow(gText_SafariZoneMenu, B_WIN_ACTION_MENU);

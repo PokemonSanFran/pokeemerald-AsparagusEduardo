@@ -570,7 +570,7 @@ static u8 GetLastTextColor(u8 colorType)
     }
 }
 
-inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *glyphPixels, s32 width, s32 height)
+inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *glyphPixels, int width, int height)
 {
     u32 xAdd, yAdd, pixelData, bits, toOrr, dummyX;
     u8 *dst;
@@ -600,7 +600,7 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
     struct WindowTemplate *template;
     u32 *glyphPixels;
     u32 currX, currY, widthOffset;
-    s32 glyphWidth, glyphHeight;
+    int glyphWidth, glyphHeight;
     u8 *windowTiles;
 
     window = &gWindows[textPrinter->printerTemplate.windowId];
@@ -936,8 +936,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
     u16 currChar;
-    s32 width;
-    s32 widthHelper;
+    int width;
+    int widthHelper;
 
     switch (textPrinter->state)
     {
@@ -1327,7 +1327,7 @@ static u32 (*GetFontWidthFunc(u8 fontId))(u16, bool32)
     return NULL;
 }
 
-s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
+int GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
     int minGlyphWidth;
@@ -1336,7 +1336,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     u32 lineWidth;
     const u8 *bufferPointer;
     int glyphWidth;
-    s32 width;
+    int width;
 
     isJapanese = 0;
     minGlyphWidth = 0;

@@ -195,7 +195,7 @@ void ActivatePerStepCallback(u8 callbackId)
     u8 taskId = FindTaskIdByFunc(Task_RunPerStepCallback);
     if (taskId != TASK_NONE)
     {
-        s32 i;
+        int i;
         s16 *data = gTasks[taskId].data;
 
         for (i = 0; i < NUM_TASK_DATA; i++)
@@ -633,9 +633,9 @@ static bool32 IsIcePuzzleCoordVisited(s16 x, s16 y)
 
 void SetSootopolisGymCrackedIceMetatiles(void)
 {
-    s32 x, y;
-    s32 width = gMapHeader.mapLayout->width;
-    s32 height = gMapHeader.mapLayout->height;
+    int x, y;
+    int width = gMapHeader.mapLayout->width;
+    int height = gMapHeader.mapLayout->height;
     for (x = 0; x < width; x++)
     {
         for (y = 0; y < height; y++)

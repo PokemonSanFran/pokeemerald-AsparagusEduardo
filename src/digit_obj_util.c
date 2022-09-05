@@ -23,7 +23,7 @@ struct DigitPrinter
     u16 tileTag;
     u16 palTag;
     u32 pow10;
-    s32 lastPrinted;
+    int lastPrinted;
 };
 
 struct DigitPrinterAlloc
@@ -35,9 +35,9 @@ struct DigitPrinterAlloc
 // this file's functions
 static u8 GetFirstOamId(u8 oamCount);
 static void CopyWorkToOam(struct DigitPrinter *objWork);
-static void DrawNumObjsLeadingZeros(struct DigitPrinter *objWork, s32 num, bool32 sign);
-static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, s32 num, bool32 sign);
-static void DrawNumObjsMinusInBack(struct DigitPrinter *objWork, s32 num, bool32 sign);
+static void DrawNumObjsLeadingZeros(struct DigitPrinter *objWork, int num, bool32 sign);
+static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, int num, bool32 sign);
+static void DrawNumObjsMinusInBack(struct DigitPrinter *objWork, int num, bool32 sign);
 static bool32 SharesTileWithAnyActive(u32 id);
 static bool32 SharesPalWithAnyActive(u32 id);
 
@@ -114,7 +114,7 @@ void DigitObjUtil_Free(void)
     }
 }
 
-bool32 DigitObjUtil_CreatePrinter(u32 id, s32 num, const struct DigitObjUtilTemplate *template)
+bool32 DigitObjUtil_CreatePrinter(u32 id, int num, const struct DigitObjUtilTemplate *template)
 {
     u32 i;
 
@@ -202,7 +202,7 @@ static void CopyWorkToOam(struct DigitPrinter *objWork)
     gMain.oamBuffer[oamId].tileNum = objWork->tileStart + (objWork->tilesPerImage * 10);
 }
 
-void DigitObjUtil_PrintNumOn(u32 id, s32 num)
+void DigitObjUtil_PrintNumOn(u32 id, int num)
 {
     bool32 sign;
 
@@ -237,7 +237,7 @@ void DigitObjUtil_PrintNumOn(u32 id, s32 num)
     }
 }
 
-static void DrawNumObjsLeadingZeros(struct DigitPrinter *objWork, s32 num, bool32 sign)
+static void DrawNumObjsLeadingZeros(struct DigitPrinter *objWork, int num, bool32 sign)
 {
     u32 pow10 = objWork->pow10;
     u32 oamId = objWork->firstOamId;
@@ -258,7 +258,7 @@ static void DrawNumObjsLeadingZeros(struct DigitPrinter *objWork, s32 num, bool3
         gMain.oamBuffer[oamId].affineMode = ST_OAM_AFFINE_ERASE;
 }
 
-static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, s32 num, bool32 sign)
+static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, int num, bool32 sign)
 {
     u32 pow10 = objWork->pow10;
     static int oamId;
@@ -303,12 +303,12 @@ static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, s32 num, bool3
     }
 }
 
-static void DrawNumObjsMinusInBack(struct DigitPrinter *objWork, s32 num, bool32 sign)
+static void DrawNumObjsMinusInBack(struct DigitPrinter *objWork, int num, bool32 sign)
 {
     u32 pow10 = objWork->pow10;
     u32 oamId = objWork->firstOamId;
     bool32 printingDigits = FALSE;
-    s32 nsprites = 0;
+    int nsprites = 0;
 
     while (pow10 != 0)
     {
@@ -342,7 +342,7 @@ static void DrawNumObjsMinusInBack(struct DigitPrinter *objWork, s32 num, bool32
 
 void DigitObjUtil_DeletePrinter(u32 id)
 {
-    s32 oamId, oamCount, i;
+    int oamId, oamCount, i;
 
     if (sOamWork == NULL)
         return;
@@ -365,7 +365,7 @@ void DigitObjUtil_DeletePrinter(u32 id)
 
 void DigitObjUtil_HideOrShow(u32 id, bool32 hide)
 {
-    s32 oamId, oamCount, i;
+    int oamId, oamCount, i;
 
     if (sOamWork == NULL)
         return;

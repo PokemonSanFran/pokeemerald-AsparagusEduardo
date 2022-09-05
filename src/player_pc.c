@@ -171,9 +171,9 @@ static void ItemStorage_UpdateSwapLinePos(u8);
 static void ItemStorage_ProcessItemSwapInput(u8);
 static void ItemStorage_EraseItemIcon(void);
 static void ItemStorage_DrawItemIcon(u16);
-static void ItemStorage_PrintDescription(s32);
+static void ItemStorage_PrintDescription(int);
 static void ItemStorage_EraseMainMenu(u8);
-static void ItemStorage_MoveCursor(s32, bool8, struct ListMenu *);
+static void ItemStorage_MoveCursor(int, bool8, struct ListMenu *);
 static void ItemStorage_PrintMenuItem(u8, u32, u8);
 
 static EWRAM_DATA const u8 *sTopMenuOptionOrder = NULL;
@@ -703,7 +703,7 @@ static void Mailbox_ProcessInput(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        s32 inputOptionId = ListMenu_ProcessInput(tListTaskId);
+        int inputOptionId = ListMenu_ProcessInput(tListTaskId);
         ListMenuGetScrollAndRow(tListTaskId, &gPlayerPCItemPageInfo.itemsAbove, &gPlayerPCItemPageInfo.cursorPos);
 
         switch (inputOptionId)
@@ -1005,7 +1005,7 @@ void CopyItemName_PlayerPC(u8 *string, u16 itemId)
     CopyItemName(itemId, string);
 }
 
-static void ItemStorage_MoveCursor(s32 id, bool8 onInit, struct ListMenu *list)
+static void ItemStorage_MoveCursor(int id, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
@@ -1037,7 +1037,7 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
     }
 }
 
-static void ItemStorage_PrintDescription(s32 id)
+static void ItemStorage_PrintDescription(int id)
 {
     const u8 *description;
     u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
@@ -1218,7 +1218,7 @@ static void ItemStorage_ProcessInput(u8 taskId)
     }
     else
     {
-        s32 id = ListMenu_ProcessInput(tListTaskId);
+        int id = ListMenu_ProcessInput(tListTaskId);
         ListMenuGetScrollAndRow(tListTaskId, &gPlayerPCItemPageInfo.itemsAbove, &gPlayerPCItemPageInfo.cursorPos);
         switch (id)
         {
@@ -1278,7 +1278,7 @@ static void ItemStorage_StartItemSwap(u8 taskId)
 static void ItemStorage_ProcessItemSwapInput(u8 taskId)
 {
     s16 *data;
-    s32 id;
+    int id;
 
     data = gTasks[taskId].data;
     if (JOY_NEW(SELECT_BUTTON))

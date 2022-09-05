@@ -1073,7 +1073,7 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
     return TRUE;
 }
 
-void BerryTreeTimeUpdate(s32 minutes)
+void BerryTreeTimeUpdate(int minutes)
 {
     int i;
     struct BerryTree *tree;
@@ -1090,7 +1090,7 @@ void BerryTreeTimeUpdate(s32 minutes)
             }
             else
             {
-                s32 time = minutes;
+                int time = minutes;
 
                 while (time != 0)
                 {

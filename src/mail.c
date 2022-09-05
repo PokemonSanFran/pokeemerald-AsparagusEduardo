@@ -677,8 +677,8 @@ static void PrintMailText(void)
     u8 signature[32];
     u8 y;
     u8 *bufptr;
-    s32 box_x;
-    s32 box_y;
+    int box_x;
+    int box_y;
 
     y = 0;
     PutWindowTilemap(0);

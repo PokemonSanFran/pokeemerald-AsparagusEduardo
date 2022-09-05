@@ -69,11 +69,11 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         .paletteNum = 15,
         .baseBlock = 1
     };
-    s32 windowWidth = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
-    s32 fiveMarksWidth = GetStringWidth(FONT_NORMAL, gText_FiveMarks, 0);
+    int windowWidth = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
+    int fiveMarksWidth = GetStringWidth(FONT_NORMAL, gText_FiveMarks, 0);
     for (i = 0; i < NUM_TRADER_ITEMS; i++)
     {
-        s32 curWidth;
+        int curWidth;
         if (trader->decorations[i] > NUM_DECORATIONS)
             curWidth = fiveMarksWidth;
         else

@@ -18,7 +18,7 @@ void ClearAllMail(void)
 
 void ClearMail(struct Mail *mail)
 {
-    s32 i;
+    int i;
 
     for (i = 0; i < MAIL_WORDS_COUNT; i++)
         mail->words[i] = EC_EMPTY_WORD;
