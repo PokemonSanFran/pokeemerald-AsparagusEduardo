@@ -142,7 +142,7 @@ void AGBPrintFlush(void)
     AGBPrintTransferDataInternal(TRUE);
 }
 
-void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram)
+void AGBAssert(const char *pFile, s32 nLine, const char *pExpression, s32 nStopProgram)
 {
     if (nStopProgram)
     {

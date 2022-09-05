@@ -23,8 +23,8 @@ struct {
 
 static void BerryFix_Main(void);
 static void BerryFix_GpuSet(void);
-static int BerryFix_TrySetScene(int);
-static void BerryFix_SetScene(int);
+static s32 BerryFix_TrySetScene(s32);
+static void BerryFix_SetScene(s32);
 static void BerryFix_HideScene(void);
 
 static const u8 sText_BerryProgramUpdate[] = _("Berry Program Update");
@@ -324,7 +324,7 @@ static void BerryFix_GpuSet(void)
     CopyWindowToVram(0, COPYWIN_GFX);
 }
 
-static int BerryFix_TrySetScene(int scene)
+static s32 BerryFix_TrySetScene(s32 scene)
 {
     if (sBerryFix->curScene == scene)
         return scene;
@@ -342,7 +342,7 @@ static int BerryFix_TrySetScene(int scene)
     return sBerryFix->curScene;
 }
 
-static void BerryFix_SetScene(int scene)
+static void BerryFix_SetScene(s32 scene)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     FillWindowPixelBuffer(1, PIXEL_FILL(10));

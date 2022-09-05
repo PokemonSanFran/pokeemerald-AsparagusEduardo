@@ -1758,7 +1758,7 @@ static void AnimVoidLines(struct Sprite *sprite)
 static void AnimVoidLines_Step(struct Sprite *sprite)
 {
     u16 id, val;
-    int i;
+    s32 i;
 
     if (++sprite->data[1] == 2)
     {
@@ -1836,7 +1836,7 @@ static void AnimBulletSeed(struct Sprite *sprite)
 
 static void AnimBulletSeed_Step1(struct Sprite *sprite)
 {
-    int i;
+    s32 i;
     u16 rand;
     s16 *ptr;
     PlaySE12WithPanning(SE_M_HORN_ATTACK, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
@@ -3016,7 +3016,7 @@ static void AnimSpeedDust(struct Sprite *sprite)
 
 void AnimTask_LoadMusicNotesPals(u8 taskId)
 {
-    int i;
+    s32 i;
     u8 paletteNums[NUM_MUSIC_NOTE_PAL_TAGS];
 
     paletteNums[0] = IndexOfSpritePaletteTag(ANIM_TAG_MUSIC_NOTES_2);
@@ -3034,7 +3034,7 @@ void AnimTask_LoadMusicNotesPals(u8 taskId)
 
 void AnimTask_FreeMusicNotesPals(u8 taskId)
 {
-    int i;
+    s32 i;
     for (i = 0; i < NUM_MUSIC_NOTE_PAL_TAGS; i++)
         FreeSpritePaletteByTag(sMusicNotePaletteTagsTable[i]);
 
@@ -3673,7 +3673,7 @@ static void AnimTask_UproarDistortion_Step(u8 taskId)
 
 static void AnimJaggedMusicNote(struct Sprite *sprite)
 {
-    int var1;
+    s32 var1;
     u8 battler = !gBattleAnimArgs[0] ? gBattleAnimAttacker : gBattleAnimTarget;
 
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
@@ -3726,8 +3726,8 @@ static void AnimPerishSongMusicNote2(struct Sprite *sprite)
 
 static void AnimPerishSongMusicNote(struct Sprite *sprite)
 {
-    int index;
-    int var2;
+    s32 index;
+    s32 var2;
 
     if (!sprite->data[0])
     {

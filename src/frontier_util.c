@@ -969,7 +969,7 @@ static void PrintHyphens(s32 y)
     s32 i;
     u8 text[37];
 
-    for (i = 0; i < (int)ARRAY_COUNT(text) - 1; i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(text) - 1; i++)
         text[i] = CHAR_HYPHEN;
     text[i] = EOS;
 
@@ -1832,7 +1832,7 @@ void ResetFrontierTrainerIds(void)
 {
     s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.trainerIds); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(gSaveBlock2Ptr->frontier.trainerIds); i++)
         gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
 }
 

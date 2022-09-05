@@ -189,7 +189,7 @@ const struct SpriteTemplate gClawSlashSpriteTemplate =
 
 void AnimTask_AttackerFadeToInvisible(u8 taskId)
 {
-    int battler;
+    s32 battler;
     gTasks[taskId].data[0] = gBattleAnimArgs[0];
     battler = gBattleAnimAttacker;
     gTasks[taskId].data[1] = 16;
@@ -402,7 +402,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     struct BattleAnimBgData animBg;
     u16 i;
     u8 pos;
-    int var0;
+    s32 var0;
     struct Task *task = &gTasks[taskId];
 
     task->data[7] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y) + 31;
@@ -708,10 +708,10 @@ static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
 
 static void DoMementoShadowEffect(struct Task *task)
 {
-    int var0, var1;
+    s32 var0, var1;
     s16 var2;
     s16 i;
-    int var4;
+    s32 var4;
 
     var2 = task->data[5] - task->data[4];
     if (var2 != 0)

@@ -563,7 +563,7 @@ static void AppendTilesetAnimToBuffer(const u16 *src, u16 *dest, u16 size)
 
 void TransferTilesetAnimsBuffer(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < sTilesetDMA3TransferBufferSize; i ++)
         DmaCopy16(3, sTilesetDMA3TransferBuffer[i].src, sTilesetDMA3TransferBuffer[i].dest, sTilesetDMA3TransferBuffer[i].size);
@@ -966,7 +966,7 @@ static void QueueAnimTiles_Lavaridge_Steam(u8 timer)
     u8 i = timer % ARRAY_COUNT(gTilesetAnims_Lavaridge_Steam);
     AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge_Steam[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 288)), 4 * TILE_SIZE_4BPP);
 
-    i = (timer + 2) % (int)ARRAY_COUNT(gTilesetAnims_Lavaridge_Steam);
+    i = (timer + 2) % (s32)ARRAY_COUNT(gTilesetAnims_Lavaridge_Steam);
     AppendTilesetAnimToBuffer(gTilesetAnims_Lavaridge_Steam[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 292)), 4 * TILE_SIZE_4BPP);
 }
 

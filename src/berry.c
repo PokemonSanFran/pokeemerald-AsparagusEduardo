@@ -1037,7 +1037,7 @@ bool8 TryToWaterBerryTree(void)
 
 void ClearBerryTrees(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < BERRY_TREES_COUNT; i++)
         gSaveBlock1Ptr->berryTrees[i] = gBlankBerryTree;
@@ -1075,7 +1075,7 @@ static bool32 BerryTreeGrow(struct BerryTree *tree)
 
 void BerryTreeTimeUpdate(s32 minutes)
 {
-    int i;
+    s32 i;
     struct BerryTree *tree;
 
     for (i = 0; i < BERRY_TREES_COUNT; i++)
@@ -1333,7 +1333,7 @@ void SetBerryTreesSeen(void)
     s16 top;
     s16 right;
     s16 bottom;
-    int i;
+    s32 i;
 
     GetCameraCoords(&cam_left, &cam_top);
     left = cam_left;

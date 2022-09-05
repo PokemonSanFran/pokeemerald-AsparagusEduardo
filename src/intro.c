@@ -1982,10 +1982,10 @@ static void Task_Scene3_Groudon(u8 taskId)
 
 static void CreateGroudonRockSprites(u8 taskId)
 {
-    int i;
+    s32 i;
     u8 spriteId;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sGroudonRockData); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sGroudonRockData); i++)
     {
         spriteId = CreateSprite(gAncientPowerRockSpriteTemplate, sGroudonRockData[i][0], DISPLAY_HEIGHT, i);
         gSprites[spriteId].callback = SpriteCB_GroudonRocks;
@@ -2228,7 +2228,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
 // Creates bubbles at positions spread across Kyogre's body
 static void CreateKyogreBubbleSprites_Body(u8 taskId)
 {
-    int i;
+    s32 i;
     u8 spriteId;
 
     for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
@@ -2247,7 +2247,7 @@ static void CreateKyogreBubbleSprites_Body(u8 taskId)
 // Creates bubbles at positions around Kyogre's fins, for when it's moving them
 static void CreateKyogreBubbleSprites_Fins(void)
 {
-    int i;
+    s32 i;
     u8 spriteId;
 
     for (i = 0; i < NUM_BUBBLES_IN_SET; i++)
@@ -2767,7 +2767,7 @@ static void Task_BlendLogoOut(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        if (gTasks[taskId].data[1] < (int)ARRAY_COUNT(gTitleScreenAlphaBlend) - 2)
+        if (gTasks[taskId].data[1] < (s32)ARRAY_COUNT(gTitleScreenAlphaBlend) - 2)
         {
             u8 tmp;
 

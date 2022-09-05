@@ -166,7 +166,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
     {
         for (x = 0; x < w; x++)
         {
-            int tile = (*tilemap & 0x3ff) * 32;
+            s32 tile = (*tilemap & 0x3ff) * 32;
 
             if ((*tilemap & 0xc00) == 0)
             {
@@ -205,7 +205,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
     }
 }
 
-int CountTrailingZeroBits(u32 value)
+s32 CountTrailingZeroBits(u32 value)
 {
     u8 i;
 

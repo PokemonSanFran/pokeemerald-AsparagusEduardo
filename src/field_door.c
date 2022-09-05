@@ -296,7 +296,7 @@ static void CopyDoorTilesToVram(const struct DoorGraphics *gfx, const struct Doo
 
 static void BuildDoorTiles(u16 *tiles, u16 tileNum, const u8 *paletteNums)
 {
-    int i;
+    s32 i;
     u16 tile;
 
     // Only the first 4 tiles of each metatile (bottom layer) actually use the door tiles
@@ -543,7 +543,7 @@ bool8 FieldIsDoorAnimationRunning(void)
 
 u32 GetDoorSoundEffect(u32 x, u32 y)
 {
-    int sound = GetDoorSoundType(sDoorAnimGraphicsTable, x, y);
+    s32 sound = GetDoorSoundType(sDoorAnimGraphicsTable, x, y);
 
     if (sound == DOOR_SOUND_NORMAL)
         return SE_DOOR;

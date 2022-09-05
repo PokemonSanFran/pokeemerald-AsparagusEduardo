@@ -1377,7 +1377,7 @@ void AnimTask_SetPsychicBackground(u8 taskId)
 
 static void SetPsychicBackground_Step(u8 taskId)
 {
-    int i;
+    s32 i;
     u16 lastColor;
     u8 paletteIndex = GetBattleBgPaletteNum();
 
@@ -1403,7 +1403,7 @@ void AnimTask_FadeScreenToWhite(u8 taskId)
 
 static void FadeScreenToWhite_Step(u8 taskId)
 {
-    int i;
+    s32 i;
     u16 lastColor;
     u8 paletteIndex = GetBattleBgPaletteNum();
 
@@ -1477,7 +1477,7 @@ static void AnimLeer(struct Sprite *sprite)
 
 static void AnimLetterZ(struct Sprite *sprite)
 {
-    int var0;
+    s32 var0;
     if (sprite->data[0] == 0)
     {
         SetSpriteCoordsToAnimAttackerCoords(sprite);
@@ -1752,8 +1752,8 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
     s16 var0;
     u8 toBG2;
     s16 var2;
-    int var3;
-    int var4;
+    s32 var3;
+    s32 var4;
     s16 i;
     struct ScanlineEffectParams scanlineParams;
     struct Task *task = &gTasks[taskId];
@@ -1907,7 +1907,7 @@ void AnimTask_TormentAttacker(u8 taskId)
 
 static void TormentAttacker_Step(u8 taskId)
 {
-    int var0, var1;
+    s32 var0, var1;
     s16 x, y;
     u16 i, j;
     u8 spriteId;
@@ -2250,7 +2250,7 @@ void AnimTask_SwallowDeformMon(u8 taskId)
 
 void AnimTask_TransformMon(u8 taskId)
 {
-    int i, j;
+    s32 i, j;
     u8 position;
     struct BattleAnimBgData animBg;
     u8 *dest;
@@ -2862,7 +2862,7 @@ void AnimTask_FlailMovement(u8 taskId)
 
 static void AnimTask_FlailMovement_Step(u8 taskId)
 {
-    int temp;
+    s32 temp;
     struct Task *task = &gTasks[taskId];
 
     switch (task->data[0])
@@ -3034,8 +3034,8 @@ void AnimTask_PainSplitMovement(u8 taskId)
 static void AnimFlatterConfetti(struct Sprite *sprite)
 {
     u8 tileOffset;
-    int rand1;
-    int rand2;
+    s32 rand1;
+    s32 rand2;
 
     tileOffset = Random2() % 12;
     sprite->oam.tileNum += tileOffset;
@@ -3544,7 +3544,7 @@ static void AnimYawnCloud(struct Sprite *sprite)
 
 static void AnimYawnCloud_Step(struct Sprite *sprite)
 {
-    int index;
+    s32 index;
 
     sprite->data[0]++;
     index = (sprite->data[0] * 8) & 0xFF;
@@ -4088,8 +4088,8 @@ static void AnimTask_GlareEyeDots_Step(u8 taskId)
 
 static void GetGlareEyeDotCoords(s16 startX, s16 startY, s16 endX, s16 endY, u8 pairMax, u8 pairNum, s16 *x, s16 *y)
 {
-    int x2;
-    int y2;
+    s32 x2;
+    s32 y2;
 
     if (pairNum == 0)
     {
@@ -4503,8 +4503,8 @@ void AnimTask_HelpingHandAttackerMovement(u8 taskId)
     {
         if (IsDoubleBattle() == TRUE)
         {
-            int attackerX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
-            int partnerX = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X);
+            s32 attackerX = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+            s32 partnerX = GetBattlerSpriteCoord(BATTLE_PARTNER(gBattleAnimAttacker), BATTLER_COORD_X);
             if (attackerX > partnerX)
                 task->data[14] = 1;
             else
@@ -4782,7 +4782,7 @@ static void AnimMeteorMashStar(struct Sprite *sprite)
 
 void AnimTask_MonToSubstitute(u8 taskId)
 {
-    int i;
+    s32 i;
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
 
     if (gTasks[taskId].data[0] == 0)
@@ -5078,8 +5078,8 @@ void AnimTask_GetReturnPowerLevel(u8 taskId)
 void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
     u8 spriteId, spriteId2;
-    int personality;
-    int otId;
+    s32 personality;
+    s32 otId;
     u16 species;
     u8 subpriority;
     bool8 isBackPic;

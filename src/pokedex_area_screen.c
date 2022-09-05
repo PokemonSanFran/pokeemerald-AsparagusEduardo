@@ -332,7 +332,7 @@ static void SetAreaHasMon(u16 mapGroup, u16 mapNum)
 
 static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
 {
-    int i;
+    s32 i;
 
     if (sPokedexAreaScreen->numSpecialAreas < MAX_AREA_MARKERS)
     {

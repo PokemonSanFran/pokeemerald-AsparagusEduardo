@@ -855,7 +855,7 @@ void CgbOscOff(u8 chanNum)
     }
 }
 
-static inline int CgbPan(struct CgbChannel *chan)
+static inline s32 CgbPan(struct CgbChannel *chan)
 {
     u32 rightVolume = chan->rightVolume;
     u32 leftVolume = chan->leftVolume;
@@ -916,7 +916,7 @@ void CgbSound(void)
     s32 envelopeStepTimeAndDir;
 
     // Most comparision operations that cast to s8 perform 'and' by 0xFF.
-    int mask = 0xff;
+    s32 mask = 0xff;
 
     if (soundInfo->c15)
         soundInfo->c15--;
@@ -1095,7 +1095,7 @@ void CgbSound(void)
                 }
                 else if ((channels->statusFlags & SOUND_CHANNEL_SF_ENV) == SOUND_CHANNEL_SF_ENV_DECAY)
                 {
-                    int envelopeVolume, sustainGoal;
+                    s32 envelopeVolume, sustainGoal;
 
                     channels->envelopeVolume--;
                     envelopeVolume = (s8)(channels->envelopeVolume & mask);
@@ -1166,7 +1166,7 @@ void CgbSound(void)
         {
             if (ch < 4 && (channels->type & TONEDATA_TYPE_FIX))
             {
-                int dac_pwm_rate = REG_SOUNDBIAS_H;
+                s32 dac_pwm_rate = REG_SOUNDBIAS_H;
 
                 if (dac_pwm_rate < 0x40)        // if PWM rate = 32768 Hz
                     channels->frequency = (channels->frequency + 2) & 0x7fc;

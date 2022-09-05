@@ -233,7 +233,7 @@ static const struct SpriteTemplate sSpriteTemplate_Arrow =
 
 static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
 {
-    int state = gTasks[sprite->sTaskId].tSelection;
+    s32 state = gTasks[sprite->sTaskId].tSelection;
     if (state != sprite->sState)
     {
         sprite->sState = state;
@@ -283,7 +283,7 @@ static void SpriteCB_Cursor_UpOrRight(struct Sprite *sprite)
 
 static void SpriteCB_Cursor_Down(struct Sprite *sprite)
 {
-    int state = gTasks[sprite->sTaskId].tSelection;
+    s32 state = gTasks[sprite->sTaskId].tSelection;
     if (state != sprite->sState)
     {
         sprite->sState = state;
@@ -392,7 +392,7 @@ static void ShowChooseTimeWindow(u8 windowId, u16 days, u8 hours, u8 minutes, u8
     ScheduleBgCopyTilemapToVram(0);
 }
 
-static bool32 MoveTimeUpDown(s16 *val, int minVal, int maxVal, u16 keys)
+static bool32 MoveTimeUpDown(s16 *val, s32 minVal, s32 maxVal, u16 keys)
 {
     if (keys & DPAD_DOWN)
     {

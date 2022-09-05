@@ -987,7 +987,7 @@ void GetOnOffBike(u8 transitionFlags)
     }
 }
 
-void BikeClearState(int newDirHistory, int newAbStartHistory)
+void BikeClearState(s32 newDirHistory, s32 newAbStartHistory)
 {
     u8 i;
 

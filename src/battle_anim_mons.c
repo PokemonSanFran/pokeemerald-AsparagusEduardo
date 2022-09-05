@@ -580,7 +580,7 @@ static void AnimPosToTranslateLinear(struct Sprite *sprite)
 void ConvertPosDataToTranslateLinearData(struct Sprite *sprite)
 {
     s16 old;
-    int xDiff;
+    s32 xDiff;
 
     if (sprite->sStartX > sprite->sTargetX)
         sprite->sStepsX = -sprite->sStepsX;
@@ -1068,8 +1068,8 @@ void InitSpriteDataForLinearTranslation(struct Sprite *sprite)
 
 void InitAnimLinearTranslation(struct Sprite *sprite)
 {
-    int x = sprite->data[2] - sprite->data[1];
-    int y = sprite->data[4] - sprite->data[3];
+    s32 x = sprite->data[2] - sprite->data[1];
+    s32 y = sprite->data[4] - sprite->data[3];
     bool8 movingLeft = x < 0;
     bool8 movingUp = y < 0;
     u16 xDelta = abs(x) << 8;
@@ -1159,7 +1159,7 @@ static void AnimTranslateLinear_WithFollowup_SetCornerVecX(struct Sprite *sprite
 
 void InitAnimLinearTranslationWithSpeed(struct Sprite *sprite)
 {
-    int v1 = abs(sprite->data[2] - sprite->data[1]) << 8;
+    s32 v1 = abs(sprite->data[2] - sprite->data[1]) << 8;
     sprite->data[0] = v1 / sprite->data[0];
     InitAnimLinearTranslation(sprite);
 }
@@ -1175,8 +1175,8 @@ void InitAnimLinearTranslationWithSpeedAndPos(struct Sprite *sprite)
 
 static void InitAnimFastLinearTranslation(struct Sprite *sprite)
 {
-    int xDiff = sprite->data[2] - sprite->data[1];
-    int yDiff = sprite->data[4] - sprite->data[3];
+    s32 xDiff = sprite->data[2] - sprite->data[1];
+    s32 yDiff = sprite->data[4] - sprite->data[3];
     bool8 x_sign = xDiff < 0;
     bool8 y_sign = yDiff < 0;
     u16 x2 = abs(xDiff) << 4;
@@ -1248,7 +1248,7 @@ static void AnimFastTranslateLinearWaitEnd(struct Sprite *sprite)
 
 void InitAnimFastLinearTranslationWithSpeed(struct Sprite *sprite)
 {
-    int xDiff = abs(sprite->data[2] - sprite->data[1]) << 4;
+    s32 xDiff = abs(sprite->data[2] - sprite->data[1]) << 4;
     sprite->data[0] = xDiff / sprite->data[0];
     InitAnimFastLinearTranslation(sprite);
 }
@@ -1264,7 +1264,7 @@ void InitAnimFastLinearTranslationWithSpeedAndPos(struct Sprite *sprite)
 
 void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation)
 {
-    int i;
+    s32 i;
     struct ObjAffineSrcData src;
     struct OamMatrix matrix;
 
@@ -1335,7 +1335,7 @@ void SetBattlerSpriteYOffsetFromRotation(u8 spriteId)
 
 void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 xScale, s16 yScale, u16 rotation)
 {
-    int i;
+    s32 i;
     struct ObjAffineSrcData src;
     struct OamMatrix matrix;
 
@@ -1378,7 +1378,7 @@ u16 ArcTan2Neg(s16 x, s16 y)
 
 void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor)
 {
-    int i;
+    s32 i;
     struct PlttData *originalColor;
     struct PlttData *destColor;
     u16 average;
@@ -1879,9 +1879,9 @@ bool8 RunAffineAnimFromTaskData(struct Task *task)
 // matrix's scale in the y dimension.
 void SetBattlerSpriteYOffsetFromYScale(u8 spriteId)
 {
-    int var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(spriteId) * 2;
+    s32 var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(spriteId) * 2;
     u16 matrix = gSprites[spriteId].oam.matrixNum;
-    int var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
+    s32 var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
 
     if (var2 > MON_PIC_HEIGHT * 2)
         var2 = MON_PIC_HEIGHT * 2;
@@ -1892,9 +1892,9 @@ void SetBattlerSpriteYOffsetFromYScale(u8 spriteId)
 // matrix's scale in the y dimension.
 void SetBattlerSpriteYOffsetFromOtherYScale(u8 spriteId, u8 otherSpriteId)
 {
-    int var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(otherSpriteId) * 2;
+    s32 var = MON_PIC_HEIGHT - GetBattlerYDeltaFromSpriteId(otherSpriteId) * 2;
     u16 matrix = gSprites[spriteId].oam.matrixNum;
-    int var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
+    s32 var2 = SAFE_DIV(var << 8, gOamMatrices[matrix].d);
 
     if (var2 > MON_PIC_HEIGHT * 2)
         var2 = MON_PIC_HEIGHT * 2;
@@ -2028,7 +2028,7 @@ static void SetPriorityForVisibleBattlers(u8 priority)
 
 void InitPrioritiesForVisibleBattlers(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -2162,7 +2162,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
     u32 personality;
     u16 letter;
     u16 unownSpecies;
-    int ret;
+    s32 ret;
     const struct MonCoords *coords;
     struct BattleSpriteInfo *spriteInfo;
 
@@ -2328,7 +2328,7 @@ void SetAverageBattlerPositions(u8 battlerId, bool8 respectMonPicOffsets, s16 *x
     *y = (battlerY + partnerY) / 2;
 }
 
-u8 CreateInvisibleSpriteCopy(int battlerId, u8 spriteId, int species)
+u8 CreateInvisibleSpriteCopy(s32 battlerId, u8 spriteId, s32 species)
 {
     u8 newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     gSprites[newSpriteId] = gSprites[spriteId];
@@ -2541,7 +2541,7 @@ static void AnimWeatherBallUp_Step(struct Sprite *sprite)
 
 void AnimWeatherBallDown(struct Sprite *sprite)
 {
-    int x;
+    s32 x;
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = sprite->x + gBattleAnimArgs[4];
     sprite->data[4] = sprite->y + gBattleAnimArgs[5];

@@ -1862,7 +1862,7 @@ static u8 TrySelectBias_Special(void)
 {
     s16 whichBias;
 
-    for (whichBias = 0; whichBias < (int)ARRAY_COUNT(sBiasesSpecial); whichBias++)
+    for (whichBias = 0; whichBias < (s32)ARRAY_COUNT(sBiasesSpecial); whichBias++)
     {
         s16 rval = Random() & 0xff;
         s16 value = sBiasProbabilities_Special[whichBias][sSlotMachine->machineId];
@@ -1876,7 +1876,7 @@ static u8 TrySelectBias_Regular(void)
 {
     s16 whichBias;
 
-    for (whichBias = 0; whichBias < (int)ARRAY_COUNT(sBiasesRegular); whichBias++)
+    for (whichBias = 0; whichBias < (s32)ARRAY_COUNT(sBiasesRegular); whichBias++)
     {
         s16 rval = Random() & 0xff;
         s16 value = sBiasProbabilities_Regular[whichBias][sSlotMachine->machineId];
@@ -3602,7 +3602,7 @@ static void ReelTime_WaitStartPikachu(struct Task *task)
 
 static void ReelTime_PikachuSpeedUp1(struct Task *task)
 {
-    int i;
+    s32 i;
     u8 pikachuAnimIds[ARRAY_COUNT(sReelTimePikachuAnimIds)];
     s16 reelTimeBoltDelays[ARRAY_COUNT(sReelTimeBoltDelays)];
     s16 pikachuAuraFlashDelays[ARRAY_COUNT(sPikachuAuraFlashDelays)];

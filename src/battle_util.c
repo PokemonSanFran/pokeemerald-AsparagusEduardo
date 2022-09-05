@@ -735,7 +735,7 @@ u8 GetBattlerForBattleScript(u8 caseId)
 
 void PressurePPLose(u8 target, u8 attacker, u16 move)
 {
-    int moveIndex;
+    s32 moveIndex;
 
     if (gBattleMons[target].ability != ABILITY_PRESSURE)
         return;
@@ -762,8 +762,8 @@ void PressurePPLose(u8 target, u8 attacker, u16 move)
 
 void PressurePPLoseOnUsingImprison(u8 attacker)
 {
-    int i, j;
-    int imprisonPos = MAX_MON_MOVES;
+    s32 i, j;
+    s32 imprisonPos = MAX_MON_MOVES;
     u8 atkSide = GetBattlerSide(attacker);
 
     for (i = 0; i < gBattlersCount; i++)
@@ -794,8 +794,8 @@ void PressurePPLoseOnUsingImprison(u8 attacker)
 
 void PressurePPLoseOnUsingPerishSong(u8 attacker)
 {
-    int i, j;
-    int perishSongPos = MAX_MON_MOVES;
+    s32 i, j;
+    s32 perishSongPos = MAX_MON_MOVES;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -826,7 +826,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker)
 // Unused
 static void MarkAllBattlersForControllerExec(void)
 {
-    int i;
+    s32 i;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
@@ -3237,7 +3237,7 @@ enum
 
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 {
-    int i = 0;
+    s32 i = 0;
     u8 effect = ITEM_NO_EFFECT;
     u8 changedPP = 0;
     u8 battlerHoldEffect, atkHoldEffect, defHoldEffect;
@@ -3980,7 +3980,7 @@ u8 IsMonDisobedient(void)
         if (calc < obedienceLevel && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY) && gBattleMons[gBattlerAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBattlerAttacker].ability != ABILITY_INSOMNIA)
         {
             // try putting asleep
-            int i;
+            s32 i;
             for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].status2 & STATUS2_UPROAR)

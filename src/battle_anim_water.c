@@ -52,7 +52,7 @@ static void CreateWaterSpoutLaunchDroplets(struct Task *, u8);
 static void CreateWaterSpoutRainDroplet(struct Task *, u8);
 static void AnimTask_WaterSport_Step(u8);
 static void CreateWaterSportDroplet(struct Task *);
-static void CreateWaterPulseRingBubbles(struct Sprite *, int, int);
+static void CreateWaterPulseRingBubbles(struct Sprite *, s32, s32);
 
 static const u8 sUnusedWater_Gfx[] = INCBIN_U8("graphics/battle_anims/unused/water_gfx.4bpp");
 static const u8 sUnusedWater[] = INCBIN_U8("graphics/battle_anims/unused/water.bin");
@@ -625,7 +625,7 @@ void AnimTask_RotateAuroraRingColors(u8 taskId)
 
 static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 {
-    int i;
+    s32 i;
     u16 palIndex;
 
     if (++gTasks[taskId].data[10] == 3)
@@ -1523,8 +1523,8 @@ void AnimWaterPulseRing(struct Sprite *sprite)
 
 static void AnimWaterPulseRing_Step(struct Sprite *sprite)
 {
-    int xDiff = sprite->data[1] - sprite->x;
-    int yDiff = sprite->data[2] - sprite->y;
+    s32 xDiff = sprite->data[1] - sprite->x;
+    s32 yDiff = sprite->data[2] - sprite->y;
 
     sprite->x2 = (sprite->data[0] * xDiff) / sprite->data[3];
     sprite->y2 = (sprite->data[0] * yDiff) / sprite->data[3];
@@ -1538,7 +1538,7 @@ static void AnimWaterPulseRing_Step(struct Sprite *sprite)
     sprite->data[0]++;
 }
 
-static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
+static void CreateWaterPulseRingBubbles(struct Sprite *sprite, s32 xDiff, s32 yDiff)
 {
     s16 combinedX;
     s16 combinedY;

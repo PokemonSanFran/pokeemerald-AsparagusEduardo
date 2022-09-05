@@ -5,20 +5,20 @@
 #include "list_menu.h"
 
 void ConvertInternationalPlayerName(u8 *src);
-void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language);
-int GetStringCenterAlignXOffset(int fontId, const u8 *str, int totalWidth);
-int GetStringRightAlignXOffset(int fontId, const u8 *str, int totalWidth);
-int GetStringCenterAlignXOffsetWithLetterSpacing(int fontId, const u8 *str, int totalWidth, int letterSpacing);
-int GetStringWidthDifference(int fontId, const u8 *str, int totalWidth, int letterSpacing);
-int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions);
-int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *actionIds, int numActions);
-int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu);
-void CopyMonCategoryText(int dexNum, u8 *dest);
-u8 *GetStringClearToWidth(u8 *dest, int fontId, const u8 *str, int totalStringWidth);
+void TVShowConvertInternationalString(u8 *dest, const u8 *src, s32 language);
+s32 GetStringCenterAlignXOffset(s32 fontId, const u8 *str, s32 totalWidth);
+s32 GetStringRightAlignXOffset(s32 fontId, const u8 *str, s32 totalWidth);
+s32 GetStringCenterAlignXOffsetWithLetterSpacing(s32 fontId, const u8 *str, s32 totalWidth, s32 letterSpacing);
+s32 GetStringWidthDifference(s32 fontId, const u8 *str, s32 totalWidth, s32 letterSpacing);
+s32 GetMaxWidthInMenuTable(const struct MenuAction *actions, s32 numActions);
+s32 GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *actionIds, s32 numActions);
+s32 Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu);
+void CopyMonCategoryText(s32 dexNum, u8 *dest);
+u8 *GetStringClearToWidth(u8 *dest, s32 fontId, const u8 *str, s32 totalStringWidth);
 void PadNameString(u8 *dest, u8 padChar);
 void ConvertInternationalPlayerNameStripChar(u8 *, u8);
 void ConvertInternationalContestantName(u8 *);
-int GetNicknameLanguage(u8 *);
-void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows);
+s32 GetNicknameLanguage(u8 *);
+void FillWindowTilesByRow(s32 windowId, s32 columnStart, s32 rowStart, s32 numFillTiles, s32 numRows);
 
 #endif // GUARD_INTERNATIONAL_STRING_UTIL_H

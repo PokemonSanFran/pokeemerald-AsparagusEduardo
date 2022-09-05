@@ -210,7 +210,7 @@ static void CB2_ExitWirelessCommunicationStatusScreen(void)
 {
     s32 i;
     FreeAllWindowBuffers();
-    for (i = 0; i < (int)ARRAY_COUNT(sBgTemplates); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sBgTemplates); i++)
     {
         Free(GetBgTilemapBuffer(i));
     }
@@ -237,7 +237,7 @@ static void PrintHeaderTexts(void)
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
     WCSS_AddTextPrinterParameterized(0, FONT_NORMAL, sHeaderTexts[0], GetStringCenterAlignXOffset(FONT_NORMAL, sHeaderTexts[0], 0xC0), 6, COLORMODE_GREEN);
-    for (i = 0; i < (int)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(*sHeaderTexts) - 1; i++)
     {
         WCSS_AddTextPrinterParameterized(1, FONT_NORMAL, sHeaderTexts[i + 1], 0, 30 * i + 8, COLORMODE_WHITE_LGRAY);
     }
@@ -349,7 +349,7 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
 
 static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * groupCounts)
 {
-    int i, j, k;
+    s32 i, j, k;
     u32 activity = player->rfu.data.activity;
 
     #define group_activity(i) (sActivityGroupInfo[(i)][0])

@@ -2431,7 +2431,7 @@ static struct ObjectEventTemplate *FindObjectEventTemplateByLocalId(u8 localId, 
 
 struct ObjectEventTemplate *GetBaseTemplateForObjectEvent(const struct ObjectEvent *objectEvent)
 {
-    int i;
+    s32 i;
 
     if (objectEvent->mapNum != gSaveBlock1Ptr->location.mapNum
      || objectEvent->mapGroup != gSaveBlock1Ptr->location.mapGroup)
@@ -8559,7 +8559,7 @@ static void SpriteCB_VirtualObject(struct Sprite *sprite)
 // Unused
 static void DestroyVirtualObjects(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
@@ -8569,9 +8569,9 @@ static void DestroyVirtualObjects(void)
     }
 }
 
-static int GetVirtualObjectSpriteId(u8 virtualObjId)
+static s32 GetVirtualObjectSpriteId(u8 virtualObjId)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < MAX_SPRITES; i++)
     {
@@ -8592,7 +8592,7 @@ void TurnVirtualObject(u8 virtualObjId, u8 direction)
 
 void SetVirtualObjectGraphics(u8 virtualObjId, u8 graphicsId)
 {
-    int spriteId = GetVirtualObjectSpriteId(virtualObjId);
+    s32 spriteId = GetVirtualObjectSpriteId(virtualObjId);
 
     if (spriteId != MAX_SPRITES)
     {

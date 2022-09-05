@@ -2211,8 +2211,8 @@ static void ClearRearrangementNonSprites(void)
     u8 i;
     u8 y;
     u8 x;
-    int posX;
-    int posY;
+    s32 posX;
+    s32 posY;
     u8 perm;
 
     for (i = 0; i < sCurDecorSelectedInRearrangement; i++)

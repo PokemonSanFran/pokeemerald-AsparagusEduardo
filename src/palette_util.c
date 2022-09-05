@@ -224,7 +224,7 @@ void InitPulseBlend(struct PulseBlend *pulseBlend)
         pulseBlend->pulseBlendPalettes[i].paletteSelector = i;
 }
 
-int InitPulseBlendPaletteSettings(struct PulseBlend *pulseBlend, const struct PulseBlendSettings *settings)
+s32 InitPulseBlendPaletteSettings(struct PulseBlend *pulseBlend, const struct PulseBlendSettings *settings)
 {
     u8 i = 0;
     struct PulseBlendPalette *pulseBlendPalette = NULL;

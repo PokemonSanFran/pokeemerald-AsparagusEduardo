@@ -1040,7 +1040,7 @@ static u16 GetPrizeItemId(void)
         trainerNumSum += sHillData->floors[i].trainerNum2;
     }
     prizeListSetId = trainerNumSum / 256;
-    prizeListSetId %= (int)ARRAY_COUNT(sPrizeListSets);
+    prizeListSetId %= (s32)ARRAY_COUNT(sPrizeListSets);
 
     // Now get which prize list to use from the set. See GetPrizeListId for details.
     // The below conditional will always be true, because a Trainer Hill challenge can't be entered

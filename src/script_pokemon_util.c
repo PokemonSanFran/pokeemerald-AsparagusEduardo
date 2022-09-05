@@ -61,7 +61,7 @@ void HealPlayerParty(void)
 u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
 {
     u16 nationalDexNum;
-    int sentToPc;
+    s32 sentToPc;
     u8 heldItem[2];
     struct Pokemon mon;
 
@@ -114,7 +114,7 @@ void HasEnoughMonsForDoubleBattle(void)
 
 static bool8 CheckPartyMonHasHeldItem(u16 item)
 {
-    int i;
+    s32 i;
 
     for(i = 0; i < PARTY_SIZE; i++)
     {
@@ -209,7 +209,7 @@ static void CB2_ReturnFromChooseBattleFrontierParty(void)
 void ReducePlayerPartyToSelectedMons(void)
 {
     struct Pokemon party[MAX_FRONTIER_PARTY_SIZE];
-    int i;
+    s32 i;
 
     CpuFill32(0, party, sizeof party);
 

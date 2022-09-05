@@ -1616,8 +1616,8 @@ static void CreateConditionSprite(void)
 {
     u16 i;
     s16 xDiff, xStart;
-    int yStart = 17;
-    int var = 8;
+    s32 yStart = 17;
+    s32 var = 8;
     struct Sprite **sprites = sMenu->condition;
     const struct SpriteTemplate *template = &sSpriteTemplate_Condition;
 

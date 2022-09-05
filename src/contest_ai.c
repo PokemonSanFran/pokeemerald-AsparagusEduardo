@@ -295,7 +295,7 @@ static u8 AIStackPop(void);
 
 void ContestAI_ResetAI(u8 contestantAI)
 {
-    int i;
+    s32 i;
     memset(&eContestAI, 0, sizeof(struct ContestAIInfo));
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -326,7 +326,7 @@ u8 ContestAI_GetActionToUse(void)
         // with the highest (or tied highest) score, return
         u8 moveIdx = Random() & (MAX_MON_MOVES - 1); // % MAX_MON_MOVES doesn't match
         u8 score = eContestAI.moveScores[moveIdx];
-        int i;
+        s32 i;
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (score < eContestAI.moveScores[i])
@@ -381,7 +381,7 @@ static void ContestAI_DoAIProcessing(void)
 
 static u8 GetContestantIdByTurn(u8 turn)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         if (eContestAppealResults.turnOrder[i] == turn)
@@ -810,7 +810,7 @@ static void ContestAICmd_if_move_effect_type_not_eq(void)
 
 static void ContestAICmd_check_most_appealing_move(void)
 {
-    int i;
+    s32 i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
     u8 appeal = gContestEffects[gContestMoves[move].effect].appeal;
 
@@ -841,7 +841,7 @@ static void ContestAICmd_if_most_appealing_move(void)
 
 static void ContestAICmd_check_most_jamming_move(void)
 {
-    int i;
+    s32 i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
     u8 jam = gContestEffects[gContestMoves[move].effect].jam;
 
@@ -1023,7 +1023,7 @@ static void ContestAICmd_if_most_used_count_not_eq(void)
 static void ContestAICmd_check_combo_starter(void)
 {
     u8 result = 0;
-    int i;
+    s32 i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1069,7 +1069,7 @@ static void ContestAICmd_if_not_combo_starter(void)
 static void ContestAICmd_check_combo_finisher(void)
 {
     u8 result = 0;
-    int i;
+    s32 i;
     u16 move = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1691,8 +1691,8 @@ static bool8 AIStackPop(void)
 
 static void ContestAICmd_check_user_has_exciting_move(void)
 {
-    int result = 0;
-    int i;
+    s32 result = 0;
+    s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1739,8 +1739,8 @@ static void ContestAICmd_if_user_doesnt_have_exciting_move(void)
 
 static void ContestAICmd_check_user_has_move(void)
 {
-    int hasMove = FALSE;
-    int i;
+    s32 hasMove = FALSE;
+    s32 i;
     u16 targetMove = T1_READ_16(gAIScriptPtr + 1);
 
     for (i = 0; i < MAX_MON_MOVES; i++)

@@ -139,7 +139,7 @@ static void ContestEffect_StartleFrontMon(void)
     u8 a = eContestAppealResults.contestant;
 
     if (eContestAppealResults.turnOrder[a] != 0) {
-        int i;
+        s32 i;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -163,7 +163,7 @@ static void ContestEffect_StartlePrevMons(void)
 
     if (eContestAppealResults.turnOrder[contestant] != 0)
     {
-        int i, j;
+        s32 i, j;
 
         for (i = 0, j = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -183,7 +183,7 @@ static void ContestEffect_StartlePrevMons(void)
 static void ContestEffect_StartlePrevMon2(void)
 {
     u8 rval = Random() % 10;
-    int jam;
+    s32 jam;
 
     if (rval < 2)
         jam = 20;
@@ -205,7 +205,7 @@ static void ContestEffect_StartlePrevMons2(void)
 
     if (turnOrder != 0)
     {
-        int i;
+        s32 i;
 
         for (i = 0; i < 4; i++)
         {
@@ -250,7 +250,7 @@ static void ContestEffect_ShiftJudgeAttention(void)
 
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
-        int i;
+        s32 i;
 
         for (i = 0; i < 4; i++)
         {
@@ -280,7 +280,7 @@ static void ContestEffect_StartleMonWithJudgesAttention(void)
 
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
-        int i;
+        s32 i;
 
         for (i = 0; i < 4; i++)
         {
@@ -360,7 +360,7 @@ static void ContestEffect_MakeFollowingMonNervous(void)
 
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 3)
     {
-        int i;
+        s32 i;
 
         for (i = 0; i < 4; i++)
         {
@@ -391,8 +391,8 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
     u8 numUnnerved = 0;
     bool32 contestantUnnerved = FALSE;
     u8 contestantIds[5];
-    int i;
-    int numAfter;
+    s32 i;
+    s32 numAfter;
     s16 oddsMod[CONTESTANT_COUNT];
     s16 odds[CONTESTANT_COUNT];
 
@@ -472,7 +472,7 @@ static void ContestEffect_MakeFollowingMonsNervous(void)
 static void ContestEffect_WorsenConditionOfPrevMons(void)
 {
     u8 numHit = 0;
-    int i;
+    s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -496,7 +496,7 @@ static void ContestEffect_WorsenConditionOfPrevMons(void)
 static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
 {
     u8 numHit = 0;
-    int i;
+    s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -542,8 +542,8 @@ static void ContestEffect_BetterIfLast(void)
 // Makes the appeal as good as those before it.
 static void ContestEffect_AppealAsGoodAsPrevOnes(void)
 {
-    int i;
-    int appealSum;
+    s32 i;
+    s32 appealSum;
 
     for (i = 0, appealSum = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -572,7 +572,7 @@ static void ContestEffect_AppealAsGoodAsPrevOne(void)
 
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
-        int i;
+        s32 i;
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] - 1 == eContestAppealResults.turnOrder[i])
@@ -680,7 +680,7 @@ static void ContestEffect_BetterIfDiffType(void)
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
         u16 move = eContestantStatus[eContestAppealResults.contestant].currMove;
-        int i;
+        s32 i;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -700,7 +700,7 @@ static void ContestEffect_AffectedByPrevAppeal(void)
 {
     if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] != 0)
     {
-        int i;
+        s32 i;
 
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
@@ -894,7 +894,7 @@ static void ContestEffect_ExciteAudienceInAnyContest(void)
 // Badly startles all POKéMON that made good appeals.
 static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
 {
-    int i;
+    s32 i;
     u8 numJammed = 0;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -965,8 +965,8 @@ static void ContestEffect_DontExciteAudience(void)
 
 static void JamByMoveCategory(u8 category)
 {
-    int i;
-    int numJammed = 0;
+    s32 i;
+    s32 numJammed = 0;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -1014,7 +1014,7 @@ static bool8 CanUnnerveContestant(u8 i)
 static bool8 WasAtLeastOneOpponentJammed(void)
 {
     s16 jamBuffer[CONTESTANT_COUNT] = {0};
-    int i;
+    s32 i;
 
     for (i = 0; eContestAppealResults.jamQueue[i] != 0xFF; i++)
     {

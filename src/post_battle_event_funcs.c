@@ -9,9 +9,9 @@
 #include "tv.h"
 #include "constants/heal_locations.h"
 
-int GameClear(void)
+s32 GameClear(void)
 {
-    int i;
+    s32 i;
     bool32 ribbonGet;
     struct RibbonCounter {
         u8 partyIndex;

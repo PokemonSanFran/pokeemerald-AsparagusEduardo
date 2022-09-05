@@ -218,7 +218,7 @@ static void SetTradePartyLiveStatuses(u8);
 static void GetTradePartyHPBarLevels(u8);
 static void SetTradePartyHPBarSprites(void);
 static void SaveTradeGiftRibbons(void);
-static u32 CanTradeSelectedMon(struct Pokemon *, int, int);
+static u32 CanTradeSelectedMon(struct Pokemon *, s32, s32);
 static void SpriteCB_LinkMonGlow(struct Sprite *);
 static void SpriteCB_LinkMonShadow(struct Sprite *);
 static void SpriteCB_CableEndSending(struct Sprite *);
@@ -375,7 +375,7 @@ void CB2_StartCreateTradeMenu(void)
 
 static void CB2_CreateTradeMenu(void)
 {
-    int i;
+    s32 i;
     struct SpriteTemplate temp;
     u8 id;
     u32 xPos;
@@ -639,7 +639,7 @@ static void CB2_CreateTradeMenu(void)
 
 static void CB2_ReturnToTradeMenu(void)
 {
-    int i;
+    s32 i;
     struct SpriteTemplate temp;
     u8 id;
     u32 xPos;
@@ -905,7 +905,7 @@ static void CB2_TradeMenu(void)
 
 static void LoadTradeBgGfx(u8 state)
 {
-    int i;
+    s32 i;
 
     switch (state)
     {
@@ -934,7 +934,7 @@ static void LoadTradeBgGfx(u8 state)
 
 static void SetTradePartyMonsVisible(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -978,7 +978,7 @@ static void Trade_Memcpy(void *dataDest, const void *dataSrc, u32 count)
 static bool8 BufferTradeParties(void)
 {
     u8 id = GetMultiplayerId();
-    int i;
+    s32 i;
     struct Pokemon *mon;
 
     switch (sTradeMenuData->bufferPartyState)
@@ -1314,7 +1314,7 @@ static void CB1_SendOrReactToLinkTradeData(void)
 
 static u8 GetNewTradeMenuPosition(u8 oldPosition, u8 direction)
 {
-    int i;
+    s32 i;
     u8 newPosition = 0;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -1488,7 +1488,7 @@ static void TradeMenuShowMonSummaryScreen(void)
 
 static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 playerMonIdx, u8 partnerMonIdx)
 {
-    int i;
+    s32 i;
     u16 partnerSpecies;
     u8 hasLiveMon = 0;
 
@@ -1524,7 +1524,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
 // Returns TRUE if the partner's selected mon is invalid, FALSE otherwise
 static bool32 CheckMonsBeforeTrade(void)
 {
-    int i;
+    s32 i;
     u8 aliveMons[PARTY_SIZE * 2];
 
     for (i = 0; i < sTradeMenuData->partyCounts[TRADE_PLAYER]; i++)
@@ -1578,7 +1578,7 @@ static void ConfirmOrCancelTrade(void)
 // Only when choosing Yes to cancel, when No is chosen all are redrawn anyway
 static void RestoreNicknamesCoveredByYesNo(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < sTradeMenuData->partyCounts[1] - 4; i++)
     {
@@ -1641,7 +1641,7 @@ static void DelayTradeConfirmation(void)
 
 static void RedrawTradeMenuAfterPressA(void)
 {
-    int i;
+    s32 i;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -2032,7 +2032,7 @@ static void DrawTradeMenuPartyInfo(u8 whichParty)
 
 static void ResetTradeMenuPartyPositions(u8 whichParty)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < sTradeMenuData->partyCounts[whichParty]; i++)
     {
@@ -2076,9 +2076,9 @@ static void Task_DrawSelectionTrade(u8 taskId)
 
 static void QueueAction(u16 delay, u8 actionId)
 {
-    int i;
+    s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sTradeMenuData->queuedActions); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sTradeMenuData->queuedActions); i++)
     {
         if (!sTradeMenuData->queuedActions[i].queued)
         {
@@ -2093,9 +2093,9 @@ static void QueueAction(u16 delay, u8 actionId)
 static u32 GetNumQueuedActions(void)
 {
     u32 numActions = 0;
-    int i;
+    s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sTradeMenuData->queuedActions); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sTradeMenuData->queuedActions); i++)
     {
         numActions += sTradeMenuData->queuedActions[i].queued;
     }
@@ -2105,9 +2105,9 @@ static u32 GetNumQueuedActions(void)
 
 static void DoQueuedActions(void)
 {
-    int i;
+    s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sTradeMenuData->queuedActions); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sTradeMenuData->queuedActions); i++)
     {
         if (sTradeMenuData->queuedActions[i].queued)
         {
@@ -2221,7 +2221,7 @@ static void DrawBottomRowText(const u8 *str, u8 *dest, u8 unused)
 
 static void SetTradePartyLiveStatuses(u8 whichParty)
 {
-    int i;
+    s32 i;
 
     switch (whichParty)
     {
@@ -2295,7 +2295,7 @@ static void GetTradePartyHPBarLevels(u8 who)
 
 static void SetTradePartyHPBarSprites(void)
 {
-    int i, j;
+    s32 i, j;
 
     for (i = 0; i < 2; i++)
     {
@@ -2308,9 +2308,9 @@ static void SetTradePartyHPBarSprites(void)
 
 static void SaveTradeGiftRibbons(void)
 {
-    int i;
+    s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sTradeMenuData->giftRibbons); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sTradeMenuData->giftRibbons); i++)
     {
         if (gSaveBlock1Ptr->giftRibbons[i] == 0 && sTradeMenuData->giftRibbons[i] != 0)
         {
@@ -2320,9 +2320,9 @@ static void SaveTradeGiftRibbons(void)
     }
 }
 
-static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int monIdx)
+static u32 CanTradeSelectedMon(struct Pokemon *playerParty, s32 partyCount, s32 monIdx)
 {
-    int i, numMonsLeft;
+    s32 i, numMonsLeft;
     struct LinkPlayer *player;
     u32 species[PARTY_SIZE];
     u32 species2[PARTY_SIZE];
@@ -2435,7 +2435,7 @@ static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isEventLegal)
     return FALSE;
 }
 
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isEventLegal)
+s32 GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isEventLegal)
 {
     bool8 playerHasNationalDex = player.hasNationalDex;
     bool8 playerIsChampion = player.isChampion;
@@ -2496,7 +2496,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     return UR_TRADE_MSG_NONE;
 }
 
-int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isEventLegal)
+s32 CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isEventLegal)
 {
     bool8 hasNationalDex = player.hasNationalDex;
 
@@ -2518,10 +2518,10 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
 
 // Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade
 // Unlike later generations, this version of Spin Trade isnt only for Eggs
-int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
+s32 CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
 {
-    int i, version, versions, canTradeAnyMon, numMonsLeft;
-    int speciesArray[PARTY_SIZE];
+    s32 i, version, versions, canTradeAnyMon, numMonsLeft;
+    s32 speciesArray[PARTY_SIZE];
 
     // Make Eggs not count for numMonsLeft
     for (i = 0; i < gPlayerPartyCount; i++)
@@ -2715,7 +2715,7 @@ static u32 TradeGetMultiplayerId(void)
 
 static void LoadTradeMonPic(u8 whichParty, u8 state)
 {
-    int pos = 0;
+    s32 pos = 0;
     struct Pokemon *mon = NULL;
     u16 species;
     u32 personality;

@@ -735,7 +735,7 @@ void SetContinueGameWarpToHealLocation(u8 healLocationId)
         SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->group, warp->map, WARP_ID_NONE, warp->x, warp->y);
 }
 
-void SetContinueGameWarpToDynamicWarp(int unused)
+void SetContinueGameWarpToDynamicWarp(s32 unused)
 {
     gSaveBlock1Ptr->continueGameWarp = gSaveBlock1Ptr->dynamicWarp;
 }

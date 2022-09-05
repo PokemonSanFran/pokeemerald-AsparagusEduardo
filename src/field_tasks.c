@@ -134,7 +134,7 @@ static const u16 sSootopolisGymIceRowVars[] =
 
 static void Task_RunPerStepCallback(u8 taskId)
 {
-    int idx = gTasks[taskId].tCallbackId;
+    s32 idx = gTasks[taskId].tCallbackId;
     sPerStepCallbacks[idx](taskId);
 }
 
@@ -872,7 +872,7 @@ static const u16 sMuddySlopeMetatiles[] = {
 };
 
 #define SLOPE_ANIM_TIME 32
-#define SLOPE_ANIM_STEP_TIME (SLOPE_ANIM_TIME / (int)ARRAY_COUNT(sMuddySlopeMetatiles))
+#define SLOPE_ANIM_STEP_TIME (SLOPE_ANIM_TIME / (s32)ARRAY_COUNT(sMuddySlopeMetatiles))
 
 static void SetMuddySlopeMetatile(s16 *data, s16 x, s16 y)
 {
@@ -890,7 +890,7 @@ static void SetMuddySlopeMetatile(s16 *data, s16 x, s16 y)
 static void Task_MuddySlope(u8 taskId)
 {
     s16 x, y, cameraOffsetX, cameraOffsetY;
-    int i;
+    s32 i;
     u16 mapId;
     s16 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);

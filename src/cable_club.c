@@ -430,10 +430,10 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
 
 bool32 AreBattleTowerLinkSpeciesSame(u16 *speciesList1, u16 *speciesList2)
 {
-    int i;
-    int j;
+    s32 i;
+    s32 j;
     bool32 haveSameSpecies = FALSE;
-    int numSameSpecies = 0;
+    s32 numSameSpecies = 0;
 
     gStringVar1[0] = EOS;
     gStringVar2[0] = EOS;
@@ -636,8 +636,8 @@ void ValidateMixingGameLanguage(void)
 
 static void Task_ValidateMixingGameLanguage(u8 taskId)
 {
-    int playerCount;
-    int i;
+    s32 playerCount;
+    s32 i;
 
     switch (gTasks[taskId].tState)
     {
@@ -809,7 +809,7 @@ void CableClubSaveGame(void)
     SaveGame();
 }
 
-static void SetLinkBattleTypeFlags(int linkService)
+static void SetLinkBattleTypeFlags(s32 linkService)
 {
     switch (linkService)
     {
@@ -878,7 +878,7 @@ static void Task_StartWiredCableClubBattle(u8 taskId)
 
 static void Task_StartWirelessCableClubBattle(u8 taskId)
 {
-    int i;
+    s32 i;
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
@@ -947,7 +947,7 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
 static void CB2_ReturnFromUnionRoomBattle(void)
 {
     u8 playerCount;
-    int i;
+    s32 i;
     bool32 linkedWithFRLG;
 
     switch (gMain.state)

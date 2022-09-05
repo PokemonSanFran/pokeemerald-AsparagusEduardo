@@ -354,7 +354,7 @@ struct StorageMessage
 struct StorageMenu
 {
     const u8 *text;
-    int textId;
+    s32 textId;
 };
 
 struct UnkUtilData
@@ -5947,7 +5947,7 @@ static void InitNewCursorPos(u8 newCursorArea, u8 newCursorPosition)
 
 static void InitCursorMove(void)
 {
-    int yDistance, xDistance;
+    s32 yDistance, xDistance;
 
     if (sStorage->cursorVerticalWrap != 0 || sStorage->cursorHorizontalWrap != 0)
         sStorage->cursorMoveSteps = 12;

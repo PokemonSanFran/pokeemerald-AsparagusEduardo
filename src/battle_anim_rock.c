@@ -390,7 +390,7 @@ static void AnimParticleInVortex_Step(struct Sprite *sprite)
 
 void AnimTask_LoadSandstormBackground(u8 taskId)
 {
-    int var0;
+    s32 var0;
     struct BattleAnimBgData animBg;
 
     var0 = 0;
@@ -558,7 +558,7 @@ void AnimTask_Rollout(u8 taskId)
 {
     u16 var0, var1, var2, var3;
     u8 rolloutCounter;
-    int var5;
+    s32 var5;
     s16 pan1, pan2;
     struct Task *task;
 
@@ -675,7 +675,7 @@ static void AnimTask_Rollout_Step(u8 taskId)
 static void CreateRolloutDirtSprite(struct Task *task)
 {
     const struct SpriteTemplate *spriteTemplate;
-    int tileOffset;
+    s32 tileOffset;
     u16 x, y;
     u8 spriteId;
 

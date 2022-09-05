@@ -4,8 +4,8 @@
 
 static u16 MultiBoot_required_data[MULTIBOOT_NCHILD];
 
-static int MultiBootSend(struct MultiBootParam *mp, u16 data);
-static int MultiBootHandShake(struct MultiBootParam *mp);
+static s32 MultiBootSend(struct MultiBootParam *mp, u16 data);
+static s32 MultiBootHandShake(struct MultiBootParam *mp);
 static void MultiBootWaitCycles(u32 cycles);
 static void MultiBootWaitSendDone(void);
 
@@ -25,11 +25,11 @@ void MultiBootInit(struct MultiBootParam *mp)
     REG_SIODATA8 = 0;
 }
 
-int MultiBootMain(struct MultiBootParam *mp)
+s32 MultiBootMain(struct MultiBootParam *mp)
 {
-    int i;
-    int j;
-    int k;
+    s32 i;
+    s32 j;
+    s32 k;
 
     if (MultiBootCheckComplete(mp))
     {
@@ -287,9 +287,9 @@ output_burst:
     }
 }
 
-static int MultiBootSend(struct MultiBootParam *mp, u16 data)
+static s32 MultiBootSend(struct MultiBootParam *mp, u16 data)
 {
-    int i;
+    s32 i;
 
     i = REG_SIOCNT & (SIO_MULTI_BUSY | SIO_MULTI_SD | SIO_MULTI_SI);
     if (i != SIO_MULTI_SD)
@@ -317,9 +317,9 @@ void MultiBootStartProbe(struct MultiBootParam *mp)
     mp->probe_count = 1;
 }
 
-void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, int length, u8 palette_color, s8 palette_speed)
+void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, s32 length, u8 palette_color, s8 palette_speed)
 {
-    int i = 0;
+    s32 i = 0;
 
     if (mp->probe_count != 0
      || mp->client_bit == 0
@@ -362,7 +362,7 @@ void MultiBootStartMaster(struct MultiBootParam *mp, const u8 *srcp, int length,
     mp->probe_count = 0xd0;
 }
 
-int MultiBootCheckComplete(struct MultiBootParam *mp)
+s32 MultiBootCheckComplete(struct MultiBootParam *mp)
 {
     if (mp->probe_count == 0xe9)
     {
@@ -372,9 +372,9 @@ int MultiBootCheckComplete(struct MultiBootParam *mp)
     return 0;
 }
 
-static int MultiBootHandShake(struct MultiBootParam *mp)
+static s32 MultiBootHandShake(struct MultiBootParam *mp)
 {
-    int i, j;
+    s32 i, j;
 
 #define send_data (mp->system_work[0])
 #define must_data (mp->system_work[1])
@@ -457,7 +457,7 @@ MultiBootWaitCyclesLoop:\n\
 
 static void MultiBootWaitSendDone(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 31069; i++)
     {

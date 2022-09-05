@@ -87,7 +87,7 @@ void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 void SetContinueGameWarpToHealLocation(u8 healLocationId);
-void SetContinueGameWarpToDynamicWarp(int unused);
+void SetContinueGameWarpToDynamicWarp(s32 unused);
 const struct MapConnection *GetMapConnection(u8 dir);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);

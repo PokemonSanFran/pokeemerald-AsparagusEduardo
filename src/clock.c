@@ -59,7 +59,7 @@ static void UpdatePerDay(struct Time *localTime)
 static void UpdatePerMinute(struct Time *localTime)
 {
     struct Time difference;
-    int minutes;
+    s32 minutes;
 
     CalcTimeDifference(&difference, &gSaveBlock2Ptr->lastBerryTreeUpdate, localTime);
     minutes = 24 * 60 * difference.days + 60 * difference.hours + difference.minutes;

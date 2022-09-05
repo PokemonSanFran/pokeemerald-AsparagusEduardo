@@ -44,7 +44,7 @@ struct EReaderData gEReaderData;
 extern const u8 gMultiBootProgram_EReader_Start[];
 extern const u8 gMultiBootProgram_EReader_End[];
 
-static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
+static void EReader_Load(struct EReaderData *eReader, s32 size, u32 *data)
 {
     volatile u16 backupIME = REG_IME;
     REG_IME = 0;

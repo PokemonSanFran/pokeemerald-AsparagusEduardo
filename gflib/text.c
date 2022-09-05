@@ -243,7 +243,7 @@ static void SetFontsPointer(const struct FontInfo *fonts)
 
 void DeactivateAllTextPrinters(void)
 {
-    int printer;
+    s32 printer;
     for (printer = 0; printer < NUM_TEXT_PRINTERS; ++printer)
         sTextPrinters[printer].active = FALSE;
 }
@@ -270,7 +270,7 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
 
 bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
 {
-    int i;
+    s32 i;
     u16 j;
 
     if (!gFonts)
@@ -282,7 +282,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     sTempTextPrinter.delayCounter = 0;
     sTempTextPrinter.scrollDistance = 0;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sTempTextPrinter.subStructFields); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sTempTextPrinter.subStructFields); i++)
         sTempTextPrinter.subStructFields[i] = 0;
 
     sTempTextPrinter.printerTemplate = *printerTemplate;
@@ -318,7 +318,7 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 
 void RunTextPrinters(void)
 {
-    int i;
+    s32 i;
 
     if (!gDisableTextPrinters)
     {
@@ -1190,8 +1190,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
     case RENDER_STATE_SCROLL:
         if (textPrinter->scrollDistance)
         {
-            int scrollSpeed = GetPlayerTextSpeed();
-            int speed = sWindowVerticalScrollSpeeds[scrollSpeed];
+            s32 scrollSpeed = GetPlayerTextSpeed();
+            s32 speed = sWindowVerticalScrollSpeeds[scrollSpeed];
             if (textPrinter->scrollDistance < speed)
             {
                 ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
@@ -1227,16 +1227,16 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 // Unused
 static u32 GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
 {
-    int i;
+    s32 i;
     u8 width;
-    int temp;
-    int temp2;
+    s32 temp;
+    s32 temp2;
     u8 line;
-    int strPos;
+    s32 strPos;
     u8 lineWidths[8];
     const u8 *strLocal;
 
-    for (i = 0; i < (int)ARRAY_COUNT(lineWidths); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(lineWidths); i++)
         lineWidths[i] = 0;
 
     width = 0;
@@ -1330,12 +1330,12 @@ static u32 (*GetFontWidthFunc(u8 fontId))(u16, bool32)
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
-    int minGlyphWidth;
+    s32 minGlyphWidth;
     u32 (*func)(u16 fontId, bool32 isJapanese);
-    int localLetterSpacing;
+    s32 localLetterSpacing;
     u32 lineWidth;
     const u8 *bufferPointer;
-    int glyphWidth;
+    s32 glyphWidth;
     s32 width;
 
     isJapanese = 0;
@@ -1503,9 +1503,9 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
 {
     u8 shadowColor;
     u8 *strLocal;
-    int strPos;
-    int temp;
-    int temp2;
+    s32 strPos;
+    s32 temp;
+    s32 temp2;
     u8 colorBackup[3];
     u8 fgColor;
     u8 bgColor;
@@ -1646,7 +1646,7 @@ void SetDefaultFontsPointer(void)
 
 u8 GetFontAttribute(u8 fontId, u8 attributeId)
 {
-    int result = 0;
+    s32 result = 0;
     switch (attributeId)
     {
         case FONTATTR_MAX_LETTER_WIDTH:

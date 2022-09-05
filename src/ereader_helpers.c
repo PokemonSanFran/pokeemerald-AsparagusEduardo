@@ -26,9 +26,9 @@ struct SendRecvMgr
     u8 checksumResult;     // EREADER_CHECKSUM_*
     u8 cancellationReason; // EREADER_CANCEL_*
     u32 *data;             // Payload source or destination
-    int cursor;            // Index of the next word
-    int size;              // Last word index
-    int checksum;
+    s32 cursor;            // Index of the next word
+    s32 size;              // Last word index
+    s32 checksum;
 };
 
 static void GetKeyInput(void);
@@ -380,7 +380,7 @@ static u8 GetTrainerHillUnkVal(void)
 
 static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTrainer)
 {
-    int checksum = CalcByteArraySum((u8 *)hillTrainer, offsetof(typeof(*hillTrainer), checksum));
+    s32 checksum = CalcByteArraySum((u8 *)hillTrainer, offsetof(typeof(*hillTrainer), checksum));
     if (checksum != hillTrainer->checksum)
         return FALSE;
 
@@ -391,7 +391,7 @@ bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
 {
     u32 i;
     u32 checksum;
-    int numTrainers = hillSet->numTrainers;
+    s32 numTrainers = hillSet->numTrainers;
 
     // Validate number of trainers
     if (numTrainers < 1 || numTrainers > NUM_TRAINER_HILL_TRAINERS)
@@ -415,7 +415,7 @@ bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
 static bool32 ValidateTrainerHillChecksum(struct EReaderTrainerHillSet *hillSet)
 {
     u32 checksum;
-    int numTrainers = hillSet->numTrainers;
+    s32 numTrainers = hillSet->numTrainers;
     if (numTrainers < 1 || numTrainers > NUM_TRAINER_HILL_TRAINERS)
         return FALSE;
 
@@ -428,7 +428,7 @@ static bool32 ValidateTrainerHillChecksum(struct EReaderTrainerHillSet *hillSet)
 
 static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet * hillSet, struct TrainerHillChallenge * challenge)
 {
-    int i;
+    s32 i;
 
     AGB_ASSERT_EX(hillSet->dummy == 0, "cereader_tool.c", 450);
     AGB_ASSERT_EX(hillSet->id == 0, "cereader_tool.c", 452);
@@ -501,10 +501,10 @@ bool32 ReadTrainerHillAndValidate(void)
     return result;
 }
 
-int EReader_Send(int size, const void * src)
+s32 EReader_Send(s32 size, const void * src)
 {
-    int result;
-    int sendStatus;
+    s32 result;
+    s32 sendStatus;
 
     EReaderHelper_SaveRegsState();
     while (1)
@@ -542,10 +542,10 @@ int EReader_Send(int size, const void * src)
     return result;
 }
 
-int EReader_Recv(void * dest)
+s32 EReader_Recv(void * dest)
 {
-    int result;
-    int recvStatus;
+    s32 result;
+    s32 recvStatus;
 
     EReaderHelper_SaveRegsState();
     while (1)
@@ -619,7 +619,7 @@ static void OpenSerial32(void)
     sCounter2 = 0;
 }
 
-int EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBuffer)
+s32 EReaderHandleTransfer(u8 mode, size_t size, const void * data, void * recvBuffer)
 {
     switch (sSendRecvMgr.state)
     {
@@ -846,7 +846,7 @@ static void DisableTm3(void)
 
 static void GetKeyInput(void)
 {
-    int rawKeys = REG_KEYINPUT ^ KEYS_MASK;
+    s32 rawKeys = REG_KEYINPUT ^ KEYS_MASK;
     sJoyNew = rawKeys & ~sJoyNewOrRepeated;
     sJoyNewOrRepeated = rawKeys;
 }

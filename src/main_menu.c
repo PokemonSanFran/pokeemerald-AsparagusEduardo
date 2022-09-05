@@ -1497,8 +1497,8 @@ static void Task_NewGameBirchSpeech_WaitToShowGenderMenu(u8 taskId)
 
 static void Task_NewGameBirchSpeech_ChooseGender(u8 taskId)
 {
-    int gender = NewGameBirchSpeech_ProcessGenderMenuInput();
-    int gender2;
+    s32 gender = NewGameBirchSpeech_ProcessGenderMenuInput();
+    s32 gender2;
 
     switch (gender)
     {
@@ -1921,7 +1921,7 @@ static void AddBirchSpeechObjects(u8 taskId)
 
 static void Task_NewGameBirchSpeech_FadeOutTarget1InTarget2(u8 taskId)
 {
-    int alphaCoeff2;
+    s32 alphaCoeff2;
 
     if (gTasks[taskId].tAlphaCoeff1 == 0)
     {
@@ -1960,7 +1960,7 @@ static void NewGameBirchSpeech_StartFadeOutTarget1InTarget2(u8 taskId, u8 delay)
 
 static void Task_NewGameBirchSpeech_FadeInTarget1OutTarget2(u8 taskId)
 {
-    int alphaCoeff2;
+    s32 alphaCoeff2;
 
     if (gTasks[taskId].tAlphaCoeff1 == 16)
     {

@@ -24,7 +24,7 @@ static u8 sDma3RequestCursor;
 
 void ClearDma3Requests(void)
 {
-    int i;
+    s32 i;
 
     sDma3ManagerLocked = TRUE;
     sDma3RequestCursor = 0;
@@ -97,8 +97,8 @@ void ProcessDma3Requests(void)
 
 s16 RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
 {
-    int cursor;
-    int i = 0;
+    s32 cursor;
+    s32 i = 0;
 
     sDma3ManagerLocked = TRUE;
     cursor = sDma3RequestCursor;
@@ -129,8 +129,8 @@ s16 RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
 
 s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
 {
-    int cursor;
-    int i = 0;
+    s32 cursor;
+    s32 i = 0;
 
     cursor = sDma3RequestCursor;
     sDma3ManagerLocked = TRUE;
@@ -162,7 +162,7 @@ s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
 
 s16 CheckForSpaceForDma3Request(s16 index)
 {
-    int i = 0;
+    s32 i = 0;
 
     if (index == -1)  // check if all requests are free
     {

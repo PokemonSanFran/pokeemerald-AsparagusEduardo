@@ -125,9 +125,9 @@ static void CopyValue32Bit(void)
 
 static void TaskFunc_UpdateWavePerFrame(u8 taskId)
 {
-    int value = 0;
-    int i;
-    int offset;
+    s32 value = 0;
+    s32 i;
+    s32 offset;
 
     if (sShouldStopWaveTask)
     {
@@ -213,8 +213,8 @@ static void GenerateWave(u16 *buffer, u8 frequency, u8 amplitude, u8 unused)
 // 'regOffset' is the offset of the video register to modify.
 u8 ScanlineEffect_InitWave(u8 startLine, u8 endLine, u8 frequency, u8 amplitude, u8 delayInterval, u8 regOffset, bool8 applyBattleBgOffsets)
 {
-    int i;
-    int offset;
+    s32 i;
+    s32 offset;
     struct ScanlineEffectParams params;
     u8 taskId;
 

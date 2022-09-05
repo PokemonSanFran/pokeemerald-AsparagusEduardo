@@ -46,7 +46,7 @@ static u8 GetMewObjectEventId(void)
 u32 GetMewMoveDirection(void)
 {
     u8 i;
-    int mewSafeFromTrap;
+    s32 mewSafeFromTrap;
     struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
     sPlayerToMewDeltaX = gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x - mew->currentCoords.x;

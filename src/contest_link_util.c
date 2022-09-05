@@ -32,7 +32,7 @@ static void Task_LinkContest_CalculateTurnOrderEm(u8);
 
 void Task_LinkContest_StartCommunicationEm(u8 taskId)
 {
-    int gameCleared;
+    s32 gameCleared;
 
     switch (gTasks[taskId].tCategory)
     {
@@ -79,7 +79,7 @@ static void Task_LinkContest_SetUpContestEm(u8 taskId)
 {
     u8 i;
     u8 rank;
-    int gameCleared;
+    s32 gameCleared;
     u8 categories[CONTESTANT_COUNT];
     u8 leaderIds[CONTESTANT_COUNT];
 
@@ -150,7 +150,7 @@ static void Task_LinkContest_CalculateTurnOrderEm(u8 taskId)
 
 static void Task_LinkContest_CommunicateMonsEm(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
@@ -226,7 +226,7 @@ static void Task_LinkContest_CommunicateRngEm(u8 taskId)
 
 static void Task_LinkContest_CommunicateLeaderIdsEm(u8 taskId)
 {
-    int i;
+    s32 i;
     u16 data[CONTESTANT_COUNT];
     u16 leaderId;
 
@@ -265,7 +265,7 @@ static void Task_LinkContest_CommunicateLeaderIdsEm(u8 taskId)
 
 static void Task_LinkContest_CommunicateCategoryEm(u8 taskId)
 {
-    int i;
+    s32 i;
     u16 data[CONTESTANT_COUNT];
     u16 category;
 
@@ -304,7 +304,7 @@ static void Task_LinkContest_CommunicateCategoryEm(u8 taskId)
 
 static void Task_LinkContest_CommunicateAIMonsEm(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;

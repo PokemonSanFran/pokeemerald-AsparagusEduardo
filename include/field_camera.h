@@ -16,9 +16,9 @@ extern u16 gTotalCameraPixelOffsetX;
 extern u16 gTotalCameraPixelOffsetY;
 
 void DrawWholeMapView(void);
-void CurrentMapDrawMetatileAt(int x, int y);
+void CurrentMapDrawMetatileAt(s32 x, s32 y);
 void GetCameraOffsetWithPan(s16 *x, s16 *y);
-void DrawDoorMetatileAt(int x, int y, u16 *arr);
+void DrawDoorMetatileAt(s32 x, s32 y, u16 *arr);
 void ResetFieldCamera(void);
 void ResetCameraUpdateInfo(void);
 u32 InitCameraUpdateCallback(u8 trackedSpriteId);

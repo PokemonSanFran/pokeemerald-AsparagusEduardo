@@ -623,7 +623,7 @@ void MauvilleGymPressSwitch(void)
 // Sets the gym barriers back to the default state; their alt state is handled by MauvilleCity_Gym_EventScript_SetAltBarriers
 void MauvilleGymSetDefaultBarriers(void)
 {
-    int x, y;
+    s32 x, y;
     // All switches/barriers are within these coord ranges
     for (y = 5 + MAP_OFFSET; y < 17 + MAP_OFFSET; y++)
     {
@@ -717,7 +717,7 @@ void MauvilleGymSetDefaultBarriers(void)
 // Presses all switches and deactivates all beams.
 void MauvilleGymDeactivatePuzzle(void)
 {
-    int i, x, y;
+    s32 i, x, y;
     const struct UCoords8 *switchCoords = sMauvilleGymSwitchCoords;
     for (i = ARRAY_COUNT(sMauvilleGymSwitchCoords) - 1; i >= 0; i--)
     {
@@ -1822,7 +1822,7 @@ static void Task_MoveElevator(u8 taskId)
 
 void ShowDeptStoreElevatorFloorSelect(void)
 {
-    int xPos;
+    s32 xPos;
 
     sTutorMoveAndElevatorWindowId = AddWindow(&gElevatorFloor_WindowTemplate);
     SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
@@ -1956,7 +1956,7 @@ bool8 UsedPokemonCenterWarp(void)
         0xFFFF
     };
 
-    int i;
+    s32 i;
     u16 map = (gLastUsedWarp.mapGroup << 8) + gLastUsedWarp.mapNum;
 
     for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)
@@ -2497,7 +2497,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
 
     if (task->tLeft + task->tWidth > MAX_MULTICHOICE_WIDTH + 1)
     {
-        int adjustedLeft = MAX_MULTICHOICE_WIDTH + 1 - task->tWidth;
+        s32 adjustedLeft = MAX_MULTICHOICE_WIDTH + 1 - task->tWidth;
         if (adjustedLeft < 0)
             task->tLeft = 0;
         else
@@ -3343,8 +3343,8 @@ bool8 ShouldShowBoxWasFullMessage(void)
 
 bool8 IsDestinationBoxFull(void)
 {
-    int box;
-    int i;
+    s32 box;
+    s32 i;
     SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
     box = StorageGetCurrentBox();
     do
@@ -3543,7 +3543,7 @@ u32 GetMartEmployeeObjectEventId(void)
 
 bool32 IsTrainerRegistered(void)
 {
-    int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
+    s32 index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (index >= 0)
     {
         if (FlagGet(FLAG_MATCH_CALL_REGISTERED + index) == TRUE)
@@ -3837,7 +3837,7 @@ bool8 InPokemonCenter(void)
         0xFFFF
     };
 
-    int i;
+    s32 i;
     u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
 
     for (i = 0; sPokemonCenters[i] != 0xFFFF; i++)

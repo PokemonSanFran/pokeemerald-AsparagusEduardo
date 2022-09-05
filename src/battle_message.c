@@ -2865,7 +2865,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_TABLE_START]);
             srcID += 3;
             break;
-        case B_BUFF_NUMBER: // int to string
+        case B_BUFF_NUMBER: // s32 to string
             switch (src[srcID + 1])
             {
             case 1:

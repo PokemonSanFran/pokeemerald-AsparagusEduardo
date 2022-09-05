@@ -435,7 +435,7 @@ static void AnimDefensiveWall(struct Sprite *sprite)
         u8 battlerCopy;
         u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         u8 rank = GetBattlerSpriteBGPriorityRank(battler);
-        int var0 = 1;
+        s32 var0 = 1;
         u8 toBG_2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))
@@ -515,7 +515,7 @@ static void AnimDefensiveWall_Step3(struct Sprite *sprite)
 {
     u16 color;
     u16 startOffset;
-    int i;
+    s32 i;
 
     if (++sprite->data[1] == 2)
     {
@@ -564,7 +564,7 @@ static void AnimDefensiveWall_Step5(struct Sprite *sprite)
         u8 battlerCopy;
         u8 battler = battlerCopy = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         u8 rank = GetBattlerSpriteBGPriorityRank(battler);
-        int var0 = 1;
+        s32 var0 = 1;
         bool8 toBG2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))

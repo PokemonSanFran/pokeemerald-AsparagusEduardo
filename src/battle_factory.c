@@ -223,8 +223,8 @@ static void InitFactoryChallenge(void)
 
 static void GetBattleFactoryData(void)
 {
-    int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
     {
@@ -242,8 +242,8 @@ static void GetBattleFactoryData(void)
 
 static void SetBattleFactoryData(void)
 {
-    int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
     switch (gSpecialVar_0x8005)
     {
@@ -302,10 +302,10 @@ static void SetPerformedRentalSwap(void)
 
 static void GenerateOpponentMons(void)
 {
-    int i, j, k;
+    s32 i, j, k;
     u16 species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
-    int firstMonId = 0;
+    s32 firstMonId = 0;
     u16 trainerId = 0;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
@@ -338,12 +338,12 @@ static void GenerateOpponentMons(void)
             continue;
 
         // Ensure none of the opponent's pokemon are the same as the potential rental pokemon for the player
-        for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
+        for (j = 0; j < (s32)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
         {
             if (gFacilityTrainerMons[monId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
                 break;
         }
-        if (j != (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons))
+        if (j != (s32)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons))
             continue;
 
         // "High tier" pokemon are only allowed on open level mode
@@ -402,8 +402,8 @@ static void SetRentalsToOpponentParty(void)
 
 static void SetPlayerAndOpponentParties(void)
 {
-    int i, j, k;
-    int count = 0;
+    s32 i, j, k;
+    s32 count = 0;
     u8 bits = 0;
     u8 monLevel;
     u16 monId;
@@ -508,7 +508,7 @@ static void SetPlayerAndOpponentParties(void)
 
 static void GenerateInitialRentalMons(void)
 {
-    int i, j;
+    s32 i, j;
     u8 firstMonId;
     u8 battleMode;
     u8 lvlMode;
@@ -751,11 +751,11 @@ u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
 
 void FillFactoryBrainParty(void)
 {
-    int i, j, k;
+    s32 i, j, k;
     u16 species[FRONTIER_PARTY_SIZE];
     u16 heldItems[FRONTIER_PARTY_SIZE];
     u8 friendship;
-    int monLevel;
+    s32 monLevel;
     u8 fixedIV;
     u32 otId;
 
@@ -776,12 +776,12 @@ void FillFactoryBrainParty(void)
         if (monLevel == FRONTIER_MAX_LEVEL_50 && monId > FRONTIER_MONS_HIGH_TIER)
             continue;
 
-        for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
+        for (j = 0; j < (s32)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
         {
             if (monId == gSaveBlock2Ptr->frontier.rentalMons[j].monId)
                 break;
         }
-        if (j != (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons))
+        if (j != (s32)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons))
             continue;
 
         for (k = 0; k < i; k++)
@@ -881,7 +881,7 @@ u8 GetNumPastRentalsRank(u8 battleMode, u8 lvlMode)
 
 u32 GetAiScriptsInBattleFactory(void)
 {
-    int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    s32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
     if (lvlMode == FRONTIER_LVL_TENT)
     {
@@ -889,8 +889,8 @@ u32 GetAiScriptsInBattleFactory(void)
     }
     else
     {
-        int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        int challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
+        s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+        s32 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
 
         if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
             return AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY;

@@ -282,7 +282,7 @@ static void LoadLinkTestBgGfx(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 ch
 // Unused
 static void LinkTestScreen(void)
 {
-    int i;
+    s32 i;
 
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -338,7 +338,7 @@ static void VBlankCB_LinkError(void)
 
 static void InitLink(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < CMD_LENGTH; i++)
         gSendCmd[i] = LINKCMD_NONE;
@@ -358,7 +358,7 @@ static void Task_TriggerHandshake(u8 taskId)
 
 void OpenLink(void)
 {
-    int i;
+    s32 i;
 
     if (!gWirelessCommType)
     {
@@ -500,8 +500,8 @@ u16 LinkMain2(const u16 *heldKeys)
 
 static void HandleReceiveRemoteLinkPlayer(u8 who)
 {
-    int i;
-    int count;
+    s32 i;
+    s32 count;
 
     count = 0;
     gRemoteLinkPlayersNotReceived[who] = FALSE;
@@ -749,9 +749,9 @@ u8 GetLinkPlayerCount(void)
     return EXTRACT_PLAYER_COUNT(gLinkStatus);
 }
 
-static int AreAnyLinkPlayersUsingVersions(u32 version1, u32 version2)
+static s32 AreAnyLinkPlayersUsingVersions(u32 version1, u32 version2)
 {
-    int i;
+    s32 i;
     u8 nPlayers;
 
     nPlayers = GetLinkPlayerCount();
@@ -790,7 +790,7 @@ bool32 Link_AnyPartnersPlayingRubyOrSapphire(void)
 
 bool32 Link_AnyPartnersPlayingFRLG_JP(void)
 {
-    int i;
+    s32 i;
 
     i = AreAnyLinkPlayersUsingVersions(VERSION_FIRE_RED, VERSION_LEAF_GREEN);
     if (i >= 0 && gLinkPlayers[i].language == LANGUAGE_JAPANESE)
@@ -807,10 +807,10 @@ void OpenLinkTimed(void)
     OpenLink();
 }
 
-u8 GetLinkPlayerDataExchangeStatusTimed(int minPlayers, int maxPlayers)
+u8 GetLinkPlayerDataExchangeStatusTimed(s32 minPlayers, s32 maxPlayers)
 {
-    int i;
-    int count;
+    s32 i;
+    s32 count;
     u32 index;
     u8 numPlayers;
     u32 linkType1;
@@ -915,7 +915,7 @@ u32 GetLinkPlayerTrainerId(u8 who)
 
 void ResetLinkPlayers(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i <= MAX_LINK_PLAYERS; i++)
         gLinkPlayers[i] = (struct LinkPlayer){};
@@ -964,7 +964,7 @@ static void LinkCB_BlockSendBegin(void)
 
 static void LinkCB_BlockSend(void)
 {
-    int i;
+    s32 i;
     const u8 *src;
 
     src = sBlockSend.src;
@@ -1078,7 +1078,7 @@ static void SetBlockReceivedFlag(u8 who)
 
 void ResetBlockReceivedFlags(void)
 {
-    int i;
+    s32 i;
 
     if (gWirelessCommType == TRUE)
     {
@@ -1141,7 +1141,7 @@ static void LinkTest_PrintChar(char val, u8 x, u8 y)
 static void LinkTest_PrintHex(u32 num, u8 x, u8 y, u8 length)
 {
     char buff[16];
-    int i;
+    s32 i;
 
     for (i = 0; i < length; i++)
     {
@@ -1155,11 +1155,11 @@ static void LinkTest_PrintHex(u32 num, u8 x, u8 y, u8 length)
     }
 }
 
-static void LinkTest_PrintInt(int num, u8 x, u8 y, u8 length)
+static void LinkTest_PrintInt(s32 num, u8 x, u8 y, u8 length)
 {
     char buff[16];
-    int negX;
-    int i;
+    s32 negX;
+    s32 i;
 
     negX = -1;
     if (num < 0)
@@ -1184,9 +1184,9 @@ static void LinkTest_PrintInt(int num, u8 x, u8 y, u8 length)
 
 static void LinkTest_PrintString(const char *str, u8 x, u8 y)
 {
-    int xOffset;
-    int i;
-    int yOffset;
+    s32 xOffset;
+    s32 i;
+    s32 yOffset;
 
     yOffset = 0;
     xOffset = 0;
@@ -1217,7 +1217,7 @@ static void LinkCB_RequestPlayerDataExchange(void)
 static void Task_PrintTestData(u8 taskId)
 {
     char testTitle[32];
-    int i;
+    s32 i;
 
     strcpy(testTitle, sASCIITestPrint);
     LinkTest_PrintString(testTitle, 5, 2);
@@ -1248,7 +1248,7 @@ void SetLinkDebugValues(u32 seed, u32 flags)
 
 u8 GetSavedLinkPlayerCountAsBitFlags(void)
 {
-    int i;
+    s32 i;
     u8 flags;
 
     flags = 0;
@@ -1260,7 +1260,7 @@ u8 GetSavedLinkPlayerCountAsBitFlags(void)
 
 u8 GetLinkPlayerCountAsBitFlags(void)
 {
-    int i;
+    s32 i;
     u8 flags;
 
     flags = 0;
@@ -1272,7 +1272,7 @@ u8 GetLinkPlayerCountAsBitFlags(void)
 
 void SaveLinkPlayers(u8 playerCount)
 {
-    int i;
+    s32 i;
 
     gSavedLinkPlayerCount = playerCount;
     gSavedMultiplayerId = GetMultiplayerId();
@@ -1295,7 +1295,7 @@ static u8 GetSavedMultiplayerId(void)
 
 bool8 DoesLinkPlayerCountMatchSaved(void)
 {
-    int i;
+    s32 i;
     u32 count = 0;
 
     for (i = 0; i < gSavedLinkPlayerCount; i++)
@@ -1325,7 +1325,7 @@ bool8 DoesLinkPlayerCountMatchSaved(void)
 
 void ClearSavedLinkPlayers(void)
 {
-    int i;
+    s32 i;
     // The CpuSet loop below is incorrectly writing to NULL
     // instead of sSavedLinkPlayers.
     // Additionally it's using the wrong array size.
@@ -1427,7 +1427,7 @@ static void LinkCB_ReadyCloseLink(void)
 
 static void LinkCB_WaitCloseLink(void)
 {
-    int i;
+    s32 i;
     unsigned count;
 
     // Wait for all players to be ready
@@ -1483,7 +1483,7 @@ static void LinkCB_ReadyCloseLinkWithJP(void)
 
 static void LinkCB_WaitCloseLinkWithJP(void)
 {
-    int i;
+    s32 i;
     unsigned count;
     u8 linkPlayerCount;
 

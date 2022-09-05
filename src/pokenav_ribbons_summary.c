@@ -313,7 +313,7 @@ static bool32 TrySelectRibbonDown(struct Pokenav_RibbonsSummaryList *list)
     if (list->numGiftRibbons != 0)
     {
         // In/beyond last of row of normal ribbons and gift ribbons present, move down to gift ribbon row
-        int ribbonPos = list->selectedPos - list->normalRibbonLastRowStart;
+        s32 ribbonPos = list->selectedPos - list->normalRibbonLastRowStart;
         if (ribbonPos >= list->numGiftRibbons)
             ribbonPos = list->numGiftRibbons - 1;
 
@@ -337,7 +337,7 @@ static bool32 TrySelectRibbonLeft(struct Pokenav_RibbonsSummaryList *list)
 
 static bool32 TrySelectRibbonRight(struct Pokenav_RibbonsSummaryList *list)
 {
-    int column = list->selectedPos % RIBBONS_PER_ROW;
+    s32 column = list->selectedPos % RIBBONS_PER_ROW;
 
     if (column >= RIBBONS_PER_ROW - 1)
         return FALSE;
@@ -504,7 +504,7 @@ static u16 GetSelectedPosition(void)
 static u32 GetRibbonId(void)
 {
     struct Pokenav_RibbonsSummaryList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST);
-    int ribbonPos = list->selectedPos;
+    s32 ribbonPos = list->selectedPos;
     if (ribbonPos < FIRST_GIFT_RIBBON)
         return list->ribbonIds[ribbonPos];
     else

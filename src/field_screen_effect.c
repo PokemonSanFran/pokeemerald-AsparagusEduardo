@@ -1070,7 +1070,7 @@ void DoSpinExitWarp(void)
 
 static void LoadOrbEffectPalette(bool8 blueOrb)
 {
-    int i;
+    s32 i;
     u16 color[1];
 
     if (!blueOrb)

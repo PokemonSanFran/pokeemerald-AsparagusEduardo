@@ -760,7 +760,7 @@ static void HealOneOrTwoMons(void)
 
 static void BufferNPCMessage(void)
 {
-    int speechId;
+    s32 speechId;
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum <= 4)
         speechId = sNPCTable[sNpcId].speechId1;
@@ -1383,7 +1383,7 @@ static void GetRoomTypeHint(void)
 
 static void PrepareOneTrainer(bool8 difficult)
 {
-    int i;
+    s32 i;
     u8 lvlMode;
     u8 battleNum;
     u16 challengeNum;
@@ -1415,7 +1415,7 @@ static void PrepareOneTrainer(bool8 difficult)
 
 static void PrepareTwoTrainers(void)
 {
-    int i;
+    s32 i;
     u16 trainerId;
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
@@ -1588,7 +1588,7 @@ static void SaveMonHeldItems(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        int heldItem = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
+        s32 heldItem = GetMonData(&gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1],
                                   MON_DATA_HELD_ITEM);
         gSaveBlock2Ptr->frontier.pikeHeldItemsBackup[i] = heldItem;
     }

@@ -10,37 +10,37 @@
 
 extern const struct PokedexEntry gPokedexEntries[];
 
-int GetStringCenterAlignXOffset(int fontId, const u8 *str, int totalWidth)
+s32 GetStringCenterAlignXOffset(s32 fontId, const u8 *str, s32 totalWidth)
 {
     return GetStringCenterAlignXOffsetWithLetterSpacing(fontId, str, totalWidth, 0);
 }
 
-int GetStringRightAlignXOffset(int fontId, const u8 *str, int totalWidth)
+s32 GetStringRightAlignXOffset(s32 fontId, const u8 *str, s32 totalWidth)
 {
     return GetStringWidthDifference(fontId, str, totalWidth, 0);
 }
 
-int GetStringCenterAlignXOffsetWithLetterSpacing(int fontId, const u8 *str, int totalWidth, int letterSpacing)
+s32 GetStringCenterAlignXOffsetWithLetterSpacing(s32 fontId, const u8 *str, s32 totalWidth, s32 letterSpacing)
 {
     return GetStringWidthDifference(fontId, str, totalWidth, letterSpacing) / 2;
 }
 
-int GetStringWidthDifference(int fontId, const u8 *str, int totalWidth, int letterSpacing)
+s32 GetStringWidthDifference(s32 fontId, const u8 *str, s32 totalWidth, s32 letterSpacing)
 {
-    int stringWidth = GetStringWidth(fontId, str, letterSpacing);
+    s32 stringWidth = GetStringWidth(fontId, str, letterSpacing);
     if (totalWidth > stringWidth)
         return totalWidth - stringWidth;
     else
         return 0;
 }
 
-int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions)
+s32 GetMaxWidthInMenuTable(const struct MenuAction *actions, s32 numActions)
 {
-    int i, maxWidth;
+    s32 i, maxWidth;
 
     for (maxWidth = 0, i = 0; i < numActions; i++)
     {
-        int stringWidth = GetStringWidth(FONT_NORMAL, actions[i].text, 0);
+        s32 stringWidth = GetStringWidth(FONT_NORMAL, actions[i].text, 0);
         if (stringWidth > maxWidth)
             maxWidth = stringWidth;
     }
@@ -48,13 +48,13 @@ int GetMaxWidthInMenuTable(const struct MenuAction *actions, int numActions)
     return ConvertPixelWidthToTileWidth(maxWidth);
 }
 
-int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *actionIds, int numActions)
+s32 GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *actionIds, s32 numActions)
 {
-    int i, maxWidth;
+    s32 i, maxWidth;
 
     for (maxWidth = 0, i = 0; i < numActions; i++)
     {
-        int stringWidth = GetStringWidth(FONT_NORMAL, actions[actionIds[i]].text, 0);
+        s32 stringWidth = GetStringWidth(FONT_NORMAL, actions[actionIds[i]].text, 0);
         if (stringWidth > maxWidth)
             maxWidth = stringWidth;
     }
@@ -62,15 +62,15 @@ int GetMaxWidthInSubsetOfMenuTable(const struct MenuAction *actions, const u8 *a
     return ConvertPixelWidthToTileWidth(maxWidth);
 }
 
-int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
+s32 Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
 {
-    int i, maxWidth, finalWidth;
+    s32 i, maxWidth, finalWidth;
     const struct ListMenuItem *items = listMenu->items;
 
     maxWidth = 0;
     for (i = 0; i < listMenu->totalItems; i++)
     {
-        int width = GetStringWidth(listMenu->fontId, items[i].name, 0);
+        s32 width = GetStringWidth(listMenu->fontId, items[i].name, 0);
         if (width > maxWidth)
             maxWidth = width;
     }
@@ -86,18 +86,18 @@ int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
     return finalWidth;
 }
 
-void CopyMonCategoryText(int dexNum, u8 *dest)
+void CopyMonCategoryText(s32 dexNum, u8 *dest)
 {
     u8 *str = StringCopy(dest, gPokedexEntries[dexNum].categoryName);
     *str = CHAR_SPACE;
     StringCopy(str + 1, gText_Pokemon);
 }
 
-u8 *GetStringClearToWidth(u8 *dest, int fontId, const u8 *str, int totalStringWidth)
+u8 *GetStringClearToWidth(u8 *dest, s32 fontId, const u8 *str, s32 totalStringWidth)
 {
     u8 *buffer;
-    int width;
-    int clearWidth;
+    s32 width;
+    s32 clearWidth;
 
     if (str)
     {
@@ -200,14 +200,14 @@ void ConvertInternationalContestantName(u8 *str)
     }
 }
 
-void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language)
+void TVShowConvertInternationalString(u8 *dest, const u8 *src, s32 language)
 {
     StringCopy(dest, src);
     ConvertInternationalString(dest, language);
 }
 
 // It's impossible to distinguish between Latin languages just from a string alone, so the function defaults to LANGUAGE_ENGLISH. This is the case in all of the versions of the game.
-int GetNicknameLanguage(u8 *str)
+s32 GetNicknameLanguage(u8 *str)
 {
     if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
         return LANGUAGE_JAPANESE;
@@ -216,10 +216,10 @@ int GetNicknameLanguage(u8 *str)
 }
 
 // Used by Pokénav's Match Call to erase the previous trainer's flavor text when switching between their info pages.
-void FillWindowTilesByRow(int windowId, int columnStart, int rowStart, int numFillTiles, int numRows)
+void FillWindowTilesByRow(s32 windowId, s32 columnStart, s32 rowStart, s32 numFillTiles, s32 numRows)
 {
     u8 *windowTileData;
-    int fillSize, windowRowSize, i;
+    s32 fillSize, windowRowSize, i;
     struct Window *window = &gWindows[windowId];
 
     fillSize = numFillTiles * TILE_SIZE_4BPP;

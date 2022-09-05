@@ -1221,7 +1221,7 @@ static void AddOptionDescriptionWindow(void)
 static void PrintCurrentOptionDescription(void)
 {
     struct Pokenav_MenuGfx * gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
-    int menuItem = GetCurrentMenuItemId();
+    s32 menuItem = GetCurrentMenuItemId();
     const u8 * desc = sPageDescriptions[menuItem];
     u32 width = GetStringWidth(FONT_NORMAL, desc, -1);
     FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
@@ -1356,9 +1356,9 @@ static void Task_CurrentMenuOptionGlow(u8 taskId)
 
 static void SetMenuOptionGlow(void)
 {
-    int menuType = GetPokenavMenuType();
-    int cursorPos = GetPokenavCursorPos();
-    int r4 = sPokenavMenuOptionLabelGfx[menuType].deltaY * cursorPos + sPokenavMenuOptionLabelGfx[menuType].yStart - 8;
+    s32 menuType = GetPokenavMenuType();
+    s32 cursorPos = GetPokenavCursorPos();
+    s32 r4 = sPokenavMenuOptionLabelGfx[menuType].deltaY * cursorPos + sPokenavMenuOptionLabelGfx[menuType].yStart - 8;
     CpuFill16(0, gScanlineEffectRegBuffers[0], DISPLAY_HEIGHT * 2);
     CpuFill16(0, gScanlineEffectRegBuffers[1], DISPLAY_HEIGHT * 2);
     CpuFill16(RGB(16, 23, 28), &gScanlineEffectRegBuffers[0][r4], 0x20);

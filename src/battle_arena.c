@@ -382,7 +382,7 @@ void CallBattleArenaFunction(void)
 
 u8 BattleArena_ShowJudgmentWindow(u8 *state)
 {
-    int i;
+    s32 i;
     u8 result = ARENA_RESULT_RUNNING;
     switch (*state)
     {
@@ -510,9 +510,9 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
 
 static void ShowJudgmentSprite(u8 x, u8 y, u8 category, u8 battler)
 {
-    int animNum = 0;
-    int pointsPlayer = 0;
-    int pointsOpponent = 0;
+    s32 animNum = 0;
+    s32 pointsPlayer = 0;
+    s32 pointsOpponent = 0;
     s8 *mindPoints = gBattleStruct->arenaMindPoints;
     s8 *skillPoints = gBattleStruct->arenaSkillPoints;
     u16 *hpAtStart = gBattleStruct->arenaStartHp;

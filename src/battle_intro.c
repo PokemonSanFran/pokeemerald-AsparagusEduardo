@@ -70,7 +70,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
     }
 }
 
-int GetAnimBgAttribute(u8 bgId, u8 attributeId)
+s32 GetAnimBgAttribute(u8 bgId, u8 attributeId)
 {
     u16 bgCnt;
 
@@ -153,7 +153,7 @@ static void BattleIntroSlideEnd(u8 taskId)
 
 static void BattleIntroSlide1(u8 taskId)
 {
-    int i;
+    s32 i;
 
     gBattle_BG1_X += 6;
     switch (gTasks[taskId].tState)
@@ -238,7 +238,7 @@ static void BattleIntroSlide1(u8 taskId)
 
 static void BattleIntroSlide2(u8 taskId)
 {
-    int i;
+    s32 i;
 
     switch (gTasks[taskId].tTerrain)
     {
@@ -350,7 +350,7 @@ static void BattleIntroSlide2(u8 taskId)
 
 static void BattleIntroSlide3(u8 taskId)
 {
-    int i;
+    s32 i;
 
     gBattle_BG1_X += 8;
     switch (gTasks[taskId].tState)
@@ -438,7 +438,7 @@ static void BattleIntroSlide3(u8 taskId)
 
 static void BattleIntroSlideLink(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (gTasks[taskId].tState > 1 && !gTasks[taskId].data[4])
     {
@@ -584,11 +584,11 @@ static void BattleIntroSlidePartner(u8 taskId)
     }
 }
 
-void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u16 *tilemap, u16 tilesOffset)
+void DrawBattlerOnBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u16 *tilemap, u16 tilesOffset)
 {
-    int i, j;
+    s32 i, j;
     u8 battler = GetBattlerAtPosition(battlerPosition);
-    int offset = tilesOffset;
+    s32 offset = tilesOffset;
     CpuCopy16(gMonSpritesGfxPtr->sprites.ptr[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], tiles, BG_SCREEN_SIZE);
     LoadBgTiles(bgId, tiles, 0x1000, tilesOffset);
     for (i = y; i < y + 8; i++)
@@ -604,7 +604,7 @@ void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 
 
 static void DrawBattlerOnBgDMA(u8 x, u8 y, u8 battlerPosition, u8 arg3, u8 paletteId, u16 arg5, u8 arg6, u8 arg7)
 {
-    int i, j, offset;
+    s32 i, j, offset;
 
     DmaCopy16(3, gMonSpritesGfxPtr->sprites.ptr[battlerPosition] + BG_SCREEN_SIZE * arg3, (void *)BG_SCREEN_ADDR(0) + arg5, BG_SCREEN_SIZE);
     offset = (arg5 >> 5) - (arg7 << 9);

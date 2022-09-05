@@ -7778,7 +7778,7 @@ static void Cmd_mimicattackcopy(void)
     }
     else
     {
-        int i;
+        s32 i;
 
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -9607,7 +9607,7 @@ static void Cmd_pickup(void)
                 if (lvlDivBy10 > 9)
                     lvlDivBy10 = 9;
 
-                for (j = 0; j < (int)ARRAY_COUNT(sPickupProbabilities); j++)
+                for (j = 0; j < (s32)ARRAY_COUNT(sPickupProbabilities); j++)
                 {
                     if (sPickupProbabilities[j] > rand)
                     {

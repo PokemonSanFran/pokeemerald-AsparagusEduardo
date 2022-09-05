@@ -1109,7 +1109,7 @@ const u8 *MatchCall_GetOverrideFlavorText(u32 idx, u32 offset)
     return NULL;
 }
 
-int MatchCall_GetOverrideFacilityClass(u32 idx)
+s32 MatchCall_GetOverrideFacilityClass(u32 idx)
 {
     u32 i;
 
@@ -1123,9 +1123,9 @@ int MatchCall_GetOverrideFacilityClass(u32 idx)
 
 bool32 MatchCall_HasRematchId(u32 idx)
 {
-    int i;
+    s32 i;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sMatchCallHeaders); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sMatchCallHeaders); i++)
     {
         u32 id = MatchCall_GetRematchTableIdx(i);
         if (id != REMATCH_TABLE_ENTRIES && id == idx)
@@ -1136,7 +1136,7 @@ bool32 MatchCall_HasRematchId(u32 idx)
 
 void SetMatchCallRegisteredFlag(void)
 {
-    int r0 = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
+    s32 r0 = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
     if (r0 >= 0)
         FlagSet(FLAG_MATCH_CALL_REGISTERED + r0);
 }

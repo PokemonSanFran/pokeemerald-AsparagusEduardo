@@ -4531,7 +4531,7 @@ static void SpriteCB_ShroomishExit(struct Sprite *sprite)
 // Handles both the screen shake and ball shadow effect for when Shroomish unsticks the ball
 static void SpriteCB_ShroomishShakeScreen(struct Sprite *sprite)
 {
-    int screenShakeIdx;
+    s32 screenShakeIdx;
     u16 screenShakeOffsets[][4] = {
         {-1, 0, 1, 0},
         {-2, 0, 2, 0},

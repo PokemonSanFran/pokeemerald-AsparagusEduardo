@@ -69,8 +69,8 @@ extern vu16 GPIOPortDirection;
 static u16 sDummy; // unused variable
 static bool8 sLocked;
 
-static int WriteCommand(u8 value);
-static int WriteData(u8 value);
+static s32 WriteCommand(u8 value);
+static s32 WriteData(u8 value);
 static u8 ReadData();
 
 static void EnableGpioPortRead();
@@ -384,7 +384,7 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-static int WriteCommand(u8 value)
+static s32 WriteCommand(u8 value)
 {
     u8 i;
     u8 temp;
@@ -405,7 +405,7 @@ static int WriteCommand(u8 value)
 #endif
 }
 
-static int WriteData(u8 value)
+static s32 WriteData(u8 value)
 {
     u8 i;
     u8 temp;

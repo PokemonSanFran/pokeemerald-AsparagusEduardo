@@ -382,7 +382,7 @@ static void ClearAllDaycareData(struct DayCare *daycare)
 // given species.
 static u16 GetEggSpecies(u16 species)
 {
-    int i, j, k;
+    s32 i, j, k;
     bool8 found;
 
     // Working backwards up to 5 times seems arbitrary, since the maximum number

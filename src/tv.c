@@ -88,7 +88,7 @@ static EWRAM_DATA u8 sTVSecretBaseSecretsRandomValues[3] = {};
 static void ClearPokeNews(void);
 static u8 GetTVGroupByShowId(u8);
 static u8 FindFirstActiveTVShowThatIsNotAMassOutbreak(void);
-static void SetTVMetatilesOnMap(int, int, u16);
+static void SetTVMetatilesOnMap(s32, s32, u16);
 static u8 FindAnyPokeNewsOnTheAir(void);
 static void TakeGabbyAndTyOffTheAir(void);
 static bool8 BernoulliTrial(u16 ratio);
@@ -824,7 +824,7 @@ u8 FindAnyTVShowOnTheAir(void)
     return slot;
 }
 
-void UpdateTVScreensOnMap(int width, int height)
+void UpdateTVScreensOnMap(s32 width, s32 height)
 {
     FlagSet(FLAG_SYS_TV_WATCH);
     switch (CheckForPlayersHouseNews())
@@ -852,10 +852,10 @@ void UpdateTVScreensOnMap(int width, int height)
     }
 }
 
-static void SetTVMetatilesOnMap(int width, int height, u16 metatileId)
+static void SetTVMetatilesOnMap(s32 width, s32 height, u16 metatileId)
 {
-    int x;
-    int y;
+    s32 x;
+    s32 y;
 
     for (y = 0; y < height; y++)
     {
@@ -2784,13 +2784,13 @@ void SetContestCategoryStringVarForInterview(void)
     CopyContestCategoryToStringVar(1, show->bravoTrainer.contestCategory);
 }
 
-void ConvertIntToDecimalString(u8 varIdx, int value)
+void ConvertIntToDecimalString(u8 varIdx, s32 value)
 {
-    int nDigits = CountDigits(value);
+    s32 nDigits = CountDigits(value);
     ConvertIntToDecimalStringN(gTVStringVarPtrs[varIdx], value, STR_CONV_MODE_LEFT_ALIGN, nDigits);
 }
 
-size_t CountDigits(int value)
+size_t CountDigits(s32 value)
 {
     if (value / 10 == 0)        return 1;
     if (value / 100 == 0)       return 2;
@@ -2807,7 +2807,7 @@ size_t CountDigits(int value)
 static void SmartShopper_BufferPurchaseTotal(u8 varIdx, TVShow *show)
 {
     u8 i;
-    int price = 0;
+    s32 price = 0;
     for (i = 0; i < SMARTSHOPPER_NUM_ITEMS; i++)
     {
         if (show->smartshopperShow.itemIds[i] != ITEM_NONE)
@@ -3963,7 +3963,7 @@ else \
 // Unused
 static void TranslateShowNames(TVShow *show, u32 language)
 {
-    int i;
+    s32 i;
     TVShow **shows;
 
     shows = calloc(11, sizeof(TVShow *));
@@ -4174,7 +4174,7 @@ static void TranslateJapaneseEmeraldShows(TVShow *shows)
 
 void SanitizeTVShowLocationsForRuby(TVShow *shows)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < LAST_TVSHOW_IDX; i++)
     {

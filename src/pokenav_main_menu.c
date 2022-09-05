@@ -471,7 +471,8 @@ void PokenavFillPalette(u32 palIndex, u16 fillValue)
     CpuFill16(fillValue, gPlttBufferFaded + 0x100 + (palIndex * 16), 16 * sizeof(u16));
 }
 
-void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, int a3, int a4, u16 *palette)
+// Changing size's int to s32 makes it not match.
+void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, s32 a3, s32 a4, u16 *palette)
 {
     if (a4 == 0)
     {
@@ -483,8 +484,8 @@ void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, int a3, int a
     }
     else
     {
-        int r, g, b;
-        int r1, g1, b1;
+        s32 r, g, b;
+        s32 r1, g1, b1;
         while (size--)
         {
             r = GET_R(*src);
@@ -539,9 +540,9 @@ void FadeToBlackExceptPrimary(void)
     BlendPalettes(PALETTES_ALL & ~(1 << 16 | 1), 16, RGB_BLACK);
 }
 
-void InitBgTemplates(const struct BgTemplate *templates, int count)
+void InitBgTemplates(const struct BgTemplate *templates, s32 count)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < count; i++)
         InitBgFromTemplate(templates++);

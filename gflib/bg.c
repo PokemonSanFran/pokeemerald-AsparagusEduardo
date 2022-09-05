@@ -68,7 +68,7 @@ u8 GetBgMode(void)
 
 void ResetBgControlStructs(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < NUM_BACKGROUNDS; i++)
     {
@@ -291,14 +291,14 @@ bool8 IsInvalidBg(u8 bg)
 }
 
 // From FRLG. Dummied out.
-int BgTileAllocOp(int bg, int offset, int count, int mode)
+s32 BgTileAllocOp(s32 bg, s32 offset, s32 count, s32 mode)
 {
     return 0;
 }
 
 void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
 {
-    int i;
+    s32 i;
     ResetBgs();
 
     for (i = 0; i < NUM_BACKGROUNDS; i++)
@@ -311,7 +311,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
 
 void InitBgsFromTemplates(u8 bgMode, const struct BgTemplate *templates, u8 numTemplates)
 {
-    int i;
+    s32 i;
     u8 bg;
 
     SetBgModeInternal(bgMode);
@@ -441,7 +441,7 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
 
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < 0x80; i++)
     {

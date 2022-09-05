@@ -2380,7 +2380,7 @@ static u8 GetNewBerryIdByDifficulty(u8 difficulty, u8 column)
 
 static bool32 IsTotalBerriesMissedOver10(u16 berryResults[MAX_RFU_PLAYERS][NUM_BERRY_IDS])
 {
-    int missed = 0, i = 0;
+    s32 missed = 0, i = 0;
     for (; i < GetLinkPlayerCount(); missed += berryResults[i][BERRY_MISSED], i++)
         ;
 
@@ -2902,7 +2902,7 @@ static u8 GetPlayerIdByPos(u8 id)
 
 void IsDodrioInParty(void)
 {
-    int i;
+    s32 i;
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES)

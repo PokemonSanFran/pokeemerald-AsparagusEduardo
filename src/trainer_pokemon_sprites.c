@@ -45,7 +45,7 @@ static void DummyPicSpriteCallback(struct Sprite *sprite)
 
 bool16 ResetAllPicSprites(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < PICS_COUNT; i ++)
         sSpritePics[i] = sDummyPicData;
@@ -138,7 +138,7 @@ static u16 CreatePicSprite(u16 species, u32 otId, u32 personality, bool8 isFront
     u8 i;
     u8 *framePics;
     struct SpriteFrameImage *images;
-    int j;
+    s32 j;
     u8 spriteId;
 
     for (i = 0; i < PICS_COUNT; i ++)
@@ -196,7 +196,7 @@ u16 CreateMonPicSprite_Affine(u16 species, u32 otId, u32 personality, u8 flags, 
 {
     u8 *framePics;
     struct SpriteFrameImage *images;
-    int j;
+    s32 j;
     u8 i;
     u8 spriteId;
     u8 type;

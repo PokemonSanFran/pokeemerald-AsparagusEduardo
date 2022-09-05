@@ -105,8 +105,8 @@ struct ContestResultsInternal
 
 struct ContestMonResults
 {
-    int relativePreliminaryPoints;
-    int relativeRound2Points;
+    s32 relativePreliminaryPoints;
+    s32 relativeRound2Points;
     u32 barLengthPreliminary;
     u32 barLengthRound2;
     bool8 lostPoints;
@@ -129,7 +129,7 @@ static void LoadAllContestMonIconPalettes(void);
 static void LoadContestResultsTitleBarTilemaps(void);
 static u8 GetNumPreliminaryPoints(u8, bool8);
 static s8 GetNumRound2Points(u8, bool8);
-static void AddContestTextPrinter(int, u8 *, int);
+static void AddContestTextPrinter(s32, u8 *, s32);
 static void AllocContestResults(void);
 static void FreeContestResults(void);
 static void LoadAllContestMonIcons(u8, u8);
@@ -401,12 +401,12 @@ static const u8 sContestLinkTextColors[4] = {TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLO
 
 static void InitContestResultsDisplay(void)
 {
-    int i;
+    s32 i;
 
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
-    for (i = 0; i < (int)ARRAY_COUNT(sContestResults->tilemapBuffers); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sContestResults->tilemapBuffers); i++)
         SetBgTilemapBuffer(i, sContestResults->tilemapBuffers[i]);
 
     InitWindows(sWindowTemplates);
@@ -446,7 +446,7 @@ static void InitContestResultsDisplay(void)
 
 static void LoadContestResultsBgGfx(void)
 {
-    int i, j;
+    s32 i, j;
     s8 numStars, round2Points;
     u16 tile1, tile2;
 
@@ -511,7 +511,7 @@ static void LoadContestMonName(u8 monIndex)
 
 static void LoadAllContestMonNames(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         LoadContestMonName(i);
@@ -814,7 +814,7 @@ static void Task_ShowRound2Results(u8 taskId)
 
 static void Task_AnnounceWinner(u8 taskId)
 {
-    int i;
+    s32 i;
     switch (gTasks[taskId].tState)
     {
     case 0:
@@ -875,7 +875,7 @@ static void Task_AnnounceWinner(u8 taskId)
 
 static void Task_ShowWinnerMonBanner(u8 taskId)
 {
-    int i;
+    s32 i;
     u8 spriteId;
     u16 species;
     u32 otId;
@@ -976,7 +976,7 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
 
 static void Task_SetSeenWinnerMon(u8 taskId)
 {
-    int i, nationalDexNum;
+    s32 i, nationalDexNum;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -1130,7 +1130,7 @@ static void LoadContestMonIcon(u16 species, u8 monIndex, u8 srcOffset, u8 useDma
 
 static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
         LoadContestMonIcon(gContestMons[i].species, i, srcOffset, useDmaNow, gContestMons[i].personality);
@@ -1138,7 +1138,7 @@ static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
 
 static void LoadAllContestMonIconPalettes(void)
 {
-    int i, species;
+    s32 i, species;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -1167,8 +1167,8 @@ static void TryCreateWirelessSprites(void)
 static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 {
     u16 windowId;
-    int origWidth;
-    int strWidth;
+    s32 origWidth;
+    s32 strWidth;
     u8 *spriteTilePtrs[4];
     u8 *dst;
 
@@ -1195,10 +1195,10 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
         sprite = &gSprites[spriteId];
         spriteTilePtrs[0] = (u8 *)(sprite->oam.tileNum * 32 + OBJ_VRAM0);
 
-        for (i = 1; i < (int)ARRAY_COUNT(spriteTilePtrs); i++)
+        for (i = 1; i < (s32)ARRAY_COUNT(spriteTilePtrs); i++)
             spriteTilePtrs[i] = (void *)(gSprites[sprite->data[i - 1]].oam.tileNum * 32 + OBJ_VRAM0);
 
-        for (i = 0; i < (int)ARRAY_COUNT(spriteTilePtrs); i++)
+        for (i = 0; i < (s32)ARRAY_COUNT(spriteTilePtrs); i++)
             CpuFill32(0, spriteTilePtrs[i], 0x400);
 
         dst = spriteTilePtrs[0];
@@ -1230,18 +1230,18 @@ static s32 DrawResultsTextWindow(const u8 *text, u8 spriteId)
 
 static void CreateResultsTextWindowSprites(void)
 {
-    int i;
+    s32 i;
     struct SpriteTemplate template;
     u8 spriteIds[ARRAY_COUNT(sSpriteSheets_ResultsTextWindow)];
 
     template = sSpriteTemplate_ResultsTextWindow;
-    for (i = 0; i < (int)ARRAY_COUNT(sSpriteSheets_ResultsTextWindow); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sSpriteSheets_ResultsTextWindow); i++)
         LoadSpriteSheet(&sSpriteSheets_ResultsTextWindow[i]);
 
     LoadSpritePalette(&sSpritePalette_ResultsTextWindow);
 
     // Create sprites for the two window types, each made up of 4 sprites
-    for (i = 0; i < (int)ARRAY_COUNT(sSpriteSheets_ResultsTextWindow); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sSpriteSheets_ResultsTextWindow); i++)
     {
         spriteIds[i] = CreateSprite(&template, TEXT_BOX_X, TEXT_BOX_Y, 10);
         template.tileTag++;
@@ -1309,7 +1309,7 @@ static void EndTextBoxSlideOut(struct Sprite *sprite)
 
 static void SpriteCB_TextBoxSlideIn(struct Sprite *sprite)
 {
-    int i;
+    s32 i;
 
     s16 delta = sprite->sDistance + sprite->sSlideIncrement;
     sprite->x -= delta >> 8;
@@ -1342,7 +1342,7 @@ static void SpriteCB_EndTextBoxSlideIn(struct Sprite *sprite)
 
 static void SpriteCB_TextBoxSlideOut(struct Sprite *sprite)
 {
-    int i;
+    s32 i;
     s16 delta;
 
     delta = sprite->sDistance + sprite->sSlideIncrement;
@@ -1361,7 +1361,7 @@ static void SpriteCB_TextBoxSlideOut(struct Sprite *sprite)
 
 static void ShowLinkResultsTextBox(const u8 *text)
 {
-    int i;
+    s32 i;
     u16 x;
     struct Sprite *sprite;
 
@@ -1385,7 +1385,7 @@ static void ShowLinkResultsTextBox(const u8 *text)
 
 static void HideLinkResultsTextBox(void)
 {
-    int i;
+    s32 i;
     struct Sprite *sprite;
 
     sprite = &gSprites[sContestResults->data->linkTextBoxSpriteId];
@@ -1404,7 +1404,7 @@ static void HideLinkResultsTextBox(void)
 static void LoadContestResultsTitleBarTilemaps(void)
 {
     u8 palette;
-    int x, y;
+    s32 x, y;
 
     x = 5;
     y = 1;
@@ -1547,7 +1547,7 @@ static void Task_DrawFinalStandingNumber(u8 taskId)
 
 static void Task_StartHighlightWinnersBox(u8 taskId)
 {
-    int i;
+    s32 i;
     GET_CONTEST_WINNER_ID(i);
     CopyToBgTilemapBufferRect_ChangePalette(2, i * 0xC0 + 0x100 + sContestResults->tilemapBuffers[2], 0, i * 3 + 4, 32, 3, 9);
     gTasks[taskId].data[10] = i;
@@ -1692,7 +1692,7 @@ static void Task_BounceMonIconInBox(u8 taskId)
 
 static void CalculateContestantsResultData(void)
 {
-    int i, relativePoints;
+    s32 i, relativePoints;
     u32 barLength;
     s16 highestPoints;
     s8 round2Points;
@@ -1768,7 +1768,7 @@ static void CalculateContestantsResultData(void)
 
 static void UpdateContestResultBars(bool8 isRound2, u8 numUpdates)
 {
-    int i, taskId;
+    s32 i, taskId;
     u32 target;
     u8 numIncreasing = 0, numDecreasing = 0;
 
@@ -1837,7 +1837,7 @@ static void UpdateContestResultBars(bool8 isRound2, u8 numUpdates)
 
 static void Task_UpdateContestResultBar(u8 taskId)
 {
-    int i;
+    s32 i;
     bool32 minMaxReached = FALSE;
     bool32 targetReached = FALSE;
     u8 monId = gTasks[taskId].tMonId;
@@ -1934,7 +1934,7 @@ static void FreeContestResults(void)
     FreeMonSpritesGfx();
 }
 
-static void AddContestTextPrinter(int windowId, u8 *str, int x)
+static void AddContestTextPrinter(s32 windowId, u8 *str, s32 x)
 {
     struct TextPrinterTemplate textPrinter;
     textPrinter.currentChar = str;
@@ -2235,7 +2235,7 @@ static void Task_LinkContest_CalculateTurnOrderRS(u8 taskId)
 
 u8 LinkContest_GetLeaderIndex(u8 *ids)
 {
-    int i;
+    s32 i;
     u8 leaderIdx = 0;
 
     for (i = 1; i < gNumLinkContestPlayers; i++)
@@ -2249,7 +2249,7 @@ u8 LinkContest_GetLeaderIndex(u8 *ids)
 
 void Task_LinkContest_FinalizeConnection(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (gSpecialVar_0x8004 == TRUE)
     {
@@ -2331,7 +2331,7 @@ void BufferContestTrainerAndMonNames(void)
 // Unused
 void DoesContestCategoryHaveMuseumPainting(void)
 {
-    int contestWinner;
+    s32 contestWinner;
     switch (gSpecialVar_ContestCategory)
     {
     case CONTEST_CATEGORY_COOL:
@@ -2379,7 +2379,7 @@ void ShouldReadyContestArtist(void)
 
 u8 CountPlayerMuseumPaintings(void)
 {
-    int i;
+    s32 i;
     u8 count = 0;
 
     for (i = 0; i < NUM_CONTEST_WINNERS - MUSEUM_CONTEST_WINNERS_START; i++)
@@ -2395,7 +2395,7 @@ u8 CountPlayerMuseumPaintings(void)
 void GetContestantNamesAtRank(void)
 {
     s16 conditions[CONTESTANT_COUNT];
-    int i, j;
+    s32 i, j;
     s16 condition;
     s8 numAtCondition;
     u8 contestantOffset;
@@ -2413,7 +2413,7 @@ void GetContestantNamesAtRank(void)
         {
             if (conditions[j - 1] < conditions[j])
             {
-                int temp;
+                s32 temp;
                 SWAP(conditions[j], conditions[j - 1], temp)
             }
         }
@@ -2482,13 +2482,13 @@ void ShowContestPainting(void)
 
 void SetLinkContestPlayerGfx(void)
 {
-    int i;
+    s32 i;
 
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
-            int version = (u8)gLinkPlayers[i].version;
+            s32 version = (u8)gLinkPlayers[i].version;
             if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
             {
                 if (gLinkPlayers[i].gender == MALE)
@@ -2507,9 +2507,9 @@ void SetLinkContestPlayerGfx(void)
 
 void LoadLinkContestPlayerPalettes(void)
 {
-    int i;
+    s32 i;
     u8 objectEventId;
-    int version;
+    s32 version;
     struct Sprite *sprite;
     static const u8 sContestantLocalIds[CONTESTANT_COUNT] = { 3, 4, 5, 14 };
 

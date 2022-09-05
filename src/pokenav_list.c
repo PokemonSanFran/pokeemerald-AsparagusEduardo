@@ -352,7 +352,7 @@ static struct PokenavListWindowState *GetPokenavListWindowState(void)
     return &list->windowState;
 }
 
-int PokenavList_MoveCursorUp(void)
+s32 PokenavList_MoveCursorUp(void)
 {
     struct PokenavListWindowState *windowState = GetPokenavListWindowState();
 
@@ -369,7 +369,7 @@ int PokenavList_MoveCursorUp(void)
     return 0;
 }
 
-int PokenavList_MoveCursorDown(void)
+s32 PokenavList_MoveCursorDown(void)
 {
     struct PokenavListWindowState *windowState = GetPokenavListWindowState();
 
@@ -388,7 +388,7 @@ int PokenavList_MoveCursorDown(void)
     return 0;
 }
 
-int PokenavList_PageUp(void)
+s32 PokenavList_PageUp(void)
 {
     s32 scroll;
     struct PokenavListWindowState *windowState = GetPokenavListWindowState();
@@ -410,7 +410,7 @@ int PokenavList_PageUp(void)
     return 0;
 }
 
-int PokenavList_PageDown(void)
+s32 PokenavList_PageDown(void)
 {
     struct PokenavListWindowState *windowState = GetPokenavListWindowState();
 

@@ -7,7 +7,7 @@
 #include "data/bard_music/default_sound.h"
 #include "data/bard_music/length_table.h"
 
-static s16 CalcWordPitch(int pitchIdx, int songPos)
+static s16 CalcWordPitch(s32 pitchIdx, s32 songPos)
 {
     return sBardSoundPitchTables[pitchIdx][songPos];
 }
@@ -44,7 +44,7 @@ const struct BardSound *GetWordSounds(u16 word)
 
 void GetWordPhonemes(struct BardSong *song, u16 word)
 {
-    int i;
+    s32 i;
     const struct BardSound *sound;
 
     song->length = 0;

@@ -58,7 +58,7 @@ static const u8 sSSTidalSailWestMovementScript[] =
 
 static void Task_Truck3(u8);
 
-static s16 GetTruckCameraBobbingY(int time)
+static s16 GetTruckCameraBobbingY(s32 time)
 {
     if (!(time % 120))
         return -1;
@@ -76,7 +76,7 @@ static s16 GetTruckCameraBobbingY(int time)
 // Box 1 has 30 added to the time so it jumps earlier, and
 // box 2 has the return value multiplied by less, so it doesn't
 // jump as high.
-static s16 GetTruckBoxYMovement(int time)
+static s16 GetTruckBoxYMovement(s32 time)
 {
     if (!((time + 120) % 180))
         return -1;

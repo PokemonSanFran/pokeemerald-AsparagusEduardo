@@ -58,8 +58,8 @@ struct EasyChatScreenControl
     u8 phrasePrintBuffer[193];
     u8 wordSelectPrintBuffer[514];
     u16 scrollOffset;
-    int scrollDest;
-    int scrollSpeed;
+    s32 scrollDest;
+    s32 scrollSpeed;
     struct Sprite *mainCursorSprite;
     struct Sprite *rectangleCursorSpriteRight;
     struct Sprite *rectangleCursorSpriteLeft;
@@ -86,8 +86,8 @@ struct EasyChatPhraseFrameDimensions
 struct EasyChatWordInfo
 {
     const u8 *text;
-    int alphabeticalOrder;
-    int enabled;
+    s32 alphabeticalOrder;
+    s32 enabled;
 };
 
 typedef union
@@ -117,13 +117,13 @@ struct EasyChatScreenWordData
 struct EasyChatWordsByLetter
 {
     const u16 *words;
-    int numWords;
+    s32 numWords;
 };
 
 void InitEasyChatPhrases(void);
 void ShowEasyChatScreen(void);
 u8 * CopyEasyChatWord(u8 *dest, u16 word);
-bool32 IsEasyChatAnswerUnlocked(int word);
+bool32 IsEasyChatAnswerUnlocked(s32 word);
 void InitializeEasyChatWordArray(u16 *words, u16 length);
 u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows);
 bool8 IsBardWordInvalid(u16 word);

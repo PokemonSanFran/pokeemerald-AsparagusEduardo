@@ -28,7 +28,7 @@ static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
 
 static bool32 AllMonsFainted(void)
 {
-    int i;
+    s32 i;
     struct Pokemon *pokemon = gPlayerParty;
 
     for (i = 0; i < PARTY_SIZE; i++, pokemon++)
@@ -115,7 +115,7 @@ void TryFieldPoisonWhiteOut(void)
 
 s32 DoPoisonFieldEffect(void)
 {
-    int i;
+    s32 i;
     u32 hp;
     struct Pokemon *pokemon = gPlayerParty;
     u32 numPoisoned = 0;

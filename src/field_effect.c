@@ -936,7 +936,7 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
 // r, g, b are between 0 and 16
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
-    int curRed, curGreen, curBlue;
+    s32 curRed, curGreen, curBlue;
     u16 color = gPlttBufferUnfaded[i];
 
     curRed   = (color & RGB_RED);
@@ -957,7 +957,7 @@ void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 // r, g, b are between 0 and 16
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
-    int curRed, curGreen, curBlue;
+    s32 curRed, curGreen, curBlue;
     u16 color = gPlttBufferUnfaded[i];
 
     curRed   = (color & RGB_RED);
@@ -1352,7 +1352,7 @@ static void Task_UseFly(u8 taskId)
             return;
 
         gFieldEffectArguments[0] = GetCursorSelectionMonId();
-        if ((int)gFieldEffectArguments[0] > PARTY_SIZE - 1)
+        if ((s32)gFieldEffectArguments[0] > PARTY_SIZE - 1)
             gFieldEffectArguments[0] = 0;
 
         FieldEffectStart(FLDEFF_USE_FLY);
@@ -3528,7 +3528,7 @@ static void FlyInFieldEffect_JumpOffBird(struct Task *task)
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->y2 = sYPositions[task->tTimer];
 
-    if ((++task->tTimer) >= (int)ARRAY_COUNT(sYPositions))
+    if ((++task->tTimer) >= (s32)ARRAY_COUNT(sYPositions))
         task->tState++;
 }
 
@@ -3779,9 +3779,9 @@ static const struct SpriteTemplate sSpriteTemplate_DeoxysRockFragment =
 
 static void CreateDeoxysRockFragments(struct Sprite *sprite)
 {
-    int i;
-    int xPos = (s16)gTotalCameraPixelOffsetX + sprite->x + sprite->x2;
-    int yPos = (s16)gTotalCameraPixelOffsetY + sprite->y + sprite->y2 - 4;
+    s32 i;
+    s32 xPos = (s16)gTotalCameraPixelOffsetX + sprite->x + sprite->x2;
+    s32 yPos = (s16)gTotalCameraPixelOffsetY + sprite->y + sprite->y2 - 4;
 
     for (i = 0; i < 4; i++)
     {
@@ -3827,7 +3827,7 @@ bool8 FldEff_MoveDeoxysRock(struct Sprite *sprite)
     if (!TryGetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2], &objectEventIdBuffer))
     {
         struct ObjectEvent *object;
-        int xPos, yPos;
+        s32 xPos, yPos;
         u8 taskId;
         object = &gObjectEvents[objectEventIdBuffer];
         xPos = object->currentCoords.x - MAP_OFFSET;

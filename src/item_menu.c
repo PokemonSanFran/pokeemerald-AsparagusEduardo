@@ -139,7 +139,7 @@ static bool8 IsWallysBag(void);
 static void Task_WallyTutorialBagMenu(u8);
 static void Task_BagMenu_HandleInput(u8);
 static void GetItemName(s8 *, u16);
-static void PrintItemDescription(int);
+static void PrintItemDescription(s32);
 static void BagMenu_PrintCursorAtPos(u8, u8);
 static void BagMenu_Print(u8, u8, const u8 *, u8, u8, u8, u8, u8, u8);
 static void Task_CloseBagMenu(u8);
@@ -948,7 +948,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
 {
     u16 itemId;
     u16 itemQuantity;
-    int offset;
+    s32 offset;
 
     if (itemIndex != LIST_CANCEL)
     {
@@ -993,7 +993,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
     }
 }
 
-static void PrintItemDescription(int itemIndex)
+static void PrintItemDescription(s32 itemIndex)
 {
     const u8 *str;
     if (itemIndex != LIST_CANCEL)
@@ -1199,7 +1199,7 @@ static void PrintItemQuantity(u8 windowId, s16 quantity)
 }
 
 // Prints the quantity of items to be sold and the amount that would be earned
-static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
+static void PrintItemSoldAmount(s32 windowId, s32 numSold, s32 moneyEarned)
 {
     u8 numDigits = (gBagPosition.pocket == BERRIES_POCKET) ? BERRY_CAPACITY_DIGITS : BAG_ITEM_CAPACITY_DIGITS;
     ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, numDigits);
@@ -2410,7 +2410,7 @@ static void PrintPocketNames(const u8 *pocketName1, const u8 *pocketName2)
 {
     struct WindowTemplate window = {0};
     u16 windowId;
-    int offset;
+    s32 offset;
 
     window.width = 16;
     window.height = 2;
@@ -2431,7 +2431,7 @@ static void CopyPocketNameToWindow(u32 a)
 {
     u8 (* tileDataBuffer)[32][32];
     u8 *windowTileData;
-    int b;
+    s32 b;
     if (a > 8)
         a = 8;
     tileDataBuffer = &gBagMenu->pocketNameBuffer;

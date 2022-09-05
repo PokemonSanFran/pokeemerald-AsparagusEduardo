@@ -100,10 +100,10 @@ void SetMysteryEventScriptStatus(u32 status)
     sMysteryEventScriptContext.mStatus = status;
 }
 
-static int CalcRecordMixingGiftChecksum(void)
+static s32 CalcRecordMixingGiftChecksum(void)
 {
-    unsigned int i;
-    int sum = 0;
+    u32 i;
+    s32 sum = 0;
     u8 *data = (u8 *)(&gSaveBlock1Ptr->recordMixingGift.data);
 
     for (i = 0; i < sizeof(gSaveBlock1Ptr->recordMixingGift.data); i++)
@@ -115,7 +115,7 @@ static int CalcRecordMixingGiftChecksum(void)
 static bool32 IsRecordMixingGiftValid(void)
 {
     struct RecordMixingGiftData *data = &gSaveBlock1Ptr->recordMixingGift.data;
-    int checksum = CalcRecordMixingGiftChecksum();
+    s32 checksum = CalcRecordMixingGiftChecksum();
 
     if (data->unk0 == 0
         || data->quantity == 0
@@ -375,7 +375,7 @@ bool8 MEScrCmd_enableresetrtc(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_checksum(struct ScriptContext *ctx)
 {
-    int checksum = ScriptReadWord(ctx);
+    s32 checksum = ScriptReadWord(ctx);
     u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (checksum != CalcByteArraySum(data, dataEnd - data))
@@ -388,7 +388,7 @@ bool8 MEScrCmd_checksum(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_crc(struct ScriptContext *ctx)
 {
-    int crc = ScriptReadWord(ctx);
+    s32 crc = ScriptReadWord(ctx);
     u8 *data = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     u8 *dataEnd = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (crc != CalcCRC16(data, dataEnd - data))

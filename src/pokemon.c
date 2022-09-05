@@ -5272,7 +5272,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     const u8 *temp;
     const u8 *itemEffect;
     u8 offset;
-    int i;
+    s32 i;
     u8 j;
     u8 effectFlags;
 
@@ -5391,7 +5391,7 @@ static void BufferStatRoseMessage(s32 statIdx)
 
 u8 *UseStatIncreaseItem(u16 itemId)
 {
-    int i;
+    s32 i;
     const u8 *itemEffect;
 
     if (itemId == ITEM_ENIGMA_BERRY)
@@ -5448,7 +5448,7 @@ u8 GetNatureFromPersonality(u32 personality)
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
 {
-    int i;
+    s32 i;
     u16 targetSpecies = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
@@ -5924,7 +5924,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
     u16 totalEVs = 0;
     u16 heldItem;
     u8 holdEffect;
-    int i, multiplier;
+    s32 i, multiplier;
 
     for (i = 0; i < NUM_STATS; i++)
     {
@@ -5985,8 +5985,8 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
 
         if (evs[i] + (s16)evIncrease > MAX_PER_STAT_EVS)
         {
-            int val1 = (s16)evIncrease + MAX_PER_STAT_EVS;
-            int val2 = evs[i] + evIncrease;
+            s32 val1 = (s16)evIncrease + MAX_PER_STAT_EVS;
+            s32 val2 = evs[i] + evIncrease;
             evIncrease = val1 - val2;
         }
 
@@ -5998,7 +5998,7 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
 
 u16 GetMonEVCount(struct Pokemon *mon)
 {
-    int i;
+    s32 i;
     u16 count = 0;
 
     for (i = 0; i < NUM_STATS; i++)
@@ -6051,7 +6051,7 @@ u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
 {
     u8 retVal;
 
-    int partyIndex = 0;
+    s32 partyIndex = 0;
     unsigned curBit = 1;
     retVal = 0;
 
@@ -6079,7 +6079,7 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
 {
     u8 retVal;
 
-    int partyIndex = 0;
+    s32 partyIndex = 0;
     unsigned curBit = 1;
     retVal = 0;
 
@@ -6105,7 +6105,7 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
 
 void UpdatePartyPokerusTime(u16 days)
 {
-    int i;
+    s32 i;
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0))
@@ -6131,7 +6131,7 @@ void PartySpreadPokerus(struct Pokemon *party)
 {
     if ((Random() % 3) == 0)
     {
-        int i;
+        s32 i;
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES, 0))
@@ -6221,7 +6221,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
-    int i, j, k;
+    s32 i, j, k;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
@@ -6257,7 +6257,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 {
     u8 numMoves = 0;
-    int i;
+    s32 i;
 
     for (i = 0; i < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
          moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
@@ -6272,7 +6272,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
-    int i, j, k;
+    s32 i, j, k;
 
     if (species == SPECIES_EGG)
         return 0;
@@ -6333,7 +6333,7 @@ bool32 IsSpeciesInHoennDex(u16 species)
 
 void ClearBattleMonForms(void)
 {
-    int i;
+    s32 i;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         gBattleMonForms[i] = 0;
 }
@@ -6480,7 +6480,7 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 
 bool32 IsHMMove2(u16 move)
 {
-    int i = 0;
+    s32 i = 0;
     while (sHMMoves[i] != HM_MOVES_END)
     {
         if (sHMMoves[i++] == move)
@@ -6523,7 +6523,7 @@ bool8 IsOtherTrainer(u32 otId, u8 *otName)
       | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
       | (gSaveBlock2Ptr->playerTrainerId[3] << 24)))
     {
-        int i;
+        s32 i;
         for (i = 0; otName[i] != EOS; i++)
             if (otName[i] != gSaveBlock2Ptr->playerName[i])
                 return TRUE;
@@ -6540,7 +6540,7 @@ void MonRestorePP(struct Pokemon *mon)
 
 void BoxMonRestorePP(struct BoxPokemon *boxMon)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {

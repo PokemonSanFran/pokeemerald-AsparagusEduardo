@@ -1313,7 +1313,7 @@ u8 CreateRecordMixingLights(void)
 
 void DestroyRecordMixingLights(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < MAX_SPRITES; i++)
     {

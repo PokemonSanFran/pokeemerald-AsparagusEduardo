@@ -61,12 +61,12 @@ static void FreeMatchCallSprites(void);
 static void LoadCallWindowAndFade(struct Pokenav_MatchCallGfx *);
 static void DrawMatchCallLeftColumnWindows(struct Pokenav_MatchCallGfx *);
 static void UpdateMatchCallInfoBox(struct Pokenav_MatchCallGfx *);
-static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *, int);
+static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *, s32);
 static void AllocMatchCallSprites(void);
 static void SetPokeballIconsFlashing(bool32);
 static void PrintMatchCallSelectionOptions(struct Pokenav_MatchCallGfx *);
 static bool32 ShowOptionsCursor(struct Pokenav_MatchCallGfx *);
-static void UpdateCursorGfxPos(struct Pokenav_MatchCallGfx *, int);
+static void UpdateCursorGfxPos(struct Pokenav_MatchCallGfx *, s32);
 static bool32 IsDma3ManagerBusyWithBgCopy1(struct Pokenav_MatchCallGfx *);
 static void UpdateWindowsReturnToTrainerList(struct Pokenav_MatchCallGfx *);
 static void DrawMsgBoxForMatchCallMsg(struct Pokenav_MatchCallGfx *);
@@ -90,9 +90,9 @@ static void PrintNumberRegisteredLabel(u16);
 static void PrintNumberRegistered(u16);
 static void PrintNumberOfBattlesLabel(u16);
 static void PrintNumberOfBattles(u16);
-static void PrintMatchCallInfoLabel(u16, const u8 *, int);
-static void PrintMatchCallInfoNumber(u16, const u8 *, int);
-static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *, int);
+static void PrintMatchCallInfoLabel(u16, const u8 *, s32);
+static void PrintMatchCallInfoNumber(u16, const u8 *, s32);
+static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *, s32);
 static void CloseMatchCallSelectOptionsWindow(struct Pokenav_MatchCallGfx *);
 static struct Sprite *CreateTrainerPicSprite(void);
 static void SpriteCB_TrainerPicSlideOnscreen(struct Sprite *);
@@ -746,8 +746,8 @@ static u32 ShowCheckPage(s32 state)
 
 static u32 ShowCheckPageDown(s32 state)
 {
-    int topId;
-    int delta;
+    s32 topId;
+    s32 delta;
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
     {
@@ -811,8 +811,8 @@ static u32 ExitCheckPage(s32 state)
 
 static u32 ShowCheckPageUp(s32 state)
 {
-    int topId;
-    int delta;
+    s32 topId;
+    s32 delta;
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
     switch (state)
     {
@@ -996,7 +996,7 @@ static void PrintNumberOfBattlesLabel(u16 windowId)
 static void PrintNumberOfBattles(u16 windowId)
 {
     u8 str[5];
-    int numTrainerBattles = GetGameStat(GAME_STAT_TRAINER_BATTLES);
+    s32 numTrainerBattles = GetGameStat(GAME_STAT_TRAINER_BATTLES);
     if (numTrainerBattles > 99999)
         numTrainerBattles = 99999;
 
@@ -1004,25 +1004,25 @@ static void PrintNumberOfBattles(u16 windowId)
     PrintMatchCallInfoNumber(windowId, str, 3);
 }
 
-static void PrintMatchCallInfoLabel(u16 windowId, const u8 *str, int top)
+static void PrintMatchCallInfoLabel(u16 windowId, const u8 *str, s32 top)
 {
-    int y = top * 16 + 1;
+    s32 y = top * 16 + 1;
     AddTextPrinterParameterized(windowId, FONT_NARROW, str, 2, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, int top)
+static void PrintMatchCallInfoNumber(u16 windowId, const u8 *str, s32 top)
 {
-    int x = GetStringRightAlignXOffset(FONT_NARROW, str, 86);
-    int y = top * 16 + 1;
+    s32 x = GetStringRightAlignXOffset(FONT_NARROW, str, 86);
+    s32 y = top * 16 + 1;
     AddTextPrinterParameterized(windowId, FONT_NARROW, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
-static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, int delta)
+static void PrintMatchCallLocation(struct Pokenav_MatchCallGfx *gfx, s32 delta)
 {
     u8 mapName[32];
-    int x;
-    int index = PokenavList_GetSelectedIndex() + delta;
-    int mapSec = GetMatchCallMapSec(index);
+    s32 x;
+    s32 index = PokenavList_GetSelectedIndex() + delta;
+    s32 mapSec = GetMatchCallMapSec(index);
     if (mapSec != MAPSEC_NONE)
         GetMapName(mapName, mapSec, 0);
     else
@@ -1040,7 +1040,7 @@ static void PrintMatchCallSelectionOptions(struct Pokenav_MatchCallGfx *gfx)
     FillWindowPixelBuffer(gfx->infoBoxWindowId, PIXEL_FILL(1));
     for (i = 0; i < MATCH_CALL_OPTION_COUNT; i++)
     {
-        int optionText = GetMatchCallOptionId(i);
+        s32 optionText = GetMatchCallOptionId(i);
         if (optionText == MATCH_CALL_OPTION_COUNT)
             break;
 
@@ -1138,7 +1138,7 @@ static bool32 WaitForTrainerIsCloseByText(struct Pokenav_MatchCallGfx *gfx)
 
 static void PrintMatchCallMessage(struct Pokenav_MatchCallGfx *gfx)
 {
-    int index = PokenavList_GetSelectedIndex();
+    s32 index = PokenavList_GetSelectedIndex();
     const u8 *str = GetMatchCallMessageText(index, &gfx->newRematchRequest);
     u8 speed = GetPlayerTextSpeedDelay();
     AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
@@ -1169,7 +1169,7 @@ static bool32 WaitForCallMessageBoxErase(struct Pokenav_MatchCallGfx *gfx)
 
 static void AllocMatchCallSprites(void)
 {
-    int i;
+    s32 i;
     u8 paletteNum;
     struct SpriteSheet spriteSheet;
     struct Pokenav_MatchCallGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_OPEN);
@@ -1205,7 +1205,7 @@ static void FreeMatchCallSprites(void)
     FreeSpritePaletteByTag(PALTAG_TRAINER_PIC);
 }
 
-static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *gfx, int top)
+static void CreateOptionsCursorSprite(struct Pokenav_MatchCallGfx *gfx, s32 top)
 {
     if (!gfx->optionsCursorSprite)
     {
@@ -1221,7 +1221,7 @@ static void CloseMatchCallSelectOptionsWindow(struct Pokenav_MatchCallGfx *gfx)
     gfx->optionsCursorSprite = NULL;
 }
 
-static void UpdateCursorGfxPos(struct Pokenav_MatchCallGfx *gfx, int top)
+static void UpdateCursorGfxPos(struct Pokenav_MatchCallGfx *gfx, s32 top)
 {
     gfx->optionsCursorSprite->y2 = top * 16;
 }
@@ -1244,7 +1244,7 @@ static struct Sprite *CreateTrainerPicSprite(void)
 static void LoadCheckPageTrainerPic(struct Pokenav_MatchCallGfx *gfx)
 {
     u16 cursor;
-    int trainerPic = GetMatchCallTrainerPic(PokenavList_GetSelectedIndex());
+    s32 trainerPic = GetMatchCallTrainerPic(PokenavList_GetSelectedIndex());
     if (trainerPic >= 0)
     {
         DecompressPicFromTable(&gTrainerFrontPicTable[trainerPic], gfx->trainerPicGfx, SPECIES_NONE);

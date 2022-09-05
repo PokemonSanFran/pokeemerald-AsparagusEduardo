@@ -16,7 +16,7 @@ void AGBPrint(const char *pBuf);
 void AGBPrintf(const char *pBuf, ...);
 void AGBPrintFlush1Block(void);
 void AGBPrintFlush(void);
-void AGBAssert(const char *pFile, int nLine, const char *pExpression, int nStopProgram);
+void AGBAssert(const char *pFile, s32 nLine, const char *pExpression, s32 nStopProgram);
 #endif
 
 #undef AGB_ASSERT

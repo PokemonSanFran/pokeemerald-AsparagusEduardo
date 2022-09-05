@@ -720,7 +720,7 @@ static u8 GetBattleTransitionTypeByMap(void)
 static u16 GetSumOfPlayerPartyLevel(u8 numMons)
 {
     u8 sum = 0;
-    int i;
+    s32 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {

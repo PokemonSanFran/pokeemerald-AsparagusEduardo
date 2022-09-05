@@ -20,7 +20,7 @@ static bool32 ValidateWonderNews(const struct WonderNews *);
 static bool32 ValidateWonderCard(const struct WonderCard *);
 static void ClearSavedWonderCardMetadata(void);
 static void ClearSavedTrainerIds(void);
-static void IncrementCardStatForNewTrainer(u32, u32, u32 *, int);
+static void IncrementCardStatForNewTrainer(u32, u32, u32 *, s32);
 
 #define CALC_CRC(data) CalcCRC16WithTable((void *)&(data), sizeof(data))
 
@@ -263,10 +263,10 @@ bool32 IsSavedWonderCardGiftNotReceived(void)
     return TRUE;
 }
 
-static int GetNumStampsInMetadata(const struct WonderCardMetadata *data, int size)
+static s32 GetNumStampsInMetadata(const struct WonderCardMetadata *data, s32 size)
 {
-    int numStamps = 0;
-    int i;
+    s32 numStamps = 0;
+    s32 i;
     for (i = 0; i < size; i++)
     {
         if (data->stampData[STAMP_ID][i] && data->stampData[STAMP_SPECIES][i] != SPECIES_NONE)
@@ -276,9 +276,9 @@ static int GetNumStampsInMetadata(const struct WonderCardMetadata *data, int siz
     return numStamps;
 }
 
-static bool32 IsStampInMetadata(const struct WonderCardMetadata *metadata, const u16 *stamp, int maxStamps)
+static bool32 IsStampInMetadata(const struct WonderCardMetadata *metadata, const u16 *stamp, s32 maxStamps)
 {
-    int i;
+    s32 i;
     for (i = 0; i < maxStamps; i++)
     {
         if (metadata->stampData[STAMP_ID][i] == stamp[STAMP_ID])
@@ -301,7 +301,7 @@ static bool32 ValidateStamp(const u16 *stamp)
     return TRUE;
 }
 
-static int GetNumStampsInSavedCard(void)
+static s32 GetNumStampsInSavedCard(void)
 {
     struct WonderCard *card;
     if (!ValidateSavedWonderCard())
@@ -317,8 +317,8 @@ static int GetNumStampsInSavedCard(void)
 bool32 MysteryGift_TrySaveStamp(const u16 *stamp)
 {
     struct WonderCard *card = &gSaveBlock1Ptr->mysteryGift.card;
-    int maxStamps = card->maxStamps;
-    int i;
+    s32 maxStamps = card->maxStamps;
+    s32 i;
     if (!ValidateStamp(stamp))
         return FALSE;
 
@@ -345,7 +345,7 @@ bool32 MysteryGift_TrySaveStamp(const u16 *stamp)
 
 void MysteryGift_LoadLinkGameData(struct MysteryGiftLinkGameData *data, bool32 isWonderNews)
 {
-    int i;
+    s32 i;
     CpuFill32(0, data, sizeof(*data));
     data->validationVar = GAME_DATA_VALID_VAR;
     data->validationFlag1 = 1;
@@ -428,7 +428,7 @@ u32 MysteryGift_CompareCardFlags(const u16 *flagId, const struct MysteryGiftLink
 // so the return values here are never checked by anything.
 u32 MysteryGift_CheckStamps(const u16 *stamp, const struct MysteryGiftLinkGameData *data, const void *unused)
 {
-    int stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
+    s32 stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
     
     // Has full stamp card?
     if (stampsMissing == 0)
@@ -448,7 +448,7 @@ u32 MysteryGift_CheckStamps(const u16 *stamp, const struct MysteryGiftLinkGameDa
 
 bool32 MysteryGift_DoesQuestionnaireMatch(const struct MysteryGiftLinkGameData *data, const u16 *words)
 {
-    int i;
+    s32 i;
     for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
     {
         if (data->questionnaireWords[i] != words[i])
@@ -458,7 +458,7 @@ bool32 MysteryGift_DoesQuestionnaireMatch(const struct MysteryGiftLinkGameData *
     return TRUE;
 }
 
-static int GetNumStampsInLinkData(const struct MysteryGiftLinkGameData *data)
+static s32 GetNumStampsInLinkData(const struct MysteryGiftLinkGameData *data)
 {
     return GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
 }
@@ -629,9 +629,9 @@ static void ClearSavedTrainerIds(void)
 
 // Returns TRUE if it's a new trainer id, FALSE if an existing one.
 // In either case the given trainerId is saved in element 0
-static bool32 RecordTrainerId(u32 trainerId, u32 *trainerIds, int size)
+static bool32 RecordTrainerId(u32 trainerId, u32 *trainerIds, s32 size)
 {
-    int i, j;
+    s32 i, j;
 
     for (i = 0; i < size; i++)
     {
@@ -659,7 +659,7 @@ static bool32 RecordTrainerId(u32 trainerId, u32 *trainerIds, int size)
     }
 }
 
-static void IncrementCardStatForNewTrainer(u32 stat, u32 trainerId, u32 *trainerIds, int size)
+static void IncrementCardStatForNewTrainer(u32 stat, u32 trainerId, u32 *trainerIds, s32 size)
 {
     if (RecordTrainerId(trainerId, trainerIds, size))
         IncrementCardStat(stat);

@@ -63,8 +63,8 @@ static bool32 IsDma3ManagerBusyWithBgCopy_(struct Pokenav_RegionMapGfx *);
 static void ChangeBgYForZoom(bool32);
 static bool32 IsChangeBgYForZoomActive(void);
 static void CreateCityZoomTextSprites(void);
-static void DrawCityMap(struct Pokenav_RegionMapGfx *, int, int);
-static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *, int, int);
+static void DrawCityMap(struct Pokenav_RegionMapGfx *, s32, s32);
+static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *, s32, s32);
 static void SetCityZoomTextInvisibility(bool32);
 static void Task_ChangeBgYForZoom(u8 taskId);
 static void UpdateCityZoomTextPosition(void);
@@ -302,7 +302,7 @@ static bool8 ShouldOpenRegionMapZoomed(void)
 
 static u32 LoopedTask_OpenRegionMap(s32 taskState)
 {
-    int menuGfxId;
+    s32 menuGfxId;
     struct RegionMap *regionMap;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     switch (taskState)
@@ -484,7 +484,7 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
 
 static void LoadCityZoomViewGfx(void)
 {
-    int i;
+    s32 i;
     for (i = 0; i < ARRAY_COUNT(sCityZoomTextSpriteSheet); i++)
         LoadCompressedSpriteSheet(&sCityZoomTextSpriteSheet[i]);
 
@@ -494,11 +494,11 @@ static void LoadCityZoomViewGfx(void)
 
 static void FreeCityZoomViewGfx(void)
 {
-    int i;
+    s32 i;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     FreeSpriteTilesByTag(GFXTAG_CITY_ZOOM);
     FreeSpritePaletteByTag(PALTAG_CITY_ZOOM);
-    for (i = 0; i < (int)ARRAY_COUNT(state->cityZoomTextSprites); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(state->cityZoomTextSprites); i++)
         DestroySprite(state->cityZoomTextSprites[i]);
 }
 
@@ -634,9 +634,9 @@ static u32 LoopedTask_DecompressCityMaps(s32 taskState)
     return LT_FINISH;
 }
 
-static void DrawCityMap(struct Pokenav_RegionMapGfx *state, int mapSecId, int pos)
+static void DrawCityMap(struct Pokenav_RegionMapGfx *state, s32 mapSecId, s32 pos)
 {
-    int i;
+    s32 i;
     for (i = 0; i < NUM_CITY_MAPS && (sPokenavCityMaps[i].mapSecId != mapSecId || sPokenavCityMaps[i].index != pos); i++)
         ;
 
@@ -647,9 +647,9 @@ static void DrawCityMap(struct Pokenav_RegionMapGfx *state, int mapSecId, int po
     CopyToBgTilemapBufferRect(1, state->cityZoomPics[i], 18, 6, 10, 10);
 }
 
-static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *state, int mapSecId, int pos)
+static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *state, s32 mapSecId, s32 pos)
 {
-    int i = 0;
+    s32 i = 0;
     while (1)
     {
         const u8 *landmarkName = GetLandmarkName(mapSecId, pos, i);
@@ -664,8 +664,8 @@ static void PrintLandmarkNames(struct Pokenav_RegionMapGfx *state, int mapSecId,
 
 static void CreateCityZoomTextSprites(void)
 {
-    int i;
-    int y;
+    s32 i;
+    s32 y;
     struct Sprite *sprite;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
 
@@ -675,7 +675,7 @@ static void CreateCityZoomTextSprites(void)
     else
         y = 132;
 
-    for (i = 0; i < (int)ARRAY_COUNT(state->cityZoomTextSprites); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(state->cityZoomTextSprites); i++)
     {
         u8 spriteId = CreateSprite(&sCityZoomTextSpriteTemplate, 152 + i * 32, y, 8);
         sprite = &gSprites[spriteId];
@@ -726,17 +726,17 @@ static void SpriteCB_CityZoomText(struct Sprite *sprite)
 
 static void UpdateCityZoomTextPosition(void)
 {
-    int i;
+    s32 i;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
-    int y = 132 - (GetBgY(1) >> 8);
-    for (i = 0; i < (int)ARRAY_COUNT(state->cityZoomTextSprites); i++)
+    s32 y = 132 - (GetBgY(1) >> 8);
+    for (i = 0; i < (s32)ARRAY_COUNT(state->cityZoomTextSprites); i++)
         state->cityZoomTextSprites[i]->y = y;
 }
 
 static void SetCityZoomTextInvisibility(bool32 invisible)
 {
-    int i;
+    s32 i;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
-    for (i = 0; i < (int)ARRAY_COUNT(state->cityZoomTextSprites); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(state->cityZoomTextSprites); i++)
         state->cityZoomTextSprites[i]->invisible = invisible;
 }

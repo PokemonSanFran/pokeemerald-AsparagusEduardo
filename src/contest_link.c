@@ -73,7 +73,7 @@ static void Task_LinkContest_StartInitFlags(u8 taskId)
 
 static void Task_LinkContest_InitFlags(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (!gReceivedRemoteLinkPlayers)
         return;
@@ -122,7 +122,7 @@ bool32 LinkContest_TryLinkStandby(s16 *state)
 
 void Task_LinkContest_CommunicateMonsRS(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].tStandbyState))
         return;
@@ -207,7 +207,7 @@ void Task_LinkContest_CommunicateRngRS(u8 taskId)
 
 void Task_LinkContest_CommunicateCategoryRS(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].tStandbyState))
         return;
@@ -275,7 +275,7 @@ void Task_LinkContest_CommunicateMonIdxs(u8 taskId)
 
 void Task_LinkContest_CommunicateMoveSelections(u8 taskId)
 {
-    int i;
+    s32 i;
 
     switch (gTasks[taskId].tState)
     {
@@ -460,7 +460,7 @@ void Task_LinkContest_CommunicateAppealsState(u8 taskId)
 
 void Task_LinkContest_CommunicateLeaderIdsRS(u8 taskId)
 {
-    int i;
+    s32 i;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].tStandbyState))
         return;

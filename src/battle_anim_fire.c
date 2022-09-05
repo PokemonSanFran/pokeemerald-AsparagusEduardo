@@ -992,7 +992,7 @@ static void InitEruptionLaunchRockCoordData(struct Sprite *sprite, s16 speedX, s
 
 static void UpdateEruptionLaunchRockPos(struct Sprite *sprite)
 {
-    int extraLaunchSpeed;
+    s32 extraLaunchSpeed;
     if (++sprite->sSpeedDelay > 2)
     {
         sprite->sSpeedDelay = 0;

@@ -82,7 +82,7 @@ static void AnimProtect(struct Sprite *);
 static void AnimProtect_Step(struct Sprite *);
 static void AnimMilkBottle(struct Sprite *);
 static void AnimMilkBottle_Step1(struct Sprite *);
-static void AnimMilkBottle_Step2(struct Sprite *, int, int);
+static void AnimMilkBottle_Step2(struct Sprite *, s32, s32);
 static void AnimGrantingStars(struct Sprite *);
 static void AnimSparklingStars(struct Sprite *);
 static void AnimBubbleBurst(struct Sprite *);
@@ -2987,8 +2987,8 @@ static void AnimIngrainOrb(struct Sprite *sprite)
 
 static void InitItemBagData(struct Sprite *sprite, s16 c)
 {
-    int a = (sprite->x << 8) | sprite->y;
-    int b = (sprite->data[6] << 8) | sprite->data[7];
+    s32 a = (sprite->x << 8) | sprite->y;
+    s32 b = (sprite->data[6] << 8) | sprite->data[7];
     c <<= 8;
     sprite->data[5] = a;
     sprite->data[6] = b;
@@ -3082,7 +3082,7 @@ static void AnimPresent(struct Sprite *sprite)
 
 static void AnimKnockOffOpponentsItem(struct Sprite *sprite)
 {
-    int zero;
+    s32 zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);
     zero = 0;
     if (sprite->data[0] > 0x7F)
@@ -3173,7 +3173,7 @@ static void AnimItemSteal(struct Sprite *sprite)
 
 static void AnimItemSteal_Step3(struct Sprite *sprite)
 {
-    int zero;
+    s32 zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);
     zero = 0;
     if (sprite->data[0] > 127)
@@ -3200,8 +3200,8 @@ static void AnimItemSteal_Step3(struct Sprite *sprite)
 // arg 1: initial wave offset
 static void AnimTrickBag(struct Sprite *sprite)
 {
-    int a;
-    int b;
+    s32 a;
+    s32 b;
 
     if (!sprite->data[0])
     {
@@ -3334,7 +3334,7 @@ static void AnimTask_LeafBlade_Step(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
     struct Sprite *sprite = &gSprites[task->data[2]];
-    int a = task->data[0];
+    s32 a = task->data[0];
     switch (a)
     {
     case 4:
@@ -3616,7 +3616,7 @@ static void AnimFlyingParticle(struct Sprite *sprite)
 
 static void AnimFlyingParticle_Step(struct Sprite *sprite)
 {
-    int a = sprite->data[7];
+    s32 a = sprite->data[7];
     sprite->data[7]++;
     sprite->y2 = (sprite->data[1] * gSineTable[sprite->data[0]]) >> 8;
     sprite->x2 = sprite->data[2] * a;
@@ -3972,7 +3972,7 @@ static void AnimProtect(struct Sprite *sprite)
 
 static void AnimProtect_Step(struct Sprite *sprite)
 {
-    int i, id, savedPal;
+    s32 i, id, savedPal;
     sprite->data[5] += 96;
     sprite->x2 = -(sprite->data[5] >> 8);
     if (++sprite->data[1] > 1)
@@ -4102,7 +4102,7 @@ static void AnimMilkBottle_Step1(struct Sprite *sprite)
     }
 }
 
-static void AnimMilkBottle_Step2(struct Sprite *sprite, int unk1, int unk2)
+static void AnimMilkBottle_Step2(struct Sprite *sprite, s32 unk1, s32 unk2)
 {
     if (sprite->data[3] <= 11)
         sprite->data[4] += 2;
@@ -4346,7 +4346,7 @@ static void AnimLockOnTarget_Step4(struct Sprite *sprite)
     BlendPalettes(GetBattlePalettesMask(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE), sprite->data[1], RGB(31, 31, 31));
     if (sprite->data[1] == 16)
     {
-        int pal;
+        s32 pal;
         sprite->data[2]++;
         pal = sprite->oam.paletteNum;
         LoadPalette(&gPlttBufferUnfaded[0x108 + pal * 16], pal * 16 | 0x101, 4);
@@ -4998,10 +4998,10 @@ static void AnimMoonlightSparkle_Step(struct Sprite *sprite)
 
 void AnimTask_MoonlightEndFade(u8 taskId)
 {
-    int a = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE) & 0xFFFF;
-    int b;
-    int c;
-    int d;
+    s32 a = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE) & 0xFFFF;
+    s32 b;
+    s32 c;
+    s32 d;
 
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
@@ -5167,7 +5167,7 @@ static void AnimHornHit_Step(struct Sprite *sprite)
 void AnimTask_DoubleTeam(u8 taskId)
 {
     u16 i;
-    int obj;
+    s32 obj;
     u16 r3;
     u16 r4;
     struct Task *task = &gTasks[taskId];
@@ -5319,8 +5319,8 @@ static void AnimWavyMusicNotes(struct Sprite *sprite)
 
 static void AnimWavyMusicNotes_CalcVelocity(s16 x, s16 y, s16 *velocX, s16 *velocY, s8 xSpeedFactor)
 {
-    int x2;
-    int time;
+    s32 x2;
+    s32 time;
     if (x < 0)
         xSpeedFactor = -xSpeedFactor;
 
@@ -5356,7 +5356,7 @@ static void AnimWavyMusicNotes_Step(struct Sprite *sprite)
         if (sprite->sBlendCycleTime && ++sprite->sBlendTimer > sprite->sBlendCycleTime)
         {
             sprite->sBlendTimer = 0;
-            if (++sprite->sBlendTableIdx > (int)ARRAY_COUNT(gParticlesColorBlendTable) - 1)
+            if (++sprite->sBlendTableIdx > (s32)ARRAY_COUNT(gParticlesColorBlendTable) - 1)
                 sprite->sBlendTableIdx = 0;
 
             index = IndexOfSpritePaletteTag(gParticlesColorBlendTable[sprite->sBlendTableIdx][0]);

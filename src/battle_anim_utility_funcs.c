@@ -275,7 +275,7 @@ static void AnimMonTrace(struct Sprite *sprite)
 void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
 {
     u16 species;
-    int spriteId, newSpriteId;
+    s32 spriteId, newSpriteId;
     u16 var0;
     u16 bg1Cnt;
     struct BattleAnimBgData animBgData;
@@ -685,7 +685,7 @@ static void SetPalettesToColor(u32 selectedPalettes, u16 color)
 void AnimTask_BlendNonAttackerPalettes(u8 taskId)
 {
     u32 battler;
-    int j;
+    s32 j;
     u32 selectedPalettes = 0;
 
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
@@ -769,7 +769,7 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
+void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
 {
     u16 species;
     u8 spriteId, spriteId2;
@@ -918,7 +918,7 @@ void AnimTask_FreeBackupPalBuffer(u8 taskId)
 void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
 {
     u32 selectedPalettes;
-    int paletteIndex = 0;
+    s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
     {
@@ -945,7 +945,7 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
 void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
 {
     u32 selectedPalettes;
-    int paletteIndex = 0;
+    s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
     {
@@ -972,7 +972,7 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
 void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
 {
     u32 selectedPalettes;
-    int paletteIndex = 0;
+    s32 paletteIndex = 0;
 
     if (gBattleAnimArgs[0] == 0)
     {

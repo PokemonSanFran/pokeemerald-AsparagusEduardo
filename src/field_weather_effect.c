@@ -552,8 +552,8 @@ static void StartRainSpriteFall(struct Sprite *sprite)
 {
     u32 rand;
     u16 numFallingFrames;
-    int tileX;
-    int tileY;
+    s32 tileX;
+    s32 tileY;
 
     if (sprite->tRandom == 0)
         sprite->tRandom = 361;

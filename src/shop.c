@@ -72,7 +72,7 @@ static void BuyMenuCopyMenuBgToBg1TilemapBuffer(void);
 static void BuyMenuCollectObjectEventData(void);
 static void BuyMenuDrawObjectEvents(void);
 static void BuyMenuDrawMapBg(void);
-static bool8 BuyMenuCheckForOverlapWithMenuBg(int, int);
+static bool8 BuyMenuCheckForOverlapWithMenuBg(s32, s32);
 static void BuyMenuDrawMapMetatile(s16, s16, const u16 *, u8);
 static void BuyMenuDrawMapMetatileLayer(u16 *dest, s16 offset1, s16 offset2, const u16 *src);
 static bool8 BuyMenuCheckIfObjectEventOverlapsMenuBg(s16 *);
@@ -275,7 +275,7 @@ static const u8 sShopBuyMenuTextColors[][3] =
 
 static u8 CreateShopMenu(u8 martType)
 {
-    int numMenuItems;
+    s32 numMenuItems;
 
     LockPlayerFieldControls();
     sMartInfo.martType = martType;
@@ -891,11 +891,11 @@ static void BuyMenuCopyMenuBgToBg1TilemapBuffer(void)
     }
 }
 
-static bool8 BuyMenuCheckForOverlapWithMenuBg(int x, int y)
+static bool8 BuyMenuCheckForOverlapWithMenuBg(s32 x, s32 y)
 {
     const u16 *metatile = sShopData->tilemapBuffers[0];
-    int offset1 = x * 2;
-    int offset2 = y * 64;
+    s32 offset1 = x * 2;
+    s32 offset2 = y * 64;
 
     if (metatile[offset2 + offset1] == 0 &&
         metatile[offset2 + offset1 + 32] == 0 &&

@@ -92,11 +92,11 @@ static u16 GetLengthWithExpandedPlayerName(const u8 *str)
 
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos)
 {
-    int i;
+    s32 i;
     u8 windowId;
     u8 count = sMultichoiceLists[multichoiceId].count;
     const struct MenuAction *actions = sMultichoiceLists[multichoiceId].list;
-    int width = 0;
+    s32 width = 0;
     u8 newWidth;
 
     for (i = 0; i < count; i++)
@@ -258,7 +258,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
     {
         u8 taskId;
         u8 rowCount, newWidth;
-        int i, width;
+        s32 i, width;
 
         gSpecialVar_Result = 0xFF;
         width = 0;
@@ -333,7 +333,7 @@ static void CreatePCMultichoice(void)
     u8 width;
     u8 numChoices;
     u8 windowId;
-    int i;
+    s32 i;
 
     for (i = 0; i < ARRAY_COUNT(sPCNameStrings); i++)
     {
@@ -724,16 +724,16 @@ static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowI
 #undef tWindowId
 #undef tMultichoiceId
 
-static int DisplayTextAndGetWidthInternal(const u8 *str)
+static s32 DisplayTextAndGetWidthInternal(const u8 *str)
 {
     u8 temp[64];
     StringExpandPlaceholders(temp, str);
     return GetStringWidth(FONT_NORMAL, temp, 0);
 }
 
-int DisplayTextAndGetWidth(const u8 *str, int prevWidth)
+s32 DisplayTextAndGetWidth(const u8 *str, s32 prevWidth)
 {
-    int width = DisplayTextAndGetWidthInternal(str);
+    s32 width = DisplayTextAndGetWidthInternal(str);
     if (width < prevWidth)
     {
         width = prevWidth;
@@ -741,14 +741,14 @@ int DisplayTextAndGetWidth(const u8 *str, int prevWidth)
     return width;
 }
 
-int ConvertPixelWidthToTileWidth(int width)
+s32 ConvertPixelWidthToTileWidth(s32 width)
 {
     return (((width + 9) / 8) + 1) > MAX_MULTICHOICE_WIDTH ? MAX_MULTICHOICE_WIDTH : (((width + 9) / 8) + 1);
 }
 
-int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width)
+s32 ScriptMenu_AdjustLeftCoordFromWidth(s32 left, s32 width)
 {
-    int adjustedLeft = left;
+    s32 adjustedLeft = left;
 
     if (left + width > MAX_MULTICHOICE_WIDTH)
     {

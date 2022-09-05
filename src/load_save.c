@@ -159,7 +159,7 @@ void ClearContinueGameWarpStatus2(void)
 
 void SavePlayerParty(void)
 {
-    int i;
+    s32 i;
 
     gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
 
@@ -169,7 +169,7 @@ void SavePlayerParty(void)
 
 void LoadPlayerParty(void)
 {
-    int i;
+    s32 i;
 
     gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
 
@@ -179,7 +179,7 @@ void LoadPlayerParty(void)
 
 void SaveObjectEvents(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         gSaveBlock1Ptr->objectEvents[i] = gObjectEvents[i];
@@ -187,7 +187,7 @@ void SaveObjectEvents(void)
 
 void LoadObjectEvents(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         gObjectEvents[i] = gSaveBlock1Ptr->objectEvents[i];
@@ -207,7 +207,7 @@ void CopyPartyAndObjectsFromSave(void)
 
 void LoadPlayerBag(void)
 {
-    int i;
+    s32 i;
 
     // load player items.
     for (i = 0; i < BAG_ITEMS_COUNT; i++)
@@ -238,7 +238,7 @@ void LoadPlayerBag(void)
 
 void SavePlayerBag(void)
 {
-    int i;
+    s32 i;
     u32 encryptionKeyBackup;
 
     // save player items.

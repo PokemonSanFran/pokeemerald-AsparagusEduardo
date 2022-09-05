@@ -548,7 +548,7 @@ static bool32 IsStartGraphicAnimRunning(u8 spriteId)
 
 static void SpriteCB_Start(struct Sprite *sprite)
 {
-    int y;
+    s32 y;
     s16 *data = sprite->data;
 
     switch (sState)

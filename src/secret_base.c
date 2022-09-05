@@ -1282,7 +1282,7 @@ void SecretBasePerStepCallback(u8 taskId)
             PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
             if (sInFriendSecretBase == TRUE)
             {
-                switch ((int)MapGridGetMetatileIdAt(x, y))
+                switch ((s32)MapGridGetMetatileIdAt(x, y))
                 {
                 case METATILE_SecretBase_RedBalloon:
                 case METATILE_SecretBase_BlueBalloon:
@@ -1333,7 +1333,7 @@ void SecretBasePerStepCallback(u8 taskId)
 
 static void SaveSecretBase(u8 secretBaseIdx, struct SecretBase *secretBase, u32 version, u32 language)
 {
-    int stringLength;
+    s32 stringLength;
     u8 *name;
 
     gSaveBlock1Ptr->secretBases[secretBaseIdx] = *secretBase;
@@ -2061,7 +2061,7 @@ void CheckInteractedWithFriendsSandOrnament(void)
     s16 x, y;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    switch ((int)MapGridGetMetatileIdAt(x, y))
+    switch ((s32)MapGridGetMetatileIdAt(x, y))
     {
         case METATILE_SecretBase_SandOrnament_Base1:
         case METATILE_SecretBase_SandOrnament_Base2:

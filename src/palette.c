@@ -985,7 +985,7 @@ void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTa
 // Unused
 static bool32 IsBlendPalettesGraduallyTaskActive(u8 id)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < NUM_TASKS; i++)
         if ((gTasks[i].isActive == TRUE)

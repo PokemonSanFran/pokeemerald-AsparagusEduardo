@@ -724,7 +724,7 @@ static void ResetGpuAndVram(void)
 
 static void Task_UpdatePage(u8 taskId)
 {
-    int i;
+    s32 i;
 
     switch (gTasks[taskId].tState)
     {
@@ -1484,7 +1484,7 @@ static void SpriteCB_CreditsMon(struct Sprite *sprite)
     case 3:
         if (sprite->data[3] != 0)
         {
-            int data3;
+            s32 data3;
 
             sprite->data[3]--;
 

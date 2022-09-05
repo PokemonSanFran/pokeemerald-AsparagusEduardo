@@ -161,7 +161,7 @@ static const struct OamData sContestPaintingMonOamData =
 
 static const u16 sBgPalette[] = {RGB_BLACK, RGB_BLACK};
 
-void SetContestWinnerForPainting(int contestWinnerId)
+void SetContestWinnerForPainting(s32 contestWinnerId)
 {
     u8 *saveIdx = &gCurContestWinnerSaveIdx;
     u8 *isForArtist = &gCurContestWinnerIsForArtist;
@@ -280,7 +280,7 @@ static void InitContestPaintingWindow(void)
 
 static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
 {
-    int x;
+    s32 x;
     u8 category;
 
     // Artist's painting has no caption

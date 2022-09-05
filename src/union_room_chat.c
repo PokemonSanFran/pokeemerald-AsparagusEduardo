@@ -265,7 +265,7 @@ static void PrintCurrentKeyboardPage(void);
 static bool32 SlideKeyboardPageIn(void);
 static void MoveKeyboardCursor(void);
 static void UpdateRButtonLabel(void);
-static void AddStdMessageWindow(int, u16);
+static void AddStdMessageWindow(s32, u16);
 static void AddYesNoMenuAt(u8, u8, u8);
 static void HideStdMessageWindow(void);
 static void HideYesNoMenuWindow(void);
@@ -904,7 +904,7 @@ void EnterUnionRoomChat(void)
 
 static void InitUnionRoomChat(struct UnionRoomChat *chat)
 {
-    int i;
+    s32 i;
 
     chat->funcId = CHAT_FUNC_JOIN;
     chat->funcState = 0;
@@ -1652,9 +1652,9 @@ static bool32 HandleDPadInput(void)
 
 static void AppendTextToMessage(void)
 {
-    int i;
+    s32 i;
     const u8 *charsStr;
-    int strLength;
+    s32 strLength;
     u8 *str;
     u8 buffer[21];
 
@@ -1755,12 +1755,12 @@ static void ResetMessageEntryBuffer(void)
 
 static void SaveRegisteredTexts(void)
 {
-    int i;
+    s32 i;
     for (i = 0; i < UNION_ROOM_KB_ROW_COUNT; i++)
         StringCopy(gSaveBlock1Ptr->registeredTexts[i], sChat->registeredTexts[i]);
 }
 
-static u8 *GetRegisteredTextByRow(int row)
+static u8 *GetRegisteredTextByRow(s32 row)
 {
     return sChat->registeredTexts[row];
 }
@@ -1914,7 +1914,7 @@ static u8 *GetMessageEntryBuffer(void)
     return sChat->messageEntryBuffer;
 }
 
-static int GetLengthOfMessageEntry(void)
+static s32 GetLengthOfMessageEntry(void)
 {
     u8 *str = GetMessageEntryBuffer();
     return StringLength_Multibyte(str);
@@ -1922,7 +1922,7 @@ static int GetLengthOfMessageEntry(void)
 
 static void GetBufferSelectionRegion(u32 *x, u32 *width)
 {
-    int diff = sChat->bufferCursorPos - sChat->lastBufferCursorPos;
+    s32 diff = sChat->bufferCursorPos - sChat->lastBufferCursorPos;
     if (diff < 0)
     {
         diff *= -1;
@@ -1938,7 +1938,7 @@ static void GetBufferSelectionRegion(u32 *x, u32 *width)
 
 static u8 *GetLimitedMessageStartPtr(void)
 {
-    int i;
+    s32 i;
     u16 numChars = GetNumOverflowCharsInMessage();
     u8 *str = sChat->messageEntryBuffer;
     for (i = 0; i < numChars; i++)
@@ -1979,12 +1979,12 @@ static u8 GetReceivedPlayerIndex(void)
     return sChat->receivedPlayerIndex;
 }
 
-static int GetTextEntryCursorPosition(void)
+static s32 GetTextEntryCursorPosition(void)
 {
     return sChat->bufferCursorPos;
 }
 
-static int GetShouldShowCaseToggleIcon(void)
+static s32 GetShouldShowCaseToggleIcon(void)
 {
     u8 *str = GetLastCharOfMessagePtr();
     u32 character = *str;
@@ -2180,12 +2180,12 @@ static void InitDisplay(struct UnionRoomChatDisplay *display)
 
 static void ResetDisplaySubtasks(void)
 {
-    int i;
+    s32 i;
 
     if (!sDisplay)
         return;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sDisplay->subtasks); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sDisplay->subtasks); i++)
     {
         sDisplay->subtasks[i].callback = Display_Dummy;
         sDisplay->subtasks[i].active = FALSE;
@@ -2195,12 +2195,12 @@ static void ResetDisplaySubtasks(void)
 
 static void RunDisplaySubtasks(void)
 {
-    int i;
+    s32 i;
 
     if (!sDisplay)
         return;
 
-    for (i = 0; i < (int)ARRAY_COUNT(sDisplay->subtasks); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(sDisplay->subtasks); i++)
     {
         sDisplay->subtasks[i].active =
             sDisplay->subtasks[i].callback(&sDisplay->subtasks[i].state);
@@ -2774,10 +2774,10 @@ static s8 ProcessMenuInput(void)
     return Menu_ProcessInput();
 }
 
-static void AddStdMessageWindow(int msgId, u16 bg0vofs)
+static void AddStdMessageWindow(s32 msgId, u16 bg0vofs)
 {
     const u8 *str;
-    int windowId;
+    s32 windowId;
     struct WindowTemplate template;
     template.bg = 0;
     template.tilemapLeft = 8;
@@ -2887,7 +2887,7 @@ static void DrawTextEntryMessage(u16 x, u8 *str, u8 bgColor, u8 fgColor, u8 shad
 static void PrintCurrentKeyboardPage(void)
 {
     u8 page;
-    int i;
+    s32 i;
     u16 left;
     u16 top;
     u8 color[3];
@@ -2931,7 +2931,7 @@ static void PrintCurrentKeyboardPage(void)
             }
             else
             {
-                int length = StringLength_Multibyte(str2);
+                s32 length = StringLength_Multibyte(str2);
                 do
                 {
                     length--;
@@ -3101,7 +3101,7 @@ static void LoadKeyboardWindow(void)
 
 static void LoadTextEntryWindow(void)
 {
-    int i;
+    s32 i;
     u8 unused[2];
     unused[0] = 0;
     unused[1] = 0xFF;
@@ -3243,7 +3243,7 @@ static void CreateTextEntrySprites(void)
 
 static void SpriteCB_TextEntryCursor(struct Sprite *sprite)
 {
-    int pos = GetTextEntryCursorPosition();
+    s32 pos = GetTextEntryCursorPosition();
     if (pos == MAX_MESSAGE_LENGTH)
     {
         sprite->invisible = TRUE;
@@ -3291,7 +3291,7 @@ static void UpdateRButtonLabel(void)
     }
     else
     {
-        int anim = GetShouldShowCaseToggleIcon();
+        s32 anim = GetShouldShowCaseToggleIcon();
         if (anim == 3)
         {
             sSprites->rButtonLabel->invisible = TRUE;

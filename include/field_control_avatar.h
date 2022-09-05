@@ -24,12 +24,12 @@ struct FieldInput
 
 void FieldClearPlayerInput(struct FieldInput *pStruct);
 void FieldGetPlayerInput(struct FieldInput *pStruct, u16 keys, u16 heldKeys);
-int ProcessPlayerFieldInput(struct FieldInput *pStruct);
+s32 ProcessPlayerFieldInput(struct FieldInput *pStruct);
 void overworld_poison_timer_set(void);
 void RestartWildEncounterImmunitySteps(void);
 const u8 *GetObjectEventScriptPointerPlayerFacing(void);
 bool8 TryDoDiveWarp(struct MapPosition *position, u16 b);
-int SetCableClubWarp(void);
+s32 SetCableClubWarp(void);
 u8 TrySetDiveWarp(void);
 const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction);
 u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);

@@ -3671,7 +3671,7 @@ static void ContestPrintLinkStandby(void)
 
 static void FillContestantWindowBgs(void)
 {
-    int i;
+    s32 i;
 
     for(i = 0; i < CONTESTANT_COUNT; i++)
         ContestBG_FillBoxWithTile(0, 0, 0x16, 2 + i * 5, 8, 2, 0x11);

@@ -382,7 +382,7 @@ static void AnimTask_AnimateGustTornadoPalette_Step(u8 taskId)
 {
     u8 data2;
     u16 temp;
-    int i, base;
+    s32 i, base;
 
     if (gTasks[taskId].data[10]++ == gTasks[taskId].data[1])
     {
@@ -1049,7 +1049,7 @@ static void AnimDiveBall_Step2(struct Sprite *sprite)
 static void AnimDiveWaterSplash(struct Sprite *sprite)
 {
     u32 matrixNum;
-    int t1, t2;
+    s32 t1, t2;
 
     switch (sprite->data[0])
     {
@@ -1103,8 +1103,8 @@ static void AnimDiveWaterSplash(struct Sprite *sprite)
 // Launches a water droplet away from the specified battler. Used by Astonish and Dive
 static void AnimSprayWaterDroplet(struct Sprite *sprite)
 {
-    int v1 = 0x1ff & Random2();
-    int v2 = 0x7f & Random2();
+    s32 v1 = 0x1ff & Random2();
+    s32 v2 = 0x7f & Random2();
 
     if (v1 % 2)
         sprite->data[0] = 736 + v1;

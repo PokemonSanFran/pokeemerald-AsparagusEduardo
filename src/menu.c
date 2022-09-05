@@ -250,7 +250,7 @@ void ClearStdWindowAndFrame(u8 windowId, bool8 copyToVram)
 
 static void WindowFunc_DrawStandardFrame(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum)
 {
-    int i;
+    s32 i;
 
     FillBgTilemapBufferRect(bg,
                             STD_WINDOW_BASE_TILE_NUM + 0,
@@ -955,7 +955,7 @@ void RedrawMenuCursor(u8 oldPos, u8 newPos)
 u8 Menu_MoveCursor(s8 cursorDelta)
 {
     u8 oldPos = sMenu.cursorPos;
-    int newPos = sMenu.cursorPos + cursorDelta;
+    s32 newPos = sMenu.cursorPos + cursorDelta;
 
     if (newPos < sMenu.minCursorPos)
         sMenu.cursorPos = sMenu.maxCursorPos;
@@ -971,7 +971,7 @@ u8 Menu_MoveCursor(s8 cursorDelta)
 u8 Menu_MoveCursorNoWrapAround(s8 cursorDelta)
 {
     u8 oldPos = sMenu.cursorPos;
-    int newPos = sMenu.cursorPos + cursorDelta;
+    s32 newPos = sMenu.cursorPos + cursorDelta;
 
     if (newPos < sMenu.minCursorPos)
         sMenu.cursorPos = sMenu.minCursorPos;
@@ -1768,15 +1768,15 @@ void DoScheduledBgTilemapCopiesToVram(void)
 
 void ResetTempTileDataBuffers(void)
 {
-    int i;
-    for (i = 0; i < (int)ARRAY_COUNT(sTempTileDataBuffer); i++)
+    s32 i;
+    for (i = 0; i < (s32)ARRAY_COUNT(sTempTileDataBuffer); i++)
         sTempTileDataBuffer[i] = NULL;
     sTempTileDataBufferIdx = 0;
 }
 
 bool8 FreeTempTileDataBuffersIfPossible(void)
 {
-    int i;
+    s32 i;
 
     if (!IsDma3ManagerBusyWithBgCopy())
     {
@@ -1893,10 +1893,10 @@ void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8
     }
 }
 
-void AddValToTilemapBuffer(void *ptr, int delta, int width, int height, bool32 isAffine)
+void AddValToTilemapBuffer(void *ptr, s32 delta, s32 width, s32 height, bool32 isAffine)
 {
-    int i;
-    int area = width * height;
+    s32 i;
+    s32 area = width * height;
     if (isAffine == TRUE)
     {
         u8 *as8BPP = ptr;
@@ -1924,9 +1924,9 @@ void ResetBgPositions(void)
     ChangeBgY(3, 0, BG_COORD_SET);
 }
 
-void BgDmaFill(u32 bg, u8 value, int offset, int size)
+void BgDmaFill(u32 bg, u8 value, s32 offset, s32 size)
 {
-    int temp = (!GetBgAttribute(bg, BG_ATTR_PALETTEMODE)) ? 32 : 64;
+    s32 temp = (!GetBgAttribute(bg, BG_ATTR_PALETTEMODE)) ? 32 : 64;
     void *addr = (void *)((GetBgAttribute(bg, BG_ATTR_CHARBASEINDEX) * 0x4000) + (GetBgAttribute(bg, BG_ATTR_BASETILE) + offset) * temp);
     RequestDma3Fill(value << 24 | value << 16 | value << 8 | value, VRAM + addr, size * temp, 1);
 }
@@ -1997,7 +1997,7 @@ void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 left
 
 void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 {
-    int count = 0;
+    s32 count = 0;
     while (gSaveBlock2Ptr->playerName[count] != EOS)
         count++;
 
@@ -2008,7 +2008,7 @@ void PrintPlayerNameOnWindow(u8 windowId, const u8 *src, u16 x, u16 y)
 
 static void UnusedBlitBitmapRect(const struct Bitmap *src, struct Bitmap *dst, u16 srcX, u16 srcY, u16 dstX, u16 dstY, u16 width, u16 height)
 {
-    int loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
+    s32 loopSrcY, loopDstY, loopSrcX, loopDstX, xEnd, yEnd, multiplierSrcY, multiplierDstY;
     const u8 *pixelsSrc;
     u8 *pixelsDst;
     u16 toOrr;

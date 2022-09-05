@@ -1058,7 +1058,7 @@ void TryPutLinkBattleTvShowOnAir(void)
     u16 species = 0;
     u16 moveId = 0;
     s32 i, j;
-    int zero = 0, one = 1; //needed for matching
+    s32 zero = 0, one = 1; //needed for matching
 
     if (gBattleStruct->anyMonHasTransformed)
         return;

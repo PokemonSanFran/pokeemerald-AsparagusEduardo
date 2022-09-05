@@ -260,7 +260,7 @@ void ClearLinkCallback(void);
 void ClearLinkCallback_2(void);
 u8 GetLinkPlayerCount(void);
 void OpenLinkTimed(void);
-u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper);
+u8 GetLinkPlayerDataExchangeStatusTimed(s32 lower, s32 upper);
 bool8 IsLinkPlayerDataExchangeComplete(void);
 u32 GetLinkPlayerTrainerId(u8);
 void ResetLinkPlayers(void);

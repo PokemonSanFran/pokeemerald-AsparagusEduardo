@@ -2433,8 +2433,8 @@ static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox 
 {
     if (c)
     {
-        int width = ((menuBox->infoRects->descTextLeft % 8) + menuBox->infoRects->descTextWidth + 7) / 8;
-        int height = ((menuBox->infoRects->descTextTop % 8) + menuBox->infoRects->descTextHeight + 7) / 8;
+        s32 width = ((menuBox->infoRects->descTextLeft % 8) + menuBox->infoRects->descTextWidth + 7) / 8;
+        s32 height = ((menuBox->infoRects->descTextTop % 8) + menuBox->infoRects->descTextHeight + 7) / 8;
         menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->descTextLeft >> 3, menuBox->infoRects->descTextTop >> 3, width, height, TRUE);
     }
     if (c != 2)
@@ -5858,7 +5858,7 @@ void BufferBattlePartyCurrentOrder(void)
 static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
 {
     u8 partyIds[PARTY_SIZE];
-    int i, j;
+    s32 i, j;
 
     if (IsMultiBattle() == TRUE)
     {
@@ -5905,7 +5905,7 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
             }
         }
     }
-    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+    for (i = 0; i < (s32)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
         partyBattleOrder[i] = (partyIds[0 + (i * 2)] << 4) | partyIds[1 + (i * 2)];
 }
 
@@ -5918,7 +5918,7 @@ void BufferBattlePartyCurrentOrderBySide(u8 battlerId, u8 flankId)
 static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, u8 battlerId)
 {
     u8 partyIndexes[PARTY_SIZE];
-    int i, j;
+    s32 i, j;
     u8 leftBattler;
     u8 rightBattler;
 
@@ -5985,7 +5985,7 @@ void SwitchPartyOrderLinkMulti(u8 battlerId, u8 slot, u8 slot2)
 {
     u8 partyIds[PARTY_SIZE];
     u8 tempSlot = 0;
-    int i, j;
+    s32 i, j;
     u8 *partyBattleOrder;
     u8 partyIdBuffer;
 
@@ -6053,7 +6053,7 @@ u8 GetPartyIdFromBattlePartyId(u8 battlePartyId)
 {
     u8 i, j;
 
-    for (j = i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); j++, i++)
+    for (j = i = 0; i < (s32)ARRAY_COUNT(gBattlePartyCurrentOrder); j++, i++)
     {
         if ((gBattlePartyCurrentOrder[i] >> 4) != battlePartyId)
         {
