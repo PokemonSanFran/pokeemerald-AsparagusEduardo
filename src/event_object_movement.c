@@ -1249,19 +1249,51 @@ static u8 GetObjectEventIdByLocalId(u8 localId)
     return OBJECT_EVENTS_COUNT;
 }
 
+static void SetObjectTemplateFlagIfTemporary(struct ObjectEventTemplate *template);
+static bool8 IsTreeOrRockOffScreenPostWalkTransition(struct ObjectEventTemplate *template, s16 x, s16 y);
+static bool8 IsTreeOrRockCloneOffScreen(struct ObjectEventTemplate *template, s16 x, s16 y);
+static bool8 ShouldTreeOrRockObjectBeCreated(struct ObjectEventTemplate *template, bool8 isClone, s16 x, s16 y);
+
 static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template, u8 mapNum, u8 mapGroup)
 {
     struct ObjectEvent *objectEvent;
     u8 objectEventId;
+    bool8 isClone = FALSE;
     s16 x;
     s16 y;
+    s16 cloneX = 0;
+    s16 cloneY = 0;
 
-    if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId))
-        return OBJECT_EVENTS_COUNT;
+    if (template->inConnection == 0xFF)
+    {
+        isClone = TRUE;
+        mapNum = template->trainerType;
+        mapGroup = template->trainerRange_berryTreeId;
+        cloneX = template->x;
+        cloneY = template->y;
+        template = &Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->events->objectEvents[template->elevation - 1];
+    }
+
+    if (GetAvailableObjectEventId(template->localId, mapNum, mapGroup, &objectEventId)
+        || !ShouldTreeOrRockObjectBeCreated(template, isClone, cloneX, cloneY))
+    {
+        if (objectEvent->rangeX == 0)
+            objectEvent->rangeX++;
+        if (objectEvent->rangeY == 0)
+            objectEvent->rangeY++;
+    }
     objectEvent = &gObjectEvents[objectEventId];
     ClearObjectEvent(objectEvent);
-    x = template->x + MAP_OFFSET;
-    y = template->y + MAP_OFFSET;
+    if (isClone)
+    {
+        x = cloneX + MAP_OFFSET;
+        y = cloneY + MAP_OFFSET;
+    }
+    else
+    {
+        x = template->x + MAP_OFFSET;
+        y = template->y + MAP_OFFSET;
+    }
     objectEvent->active = TRUE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     objectEvent->graphicsId = template->graphicsId;
@@ -1293,6 +1325,77 @@ static u8 InitObjectEventStateFromTemplate(struct ObjectEventTemplate *template,
             objectEvent->rangeY++;
     }
     return objectEventId;
+}
+
+static bool8 ShouldTreeOrRockObjectBeCreated(struct ObjectEventTemplate *template, bool8 isClone, s16 x, s16 y)
+{
+    if (isClone && !IsTreeOrRockCloneOffScreen(template, x, y))
+        return FALSE;
+    else if (!IsTreeOrRockOffScreenPostWalkTransition(template, x, y))
+        return FALSE;
+    return TRUE;
+}
+
+static bool8 IsTreeOrRockCloneOffScreen(struct ObjectEventTemplate *template, s16 x, s16 y)
+{
+    if (template->graphicsId == OBJ_EVENT_GFX_CUTTABLE_TREE ||
+        template->graphicsId == OBJ_EVENT_GFX_BREAKABLE_ROCK)
+    {
+        if (((gSaveBlock1Ptr->pos.x < x) && (gSaveBlock1Ptr->pos.x + 8) >= x) ||
+             (gSaveBlock1Ptr->pos.x - 8) < x)
+        {
+            if (((gSaveBlock1Ptr->pos.y - 6) <= y) &&
+                ((gSaveBlock1Ptr->pos.y + 6) >= y))
+            {
+                return FALSE;
+            }
+        }
+    }
+    return TRUE;
+}
+
+static bool8 IsTreeOrRockOffScreenPostWalkTransition(struct ObjectEventTemplate *template, s16 x, s16 y)
+{
+    s32 width, height;
+
+    if (!IsMapTypeOutdoors(GetCurrentMapType()))
+        return TRUE;
+    
+    width = gBackupMapLayout.width - 16;
+    height = gBackupMapLayout.height - 15;
+
+    if (template->graphicsId != OBJ_EVENT_GFX_CUTTABLE_TREE &&
+        template->graphicsId != OBJ_EVENT_GFX_BREAKABLE_ROCK)
+        return TRUE;
+    
+    if ((gSaveBlock1Ptr->pos.x != 0) ||
+       ((gSaveBlock1Ptr->pos.x == 0) && (template->x > 8)))
+    {
+        if ((gSaveBlock1Ptr->pos.x != width) ||
+           ((gSaveBlock1Ptr->pos.x == width) && (template->x < (width - 8))))
+        {
+            if ((gSaveBlock1Ptr->pos.y != 0) ||
+               ((gSaveBlock1Ptr->pos.y == 0) && (template->y > 6)))
+            {
+                if ((gSaveBlock1Ptr->pos.y != height) ||
+                   ((gSaveBlock1Ptr->pos.y == height) && (template->y < (height - 6))))
+                {
+                    return TRUE;
+                }
+            }
+        }
+    }
+
+    SetObjectTemplateFlagIfTemporary(template);
+    return FALSE;
+}
+
+static void SetObjectTemplateFlagIfTemporary(struct ObjectEventTemplate *template)
+{
+    if ((template->flagId >= FLAG_TEMP_11) && (template->flagId <= FLAG_TEMP_1F))
+    {
+        FlagSet(template->flagId);
+    }
 }
 
 u8 Unref_TryInitLocalObjectEvent(u8 localId)
