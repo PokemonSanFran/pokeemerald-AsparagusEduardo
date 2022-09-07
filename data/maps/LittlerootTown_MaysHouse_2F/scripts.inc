@@ -311,7 +311,7 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 	end
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-RivalsHouse_2F_Text_MayWhoAreYou: @ 81F959C
+RivalsHouse_2F_Text_MayWhoAreYou:
 	.string "¿Eh?\n"
 	.string "¿Quién…? ¿Quién eres tú?\p"
 	.string "Ah…\n"
@@ -335,11 +335,11 @@ RivalsHouse_2F_Text_MayWhoAreYou: @ 81F959C
 	.string "a atrapar Pokémon salvajes!\p"
 	.string "¡{PLAYER}{KUN}, nos vemos luego!$"
 
-RivalsHouse_2F_Text_MayGettingReady: @ 81F978A
+RivalsHouse_2F_Text_MayGettingReady:
 	.string "Mis Pokémon están curados…\n"
 	.string "Tengo todos los objetos… y…$"
 
-RivalsHouse_2F_Text_BrendanWhoAreYou: @ 81F97B4
+RivalsHouse_2F_Text_BrendanWhoAreYou:
 	.string "¿Eh?\n"
 	.string "¿Tú…?\p"
 	.string "¿Quién eres tú?\p"
@@ -358,15 +358,15 @@ RivalsHouse_2F_Text_BrendanWhoAreYou: @ 81F97B4
 	.string "a atrapar Pokémon salvajes…\p"
 	.string "Bueno, pues otro día, ¿vale?$"
 
-RivalsHouse_2F_Text_BrendanGettingReady: @ 81F9962
+RivalsHouse_2F_Text_BrendanGettingReady:
 	.string "Mis Pokémon están curados…\n"
 	.string "Tengo todos los objetos… y…$"
 
-RivalsHouse_2F_Text_ItsRivalsPokeBall: @ 81F9991
+RivalsHouse_2F_Text_ItsRivalsPokeBall:
 	.string "¡Es la Poké Ball de {RIVAL}!\p"
 	.string "Será mejor que la deje donde está.$"
 
-RivalsHouse_2F_Text_MayJustCheckingMyPokedex: @ 81F99C9
+RivalsHouse_2F_Text_MayJustCheckingMyPokedex:
 	.string "Aura: ¡{PLAYER}{KUN}!\p"
 	.string "Estaba mirando mi Pokédex.\p"
 	.string "Todavía hay un montón de Pokémon\n"
@@ -376,13 +376,13 @@ RivalsHouse_2F_Text_MayJustCheckingMyPokedex: @ 81F99C9
 	.string "¿Adónde debería ir a atrapar nuevos\n"
 	.string "Pokémon la próxima vez?$"
 
-RivalsHouse_2F_Text_MayWhereShouldIGoNext: @ 81F9A9E
+RivalsHouse_2F_Text_MayWhereShouldIGoNext:
 	.string "Aura: ¿Adónde debería ir a atrapar\n"
 	.string "nuevos Pokémon la próxima vez?\p"
 	.string "Sería divertido si nos encontráramos,\n"
 	.string "¿verdad, {PLAYER}{KUN}?$"
 
-RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex: @ 81F9B0D
+RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:
 	.string "Bruno: Anda, hola, {PLAYER}.\p"
 	.string "Estaba mirando mi Pokédex.\p"
 	.string "Todavía hay un montón de Pokémon\n"
@@ -391,7 +391,7 @@ RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex: @ 81F9B0D
 	.string "Cuando miro mi Pokédex me entran\n"
 	.string "ganas de salir de viaje otra vez…$"
 
-RivalsHouse_2F_Text_BrendanWhereShouldIGoNext: @ 81F9BE7
+RivalsHouse_2F_Text_BrendanWhereShouldIGoNext:
 	.string "No logro decidir a qué lugar\n"
 	.string "debería ir para cazar Pokémon.\p"
 	.string "Oye, {PLAYER}, si nos vemos mientras\n"

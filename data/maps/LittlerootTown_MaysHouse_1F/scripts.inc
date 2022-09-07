@@ -321,7 +321,7 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 	step_end
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-RivalsHouse_1F_Text_OhYoureTheNewNeighbor: @ 81F8BC5
+RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
 	.string "Hola. ¿Quién eres tú?\p"
 	.string "Ah…\n"
 	.string "Ya…\p"
@@ -333,26 +333,26 @@ RivalsHouse_1F_Text_OhYoureTheNewNeighbor: @ 81F8BC5
 	.string "ha sabido que venías a vivir aquí…\p"
 	.string "Ahora está arriba, creo.$"
 
-RivalsHouse_1F_Text_LikeChildLikeFather: @ 81F8CA5
+RivalsHouse_1F_Text_LikeChildLikeFather:
 	.string "De tal padre, tal retoño.\p"
 	.string "¡Mi marido está igual de entusiasmado\n"
 	.string "por los Pokémon que nuestro retoño!\p"
 	.string "Cuando no está en su Laboratorio,\n"
 	.string "anda perdido entre las hierbas altas.$"
 
-RivalsHouse_1F_Text_TooBusyToNoticeVisit: @ 81F8D37
+RivalsHouse_1F_Text_TooBusyToNoticeVisit:
 	.string "¡Ay! ¡{RIVAL}!\p"
 	.string "¡Estos niños están tan ocupados\n"
 	.string "con sus Pokémon que no se acuerdan\l"
 	.string "de venir a ver a sus padres, {PLAYER}{KUN}!$"
 
-RivalsHouse_1F_Text_WentOutToRoute103: @ 81F8D93
+RivalsHouse_1F_Text_WentOutToRoute103:
 	.string "Oh, {RIVAL} ha ido a la RUTA 103.\p"
 	.string "De tal palo, tal astilla.\n"
 	.string "{RIVAL} es incapaz de quedarse\l"
 	.string "en casa sin hacer nada.$"
 
-RivalsHouse_1F_Text_ShouldGoHomeEverySoOften: @ 81F8E01
+RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "Creo que viajar con Pokémon\n"
 	.string "es de lo mejor que hay.\p"
 	.string "Pero deberías ir a casa alguna vez\n"
@@ -360,7 +360,7 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften: @ 81F8E01
 	.string "Puede que ella no te lo diga, pero\n"
 	.string "estará preocupada por ti, {PLAYER}{KUN}.$"
 
-RivalsHouse_1F_Text_MayWhoAreYou: @ 81F8EC6
+RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "¿Eh?\n"
 	.string "¿Quién…? ¿Quién eres tú?\p"
 	.string "Ah…\n"
@@ -384,7 +384,7 @@ RivalsHouse_1F_Text_MayWhoAreYou: @ 81F8EC6
 	.string "a atrapar Pokémon salvajes!\p"
 	.string "¡{PLAYER}{KUN}, nos vemos luego!$"
 
-RivalsHouse_1F_Text_BrendanWhoAreYou: @ 81F90B4
+RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "¿Eh?\n"
 	.string "¿Tú…?\p"
 	.string "¿Quién eres tú?\p"
@@ -403,7 +403,7 @@ RivalsHouse_1F_Text_BrendanWhoAreYou: @ 81F90B4
 	.string "a atrapar Pokémon salvajes…\p"
 	.string "Bueno, pues otro día, ¿vale?$"
 
-RivalsHouse_1F_Text_DoYouHavePokemon: @ 81F9262
+RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "¡Anda, hola!\p"
 	.string "¿Ya tienes tu propio Pokémon?$"
 #else

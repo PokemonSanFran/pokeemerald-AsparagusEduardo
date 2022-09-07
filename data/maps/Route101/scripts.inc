@@ -261,20 +261,20 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-Route101_Text_HelpMe: @ 81EBE8F
+Route101_Text_HelpMe:
 	.string "¡Socorro! ¡Ayuda!$"
 
-Route101_Text_PleaseHelp: @ 81EBE9A
+Route101_Text_PleaseHelp:
 	.string "¡Oye! ¡Sí, tú!\n"
 	.string "¡Ayúdame, por favor!\p"
 	.string "¡En mi mochila hay Poké Balls!\n"
 	.string "¡Usa una!$"
 
-Route101_Text_DontLeaveMe: @ 81EBEDF
+Route101_Text_DontLeaveMe:
 	.string "Pe-pero... ¡¿adónde vas?!\n"
 	.string "¡¡¡No me dejes así!!!$"
 
-Route101_Text_YouSavedMe: @ 81EBF12
+Route101_Text_YouSavedMe:
 	.string "Prof. Abedul: Uf…\p"
 	.string "Estaba en la zona de hierba alta\n"
 	.string "estudiando Pokémon salvajes.\l"
@@ -287,19 +287,19 @@ Route101_Text_YouSavedMe: @ 81EBF12
 	.string "así que vente conmigo a mi laboratorio\n"
 	.string "Pokémon, ¿vale?$"
 
-Route101_Text_TakeTiredPokemonToPokeCenter: @ 81EBFDD
+Route101_Text_TakeTiredPokemonToPokeCenter:
 	.string "Si tus Pokémon están cansados,\n"
 	.string "llévalos a un Centro Pokémon.\p"
 	.string "Hay un Centro Pokémon en Pueblo\n"
 	.string "Escaso, muy cerca de aquí.$"
 
-Route101_Text_WildPokemonInTallGrass: @ 81EC04A
+Route101_Text_WildPokemonInTallGrass:
 	.string "Los Pokémon salvajes te atacarán\n"
 	.string "en las zonas de hierba alta.\p"
 	.string "Si quieres atrapar Pokémon, ve donde\n"
 	.string "haya hierba alta y busca.$"
 
-Route101_Text_RouteSign: @ 81EC0C8
+Route101_Text_RouteSign:
 	.string "Ruta 101\n"
 	.string "{UP_ARROW} Pueblo Escaso$"
 

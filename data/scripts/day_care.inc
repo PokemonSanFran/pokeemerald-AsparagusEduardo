@@ -407,7 +407,7 @@ Route117_PokemonDayCare_Text_WhatWillYouBattleWith:
 	.string "Come back another time.$"
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-Text_EggHatchHuh: @ 8292668
+Text_EggHatchHuh:
 	.string "¿Y esto?$"
 #else
 Text_EggHatchHuh:

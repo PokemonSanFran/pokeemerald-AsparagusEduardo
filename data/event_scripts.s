@@ -841,32 +841,32 @@ Common_EventScript_PlayerHandedOverTheItem::
 @ The below and surf.inc could be split into some text/notices.inc
 
 #if GAME_LANGUAGE == LANGUAGE_SPANISH
-gText_PokemartSign:: @ 8272B6A
+gText_PokemartSign::
 	.string "Tienda Pokémon\n"
 	.string "“¡Gran gama de artículos selectos!”$"
 
-gText_PokemonCenterSign:: @ 8272B9E
+gText_PokemonCenterSign::
 	.string "Centro Pokémon\n"
 	.string "“¡Rejuvenece a tus cansados amigos!”$"
 
-gText_MomOrDadMightLikeThisProgram:: @ 8272BCF
+gText_MomOrDadMightLikeThisProgram::
 	.string "{STR_VAR_1} might like this program.\n"
 	.string "… … … … … … … … … … … … … … … …\p"
 	.string "Better get going!$"
 
-gText_WhichFloorWouldYouLike:: @ 8272C1D
+gText_WhichFloorWouldYouLike::
 	.string "Welcome to Lilycove Department Store.\p"
 	.string "Which floor would you like?$"
 
-gText_SandstormIsVicious:: @ 8272C5F
+gText_SandstormIsVicious::
 	.string "The sandstorm is vicious.\n"
 	.string "It's impossible to keep going.$"
 
-gText_SelectWithoutRegisteredItem:: @ 8272C98
+gText_SelectWithoutRegisteredItem::
 	.string "An item in the Bag can be\n"
 	.string "registered for easy use.$"
 
-gText_PokemonTrainerSchoolEmail:: @ 8272CD5
+gText_PokemonTrainerSchoolEmail::
 	.string "Tienes un correo electrónico de la\n"
 	.string "Escuela de Entrenadores Pokémon.\p"
 	.string "A ver…\p"
@@ -877,23 +877,23 @@ gText_PokemonTrainerSchoolEmail:: @ 8272CD5
 	.string "de movimientos de sus Pokémon.”\p"
 	.string "Qué interesante…$"
 
-gText_PlayerHouseBootPC:: @ 8272D87
+gText_PlayerHouseBootPC::
 	.string "{PLAYER} encendió el PC.$"
 
-gText_PokeblockLinkCanceled:: @ 8272D9C
+gText_PokeblockLinkCanceled::
 	.string "The link was canceled.$"
 
-gText_UnusedNicknameReceivedPokemon:: @ 8272DB3
+gText_UnusedNicknameReceivedPokemon::
 	.string "Want to give a nickname to\n"
 	.string "the {STR_VAR_2} you received?$"
 
-gText_PlayerWhitedOut:: @ 8272DE3
+gText_PlayerWhitedOut::
 	.string "¡A {PLAYER} no le\n"
 	.string "quedan Pokémon!\p"
 	.string "¡{PLAYER} está fuera\n"
 	.string "de combate!$"
 #else
-gText_PokemartSign:: @ 8272B6A
+gText_PokemartSign::
 	.string "“Selected items for your convenience!”\n"
 	.string "Pokémon Mart$"
 
