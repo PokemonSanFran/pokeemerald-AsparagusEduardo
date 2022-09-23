@@ -171,16 +171,16 @@ void RecordMixingPlayerSpotTriggered(void)
 // these variables were const in R/S, but had to become changeable because of saveblocks changing RAM position
 static void SetSrcLookupPointers(void)
 {
-    sSecretBasesSave = gSaveBlock1Ptr->secretBases;
-    sTvShowsSave = gSaveBlock1Ptr->tvShows;
-    sPokeNewsSave = gSaveBlock1Ptr->pokeNews;
-    sOldManSave = &gSaveBlock1Ptr->oldMan;
-    sDewfordTrendsSave = gSaveBlock1Ptr->dewfordTrends;
+    sSecretBasesSave = gSaveBlock2Ptr->secretBases;
+    sTvShowsSave = gSaveBlock2Ptr->tvShows;
+    sPokeNewsSave = gSaveBlock2Ptr->pokeNews;
+    sOldManSave = &gSaveBlock2Ptr->oldMan;
+    sDewfordTrendsSave = gSaveBlock2Ptr->dewfordTrends;
     sRecordMixMailSave = &sRecordMixMail;
-    sBattleTowerSave = &gSaveBlock2Ptr->frontier.towerPlayer;
-    sLilycoveLadySave = &gSaveBlock1Ptr->lilycoveLady;
-    sApprenticesSave = gSaveBlock2Ptr->apprentices;
-    sBattleTowerSave_Duplicate = &gSaveBlock2Ptr->frontier.towerPlayer;
+    sBattleTowerSave = &gSaveBlock1Ptr->frontier.towerPlayer;
+    sLilycoveLadySave = &gSaveBlock2Ptr->lilycoveLady;
+    sApprenticesSave = gSaveBlock1Ptr->apprentices;
+    sBattleTowerSave_Duplicate = &gSaveBlock1Ptr->frontier.towerPlayer;
 }
 
 static void PrepareUnknownExchangePacket(struct PlayerRecordRS *dest)
@@ -960,8 +960,8 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
 
     // Save player's record mixed mail to the daycare (in case it has changed)
     mixMail = (void *)records + multiplayerId * recordSize;
-    memcpy(&gSaveBlock1Ptr->daycare.mons[0].mail, &mixMail->mail[0], sizeof(struct DaycareMail));
-    memcpy(&gSaveBlock1Ptr->daycare.mons[1].mail, &mixMail->mail[1], sizeof(struct DaycareMail));
+    memcpy(&gSaveBlock2Ptr->daycare.mons[0].mail, &mixMail->mail[0], sizeof(struct DaycareMail));
+    memcpy(&gSaveBlock2Ptr->daycare.mons[1].mail, &mixMail->mail[1], sizeof(struct DaycareMail));
     SeedRng(oldSeed);
 }
 
@@ -1002,11 +1002,11 @@ static void Task_DoRecordMixing(u8 taskId)
     case 2:
         // Mixing Ruby/Sapphire records.
         SetContinueGameWarpStatusToDynamicWarp();
-        WriteSaveBlock2();
+        WriteSaveBlock1();
         task->tState++;
         break;
     case 3:
-        if (WriteSaveBlock1Sector())
+        if (WriteSaveBlock2Sector())
         {
             ClearContinueGameWarpStatus2();
             task->tState = 4;
@@ -1076,15 +1076,15 @@ static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src)
     numMixApprentices = 0;
     for (i = 0; i < 2; i++)
     {
-        id = (i + gSaveBlock2Ptr->playerApprentice.saveId) % (APPRENTICE_COUNT - 1) + 1;
+        id = (i + gSaveBlock1Ptr->playerApprentice.saveId) % (APPRENTICE_COUNT - 1) + 1;
         if (src[id].playerName[0] != EOS)
         {
-            if (GetTrainerId(src[id].playerId) != GetTrainerId(gSaveBlock2Ptr->playerTrainerId))
+            if (GetTrainerId(src[id].playerId) != GetTrainerId(gSaveBlock1Ptr->playerTrainerId))
             {
                 numMixApprentices++;
                 apprenticeSaveId = id;
             }
-            if (GetTrainerId(src[id].playerId) == GetTrainerId(gSaveBlock2Ptr->playerTrainerId))
+            if (GetTrainerId(src[id].playerId) == GetTrainerId(gSaveBlock1Ptr->playerTrainerId))
             {
                 numOldPlayerApprentices++;
                 oldPlayerApprenticeSaveId = id;
@@ -1106,9 +1106,9 @@ static void GetSavedApprentices(struct Apprentice *dst, struct Apprentice *src)
         break;
     case 2:
         if (Random2() > 0x3333)
-            dst[1] = src[gSaveBlock2Ptr->playerApprentice.saveId + 1];
+            dst[1] = src[gSaveBlock1Ptr->playerApprentice.saveId + 1];
         else
-            dst[1] = src[((gSaveBlock2Ptr->playerApprentice.saveId + 1) % (APPRENTICE_COUNT - 1) + 1)];
+            dst[1] = src[((gSaveBlock1Ptr->playerApprentice.saveId + 1) % (APPRENTICE_COUNT - 1) + 1)];
         break;
     }
 }
@@ -1121,34 +1121,34 @@ void GetPlayerHallRecords(struct PlayerHallRecords *dst)
     {
         for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
         {
-            CopyTrainerId(dst->onePlayer[i][j].id, gSaveBlock2Ptr->playerTrainerId);
+            CopyTrainerId(dst->onePlayer[i][j].id, gSaveBlock1Ptr->playerTrainerId);
             dst->onePlayer[i][j].language = GAME_LANGUAGE;
-            StringCopy(dst->onePlayer[i][j].name, gSaveBlock2Ptr->playerName);
+            StringCopy(dst->onePlayer[i][j].name, gSaveBlock1Ptr->playerName);
         }
     }
 
     for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
     {
         dst->twoPlayers[j].language = GAME_LANGUAGE;
-        CopyTrainerId(dst->twoPlayers[j].id1, gSaveBlock2Ptr->playerTrainerId);
-        CopyTrainerId(dst->twoPlayers[j].id2, gSaveBlock2Ptr->frontier.opponentTrainerIds[j]);
-        StringCopy(dst->twoPlayers[j].name1, gSaveBlock2Ptr->playerName);
-        StringCopy(dst->twoPlayers[j].name2, gSaveBlock2Ptr->frontier.opponentNames[j]);
+        CopyTrainerId(dst->twoPlayers[j].id1, gSaveBlock1Ptr->playerTrainerId);
+        CopyTrainerId(dst->twoPlayers[j].id2, gSaveBlock1Ptr->frontier.opponentTrainerIds[j]);
+        StringCopy(dst->twoPlayers[j].name1, gSaveBlock1Ptr->playerName);
+        StringCopy(dst->twoPlayers[j].name2, gSaveBlock1Ptr->frontier.opponentNames[j]);
     }
 
     for (i = 0; i < FRONTIER_LVL_MODE_COUNT; i++)
     {
-        dst->onePlayer[RANKING_HALL_TOWER_SINGLES][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_TOWER_DOUBLES][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_DOUBLES][i];
-        dst->onePlayer[RANKING_HALL_TOWER_MULTIS][i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_MULTIS][i];
-        dst->onePlayer[RANKING_HALL_DOME][i].winStreak = gSaveBlock2Ptr->frontier.domeRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_PALACE][i].winStreak = gSaveBlock2Ptr->frontier.palaceRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_ARENA][i].winStreak = gSaveBlock2Ptr->frontier.arenaRecordStreaks[i];
-        dst->onePlayer[RANKING_HALL_FACTORY][i].winStreak = gSaveBlock2Ptr->frontier.factoryRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
-        dst->onePlayer[RANKING_HALL_PIKE][i].winStreak = gSaveBlock2Ptr->frontier.pikeRecordStreaks[i];
-        dst->onePlayer[RANKING_HALL_PYRAMID][i].winStreak = gSaveBlock2Ptr->frontier.pyramidRecordStreaks[i];
+        dst->onePlayer[RANKING_HALL_TOWER_SINGLES][i].winStreak = gSaveBlock1Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[RANKING_HALL_TOWER_DOUBLES][i].winStreak = gSaveBlock1Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_DOUBLES][i];
+        dst->onePlayer[RANKING_HALL_TOWER_MULTIS][i].winStreak = gSaveBlock1Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_MULTIS][i];
+        dst->onePlayer[RANKING_HALL_DOME][i].winStreak = gSaveBlock1Ptr->frontier.domeRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[RANKING_HALL_PALACE][i].winStreak = gSaveBlock1Ptr->frontier.palaceRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[RANKING_HALL_ARENA][i].winStreak = gSaveBlock1Ptr->frontier.arenaRecordStreaks[i];
+        dst->onePlayer[RANKING_HALL_FACTORY][i].winStreak = gSaveBlock1Ptr->frontier.factoryRecordWinStreaks[FRONTIER_MODE_SINGLES][i];
+        dst->onePlayer[RANKING_HALL_PIKE][i].winStreak = gSaveBlock1Ptr->frontier.pikeRecordStreaks[i];
+        dst->onePlayer[RANKING_HALL_PYRAMID][i].winStreak = gSaveBlock1Ptr->frontier.pyramidRecordStreaks[i];
 
-        dst->twoPlayers[i].winStreak = gSaveBlock2Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_LINK_MULTIS][i];
+        dst->twoPlayers[i].winStreak = gSaveBlock1Ptr->frontier.towerRecordWinStreaks[FRONTIER_MODE_LINK_MULTIS][i];
     }
 }
 
@@ -1179,7 +1179,7 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
     apprenticeId = 0;
     for (i = 0; i < 2; i++)
     {
-        if (mixApprentice[i].playerName[0] != EOS && !IsApprenticeAlreadySaved(&mixApprentice[i], &gSaveBlock2Ptr->apprentices[0]))
+        if (mixApprentice[i].playerName[0] != EOS && !IsApprenticeAlreadySaved(&mixApprentice[i], &gSaveBlock1Ptr->apprentices[0]))
         {
             numApprentices++;
             apprenticeId = i;
@@ -1189,17 +1189,17 @@ static void ReceiveApprenticeData(struct Apprentice *records, size_t recordSize,
     switch (numApprentices)
     {
     case 1:
-        apprenticeSaveId = gSaveBlock2Ptr->playerApprentice.saveId + 1;
-        gSaveBlock2Ptr->apprentices[apprenticeSaveId] = mixApprentice[apprenticeId];
-        gSaveBlock2Ptr->playerApprentice.saveId = (gSaveBlock2Ptr->playerApprentice.saveId + 1) % (APPRENTICE_COUNT - 1);
+        apprenticeSaveId = gSaveBlock1Ptr->playerApprentice.saveId + 1;
+        gSaveBlock1Ptr->apprentices[apprenticeSaveId] = mixApprentice[apprenticeId];
+        gSaveBlock1Ptr->playerApprentice.saveId = (gSaveBlock1Ptr->playerApprentice.saveId + 1) % (APPRENTICE_COUNT - 1);
         break;
     case 2:
         for (i = 0; i < 2; i++)
         {
-            apprenticeSaveId = ((i ^ 1) + gSaveBlock2Ptr->playerApprentice.saveId) % (APPRENTICE_COUNT - 1) + 1;
-            gSaveBlock2Ptr->apprentices[apprenticeSaveId] = mixApprentice[i];
+            apprenticeSaveId = ((i ^ 1) + gSaveBlock1Ptr->playerApprentice.saveId) % (APPRENTICE_COUNT - 1) + 1;
+            gSaveBlock1Ptr->apprentices[apprenticeSaveId] = mixApprentice[i];
         }
-        gSaveBlock2Ptr->playerApprentice.saveId = (gSaveBlock2Ptr->playerApprentice.saveId + 2) % (APPRENTICE_COUNT - 1);
+        gSaveBlock1Ptr->playerApprentice.saveId = (gSaveBlock1Ptr->playerApprentice.saveId + 2) % (APPRENTICE_COUNT - 1);
         break;
     }
 }
@@ -1227,7 +1227,7 @@ static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records
         {
             // First get the existing saved records
             for (k = 0; k < HALL_RECORDS_COUNT; k++)
-                dst->hallRecords1P[i][j][k] = gSaveBlock2Ptr->hallRecords1P[i][j][k];
+                dst->hallRecords1P[i][j][k] = gSaveBlock1Ptr->hallRecords1P[i][j][k];
 
             // Then read the new mixed records
             for (k = 0; k < linkPlayerCount - 1; k++)
@@ -1257,7 +1257,7 @@ static void GetNewHallRecords(struct RecordMixingHallRecords *dst, void *records
     {
         // First get the existing saved records
         for (k = 0; k < HALL_RECORDS_COUNT; k++)
-            dst->hallRecords2P[j][k] = gSaveBlock2Ptr->hallRecords2P[j][k];
+            dst->hallRecords2P[j][k] = gSaveBlock1Ptr->hallRecords2P[j][k];
 
         // Then read the new mixed records
         for (k = 0; k < linkPlayerCount - 1; k++)
@@ -1346,10 +1346,10 @@ static void SaveHighestWinStreakRecords(struct RecordMixingHallRecords *mixHallR
     for (i = 0; i < HALL_FACILITIES_COUNT; i++)
     {
         for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-            FillWinStreakRecords1P(gSaveBlock2Ptr->hallRecords1P[i][j], mixHallRecords->hallRecords1P[i][j]);
+            FillWinStreakRecords1P(gSaveBlock1Ptr->hallRecords1P[i][j], mixHallRecords->hallRecords1P[i][j]);
     }
     for (j = 0; j < FRONTIER_LVL_MODE_COUNT; j++)
-        FillWinStreakRecords2P(gSaveBlock2Ptr->hallRecords2P[j], mixHallRecords->hallRecords2P[j]);
+        FillWinStreakRecords2P(gSaveBlock1Ptr->hallRecords2P[j], mixHallRecords->hallRecords2P[j]);
 }
 
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t recordSize, u32 multiplayerId)
@@ -1365,9 +1365,9 @@ static void ReceiveRankingHallRecords(struct PlayerHallRecords *records, size_t 
 
 static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)
 {
-    sRecordMixMail.mail[0] = gSaveBlock1Ptr->daycare.mons[0].mail;
-    sRecordMixMail.mail[1] = gSaveBlock1Ptr->daycare.mons[1].mail;
-    InitDaycareMailRecordMixing(&gSaveBlock1Ptr->daycare, &sRecordMixMail);
+    sRecordMixMail.mail[0] = gSaveBlock2Ptr->daycare.mons[0].mail;
+    sRecordMixMail.mail[1] = gSaveBlock2Ptr->daycare.mons[1].mail;
+    InitDaycareMailRecordMixing(&gSaveBlock2Ptr->daycare, &sRecordMixMail);
     *dst = *sRecordMixMailSave;
 }
 

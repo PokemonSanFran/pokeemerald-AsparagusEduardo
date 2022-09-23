@@ -2264,7 +2264,7 @@ void Task_LinkContest_FinalizeConnection(u8 taskId)
             StringGet_Nickname(gContestMons[i].nickname);
 
         DestroyTask(taskId);
-        SetDynamicWarp(0, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE);
+        SetDynamicWarp(0, gSaveBlock2Ptr->location.mapGroup, gSaveBlock2Ptr->location.mapNum, WARP_ID_NONE);
         UnlockPlayerFieldControls();
         ScriptContext_Enable();
     }
@@ -2292,9 +2292,9 @@ static void Task_LinkContest_WaitDisconnect(u8 taskId)
 
 void SetContestTrainerGfxIds(void)
 {
-    gSaveBlock1Ptr->vars[VAR_OBJ_GFX_ID_0 - VARS_START] = gContestMons[0].trainerGfxId;
-    gSaveBlock1Ptr->vars[VAR_OBJ_GFX_ID_1 - VARS_START] = gContestMons[1].trainerGfxId;
-    gSaveBlock1Ptr->vars[VAR_OBJ_GFX_ID_2 - VARS_START] = gContestMons[2].trainerGfxId;
+    gSaveBlock2Ptr->vars[VAR_OBJ_GFX_ID_0 - VARS_START] = gContestMons[0].trainerGfxId;
+    gSaveBlock2Ptr->vars[VAR_OBJ_GFX_ID_1 - VARS_START] = gContestMons[1].trainerGfxId;
+    gSaveBlock2Ptr->vars[VAR_OBJ_GFX_ID_2 - VARS_START] = gContestMons[2].trainerGfxId;
 }
 
 // Unused
@@ -2352,7 +2352,7 @@ void DoesContestCategoryHaveMuseumPainting(void)
         break;
     }
 
-    if (gSaveBlock1Ptr->contestWinners[contestWinner].species == SPECIES_NONE)
+    if (gSaveBlock2Ptr->contestWinners[contestWinner].species == SPECIES_NONE)
         gSpecialVar_0x8004 = FALSE;
     else
         gSpecialVar_0x8004 = TRUE;
@@ -2384,7 +2384,7 @@ u8 CountPlayerMuseumPaintings(void)
 
     for (i = 0; i < NUM_CONTEST_WINNERS - MUSEUM_CONTEST_WINNERS_START; i++)
     {
-        if (gSaveBlock1Ptr->contestWinners[MUSEUM_CONTEST_WINNERS_START + i].species)
+        if (gSaveBlock2Ptr->contestWinners[MUSEUM_CONTEST_WINNERS_START + i].species)
             count++;
     }
 
@@ -2518,7 +2518,7 @@ void LoadLinkContestPlayerPalettes(void)
     {
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
-            objectEventId = GetObjectEventIdByLocalIdAndMap(sContestantLocalIds[i], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            objectEventId = GetObjectEventIdByLocalIdAndMap(sContestantLocalIds[i], gSaveBlock2Ptr->location.mapNum, gSaveBlock2Ptr->location.mapGroup);
             sprite = &gSprites[gObjectEvents[objectEventId].spriteId];
             sprite->oam.paletteNum = 6 + i;
             version = (u8)gLinkPlayers[i].version;

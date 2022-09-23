@@ -114,8 +114,8 @@ static bool8 CheckFeebas(void)
     u8 route119Section = 0;
     u16 spotId;
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE119)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE119))
+    if (gSaveBlock2Ptr->location.mapGroup == MAP_GROUP(ROUTE119)
+     && gSaveBlock2Ptr->location.mapNum == MAP_NUM(ROUTE119))
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= MAP_OFFSET;
@@ -133,7 +133,7 @@ static bool8 CheckFeebas(void)
         if (Random() % 100 > 49)
             return FALSE;
 
-        FeebasSeedRng(gSaveBlock1Ptr->dewfordTrends[0].rand);
+        FeebasSeedRng(gSaveBlock2Ptr->dewfordTrends[0].rand);
 
         // Assign each Feebas spot to a random fishing spot.
         // Randomness is fixed depending on the seed above.
@@ -308,11 +308,11 @@ static u16 GetCurrentMapWildMonHeaderId(void)
         if (wildHeader->mapGroup == MAP_GROUP(UNDEFINED))
             break;
 
-        if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
-            gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
+        if (gWildMonHeaders[i].mapGroup == gSaveBlock2Ptr->location.mapGroup &&
+            gWildMonHeaders[i].mapNum == gSaveBlock2Ptr->location.mapNum)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ALTERING_CAVE) &&
-                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
+            if (gSaveBlock2Ptr->location.mapGroup == MAP_GROUP(ALTERING_CAVE) &&
+                gSaveBlock2Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
             {
                 u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
                 if (alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
@@ -459,23 +459,23 @@ static bool8 SetUpMassOutbreakEncounter(u8 flags)
 {
     u16 i;
 
-    if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(gSaveBlock1Ptr->outbreakPokemonLevel))
+    if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(gSaveBlock2Ptr->outbreakPokemonLevel))
         return FALSE;
 
-    CreateWildMon(gSaveBlock1Ptr->outbreakPokemonSpecies, gSaveBlock1Ptr->outbreakPokemonLevel);
+    CreateWildMon(gSaveBlock2Ptr->outbreakPokemonSpecies, gSaveBlock2Ptr->outbreakPokemonLevel);
     for (i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(&gEnemyParty[0], gSaveBlock1Ptr->outbreakPokemonMoves[i], i);
+        SetMonMoveSlot(&gEnemyParty[0], gSaveBlock2Ptr->outbreakPokemonMoves[i], i);
 
     return TRUE;
 }
 
 static bool8 DoMassOutbreakEncounterTest(void)
 {
-    if (gSaveBlock1Ptr->outbreakPokemonSpecies != SPECIES_NONE
-     && gSaveBlock1Ptr->location.mapNum == gSaveBlock1Ptr->outbreakLocationMapNum
-     && gSaveBlock1Ptr->location.mapGroup == gSaveBlock1Ptr->outbreakLocationMapGroup)
+    if (gSaveBlock2Ptr->outbreakPokemonSpecies != SPECIES_NONE
+     && gSaveBlock2Ptr->location.mapNum == gSaveBlock2Ptr->outbreakLocationMapNum
+     && gSaveBlock2Ptr->location.mapGroup == gSaveBlock2Ptr->outbreakLocationMapGroup)
     {
-        if (Random() % 100 < gSaveBlock1Ptr->outbreakPokemonProbability)
+        if (Random() % 100 < gSaveBlock2Ptr->outbreakPokemonProbability)
             return TRUE;
     }
     return FALSE;
@@ -510,7 +510,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
             encounterRate /= 2;
         else if (ability == ABILITY_ARENA_TRAP)
             encounterRate *= 2;
-        else if (ability == ABILITY_SAND_VEIL && gSaveBlock1Ptr->weather == WEATHER_SANDSTORM)
+        else if (ability == ABILITY_SAND_VEIL && gSaveBlock2Ptr->weather == WEATHER_SANDSTORM)
             encounterRate /= 2;
     }
     if (encounterRate > MAX_ENCOUNTER_RATE)
@@ -528,8 +528,8 @@ static bool8 DoGlobalWildEncounterDiceRoll(void)
 
 static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(SOOTOPOLIS_CITY)
-     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(SOOTOPOLIS_CITY))
+    if (gSaveBlock2Ptr->location.mapGroup != MAP_GROUP(SOOTOPOLIS_CITY)
+     || gSaveBlock2Ptr->location.mapNum != MAP_NUM(SOOTOPOLIS_CITY))
     {
         return FALSE;
     }
@@ -565,7 +565,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
         }
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         {
-            headerId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+            headerId = gSaveBlock1Ptr->frontier.curChallengeBattleNum;
             if (previousMetaTileBehavior != currMetaTileBehavior && !DoGlobalWildEncounterDiceRoll())
                 return FALSE;
             else if (DoWildEncounterRateTest(gBattlePyramidWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
@@ -591,7 +591,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
 
             if (TryStartRoamerEncounter() == TRUE)
             {
-                roamer = &gSaveBlock1Ptr->roamer;
+                roamer = &gSaveBlock2Ptr->roamer;
                 if (!IsWildLevelAllowedByRepel(roamer->level))
                     return FALSE;
 
@@ -630,7 +630,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
 
             if (TryStartRoamerEncounter() == TRUE)
             {
-                roamer = &gSaveBlock1Ptr->roamer;
+                roamer = &gSaveBlock2Ptr->roamer;
                 if (!IsWildLevelAllowedByRepel(roamer->level))
                     return FALSE;
 
@@ -703,7 +703,7 @@ bool8 SweetScentWildEncounter(void)
         }
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
         {
-            headerId = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
+            headerId = gSaveBlock1Ptr->frontier.curChallengeBattleNum;
             if (TryGenerateWildMon(gBattlePyramidWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
                 return FALSE;
 

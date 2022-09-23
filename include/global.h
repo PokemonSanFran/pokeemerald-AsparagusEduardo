@@ -470,7 +470,7 @@ struct RankingHall2P
     u8 language;
 };
 
-struct SaveBlock2
+struct SaveBlock1
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
@@ -504,7 +504,7 @@ struct SaveBlock2
     /*0x64C*/ struct BattleFrontier frontier;
 }; // sizeof=0xF2C
 
-extern struct SaveBlock2 *gSaveBlock2Ptr;
+extern struct SaveBlock1 *gSaveBlock1Ptr;
 
 struct SecretBaseParty
 {
@@ -927,7 +927,7 @@ struct ExternalEventFlags
 
 } __attribute__((packed));/*size = 0x15*/
 
-struct SaveBlock1
+struct SaveBlock2
 {
     /*0x00*/ struct Coords16 pos;
     /*0x04*/ struct WarpData location;
@@ -1019,7 +1019,7 @@ struct SaveBlock1
     // sizeof: 0x3D88
 };
 
-extern struct SaveBlock1* gSaveBlock1Ptr;
+extern struct SaveBlock2* gSaveBlock2Ptr;
 
 struct MapPosition
 {

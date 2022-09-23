@@ -1450,55 +1450,55 @@ void ShowEasyChatScreen(void)
     switch (gSpecialVar_0x8004)
     {
     case EASY_CHAT_TYPE_PROFILE:
-        words = gSaveBlock1Ptr->easyChatProfile;
+        words = gSaveBlock2Ptr->easyChatProfile;
         break;
     case EASY_CHAT_TYPE_BATTLE_START:
-        words = gSaveBlock1Ptr->easyChatBattleStart;
+        words = gSaveBlock2Ptr->easyChatBattleStart;
         break;
     case EASY_CHAT_TYPE_BATTLE_WON:
-        words = gSaveBlock1Ptr->easyChatBattleWon;
+        words = gSaveBlock2Ptr->easyChatBattleWon;
         break;
     case EASY_CHAT_TYPE_BATTLE_LOST:
-        words = gSaveBlock1Ptr->easyChatBattleLost;
+        words = gSaveBlock2Ptr->easyChatBattleLost;
         break;
     case EASY_CHAT_TYPE_MAIL:
-        words = gSaveBlock1Ptr->mail[gSpecialVar_0x8005].words;
+        words = gSaveBlock2Ptr->mail[gSpecialVar_0x8005].words;
         break;
     case EASY_CHAT_TYPE_BARD_SONG:
-        bard = &gSaveBlock1Ptr->oldMan.bard;
+        bard = &gSaveBlock2Ptr->oldMan.bard;
         for (i = 0; i < BARD_SONG_LENGTH; i ++)
             bard->temporaryLyrics[i] = bard->songLyrics[i];
 
         words = bard->temporaryLyrics;
         break;
     case EASY_CHAT_TYPE_INTERVIEW:
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words;
+        words = gSaveBlock2Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words;
         displayedPersonType = gSpecialVar_0x8006;
         break;
     case EASY_CHAT_TYPE_FAN_CLUB:
-        words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.words[gSpecialVar_0x8006];
+        words = &gSaveBlock2Ptr->tvShows[gSpecialVar_0x8005].fanclubOpinions.words[gSpecialVar_0x8006];
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_FEMALE;
         break;
     case EASY_CHAT_TYPE_DUMMY_SHOW:
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].dummy.words;
+        words = gSaveBlock2Ptr->tvShows[gSpecialVar_0x8005].dummy.words;
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_MALE;
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
         words = (u16 *)gStringVar3;
-        words[0] = gSaveBlock1Ptr->dewfordTrends[0].words[0];
-        words[1] = gSaveBlock1Ptr->dewfordTrends[0].words[1];
+        words[0] = gSaveBlock2Ptr->dewfordTrends[0].words[0];
+        words[1] = gSaveBlock2Ptr->dewfordTrends[0].words[1];
         break;
     case EASY_CHAT_TYPE_GABBY_AND_TY:
-        words = gSaveBlock1Ptr->gabbyAndTyData.quote;
+        words = gSaveBlock2Ptr->gabbyAndTyData.quote;
         *words = EC_EMPTY_WORD;
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_FEMALE;
         break;
     case EASY_CHAT_TYPE_CONTEST_INTERVIEW:
-        words = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words[gSpecialVar_0x8006];
+        words = &gSaveBlock2Ptr->tvShows[gSpecialVar_0x8005].bravoTrainer.words[gSpecialVar_0x8006];
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_MALE;
         break;
     case EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW:
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].bravoTrainerTower.words;
+        words = gSaveBlock2Ptr->tvShows[gSpecialVar_0x8005].bravoTrainerTower.words;
         displayedPersonType = EASY_CHAT_PERSON_REPORTER_FEMALE;
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
@@ -1506,23 +1506,23 @@ void ShowEasyChatScreen(void)
         InitializeEasyChatWordArray(words, 2);
         break;
     case EASY_CHAT_TYPE_FAN_QUESTION:
-        words = gSaveBlock1Ptr->tvShows[gSpecialVar_0x8005].fanClubSpecial.words;
+        words = gSaveBlock2Ptr->tvShows[gSpecialVar_0x8005].fanClubSpecial.words;
         words[0] = EC_EMPTY_WORD;
         displayedPersonType = EASY_CHAT_PERSON_BOY;
         break;
     case EASY_CHAT_TYPE_QUIZ_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer;
+        words = &gSaveBlock2Ptr->lilycoveLady.quiz.playerAnswer;
         break;
     case EASY_CHAT_TYPE_QUIZ_QUESTION:
         return;
     case EASY_CHAT_TYPE_QUIZ_SET_QUESTION:
-        words = gSaveBlock1Ptr->lilycoveLady.quiz.question;
+        words = gSaveBlock2Ptr->lilycoveLady.quiz.question;
         break;
     case EASY_CHAT_TYPE_QUIZ_SET_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer;
+        words = &gSaveBlock2Ptr->lilycoveLady.quiz.correctAnswer;
         break;
     case EASY_CHAT_TYPE_APPRENTICE:
-        words = gSaveBlock2Ptr->apprentices[0].speechWon;
+        words = gSaveBlock1Ptr->apprentices[0].speechWon;
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
         words = GetQuestionnaireWordsPtr();
@@ -1548,7 +1548,7 @@ static void CB2_QuizLadyQuestion(void)
     case 1:
         if (!gPaletteFade.active)
         {
-            lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
+            lilycoveLady = &gSaveBlock2Ptr->lilycoveLady;
             lilycoveLady->quiz.playerAnswer = EC_EMPTY_WORD;
             CleanupOverworldWindowsAndTilemaps();
             DoQuizQuestionEasyChatScreen();
@@ -1593,7 +1593,7 @@ static void DoQuizAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(
         EASY_CHAT_TYPE_QUIZ_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer,
+        &gSaveBlock2Ptr->lilycoveLady.quiz.playerAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1601,7 +1601,7 @@ static void DoQuizAnswerEasyChatScreen(void)
 static void DoQuizQuestionEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.question,
+        gSaveBlock2Ptr->lilycoveLady.quiz.question,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1609,7 +1609,7 @@ static void DoQuizQuestionEasyChatScreen(void)
 static void DoQuizSetAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer,
+        &gSaveBlock2Ptr->lilycoveLady.quiz.correctAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1617,7 +1617,7 @@ static void DoQuizSetAnswerEasyChatScreen(void)
 static void DoQuizSetQuestionEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.question,
+        gSaveBlock2Ptr->lilycoveLady.quiz.question,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -2882,15 +2882,15 @@ static bool32 IsCurrentPhraseFull(void)
 static int IsQuizQuestionEmpty(void)
 {
     int i;
-    struct SaveBlock1 *saveBlock1;
+    struct SaveBlock2 *saveBlock2;
 
     if (sEasyChatScreen->type == EASY_CHAT_TYPE_QUIZ_SET_QUESTION)
         return IsCurrentPhraseEmpty();
 
-    saveBlock1 = gSaveBlock1Ptr;
+    saveBlock2 = gSaveBlock2Ptr;
     for (i = 0; i < QUIZ_QUESTION_LEN; i++)
     {
-        if (saveBlock1->lilycoveLady.quiz.question[i] != EC_EMPTY_WORD)
+        if (saveBlock2->lilycoveLady.quiz.question[i] != EC_EMPTY_WORD)
             return FALSE;
     }
 
@@ -2903,20 +2903,20 @@ static int IsQuizAnswerEmpty(void)
     if (sEasyChatScreen->type == EASY_CHAT_TYPE_QUIZ_SET_ANSWER)
         return IsCurrentPhraseEmpty();
 
-    quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    quiz = &gSaveBlock2Ptr->lilycoveLady.quiz;
     return quiz->correctAnswer == EC_EMPTY_WORD ? TRUE : FALSE;
 }
 
 static void GetQuizTitle(u8 *dst)
 {
     u8 name[32];
-    struct SaveBlock1 *saveBlock1 = gSaveBlock1Ptr;
+    struct SaveBlock2 *saveBlock2 = gSaveBlock2Ptr;
     DynamicPlaceholderTextUtil_Reset();
 
     // Buffer author's name
-    if (StringLength(saveBlock1->lilycoveLady.quiz.playerName) != 0)
+    if (StringLength(saveBlock2->lilycoveLady.quiz.playerName) != 0)
     {
-        TVShowConvertInternationalString(name, saveBlock1->lilycoveLady.quiz.playerName, saveBlock1->lilycoveLady.quiz.language);
+        TVShowConvertInternationalString(name, saveBlock2->lilycoveLady.quiz.playerName, saveBlock2->lilycoveLady.quiz.language);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, name);
     }
     else
@@ -5023,7 +5023,7 @@ static void TryAddInterviewObjectEvents(void)
 
     // Add object for player (facing right)
     spriteId = CreateObjectGraphicsSprite(
-        gSaveBlock2Ptr->playerGender == MALE ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
+        gSaveBlock1Ptr->playerGender == MALE ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
         SpriteCallbackDummy,
         52,
         40,
@@ -5370,13 +5370,13 @@ void ShowEasyChatProfile(void)
     switch (gSpecialVar_0x8004)
     {
     case 0:
-        easyChatWords = gSaveBlock1Ptr->easyChatProfile;
+        easyChatWords = gSaveBlock2Ptr->easyChatProfile;
         columns = 2;
         rows = 2;
         break;
     case 1:
-        easyChatWords = gSaveBlock1Ptr->easyChatBattleStart;
-        if (CanPhraseFitInXRowsYCols(gSaveBlock1Ptr->easyChatBattleStart, 3, 2, 18))
+        easyChatWords = gSaveBlock2Ptr->easyChatBattleStart;
+        if (CanPhraseFitInXRowsYCols(gSaveBlock2Ptr->easyChatBattleStart, 3, 2, 18))
         {
             columns = 2;
             rows = 3;
@@ -5388,12 +5388,12 @@ void ShowEasyChatProfile(void)
         }
         break;
     case 2:
-        easyChatWords = gSaveBlock1Ptr->easyChatBattleWon;
+        easyChatWords = gSaveBlock2Ptr->easyChatBattleWon;
         columns = 3;
         rows = 2;
         break;
     case 3:
-        easyChatWords = gSaveBlock1Ptr->easyChatBattleLost;
+        easyChatWords = gSaveBlock2Ptr->easyChatBattleLost;
         columns = 3;
         rows = 2;
         break;
@@ -5417,7 +5417,7 @@ static bool8 IsAdditionalPhraseUnlocked(u8 additionalPhraseId)
 {
     int byteOffset = additionalPhraseId / 8;
     int shift = additionalPhraseId % 8;
-    return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
+    return (gSaveBlock2Ptr->additionalPhrases[byteOffset] >> shift) & 1;
 }
 
 void UnlockAdditionalPhrase(u8 additionalPhraseId)
@@ -5426,7 +5426,7 @@ void UnlockAdditionalPhrase(u8 additionalPhraseId)
     {
         int byteOffset = additionalPhraseId / 8;
         int shift = additionalPhraseId % 8;
-        gSaveBlock1Ptr->additionalPhrases[byteOffset] |= 1 << shift;
+        gSaveBlock2Ptr->additionalPhrases[byteOffset] |= 1 << shift;
     }
 }
 
@@ -5534,21 +5534,21 @@ void InitEasyChatPhrases(void)
     u16 i, j;
 
     for (i = 0; i < ARRAY_COUNT(sDefaultProfileWords); i++)
-        gSaveBlock1Ptr->easyChatProfile[i] = sDefaultProfileWords[i];
+        gSaveBlock2Ptr->easyChatProfile[i] = sDefaultProfileWords[i];
 
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
-        gSaveBlock1Ptr->easyChatBattleStart[i] = sDefaultBattleStartWords[i];
+        gSaveBlock2Ptr->easyChatBattleStart[i] = sDefaultBattleStartWords[i];
 
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
-        gSaveBlock1Ptr->easyChatBattleWon[i] = sDefaultBattleWonWords[i];
+        gSaveBlock2Ptr->easyChatBattleWon[i] = sDefaultBattleWonWords[i];
 
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
-        gSaveBlock1Ptr->easyChatBattleLost[i] = sDefaultBattleLostWords[i];
+        gSaveBlock2Ptr->easyChatBattleLost[i] = sDefaultBattleLostWords[i];
 
     for (i = 0; i < MAIL_COUNT; i++)
     {
         for (j = 0; j < MAIL_WORDS_COUNT; j++)
-            gSaveBlock1Ptr->mail[i].words[j] = EC_EMPTY_WORD;
+            gSaveBlock2Ptr->mail[i].words[j] = EC_EMPTY_WORD;
     }
 
 #ifndef UBFIX
@@ -5557,10 +5557,10 @@ void InitEasyChatPhrases(void)
     // Mauville old man data is corrupted, which is initialized directly after
     // this function is called when starting a new game.
     for (i = 0; i < 64; i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+        gSaveBlock2Ptr->additionalPhrases[i] = 0;
 #else
-    for (i = 0; i < ARRAY_COUNT(gSaveBlock1Ptr->additionalPhrases); i++)
-        gSaveBlock1Ptr->additionalPhrases[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock2Ptr->additionalPhrases); i++)
+        gSaveBlock2Ptr->additionalPhrases[i] = 0;
 #endif
 }
 

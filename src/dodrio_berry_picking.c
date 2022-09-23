@@ -2625,12 +2625,12 @@ static void TryUpdateRecords(void)
     u32 berriesPicked = Min(GetBerriesPicked(sGame->multiplayerId), MAX_BERRIES); // Min here is redundant
     u32 score = Min(GetScore(sGame->multiplayerId), MAX_SCORE);
 
-    if (gSaveBlock2Ptr->berryPick.bestScore < score)
-        gSaveBlock2Ptr->berryPick.bestScore = score;
-    if (gSaveBlock2Ptr->berryPick.berriesPicked < berriesPicked)
-        gSaveBlock2Ptr->berryPick.berriesPicked = berriesPicked;
-    if (gSaveBlock2Ptr->berryPick.berriesPickedInRow < sGame->maxBerriesPickedInRow)
-        gSaveBlock2Ptr->berryPick.berriesPickedInRow = sGame->maxBerriesPickedInRow;
+    if (gSaveBlock1Ptr->berryPick.bestScore < score)
+        gSaveBlock1Ptr->berryPick.bestScore = score;
+    if (gSaveBlock1Ptr->berryPick.berriesPicked < berriesPicked)
+        gSaveBlock1Ptr->berryPick.berriesPicked = berriesPicked;
+    if (gSaveBlock1Ptr->berryPick.berriesPickedInRow < sGame->maxBerriesPickedInRow)
+        gSaveBlock1Ptr->berryPick.berriesPickedInRow = sGame->maxBerriesPickedInRow;
 }
 
 // Enqueue the given state, and dequeue and return
@@ -3001,9 +3001,9 @@ static void PrintRecordsText(u8 windowId, s32 width)
 {
     s32 i, x, numWidth;
     s32 recordNums[NUM_RECORD_TYPES];
-    recordNums[0] = gSaveBlock2Ptr->berryPick.berriesPicked;
-    recordNums[1] = gSaveBlock2Ptr->berryPick.bestScore;
-    recordNums[2] = gSaveBlock2Ptr->berryPick.berriesPickedInRow;
+    recordNums[0] = gSaveBlock1Ptr->berryPick.berriesPicked;
+    recordNums[1] = gSaveBlock1Ptr->berryPick.bestScore;
+    recordNums[2] = gSaveBlock1Ptr->berryPick.berriesPickedInRow;
 
     LoadUserWindowBorderGfx_(windowId, 0x21D, 0xD0);
     DrawTextBorderOuter(windowId, 0x21D, 0xD);
@@ -4609,7 +4609,7 @@ static void LoadGfx(void)
         sGfx->state++;
         break;
     case 4:
-        LoadWindowFrameGfx(gSaveBlock2Ptr->optionsWindowFrameType);
+        LoadWindowFrameGfx(gSaveBlock1Ptr->optionsWindowFrameType);
         LoadUserWindowFrameGfx();
         sGfx->state++;
         break;

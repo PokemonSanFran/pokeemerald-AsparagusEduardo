@@ -691,9 +691,9 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     u32 playTime;
     u8 i;
 
-    trainerCard->gender = gSaveBlock2Ptr->playerGender;
-    trainerCard->playTimeHours = gSaveBlock2Ptr->playTimeHours;
-    trainerCard->playTimeMinutes = gSaveBlock2Ptr->playTimeMinutes;
+    trainerCard->gender = gSaveBlock1Ptr->playerGender;
+    trainerCard->playTimeHours = gSaveBlock1Ptr->playTimeHours;
+    trainerCard->playTimeMinutes = gSaveBlock1Ptr->playTimeMinutes;
 
     playTime = GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME);
     if (!GetGameStat(GAME_STAT_ENTERED_HOF))
@@ -713,19 +713,19 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     trainerCard->caughtAllHoenn = HasAllHoennMons();
     trainerCard->caughtMonsCount = GetCaughtMonsCount();
 
-    trainerCard->trainerId = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+    trainerCard->trainerId = (gSaveBlock1Ptr->playerTrainerId[1] << 8) | gSaveBlock1Ptr->playerTrainerId[0];
 
     trainerCard->linkBattleWins = GetCappedGameStat(GAME_STAT_LINK_BATTLE_WINS, 9999);
     trainerCard->linkBattleLosses = GetCappedGameStat(GAME_STAT_LINK_BATTLE_LOSSES, 9999);
 
     trainerCard->pokemonTrades = GetCappedGameStat(GAME_STAT_POKEMON_TRADES, 0xFFFF);
 
-    trainerCard->money = GetMoney(&gSaveBlock1Ptr->money);
+    trainerCard->money = GetMoney(&gSaveBlock2Ptr->money);
 
     for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
-        trainerCard->easyChatProfile[i] = gSaveBlock1Ptr->easyChatProfile[i];
+        trainerCard->easyChatProfile[i] = gSaveBlock2Ptr->easyChatProfile[i];
 
-    StringCopy(trainerCard->playerName, gSaveBlock2Ptr->playerName);
+    StringCopy(trainerCard->playerName, gSaveBlock1Ptr->playerName);
 
     switch (cardType)
     {
@@ -757,7 +757,7 @@ static void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
     trainerCard->version = GAME_VERSION;
     SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
     trainerCard->hasAllFrontierSymbols = HasAllFrontierSymbols();
-    trainerCard->frontierBP = gSaveBlock2Ptr->frontier.cardBattlePoints;
+    trainerCard->frontierBP = gSaveBlock1Ptr->frontier.cardBattlePoints;
     if (trainerCard->hasAllFrontierSymbols)
         trainerCard->stars++;
 
@@ -773,7 +773,7 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
     trainerCard->version = GAME_VERSION;
     SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
     trainerCard->linkHasAllFrontierSymbols = HasAllFrontierSymbols();
-    *((u16 *)&trainerCard->linkPoints.frontier) = gSaveBlock2Ptr->frontier.cardBattlePoints;
+    *((u16 *)&trainerCard->linkPoints.frontier) = gSaveBlock1Ptr->frontier.cardBattlePoints;
     if (trainerCard->linkHasAllFrontierSymbols)
         trainerCard->stars++;
 
@@ -1108,8 +1108,8 @@ static void PrintTimeOnCard(void)
     }
     else
     {
-        hours = gSaveBlock2Ptr->playTimeHours;
-        minutes = gSaveBlock2Ptr->playTimeMinutes;
+        hours = gSaveBlock1Ptr->playTimeHours;
+        minutes = gSaveBlock1Ptr->playTimeMinutes;
     }
 
     if (hours > 999)
@@ -1823,7 +1823,7 @@ static void InitTrainerCardData(void)
     u8 i;
 
     sData->mainState = 0;
-    sData->timeColonBlinkTimer = gSaveBlock2Ptr->playTimeVBlanks;
+    sData->timeColonBlinkTimer = gSaveBlock1Ptr->playTimeVBlanks;
     sData->timeColonInvisible = FALSE;
     sData->onBack = FALSE;
     sData->flipBlendY = 0;

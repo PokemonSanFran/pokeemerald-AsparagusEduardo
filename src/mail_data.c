@@ -13,7 +13,7 @@ void ClearAllMail(void)
     u8 i;
 
     for (i = 0; i < MAIL_COUNT; i++)
-        ClearMail(&gSaveBlock1Ptr->mail[i]);
+        ClearMail(&gSaveBlock2Ptr->mail[i]);
 }
 
 void ClearMail(struct Mail *mail)
@@ -54,23 +54,23 @@ u8 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
 
     for (id = 0; id < PARTY_SIZE; id++)
     {
-        if (gSaveBlock1Ptr->mail[id].itemId == ITEM_NONE)
+        if (gSaveBlock2Ptr->mail[id].itemId == ITEM_NONE)
         {
             for (i = 0; i < MAIL_WORDS_COUNT; i++)
-                gSaveBlock1Ptr->mail[id].words[i] = EC_EMPTY_WORD;
+                gSaveBlock2Ptr->mail[id].words[i] = EC_EMPTY_WORD;
 
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-                gSaveBlock1Ptr->mail[id].playerName[i] = gSaveBlock2Ptr->playerName[i];
-            gSaveBlock1Ptr->mail[id].playerName[i] = EOS;
-            PadNameString(gSaveBlock1Ptr->mail[id].playerName, CHAR_SPACE);
+                gSaveBlock2Ptr->mail[id].playerName[i] = gSaveBlock1Ptr->playerName[i];
+            gSaveBlock2Ptr->mail[id].playerName[i] = EOS;
+            PadNameString(gSaveBlock2Ptr->mail[id].playerName, CHAR_SPACE);
 
             for (i = 0; i < TRAINER_ID_LENGTH; i++)
-                gSaveBlock1Ptr->mail[id].trainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+                gSaveBlock2Ptr->mail[id].trainerId[i] = gSaveBlock1Ptr->playerTrainerId[i];
 
             species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
             personality = GetBoxMonData(&mon->box, MON_DATA_PERSONALITY);
-            gSaveBlock1Ptr->mail[id].species = SpeciesToMailSpecies(species, personality);
-            gSaveBlock1Ptr->mail[id].itemId = itemId;
+            gSaveBlock2Ptr->mail[id].species = SpeciesToMailSpecies(species, personality);
+            gSaveBlock2Ptr->mail[id].itemId = itemId;
             SetMonData(mon, MON_DATA_MAIL, &id);
             SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
             return id;
@@ -117,7 +117,7 @@ u8 GiveMailToMon(struct Pokemon *mon, struct Mail *mail)
     if (mailId == MAIL_NONE)
         return MAIL_NONE;
 
-    gSaveBlock1Ptr->mail[mailId] = *mail;
+    gSaveBlock2Ptr->mail[mailId] = *mail;
 
     SetMonData(mon, MON_DATA_MAIL, &mailId);
 
@@ -142,7 +142,7 @@ void TakeMailFromMon(struct Pokemon *mon)
     if (MonHasMail(mon))
     {
         mailId = GetMonData(mon, MON_DATA_MAIL);
-        gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
+        gSaveBlock2Ptr->mail[mailId].itemId = ITEM_NONE;
         mailId = MAIL_NONE;
         heldItem[0] = ITEM_NONE;
         heldItem[1] = ITEM_NONE << 8;
@@ -153,7 +153,7 @@ void TakeMailFromMon(struct Pokemon *mon)
 
 void ClearMailItemId(u8 mailId)
 {
-    gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
+    gSaveBlock2Ptr->mail[mailId].itemId = ITEM_NONE;
 }
 
 u8 TakeMailFromMonAndSave(struct Pokemon *mon)
@@ -168,10 +168,10 @@ u8 TakeMailFromMonAndSave(struct Pokemon *mon)
 
     for (i = PARTY_SIZE; i < MAIL_COUNT; i++)
     {
-        if (gSaveBlock1Ptr->mail[i].itemId == ITEM_NONE)
+        if (gSaveBlock2Ptr->mail[i].itemId == ITEM_NONE)
         {
-            memcpy(&gSaveBlock1Ptr->mail[i], &gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct Mail));
-            gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)].itemId = ITEM_NONE;
+            memcpy(&gSaveBlock2Ptr->mail[i], &gSaveBlock2Ptr->mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct Mail));
+            gSaveBlock2Ptr->mail[GetMonData(mon, MON_DATA_MAIL)].itemId = ITEM_NONE;
             SetMonData(mon, MON_DATA_MAIL, &newMailId);
             SetMonData(mon, MON_DATA_HELD_ITEM, newHeldItem);
             return i;

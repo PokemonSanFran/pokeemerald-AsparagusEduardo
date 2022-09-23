@@ -618,14 +618,14 @@ static EWRAM_DATA u8 sRotatingGate_PuzzleCount = 0;
 
 static s32 GetCurrentMapRotatingGatePuzzleType(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FORTREE_CITY_GYM) &&
-        gSaveBlock1Ptr->location.mapNum == MAP_NUM(FORTREE_CITY_GYM))
+    if (gSaveBlock2Ptr->location.mapGroup == MAP_GROUP(FORTREE_CITY_GYM) &&
+        gSaveBlock2Ptr->location.mapNum == MAP_NUM(FORTREE_CITY_GYM))
     {
         return PUZZLE_FORTREE_CITY_GYM;
     }
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE110_TRICK_HOUSE_PUZZLE6) &&
-        gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE110_TRICK_HOUSE_PUZZLE6))
+    if (gSaveBlock2Ptr->location.mapGroup == MAP_GROUP(ROUTE110_TRICK_HOUSE_PUZZLE6) &&
+        gSaveBlock2Ptr->location.mapNum == MAP_NUM(ROUTE110_TRICK_HOUSE_PUZZLE6))
     {
         return PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6;
     }
@@ -703,10 +703,10 @@ static void RotatingGate_CreateGatesWithinViewport(s16 deltaX, s16 deltaY)
 
     // Calculate the bounding box of the camera
     // Same as RotatingGate_DestroyGatesOutsideViewport
-    s16 x = gSaveBlock1Ptr->pos.x - 2;
-    s16 x2 = gSaveBlock1Ptr->pos.x + MAP_OFFSET_W + 2;
-    s16 y = gSaveBlock1Ptr->pos.y - 2;
-    s16 y2 = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H;
+    s16 x = gSaveBlock2Ptr->pos.x - 2;
+    s16 x2 = gSaveBlock2Ptr->pos.x + MAP_OFFSET_W + 2;
+    s16 y = gSaveBlock2Ptr->pos.y - 2;
+    s16 y2 = gSaveBlock2Ptr->pos.y + MAP_OFFSET_H;
 
     for (i = 0; i < sRotatingGate_PuzzleCount; i++)
     {
@@ -820,10 +820,10 @@ static void RotatingGate_DestroyGatesOutsideViewport(void)
     s32 i;
 
     // Same as RotatingGate_CreateGatesWithinViewport
-    s16 x = gSaveBlock1Ptr->pos.x - 2;
-    s16 x2 = gSaveBlock1Ptr->pos.x + MAP_OFFSET_W + 2;
-    s16 y = gSaveBlock1Ptr->pos.y - 2;
-    s16 y2 = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H;
+    s16 x = gSaveBlock2Ptr->pos.x - 2;
+    s16 x2 = gSaveBlock2Ptr->pos.x + MAP_OFFSET_W + 2;
+    s16 y = gSaveBlock2Ptr->pos.y - 2;
+    s16 y2 = gSaveBlock2Ptr->pos.y + MAP_OFFSET_H;
 
     for (i = 0; i < sRotatingGate_PuzzleCount; i++)
     {

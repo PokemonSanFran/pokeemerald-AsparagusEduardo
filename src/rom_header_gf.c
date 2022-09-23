@@ -47,8 +47,8 @@ struct GFRomHeader
     u8 unk15;
     u8 unk16;
     u8 unk17;
-    u32 saveBlock2Size;
     u32 saveBlock1Size;
+    u32 saveBlock2Size;
     u32 partyCountOffset;
     u32 partyOffset;
     u32 warpFlagsOffset;
@@ -101,11 +101,11 @@ static const struct GFRomHeader sGFRomHeader = {
     .monSpeciesNames = gSpeciesNames,
     .moveNames = gMoveNames,
     .decorations = gDecorations,
-    .flagsOffset = offsetof(struct SaveBlock1, flags),
-    .varsOffset = offsetof(struct SaveBlock1, vars),
-    .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
-    .seen1Offset = offsetof(struct SaveBlock1, seen1),
-    .seen2Offset = offsetof(struct SaveBlock1, seen2),
+    .flagsOffset = offsetof(struct SaveBlock2, flags),
+    .varsOffset = offsetof(struct SaveBlock2, vars),
+    .pokedexOffset = offsetof(struct SaveBlock1, pokedex),
+    .seen1Offset = offsetof(struct SaveBlock2, seen1),
+    .seen2Offset = offsetof(struct SaveBlock2, seen2),
     .pokedexVar = VAR_NATIONAL_DEX - VARS_START,
     .pokedexFlag = FLAG_RECEIVED_POKEDEX_FROM_BIRCH,
     .mysteryEventFlag = FLAG_SYS_MYSTERY_EVENT_ENABLE,
@@ -128,18 +128,18 @@ static const struct GFRomHeader sGFRomHeader = {
     .unk15 = 1,
     .unk16 = 8,
     .unk17 = 12,
-    .saveBlock2Size = sizeof(struct SaveBlock2),
     .saveBlock1Size = sizeof(struct SaveBlock1),
-    .partyCountOffset = offsetof(struct SaveBlock1, playerPartyCount),
-    .partyOffset = offsetof(struct SaveBlock1, playerParty),
-    .warpFlagsOffset = offsetof(struct SaveBlock2, specialSaveWarpFlags),
-    .trainerIdOffset = offsetof(struct SaveBlock2, playerTrainerId),
-    .playerNameOffset = offsetof(struct SaveBlock2, playerName),
-    .playerGenderOffset = offsetof(struct SaveBlock2, playerGender),
-    .frontierStatusOffset = offsetof(struct SaveBlock2, frontier.challengeStatus),
-    .frontierStatusOffset2 = offsetof(struct SaveBlock2, frontier.challengeStatus),
-    .externalEventFlagsOffset = offsetof(struct SaveBlock1, externalEventFlags),
-    .externalEventDataOffset = offsetof(struct SaveBlock1, externalEventData),
+    .saveBlock2Size = sizeof(struct SaveBlock2),
+    .partyCountOffset = offsetof(struct SaveBlock2, playerPartyCount),
+    .partyOffset = offsetof(struct SaveBlock2, playerParty),
+    .warpFlagsOffset = offsetof(struct SaveBlock1, specialSaveWarpFlags),
+    .trainerIdOffset = offsetof(struct SaveBlock1, playerTrainerId),
+    .playerNameOffset = offsetof(struct SaveBlock1, playerName),
+    .playerGenderOffset = offsetof(struct SaveBlock1, playerGender),
+    .frontierStatusOffset = offsetof(struct SaveBlock1, frontier.challengeStatus),
+    .frontierStatusOffset2 = offsetof(struct SaveBlock1, frontier.challengeStatus),
+    .externalEventFlagsOffset = offsetof(struct SaveBlock2, externalEventFlags),
+    .externalEventDataOffset = offsetof(struct SaveBlock2, externalEventData),
     .unk18 = 0x00000000,
     .baseStats = gBaseStats,
     .abilityNames = gAbilityNames,
@@ -148,7 +148,7 @@ static const struct GFRomHeader sGFRomHeader = {
     .moves = gBattleMoves,
     .ballGfx = gBallSpriteSheets,
     .ballPalettes = gBallSpritePalettes,
-    .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),
+    .gcnLinkFlagsOffset = offsetof(struct SaveBlock1, gcnLinkFlags),
     .gameClearFlag = FLAG_SYS_GAME_CLEAR,
     .ribbonFlag = FLAG_SYS_RIBBON_GET,
     .bagCountItems = BAG_ITEMS_COUNT,
@@ -157,9 +157,9 @@ static const struct GFRomHeader sGFRomHeader = {
     .bagCountTMHMs = BAG_TMHM_COUNT,
     .bagCountBerries = BAG_BERRIES_COUNT,
     .pcItemsCount = PC_ITEMS_COUNT,
-    .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
-    .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
-    .enigmaBerryOffset = offsetof(struct SaveBlock1, enigmaBerry),
+    .pcItemsOffset = offsetof(struct SaveBlock2, pcItems),
+    .giftRibbonsOffset = offsetof(struct SaveBlock2, giftRibbons),
+    .enigmaBerryOffset = offsetof(struct SaveBlock2, enigmaBerry),
     .enigmaBerrySize = sizeof(struct EnigmaBerry),
     .moveDescriptions = NULL,
     .unk20 = 0x00000000, // 0xFFFFFFFF in FRLG

@@ -232,7 +232,7 @@ static u32 Client_Run(struct MysteryGiftClient * client)
         InitRamScript_NoObjectEvent(client->recvBuffer, sizeof(struct RamScriptData));
         break;
     case CLI_RECV_EREADER_TRAINER:
-        memcpy(&gSaveBlock2Ptr->frontier.ereaderTrainer, client->recvBuffer, sizeof(gSaveBlock2Ptr->frontier.ereaderTrainer));
+        memcpy(&gSaveBlock1Ptr->frontier.ereaderTrainer, client->recvBuffer, sizeof(gSaveBlock1Ptr->frontier.ereaderTrainer));
         ValidateEReaderTrainer();
         break;
     case CLI_RUN_BUFFER_SCRIPT:
@@ -277,8 +277,8 @@ static u32 Client_RunMysteryEventScript(struct MysteryGiftClient * client)
 static u32 Client_RunBufferScript(struct MysteryGiftClient * client)
 {
     // exec arbitrary code
-    u32 (*func)(u32 *, struct SaveBlock2 *, struct SaveBlock1 *) = (void *)gDecompressionBuffer;
-    if (func(&client->param, gSaveBlock2Ptr, gSaveBlock1Ptr) == 1)
+    u32 (*func)(u32 *, struct SaveBlock1 *, struct SaveBlock2 *) = (void *)gDecompressionBuffer;
+    if (func(&client->param, gSaveBlock1Ptr, gSaveBlock2Ptr) == 1)
     {
         client->funcId = FUNC_RUN;
         client->funcState = 0;

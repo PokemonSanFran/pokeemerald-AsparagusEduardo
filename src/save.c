@@ -55,12 +55,12 @@ struct
     u16 size;
 } static const sSaveSlotLayout[NUM_SECTORS_PER_SLOT] =
 {
-    SAVEBLOCK_CHUNK(struct SaveBlock2, 0), // SECTOR_ID_SAVEBLOCK2
+    SAVEBLOCK_CHUNK(struct SaveBlock1, 0), // SECTOR_ID_SAVEBLOCK2
 
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 0), // SECTOR_ID_SAVEBLOCK1_START
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 1),
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 2),
-    SAVEBLOCK_CHUNK(struct SaveBlock1, 3), // SECTOR_ID_SAVEBLOCK1_END
+    SAVEBLOCK_CHUNK(struct SaveBlock2, 0), // SECTOR_ID_SAVEBLOCK2_START
+    SAVEBLOCK_CHUNK(struct SaveBlock2, 1),
+    SAVEBLOCK_CHUNK(struct SaveBlock2, 2),
+    SAVEBLOCK_CHUNK(struct SaveBlock2, 3), // SECTOR_ID_SAVEBLOCK2_END
 
     SAVEBLOCK_CHUNK(struct PokemonStorage, 0), // SECTOR_ID_PKMN_STORAGE_START
     SAVEBLOCK_CHUNK(struct PokemonStorage, 1),
@@ -75,8 +75,8 @@ struct
 
 // These will produce an error if a save struct is larger than the space
 // alloted for it in the flash.
-STATIC_ASSERT(sizeof(struct SaveBlock2) <= SECTOR_DATA_SIZE, SaveBlock2FreeSpace);
-STATIC_ASSERT(sizeof(struct SaveBlock1) <= SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1), SaveBlock1FreeSpace);
+STATIC_ASSERT(sizeof(struct SaveBlock1) <= SECTOR_DATA_SIZE, SaveBlock1FreeSpace);
+STATIC_ASSERT(sizeof(struct SaveBlock2) <= SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK2_END - SECTOR_ID_SAVEBLOCK2_START + 1), SaveBlock2FreeSpace);
 STATIC_ASSERT(sizeof(struct PokemonStorage) <= SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1), PokemonStorageFreeSpace);
 
 u16 gLastWrittenSector;
@@ -689,12 +689,12 @@ static u16 CalculateChecksum(void *data, u16 size)
 static void UpdateSaveAddresses(void)
 {
     int i = SECTOR_ID_SAVEBLOCK2;
-    gRamSaveSectorLocations[i].data = (void *)(gSaveBlock2Ptr) + sSaveSlotLayout[i].offset;
+    gRamSaveSectorLocations[i].data = (void *)(gSaveBlock1Ptr) + sSaveSlotLayout[i].offset;
     gRamSaveSectorLocations[i].size = sSaveSlotLayout[i].size;
 
-    for (i = SECTOR_ID_SAVEBLOCK1_START; i <= SECTOR_ID_SAVEBLOCK1_END; i++)
+    for (i = SECTOR_ID_SAVEBLOCK2_START; i <= SECTOR_ID_SAVEBLOCK2_END; i++)
     {
-        gRamSaveSectorLocations[i].data = (void *)(gSaveBlock1Ptr) + sSaveSlotLayout[i].offset;
+        gRamSaveSectorLocations[i].data = (void *)(gSaveBlock2Ptr) + sSaveSlotLayout[i].offset;
         gRamSaveSectorLocations[i].size = sSaveSlotLayout[i].size;
     }
 
@@ -744,9 +744,9 @@ u8 HandleSavingData(u8 saveType)
         // Used by link / Battle Frontier
         // Write only SaveBlocks 1 and 2 (skips the PC)
         CopyPartyAndObjectsToSave();
-        for(i = SECTOR_ID_SAVEBLOCK2; i <= SECTOR_ID_SAVEBLOCK1_END; i++)
+        for(i = SECTOR_ID_SAVEBLOCK2; i <= SECTOR_ID_SAVEBLOCK2_END; i++)
             HandleReplaceSector(i, gRamSaveSectorLocations);
-        for(i = SECTOR_ID_SAVEBLOCK2; i <= SECTOR_ID_SAVEBLOCK1_END; i++)
+        for(i = SECTOR_ID_SAVEBLOCK2; i <= SECTOR_ID_SAVEBLOCK2_END; i++)
             WriteSectorSignatureByte_NoOffset(i, gRamSaveSectorLocations);
         break;
     case SAVE_OVERWRITE_DIFFERENT_FILE:
@@ -826,7 +826,7 @@ bool8 LinkFullSave_SetLastSectorSignature(void)
     return FALSE;
 }
 
-u8 WriteSaveBlock2(void)
+u8 WriteSaveBlock1(void)
 {
     if (gFlashMemoryPresent != TRUE)
         return TRUE;
@@ -841,22 +841,22 @@ u8 WriteSaveBlock2(void)
     return FALSE;
 }
 
-// Used in conjunction with WriteSaveBlock2 to write both for certain link saves.
-// This will be called repeatedly in a task, writing each sector of SaveBlock1 incrementally.
+// Used in conjunction with WriteSaveBlock1 to write both for certain link saves.
+// This will be called repeatedly in a task, writing each sector of SaveBlock2 incrementally.
 // It returns TRUE when finished.
-bool8 WriteSaveBlock1Sector(void)
+bool8 WriteSaveBlock2Sector(void)
 {
     u8 finished = FALSE;
-    u16 sectorId = ++gIncrementalSectorId; // Because WriteSaveBlock2 will have been called prior, this will be SECTOR_ID_SAVEBLOCK1_START
-    if (sectorId <= SECTOR_ID_SAVEBLOCK1_END)
+    u16 sectorId = ++gIncrementalSectorId; // Because WriteSaveBlock1 will have been called prior, this will be SECTOR_ID_SAVEBLOCK2_START
+    if (sectorId <= SECTOR_ID_SAVEBLOCK2_END)
     {
-        // Write a single sector of SaveBlock1
+        // Write a single sector of SaveBlock2
         HandleReplaceSectorAndVerify(gIncrementalSectorId + 1, gRamSaveSectorLocations);
         WriteSectorSignatureByte(sectorId, gRamSaveSectorLocations);
     }
     else
     {
-        // Beyond SaveBlock1, don't write the sector.
+        // Beyond SaveBlock2, don't write the sector.
         // Does write 1 byte of the next sector's signature field, but as these
         // are the same for all valid sectors it doesn't matter.
         WriteSectorSignatureByte(sectorId, gRamSaveSectorLocations);
@@ -914,12 +914,12 @@ u16 GetSaveBlocksPointersBaseOffset(void)
     {
         ReadFlashSector(i + slotOffset, gReadWriteSector);
 
-        // Base offset for SaveBlock2 is calculated using the trainer id
+        // Base offset for SaveBlock1 is calculated using the trainer id
         if (gReadWriteSector->id == SECTOR_ID_SAVEBLOCK2)
-            return sector->data[offsetof(struct SaveBlock2, playerTrainerId[0])] +
-                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[1])] +
-                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[2])] +
-                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[3])];
+            return sector->data[offsetof(struct SaveBlock1, playerTrainerId[0])] +
+                   sector->data[offsetof(struct SaveBlock1, playerTrainerId[1])] +
+                   sector->data[offsetof(struct SaveBlock1, playerTrainerId[2])] +
+                   sector->data[offsetof(struct SaveBlock1, playerTrainerId[3])];
     }
     return 0;
 }

@@ -332,11 +332,11 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
 
     mapNum = sprite->sCurrentMap >> 8;
     mapGroup = sprite->sCurrentMap;
-    if (gCamera.active && (gSaveBlock1Ptr->location.mapNum != mapNum || gSaveBlock1Ptr->location.mapGroup != mapGroup))
+    if (gCamera.active && (gSaveBlock2Ptr->location.mapNum != mapNum || gSaveBlock2Ptr->location.mapGroup != mapGroup))
     {
         sprite->sX -= gCamera.x;
         sprite->sY -= gCamera.y;
-        sprite->sCurrentMap = ((u8)gSaveBlock1Ptr->location.mapNum << 8) | (u8)gSaveBlock1Ptr->location.mapGroup;
+        sprite->sCurrentMap = ((u8)gSaveBlock2Ptr->location.mapNum << 8) | (u8)gSaveBlock2Ptr->location.mapGroup;
     }
     localId = sprite->sLocalId;
     mapNum = sprite->sMapNum;
@@ -448,11 +448,11 @@ void UpdateLongGrassFieldEffect(struct Sprite *sprite)
 
     mapNum = sprite->sCurrentMap >> 8;
     mapGroup = sprite->sCurrentMap;
-    if (gCamera.active && (gSaveBlock1Ptr->location.mapNum != mapNum || gSaveBlock1Ptr->location.mapGroup != mapGroup))
+    if (gCamera.active && (gSaveBlock2Ptr->location.mapNum != mapNum || gSaveBlock2Ptr->location.mapGroup != mapGroup))
     {
         sprite->sX -= gCamera.x;
         sprite->sY -= gCamera.y;
-        sprite->sCurrentMap = ((u8)gSaveBlock1Ptr->location.mapNum << 8) | (u8)gSaveBlock1Ptr->location.mapGroup;
+        sprite->sCurrentMap = ((u8)gSaveBlock2Ptr->location.mapNum << 8) | (u8)gSaveBlock2Ptr->location.mapGroup;
     }
     localId = sprite->sLocalId;
     mapNum = sprite->sMapNum;

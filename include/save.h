@@ -15,8 +15,8 @@
 #define SPECIAL_SECTOR_SENTINEL 0xB39D
 
 #define SECTOR_ID_SAVEBLOCK2          0
-#define SECTOR_ID_SAVEBLOCK1_START    1
-#define SECTOR_ID_SAVEBLOCK1_END      4
+#define SECTOR_ID_SAVEBLOCK2_START    1
+#define SECTOR_ID_SAVEBLOCK2_END      4
 #define SECTOR_ID_PKMN_STORAGE_START  5
 #define SECTOR_ID_PKMN_STORAGE_END   13
 #define NUM_SECTORS_PER_SLOT         14
@@ -100,8 +100,8 @@ bool8 LinkFullSave_Init(void);
 bool8 LinkFullSave_WriteSector(void);
 bool8 LinkFullSave_ReplaceLastSector(void);
 bool8 LinkFullSave_SetLastSectorSignature(void);
-bool8 WriteSaveBlock2(void);
-bool8 WriteSaveBlock1Sector(void);
+bool8 WriteSaveBlock1(void);
+bool8 WriteSaveBlock2Sector(void);
 u8 LoadGameSave(u8 saveType);
 u16 GetSaveBlocksPointersBaseOffset(void);
 u32 TryReadSpecialSaveSector(u8 sector, u8 *dst);
