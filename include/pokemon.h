@@ -6,6 +6,7 @@
 #include "constants/pokemon_config.h"
 #include "constants/map_groups.h"
 
+#define IS_BASE_FORM(species) (GET_BASE_SPECIES_ID(species) == species)
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
 #define FORM_SPECIES_END (0xffff)
 
