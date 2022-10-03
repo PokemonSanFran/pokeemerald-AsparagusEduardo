@@ -379,7 +379,7 @@
 #define STRINGID_PKMNBOXLANETTESPCFULL                378
 #define STRINGID_TRAINER1WINTEXT                      379
 #define STRINGID_TRAINER2WINTEXT                      380
-                                                      
+
 #define STRINGID_ENDUREDSTURDY                        381
 #define STRINGID_POWERHERB                            382
 #define STRINGID_HURTBYITEM                           383
@@ -624,15 +624,21 @@
 #define STRINGID_ZMOVESTATUP                          622
 #define STRINGID_ZMOVEHPTRAP                          623
 #define STRINGID_TERRAINREMOVED                       624
-#define STRINGID_PICKUP                               625
-#define STRINGID_PICKUPSOLO                           626
+#define STRINGID_ATTACKEREXPELLEDTHEPOISON            625
+#define STRINGID_ATTACKERSHOOKITSELFAWAKE             626
+#define STRINGID_ATTACKERBROKETHROUGHPARALYSIS        627
+#define STRINGID_ATTACKERHEALEDITSBURN                628
+#define STRINGID_ATTACKERMELTEDTHEICE                 629
+#define STRINGID_TARGETTOUGHEDITOUT                   630
+#define STRINGID_PICKUP                               631
+#define STRINGID_PICKUPSOLO                           632
 //tx_randomizer_and_challenges
-#define STRINGID_ONETYPECAPTUREBLOCKED                627
-#define STRINGID_NUZLOCKECAPTUREBLOCKED               628
-#define STRINGID_SPECIESCLAUSECAPTUREBLOCKED          629
-#define STRINGID_SAMESPECIESCAPTUREBLOCKED            630
+#define STRINGID_ONETYPECAPTUREBLOCKED                633
+#define STRINGID_NUZLOCKECAPTUREBLOCKED               634
+#define STRINGID_SPECIESCLAUSECAPTUREBLOCKED          635
+#define STRINGID_SAMESPECIESCAPTUREBLOCKED            636
 
-#define BATTLESTRINGS_COUNT                           631
+#define BATTLESTRINGS_COUNT                           637
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

@@ -183,8 +183,8 @@ static void UDTradeAction_Cancel(u8 taskId)
 {
     VarSet(VAR_DIMENSION_LINK, DIMENSION_INFUSED);
     UDTrade_DestroyMenu(taskId);
-    ScriptContext2_Enable();
-    ScriptContext1_SetupScript(CableClub_EventScript_AbortLink);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(CableClub_EventScript_AbortLink);
 }
 static void UDTradeAction_DestroyExtraWindow(u8 taskId)
 {
@@ -195,7 +195,7 @@ static void UDTradeAction_DestroyExtraWindow(u8 taskId)
     RemoveWindow(gTasks[taskId].data[2]);
 
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 
@@ -216,8 +216,8 @@ static void UDTradeTask_HandleMenuInput_Main(u8 taskId)
     {
         PlaySE(SE_SELECT);
         UDTrade_DestroyMenu(taskId);
-        ScriptContext2_Enable();
-        ScriptContext1_SetupScript(CableClub_EventScript_AbortLink);
+        LockPlayerFieldControls();
+        ScriptContext_SetupScript(CableClub_EventScript_AbortLink);
     }
 }
 
@@ -283,15 +283,15 @@ static void ValidateDimension(u8 taskId)
             StringCopy(gStringVar2, sUDTradeMenu_Items_Main[dimId].name);
             
             UDTrade_DestroyMenu(taskId);
-            ScriptContext2_Enable();
-            ScriptContext1_SetupScript(UDTrade_EventScript_SpeciesNotAllowed);
+            LockPlayerFieldControls();
+            ScriptContext_SetupScript(UDTrade_EventScript_SpeciesNotAllowed);
             return;
         }
     }
 
     UDTrade_DestroyMenu(taskId);
-    ScriptContext2_Enable();
-    ScriptContext1_SetupScript(CableClub_EventScript_TradeCenter);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(CableClub_EventScript_TradeCenter);
 }
 
 static void UDTradeAction_InfusedDimension(u8 taskId)

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle_setup.h"
-#include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
@@ -123,7 +122,7 @@ static const struct OamData sOamData_Icons =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -331,10 +330,8 @@ bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
 
-    #ifdef TX_DEBUGGING //DEBUG
-        if (FlagGet(FLAG_SYS_NO_TRAINER_SEE))
-            return FALSE;
-    #endif //
+    if (FlagGet(OW_FLAG_NO_TRAINER_SEE))
+        return FALSE;
 
     gNoOfApproachingTrainers = 0;
     gApproachingTrainerId = 0;
@@ -804,7 +801,7 @@ void DoTrainerApproach(void)
 static void Task_EndTrainerApproach(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 void TryPrepareSecondApproachingTrainer(void)

@@ -813,6 +813,9 @@ static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
     u16 ability = GetMonAbility(mon);
     bool8 ret = FALSE;
 
+    if (ability == ABILITY_COMATOSE)
+        return TRUE;
+
     switch (status)
     {
     case STATUS1_FREEZE:
@@ -856,8 +859,10 @@ static bool8 DoesTypePreventStatus(u16 species, u32 status)
         break;
     case STATUS1_PARALYSIS:
         if (GetTypeBySpecies(species, 1) == TYPE_GROUND || GetTypeBySpecies(species, 2) == TYPE_GROUND
-            || (B_PARALYZE_ELECTRIC >= GEN_6 &&
-                (GetTypeBySpecies(species, 1) == TYPE_ELECTRIC || GetTypeBySpecies(species, 2) == TYPE_ELECTRIC)))
+        #if B_PARALYZE_ELECTRIC >= GEN_6
+            || GetTypeBySpecies(species, 1) == TYPE_ELECTRIC || GetTypeBySpecies(species, 2) == TYPE_ELECTRIC
+        #endif
+        )
             ret = TRUE;
         break;
     case STATUS1_BURN:
@@ -1253,7 +1258,7 @@ static void Task_DoStatusInflictionScreenFlash(u8 taskId)
     {
         if (IsStatusInflictionScreenFlashTaskFinished())
         {
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
     }

@@ -19,8 +19,10 @@
 
 #ifdef ENGLISH
 #define UNITS_IMPERIAL
+#define CHAR_DEC_SEPARATOR CHAR_PERIOD // Period is used as a decimal separator only in the UK and the US.
 #else
 #define UNITS_METRIC
+#define CHAR_DEC_SEPARATOR CHAR_COMMA
 #endif
 
 //#define GBA_PRINTF
@@ -34,5 +36,22 @@
 #define UBFIX
 #endif
 #endif
+
+// Compatibility definition for other projects to detect pokeemerald-expansion
+#define RHH_EXPANSION
+
+// Legacy branch-based defines included for backwards compatibility
+#define BATTLE_ENGINE
+#define POKEMON_EXPANSION
+#define ITEM_EXPANSION
+
+// Generation constants used in configs to define behavior
+#define GEN_3 0
+#define GEN_4 1
+#define GEN_5 2
+#define GEN_6 3
+#define GEN_7 4
+#define GEN_8 5
+#define GEN_LATEST GEN_8
 
 #endif // GUARD_CONFIG_H

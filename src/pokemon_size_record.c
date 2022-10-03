@@ -68,7 +68,7 @@ static const u8 gText_Kilogram[] = _("kilogram");
 static const u8 gText_KilogramPlural[] = _("kilograms");
 static const u8 gText_KilogramSymbol[] = _("kg");
 
-static const u8* const sImperialText[] =
+static const u8 *const sImperialText[] =
 {
     [UNIT_TEXT_LENGTH_SMALL_SINGLE]  = gText_Inch,
     [UNIT_TEXT_LENGTH_SMALL_PLURAL]  = gText_InchPlural,
@@ -81,7 +81,7 @@ static const u8* const sImperialText[] =
     [UNIT_TEXT_WEIGHT_SYMBOL]        = gText_PoundSymbol
 };
 
-static const u8* const sMetricText[] =
+static const u8 *const sMetricText[] =
 {
     [UNIT_TEXT_LENGTH_SMALL_SINGLE] = gText_Centimeter,
     [UNIT_TEXT_LENGTH_SMALL_PLURAL] = gText_CentimeterPlural,

@@ -50,7 +50,7 @@ static const struct OamData sClockOamData =
     .y = DISPLAY_HEIGHT,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
     .x = 0,
@@ -446,7 +446,7 @@ void CB2_FlashNotDetectedScreen(void)
 	    DrawStdFrameWithCustomTileAndPalette(0, TRUE, 0x214, 0xE);
         SaveFailedScreenTextPrint(errorMsg, 1, 0);
 	    TransferPlttBuffer();
-	    *(u16*)PLTT = RGB(17, 18, 31);
+	    *(u16 *)PLTT = RGB(17, 18, 31);
 	    ShowBg(0);
         gMain.state++;
     }

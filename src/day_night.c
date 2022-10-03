@@ -100,8 +100,8 @@ u8 GetTimeOfDay(s8 hours)
 static void LoadPaletteOverrides(void)
 {
     u8 i, j;
-    const u16* src;
-    u16* dest;
+    const u16 *src;
+    u16 *dest;
     s8 hour;
 
 #if DEBUG

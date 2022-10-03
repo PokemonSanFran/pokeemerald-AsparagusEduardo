@@ -41,6 +41,8 @@
 #include "text.h"
 #include "tv.h"
 #include "window.h"
+#include "constants/battle_config.h"
+#include "constants/battle_move_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -246,8 +248,8 @@ static bool8 LoadGraphics(void);
 static void CB2_InitSummaryScreen(void);
 static void InitBGs(void);
 static bool8 DecompressGraphics(void);
-static void CopyMonToSummaryStruct(struct Pokemon*);
-static bool8 ExtractMonDataToSummaryStruct(struct Pokemon*);
+static void CopyMonToSummaryStruct(struct Pokemon *);
+static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *);
 static void CloseSummaryScreen(u8);
 static void Task_HandleInput(u8);
 static void ChangeStatTask(u8);
@@ -255,7 +257,7 @@ static void ChangeSummaryPokemon(u8, s8);
 static void Task_ChangeSummaryMon(u8);
 static s8 AdvanceMonIndex(s8);
 static s8 AdvanceMultiBattleMonIndex(s8);
-static bool8 IsValidToViewInMulti(struct Pokemon*);
+static bool8 IsValidToViewInMulti(struct Pokemon *);
 static void ChangePage(u8, s8);
 static void ChangePageTask(u8);
 static void SwitchToMoveSelection(u8);
@@ -329,7 +331,7 @@ static void CreateCaughtBallSprite(struct Pokemon *);
 static void CreateHeldItemSprite(struct Pokemon *);
 static void CreateSetStatusSprite(void);
 static void CreateMoveSelectorSprites(u8);
-static void SpriteCb_MoveSelector(struct Sprite *);
+static void SpriteCB_MoveSelector(struct Sprite *);
 static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
@@ -543,7 +545,7 @@ static const struct OamData sOamData_MoveTypes =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x16),
     .x = 0,
@@ -725,7 +727,7 @@ static const struct OamData sOamData_MoveSelector =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x32),
     .x = 0,
@@ -796,7 +798,7 @@ static const struct OamData sOamData_StatusCondition =
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = 0,
+    .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(32x8),
     .x = 0,
@@ -1933,7 +1935,7 @@ static s8 AdvanceMultiBattleMonIndex(s8 delta)
     }
 }
 
-static bool8 IsValidToViewInMulti(struct Pokemon* mon)
+static bool8 IsValidToViewInMulti(struct Pokemon *mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
         return FALSE;
@@ -2310,7 +2312,7 @@ static void SwitchToMovePositionSwitchMode(u8 taskId)
 
 static void Task_HandleInput_MovePositionSwitch(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2450,7 +2452,7 @@ static void Task_SetHandleReplaceMoveInput(u8 taskId)
 
 static void Task_HandleReplaceMoveInput(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
@@ -2579,7 +2581,7 @@ static void Task_SwitchPageInReplaceMove(u8 taskId)
 
 static void Task_ConfirmHMCantForget(u8 taskId)
 {
-    s16* data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && gPaletteFade.active != TRUE && JOY_NEW(A_BUTTON))
     {
@@ -3645,11 +3647,7 @@ static void PrintMoveDetails(u16 move)
         {
             PrintTextOnWindow(PSS_LABEL_PANE_LEFT_MOVE, sText_Power, 8, POWER_AND_ACCURACY_Y, 0, 1);
 
-        #ifdef BATTLE_ENGINE
             if (move == MOVE_HIDDEN_POWER && CONFIG_SHOW_HIDDEN_POWER_STATS && B_HIDDEN_POWER_DMG < GEN_6)
-        #else
-            if (move == MOVE_HIDDEN_POWER && CONFIG_SHOW_HIDDEN_POWER_STATS)
-        #endif
             {
                 u8 powerBits = ((GetMonData(mon, MON_DATA_HP_IV) & 2) >> 1)
                         | ((GetMonData(mon, MON_DATA_ATK_IV) & 2) << 0)
@@ -3685,11 +3683,11 @@ static void PrintMoveDetails(u16 move)
 
             PrintTextOnWindow(PSS_LABEL_PANE_LEFT_MOVE, gMoveFourLineDescriptionPointers[move - 1], 2, 64, 0, 0);
 
-            #if CONFIG_PHYSICAL_SPECIAL_SPLIT
+        #if CONFIG_PHYSICAL_SPECIAL_SPLIT
             ShowSplitIcon(GetBattleMoveSplit(move));
-            #elif CONFIG_SHOW_ICONS_FOR_OLD_SPLIT
+        #elif CONFIG_SHOW_ICONS_FOR_OLD_SPLIT
             ShowSplitIcon(GetBattleMoveCategory(move));
-            #endif
+        #endif
         }
         else
         {
@@ -3988,7 +3986,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
         if (gMain.inBattle)
         {
         #ifdef POKEMON_EXPANSION
-            HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
+            HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                                      summary->species2,
                                      summary->pid);
@@ -4004,14 +4002,14 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
         #ifdef POKEMON_EXPANSION
             if (gMonSpritesGfxPtr != NULL)
             {
-                HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
+                HandleLoadSpecialPokePic(TRUE,
                                          gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                                          summary->species2,
                                          summary->pid);
             }
             else
             {
-                HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
+                HandleLoadSpecialPokePic(TRUE,
                                          MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
                                          summary->species2,
                                          summary->pid);
@@ -4207,14 +4205,14 @@ static void CreateMoveSelectorSprites(u8 idArrayStart)
             spriteIds[i] = CreateSprite(&sMoveSelectorSpriteTemplate, i * 32 + 128, 31, subpriority);
             StartSpriteAnim(&gSprites[spriteIds[i]], i);
 
-            gSprites[spriteIds[i]].callback = SpriteCb_MoveSelector;
+            gSprites[spriteIds[i]].callback = SpriteCB_MoveSelector;
             gSprites[spriteIds[i]].data[0] = idArrayStart;
             gSprites[spriteIds[i]].data[1] = 0;
         }
     }
 }
 
-static void SpriteCb_MoveSelector(struct Sprite *sprite)
+static void SpriteCB_MoveSelector(struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
 

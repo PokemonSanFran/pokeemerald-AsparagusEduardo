@@ -145,7 +145,7 @@ static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
 static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
 
-static const u8* const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
+static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     gText_Floor1,
     gText_Floor2,
@@ -288,17 +288,14 @@ static void BuildStartMenuActions(void)
     {
         BuildMultiPartnerRoomStartMenu();
     }
-#if defined(TX_DEBUGGING) && TX_DEBUG_MENU_OPTION
     else
     {
+    #if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == TRUE
         BuildDebugStartMenu();
-    }
-#else
-    else
-    {
+    #else
         BuildNormalStartMenu();
+    #endif
     }
-#endif
 }
 
 static void AddStartMenuAction(u8 action)
@@ -329,27 +326,18 @@ static void BuildNormalStartMenu(void)
 }
 
 static void BuildDebugStartMenu(void)
-{    
+{
+    AddStartMenuAction(MENU_ACTION_DEBUG);
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKEDEX);
-    }
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKEMON);
-    }
-
     AddStartMenuAction(MENU_ACTION_BAG);
-
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-    {
         AddStartMenuAction(MENU_ACTION_POKENAV);
-    }
-
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_DEBUG);
 }
 
 static void BuildSafariZoneStartMenu(void)
@@ -576,7 +564,7 @@ void ShowReturnToFieldStartMenu(void)
 
 void Task_ShowStartMenu(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
+    struct Task *task = &gTasks[taskId];
 
     switch(task->data[0])
     {
@@ -603,7 +591,7 @@ void ShowStartMenu(void)
         StopPlayerAvatar();
     }
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 HandleStartMenuInput(void)
@@ -773,11 +761,12 @@ static bool8 StartMenuDebugCallback(void)
     RemoveExtraStartMenuWindows();
     HideStartMenuDebug(); // Hide start menu without enabling movement
 
-    #ifdef TX_DEBUGGING
-        Debug_ShowMainMenu();
-    #endif
+#if DEBUG_SYSTEM_ENABLE == TRUE
+    FreezeObjectEvents();
+    Debug_ShowMainMenu();
+#endif
 
-    return TRUE;
+return TRUE;
 }
 
 static bool8 StartMenuSafariZoneRetireCallback(void)
@@ -823,7 +812,7 @@ void ShowBattlePyramidStartMenu(void)
     ClearDialogWindowAndFrameToTransparent(0, FALSE);
     ScriptUnfreezeObjectEvents();
     CreateStartMenuTask(Task_ShowStartMenu);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 static bool8 StartMenuBattlePyramidBagCallback(void)
@@ -864,7 +853,7 @@ static bool8 SaveCallback(void)
     case SAVE_ERROR:    // Close start menu
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
+        UnlockPlayerFieldControls();
         SoftResetInBattlePyramid();
         return TRUE;
     }
@@ -901,8 +890,8 @@ static bool8 BattlePyramidRetireCallback(void)
     case SAVE_CANCELED: // Yes (Retire from battle pyramid)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
-        ScriptContext2_Disable();
-        ScriptContext1_SetupScript(BattlePyramid_Retire);
+        UnlockPlayerFieldControls();
+        ScriptContext_SetupScript(BattlePyramid_Retire);
         return TRUE;
     }
 
@@ -961,7 +950,7 @@ static void SaveGameTask(u8 taskId)
     }
 
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 static void HideSaveMessageWindow(void)
@@ -1442,7 +1431,7 @@ static void Task_WaitForBattleTowerLinkSave(u8 taskId)
     if (!FuncIsActiveTask(Task_LinkFullSave))
     {
         DestroyTask(taskId);
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     }
 }
 
@@ -1462,7 +1451,7 @@ static void HideStartMenuWindow(void)
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeObjectEvents();
-    ScriptContext2_Disable();
+    UnlockPlayerFieldControls();
 }
 
 void HideStartMenu(void)
