@@ -4,29 +4,30 @@
 #define ITEM_NONE 0
 
 // Poké Balls
-#define ITEM_POKE_BALL 1
-#define ITEM_GREAT_BALL 2
-#define ITEM_ULTRA_BALL 3
-#define ITEM_MASTER_BALL 4
-#define ITEM_PREMIER_BALL 5
-#define ITEM_HEAL_BALL 6
-#define ITEM_NET_BALL 7
+#define ITEM_MASTER_BALL 1
+#define ITEM_ULTRA_BALL 2
+#define ITEM_GREAT_BALL 3
+#define ITEM_POKE_BALL 4
+#define ITEM_SAFARI_BALL 5
+#define ITEM_NET_BALL 6
+#define ITEM_DIVE_BALL 7
 #define ITEM_NEST_BALL 8
-#define ITEM_DIVE_BALL 9
-#define ITEM_DUSK_BALL 10
-#define ITEM_TIMER_BALL 11
-#define ITEM_QUICK_BALL 12
-#define ITEM_REPEAT_BALL 13
-#define ITEM_LUXURY_BALL 14
-#define ITEM_LEVEL_BALL 15
-#define ITEM_LURE_BALL 16
-#define ITEM_MOON_BALL 17
-#define ITEM_FRIEND_BALL 18
-#define ITEM_LOVE_BALL 19
-#define ITEM_FAST_BALL 20
-#define ITEM_HEAVY_BALL 21
-#define ITEM_DREAM_BALL 22
-#define ITEM_SAFARI_BALL 23
+#define ITEM_REPEAT_BALL 9
+#define ITEM_TIMER_BALL 10
+#define ITEM_LUXURY_BALL 11
+#define ITEM_PREMIER_BALL 12
+
+#define ITEM_HEAL_BALL 13
+#define ITEM_DUSK_BALL 14
+#define ITEM_QUICK_BALL 15
+#define ITEM_LEVEL_BALL 16
+#define ITEM_LURE_BALL 17
+#define ITEM_MOON_BALL 18
+#define ITEM_FRIEND_BALL 19
+#define ITEM_LOVE_BALL 20
+#define ITEM_FAST_BALL 21
+#define ITEM_HEAVY_BALL 22
+#define ITEM_DREAM_BALL 23
 #define ITEM_SPORT_BALL 24
 #define ITEM_PARK_BALL 25
 #define ITEM_BEAST_BALL 26
@@ -35,6 +36,7 @@
 // The following list contains the ID of each Poké Ball set in their .secondaryId field.
 // This is done so new Poké Balls can be added anywhere in this item list, where as
 // otherwise, they would need to be placed in between the Cherish Ball and the Potion.
+#define BALL_STRANGE 0
 #define BALL_POKE 1
 #define BALL_GREAT 2
 #define BALL_ULTRA 3
