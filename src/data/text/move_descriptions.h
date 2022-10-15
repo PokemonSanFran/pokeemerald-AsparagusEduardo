@@ -2940,8 +2940,105 @@ static const u8 sEerieSpellDescription[] = _(
     "Attacks with psychic power.\n"
     "Foe's last move has 3 PP cut.");
 
-static const u8 sNotDoneYetDescription[] = _(
-    "Not done yet.");
+static const u8 sDireClawDescription[] = _(
+    "High critical hit chance. May\n"
+    "paralyze, poison or drowse.");
+
+static const u8 sPsyshieldBashDescription[] = _(
+    "Hits a foe with psychic\n"
+    "energy. May raise Defense.");
+
+static const u8 sPowerShiftDescription[] = _(
+    "The user swaps its offensive\n"
+    "and defensive stats.");
+
+static const u8 sStoneAxeDescription[] = _(
+    "High critical hit ratio. Sets\n"
+    "Splinters that hurt the foe.");
+
+static const u8 sSpringtideStormDescription[] = _(
+    "Wraps a foe in fierce winds.\n"
+    "Varies with the user's form.");
+
+static const u8 sMysticalPowerDescription[] = _(
+    "Increases the user's better\n"
+    "of Atk. and Def. stats.");
+
+static const u8 sRagingFuryDescription[] = _(
+    "Viciously spews flames at\n"
+    "a foe, becoming fixated.");
+
+static const u8 sWaveCrashDescription[] = _(
+    "A water slam. Hurts the user\n"
+    "and raises its Action Speed.");
+
+static const u8 sChloroblastDescription[] = _(
+    "An blast that hurts the user\n"
+    "and lowers its Action Speed.");
+
+static const u8 sMountainGaleDescription[] = _(
+    "The user hurls giant chunks\n"
+    "of ice to damage the foe.");
+
+static const u8 sVictoryDanceDescription[] = _(
+    "Dances to raise damage 50%,\n"
+    "plus offenses and defenses.");
+
+static const u8 sHeadlongRushDescription[] = _(
+    "Hits with a full-body tackle,\n"
+    "lowering the foe's Defense.");
+
+static const u8 sBarbBarrageDescription[] = _(
+    "Can poison on impact. Powers\n"
+    "up if the foe has an ailment.");
+
+static const u8 sEsperWingDescription[] = _(
+    "High critical hit ratio.\n"
+    "Ups the user's Action Speed.");
+
+static const u8 sBitterMaliceDescription[] = _(
+    "Hurts a foe harder if it has\n"
+    "an ailment. Can give FrstBte.");
+
+static const u8 sShelterDescription[] = _(
+    "The user hardens their skin\n"
+    "and obscures itself.");
+
+static const u8 sTripleArrowsDescription[] = _(
+    "Ups critical-hit ratio for 3\n"
+    "turns. Lowers foe Defenses.");
+
+static const u8 sInfernalParadeDescription[] = _(
+    "Hurts a foe harder if it has\n"
+    "an ailment. May leave a burn.");
+
+static const u8 sCeaselessEdgeDescription[] = _(
+    "High critical hit ratio. Sets\n"
+    "Splinters that hurt the foe.");
+
+static const u8 sBleakwindStormDescription[] = _(
+    "Hits with brutal, cold winds.\n"
+    "May inflict frostbite.");
+
+static const u8 sWildboltStormDescription[] = _(
+    "Hits with a brutal tempest.\n"
+    "May inflict paralysis.");
+
+static const u8 sSandsearStormDescription[] = _(
+    "Hits with brutally hot sand.\n"
+    "May inflict a burn.");
+
+static const u8 sLunarBlessingDescription[] = _(
+    "The user heals themself and\n"
+    "conceals their presence.");
+
+static const u8 sTakeHeartDescription[] = _(
+    "The user lifts its spirits to\n"
+    "heal and strengthen itself.");
+
+const u8 gNotDoneYetDescription[] = _(
+    "This move can't be used. Its\n"
+    "effect is in development.");
 
 #else
 
