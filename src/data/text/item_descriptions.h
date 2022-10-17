@@ -3792,3 +3792,8 @@ static const u8 sSapphireDesc[] = _(
     "A brilliant blue gem\n"
     "that symbolizes\n"
     "honesty.");
+
+static const u8 sGBSoundsDesc[] = _(
+    "Listen to nostalgic\n"
+    "songs with the use\n"
+    "of a single switch.");

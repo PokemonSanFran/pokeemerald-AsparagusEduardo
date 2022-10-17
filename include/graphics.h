@@ -8835,6 +8835,10 @@ extern const u32 gItemIcon_Gem[];
 extern const u32 gItemIconPalette_Ruby[];
 extern const u32 gItemIconPalette_Sapphire[];
 
+// New key items
+extern const u32 gItemIcon_GBSounds[];
+extern const u32 gItemIconPalette_GBSounds[];
+
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 

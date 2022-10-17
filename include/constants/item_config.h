@@ -9,4 +9,7 @@
 #define I_SITRUS_BERRY_HEAL     GEN_LATEST  // In Gen4+, Sitrus Berry was changed from healing 30 HP to healing 25% of Max HP.
 #define I_VITAMIN_EV_CAP        GEN_LATEST  // In Gen8, the Vitamins no longer have a cap of 100 EV per stat.
 
+// Item flags
+#define I_FLAG_SYS_GBS_ENABLED  0       // If this flag is set, players can use the GB Sounds item.
+
 #endif // GUARD_CONSTANTS_ITEM_CONFIG_H

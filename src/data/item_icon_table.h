@@ -804,6 +804,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_TEA] = {gItemIcon_Tea, gItemIconPalette_Tea},
     [ITEM_RUBY] = {gItemIcon_Gem, gItemIconPalette_Ruby},
     [ITEM_SAPPHIRE] = {gItemIcon_Gem, gItemIconPalette_Sapphire},
+    [ITEM_GB_SOUNDS] = {gItemIcon_GBSounds, gItemIconPalette_GBSounds},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

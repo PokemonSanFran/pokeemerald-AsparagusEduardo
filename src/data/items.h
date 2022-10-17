@@ -9879,4 +9879,17 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
+
+    [ITEM_GB_SOUNDS] =
+    {
+        .name = _("GB Sounds"),
+        .itemId = ITEM_GB_SOUNDS,
+        .price = 0,
+        .description = sGBSoundsDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_GBSounds,
+    },
 };

@@ -3926,7 +3926,7 @@ static void HideWheelBalls(void)
     UpdateBallRelativeWheelAngle(sprite);                                                           \
     sprite->sBallWheelAngle = (sprite->sBallWheelAngle / DEGREES_PER_SLOT) * DEGREES_PER_SLOT + 15; \
     sprite->callback = SpriteCB_BallLandInSlot;                                                     \
-    m4aSongNumStartOrChange(SE_BRIDGE_WALK);                                                              \
+    m4aSongNumStartOrChange(SE_BRIDGE_WALK);                                                        \
 }
 
 // "wheelAngle" and "sBallAngle" are relative to the screen (e.g. 180 degrees for either is always screen bottom)

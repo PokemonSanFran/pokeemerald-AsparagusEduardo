@@ -204,6 +204,9 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+#if I_FLAG_SYS_GBS_ENABLED != 0
+    FlagClear(I_FLAG_SYS_GBS_ENABLED);
+#endif
 }
 
 static void ResetMiniGamesRecords(void)
