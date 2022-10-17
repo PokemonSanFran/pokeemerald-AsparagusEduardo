@@ -8,9 +8,12 @@ void m4aSoundVSyncOn(void);
 
 void m4aSoundInit(void);
 void m4aSoundMain(void);
-void m4aSongNumStart(u16 n, bool32 gbsEnabled);
-void m4aSongNumStartOrChange(u16 n, bool32 gbsEnabled);
-void m4aSongNumStop(u16 n, bool32 gbsEnabled);
+void m4aSongNumStart(u16 n);
+void m4aSongNumStartOrChange(u16 n);
+void m4aSongNumStop(u16 n);
+void m4aSongNumStart_GBS(u16 n, bool32 gbsEnabled);
+void m4aSongNumStartOrChange_GBS(u16 n, bool32 gbsEnabled);
+void m4aSongNumStop_GBS(u16 n, bool32 gbsEnabled);
 void m4aMPlayAllStop(void);
 void m4aMPlayContinue(struct MusicPlayerInfo *mplayInfo);
 void m4aMPlayFadeOut(struct MusicPlayerInfo *mplayInfo, u16 speed);
