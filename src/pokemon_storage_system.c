@@ -148,6 +148,14 @@ enum {
     MENU_MACHINE,
     MENU_SIMPLE,
 };
+
+enum {
+    CURSOR_MODE_NORMAL,
+    CURSOR_MODE_AUTOACTION,
+    CURSOR_MODE_MOVE_ITEMS,
+    CURSOR_MODE_COUNT
+};
+
 #define MENU_WALLPAPER_SETS_START MENU_SCENERY_1
 #define MENU_WALLPAPERS_START MENU_FOREST
 #define GENDER_MASK 0x7FFF
@@ -219,9 +227,9 @@ enum {
     PALTAG_MON_ICON_0 = 56000,
     PALTAG_MON_ICON_1, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_2, // Used implicitly in CreateMonIconSprite
-    PALTAG_3, // Unused
-    PALTAG_4, // Unused
-    PALTAG_5, // Unused
+    PALTAG_MON_ICON_3, // Used implicitly in CreateMonIconSprite
+    PALTAG_MON_ICON_4, // Used implicitly in CreateMonIconSprite
+    PALTAG_MON_ICON_5, // Used implicitly in CreateMonIconSprite
     PALTAG_DISPLAY_MON,
     PALTAG_MISC_1,
     PALTAG_MARKING_COMBO,
@@ -231,6 +239,7 @@ enum {
     PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
     PALTAG_MARKING_MENU,
+    PALTAG_MISC_3,
 };
 
 enum {
@@ -495,7 +504,7 @@ struct PokemonStorageSystemData
     u8 newCursorPosition;
     u8 cursorPrevHorizPos;
     u8 cursorFlipTimer;
-    u8 cursorPalNums[2];
+    u8 cursorPalNums[CURSOR_MODE_COUNT];
     const u32 *displayMonPalette;
     u32 displayMonPersonality;
     u16 displayMonSpecies;
@@ -575,7 +584,7 @@ EWRAM_DATA static s8 sCursorPosition = 0;
 EWRAM_DATA static bool8 sIsMonBeingMoved = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
-EWRAM_DATA static bool8 sAutoActionOn = 0;
+EWRAM_DATA static u8 sCursorMode = 0;
 EWRAM_DATA static bool8 sJustOpenedBag = 0;
 
 // Main tasks
@@ -1321,6 +1330,7 @@ static const struct SpriteTemplate sSpriteTemplate_Arrow =
 };
 
 static const u16 sHandCursor_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
+static const u16 sHandCursorItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor_items.gbapal");
 static const u8 sHandCursor_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor.4bpp");
 static const u8 sHandCursorShadow_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
@@ -5826,16 +5836,26 @@ static struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority
 
 static void InitCursor(void)
 {
-    if (sStorage->boxOption != OPTION_DEPOSIT)
-        sCursorArea = CURSOR_AREA_IN_BOX;
-    else
+    if (sStorage->boxOption == OPTION_DEPOSIT)
+    {
         sCursorArea = CURSOR_AREA_IN_PARTY;
+        sCursorMode = CURSOR_MODE_NORMAL;
+    }
+    else if (sStorage->boxOption == OPTION_MOVE_ITEMS)
+    {
+        sCursorArea = CURSOR_AREA_IN_BOX;
+        sCursorMode = CURSOR_MODE_MOVE_ITEMS;
+    }
+    else
+    {
+        sCursorArea = CURSOR_AREA_IN_BOX;
+        sCursorMode = CURSOR_MODE_NORMAL;
+    }
 
     sCursorPosition = 0;
     sIsMonBeingMoved = FALSE;
     sMovingMonOrigBoxId = 0;
     sMovingMonOrigBoxPos = 0;
-    sAutoActionOn = FALSE;
     ClearSavedCursorPos();
     CreateCursorSprites();
     sStorage->cursorPrevHorizPos = 1;
@@ -7140,7 +7160,7 @@ static u8 InBoxInput_Normal(void)
 
         if ((JOY_NEW(A_BUTTON)) && SetSelectionMenuTexts())
         {
-            if (!sAutoActionOn)
+            if (sCursorMode == CURSOR_MODE_NORMAL)
                 return INPUT_IN_MENU;
 
             if (sStorage->boxOption != OPTION_MOVE_MONS || sIsMonBeingMoved == TRUE)
@@ -7423,7 +7443,7 @@ static u8 HandleInput_InParty(void)
             }
             else if (SetSelectionMenuTexts())
             {
-                if (!sAutoActionOn)
+                if (sCursorMode == CURSOR_MODE_NORMAL)
                     return INPUT_IN_MENU;
 
                 switch (GetMenuItemTextId(0))
@@ -7796,6 +7816,7 @@ static void CreateCursorSprites(void)
     struct SpritePalette spritePalettes[] =
     {
         {sHandCursor_Pal, PALTAG_MISC_1},
+        {sHandCursorItems_Pal, PALTAG_MISC_3},
         {}
     };
 
@@ -7868,13 +7889,14 @@ static void CreateCursorSprites(void)
     LoadSpritePalettes(spritePalettes);
     sStorage->cursorPalNums[0] = IndexOfSpritePaletteTag(PALTAG_MISC_2); // White hand, normal
     sStorage->cursorPalNums[1] = IndexOfSpritePaletteTag(PALTAG_MISC_1); // Yellow hand, when auto-action is on
+    sStorage->cursorPalNums[2] = IndexOfSpritePaletteTag(PALTAG_MISC_3); // Blue hand, for moving items
 
     GetCursorCoordsByPos(sCursorArea, sCursorPosition, &x, &y);
     spriteId = CreateSprite(&sSpriteTemplate_Cursor, x, y, 6);
     if (spriteId != MAX_SPRITES)
     {
         sStorage->cursorSprite = &gSprites[spriteId];
-        sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sAutoActionOn];
+        sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sCursorMode];
         sStorage->cursorSprite->oam.priority = 1;
         if (sIsMonBeingMoved)
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
@@ -7911,8 +7933,10 @@ static void CreateCursorSprites(void)
 
 static void ToggleCursorAutoAction(void)
 {
-    sAutoActionOn = !sAutoActionOn;
-    sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sAutoActionOn];
+    sCursorMode++;
+    if (sCursorMode >= CURSOR_MODE_COUNT)
+        sCursorMode = 0;
+    sStorage->cursorSprite->oam.paletteNum = sStorage->cursorPalNums[sCursorMode];
 }
 
 static u8 GetCursorPosition(void)
