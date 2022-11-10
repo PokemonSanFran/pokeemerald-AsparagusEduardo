@@ -151,7 +151,7 @@ extern const u8 BattleScript_SandstreamActivates[];
 extern const u8 BattleScript_ShedSkinActivates[];
 extern const u8 BattleScript_WeatherFormChanges[];
 extern const u8 BattleScript_WeatherFormChangesLoop[];
-extern const u8 BattleScript_CastformChange[];
+extern const u8 BattleScript_WeatherFormChange[];
 extern const u8 BattleScript_IntimidateActivatesEnd3[];
 extern const u8 BattleScript_IntimidateActivates[];
 extern const u8 BattleScript_DroughtActivates[];
@@ -216,6 +216,7 @@ extern const u8 BattleScript_BerryConfuseHealEnd2[];
 extern const u8 BattleScript_BerryConfuseHealRet[];
 extern const u8 BattleScript_BerryStatRaiseEnd2[];
 extern const u8 BattleScript_BerryStatRaiseRet[];
+extern const u8 BattleScript_BerryFocusEnergyRet[];
 extern const u8 BattleScript_BerryFocusEnergyEnd2[];
 extern const u8 BattleScript_ActionSelectionItemsCantBeUsed[];
 extern const u8 BattleScript_ArenaTurnBeginning[];
@@ -428,6 +429,10 @@ extern const u8 BattleScript_BeakBlastBurn[];
 extern const u8 BattleScript_DefDownSpeedUp[];
 extern const u8 BattleScript_AffectionBasedStatusHeal[];
 extern const u8 BattleScript_AffectionBasedEndurance[];
+extern const u8 BattleScript_SymbiosisActivates[];
+extern const u8 BattleScript_MultiHitPrintStrings[];
+extern const u8 BattleScript_BurnUpRemoveType[];
+extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
