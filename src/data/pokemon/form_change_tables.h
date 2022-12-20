@@ -341,7 +341,7 @@ static const struct FormChange sGiratinaFormChangeTable[] = {
 
 static const struct FormChange sShayminFormChangeTable[] = {
     {FORM_CHANGE_ITEM_USE, SPECIES_SHAYMIN_SKY, ITEM_GRACIDEA, DAY},
-    // {FORM_CHANGE_WITHDRAW, SPECIES_SHAYMIN},
+    {FORM_CHANGE_WITHDRAW, SPECIES_SHAYMIN},
     {FORM_CHANGE_TERMINATOR},
 };
 
@@ -453,6 +453,11 @@ static const struct FormChange sGenesectFormChangeTable[] = {
 static const struct FormChange sGreninjaBattleBondFormChangeTable[] = {
     {FORM_CHANGE_FAINT,         SPECIES_GRENINJA_BATTLE_BOND},
     {FORM_CHANGE_END_BATTLE,    SPECIES_GRENINJA_BATTLE_BOND},
+    {FORM_CHANGE_TERMINATOR},
+};
+
+static const struct FormChange sFurfrouFormChangeTable[] = {
+    {FORM_CHANGE_WITHDRAW, SPECIES_FURFROU},
     {FORM_CHANGE_TERMINATOR},
 };
 
