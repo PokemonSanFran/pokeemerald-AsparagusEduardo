@@ -1,8 +1,8 @@
 #include <string.h>
 #include "gba/m4a_internal.h"
 #include "event_data.h"
+#include "config/item.h"
 #include "constants/flags.h"
-#include "constants/item_config.h"
 
 extern const u8 gCgb3Vol[];
 
