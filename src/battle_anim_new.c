@@ -73,6 +73,7 @@ static void AnimOceanicOperettaSpotlight(struct Sprite *sprite);
 static void AnimSoulStealingStar(struct Sprite *sprite);
 static void AnimSoulStealingStar_Step1(struct Sprite *sprite);
 static void AnimSoulStealingStar_Step2(struct Sprite *sprite);
+static void AnimWakeUpSlap(struct Sprite *sprite);
 
 // const data
 // general
@@ -82,6 +83,35 @@ static const union AffineAnimCmd sSquishTargetAffineAnimCmds[] =
     AFFINEANIMCMD_FRAME(0, 0, 0, 64),
     AFFINEANIMCMD_FRAME(0, -64, 0, 16),
     AFFINEANIMCMD_END,
+};
+
+// GEN 3
+// double slap
+static const union AffineAnimCmd sSpriteAffineAnim_DoubleSlap[] =
+{
+	AFFINEANIMCMD_FRAME(0, 0, 64, 1), //Rotate left 90 degrees
+	AFFINEANIMCMD_FRAME(0, 0, 0, 3), //Do Nothing
+	AFFINEANIMCMD_FRAME(0, -28, 0, 8), //Flatten horizontally (on its side)
+	AFFINEANIMCMD_FRAME(0, 0, 0, 11), //Do Nothing
+	AFFINEANIMCMD_FRAME(0, -288, 0, 1), //Unflatten in other direction
+	AFFINEANIMCMD_FRAME(0, 0, 0, 2), //Do Nothing
+	AFFINEANIMCMD_FRAME(0, 28, 0, 8), //Flatten horizontally (on its side)
+	AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd* const gSpriteAffineAnimTable_DoubleSlap[] =
+{
+	sSpriteAffineAnim_DoubleSlap,
+};
+const struct SpriteTemplate gDoubleSlapPalmSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_QUICK_GUARD_HAND,
+    .paletteTag = ANIM_TAG_QUICK_GUARD_HAND,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_DoubleSlap,
+    .callback = AnimWakeUpSlap
 };
 
 // GEN 4
@@ -7902,4 +7932,50 @@ void AnimTask_AffectionHangedOn(u8 taskId)
 
     gBattleAnimArgs[0] = GetBattlerFriendshipScore(gBattleAnimTarget);
     DestroyAnimVisualTask(taskId);
+}
+
+//Creates a sprite that moves right then then along the target.
+//arg 0: Swipe distance
+//arg 1: Speed
+//arg 2: Less swipes (for Double Slap)
+static void AnimWakeUpSlap(struct Sprite *sprite)
+{
+	switch (sprite->data[7]) { //State
+		case 0:
+			sprite->x2 = gBattleAnimArgs[0];
+			sprite->data[0] = -gBattleAnimArgs[0]; //Swipe distance
+			sprite->data[1] = gBattleAnimArgs[1]; //Swipe speed
+			sprite->data[6] = gBattleAnimArgs[2]; //Less Slaps
+			++sprite->data[7];
+			break;
+		//Right
+		case 1:
+		case 3:
+			sprite->x2 += sprite->data[1];
+
+			if (sprite->x2 >= sprite->data[0])
+			{
+				sprite->data[0] = -sprite->data[0];
+				++sprite->data[7];
+			}
+			break;
+		//Left
+		case 2:
+		case 4:
+			sprite->x2 -= sprite->data[1];
+
+			if (sprite->x2 <= sprite->data[0])
+			{
+				sprite->data[0] = -sprite->data[0];
+
+				if (sprite->data[6])
+					sprite->data[7] = 5; //Destroy
+				else
+					++sprite->data[7];
+			}
+			break;
+		case 5:
+			DestroyAnimSprite(sprite);
+			break;
+	}
 }

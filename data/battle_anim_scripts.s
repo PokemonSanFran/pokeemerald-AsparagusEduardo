@@ -14470,24 +14470,28 @@ Move_POUND:
 	blendoff
 	end
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Credits to Skeli
 Move_DOUBLE_SLAP:
 	loadspritegfx ANIM_TAG_IMPACT
-	monbg ANIM_TARGET
+	loadspritegfx ANIM_TAG_QUICK_GUARD_HAND
+	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
-	choosetwoturnanim DoubleSlapLeft, DoubleSlapRight
-DoubleSlapContinue:
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
-	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
+	launchtemplate gDoubleSlapPalmSpriteTemplate, ANIMSPRITE_IS_TARGET | 3, 0x3, -64, 6, TRUE
+	delay 8
+	playsewithpan SE_M_DOUBLE_SLAP SOUND_PAN_TARGET
+	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_TARGET 2 0 6 1
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 1, 0x4, 0x0 0x0 ANIM_TARGET 0x2
+	delay 20
+	playsewithpan SE_M_DOUBLE_SLAP SOUND_PAN_TARGET
+	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_TARGET 2 0 6 1
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 1, 0x4, 0x0 0x0 ANIM_TARGET 0x2
 	waitforvisualfinish
-	clearmonbg ANIM_TARGET
+	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
-DoubleSlapLeft:
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, -8, 0, ANIM_TARGET, 2
-	goto DoubleSlapContinue
-DoubleSlapRight:
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 8, 0, ANIM_TARGET, 2
-	goto DoubleSlapContinue
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 Move_POISON_POWDER:
 	loadspritegfx ANIM_TAG_POISON_POWDER
