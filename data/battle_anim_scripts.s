@@ -14857,7 +14857,7 @@ Move_DOUBLE_EDGE:
 	waitbgfadeout
 	end
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+@Vanilla animation
 Move_POISON_STING:
 	loadspritegfx ANIM_TAG_NEEDLE
 	loadspritegfx ANIM_TAG_IMPACT
@@ -14877,7 +14877,8 @@ Move_POISON_STING:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_TWINEEDLE:
 	loadspritegfx ANIM_TAG_NEEDLE
 	loadspritegfx ANIM_TAG_IMPACT
@@ -14897,7 +14898,8 @@ Move_TWINEEDLE:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_FIRE_BLAST:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	createsoundtask SoundTask_FireBlast, SE_M_FLAME_WHEEL, SE_M_FLAME_WHEEL2
@@ -14945,7 +14947,8 @@ FireBlastCross:
 	createsprite gFireBlastCrossSpriteTemplate, ANIM_TARGET, 2, 0, 0, 15, -2, 2
 	createsprite gFireBlastCrossSpriteTemplate, ANIM_TARGET, 2, 0, 0, 15, 2, 2
 	return
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_LEECH_SEED:
 	loadspritegfx ANIM_TAG_SEED
 	playsewithpan SE_M_POISON_POWDER, SOUND_PAN_ATTACKER
@@ -14960,7 +14963,8 @@ Move_LEECH_SEED:
 	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET, 10, 8
 	waitforvisualfinish
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_EMBER:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	loopsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER, 5, 2
@@ -14975,7 +14979,6 @@ Move_EMBER:
 	call EmberFireHit
 	call EmberFireHit
 	end
-
 EmberFireHit:
 	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 24, 24, 20, ANIM_TARGET, 1
 	delay 4
@@ -18860,35 +18863,26 @@ Move_THUNDER:
 	setarg 7, -1
 	waitbgfadein
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Credits to Skeli
 Move_THUNDER_PUNCH:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HANDS_AND_FEET
-	loadspritegfx ANIM_TAG_LIGHTNING
+	loadspritegfx ANIM_TAG_SPARK_2
 	monbg ANIM_TARGET
 	setalpha 12, 8
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 0, 16, RGB_BLACK
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0x0 0xE 0x0
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	createsprite gFistFootSpriteTemplate, ANIM_TARGET, 4, 0, 0, 8, 1, 0
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, ANIM_TARGET, 1
-	delay 1
-	createvisualtask AnimTask_InvertScreenColor, 2, 1 | 0x2 | 0x4
-	delay 1
-	createsprite gLightningSpriteTemplate, ANIM_TARGET, 2, 0, -48
-	delay 1
-	createsprite gLightningSpriteTemplate, ANIM_ATTACKER, 2, 0, -16
-	delay 1
-	createsprite gLightningSpriteTemplate, ANIM_ATTACKER, 2, 0, 16
-	delay 1
-	playsewithpan SE_M_TRI_ATTACK2, SOUND_PAN_TARGET
-	createvisualtask AnimTask_InvertScreenColor, 2, 1 | 0x2 | 0x4
-	delay 2
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 15, 1
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, ANIM_TARGET, 2
-	delay 1
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 16, 0, RGB_BLACK
-	delay 20
+	playsewithpan SE_M_COMET_PUNCH SOUND_PAN_TARGET
+	launchtemplate gFistFootSpriteTemplate 0x84 0x5 0x0 0x0 0x8 0x1 0x0
+	launchtemplate gBasicHitSplatSpriteTemplate 0x83 0x4 0x0 0x0 0x1 0x1
+	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_TARGET 0x0 0x3 0xf 0x1
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_DEF 0x2 0x0 0x9 0x07FE
+	delay 0x5
+	call ElectricityEffect
+	waitforvisualfinish
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_DEF 0x2 0x9 0x0 0x07FE
+	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0xE 0x0 0x0
 	waitforvisualfinish
 	clearmonbg ANIM_TARGET
 	blendoff
