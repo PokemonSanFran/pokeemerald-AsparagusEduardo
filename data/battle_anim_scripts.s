@@ -14456,6 +14456,7 @@ Move_MAGICAL_TORQUE::
 	end @to do
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_NONE:
 Move_MIRROR_MOVE:
 Move_POUND:
@@ -14469,8 +14470,6 @@ Move_POUND:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
-
-
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @Credits to Skeli
 Move_DOUBLE_SLAP:
@@ -14492,7 +14491,7 @@ Move_DOUBLE_SLAP:
 	blendoff
 	end
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+@Vanilla animation
 Move_POISON_POWDER:
 	loadspritegfx ANIM_TAG_POISON_POWDER
 	loadspritegfx ANIM_TAG_POISON_BUBBLE
@@ -14517,7 +14516,8 @@ Move_POISON_POWDER:
 	createsprite gPoisonPowderParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_STUN_SPORE:
 	loadspritegfx ANIM_TAG_STUN_SPORE
 	loopsewithpan SE_M_POISON_POWDER, SOUND_PAN_TARGET, 10, 6
@@ -14541,7 +14541,8 @@ Move_STUN_SPORE:
 	createsprite gStunSporeParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_SLEEP_POWDER:
 	loadspritegfx ANIM_TAG_SLEEP_POWDER
 	loopsewithpan SE_M_POISON_POWDER, SOUND_PAN_TARGET, 10, 6
@@ -14565,7 +14566,8 @@ Move_SLEEP_POWDER:
 	createsprite gSleepPowderParticleSpriteTemplate, ANIM_TARGET, 2, 5, -22, 117, 80, 5, 1
 	waitforvisualfinish
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_SWIFT:
 	loadspritegfx ANIM_TAG_YELLOW_STAR
 	loadspritegfx ANIM_TAG_IMPACT
@@ -14592,7 +14594,8 @@ Move_SWIFT:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_STRENGTH:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
@@ -14618,7 +14621,8 @@ Move_STRENGTH:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_TACKLE:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -14632,7 +14636,8 @@ Move_TACKLE:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_BODY_SLAM:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
@@ -14658,7 +14663,8 @@ Move_BODY_SLAM:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_SUPERSONIC:
 	loadspritegfx ANIM_TAG_GOLD_RING
 	monbg ANIM_ATK_PARTNER
@@ -14680,7 +14686,8 @@ SupersonicRing:
 	createsprite gSupersonicRingSpriteTemplate, ANIM_TARGET, 2, 16, 0, 0, 0, 30, 0
 	delay 2
 	return
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_SCREECH:
 	loadspritegfx ANIM_TAG_PURPLE_RING
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 3, 0, 2, 1
@@ -14695,7 +14702,8 @@ ScreechRing:
 	createsprite gScreechRingSpriteTemplate, ANIM_TARGET, 2, 16, 0, 0, 0, 30, 0
 	delay 2
 	return
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_FLAME_WHEEL:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	monbg ANIM_DEF_PARTNER
@@ -14732,12 +14740,8 @@ Move_FLAME_WHEEL:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
-
-FlameWheel1: @ Unused
-	createsprite gFireSpiralOutwardSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 50
-	delay 4
-	return
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_PIN_MISSILE:
 	loadspritegfx ANIM_TAG_NEEDLE
 	loadspritegfx ANIM_TAG_IMPACT
@@ -14766,7 +14770,8 @@ Move_PIN_MISSILE:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_ICICLE_SPEAR:
 	loadspritegfx ANIM_TAG_ICICLE_SPEAR
 	loadspritegfx ANIM_TAG_IMPACT
@@ -14795,7 +14800,8 @@ Move_ICICLE_SPEAR:
 	clearmonbg ANIM_TARGET
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Vanilla animation
 Move_TAKE_DOWN:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_DEF_PARTNER
@@ -14818,39 +14824,39 @@ Move_TAKE_DOWN:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Credits to Skeli
 Move_DOUBLE_EDGE:
 	loadspritegfx ANIM_TAG_IMPACT
-	playsewithpan SE_M_SWIFT, SOUND_PAN_ATTACKER
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_ATTACKER, 4, 2, RGB_WHITE, 10, RGB_BLACK, 0
-	waitforvisualfinish
-	delay 10
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
-	waitplaysewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER, 8
-	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 18, 6, 2, 4
+	waitplaysewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER, 0x8
+	launchtask AnimTask_TranslateMonEllipticalRespectSide 0x2 0x5 ANIM_ATTACKER 0x12 0x6 0x2 0x4
+	delay 0xA
+	fadetobgfromset BG_IMPACT_OPPONENT BG_IMPACT_PLAYER BG_IMPACT_OPPONENT
 	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 0, 16, 16, RGB_WHITE
-	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 20, 0, 0, 4
-	delay 3
+	launchtemplate gSlideMonToOffsetSpriteTemplate 0x2 0x5 ANIM_ATTACKER 0x14 0x0 0x0 0x4
+	delay 0x3
 	waitforvisualfinish
 	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 4, -10, 0, ANIM_TARGET, 0
-	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 1, -32, 0, 0, 3
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 4, 0x4, 0xfff6 0x0 0x1 0x0
+	launchtemplate gSlideMonToOffsetSpriteTemplate 0x2 0x5 ANIM_TARGET 0xffe0 0x0 0x0 0x3
 	waitforvisualfinish
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_ATTACKER, 0
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_TARGET, 0
-	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 4, 0, 12, 1
-	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 4, 0, 12, 1
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 16, 0, RGB_WHITE
+	launchtask AnimTask_RotateMonSpriteToSide 0x2 0x4 0x8 0xff00 ANIM_ATTACKER 0x0
+	launchtask AnimTask_RotateMonSpriteToSide 0x2 0x4 0x8 0xff00 ANIM_TARGET 0x0
+	launchtask AnimTask_ShakeMonInPlace 0x2 0x5 0x0 0x4 0x0 0xc 0x1
+	launchtask AnimTask_ShakeMonInPlace 0x2 0x5 0x1 0x4 0x0 0xc 0x1
 	waitforvisualfinish
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_ATTACKER, 1
-	createvisualtask AnimTask_RotateMonSpriteToSide, 2, 8, -256, ANIM_TARGET, 1
+	launchtask AnimTask_RotateMonSpriteToSide 0x2 0x4 0x8 0xff00 ANIM_ATTACKER 0x1
+	launchtask AnimTask_RotateMonSpriteToSide 0x2 0x4 0x8 0xff00 ANIM_TARGET 0x1
 	waitforvisualfinish
-	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 5
-	delay 3
-	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 1, 0, 7
+	launchtemplate gSlideMonToOriginalPosSpriteTemplate 0x2 0x3 ANIM_ATTACKER 0x0 0x5
+	delay 0x3
+	launchtemplate gSlideMonToOriginalPosSpriteTemplate 0x2 0x3 ANIM_TARGET 0x0 0x7
 	waitforvisualfinish
+	restorebg
+	waitbgfadeout
 	end
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 Move_POISON_STING:
 	loadspritegfx ANIM_TAG_NEEDLE
