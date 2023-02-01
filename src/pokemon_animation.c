@@ -783,7 +783,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES + 1] =
     [SPECIES_DEOXYS_ATTACK]                     = BACK_ANIM_SHRINK_GROW_VIBRATE,
     [SPECIES_DEOXYS_DEFENSE]                    = BACK_ANIM_SHRINK_GROW_VIBRATE,
     [SPECIES_DEOXYS_SPEED]                      = BACK_ANIM_SHRINK_GROW_VIBRATE,
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     //[SPECIES_TURTWIG]                           = BACK_ANIM_NONE,
     //[SPECIES_GROTLE]                            = BACK_ANIM_NONE,
     //[SPECIES_TORTERRA]                          = BACK_ANIM_NONE,
@@ -899,7 +899,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES + 1] =
     //[SPECIES_ARCEUS_DARK]                       = BACK_ANIM_NONE,
     //[SPECIES_ARCEUS_FAIRY]                      = BACK_ANIM_NONE,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     //[SPECIES_VICTINI]                           = BACK_ANIM_NONE,
     //[SPECIES_SNIVY]                             = BACK_ANIM_NONE,
     //[SPECIES_SERVINE]                           = BACK_ANIM_NONE,
@@ -1093,7 +1093,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES + 1] =
     //[SPECIES_GENESECT_BURN_DRIVE]               = BACK_ANIM_NONE,
     //[SPECIES_GENESECT_CHILL_DRIVE]              = BACK_ANIM_NONE,
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     //[SPECIES_CHESPIN]                           = BACK_ANIM_NONE,
     //[SPECIES_QUILLADIN]                         = BACK_ANIM_NONE,
     //[SPECIES_CHESNAUGHT]                        = BACK_ANIM_NONE,
@@ -1265,7 +1265,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES + 1] =
     //[SPECIES_HOOPA_UNBOUND]                     = BACK_ANIM_NONE,
     //[SPECIES_VOLCANION]                         = BACK_ANIM_NONE,
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     //[SPECIES_ROWLET]                            = BACK_ANIM_NONE,
     //[SPECIES_DARTRIX]                           = BACK_ANIM_NONE,
     //[SPECIES_DECIDUEYE]                         = BACK_ANIM_NONE,
@@ -1398,7 +1398,7 @@ static const u8 sSpeciesToBackAnimSet[NUM_SPECIES + 1] =
     //[SPECIES_MELTAN]                            = BACK_ANIM_NONE,
     //[SPECIES_MELMETAL]                          = BACK_ANIM_NONE,
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     //[SPECIES_GROOKEY]                           = BACK_ANIM_NONE,
     //[SPECIES_THWACKEY]                          = BACK_ANIM_NONE,
     //[SPECIES_RILLABOOM]                         = BACK_ANIM_NONE,

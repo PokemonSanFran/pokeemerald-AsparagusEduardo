@@ -43,7 +43,7 @@ FORM_BATTLE_END:
 #define DAY    1
 #define NIGHT  2
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
 static const struct FormChange sGiratinaFormChangeTable[] = {
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ALTERED, ITEM_NONE},
     {FORM_ITEM_HOLD, SPECIES_GIRATINA_ORIGIN, ITEM_GRISEOUS_ORB},
@@ -96,7 +96,7 @@ static const struct FormChange sArceusFormChangeTable[] = {
 };
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
 static const struct FormChange sTornadusFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_TORNADUS_THERIAN, ITEM_REVEAL_GLASS},
     {FORM_ITEM_USE, SPECIES_TORNADUS_INCARNATE, ITEM_REVEAL_GLASS},
@@ -131,7 +131,7 @@ static const struct FormChange sGenesectFormChangeTable[] = {
 };
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
 static const struct FormChange sXerneasFormChangeTable[] = {
     {FORM_BATTLE_BEGIN, SPECIES_XERNEAS_ACTIVE  },
     {FORM_BATTLE_END,   SPECIES_XERNEAS_NEUTRAL,},
@@ -145,7 +145,7 @@ static const struct FormChange sHoopaFormChangeTable[] = {
 };
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
 static const struct FormChange sOricorioFormChangeTable[] = {
     {FORM_ITEM_USE, SPECIES_ORICORIO_BAILE,   ITEM_RED_NECTAR},
     {FORM_ITEM_USE, SPECIES_ORICORIO_POM_POM, ITEM_YELLOW_NECTAR},
@@ -177,7 +177,7 @@ static const struct FormChange sSilvallyFormChangeTable[] = {
 };
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
 static const struct FormChange sZacianFormChangeTable[] = {
     {FORM_BATTLE_BEGIN, SPECIES_ZACIAN_CROWNED_SWORD,        ITEM_RUSTED_SWORD, MOVE_IRON_HEAD,      MOVE_BEHEMOTH_BLADE},
     {FORM_BATTLE_END,   SPECIES_ZACIAN_HERO_OF_MANY_BATTLES, ITEM_RUSTED_SWORD, MOVE_BEHEMOTH_BLADE, MOVE_IRON_HEAD},

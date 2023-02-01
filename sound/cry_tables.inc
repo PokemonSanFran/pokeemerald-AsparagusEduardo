@@ -474,7 +474,7 @@ gCryTable::
 	cry Cry_RayquazaMega
 	cry Cry_Jirachi
 	cry Cry_Deoxys
-.if P_GEN_4_POKEMON == TRUE
+.if P_SPECIES_GEN_4 == TRUE
 	cry Cry_Turtwig
 	cry Cry_Grotle
 	cry Cry_Torterra
@@ -558,7 +558,7 @@ gCryTable::
 	cry Cry_ShayminSky
 	cry Cry_Arceus
 .endif
-.if P_GEN_5_POKEMON == TRUE
+.if P_SPECIES_GEN_5 == TRUE
 	cry Cry_Victini
 	cry Cry_Snivy
 	cry Cry_Servine
@@ -726,7 +726,7 @@ gCryTable::
 	cry Cry_Meloetta
 	cry Cry_Genesect
 .endif
-.if P_GEN_6_POKEMON == TRUE
+.if P_SPECIES_GEN_6 == TRUE
 	cry Cry_Chespin
 	cry Cry_Quilladin
 	cry Cry_Chesnaught
@@ -806,7 +806,7 @@ gCryTable::
 	cry Cry_HoopaUnbound
 	cry Cry_Volcanion
 .endif
-.if P_GEN_7_POKEMON == TRUE
+.if P_SPECIES_GEN_7 == TRUE
 	cry Cry_Rowlet
 	cry Cry_Dartrix
 	cry Cry_Decidueye
@@ -905,7 +905,7 @@ gCryTable::
 	cry Cry_Meltan
 	cry Cry_Melmetal
 .endif
-.if P_GEN_8_POKEMON == TRUE
+.if P_SPECIES_GEN_8 == TRUE
 	cry Cry_Grookey
 	cry Cry_Thwackey
 	cry Cry_Rillaboom
@@ -1475,7 +1475,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_RayquazaMega
 	cry_reverse Cry_Jirachi
 	cry_reverse Cry_Deoxys
-.if P_GEN_4_POKEMON == TRUE
+.if P_SPECIES_GEN_4 == TRUE
 	cry_reverse Cry_Turtwig
 	cry_reverse Cry_Grotle
 	cry_reverse Cry_Torterra
@@ -1559,7 +1559,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_ShayminSky
 	cry_reverse Cry_Arceus
 .endif
-.if P_GEN_5_POKEMON == TRUE
+.if P_SPECIES_GEN_5 == TRUE
 	cry_reverse Cry_Victini
 	cry_reverse Cry_Snivy
 	cry_reverse Cry_Servine
@@ -1727,7 +1727,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Meloetta
 	cry_reverse Cry_Genesect
 .endif
-.if P_GEN_6_POKEMON == TRUE
+.if P_SPECIES_GEN_6 == TRUE
 	cry_reverse Cry_Chespin
 	cry_reverse Cry_Quilladin
 	cry_reverse Cry_Chesnaught
@@ -1807,7 +1807,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_HoopaUnbound
 	cry_reverse Cry_Volcanion
 .endif
-.if P_GEN_7_POKEMON == TRUE
+.if P_SPECIES_GEN_7 == TRUE
 	cry_reverse Cry_Rowlet
 	cry_reverse Cry_Dartrix
 	cry_reverse Cry_Decidueye
@@ -1906,7 +1906,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Meltan
 	cry_reverse Cry_Melmetal
 .endif
-.if P_GEN_8_POKEMON == TRUE
+.if P_SPECIES_GEN_8 == TRUE
 	cry_reverse Cry_Grookey
 	cry_reverse Cry_Thwackey
 	cry_reverse Cry_Rillaboom

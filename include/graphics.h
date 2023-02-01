@@ -3313,7 +3313,7 @@ extern const u32 gMonPalette_DeoxysSpeed[];
 extern const u32 gMonBackPic_DeoxysSpeed[];
 extern const u32 gMonShinyPalette_DeoxysSpeed[];
 extern const u8 gMonIcon_DeoxysSpeed[];
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
 extern const u32 gMonFrontPic_Turtwig[];
 extern const u32 gMonPalette_Turtwig[];
 extern const u32 gMonBackPic_Turtwig[];
@@ -3934,7 +3934,7 @@ extern const u32 gMonShinyPalette_ArceusDark[];
 extern const u32 gMonPalette_ArceusFairy[];
 extern const u32 gMonShinyPalette_ArceusFairy[];
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
 extern const u32 gMonFrontPic_Victini[];
 extern const u32 gMonPalette_Victini[];
 extern const u32 gMonBackPic_Victini[];
@@ -5057,7 +5057,7 @@ extern const u32 gMonShinyPalette_GenesectBurnDrive[];
 extern const u32 gMonPalette_GenesectChillDrive[];
 extern const u32 gMonShinyPalette_GenesectChillDrive[];
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
 extern const u32 gMonFrontPic_Chespin[];
 extern const u32 gMonPalette_Chespin[];
 extern const u32 gMonBackPic_Chespin[];
@@ -5736,7 +5736,7 @@ extern const u32 gMonShinyPalette_Volcanion[];
 extern const u8 gMonIcon_Volcanion[];
 extern const u8 gMonFootprint_Volcanion[];
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
 extern const u32 gMonFrontPic_Rowlet[];
 extern const u32 gMonPalette_Rowlet[];
 extern const u32 gMonBackPic_Rowlet[];
@@ -6382,7 +6382,7 @@ extern const u32 gMonBackPic_MelmetalGigantamax[];
 extern const u32 gMonShinyPalette_MelmetalGigantamax[];
 extern const u8 gMonIcon_MelmetalGigantamax[];
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
 extern const u32 gMonFrontPic_Grookey[];
 extern const u32 gMonPalette_Grookey[];
 extern const u32 gMonBackPic_Grookey[];

@@ -119,7 +119,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES + 1] =
     [SPECIES_RAYQUAZA_MEGA] = 4,
     [SPECIES_JIRACHI] = 14,
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_COMBEE] = 8,
     [SPECIES_VESPIQUEN] = 4,
     [SPECIES_DRIFLOON] = 5,
@@ -139,7 +139,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES + 1] =
     [SPECIES_DARKRAI] = 4,
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_MUNNA] = 7,
     [SPECIES_MUSHARNA] = 5,
     [SPECIES_WOOBAT] = 19,
@@ -170,7 +170,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES + 1] =
     [SPECIES_MELOETTA_PIROUETTE] = 5,
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_FLETCHINDER] = 9,
     [SPECIES_TALONFLAME] = 7,
     [SPECIES_VIVILLON_ICY_SNOW]    = 9,
@@ -219,7 +219,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES + 1] =
     [SPECIES_HOOPA_UNBOUND] = 3,
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_VIKAVOLT] = 8,
     [SPECIES_CUTIEFLY] = 10,
     [SPECIES_RIBOMBEE] = 6,
@@ -255,7 +255,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES + 1] =
     [SPECIES_NAGANADEL] = 7,
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_CORVISQUIRE] = 10,
     [SPECIES_ORBEETLE] = 8,
     [SPECIES_FLAPPLE] = 9,

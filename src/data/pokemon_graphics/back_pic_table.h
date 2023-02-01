@@ -569,7 +569,7 @@ const u32 *const gMonBackPicTable[NUM_SPECIES + 1] =
     [SPECIES_DEOXYS_DEFENSE] = gMonBackPic_DeoxysDefense,
     [SPECIES_DEOXYS_SPEED] = gMonBackPic_DeoxysSpeed,
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_TURTWIG] = gMonBackPic_Turtwig,
     [SPECIES_GROTLE] = gMonBackPic_Grotle,
     [SPECIES_TORTERRA] = gMonBackPic_Torterra,
@@ -690,7 +690,7 @@ const u32 *const gMonBackPicTable[NUM_SPECIES + 1] =
     [SPECIES_ARCEUS_FAIRY] = gMonBackPic_Arceus,
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_VICTINI] = gMonBackPic_Victini,
     [SPECIES_SNIVY] = gMonBackPic_Snivy,
     [SPECIES_SERVINE] = gMonBackPic_Servine,
@@ -885,7 +885,7 @@ const u32 *const gMonBackPicTable[NUM_SPECIES + 1] =
     [SPECIES_GENESECT_CHILL_DRIVE] = gMonBackPic_Genesect,
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_CHESPIN] = gMonBackPic_Chespin,
     [SPECIES_QUILLADIN] = gMonBackPic_Quilladin,
     [SPECIES_CHESNAUGHT] = gMonBackPic_Chesnaught,
@@ -1058,7 +1058,7 @@ const u32 *const gMonBackPicTable[NUM_SPECIES + 1] =
     [SPECIES_VOLCANION] = gMonBackPic_Volcanion,
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_ROWLET] = gMonBackPic_Rowlet,
     [SPECIES_DARTRIX] = gMonBackPic_Dartrix,
     [SPECIES_DECIDUEYE] = gMonBackPic_Decidueye,
@@ -1192,7 +1192,7 @@ const u32 *const gMonBackPicTable[NUM_SPECIES + 1] =
     [SPECIES_MELMETAL] = gMonBackPic_Melmetal,
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_GROOKEY] = gMonBackPic_Grookey,
     [SPECIES_THWACKEY] = gMonBackPic_Thwackey,
     [SPECIES_RILLABOOM] = gMonBackPic_Rillaboom,
@@ -1303,7 +1303,7 @@ const u32 *const gMonBackPicTable[NUM_SPECIES + 1] =
 const u32 *const gMonBackPicTableFemale[NUM_SPECIES + 1] =
 {
     [SPECIES_EEVEE] = gMonBackPic_EeveeF,
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_STARLY] = gMonBackPic_StarlyF,
     [SPECIES_STARAVIA] = gMonBackPic_StaraviaF,
     [SPECIES_BIDOOF] = gMonBackPic_BidoofF,
@@ -1311,12 +1311,12 @@ const u32 *const gMonBackPicTableFemale[NUM_SPECIES + 1] =
     [SPECIES_KRICKETUNE] = gMonBackPic_KricketuneF,
     [SPECIES_SHINX] = gMonBackPic_ShinxF,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_UNFEZANT] = gMonBackPic_UnfezantF,
     [SPECIES_FRILLISH] = gMonBackPic_FrillishF,
     [SPECIES_JELLICENT] = gMonBackPic_JellicentF,
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_PYROAR] = gMonBackPic_PyroarF,
 #endif
 };

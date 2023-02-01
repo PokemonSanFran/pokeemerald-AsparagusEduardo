@@ -18561,7 +18561,7 @@ static const u16 sDeoxysSpeedTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
 static const u16 sTurtwigTeachableLearnset[] = {
     MOVE_ATTRACT,
     MOVE_BODY_SLAM,
@@ -21544,7 +21544,7 @@ static const u16 sArceusTeachableLearnset[] = {
 };
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
 static const u16 sVictiniTeachableLearnset[] = {
     MOVE_BRICK_BREAK,
     MOVE_DOUBLE_EDGE,
@@ -26829,7 +26829,7 @@ static const u16 sGenesectTeachableLearnset[] = {
 };
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
 static const u16 sChespinTeachableLearnset[] = {
     MOVE_AERIAL_ACE,
     MOVE_ATTRACT,
@@ -29258,7 +29258,7 @@ static const u16 sVolcanionTeachableLearnset[] = {
 };
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
 static const u16 sRowletTeachableLearnset[] = {
     MOVE_ATTRACT,
     MOVE_DOUBLE_TEAM,
@@ -31684,7 +31684,7 @@ static const u16 sMelmetalTeachableLearnset[] = {
 };
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
 static const u16 sGrookeyTeachableLearnset[] = {
     MOVE_ATTRACT,
     MOVE_ENDURE,

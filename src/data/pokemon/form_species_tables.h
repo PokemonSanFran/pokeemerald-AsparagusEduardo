@@ -597,7 +597,7 @@ static const u16 sDeoxysFormSpeciesIdTable[] = {
     FORM_SPECIES_END,
 };
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
 static const u16 sBurmyFormSpeciesIdTable[] = {
     SPECIES_BURMY_PLANT_CLOAK,
     SPECIES_BURMY_SANDY_CLOAK,
@@ -711,7 +711,7 @@ static const u16 sArceusFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
 static const u16 sSamurottFormSpeciesIdTable[] = {
     SPECIES_SAMUROTT,
     SPECIES_SAMUROTT_HISUIAN,
@@ -856,7 +856,7 @@ static const u16 sGenesectFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
 static const u16 sGreninjaFormSpeciesIdTable[] = {
     SPECIES_GRENINJA,
     SPECIES_GRENINJA_BATTLE_BOND,
@@ -1052,7 +1052,7 @@ static const u16 sHoopaFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
 static const u16 sDecidueyeFormSpeciesIdTable[] = {
     SPECIES_DECIDUEYE,
     SPECIES_DECIDUEYE_HISUIAN,
@@ -1153,7 +1153,7 @@ static const u16 sMelmetalFormSpeciesIdTable[] = {
 };
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
 static const u16 sRillaboomFormSpeciesIdTable[] = {
     SPECIES_RILLABOOM,
     SPECIES_RILLABOOM_GIGANTAMAX,

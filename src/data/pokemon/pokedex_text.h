@@ -3162,7 +3162,7 @@ const u8 gChimechoPokedexText[] = _(
     "themselves using seven different and\n"
     "distinguishing cries.");
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
 const u8 gTurtwigPokedexText[] = _(
     "The shell on its back is made of soil. \n"
     "On a very healthy Turtwig, the shell \n"
@@ -3746,7 +3746,7 @@ const u8 gArceusPokedexText[] = _(
     "even existed.");
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
 const u8 gVictiniPokedexText[] = _(
     "This Pokémon brings victory.\n"
     "It is said that Trainers with Victini\n"
@@ -4778,7 +4778,7 @@ const u8 gGenesectPokedexText[] = _(
     "a cannon to its back.");
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
 const u8 gChespinPokedexText[] = _(
     "The quills on its head are usually soft.\n"
     "When it flexes them, the points become\n"
@@ -5379,7 +5379,7 @@ const u8 gVolcanionPokedexText[] = _(
     "humans do not tread.");
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
 const u8 gRowletPokedexText[] = _(
     "This wary Pokémon uses photosynthesis\n"
     "to store up energy during the day, while\n"
@@ -5964,7 +5964,7 @@ const u8 gMelmetalPokedexText[] = _(
 const u8 gMelmetalGigantamaxPokedexText[] = _("");
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
 const u8 gGrookeyPokedexText[] = _(
     "When it uses its special stick to strike up\n"
     "a beat, the sound waves produced carry\n"

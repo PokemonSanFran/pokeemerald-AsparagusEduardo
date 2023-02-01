@@ -568,7 +568,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_DEOXYS_ATTACK] = gMonFootprint_Deoxys,
     [SPECIES_DEOXYS_DEFENSE] = gMonFootprint_Deoxys,
     [SPECIES_DEOXYS_SPEED] = gMonFootprint_Deoxys,
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_TURTWIG] = gMonFootprint_Turtwig,
     [SPECIES_GROTLE] = gMonFootprint_Grotle,
     [SPECIES_TORTERRA] = gMonFootprint_Torterra,
@@ -684,7 +684,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_ARCEUS_DARK] = gMonFootprint_Arceus,
     [SPECIES_ARCEUS_FAIRY] = gMonFootprint_Arceus,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_VICTINI] = gMonFootprint_Victini,
     [SPECIES_SNIVY] = gMonFootprint_Snivy,
     [SPECIES_SERVINE] = gMonFootprint_Servine,
@@ -878,7 +878,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_GENESECT_BURN_DRIVE] = gMonFootprint_Genesect,
     [SPECIES_GENESECT_CHILL_DRIVE] = gMonFootprint_Genesect,
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_CHESPIN] = gMonFootprint_Chespin,
     [SPECIES_QUILLADIN] = gMonFootprint_Quilladin,
     [SPECIES_CHESNAUGHT] = gMonFootprint_Chesnaught,
@@ -1050,7 +1050,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_HOOPA_UNBOUND] = gMonFootprint_Hoopa,
     [SPECIES_VOLCANION] = gMonFootprint_Volcanion,
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_ROWLET] = gMonFootprint_Rowlet,
     [SPECIES_DARTRIX] = gMonFootprint_Dartrix,
     [SPECIES_DECIDUEYE] = gMonFootprint_Decidueye,
@@ -1183,7 +1183,7 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_MELTAN] = gMonFootprint_Meltan,
     [SPECIES_MELMETAL] = gMonFootprint_Melmetal,
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_GROOKEY] = gMonFootprint_Grookey,
     [SPECIES_THWACKEY] = gMonFootprint_Thwackey,
     [SPECIES_RILLABOOM] = gMonFootprint_Rillaboom,

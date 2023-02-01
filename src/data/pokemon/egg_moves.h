@@ -2633,7 +2633,7 @@ const u16 gEggMoves[] = {
         MOVE_THRASH,
         MOVE_TWISTER),
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     egg_moves(TURTWIG,
         MOVE_AMNESIA,
         MOVE_BODY_SLAM,
@@ -3049,7 +3049,7 @@ const u16 gEggMoves[] = {
 
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     egg_moves(SNIVY,
         MOVE_CAPTIVATE,
         MOVE_GLARE,
@@ -3858,7 +3858,7 @@ const u16 gEggMoves[] = {
 
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     egg_moves(CHESPIN,
         MOVE_BELLY_DRUM,
         MOVE_CURSE,
@@ -4205,7 +4205,7 @@ const u16 gEggMoves[] = {
 
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     egg_moves(ROWLET,
         MOVE_BATON_PASS,
         MOVE_CONFUSE_RAY,
@@ -4435,7 +4435,7 @@ const u16 gEggMoves[] = {
 
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     egg_moves(GROOKEY,
         MOVE_FAKE_OUT,
         MOVE_GROWTH,

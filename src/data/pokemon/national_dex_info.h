@@ -430,7 +430,7 @@ const struct NationalDexInfo gNationalDexInfo[NATIONAL_DEX_COUNT + 1] =
     [NATIONAL_DEX_RAYQUAZA] =    { .speciesName = _("Rayquaza"),     .baseSpeciesId = SPECIES_RAYQUAZA, .formSpeciesIdTable = sRayquazaFormSpeciesIdTable, },
     [NATIONAL_DEX_JIRACHI] =     { .speciesName = _("Jirachi"),      .baseSpeciesId = SPECIES_JIRACHI, },
     [NATIONAL_DEX_DEOXYS] =      { .speciesName = _("Deoxys"),       .baseSpeciesId = SPECIES_DEOXYS_NORMAL, .formSpeciesIdTable = sDeoxysFormSpeciesIdTable, },
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [NATIONAL_DEX_TURTWIG] =     { .speciesName = _("Turtwig"),      .baseSpeciesId = SPECIES_TURTWIG, },
     [NATIONAL_DEX_GROTLE] =      { .speciesName = _("Grotle"),       .baseSpeciesId = SPECIES_GROTLE, },
     [NATIONAL_DEX_TORTERRA] =    { .speciesName = _("Torterra"),     .baseSpeciesId = SPECIES_TORTERRA, },
@@ -509,7 +509,7 @@ const struct NationalDexInfo gNationalDexInfo[NATIONAL_DEX_COUNT + 1] =
     [NATIONAL_DEX_SHAYMIN] =     { .speciesName = _("Shaymin"),      .baseSpeciesId = SPECIES_SHAYMIN_LAND, .formSpeciesIdTable = sShayminFormSpeciesIdTable, },
     [NATIONAL_DEX_ARCEUS] =      { .speciesName = _("Arceus"),       .baseSpeciesId = SPECIES_ARCEUS_NORMAL, .formSpeciesIdTable = sArceusFormSpeciesIdTable, },
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [NATIONAL_DEX_VICTINI] =     { .speciesName = _("Victini"),      .baseSpeciesId = SPECIES_VICTINI, },
     [NATIONAL_DEX_SNIVY] =       { .speciesName = _("Snivy"),        .baseSpeciesId = SPECIES_SNIVY, },
     [NATIONAL_DEX_SERVINE] =     { .speciesName = _("Servine"),      .baseSpeciesId = SPECIES_SERVINE, },
@@ -670,7 +670,7 @@ const struct NationalDexInfo gNationalDexInfo[NATIONAL_DEX_COUNT + 1] =
     [NATIONAL_DEX_MELOETTA] =    { .speciesName = _("Meloetta"),     .baseSpeciesId = SPECIES_MELOETTA_ARIA, .formSpeciesIdTable = sMeloettaFormSpeciesIdTable, },
     [NATIONAL_DEX_GENESECT] =    { .speciesName = _("Genesect"),     .baseSpeciesId = SPECIES_GENESECT, .formSpeciesIdTable = sGenesectFormSpeciesIdTable, },
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [NATIONAL_DEX_CHESPIN] =     { .speciesName = _("Chespin"),      .baseSpeciesId = SPECIES_CHESPIN, },
     [NATIONAL_DEX_QUILLADIN] =   { .speciesName = _("Quilladin"),    .baseSpeciesId = SPECIES_QUILLADIN, },
     [NATIONAL_DEX_CHESNAUGHT] =  { .speciesName = _("Chesnaught"),   .baseSpeciesId = SPECIES_CHESNAUGHT, },
@@ -743,7 +743,7 @@ const struct NationalDexInfo gNationalDexInfo[NATIONAL_DEX_COUNT + 1] =
     [NATIONAL_DEX_HOOPA] =       { .speciesName = _("Hoopa"),        .baseSpeciesId = SPECIES_HOOPA_CONFINED, .formSpeciesIdTable = sHoopaFormSpeciesIdTable, },
     [NATIONAL_DEX_VOLCANION] =   { .speciesName = _("Volcanion"),    .baseSpeciesId = SPECIES_VOLCANION, },
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [NATIONAL_DEX_ROWLET] =      { .speciesName = _("Rowlet"),       .baseSpeciesId = SPECIES_ROWLET, },
     [NATIONAL_DEX_DARTRIX] =     { .speciesName = _("Dartrix"),      .baseSpeciesId = SPECIES_DARTRIX, },
     [NATIONAL_DEX_DECIDUEYE] =   { .speciesName = _("Decidueye"),    .baseSpeciesId = SPECIES_DECIDUEYE, .formSpeciesIdTable = sDecidueyeFormSpeciesIdTable, },
@@ -833,7 +833,7 @@ const struct NationalDexInfo gNationalDexInfo[NATIONAL_DEX_COUNT + 1] =
     [NATIONAL_DEX_MELTAN] =      { .speciesName = _("Meltan"),       .baseSpeciesId = SPECIES_MELTAN, },
     [NATIONAL_DEX_MELMETAL] =    { .speciesName = _("Melmetal"),     .baseSpeciesId = SPECIES_MELMETAL, .formSpeciesIdTable = sMelmetalFormSpeciesIdTable, },
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [NATIONAL_DEX_GROOKEY] =     { .speciesName = _("Grookey"),      .baseSpeciesId = SPECIES_GROOKEY, },
     [NATIONAL_DEX_THWACKEY] =    { .speciesName = _("Thwackey"),     .baseSpeciesId = SPECIES_THWACKEY, },
     [NATIONAL_DEX_RILLABOOM] =   { .speciesName = _("Rillaboom"),    .baseSpeciesId = SPECIES_RILLABOOM, .formSpeciesIdTable = sRillaboomFormSpeciesIdTable, },

@@ -2292,7 +2292,7 @@ Cry_Jirachi::
 Cry_Deoxys::
 	.incbin "sound/direct_sound_samples/cries/deoxys.bin"
 
-.if P_GEN_4_POKEMON == TRUE
+.if P_SPECIES_GEN_4 == TRUE
 	.align 2
 Cry_Turtwig::
 	.incbin "sound/direct_sound_samples/cries/turtwig.bin"
@@ -2622,7 +2622,7 @@ Cry_Arceus::
 	.incbin "sound/direct_sound_samples/cries/arceus.bin"
 .endif
 
-.if P_GEN_5_POKEMON == TRUE
+.if P_SPECIES_GEN_5 == TRUE
 	.align 2
 Cry_Victini::
 	.incbin "sound/direct_sound_samples/cries/victini.bin"
@@ -3292,7 +3292,7 @@ Cry_Genesect::
 	.incbin "sound/direct_sound_samples/cries/genesect.bin"
 .endif
 
-.if P_GEN_6_POKEMON == TRUE
+.if P_SPECIES_GEN_6 == TRUE
 	.align 2
 Cry_Chespin::
 	.incbin "sound/direct_sound_samples/cries/chespin.bin"
@@ -3606,7 +3606,7 @@ Cry_Volcanion::
 	.incbin "sound/direct_sound_samples/cries/volcanion.bin"
 .endif
 
-.if P_GEN_7_POKEMON == TRUE
+.if P_SPECIES_GEN_7 == TRUE
 	.align 2
 Cry_Rowlet::
 	.incbin "sound/direct_sound_samples/cries/rowlet.bin"
@@ -3996,7 +3996,7 @@ Cry_Melmetal::
 	.incbin "sound/direct_sound_samples/cries/melmetal.bin"
 .endif
 
-.if P_GEN_8_POKEMON == TRUE
+.if P_SPECIES_GEN_8 == TRUE
 	.align 2
 Cry_Grookey::
 	.incbin "sound/direct_sound_samples/cries/grookey.bin"

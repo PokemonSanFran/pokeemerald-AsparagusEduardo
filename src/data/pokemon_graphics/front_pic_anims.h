@@ -5116,7 +5116,7 @@ static const union AnimCmd sAnim_Egg_1[] =
     ANIMCMD_END,
 };
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
 static const union AnimCmd sAnim_Turtwig_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -6054,7 +6054,7 @@ static const union AnimCmd sAnim_Arceus_1[] =
     ANIMCMD_END,
 };
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
 static const union AnimCmd sAnim_Victini_1[] =
 {
     ANIMCMD_FRAME(0, 2),
@@ -7837,7 +7837,7 @@ static const union AnimCmd sAnim_Genesect_1[] =
     ANIMCMD_END,
 };
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
 static const union AnimCmd sAnim_Chespin_1[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -8630,7 +8630,7 @@ static const union AnimCmd sAnim_Volcanion_1[] =
     ANIMCMD_END,
 };
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
 PLACEHOLDER_ANIM_SINGLE_FRAME(Rowlet);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Dartrix);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Decidueye);
@@ -8770,7 +8770,7 @@ PLACEHOLDER_ANIM_SINGLE_FRAME(Meltan);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Melmetal);
 PLACEHOLDER_ANIM_SINGLE_FRAME(MelmetalGigantamax);
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
 PLACEHOLDER_ANIM_SINGLE_FRAME(Grookey);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Thwackey);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Rillaboom);
@@ -9445,7 +9445,7 @@ DOUBLE_ANIMATION(DeoxysSpeed);
 SINGLE_ANIMATION(Chingling);
 SINGLE_ANIMATION(Chimecho);
 SINGLE_ANIMATION(Egg);
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
 SINGLE_ANIMATION(Turtwig);
 SINGLE_ANIMATION(Grotle);
 SINGLE_ANIMATION(Torterra);
@@ -9538,7 +9538,7 @@ SINGLE_ANIMATION(ShayminLand);
 SINGLE_ANIMATION(ShayminSky);
 SINGLE_ANIMATION(Arceus);
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
 SINGLE_ANIMATION(Victini);
 SINGLE_ANIMATION(Snivy);
 SINGLE_ANIMATION(Servine);
@@ -9720,7 +9720,7 @@ DOUBLE_ANIMATION(MeloettaAria);
 SINGLE_ANIMATION(MeloettaPirouette);
 SINGLE_ANIMATION(Genesect);
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
 SINGLE_ANIMATION(Chespin);
 DOUBLE_ANIMATION(Quilladin);
 SINGLE_ANIMATION(Chesnaught);
@@ -9802,7 +9802,7 @@ SINGLE_ANIMATION(HoopaConfined);
 SINGLE_ANIMATION(HoopaUnbound);
 SINGLE_ANIMATION(Volcanion);
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
 SINGLE_ANIMATION(Rowlet);
 SINGLE_ANIMATION(Dartrix);
 SINGLE_ANIMATION(Decidueye);
@@ -9899,7 +9899,7 @@ SINGLE_ANIMATION(Meltan);
 SINGLE_ANIMATION(Melmetal);
 SINGLE_ANIMATION(MelmetalGigantamax);
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
 SINGLE_ANIMATION(Grookey);
 SINGLE_ANIMATION(Thwackey);
 SINGLE_ANIMATION(Rillaboom);
@@ -10573,7 +10573,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_DEOXYS_DEFENSE]                    = sAnims_DeoxysDefense,
     [SPECIES_DEOXYS_SPEED]                      = sAnims_DeoxysSpeed,
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_TURTWIG]                           = sAnims_Turtwig,
     [SPECIES_GROTLE]                            = sAnims_Grotle,
     [SPECIES_TORTERRA]                          = sAnims_Torterra,
@@ -10689,7 +10689,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_ARCEUS_DARK]                       = sAnims_Arceus,
     [SPECIES_ARCEUS_FAIRY]                      = sAnims_Arceus,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_VICTINI]                           = sAnims_Victini,
     [SPECIES_SNIVY]                             = sAnims_Snivy,
     [SPECIES_SERVINE]                           = sAnims_Servine,
@@ -10883,7 +10883,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_GENESECT_BURN_DRIVE]               = sAnims_Genesect,
     [SPECIES_GENESECT_CHILL_DRIVE]              = sAnims_Genesect,
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_CHESPIN]                           = sAnims_Chespin,
     [SPECIES_QUILLADIN]                         = sAnims_Quilladin,
     [SPECIES_CHESNAUGHT]                        = sAnims_Chesnaught,
@@ -11055,7 +11055,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_HOOPA_UNBOUND]                     = sAnims_HoopaUnbound,
     [SPECIES_VOLCANION]                         = sAnims_Volcanion,
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_ROWLET]                            = sAnims_Rowlet,
     [SPECIES_DARTRIX]                           = sAnims_Dartrix,
     [SPECIES_DECIDUEYE]                         = sAnims_Decidueye,
@@ -11188,7 +11188,7 @@ const union AnimCmd *const *const gMonFrontAnimsPtrTable[NUM_SPECIES + 1] =
     [SPECIES_MELTAN]                            = sAnims_Meltan,
     [SPECIES_MELMETAL]                          = sAnims_Melmetal,
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_GROOKEY]                           = sAnims_Grookey,
     [SPECIES_THWACKEY]                          = sAnims_Thwackey,
     [SPECIES_RILLABOOM]                         = sAnims_Rillaboom,

@@ -34,13 +34,23 @@
 
 // Enabled species settings
 // These settings will toggle evolution families that originated in the specified generation.
-// Forms, evolutions babies are included.
-#define P_GEN_4_POKEMON             TRUE        // Generation 4 Pokémon (DPPt, HGSS)
-#define P_GEN_5_POKEMON             TRUE        // Generation 5 Pokémon (BW, B2W2)
-#define P_GEN_6_POKEMON             TRUE        // Generation 6 Pokémon (XY, ORAS)
-#define P_GEN_7_POKEMON             TRUE        // Generation 7 Pokémon (SM, USUM, LGPE)
-#define P_GEN_8_POKEMON             TRUE        // Generation 8 Pokémon (SwSh, BDSP, LA)
-#define P_GEN_9_POKEMON             TRUE        // Generation 9 Pokémon (SV)
+#define P_SPECIES_GEN_1             TRUE        // Generation 1 Pokémon (RGBY)
+#define P_SPECIES_GEN_2             TRUE        // Generation 2 Pokémon (GSC)
+#define P_SPECIES_GEN_3             TRUE        // Generation 3 Pokémon (RSE, FRLG)
+#define P_SPECIES_GEN_4             TRUE        // Generation 4 Pokémon (DPPt, HGSS)
+#define P_SPECIES_GEN_5             TRUE        // Generation 5 Pokémon (BW, B2W2)
+#define P_SPECIES_GEN_6             TRUE        // Generation 6 Pokémon (XY, ORAS)
+#define P_SPECIES_GEN_7             TRUE        // Generation 7 Pokémon (SM, USUM, LGPE)
+#define P_SPECIES_GEN_8             TRUE        // Generation 8 Pokémon (SwSh, BDSP, LA)
+#define P_SPECIES_GEN_9             TRUE        // Generation 9 Pokémon (SV)
+
+#define P_SPECIES_NEW_EVOLUTIONS    TRUE        // Babies and Evolutions (not including Regional Evolutions)
+#define P_SPECIES_MEGA_EVOLUTIONS   TRUE        // Mega Evolutions
+#define P_SPECIES_GIGANTAMAX_FORMS  TRUE        // Gigantamax Forms
+#define P_SPECIES_ALOLAN_FORMS      TRUE        // Alolan Forms (includes exclusive evolutions)
+#define P_SPECIES_GALARIAN_FORMS    TRUE        // Galarian Forms (includes exclusive evolutions)
+#define P_SPECIES_HISUIAN_FORMS     TRUE        // Hisuian Forms (includes exclusive evolutions)
+#define P_SPECIES_PALDEAN_FORMS     TRUE        // Paldean Forms (includes Clodsire)
 
 // WARNING: By default, the expansion has 512 bytes reserved in SaveBlock1 to allow introducing new species and forms without breaking existing saves.
 // By disabling this feature, the amount of dex flags will be adjusted to the amount of species enabled in the previous section.

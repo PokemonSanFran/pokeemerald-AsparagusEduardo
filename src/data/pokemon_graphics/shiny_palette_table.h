@@ -570,7 +570,7 @@ const u32 *const gMonShinyPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_DEOXYS_DEFENSE] = gMonShinyPalette_DeoxysDefense,
     [SPECIES_DEOXYS_SPEED] = gMonShinyPalette_DeoxysSpeed,
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_TURTWIG] = gMonShinyPalette_Turtwig,
     [SPECIES_GROTLE] = gMonShinyPalette_Grotle,
     [SPECIES_TORTERRA] = gMonShinyPalette_Torterra,
@@ -691,7 +691,7 @@ const u32 *const gMonShinyPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_ARCEUS_FAIRY] = gMonShinyPalette_ArceusFairy,
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_VICTINI] = gMonShinyPalette_Victini,
     [SPECIES_SNIVY] = gMonShinyPalette_Snivy,
     [SPECIES_SERVINE] = gMonShinyPalette_Servine,
@@ -886,7 +886,7 @@ const u32 *const gMonShinyPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_GENESECT_CHILL_DRIVE] = gMonShinyPalette_GenesectChillDrive,
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_CHESPIN] = gMonShinyPalette_Chespin,
     [SPECIES_QUILLADIN] = gMonShinyPalette_Quilladin,
     [SPECIES_CHESNAUGHT] = gMonShinyPalette_Chesnaught,
@@ -1059,7 +1059,7 @@ const u32 *const gMonShinyPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_VOLCANION] = gMonShinyPalette_Volcanion,
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_ROWLET] = gMonShinyPalette_Rowlet,
     [SPECIES_DARTRIX] = gMonShinyPalette_Dartrix,
     [SPECIES_DECIDUEYE] = gMonShinyPalette_Decidueye,
@@ -1193,7 +1193,7 @@ const u32 *const gMonShinyPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_MELMETAL] = gMonShinyPalette_Melmetal,
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_GROOKEY] = gMonShinyPalette_Grookey,
     [SPECIES_THWACKEY] = gMonShinyPalette_Thwackey,
     [SPECIES_RILLABOOM] = gMonShinyPalette_Rillaboom,
@@ -1304,12 +1304,12 @@ const u32 *const gMonShinyPaletteTable[NUM_SPECIES + 1] =
 
 const u32 *const gMonShinyPaletteTableFemale[NUM_SPECIES + 1] =
 {
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_COMBEE] = gMonShinyPalette_CombeeF,
     [SPECIES_HIPPOPOTAS] = gMonShinyPalette_HippopotasF,
     [SPECIES_HIPPOWDON] = gMonShinyPalette_HippowdonF,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_UNFEZANT] = gMonShinyPalette_UnfezantF,
     [SPECIES_FRILLISH] = gMonShinyPalette_FrillishF,
     [SPECIES_JELLICENT] = gMonShinyPalette_JellicentF,

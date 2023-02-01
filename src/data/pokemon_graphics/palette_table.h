@@ -569,7 +569,7 @@ const u32 *const gMonPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_DEOXYS_ATTACK] = gMonPalette_DeoxysAttack,
     [SPECIES_DEOXYS_DEFENSE] = gMonPalette_DeoxysDefense,
     [SPECIES_DEOXYS_SPEED] = gMonPalette_DeoxysSpeed,
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_TURTWIG] = gMonPalette_Turtwig,
     [SPECIES_GROTLE] = gMonPalette_Grotle,
     [SPECIES_TORTERRA] = gMonPalette_Torterra,
@@ -689,7 +689,7 @@ const u32 *const gMonPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_ARCEUS_DARK] = gMonPalette_ArceusDark,
     [SPECIES_ARCEUS_FAIRY] = gMonPalette_ArceusFairy,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_VICTINI] = gMonPalette_Victini,
     [SPECIES_SNIVY] = gMonPalette_Snivy,
     [SPECIES_SERVINE] = gMonPalette_Servine,
@@ -883,7 +883,7 @@ const u32 *const gMonPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_GENESECT_BURN_DRIVE] = gMonPalette_GenesectBurnDrive,
     [SPECIES_GENESECT_CHILL_DRIVE] = gMonPalette_GenesectChillDrive,
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_CHESPIN] = gMonPalette_Chespin,
     [SPECIES_QUILLADIN] = gMonPalette_Quilladin,
     [SPECIES_CHESNAUGHT] = gMonPalette_Chesnaught,
@@ -1055,7 +1055,7 @@ const u32 *const gMonPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_HOOPA_UNBOUND] = gMonPalette_HoopaUnbound,
     [SPECIES_VOLCANION] = gMonPalette_Volcanion,
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_ROWLET] = gMonPalette_Rowlet,
     [SPECIES_DARTRIX] = gMonPalette_Dartrix,
     [SPECIES_DECIDUEYE] = gMonPalette_Decidueye,
@@ -1189,7 +1189,7 @@ const u32 *const gMonPaletteTable[NUM_SPECIES + 1] =
     [SPECIES_MELMETAL] = gMonPalette_Melmetal,
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_GROOKEY] = gMonPalette_Grookey,
     [SPECIES_THWACKEY] = gMonPalette_Thwackey,
     [SPECIES_RILLABOOM] = gMonPalette_Rillaboom,
@@ -1300,12 +1300,12 @@ const u32 *const gMonPaletteTable[NUM_SPECIES + 1] =
 
 const u32 *const gMonPaletteTableFemale[NUM_SPECIES + 1] =
 {
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_COMBEE] = gMonPalette_CombeeF,
     [SPECIES_HIPPOPOTAS] = gMonPalette_HippopotasF,
     [SPECIES_HIPPOWDON] = gMonPalette_HippowdonF,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_UNFEZANT] = gMonPalette_UnfezantF,
     [SPECIES_FRILLISH] = gMonPalette_FrillishF,
     [SPECIES_JELLICENT] = gMonPalette_JellicentF,

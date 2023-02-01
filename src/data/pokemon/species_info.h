@@ -17897,7 +17897,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         DEOXYS_MISC_INFO,
     },
 
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_TURTWIG] =
     {
         .baseHP        = 55,
@@ -20973,7 +20973,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_ARCEUS_FAIRY]      = ARCEUS_SPECIES_INFO(TYPE_FAIRY,    Fairy),
 #endif
 
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_VICTINI] =
     {
         .baseHP        = 100,
@@ -27112,7 +27112,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_GENESECT_CHILL_DRIVE] = GENESECT_MISC_INFO(GenesectChillDrive),
 #endif
 
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_CHESPIN] =
     {
         .baseHP        = 56,
@@ -30093,7 +30093,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 #endif
 
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_ROWLET] =
     {
         .baseHP        = 68,
@@ -33477,7 +33477,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 #endif
 
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_GROOKEY] =
     {
         .baseHP        = 50,

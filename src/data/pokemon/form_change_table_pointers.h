@@ -1,6 +1,6 @@
 const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
 {
-#if P_GEN_4_POKEMON == TRUE
+#if P_SPECIES_GEN_4 == TRUE
     [SPECIES_GIRATINA_ALTERED] = sGiratinaFormChangeTable,
     [SPECIES_GIRATINA_ORIGIN] = sGiratinaFormChangeTable,
     [SPECIES_SHAYMIN_LAND] = sShayminFormChangeTable,
@@ -24,7 +24,7 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_ARCEUS_DARK] = sArceusFormChangeTable,
     [SPECIES_ARCEUS_FAIRY] = sArceusFormChangeTable,
 #endif
-#if P_GEN_5_POKEMON == TRUE
+#if P_SPECIES_GEN_5 == TRUE
     [SPECIES_TORNADUS_INCARNATE] = sTornadusFormChangeTable,
     [SPECIES_TORNADUS_THERIAN] = sTornadusFormChangeTable,
     [SPECIES_THUNDURUS_INCARNATE] = sThundurusFormChangeTable,
@@ -39,13 +39,13 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_GENESECT_BURN_DRIVE] = sGenesectFormChangeTable,
     [SPECIES_GENESECT_CHILL_DRIVE] = sGenesectFormChangeTable,
 #endif
-#if P_GEN_6_POKEMON == TRUE
+#if P_SPECIES_GEN_6 == TRUE
     [SPECIES_XERNEAS_NEUTRAL] = sXerneasFormChangeTable,
     [SPECIES_XERNEAS_ACTIVE] = sXerneasFormChangeTable,
     [SPECIES_HOOPA_CONFINED] = sHoopaFormChangeTable,
     [SPECIES_HOOPA_UNBOUND] = sHoopaFormChangeTable,
 #endif
-#if P_GEN_7_POKEMON == TRUE
+#if P_SPECIES_GEN_7 == TRUE
     [SPECIES_ORICORIO_BAILE] = sOricorioFormChangeTable,
     [SPECIES_ORICORIO_POM_POM] = sOricorioFormChangeTable,
     [SPECIES_ORICORIO_PAU] = sOricorioFormChangeTable,
@@ -69,7 +69,7 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_SILVALLY_STEEL] = sSilvallyFormChangeTable,
     [SPECIES_SILVALLY_WATER] = sSilvallyFormChangeTable,
 #endif
-#if P_GEN_8_POKEMON == TRUE
+#if P_SPECIES_GEN_8 == TRUE
     [SPECIES_ZACIAN_HERO_OF_MANY_BATTLES] = sZacianFormChangeTable,
     [SPECIES_ZACIAN_CROWNED_SWORD] = sZacianFormChangeTable,
     [SPECIES_ZAMAZENTA_HERO_OF_MANY_BATTLES] = sZamazentaFormChangeTable,
