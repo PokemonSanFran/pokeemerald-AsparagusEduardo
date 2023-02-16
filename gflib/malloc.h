@@ -14,6 +14,16 @@
 extern u8 gHeap[];
 
 void *Alloc(u32 size);
+#ifdef NDEBUG
+    #define MgbaPrintf(...)
+#endif
+#define Alloc(size) (                                   \
+	{                                                   \
+        if (gTestRunnerEnabled)                         \
+		    MgbaPrintf(MGBA_LOG_INFO, "size%d", size);  \
+	    (Alloc)(size);                                  \
+    })
+
 void *AllocZeroed(u32 size);
 void Free(void *pointer);
 void InitHeap(void *pointer, u32 size);

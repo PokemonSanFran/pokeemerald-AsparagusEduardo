@@ -14,7 +14,6 @@
 #include "malloc.h"
 #include "util.h"
 #include "task.h"
-#include "test_runner.h"
 #include "text.h"
 #include "battle_setup.h"
 #include "frontier_util.h"

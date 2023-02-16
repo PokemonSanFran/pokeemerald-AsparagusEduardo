@@ -5,7 +5,6 @@
 #include "main.h"
 #include "malloc.h"
 #include "test.h"
-#include "test_runner.h"
 
 #define TIMEOUT_SECONDS 30
 

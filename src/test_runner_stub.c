@@ -1,5 +1,4 @@
 #include "global.h"
-#include "test_runner.h"
 
 __attribute__((weak))
 const bool8 gTestRunnerEnabled = FALSE;

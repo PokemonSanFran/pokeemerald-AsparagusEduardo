@@ -19,7 +19,6 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
-#include "test_runner.h"
 #include "text.h"
 #include "util.h"
 #include "window.h"
