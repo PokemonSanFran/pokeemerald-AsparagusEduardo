@@ -19,10 +19,11 @@ void *Alloc(u32 size);
 #endif
 #define Alloc(size) (                                   \
 	{                                                   \
-        if (gTestRunnerEnabled)                         \
 		    MgbaPrintf(MGBA_LOG_INFO, "size%d", size);  \
 	    (Alloc)(size);                                  \
     })
+
+//        if (gTestRunnerEnabled)                         \
 
 void *AllocZeroed(u32 size);
 void Free(void *pointer);
