@@ -1307,7 +1307,7 @@ const struct Item gItems[] =
         .name = _("Exp.Candy S"),
         .price = 240,
         .holdEffectParam = EXP_800,
-        .description = sExpCandyXSDesc,
+        .description = sExpCandySDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_RareCandy,
@@ -9098,6 +9098,66 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
+    [ITEM_ABILITY_SHIELD] =
+    {
+        .name = _("AbilityShield"),
+        .price = 20000,
+        .holdEffect = HOLD_EFFECT_ABILITY_SHIELD,
+        .description = sAbilityShieldDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_CLEAR_AMULET] =
+    {
+        .name = _("Clear Amulet"),
+        .price = 30000,
+        .holdEffect = HOLD_EFFECT_CLEAR_AMULET,
+        .description = sClearAmuletDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_PUNCHING_GLOVE] =
+    {
+        .name = _("PunchingGlove"),
+        .price = 15000,
+        .holdEffect = HOLD_EFFECT_PUNCHING_GLOVE,
+        .description = sPunchingGloveDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_COVERT_CLOAK] =
+    {
+        .name = _("Covert Cloak"),
+        .price = 20000,
+        .holdEffect = HOLD_EFFECT_COVERT_CLOAK,
+        .description = sCovertCloakDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
+
+    [ITEM_LOADED_DICE] =
+    {
+                 //YellwApricorn
+        .name = _("Loaded Dice"),
+        .price = 20000,
+        .holdEffect = HOLD_EFFECT_LOADED_DICE,
+        .description = sLoadedDiceDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 30,
+    },
     [ITEM_GB_SOUNDS] =
     {
         .name = _("GB Sounds"),
