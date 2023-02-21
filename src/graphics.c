@@ -2005,9 +2005,6 @@ const u16 gMonIconPalettes[][16] =
     INCBIN_U16("graphics/pokemon/icon_palettes/pal5.gbapal"),
 };
 
-const u8 battleIconBgPlayer_Gfx[] = INCBIN_U8("graphics/pokemon/battle_icons/battle_icon_bg_player.4bpp");
-const u8 battleIconBgOpponent_Gfx[] = INCBIN_U8("graphics/pokemon/battle_icons/battle_icon_bg_opponent.4bpp");
-
 const u16 gTitleScreenBgPalettes[]         = INCBIN_U16("graphics/title_screen/pokemon_logo.gbapal",
                                                         "graphics/title_screen/rayquaza_and_clouds.gbapal");
 const u16 gTitleScreenEmeraldVersionPal[]  = INCBIN_U16("graphics/title_screen/emerald_version.gbapal");

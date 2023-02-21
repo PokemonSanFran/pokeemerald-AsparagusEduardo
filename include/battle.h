@@ -832,18 +832,12 @@ struct BattleBarInfo
     s32 currValue;
 };
 
-struct BattleOrderInfo {
-    const u8* spriteCoords;
-    u8 monSpriteId;
-};
-
 struct BattleSpriteData
 {
     struct BattleSpriteInfo *battlerData;
     struct BattleHealthboxInfo *healthBoxesData;
     struct BattleAnimationInfo *animationData;
     struct BattleBarInfo *battleBars;
-    struct BattleOrderInfo *battleOrderData;
 };
 
 #include "sprite.h"
@@ -869,12 +863,6 @@ struct TotemBoost
     s8 statChanges[NUM_BATTLE_STATS - 1];    // highest bit being set decreases the stat
 }; /* size = 8 */
 
-struct SpeciesData
-{
-    u16 species;
-    u32 personality;
-};
-
 // All battle variables are declared in battle_main.c
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
@@ -894,7 +882,6 @@ extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff3[30]; //to handle stupidly large z move names
 extern u32 gBattleTypeFlags;
 extern u8 gBattleTerrain;
-extern u32 gUnusedFirstBattleVar1;
 extern u8 *gBattleAnimBgTileBuffer;
 extern u8 *gBattleAnimBgTilemapBuffer;
 extern u8 gActiveBattler;
@@ -906,12 +893,6 @@ extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
-extern u32 gBattlerTicks[MAX_BATTLERS_COUNT];
-extern u32 gBattlerTicks2[MAX_BATTLERS_COUNT];
-extern u8 gBattlerTurnOrder[MAX_BATTLERS_ORDER_COUNT];
-extern struct SpeciesData gSpeciesTurnOrder[MAX_BATTLERS_ORDER_COUNT];
-extern u8 gSpriteTurnOrder[MAX_BATTLERS_ORDER_COUNT];
-extern u8 gBgTurnOrder[MAX_BATTLERS_ORDER_COUNT];
 extern u8 gCurrentTurnActionNumber;
 extern u8 gCurrentActionFuncId;
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
@@ -951,7 +932,6 @@ extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u16 gMoveResultFlags;
 extern u32 gHitMarker;
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
-extern u8 gUnusedFirstBattleVar2;
 extern u32 gSideStatuses[NUM_BATTLE_SIDES];
 extern struct SideTimer gSideTimers[NUM_BATTLE_SIDES];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];

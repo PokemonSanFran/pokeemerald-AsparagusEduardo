@@ -2,7 +2,6 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
-#include "battle_order.h"
 #include "battle_pyramid.h"
 #include "battle_util.h"
 #include "battle_controllers.h"
@@ -422,7 +421,6 @@ void HandleAction_UseMove(void)
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
     }
 
-    gBattlerTicks[gBattlerAttacker] += CalculateAddedTicks(gBattlerAttacker, gBattleMoves[gCurrentMove].speed);
     // check z move used
     if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE && !IS_MOVE_STATUS(gCurrentMove))
     {
@@ -782,7 +780,7 @@ bool8 TryRunFromBattle(u8 battler)
 
     if (effect != 0)
     {
-        gCurrentTurnActionNumber = 1;
+        gCurrentTurnActionNumber = gBattlersCount;
         gBattleOutcome = B_OUTCOME_RAN;
     }
 
@@ -795,7 +793,7 @@ void HandleAction_Run(void)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
     {
-        gCurrentTurnActionNumber = 1;
+        gCurrentTurnActionNumber = gBattlersCount;
 
         for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
@@ -836,7 +834,7 @@ void HandleAction_Run(void)
             }
             else
             {
-                gCurrentTurnActionNumber = 1;
+                gCurrentTurnActionNumber = gBattlersCount;
                 gBattleOutcome = B_OUTCOME_MON_FLED;
             }
         }
@@ -934,7 +932,7 @@ void HandleAction_SafariZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_FLEE);
-    gCurrentTurnActionNumber = 1;
+    gCurrentTurnActionNumber = gBattlersCount;
     gBattleOutcome = B_OUTCOME_RAN;
 }
 
@@ -1031,7 +1029,7 @@ void HandleAction_ActionFinished(void)
         }
     }
     #endif
-    UpdateBattleOrderMonIconSprites();
+
 }
 
 static const u8 sMovesNotAffectedByStench[] =
@@ -3417,7 +3415,7 @@ bool8 HandleFaintedMonActions(void)
             // Don't switch mons until all pokemon performed their actions or the battle's over.
             if (gBattleOutcome == 0
                 && !NoAliveMonsForEitherParty()
-                && gCurrentTurnActionNumber < 1)
+                && gCurrentTurnActionNumber != gBattlersCount)
             {
                 gAbsentBattlerFlags |= gBitTable[gBattlerFainted];
                 return FALSE;
@@ -3429,7 +3427,7 @@ bool8 HandleFaintedMonActions(void)
             // Don't switch mons until all pokemon performed their actions or the battle's over.
             if (gBattleOutcome == 0
                 && !NoAliveMonsForEitherParty()
-                && gCurrentTurnActionNumber < 1)
+                && gCurrentTurnActionNumber != gBattlersCount)
             {
                 return FALSE;
             }
@@ -6409,7 +6407,7 @@ u32 GetBattlerAbility(u8 battlerId)
             && sAbilitiesAffectedByMoldBreaker[gBattleMons[battlerId].ability]
             && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
             && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
-            && gCurrentTurnActionNumber < 1)
+            && gCurrentTurnActionNumber < gBattlersCount)
         return ABILITY_NONE;
 
     return gBattleMons[battlerId].ability;

@@ -6,13 +6,13 @@
 #include "battle_dome.h"
 #include "battle_interface.h"
 #include "battle_message.h"
-#include "battle_order.h"
 #include "battle_setup.h"
 #include "battle_tv.h"
 #include "battle_util.h"
 #include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
+#include "event_data.h"
 #include "item.h"
 #include "item_menu.h"
 #include "link.h"
@@ -307,13 +307,30 @@ static void HandleInputChooseAction(void)
             ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
-    else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
+    else if ((JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59))
     {
-        /*
+        bool8 canUndoAction = FALSE;
+
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-         && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_MIDDLE
-         && !(gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)])
-         && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_MIDDLE
+            && !(gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]))
+            canUndoAction = TRUE;
+
+        if (gBattleTypeFlags & BATTLE_TYPE_TRIPLE)
+        {
+            if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_MIDDLE
+                && !(gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]))
+                canUndoAction = TRUE;
+            else if (GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
+                && !(gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)])
+                && !(gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_MIDDLE)]))
+                canUndoAction = TRUE;
+        }
+
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            canUndoAction = FALSE;
+
+        if (canUndoAction)
         {
             if (gBattleResources->bufferA[gActiveBattler][1] == B_ACTION_USE_ITEM)
             {
@@ -327,9 +344,6 @@ static void HandleInputChooseAction(void)
             BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
         }
-        // TODO: add case for triple battle
-        */
-        // Can't undo action anymore since every turn only consists of one action
     }
     else if (JOY_NEW(START_BUTTON))
     {
