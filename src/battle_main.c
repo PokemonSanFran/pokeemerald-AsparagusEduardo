@@ -3671,7 +3671,7 @@ static void TryDoEventsBeforeFirstTurn(void)
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
+        gBattleStruct->monToSwitchIntoId[i] = PARTY_SIZE;
         gChosenActionByBattler[i] = B_ACTION_NONE;
         gChosenMoveByBattler[i] = MOVE_NONE;
         // Record party slots of player's mons that appeared in battle
@@ -3680,7 +3680,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     }
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
-    *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
+    gBattleStruct->absentBattlerFlags = gAbsentBattlerFlags;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
     gBattleMainFunc = HandleTurnActionSelectionState;
     ResetSentPokesToOpponentValue();
@@ -3691,10 +3691,10 @@ static void TryDoEventsBeforeFirstTurn(void)
     for (i = 0; i < gBattlersCount; i++)
         gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
 
-    *(&gBattleStruct->turnEffectsTracker) = 0;
-    *(&gBattleStruct->turnEffectsBattlerId) = 0;
-    *(&gBattleStruct->wishPerishSongState) = 0;
-    *(&gBattleStruct->wishPerishSongBattlerId) = 0;
+    gBattleStruct->turnEffectsTracker = 0;
+    gBattleStruct->turnEffectsBattlerId = 0;
+    gBattleStruct->wishPerishSongState = 0;
+    gBattleStruct->wishPerishSongBattlerId = 0;
     gBattleScripting.moveendState = 0;
     gBattleStruct->faintedActionsState = 0;
     gBattleStruct->turnCountersTracker = 0;
@@ -3926,9 +3926,9 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
-            *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
+            gBattleStruct->monToSwitchIntoId[gActiveBattler] = PARTY_SIZE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
-                || (position & BIT_FLANK) == B_FLANK_LEFT
+                || FLANK_POS(position) == B_FLANK_LEFT
                 || gBattleStruct->absentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(position))]
                 || gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(position))] == STATE_WAIT_ACTION_CONFIRMED)
             {
@@ -4407,7 +4407,7 @@ static bool8 AllAtActionConfirmed(void)
 
 static void UpdateBattlerPartyOrdersOnSwitch(void)
 {
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = gBattleResources->bufferB[gActiveBattler][1];
+    gBattleStruct->monToSwitchIntoId[gActiveBattler] = gBattleResources->bufferB[gActiveBattler][1];
     RecordedBattle_SetBattlerAction(gActiveBattler, gBattleResources->bufferB[gActiveBattler][1]);
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
