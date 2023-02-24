@@ -87,10 +87,7 @@ void *AllocInternal(void *heapStart, u32 size)
         }
 
         if (pos->next == head)
-        {
-            MgbaPrintf(MGBA_LOG_INFO, "Fuck");
             return NULL;
-        }
 
         pos = pos->next;
     }

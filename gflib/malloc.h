@@ -14,7 +14,21 @@
 extern u8 gHeap[];
 
 void *Alloc(u32 size);
+#define Alloc(size) (                                                                               \
+{                                                                                                   \
+    void *pointer = (Alloc)(size);                                                                  \
+    if (pointer == NULL)                                                                            \
+        MgbaPrintf(MGBA_LOG_INFO, "FailedToAlloc:0x%x in file \"%s\", line %d", size, __FILE__, __LINE__); \
+    pointer;                                                                                        \
+})
 void *AllocZeroed(u32 size);
+#define AllocZeroed(size) (                                                                                 \
+{                                                                                                           \
+    void *pointer = (AllocZeroed)(size);                                                                    \
+    if (pointer == NULL)                                                                                    \
+        MgbaPrintf(MGBA_LOG_INFO, "FailedToAllocZeroed:0x%x in file \"%s\", line %d", size, __FILE__, __LINE__); \
+    pointer;                                                                                                \
+})
 void Free(void *pointer);
 void InitHeap(void *pointer, u32 size);
 
