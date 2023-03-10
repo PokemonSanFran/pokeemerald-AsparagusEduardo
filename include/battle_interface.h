@@ -107,5 +107,11 @@ void TryHideLastUsedBall(void);
 void TryRestoreLastUsedBall(void);
 void TryAddLastUsedBallItemSprites(void);
 void UpdateAbilityPopup(u8 battlerId);
+//BattleInfoSystem
+void BattleInfoSystemLoadGfx(void);
+u8 BattleInfoSystemShowSplitIcon(u32 split);
+void BattleInfoSystemDestroySplitIcon(void);
+void TryHideBattleInfoSystem_ButtonPrompt(void);
+void TryRestoreBattleInfoSystem_ButtonPrompt(void);
 
 #endif // GUARD_BATTLE_INTERFACE_H

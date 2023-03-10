@@ -4,8 +4,10 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_util.h"
 #include "battle_z_move.h"
 #include "graphics.h"
+#include "item_icon.h"
 #include "sprite.h"
 #include "window.h"
 #include "string_util.h"
@@ -200,6 +202,9 @@ static void Task_FreeAbilityPopUpGfx(u8);
 
 static void SpriteCB_LastUsedBall(struct Sprite *);
 static void SpriteCB_LastUsedBallWin(struct Sprite *);
+
+static void SpriteCB_BattleInfoSystem_InfoIcon(struct Sprite *sprite);
+static void SpriteCB_BattleInfoSystem_ButtonPromptWin(struct Sprite *sprite);
 
 static const struct OamData sOamData_64x32 =
 {
@@ -2782,9 +2787,114 @@ static const struct SpriteSheet sSpriteSheet_AbilityPopUp =
 {
     sAbilityPopUpGfx, sizeof(sAbilityPopUpGfx), ABILITY_POP_UP_TAG
 };
+
+//BattleInfoSystem 
+//split icon
+#define TAG_SPLIT_ICONS 30004
+static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/interface/split_icons.gbapal");
+static const u32 sSplitIcons_Gfx[] = INCBIN_U32("graphics/interface/split_icons.4bpp.lz");
+
+static const struct OamData sOamData_SplitIcons =
+{
+    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(16x16),
+    .priority = 0,
+};
+static const struct CompressedSpriteSheet sSpriteSheet_SplitIcons =
+{
+    .data = sSplitIcons_Gfx,
+    .size = 16*16*3/2,
+    .tag = TAG_SPLIT_ICONS,
+};
+static const struct SpritePalette sSpritePal_SplitIcons =
+{
+    .data = sSplitIcons_Pal,
+    .tag = TAG_SPLIT_ICONS
+};
+static const union AnimCmd sSpriteAnim_SplitIcon0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_SplitIcon1[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_SplitIcon2[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sSpriteAnimTable_SplitIcons[] =
+{
+    sSpriteAnim_SplitIcon0,
+    sSpriteAnim_SplitIcon1,
+    sSpriteAnim_SplitIcon2,
+};
+static const struct SpriteTemplate sSpriteTemplate_SplitIcons =
+{
+    .tileTag = TAG_SPLIT_ICONS,
+    .paletteTag = TAG_SPLIT_ICONS,
+    .oam = &sOamData_SplitIcons,
+    .anims = sSpriteAnimTable_SplitIcons,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+void BattleInfoSystemLoadGfx(void)
+{
+    LoadSpritePalette(&sSpritePal_SplitIcons);
+    if (GetSpriteTileStartByTag(TAG_SPLIT_ICONS) == TAG_NONE)
+    {
+        gBattleInfoSystemSubmenuSplitIconId = MAX_SPRITES;
+        gBattleInfoSystemSubmenuButtonPromptIds[0] = MAX_SPRITES;
+        gBattleInfoSystemSubmenuButtonPromptIds[1] = MAX_SPRITES;
+        LoadCompressedSpriteSheet(&sSpriteSheet_SplitIcons);
+    }
+}
+u8 BattleInfoSystemShowSplitIcon(u32 split)
+{
+    if (gBattleInfoSystemSubmenuSplitIconId == MAX_SPRITES)
+        gBattleInfoSystemSubmenuSplitIconId = CreateSprite(&sSpriteTemplate_SplitIcons, 94+34, 144-16, 3);
+
+    gSprites[gBattleInfoSystemSubmenuSplitIconId].invisible = FALSE;
+    StartSpriteAnim(&gSprites[gBattleInfoSystemSubmenuSplitIconId], split);
+    return gBattleInfoSystemSubmenuSplitIconId;
+}
+void BattleInfoSystemDestroySplitIcon(void)
+{
+    if (gBattleInfoSystemSubmenuSplitIconId != MAX_SPRITES)
+        DestroySprite(&gSprites[gBattleInfoSystemSubmenuSplitIconId]);
+    gBattleInfoSystemSubmenuSplitIconId = MAX_SPRITES;
+}
+
+//Button prompt
+#define B_BIS_BUTTON_PROMPT TRUE
+#define B_BIS_BUTTON_PROMPT_BUTTON START_BUTTON
+
 static const struct SpritePalette sSpritePalette_AbilityPopUp =
 {
     sAbilityPopUpPalette, ABILITY_POP_UP_TAG
+};
+
+#define TAG_BIS_BUTTONS 0xD721
+static const struct OamData sOamData_BattleInfoSystem_ButtonPrompt =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
 };
 
 static const struct OamData sOamData_AbilityPopUp =
@@ -3309,6 +3419,101 @@ void TryAddLastUsedBallItemSprites(void)
 #endif
 }
 
+static const struct SpriteTemplate sSpriteTemplate_BattleInfoSystem_ButtonPromptWindow =
+{
+    .tileTag = TAG_BIS_BUTTONS,
+    .paletteTag = ABILITY_POP_UP_TAG,
+    .oam = &sOamData_BattleInfoSystem_ButtonPrompt,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_BattleInfoSystem_ButtonPromptWin
+};
+#if B_BIS_BUTTON_PROMPT_BUTTON == START_BUTTON
+    static const u8 sBattleInfoSystem_ButtonPromptWindowGfx[] = INCBIN_U8("graphics/battle_interface/bis_start.4bpp");
+#else
+    static const u8 sBattleInfoSystem_ButtonPromptWindowGfx[] = INCBIN_U8("graphics/battle_interface/bis_la.4bpp");
+#endif
+
+static const struct SpriteSheet sSpriteSheet_BattleInfoSystem_ButtonPromptWindow =
+{
+    sBattleInfoSystem_ButtonPromptWindowGfx, sizeof(sBattleInfoSystem_ButtonPromptWindowGfx), TAG_BIS_BUTTONS
+};
+
+#define TAG_BattleInfoSystem_INFO_ICON 30020
+static const struct OamData sOamData_BattleInfoSystem_InfoIcon =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const struct SpriteTemplate sSpriteTemplate_BattleInfoSystem_InfoIcon =
+{
+    .tileTag = TAG_BattleInfoSystem_INFO_ICON,
+    .paletteTag = ABILITY_POP_UP_TAG,
+    .oam = &sOamData_BattleInfoSystem_InfoIcon,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_BattleInfoSystem_InfoIcon
+};
+static const u8 sBattleInfoSystem_ButtonPromptInfoIcon[] = INCBIN_U8("graphics/battle_interface/bis_info_icon.4bpp");
+static const struct SpriteSheet sSpriteSheet_BattleInfoSystem_InfoIcon =
+{
+    sBattleInfoSystem_ButtonPromptInfoIcon, sizeof(sBattleInfoSystem_ButtonPromptInfoIcon), TAG_BattleInfoSystem_INFO_ICON
+};
+
+#define BattleInfoSystem_BUTTON_PROMPT_X_F    10
+#define BattleInfoSystem_BUTTON_PROMPT_X_0    -10
+#define BattleInfoSystem_BUTTON_PROMPT_Y      ((IsDoubleBattle()) ? 99 : 99)
+
+#define BattleInfoSystem_BUTTON_PROMPT_WIN_X_F       (BattleInfoSystem_BUTTON_PROMPT_X_F + 4)
+#define BattleInfoSystem_BUTTON_PROMPT_WIN_X_0       (BattleInfoSystem_BUTTON_PROMPT_X_0 + 5)
+#define BattleInfoSystem_BUTTON_PROMPT_WIN_Y         (BattleInfoSystem_BUTTON_PROMPT_Y - 3)
+
+#define sHideABI  data[1]
+
+static void TryAddBattleInfoSystem_ButtonPromptItemSprites(void)
+{
+#if B_BIS_BUTTON_PROMPT == TRUE
+    LoadSpritePalette(&sSpritePalette_AbilityPopUp);
+
+    // icon
+    if (GetSpriteTileStartByTag(TAG_BattleInfoSystem_INFO_ICON) == TAG_NONE)
+        LoadSpriteSheet(&sSpriteSheet_BattleInfoSystem_InfoIcon);
+    
+    if (gBattleInfoSystemSubmenuButtonPromptIds[0] == MAX_SPRITES)
+    {
+        gBattleInfoSystemSubmenuButtonPromptIds[0] = CreateSprite(&sSpriteTemplate_BattleInfoSystem_InfoIcon,
+                                                    BattleInfoSystem_BUTTON_PROMPT_X_0,
+                                                    BattleInfoSystem_BUTTON_PROMPT_Y, 5);
+        gSprites[gBattleInfoSystemSubmenuButtonPromptIds[0]].sHideABI = FALSE;   // restore
+    }
+
+    // window
+    if (GetSpriteTileStartByTag(TAG_BIS_BUTTONS) == TAG_NONE)
+        LoadSpriteSheet(&sSpriteSheet_BattleInfoSystem_ButtonPromptWindow);
+
+    if (gBattleInfoSystemSubmenuButtonPromptIds[1] == MAX_SPRITES)
+    {
+        gBattleInfoSystemSubmenuButtonPromptIds[1] = CreateSprite(&sSpriteTemplate_BattleInfoSystem_ButtonPromptWindow,
+                                                       BattleInfoSystem_BUTTON_PROMPT_WIN_X_0,
+                                                       BattleInfoSystem_BUTTON_PROMPT_WIN_Y, 5);
+        gSprites[gBattleInfoSystemSubmenuButtonPromptIds[0]].sHideABI = FALSE;   // restore
+    }
+#endif
+}
+
 static void DestroyLastUsedBallWinGfx(struct Sprite *sprite)
 {
     FreeSpriteTilesByTag(LAST_BALL_WINDOW_TAG);
@@ -3342,6 +3547,39 @@ static void SpriteCB_LastUsedBallWin(struct Sprite *sprite)
     }
 }
 
+static void DestroyBattleInfoSystem_ButtonPromptWinGfx(struct Sprite *sprite)
+{
+    FreeSpriteTilesByTag(TAG_BIS_BUTTONS);
+    FreeSpritePaletteByTag(ABILITY_POP_UP_TAG);
+    DestroySprite(sprite);
+    gBattleInfoSystemSubmenuButtonPromptIds[1] = MAX_SPRITES;
+}
+
+static void DestroyBattleInfoSystem_ButtonPromptGfx(struct Sprite *sprite)
+{
+    FreeSpriteTilesByTag(102);
+    FreeSpritePaletteByTag(102);
+    DestroySprite(sprite);
+    gBattleInfoSystemSubmenuButtonPromptIds[0] = MAX_SPRITES;
+}
+
+static void SpriteCB_BattleInfoSystem_ButtonPromptWin(struct Sprite *sprite)
+{    
+    if (sprite->sHideABI)
+    {
+        if (sprite->x != BattleInfoSystem_BUTTON_PROMPT_WIN_X_0)
+            sprite->x--;
+
+        if (sprite->x == BattleInfoSystem_BUTTON_PROMPT_WIN_X_0)
+            DestroyBattleInfoSystem_ButtonPromptWinGfx(sprite);
+    }
+    else
+    {
+        if (sprite->x != BattleInfoSystem_BUTTON_PROMPT_WIN_X_F)
+            sprite->x++;
+    }
+}
+
 static void SpriteCB_LastUsedBall(struct Sprite *sprite)
 {
     if (sprite->sHide)
@@ -3355,6 +3593,23 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
     else
     {
         if (sprite->x != LAST_USED_BALL_X_F)
+            sprite->x++;
+    }
+}
+
+static void SpriteCB_BattleInfoSystem_InfoIcon(struct Sprite *sprite)
+{    
+    if (sprite->sHideABI)
+    {
+        if (sprite->x != BattleInfoSystem_BUTTON_PROMPT_X_0)
+            sprite->x--;
+
+        if (sprite->x == BattleInfoSystem_BUTTON_PROMPT_X_0)
+            DestroyBattleInfoSystem_ButtonPromptGfx(sprite);
+    }
+    else
+    {
+        if (sprite->x != BattleInfoSystem_BUTTON_PROMPT_X_F)
             sprite->x++;
     }
 }
@@ -3383,6 +3638,30 @@ static void TryHideOrRestoreLastUsedBall(u8 caseId)
 #endif
 }
 
+static void TryHideOrRestoreBattleInfoSystem_ButtonPrompt(u8 caseId)
+{
+#if B_BIS_BUTTON_PROMPT == TRUE
+    if (gBattleInfoSystemSubmenuButtonPromptIds[0] == MAX_SPRITES)
+        return;
+
+    switch (caseId)
+    {
+    case 0: // hide
+        if (gBattleInfoSystemSubmenuButtonPromptIds[0] != MAX_SPRITES)
+            gSprites[gBattleInfoSystemSubmenuButtonPromptIds[0]].sHideABI = TRUE;   // hide
+        if (gBattleInfoSystemSubmenuButtonPromptIds[1] != MAX_SPRITES)
+            gSprites[gBattleInfoSystemSubmenuButtonPromptIds[1]].sHideABI = TRUE;   // hide
+        break;
+    case 1: // restore
+        if (gBattleInfoSystemSubmenuButtonPromptIds[0] != MAX_SPRITES)
+            gSprites[gBattleInfoSystemSubmenuButtonPromptIds[0]].sHideABI = FALSE;   // restore
+        if (gBattleInfoSystemSubmenuButtonPromptIds[1] != MAX_SPRITES)
+            gSprites[gBattleInfoSystemSubmenuButtonPromptIds[1]].sHideABI = FALSE;   // restore
+        break;
+    }
+#endif
+}
+
 void TryHideLastUsedBall(void)
 {
 #if B_LAST_USED_BALL == TRUE
@@ -3397,5 +3676,22 @@ void TryRestoreLastUsedBall(void)
         TryHideOrRestoreLastUsedBall(1);
     else
         TryAddLastUsedBallItemSprites();
+#endif
+}
+
+void TryHideBattleInfoSystem_ButtonPrompt(void)
+{
+#if B_BIS_BUTTON_PROMPT == TRUE
+    TryHideOrRestoreBattleInfoSystem_ButtonPrompt(0);
+#endif
+}
+
+void TryRestoreBattleInfoSystem_ButtonPrompt(void)
+{
+#if B_BIS_BUTTON_PROMPT == TRUE
+    if (gBattleInfoSystemSubmenuButtonPromptIds[0] != MAX_SPRITES)
+        TryHideOrRestoreBattleInfoSystem_ButtonPrompt(1);
+    else
+        TryAddBattleInfoSystem_ButtonPromptItemSprites();
 #endif
 }
