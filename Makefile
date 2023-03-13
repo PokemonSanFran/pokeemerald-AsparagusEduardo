@@ -93,9 +93,6 @@ SAMPLE_SUBDIR = sound/direct_sound_samples
 CRY_SUBDIR = sound/direct_sound_samples/cries
 TEST_SUBDIR = test
 GBS_SUBDIR = sound/songs/gbs
-RBY_GBS_SUBDIR = $(GBS_SUBDIR)/rby
-GSC_GBS_SUBDIR = $(GBS_SUBDIR)/gsc
-RSE_GBS_SUBDIR = $(GBS_SUBDIR)/rse
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 GFLIB_BUILDDIR = $(OBJ_DIR)/$(GFLIB_SUBDIR)
