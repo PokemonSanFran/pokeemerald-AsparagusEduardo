@@ -24,9 +24,12 @@ SINGLE_BATTLE_TEST("Absorb recovers 50% of the damage dealt")
     }
 }
 
-SINGLE_BATTLE_TEST("Absorb fails if Heal Block applies")
+#if B_HEAL_BLOCKING >= GEN_6
+SINGLE_BATTLE_TEST("Absorb fails if Heal Block applies in Gen 6+")
+#else
+SINGLE_BATTLE_TEST("Absorb succedes but doesn't heal if Heal Block applies before Gen 6")
+#endif
 {
-    ASSUME(B_HEAL_BLOCKING >= GEN_6);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -34,7 +37,11 @@ SINGLE_BATTLE_TEST("Absorb fails if Heal Block applies")
         TURN { MOVE(opponent, MOVE_HEAL_BLOCK); MOVE(player, MOVE_ABSORB); }
     } SCENE {
         MESSAGE("Wobbuffet was prevented from healing!");
+    #if B_HEAL_BLOCKING >= GEN_6
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, player);
+    #else
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, player);
+    #endif
         NOT HP_BAR(opponent);
         NOT HP_BAR(player);
     }
