@@ -1037,12 +1037,12 @@ void StartBerryCrush(MainCallback exitCallback)
 
 static void GetBerryFromBag(void)
 {
-    if (gSpecialVar_ItemId < FIRST_BERRY_INDEX || gSpecialVar_ItemId > LAST_BERRY_INDEX + 1)
-        gSpecialVar_ItemId = FIRST_BERRY_INDEX;
+    if (ItemId_GetPocket(gSpecialVar_ItemId) != POCKET_BERRIES)
+        gSpecialVar_ItemId = BERRY_CHERI;
     else
         RemoveBagItem(gSpecialVar_ItemId, 1);
 
-    sGame->players[sGame->localId].berryId = gSpecialVar_ItemId - FIRST_BERRY_INDEX;
+    sGame->players[sGame->localId].berryId = ItemId_GetSecondaryId(gSpecialVar_ItemId);
     sGame->nextCmd = CMD_FADE;
     sGame->afterPalFadeCmd = CMD_WAIT_BERRIES;
     SetPaletteFadeArgs(sGame->commandArgs, FALSE, PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -1383,7 +1383,7 @@ static void CreateBerrySprites(struct BerryCrushGame *game, struct BerryCrushGam
             &sSpriteTemplate_PlayerBerry,
             sPlayerBerrySpriteTags[i],
             sPlayerBerrySpriteTags[i],
-            game->players[i].berryId + FIRST_BERRY_INDEX);
+            gBerries[game->players[i].berryId].itemId);
         gfx->berrySprites[i] = &gSprites[spriteId];
         gfx->berrySprites[i]->oam.priority = 3;
         gfx->berrySprites[i]->affineAnimPaused = TRUE;

@@ -6,6 +6,7 @@
 
 struct Berry
 {
+    u16 itemId;
     const u8 name[BERRY_NAME_LENGTH + 1];
     u8 firmness;
     u16 size;

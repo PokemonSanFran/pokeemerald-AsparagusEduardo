@@ -1128,11 +1128,11 @@
 	.endm
 
 	@ Sets a berry tree's berry and growth stage. treeId is any BERRY_TREE_* constant (an index into berryTrees in SaveBlock1),
-	@ berry is any ITEM_TO_BERRY(ITEM_BERRY_NAME) value, and growthStage is any BERRY_STAGE_* constant.
+	@ berry is any ITEM_BERRY_NAME value, and growthStage is any BERRY_STAGE_* constant.
 	.macro setberrytree treeId:req, berry:req, growthStage:req
 	.byte 0x8a
 	.byte \treeId
-	.byte \berry
+	.2byte \berry
 	.byte \growthStage
 	.endm
 
@@ -2017,4 +2017,10 @@
 	setvar VAR_0x8001, \canStopEvo
 	setvar VAR_0x8002, \tryMultiple
 	special TrySpecialOverworldEvo
+	.endm
+
+	@ Obtains the item ID of a berry and saves it into VAR_RESULT.
+	.macro berryidtoitemid berry:req
+	setvar VAR_0x8000, \berry
+	special BerryIdToItemId
 	.endm

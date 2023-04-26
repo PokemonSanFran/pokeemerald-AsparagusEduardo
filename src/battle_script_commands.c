@@ -3677,7 +3677,7 @@ void SetMoveEffect(bool32 primary, u32 certain)
                 gBattlescriptCurrInstr++;
                 break;
             case MOVE_EFFECT_INCINERATE:
-                if ((gBattleMons[gEffectBattler].item >= FIRST_BERRY_INDEX && gBattleMons[gEffectBattler].item <= LAST_BERRY_INDEX)
+                if ((ItemId_GetPocket(gBattleMons[gEffectBattler].item) == POCKET_BERRIES)
                 #if B_INCINERATE_GEMS >= GEN_6
                     || (GetBattlerHoldEffect(gEffectBattler, FALSE) == HOLD_EFFECT_GEMS)
                 #endif

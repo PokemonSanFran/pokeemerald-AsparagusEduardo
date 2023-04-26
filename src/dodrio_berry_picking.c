@@ -592,40 +592,40 @@ ALIGNED(4)
 static const u8 sPrizeBerryIds[][10] =
 {
     { // Possible prizes with 3 players
-        ITEM_TO_BERRY(ITEM_RAZZ_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_BLUK_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_NANAB_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_WEPEAR_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_PINAP_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_PINAP_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_WEPEAR_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_NANAB_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_BLUK_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_RAZZ_BERRY) - 1
+        BERRY_RAZZ,
+        BERRY_BLUK,
+        BERRY_NANAB,
+        BERRY_WEPEAR,
+        BERRY_PINAP,
+        BERRY_PINAP,
+        BERRY_WEPEAR,
+        BERRY_NANAB,
+        BERRY_BLUK,
+        BERRY_RAZZ
     },
     { // Possible prizes with 4 players
-        ITEM_TO_BERRY(ITEM_POMEG_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_KELPSY_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_QUALOT_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_HONDEW_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_GREPA_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_TAMATO_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_CORNN_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_MAGOST_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_RABUTA_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_NOMEL_BERRY) - 1
+        BERRY_POMEG,
+        BERRY_KELPSY,
+        BERRY_QUALOT,
+        BERRY_HONDEW,
+        BERRY_GREPA,
+        BERRY_TAMATO,
+        BERRY_CORNN,
+        BERRY_MAGOST,
+        BERRY_RABUTA,
+        BERRY_NOMEL
     },
     { // Possible prizes with 5 players
-        ITEM_TO_BERRY(ITEM_SPELON_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_PAMTRE_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_WATMEL_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_DURIN_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_BELUE_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_BELUE_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_DURIN_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_WATMEL_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_PAMTRE_BERRY) - 1,
-        ITEM_TO_BERRY(ITEM_SPELON_BERRY) - 1
+        BERRY_SPELON,
+        BERRY_PAMTRE,
+        BERRY_WATMEL,
+        BERRY_DURIN,
+        BERRY_BELUE,
+        BERRY_BELUE,
+        BERRY_DURIN,
+        BERRY_WATMEL,
+        BERRY_PAMTRE,
+        BERRY_SPELON
     },
 };
 

@@ -1942,13 +1942,13 @@ bool8 ScrCmd_playslotmachine(struct ScriptContext *ctx)
 bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
 {
     u8 treeId = ScriptReadByte(ctx);
-    u8 berry = ScriptReadByte(ctx);
+    u16 itemId = ScriptReadHalfword(ctx);
     u8 growthStage = ScriptReadByte(ctx);
 
-    if (berry == 0)
-        PlantBerryTree(treeId, berry, growthStage, FALSE);
+    if (ItemId_GetPocket(itemId) == POCKET_BERRIES)
+        PlantBerryTree(treeId, ItemId_GetSecondaryId(itemId), growthStage, FALSE);
     else
-        PlantBerryTree(treeId, berry, growthStage, FALSE);
+        PlantBerryTree(treeId, BERRY_CHERI, growthStage, FALSE);
     return FALSE;
 }
 

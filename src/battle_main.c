@@ -5474,7 +5474,7 @@ void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk)
     else if (gBattleMoves[move].effect == EFFECT_NATURAL_GIFT)
     {
         if (ItemId_GetPocket(gBattleMons[battlerAtk].item) == POCKET_BERRIES)
-            gBattleStruct->dynamicMoveType = gNaturalGiftTable[ITEM_TO_BERRY(gBattleMons[battlerAtk].item)].type;
+            gBattleStruct->dynamicMoveType = gNaturalGiftTable[ItemId_GetSecondaryId(gBattleMons[battlerAtk].item)].type;
     }
     else if (gBattleMoves[move].effect == EFFECT_TERRAIN_PULSE)
     {

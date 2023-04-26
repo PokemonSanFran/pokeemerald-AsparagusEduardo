@@ -92,8 +92,8 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
     }
     else
     {
-        if (itemId >= FIRST_BERRY_INDEX && itemId <= LAST_BERRY_INDEX)
-            GetBerryCountString(dst, gBerries[itemId - FIRST_BERRY_INDEX].name, quantity);
+        if (ItemId_GetPocket(itemId) == POCKET_BERRIES)
+            GetBerryCountString(dst, gBerries[ItemId_GetSecondaryId(itemId)].name, quantity);
         else
             StringCopy(dst, ItemId_GetName(itemId));
     }
@@ -159,9 +159,9 @@ bool8 HasAtLeastOneBerry(void)
 {
     u16 i;
 
-    for (i = FIRST_BERRY_INDEX; i <= LAST_BERRY_INDEX; i++)
+    for (i = 1; i <= BERRY_COUNT; i++)
     {
-        if (CheckBagHasItem(i, 1) == TRUE)
+        if (CheckBagHasItem(gBerries[i].itemId, 1) == TRUE)
         {
             gSpecialVar_Result = TRUE;
             return TRUE;
@@ -934,4 +934,13 @@ u8 ItemId_GetSecondaryId(u16 itemId)
 u8 ItemId_GetFlingPower(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].flingPower;
+}
+
+bool8 BerryIdToItemId(void)
+{
+    if (gSpecialVar_0x8000 > BERRY_COUNT)
+        //gSpecialVar_Result = gBerries[1].itemId;
+        gSpecialVar_Result = gSpecialVar_0x8000;
+    else
+        gSpecialVar_Result = gBerries[gSpecialVar_0x8000].itemId;
 }

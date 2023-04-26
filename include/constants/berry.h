@@ -1,7 +1,82 @@
 #ifndef GUARD_CONSTANTS_BERRY_H
 #define GUARD_CONSTANTS_BERRY_H
 
-#define BERRY_NONE 0
+#define BERRY_NONE              0
+#define BERRY_CHERI             1
+#define BERRY_CHESTO            2
+#define BERRY_PECHA             3
+#define BERRY_RAWST             4
+#define BERRY_ASPEAR            5
+#define BERRY_LEPPA             6
+#define BERRY_ORAN              7
+#define BERRY_PERSIM            8
+#define BERRY_LUM               9
+#define BERRY_SITRUS            10
+#define BERRY_FIGY              11
+#define BERRY_WIKI              12
+#define BERRY_MAGO              13
+#define BERRY_AGUAV             14
+#define BERRY_IAPAPA            15
+#define BERRY_RAZZ              16
+#define BERRY_BLUK              17
+#define BERRY_NANAB             18
+#define BERRY_WEPEAR            19
+#define BERRY_PINAP             20
+#define BERRY_POMEG             21
+#define BERRY_KELPSY            22
+#define BERRY_QUALOT            23
+#define BERRY_HONDEW            24
+#define BERRY_GREPA             25
+#define BERRY_TAMATO            26
+#define BERRY_CORNN             27
+#define BERRY_MAGOST            28
+#define BERRY_RABUTA            29
+#define BERRY_NOMEL             30
+#define BERRY_SPELON            31
+#define BERRY_PAMTRE            32
+#define BERRY_WATMEL            33
+#define BERRY_DURIN             34
+#define BERRY_BELUE             35
+#define BERRY_CHILAN            36
+#define BERRY_OCCA              37
+#define BERRY_PASSHO            38
+#define BERRY_WACAN             39
+#define BERRY_RINDO             40
+#define BERRY_YACHE             41
+#define BERRY_CHOPLE            42
+#define BERRY_KEBIA             43
+#define BERRY_SHUCA             44
+#define BERRY_COBA              45
+#define BERRY_PAYAPA            46
+#define BERRY_TANGA             47
+#define BERRY_CHARTI            48
+#define BERRY_KASIB             49
+#define BERRY_HABAN             50
+#define BERRY_COLBUR            51
+#define BERRY_BABIRI            52
+#define BERRY_ROSELI            53
+#define BERRY_LIECHI            54
+#define BERRY_GANLON            55
+#define BERRY_SALAC             56
+#define BERRY_PETAYA            57
+#define BERRY_APICOT            58
+#define BERRY_LANSAT            59
+#define BERRY_STARF             60
+#define BERRY_ENIGMA            61
+#define BERRY_MICLE             62
+#define BERRY_CUSTAP            63
+#define BERRY_JABOCA            64
+#define BERRY_ROWAP             65
+#define BERRY_KEE               66
+#define BERRY_MARANGA           67
+#define BERRY_ENIGMA_E_READER   68
+
+#define BERRY_COUNT             BERRY_ENIGMA_E_READER
+
+#define FIRST_ROUTE_114_MAN_BERRY           BERRY_RAZZ
+#define LAST_ROUTE_114_MAN_BERRY            BERRY_PINAP
+#define NUM_ROUTE_114_MAN_BERRIES           (LAST_ROUTE_114_MAN_BERRY - FIRST_ROUTE_114_MAN_BERRY + 1)
+#define NUM_ROUTE_114_MAN_BERRIES_SKIPPED   (FIRST_ROUTE_114_MAN_BERRY - 1)
 
 #define BERRY_FIRMNESS_UNKNOWN     0
 #define BERRY_FIRMNESS_VERY_SOFT   1
