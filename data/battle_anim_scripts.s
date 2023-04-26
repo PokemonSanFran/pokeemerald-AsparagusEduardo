@@ -20184,30 +20184,38 @@ Move_GUST:
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@Credits to Skeli
 Move_WING_ATTACK:
-	loadspritegfx ANIM_TAG_GUST
 	loadspritegfx ANIM_TAG_IMPACT
-	monbg ANIM_DEF_PARTNER
-	splitbgprio ANIM_TARGET
+	loadspritegfx ANIM_TAG_WHITE_FEATHER
+	launchtask AnimTask_BlendParticle, 0x5, 0x5, ANIM_TAG_WHITE_FEATHER, 0x2, 0xA, 0xA, 0x339C @;Yellow
 	setalpha 12, 8
-	loopsewithpan SE_M_WING_ATTACK, SOUND_PAN_ATTACKER, 20, 2
-	createvisualtask AnimTask_TranslateMonElliptical, 2, 0, 12, 4, 1, 4
-	createvisualtask AnimTask_AnimateGustTornadoPalette, 5, 1, 70
-	createsprite gGustToTargetSpriteTemplate, ANIM_ATTACKER, 2, -25, 0, 0, 0, 20
-	createsprite gGustToTargetSpriteTemplate, ANIM_ATTACKER, 2, 25, 0, 0, 0, 20
-	delay 24
-	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 24, 0, 0, 9
-	delay 17
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 16, 0, ANIM_TARGET, 1
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, -16, 0, ANIM_TARGET, 1
-	loopsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET, 5, 2
+	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_TARGET 0x3 0x0 10 0x1
+	playsewithpan SE_M_WING_ATTACK SOUND_PAN_TARGET
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 2, 0x4, 0, 10 ANIM_TARGET 0x2  
+	delay 0x1
+	playsewithpan SE_M_WING_ATTACK SOUND_PAN_TARGET
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 3, 0x4, 0, 0 ANIM_TARGET 0x2
+	call WingAttackScatterFeathers
+	delay 0x1
+	playsewithpan SE_M_WING_ATTACK SOUND_PAN_TARGET
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 4, 0x4, 0, -10 ANIM_TARGET 0x2
+	delay 0x1
+	playsewithpan SE_M_WING_ATTACK SOUND_PAN_TARGET
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 5, 0x4, 0, -20 ANIM_TARGET 0x2
+	delay 0x1
+	playsewithpan SE_M_WING_ATTACK SOUND_PAN_TARGET
+	launchtemplate gBasicHitSplatSpriteTemplate, ANIMSPRITE_IS_TARGET | 6, 0x4, 0, -30 ANIM_TARGET 0x2
 	waitforvisualfinish
-	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 11
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
+	blendoff 
 	end
+WingAttackScatterFeathers:
+	launchtemplate gWingAttackFeathersSpriteTemplate, ANIMSPRITE_IS_TARGET | 1, 0x4, 0xfff8, 0xfff8, 0xa0, 0xffe0
+	launchtemplate gWingAttackFeathersSpriteTemplate, ANIMSPRITE_IS_TARGET | 1, 0x4, 0xfff8, 0xfff8, 0xff00, 0xffd8
+	launchtemplate gWingAttackFeathersSpriteTemplate, ANIMSPRITE_IS_TARGET | 1, 0x4, 0xfff8, 0xfff8, 0x1a0, 0xffda
+	launchtemplate gWingAttackFeathersSpriteTemplate, ANIMSPRITE_IS_TARGET | 1, 0x4, 0xfff8, 0xfff8, 0xfe80, 0xffe1
+	return
 
 Move_PECK:
 	loadspritegfx ANIM_TAG_IMPACT

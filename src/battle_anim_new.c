@@ -98,7 +98,6 @@ static const union AffineAnimCmd sSpriteAffineAnim_DoubleSlap[] =
 	AFFINEANIMCMD_FRAME(0, 28, 0, 8), //Flatten horizontally (on its side)
 	AFFINEANIMCMD_END
 };
-
 const union AffineAnimCmd* const gSpriteAffineAnimTable_DoubleSlap[] =
 {
 	sSpriteAffineAnim_DoubleSlap,
@@ -112,6 +111,28 @@ const struct SpriteTemplate gDoubleSlapPalmSpriteTemplate =
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_DoubleSlap,
     .callback = AnimWakeUpSlap
+};
+
+// wing attack
+static const union AffineAnimCmd sSpriteAffineAnim_WingAttackFeather[] =
+{
+	AFFINEANIMCMD_FRAME(0, 0, -1, 14), //Rotate a little right
+	AFFINEANIMCMD_FRAME(0, 0, 1, 28), //Rotate a little left
+	AFFINEANIMCMD_END,
+};
+const union AffineAnimCmd* const gSpriteAffineAnimTable_WingAttackFeather[] =
+{
+	sSpriteAffineAnim_WingAttackFeather,
+};
+const struct SpriteTemplate gWingAttackFeathersSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WHITE_FEATHER,
+    .paletteTag = ANIM_TAG_WHITE_FEATHER,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = sAnims_FallingFeather,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_WingAttackFeather,
+    .callback = AnimDizzyPunchDuck,
 };
 
 // GEN 4

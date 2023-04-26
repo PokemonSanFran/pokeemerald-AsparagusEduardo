@@ -326,6 +326,7 @@ void AnimFlyBallUp_Step(struct Sprite *sprite);
 void AnimBounceBallLand(struct Sprite *);
 void AnimEllipticalGust(struct Sprite *);
 extern const union AnimCmd *const gAffineAnims_AirWaveCrescent[];
+extern const union AnimCmd *const sAnims_FallingFeather[];
 extern const union AffineAnimCmd *const gAffineAnims_FlyBallUp[];
 extern const union AffineAnimCmd *const gAffineAnims_FlyBallAttack[];
 extern const union AffineAnimCmd *const gAffineAnims_BounceBallLand[];
