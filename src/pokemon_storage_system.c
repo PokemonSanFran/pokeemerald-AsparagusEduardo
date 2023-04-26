@@ -653,6 +653,7 @@ static void ReshowReleaseMon(void);
 static bool8 ResetReleaseMonSpritePtr(void);
 static void SetMovingMonPriority(u8);
 static void SpriteCB_HeldMon(struct Sprite *);
+static void RemoveSpeciesFromIconList(u16 species);
 static struct Sprite *CreateMonIconSprite(u16, u32, s16, s16, u8, u8);
 static void DestroyBoxMonIcon(struct Sprite *);
 
@@ -4992,6 +4993,47 @@ static void SetPlacedMonSprite(u8 boxId, u8 position, bool8 refresh)
     sStorage->movingMonSprite = NULL;
 }
 
+static void SetShiftedMonSprite(bool8 refresh)
+{
+    u8 boxId;
+    switch (sCursorArea)
+    {
+    default: //fallback
+    case CURSOR_AREA_IN_PARTY:
+        boxId = TOTAL_BOXES_COUNT;
+        break;
+    case CURSOR_AREA_IN_BOX:
+        boxId = StorageGetCurrentBox();
+        break;
+    }
+
+    if (boxId == TOTAL_BOXES_COUNT) // party mon
+    {
+        sStorage->partySprites[sCursorPosition] = sStorage->movingMonSprite;
+        if (refresh)
+        {
+            u16 species = GetMonData(&gPlayerParty[sCursorPosition], MON_DATA_SPECIES2);
+            u32 personality = GetMonData(&gPlayerParty[sCursorPosition], MON_DATA_PERSONALITY);
+            DestroyPartyMonIcon(sCursorPosition);
+            if (sCursorPosition == 0)
+                sStorage->partySprites[sCursorPosition] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+            else
+                sStorage->partySprites[sCursorPosition] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (sCursorPosition - 1)) + 16, 1, 12);
+        }
+        sStorage->partySprites[sCursorPosition]->oam.priority = 1;
+        sStorage->partySprites[sCursorPosition]->subpriority = 12;
+    }
+    else
+    {
+        if (!refresh)
+            sStorage->boxMonsSprites[sCursorPosition] = sStorage->movingMonSprite;
+        else
+            CreateBoxMonIconAtPos(sCursorPosition);
+        sStorage->boxMonsSprites[sCursorPosition]->oam.priority = 2;
+        sStorage->boxMonsSprites[sCursorPosition]->subpriority = 19 - (sCursorPosition % IN_BOX_COLUMNS);
+    }
+}
+
 static void SaveMonSpriteAtPos(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT) // party mon
@@ -5033,6 +5075,10 @@ static bool8 MoveShiftingMons(void)
 
         sStorage->movingMonSprite->callback = SpriteCB_HeldMon;
         (*sStorage->shiftMonSpritePtr)->callback = SpriteCallbackDummy;
+
+        RemoveSpeciesFromIconList((*sStorage->shiftMonSpritePtr)->data[0]);
+        DestroySprite(*sStorage->shiftMonSpritePtr);
+        *sStorage->shiftMonSpritePtr = NULL;
     }
 
     return TRUE;
@@ -6293,6 +6339,7 @@ static bool8 MonPlaceChange_Shift(void)
         {
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
             SetShiftedMonData(sStorage->shiftBoxId, sCursorPosition);
+            SetShiftedMonSprite(TRUE);
             sStorage->monPlaceChangeState++;
         }
         break;
