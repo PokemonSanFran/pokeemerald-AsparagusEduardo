@@ -96,7 +96,7 @@ struct SaveBlock1_v1
 };
 
 
-bool8 UpdateSave_v1_v2(const struct SaveSectorLocation *locations)
+bool8 UpdateSave_v1_v3(const struct SaveSectorLocation *locations)
 {
     const struct SaveBlock2* sOldSaveBlock2Ptr = (struct SaveBlock2*)(locations[0].data); // SECTOR_ID_SAVEBLOCK2
     const struct SaveBlock1_v1* sOldSaveBlock1Ptr = (struct SaveBlock1_v1*)(locations[1].data); // SECTOR_ID_SAVEBLOCK1_START
@@ -189,7 +189,7 @@ bool8 UpdateSave_v1_v2(const struct SaveSectorLocation *locations)
     // PokemonStorage 
     *gPokemonStoragePtr = *sOldPokemonStoragePtr;
 
-    gSaveBlock2Ptr->saveVersion = 2;
+    gSaveBlock2Ptr->saveVersion = 3;
 
     SetContinueGameWarpStatus();
     gSaveBlock1Ptr->continueGameWarp = gSaveBlock1Ptr->lastHealLocation;
