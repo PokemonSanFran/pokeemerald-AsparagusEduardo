@@ -1,11 +1,11 @@
 #include "global.h"
 #include "save.h"
 
-// This file contains the backups for the save file of v2.
+// This file contains the backups for the save file of v3.
 // Editing this file may cause unwanted behaviour.
 // Please use make release in case problems arise.
 
-struct SaveBlock1_v2
+struct SaveBlock1_v3
 {
     struct Coords16 pos;
     struct WarpData location;
@@ -83,8 +83,8 @@ struct SaveBlock1_v2
     struct Roamer roamer;
     struct EnigmaBerry enigmaBerry;
     struct MysteryGiftSave mysteryGift;
-    u8 dexSeen[114];
-    u8 dexCaught[114];
+    u8 dexSeen[112];
+    u8 dexCaught[112];
     u32 trainerHillTimes[4];
     struct RamScript ramScript;
     struct RecordMixingGift recordMixingGift;
@@ -96,10 +96,10 @@ struct SaveBlock1_v2
 };
 
 
-bool8 UpdateSave_v2_v4(const struct SaveSectorLocation *locations)
+bool8 UpdateSave_v3_v4(const struct SaveSectorLocation *locations)
 {
     const struct SaveBlock2* sOldSaveBlock2Ptr = (struct SaveBlock2*)(locations[0].data); // SECTOR_ID_SAVEBLOCK2
-    const struct SaveBlock1_v2* sOldSaveBlock1Ptr = (struct SaveBlock1_v2*)(locations[1].data); // SECTOR_ID_SAVEBLOCK1_START
+    const struct SaveBlock1_v3* sOldSaveBlock1Ptr = (struct SaveBlock1_v3*)(locations[1].data); // SECTOR_ID_SAVEBLOCK1_START
     const struct PokemonStorage* sOldPokemonStoragePtr = (struct PokemonStorage*)(locations[5].data); // SECTOR_ID_PKMN_STORAGE_START
     u32 i;
 
