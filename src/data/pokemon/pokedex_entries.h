@@ -10868,17 +10868,5 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 423,
         .trainerOffset = 8,
     },
-
-    [NATIONAL_DEX_ENAMORUS] =
-    {
-        .categoryName = _("Love-Hate"),
-        .height = 16,
-        .weight = 480,
-        .description = gEnamorusPokedexText,
-        .pokemonScale = 259,
-        .pokemonOffset = 1,
-        .trainerScale = 296,
-        .trainerOffset = 1,
-    },
 #endif
 };
