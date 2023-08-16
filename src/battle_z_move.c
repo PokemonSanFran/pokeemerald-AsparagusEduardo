@@ -345,8 +345,10 @@ bool32 IsZMoveTriggerSpriteActive(void)
 
 void HideZMoveTriggerSprite(void)
 {
-    struct Sprite *sprite = &gSprites[gBattleStruct->zmove.triggerSpriteId];
-    sprite->tHide = TRUE;
+    if (gBattleStruct->zmove.triggerSpriteId != 0xFF)
+    {
+        gSprites[gBattleStruct->zmove.triggerSpriteId].tHide = TRUE;
+    }
     gBattleStruct->zmove.viable = FALSE;
 }
 
